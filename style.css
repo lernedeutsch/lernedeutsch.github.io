@@ -289,35 +289,6 @@ body{
     transform:scale(1.05);
 }
 
-.az-button{
-    display:inline-block;
-
-    margin:20px 0;
-
-    padding:15px 40px;
-
-    background:#0055cc;
-
-    color:white !important;
-
-    text-decoration:none;
-
-    font-size:24px;
-
-    font-weight:bold;
-
-    border-radius:15px;
-
-    transition:.3s;
-}
-
-.az-button:hover{
-    background:#ffce00;
-
-    color:black;
-
-    transform:scale(1.05);
-}
 
 .word-list{
     columns:3;
