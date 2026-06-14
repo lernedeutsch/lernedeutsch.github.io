@@ -1,1 +1,263 @@
+html
 
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lektion 4 — Was machen Sie beruflich?</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&family=Nunito+Sans:opsz,wght@6..12,400;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="lessons.css">
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <div class="hero-text">
+      <p class="eyebrow">Lektion 4 · Erste Schritte · Niveau A1</p>
+      <h1 class="lesson-title">Was machen Sie beruflich?</h1>
+      <p>Guten Morgen und willkommen! Kurze Wiederholung: Wie heißen Sie? Wie alt sind Sie? Heute lernen wir Berufe, die Frage „Was sind Sie von Beruf?", ein/eine und das Verb „arbeiten".</p>
+      <div class="topics">
+        <span>1 · Berufe</span>
+        <span>2 · Was sind Sie von Beruf?</span>
+        <span>3 · ein / eine</span>
+        <span>4 · Verb „arbeiten"</span>
+      </div>
+    </div>
+    <div class="hero-badge">
+      <div class="badge-circle">
+        <div class="badge-icon">💼</div>
+        <div class="badge-num">04</div>
+        <div class="badge-label">Beruf</div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============ TEIL 1 — BERUFE ============ -->
+  <section class="part" id="teil1">
+    <div class="part-head">
+      <span class="part-num">Teil 1</span>
+      <h2 class="part-title">Berufe</h2>
+    </div>
+
+    <div class="card">
+      <table class="data-table">
+        <thead><tr><th>der (Mann)</th><th>die (Frau)</th></tr></thead>
+        <tbody>
+          <tr><td>der Arzt</td><td>die Ärztin</td></tr>
+          <tr><td>der Lehrer</td><td>die Lehrerin</td></tr>
+          <tr><td>der Ingenieur</td><td>die Ingenieurin</td></tr>
+          <tr><td>der Student</td><td>die Studentin</td></tr>
+          <tr><td>der Verkäufer</td><td>die Verkäuferin</td></tr>
+        </tbody>
+      </table>
+
+      <ul class="vocab-list" style="margin-top:10px;">
+        <li>Ich bin Arzt.</li>
+        <li>Ich bin Lehrerin.</li>
+        <li>Ich bin Student.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ TEIL 2 — WAS SIND SIE VON BERUF ============ -->
+  <section class="part" id="teil2">
+    <div class="part-head">
+      <span class="part-num">Teil 2</span>
+      <h2 class="part-title">Was sind Sie von Beruf?</h2>
+    </div>
+
+    <div class="card">
+      <div class="qa">
+        <div class="q">Was sind Sie von Beruf?</div>
+        <div class="a">Ich bin Lehrer. / Ich bin Ärztin. / Ich bin Ingenieur. / Ich bin Student.</div>
+      </div>
+
+      <h3 style="margin-top:14px;">Dialog</h3>
+      <div class="dialog">
+        <div class="bubble a"><span class="speaker">A</span>Was sind Sie von Beruf?</div>
+        <div class="bubble b"><span class="speaker">B</span>Ich bin Ingenieur.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TEIL 3 — EIN / EINE ============ -->
+  <section class="part" id="teil3">
+    <div class="part-head">
+      <span class="part-num">Teil 3</span>
+      <h2 class="part-title">ein / eine</h2>
+    </div>
+
+    <div class="card">
+      <div class="info-grid">
+        <div class="info-card tone-winter">
+          <h4>Maskulin — ein</h4>
+          <p>ein Arzt<br>ein Lehrer<br>ein Ingenieur</p>
+        </div>
+        <div class="info-card tone-autumn">
+          <h4>Feminin — eine</h4>
+          <p>eine Ärztin<br>eine Lehrerin<br>eine Ingenieurin</p>
+        </div>
+      </div>
+
+      <ul class="vocab-list" style="margin-top:10px;">
+        <li>Ich bin <b>ein</b> Lehrer.</li>
+        <li>Ich bin <b>eine</b> Lehrerin.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>Übung — ein oder eine?</h3>
+      <ul class="exercise-list" id="ex1">
+        <li>Ich bin ___ Arzt. <input type="text" data-answer="ein"> <span class="feedback"></span></li>
+        <li>Ich bin ___ Lehrerin. <input type="text" data-answer="eine"> <span class="feedback"></span></li>
+        <li>Ich bin ___ Student. <input type="text" data-answer="ein"> <span class="feedback"></span></li>
+        <li>Ich bin ___ Studentin. <input type="text" data-answer="eine"> <span class="feedback"></span></li>
+      </ul>
+      <button class="check-btn" onclick="checkExercise('ex1')">Antworten prüfen ✓</button>
+      <div class="exercise-result" id="ex1-result"></div>
+    </div>
+  </section>
+
+  <!-- ============ TEIL 4 — VERB ARBEITEN ============ -->
+  <section class="part" id="teil4">
+    <div class="part-head">
+      <span class="part-num">Teil 4</span>
+      <h2 class="part-title">Das Verb „arbeiten"</h2>
+    </div>
+
+    <div class="card">
+      <div class="conj-grid">
+        <div><b>ich</b> arbeite</div>
+        <div><b>du</b> arbeitest</div>
+        <div><b>Sie</b> arbeiten</div>
+      </div>
+
+      <ul class="vocab-list" style="margin-top:10px;">
+        <li>Ich arbeite.</li>
+        <li>Ich arbeite in Frankfurt.</li>
+        <li>Ich arbeite im Büro.</li>
+      </ul>
+
+      <div class="grammar-box">
+        <span class="label">Weitere Verben</span>
+        <b>lernen</b> — Ich lerne Deutsch.<br>
+        <b>studieren</b> — Ich studiere.<br>
+        <b>wohnen</b> — Ich wohne in Frankfurt.
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Übung — Ergänze das Verb</h3>
+      <ul class="exercise-list" id="ex2">
+        <li>Ich ___ in Frankfurt. <input type="text" data-answer="arbeite,wohne"> <span class="feedback"></span></li>
+        <li>Ich ___ Deutsch. <input type="text" data-answer="lerne"> <span class="feedback"></span></li>
+        <li>Ich ___ im Büro. <input type="text" data-answer="arbeite"> <span class="feedback"></span></li>
+        <li>Du ___ in Berlin? <input type="text" data-answer="arbeitest,wohnst"> <span class="feedback"></span></li>
+      </ul>
+      <button class="check-btn" onclick="checkExercise('ex2')">Antworten prüfen ✓</button>
+      <div class="exercise-result" id="ex2-result"></div>
+    </div>
+
+    <div class="card">
+      <h3>Dialog</h3>
+      <div class="dialog">
+        <div class="bubble a"><span class="speaker">A</span>Guten Tag.</div>
+        <div class="bubble b"><span class="speaker">B</span>Guten Tag.</div>
+        <div class="bubble a"><span class="speaker">A</span>Was sind Sie von Beruf?</div>
+        <div class="bubble b"><span class="speaker">B</span>Ich bin Verkäuferin.</div>
+        <div class="bubble a"><span class="speaker">A</span>Wo arbeiten Sie?</div>
+        <div class="bubble b"><span class="speaker">B</span>Ich arbeite in Frankfurt.</div>
+      </div>
+
+      <h3 style="margin-top:18px;">Sprechen</h3>
+      <ul class="speak-list">
+        <li>Was sind Sie von Beruf?</li>
+        <li>Wo arbeiten Sie?</li>
+        <li>Lernen Sie Deutsch?</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ QUIZ ============ -->
+  <section class="part" id="quiz">
+    <div class="part-head">
+      <span class="part-num">Quiz</span>
+      <h2 class="part-title">Teste dich!</h2>
+    </div>
+    <div class="card">
+      <div id="quiz1">
+        <div class="quiz-q" data-correct="1">
+          <p class="question">1. Eine Frau, die unterrichtet, ist:</p>
+          <div class="quiz-options">
+            <label><input type="radio" name="q1" value="0"> die Ärztin</label>
+            <label><input type="radio" name="q1" value="1"> die Lehrerin</label>
+            <label><input type="radio" name="q1" value="2"> die Verkäuferin</label>
+          </div>
+        </div>
+        <div class="quiz-q" data-correct="2">
+          <p class="question">2. „Ich bin ___ Ingenieur."</p>
+          <div class="quiz-options">
+            <label><input type="radio" name="q2" value="0"> eine</label>
+            <label><input type="radio" name="q2" value="1"> der</label>
+            <label><input type="radio" name="q2" value="2"> ein</label>
+          </div>
+        </div>
+        <div class="quiz-q" data-correct="0">
+          <p class="question">3. „Ich ___ in Frankfurt." (arbeiten)</p>
+          <div class="quiz-options">
+            <label><input type="radio" name="q3" value="0"> arbeite</label>
+            <label><input type="radio" name="q3" value="1"> arbeitest</label>
+            <label><input type="radio" name="q3" value="2"> arbeiten</label>
+          </div>
+        </div>
+        <div class="quiz-q" data-correct="1">
+          <p class="question">4. Formelle Frage nach dem Beruf:</p>
+          <div class="quiz-options">
+            <label><input type="radio" name="q4" value="0"> Wo wohnen Sie?</label>
+            <label><input type="radio" name="q4" value="1"> Was sind Sie von Beruf?</label>
+            <label><input type="radio" name="q4" value="2"> Wie heißen Sie?</label>
+          </div>
+        </div>
+        <div class="quiz-q" data-correct="2">
+          <p class="question">5. „Du ___ Deutsch." (lernen)</p>
+          <div class="quiz-options">
+            <label><input type="radio" name="q5" value="0"> lerne</label>
+            <label><input type="radio" name="q5" value="1"> lernen</label>
+            <label><input type="radio" name="q5" value="2"> lernst</label>
+          </div>
+        </div>
+      </div>
+      <button class="check-btn" onclick="checkQuiz('quiz1','quiz1-result')">Quiz auswerten</button>
+      <div class="exercise-result" id="quiz1-result"></div>
+    </div>
+  </section>
+
+  <!-- ============ ZUSAMMENFASSUNG ============ -->
+  <section class="part" id="zusammenfassung">
+    <div class="part-head">
+      <span class="part-num">Merken</span>
+      <h2 class="part-title">Das hast du heute gelernt!</h2>
+    </div>
+    <div class="card">
+      <div class="summary-grid">
+        <div class="row"><span class="key">Berufe</span><span>der Arzt/die Ärztin, der Lehrer/die Lehrerin, der Ingenieur/die Ingenieurin …</span></div>
+        <div class="row"><span class="key">Frage</span><span>Was sind Sie von Beruf?</span></div>
+        <div class="row"><span class="key">ein / eine</span><span>ein Lehrer / eine Lehrerin</span></div>
+        <div class="row"><span class="key">Verb „arbeiten"</span><span>arbeite · arbeitest · arbeiten</span></div>
+      </div>
+    </div>
+  </section>
+
+  <nav class="lesson-nav">
+    <a href="lekcja-03.html">← Lektion 3</a>
+    <a href="lekcja-05.html">Lektion 5 →</a>
+  </nav>
+
+</div>
+<script src="lessons.js"></script>
+</body>
+</html>
+Fatto
