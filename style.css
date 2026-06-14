@@ -639,20 +639,23 @@ body{
 .az-btn{
   display:inline-flex;
   align-items:center;
+  justify-content:center;
   gap:10px;
-  background:linear-gradient(135deg,#72b8ff,#a0d4ff);
+  background:#ffffff;
   color:#1d3557;
   border:0;
   border-radius:999px;
-  padding:12px 24px;
+  padding:16px 32px;
   font-weight:800;
-  font-size:1rem;
+  font-size:1.2rem;
   cursor:pointer;
   text-decoration:none;
-  transition:transform .15s ease, filter .15s ease;
+  transition:transform .15s ease, filter .15s ease, background .15s ease;
+  box-shadow:0 4px 14px rgba(0,0,0,.2);
 }
 
 .az-btn:hover{
   transform:translateY(-2px);
   filter:brightness(1.05);
+  background:#f0f4f8;
 }
