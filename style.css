@@ -645,9 +645,9 @@ body{
   color:#1d3557;
   border:2px solid #dce3ed;
   border-radius:999px;
-  padding:20px 40px;
+  padding:30px 50px;
   font-weight:800;
-  font-size:1.4rem;
+  font-size:2.4rem;
   cursor:pointer;
   text-decoration:none;
   transition:transform .15s ease, filter .15s ease, background .15s ease, border-color .15s ease;
