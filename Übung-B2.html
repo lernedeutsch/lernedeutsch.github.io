@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="de">
 <head>
@@ -180,4 +181,456 @@
 
   .vocab-grid{
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(210px,1f
+    grid-template-columns:repeat(auto-fit,minmax(210px,1fr));
+    gap:12px;
+    margin-top:16px;
+  }
+
+  .hobby-card{
+    background:rgba(255,255,255,.06);
+    border:1px solid var(--line);
+    border-radius:18px;
+    padding:14px;
+    cursor:pointer;
+    transition:transform .15s ease, border-color .15s ease, background .15s ease;
+    min-height:112px;
+  }
+
+  .hobby-card:hover{
+    transform:translateY(-2px);
+    border-color:rgba(244,201,93,.7);
+    background:rgba(255,255,255,.08);
+  }
+
+  .hobby-card h4{margin:0 0 6px;font-size:1.1rem;}
+  .hobby-card p{margin:0;color:rgba(244,247,251,.86);font-size:.95rem;}
+  .hobby-card .example{
+    margin-top:8px;
+    color:#ffeaa1;
+    font-weight:700;
+    display:none;
+  }
+
+  .hobby-card.show .example{display:block;}
+
+  .grammar-box{
+    background:rgba(255,255,255,.06);
+    border-left:4px solid var(--gold);
+    border-radius:16px;
+    padding:14px 16px;
+    margin:16px 0;
+  }
+
+  .scale{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+    gap:10px;
+    margin-top:14px;
+  }
+
+  .scale-item{
+    background:rgba(255,255,255,.06);
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:12px;
+  }
+
+  .scale-item b{
+    display:block;
+    color:#ffeaa1;
+    margin-bottom:4px;
+  }
+
+  .qa{
+    display:grid;
+    gap:10px;
+    margin-top:16px;
+  }
+
+  .q,.a{
+    padding:12px 14px;
+    border-radius:14px;
+  }
+
+  .q{
+    background:rgba(114,184,255,.12);
+    border:1px solid rgba(114,184,255,.18);
+  }
+
+  .a{
+    background:rgba(139,209,124,.12);
+    border:1px solid rgba(139,209,124,.18);
+  }
+
+  .exercise-list,.hw-list{padding-left:18px;}
+  .exercise-list li,.hw-list li{margin:10px 0;}
+
+  input[type="text"], textarea{
+    background:#f9fbff;
+    color:#1d2b39;
+    border:1px solid rgba(35,51,46,.18);
+    border-radius:12px;
+    padding:9px 10px;
+    font:inherit;
+    min-width:180px;
+    vertical-align:middle;
+  }
+
+  textarea{
+    width:min(100%,620px);
+    display:block;
+    margin-top:8px;
+    resize:vertical;
+  }
+
+  .feedback{
+    display:inline-block;
+    min-width:22px;
+    font-weight:800;
+    margin-left:8px;
+  }
+
+  .ok{color:#96e79d;}
+  .no{color:#ff8b8b;}
+
+  .check-btn{
+    margin-top:12px;
+    background:linear-gradient(135deg,var(--gold),#ffd976);
+    color:#223;
+    border:0;
+    border-radius:999px;
+    padding:11px 18px;
+    font-weight:800;
+    cursor:pointer;
+  }
+
+  .check-btn:hover{filter:brightness(1.03);}
+  .exercise-result{margin-top:10px;font-weight:700;}
+
+  .verb-boxes{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+    gap:12px;
+    margin-top:14px;
+  }
+
+  .verb-box{
+    background:rgba(255,255,255,.06);
+    border:1px solid var(--line);
+    border-radius:16px;
+    padding:14px;
+  }
+
+  .split-demo{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+    margin-top:14px;
+  }
+
+  .demo{
+    background:rgba(255,255,255,.06);
+    border:1px solid var(--line);
+    border-radius:16px;
+    padding:14px;
+  }
+
+  .demo h4{margin:0 0 8px;}
+
+  table.ordinal{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:12px;
+    overflow:hidden;
+    border-radius:14px;
+  }
+
+  .ordinal th,.ordinal td{
+    border:1px solid rgba(244,247,251,.12);
+    padding:10px 12px;
+    text-align:left;
+  }
+
+  .ordinal thead th{background:rgba(244,201,93,.14);}
+  .ordinal tbody td{background:rgba(255,255,255,.03);}
+
+  .quiz-q{
+    background:rgba(255,255,255,.05);
+    border:1px solid var(--line);
+    border-radius:16px;
+    padding:14px;
+    margin:12px 0;
+  }
+
+  .quiz-options{
+    display:grid;
+    gap:8px;
+  }
+
+  .quiz-options label{
+    display:block;
+    background:rgba(255,255,255,.05);
+    border-radius:12px;
+    padding:10px 12px;
+    border:1px solid transparent;
+  }
+
+  .quiz-options label.correct{
+    border-color:#96e79d;
+    background:rgba(139,209,124,.14);
+  }
+
+  .quiz-options label.incorrect{
+    border-color:#ff8b8b;
+    background:rgba(255,139,139,.12);
+  }
+
+  .dialog{display:grid;gap:10px;}
+  .bubble{
+    padding:12px 14px;
+    border-radius:18px;
+    max-width:86%;
+  }
+
+  .marta{background:rgba(255,255,255,.08);}
+  .tom{background:rgba(244,201,93,.12);margin-left:auto;}
+
+  .speaker{
+    display:block;
+    font-family:"JetBrains Mono",monospace;
+    font-size:.76rem;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    color:#ffeaa1;
+    margin-bottom:4px;
+  }
+
+  .summary-grid{display:grid;gap:12px;}
+
+  .row{
+    display:grid;
+    grid-template-columns:180px 1fr;
+    gap:14px;
+    align-items:start;
+    padding:12px 14px;
+    background:rgba(255,255,255,.05);
+    border:1px solid var(--line);
+    border-radius:14px;
+  }
+
+  .key{font-weight:800;color:#ffeaa1;}
+
+  .lesson-nav{
+    display:flex;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:10px;
+    border-top:2px dashed var(--line);
+    padding-top:24px;
+    margin-top:10px;
+    font-family:"JetBrains Mono", monospace;
+    font-size:.9rem;
+  }
+
+  .lesson-nav a{
+    color:var(--chalk);
+    text-decoration:none;
+    border:1px solid var(--line);
+    border-radius:999px;
+    padding:8px 16px;
+    transition:background .15s ease,border-color .15s ease;
+  }
+
+  .lesson-nav a:hover{
+    background:rgba(244,247,251,.08);
+    border-color:var(--gold);
+    color:var(--gold);
+  }
+
+  .übung-btn{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    background:linear-gradient(135deg,var(--blue),#a0d4ff);
+    color:#1d3557;
+    border:0;
+    border-radius:999px;
+    padding:14px 28px;
+    font-weight:800;
+    font-size:1.05rem;
+    cursor:pointer;
+    margin:24px auto 0;
+    text-decoration:none;
+    transition:transform .15s ease, filter .15s ease;
+  }
+
+  .übung-btn:hover{
+    transform:translateY(-2px);
+    filter:brightness(1.05);
+  }
+
+  a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,label:focus-within{
+    outline:3px solid var(--gold);
+    outline-offset:2px;
+  }
+
+  @media (max-width:720px){
+    h1.lesson-title{font-size:2.2rem;}
+    .part-title{font-size:1.7rem;}
+    .row{grid-template-columns:1fr;}
+    .split-demo{grid-template-columns:1fr;}
+    .bubble{max-width:100%;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <div class="hero-text">
+      <p class="eyebrow">Deutschkurs A1 · Lektion 12 von 30</p>
+      <h1 class="lesson-title">Hobbys und Freizeit</h1>
+      <p>Heute lernen wir, wie man über Hobbys spricht, <b>gern</b> benutzt, trennbare und untrennbare Verben erkennt und Freizeitfragen beantwortet.</p>
+      <div class="topics">
+        <span>1 · Hobbys</span>
+        <span>2 · gern / gerne</span>
+        <span>3 · Trennbar & untrennbar</span>
+        <span>4 · Freizeit</span>
+      </div>
+    </div>
+
+    <div class="wheel-box">
+      <svg viewBox="0 0 320 320" role="img" aria-label="Freizeit-Symbol mit Hobbys rund um ein Zentrum">
+        <circle cx="160" cy="160" r="132" fill="rgba(255,255,255,.05)" stroke="rgba(244,247,251,.16)"/>
+        <circle cx="160" cy="160" r="70" fill="#20324a" stroke="rgba(255,255,255,.12)"/>
+        <text class="center-label" x="160" y="152">Freizeit</text>
+        <text class="center-sub" x="160" y="175">Hobbys</text>
+        <text x="160" y="40" class="month-label" font-size="16">⚽</text>
+        <text x="252" y="82" class="month-label" font-size="16">🎵</text>
+        <text x="282" y="164" class="month-label" font-size="16">📚</text>
+        <text x="250" y="246" class="month-label" font-size="16">✈️</text>
+        <text x="160" y="292" class="month-label" font-size="16">🍳</text>
+        <text x="70" y="246" class="month-label" font-size="16">🎾</text>
+        <text x="38" y="164" class="month-label" font-size="16">🚲</text>
+        <text x="70" y="82" class="month-label" font-size="16">🧩</text>
+      </svg>
+    </div>
+  </header>
+
+  <section class="part" id="teil1">
+    <div class="part-head"><span class="part-num">Teil 1</span><h2 class="part-title">Hobbys: Wortschatz</h2></div>
+    <div class="card">
+      <p class="lead">Ein Hobby ist eine Aktivität, die wir in der Freizeit gern machen. Klicken Sie auf eine Karte — dann sehen Sie ein Beispielsatz.</p>
+      <div class="vocab-grid">
+        <div class="hobby-card" onclick="this.classList.toggle('show')"><h4>⚽ Sport</h4><p>aktiv sein, trainieren, gewinnen</p><div class="example">Beispiel: Ich spiele gern Fußball.</div></div>
+        <div class="hobby-card" onclick="this.classList.toggle('show')"><h4>🎵 Musik</h4><p>hören, singen, Klavier spielen</p><div class="example">Beispiel: Ich höre gern Musik.</div></div>
+        <div class="hobby-card" onclick="this.classList.toggle('show')"><h4>📚 Lesen</h4><p>Bücher, Comics, Zeitungen</p><div class="example">Beispiel: Ich lese gern Bücher.</div></div>
+        <div class="hobby-card" onclick="this.classList.toggle('show')"><h4>🍳 Kochen</h4><p>Rezept, backen, vorbereiten</p><div class="example">Beispiel: Ich koche gern.</div></div>
+        <div class="hobby-card" onclick="this.classList.toggle('show')"><h4>✈️ Reisen</h4><p>unterwegs sein, neue Orte</p><div class="example">Beispiel: Ich reise gern.</div></div>
+        <div class="hobby-card" onclick="this.classList.toggle('show')"><h4>📷 Fotografieren</h4><p>Bilder machen, Natur, Stadt</p><div class="example">Beispiel: Ich mache gern Fotos.</div></div>
+        <div class="hobby-card" onclick="this.classList.toggle('show')"><h4>🎨 Malen</h4><p>zeichnen, kreativ sein</p><div class="example">Beispiel: Ich male gern.</div></div>
+        <div class="hobby-card" onclick="this.classList.toggle('show')"><h4>🎧 Musik hören</h4><p>Lieder, Podcast, Radio</p><div class="example">Beispiel: Ich höre gern Musik.</div></div>
+        <div class="hobby-card" onclick="this.classList.toggle('show')"><h4>🎾 Tennis</h4><p>spielen, trainieren, Match</p><div class="example">Beispiel: Ich spiele gern Tennis.</div></div>
+        <div class="hobby-card" onclick="this.classList.toggle('show')"><h4>🚲 Radfahren</h4><p>fahren, draußen, Bewegung</p><div class="example">Beispiel: Ich fahre gern Rad.</div></div>
+        <div class="hobby-card" onclick="this.classList.toggle('show')"><h4>🧩 Spiele</h4><p>Karten, Brettspiele, Puzzle</p><div class="example">Beispiel: Ich spiele gern Karten.</div></div>
+        <div class="hobby-card" onclick="this.classList.toggle('show')"><h4>💻 Computer</h4><p>online, lernen, spielen</p><div class="example">Beispiel: Ich arbeite gern am Computer.</div></div>
+      </div>
+      <div class="grammar-box"><span class="label">Wichtige Verben</span> spielen — Fußball spielen, Klavier spielen, Karten spielen<br>treiben — Sport treiben<br>machen — Yoga machen, Sport machen, Fotos machen<br>lesen — ein Buch lesen, Zeitung lesen<br>hören — Musik hören, Radio hören<br>gehen — schwimmen gehen, joggen gehen, tanzen gehen<br>kochen — gern kochen, ein neues Rezept kochen<br>reisen — gern reisen, ins Ausland reisen</div>
+    </div>
+  </section>
+
+  <section class="part" id="teil2">
+    <div class="part-head"><span class="part-num">Teil 2</span><h2 class="part-title">Interessen ausdrücken: gern</h2></div>
+    <div class="card">
+      <p class="lead">Um zu sagen, was wir gern machen, verwenden wir <b>gern</b> oder <b>gerne</b> nach dem Verb.</p>
+      <div class="grammar-box"><b>Position:</b> Das Wort <b>gern</b> steht direkt nach dem Verb — oder am Ende, wenn kein Objekt folgt.<br>Ich spiele gern Fußball. · Ich höre gern Musik. · Ich lese gern Bücher. · Ich koche gern.</div>
+      <div class="scale">
+        <div class="scale-item"><b>sehr gern</b>Ich tanze sehr gern.</div>
+        <div class="scale-item"><b>gern</b>Ich lese gern.</div>
+        <div class="scale-item"><b>ganz gern</b>Ich kann ganz gern kochen.</div>
+        <div class="scale-item"><b>nicht so gern</b>Ich tanze nicht so gern.</div>
+        <div class="scale-item"><b>nicht gern</b>Ich putze gar nicht gern.</div>
+        <div class="scale-item"><b>am liebsten</b>Am liebsten spiele ich Tennis.</div>
+      </div>
+      <div class="qa"><div class="q">Was ist dein Hobby?</div><div class="a">Mein Hobby ist Lesen. / Meine Hobbys sind Kochen und Reisen.</div><div class="q">Was machst du gern?</div><div class="a">Ich spiele gern Gitarre und ich gehe gern joggen.</div></div>
+    </div>
+  </section>
+
+  <section class="part" id="teil3">
+    <div class="part-head"><span class="part-num">Teil 3</span><h2 class="part-title">Trennbare und untrennbare Verben</h2></div>
+    <div class="card">
+      <p class="lead">Viele deutsche Verben haben ein Präfix. Es gibt zwei Typen: trennbare und untrennbare Verben.</p>
+      <div class="split-demo">
+        <div class="demo"><h4>Trennbar: fernsehen</h4><p>fern + sehen → Ich sehe heute Abend fern.</p><p>Das Präfix springt ans Ende des Satzes.</p></div>
+        <div class="demo"><h4>Untrennbar: besuchen</h4><p>be + suchen → Ich besuche am Sonntag meine Großeltern.</p><p>Das Präfix bleibt fest am Verb.</p></div>
+      </div>
+      <div class="verb-boxes">
+        <div class="verb-box"><b>Trennbare Verben:</b><br>einkaufen → Ich kaufe Obst ein.<br>aufstehen → Ich stehe um 7 Uhr auf.<br>mitkommen → Kommst du heute mit?<br>anrufen → Ich rufe meine Mutter an.<br>ausgehen → Wir gehen am Freitag aus.</div>
+        <div class="verb-box"><b>Untrennbare Präfixe:</b><br>be-, ge-, ver-, er-, ent-, emp-, zer-<br><br><b>Weitere Verben:</b><br>verstehen, erzählen, bekommen</div>
+      </div>
+      <div class="grammar-box"><b>Wie erkennt man es?</b><br>Trennbare Präfixe sind oft betont: AUFstehen, EINkaufen, FERNsehen.<br>Untrennbare Präfixe sind unbetont: beSUCHen, verSTEHen, erZÄHlen.</div>
+    </div>
+  </section>
+
+  <section class="part" id="teil4">
+    <div class="part-head"><span class="part-num">Teil 4</span><h2 class="part-title">Was machst du in der Freizeit?</h2></div>
+    <div class="card">
+      <p class="lead">Jetzt üben wir die wichtigste Frage dieser Lektion.</p>
+      <div class="qa">
+        <div class="q">Was machst du in der Freizeit? <i>(informell)</i></div>
+        <div class="q">Was machen Sie in der Freizeit? <i>(formell)</i></div>
+        <div class="a">In meiner Freizeit spiele ich gern Fußball. · In meiner Freizeit lese ich gern Bücher. · In meiner Freizeit treibe ich Sport und höre Musik. · In meiner Freizeit gehe ich oft schwimmen.</div>
+      </div>
+      <div class="grammar-box"><b>Häufigkeit:</b> immer 100% · oft 70% · manchmal 40% · selten 15% · nie 0%<br>Ich gehe immer am Samstag schwimmen. · Ich lese oft abends ein Buch. · Ich spiele manchmal mit Freunden Karten. · Ich gehe selten ins Kino. · Ich sehe nie fern.</div>
+    </div>
+  </section>
+
+  <section class="part" id="dialog">
+    <div class="part-head"><span class="part-num">Dialog</span><h2 class="part-title">Lesen und sprechen</h2></div>
+    <div class="card">
+      <p>Achten Sie auf <b>gern</b> und auf die trennbaren Verben.</p>
+      <div class="dialog">
+        <div class="bubble marta"><span class="speaker">Nina</span>Hallo Paul! Was machst du in der Freizeit?</div>
+        <div class="bubble tom"><span class="speaker">Paul</span>Hallo Nina! Ich treibe gern Sport — ich spiele Tennis und gehe oft joggen. Und du?</div>
+        <div class="bubble marta"><span class="speaker">Nina</span>Ich lese sehr gern Bücher und ich höre gern Musik. Manchmal koche ich auch gern.</div>
+        <div class="bubble tom"><span class="speaker">Paul</span>Interessant! Siehst du auch fern?</div>
+        <div class="bubble marta"><span class="speaker">Nina</span>Nein, ich sehe nie fern — das ist langweilig. Aber ich reise sehr gern!</div>
+        <div class="bubble tom"><span class="speaker">Paul</span>Was ist dein Lieblingshobby?</div>
+        <div class="bubble marta"><span class="speaker">Nina</span>Am liebsten reise ich. Und dein Lieblingshobby?</div>
+        <div class="bubble tom"><span class="speaker">Paul</span>Am liebsten spiele ich Fußball mit Freunden. Kommst du am Samstag mit?</div>
+        <div class="bubble marta"><span class="speaker">Nina</span>Ja, gern! Bis Samstag!</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="part" id="zusammenfassung">
+    <div class="part-head"><span class="part-num">Merken</span><h2 class="part-title">Das haben Sie heute gelernt!</h2></div>
+    <div class="card">
+      <div class="summary-grid">
+        <div class="row"><span class="key">Hobbys</span><span>Sport, Musik, Lesen, Kochen, Reisen, Fotografieren, Tanzen …</span></div>
+        <div class="row"><span class="key">Wichtige Verben</span><span>spielen, treiben, machen, lesen, hören, gehen, kochen, reisen</span></div>
+        <div class="row"><span class="key">gern</span><span>sehr gern → gern → nicht so gern → gar nicht gern · am liebsten</span></div>
+        <div class="row"><span class="key">Trennbare Verben</span><span>Präfix springt ans Ende — fernsehen → Ich sehe fern.</span></div>
+        <div class="row"><span class="key">Untrennbare Verben</span><span>Präfix bleibt fest — besuchen → Ich besuche.</span></div>
+        <div class="row"><span class="key">Freizeitfrage</span><span>Was machst du / machen Sie in der Freizeit?</span></div>
+        <div class="row"><span class="key">Häufigkeit</span><span>immer, oft, manchmal, selten, nie</span></div>
+      </div>
+    </div>
+  </section>
+
+  <a href="Übung-A1.html" class="übung-btn">Übung-A1</a>
+
+  <nav class="lesson-nav">
+    <a href="#">← Lektion 11</a>
+    <a href="#">Lektion 13 →</a>
+  </nav>
+</div>
+
+<script>
+function normalize(str){
+  return str.trim().toLowerCase().replace(/ß/g,'ss').replace(/[.!?]/g,'');
+}
+</script>
+</body>
+</html>
+```
