@@ -1,22 +1,134 @@
+
 <!DOCTYPE html>
-<html lang="pl">
+<html lang="de">
 <head>
 <meta charset="UTF-8">
-<title>Wortschatz A2</title>
-<link rel="stylesheet" href="style.css">
-</head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lektion 11 — Wochentage, Monate, Jahreszeiten &amp; Daten</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&family=Nunito+Sans:opsz,wght@6..12,400;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#1f3d36;
+    --bg-soft:#26473f;
+    --paper:#fbf6ec;
+    --ink:#23332e;
+    --chalk:#f5f1e6;
+    --gold:#f4c95d;
+    --spring:#9bc53d;
+    --summer:#f4c95d;
+    --autumn:#e0763c;
+    --winter:#5fa8d3;
+    --line: rgba(245,241,230,0.25);
+  }
 
-<body>
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
 
-<div class="page">
+  body{
+    margin:0;
+    background:var(--bg);
+    background-image:
+      radial-gradient(circle at 15% 10%, rgba(245,241,230,0.05), transparent 40%),
+      radial-gradient(circle at 85% 90%, rgba(245,241,230,0.04), transparent 45%);
+    color:var(--chalk);
+    font-family:"Nunito Sans", sans-serif;
+    line-height:1.6;
+    padding:0 0 60px;
+  }
 
-<h1>Wortschatz A2</h1>
+  .wrap{
+    max-width:880px;
+    margin:0 auto;
+    padding:32px 20px 0;
+  }
 
-<p>Tutaj będą słówka poziomu A2.</p>
+  /* ---------- HEADER / HERO ---------- */
+  header.hero{
+    display:flex;
+    flex-wrap:wrap;
+    align-items:center;
+    gap:32px;
+    padding:24px 0 36px;
+    border-bottom:2px dashed var(--line);
+    margin-bottom:36px;
+  }
+  .hero-text{flex:1 1 320px;}
+  .eyebrow{
+    font-family:"JetBrains Mono", monospace;
+    letter-spacing:.18em;
+    text-transform:uppercase;
+    font-size:.78rem;
+    color:var(--gold);
+    margin:0 0 10px;
 
-<a href="Wortschatz.html">← Zurück</a>
+ /* ---------- EXERCISES ---------- */
+  .exercise-list{
+    list-style:none;
+    margin:14px 0 0;
+    padding:0;
+    counter-reset: ex;
+  }
+  .exercise-list li{
+    counter-increment: ex;
+    display:flex;
+    flex-wrap:wrap;
+    align-items:center;
+    gap:8px;
+    margin-bottom:12px;
+    font-size:.97rem;
+  }
+  .exercise-list li::before{
+    content: counter(ex) ".";
+    font-family:"JetBrains Mono", monospace;
+    color:#a37a14;
+    flex-shrink:0;
+    min-width:1.4em;
+  }
+  .exercise-list input[type="text"]{
+    font-family:"JetBrains Mono", monospace;
+    font-size:.95rem;
+    border:none;
+    border-bottom:2px solid #1f3d36;
+    background:transparent;
+    padding:3px 6px;
+    width:160px;
+    color:#1f3d36;
+  }
+  .exercise-list input[type="text"]:focus{
+    outline:none;
+    border-bottom-color:var(--autumn);
+  }
+  .feedback{
+    font-size:1.05rem;
+    width:1.2em;
+    text-align:center;
+  }
+  .feedback.ok{color:#5b8a2f;}
+  .feedback.no{color:#c1502e;}
 
-</div>
+  .check-btn{
+    font-family:"Kalam", cursive;
+    font-weight:700;
+    font-size:1rem;
+    border:2px solid #1f3d36;
+    background:transparent;
+    color:#1f3d36;
+    border-radius:999px;
+    padding:8px 22px;
+    cursor:pointer;
+    margin-top:6px;
+    transition: background .15s ease, color .15s ease;
+  }
+  .check-btn:hover{background:#1f3d36; color:var(--paper);}
 
+  .exercise-result{
+    font-family:"JetBrains Mono", monospace;
+    font-size:.85rem;
+    margin-top:8px;
+    min-height:1.2em;
+  }
+</script>
 </body>
 </html>
