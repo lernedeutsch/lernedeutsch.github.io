@@ -627,3 +627,32 @@ body{
     width: 50%;
     vertical-align: top;
 }
+.top-bar{
+  max-width:880px;
+  margin:20px auto 0;
+  padding:0 20px;
+  display:flex;
+  align-items:center;
+  gap:16px;
+}
+
+.az-btn{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  background:linear-gradient(135deg,#72b8ff,#a0d4ff);
+  color:#1d3557;
+  border:0;
+  border-radius:999px;
+  padding:12px 24px;
+  font-weight:800;
+  font-size:1rem;
+  cursor:pointer;
+  text-decoration:none;
+  transition:transform .15s ease, filter .15s ease;
+}
+
+.az-btn:hover{
+  transform:translateY(-2px);
+  filter:brightness(1.05);
+}
