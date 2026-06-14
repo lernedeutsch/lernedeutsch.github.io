@@ -1,1 +1,647 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lektion 11 — Wochentage, Monate, Jahreszeiten &amp; Daten</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&family=Nunito+Sans:opsz,wght@6..12,400;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#1f3d36;
+    --bg-soft:#26473f;
+    --paper:#fbf6ec;
+    --ink:#23332e;
+    --chalk:#f5f1e6;
+    --gold:#f4c95d;
+    --spring:#9bc53d;
+    --summer:#f4c95d;
+    --autumn:#e0763c;
+    --winter:#5fa8d3;
+    --line: rgba(245,241,230,0.25);
+  }
 
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+
+  body{
+    margin:0;
+    background:var(--bg);
+    background-image:
+      radial-gradient(circle at 15% 10%, rgba(245,241,230,0.05), transparent 40%),
+      radial-gradient(circle at 85% 90%, rgba(245,241,230,0.04), transparent 45%);
+    color:var(--chalk);
+    font-family:"Nunito Sans", sans-serif;
+    line-height:1.6;
+    padding:0 0 60px;
+  }
+
+  .wrap{
+    max-width:880px;
+    margin:0 auto;
+    padding:32px 20px 0;
+  }
+
+  /* ---------- HEADER / HERO ---------- */
+  header.hero{
+    display:flex;
+    flex-wrap:wrap;
+    align-items:center;
+    gap:32px;
+    padding:24px 0 36px;
+    border-bottom:2px dashed var(--line);
+    margin-bottom:36px;
+  }
+  .hero-text{flex:1 1 320px;}
+  .eyebrow{
+    font-family:"JetBrains Mono", monospace;
+    letter-spacing:.18em;
+    text-transform:uppercase;
+    font-size:.78rem;
+    color:var(--gold);
+    margin:0 0 10px;
+  }
+  h1.lesson-title{
+    font-family:"Kalam", cursive;
+    font-weight:700;
+    font-size:2.6rem;
+    line-height:1.15;
+    margin:0 0 14px;
+    color:var(--chalk);
+  }
+  .hero-text p{
+    margin:0;
+    color:rgba(245,241,230,.85);
+    max-width:42ch;
+  }
+
+  .topics{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-top:18px;
+  }
+  .topics span{
+    font-family:"JetBrains Mono", monospace;
+    font-size:.78rem;
+    border:1px solid var(--line);
+    border-radius:999px;
+    padding:5px 12px;
+    color:var(--chalk);
+  }
+
+  /* ---------- JAHRESKREIS (signature element) ---------- */
+  .wheel-box{flex:0 0 240px; display:flex; justify-content:center;}
+  .wheel-box svg{width:240px; height:240px; max-width:100%;}
+  .ring-spring{fill:var(--spring); opacity:.85;}
+  .ring-summer{fill:var(--summer); opacity:.9;}
+  .ring-autumn{fill:var(--autumn); opacity:.88;}
+  .ring-winter{fill:var(--winter); opacity:.85;}
+  .ring-seg{stroke:var(--bg); stroke-width:2;}
+  .month-label{
+    font-family:"JetBrains Mono", monospace;
+    font-size:11px;
+    fill:var(--bg);
+    text-anchor:middle;
+    dominant-baseline:middle;
+  }
+  .month-label.now{
+    font-weight:700;
+    fill:#1f3d36;
+  }
+  .season-label{
+    font-family:"Kalam", cursive;
+    font-size:15px;
+    font-weight:700;
+    fill:var(--chalk);
+    text-anchor:middle;
+    dominant-baseline:middle;
+  }
+  .now-marker{
+    fill:var(--paper);
+    stroke:var(--bg);
+    stroke-width:2;
+  }
+  @media (prefers-reduced-motion: no-preference){
+    .now-marker{ animation: pulse 2.4s ease-in-out infinite; }
+  }
+  @keyframes pulse{
+    0%,100%{ r:6; opacity:1; }
+    50%{ r:8; opacity:.65; }
+  }
+  .center-label{
+    font-family:"Kalam", cursive;
+    font-size:18px;
+    font-weight:700;
+    fill:var(--chalk);
+    text-anchor:middle;
+  }
+  .center-sub{
+    font-family:"JetBrains Mono", monospace;
+    font-size:10px;
+    fill:rgba(245,241,230,.7);
+    text-anchor:middle;
+  }
+
+  /* ---------- SECTIONS ---------- */
+  section.part{
+    margin-bottom:40px;
+  }
+  .part-head{
+    display:flex;
+    align-items:baseline;
+    gap:12px;
+    margin-bottom:14px;
+  }
+  .part-num{
+    font-family:"JetBrains Mono", monospace;
+    font-size:.95rem;
+    color:var(--gold);
+    border:1px solid var(--gold);
+    border-radius:6px;
+    padding:2px 8px;
+    flex-shrink:0;
+  }
+  h2.part-title{
+    font-family:"Kalam", cursive;
+    font-weight:700;
+    font-size:1.7rem;
+    margin:0;
+    color:var(--chalk);
+  }
+
+  .card{
+    background:var(--paper);
+    color:var(--ink);
+    border-radius:14px;
+    padding:24px 26px;
+    box-shadow:0 6px 0 rgba(0,0,0,.12);
+  }
+  .card + .card{margin-top:18px;}
+  .card h3{
+    font-family:"Kalam", cursive;
+    font-size:1.15rem;
+    margin:0 0 10px;
+    color:#1f3d36;
+  }
+  .card p{margin:0 0 10px;}
+  .card p:last-child{margin-bottom:0;}
+
+  .grammar-box{
+    border-left:4px solid var(--gold);
+    background:rgba(244,201,93,.12);
+    border-radius:0 10px 10px 0;
+    padding:14px 18px;
+    margin:14px 0;
+  }
+  .grammar-box .label{
+    font-family:"JetBrains Mono", monospace;
+    font-size:.75rem;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    color:#a37a14;
+    display:block;
+    margin-bottom:6px;
+  }
+
+  .qa{
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+    font-size:.97rem;
+    margin:12px 0;
+  }
+  .qa .q::before{content:"❓ "; }
+  .qa .a::before{content:"💬 "; }
+  .qa .q, .qa .a{
+    background:rgba(31,61,54,.06);
+    border-radius:8px;
+    padding:8px 12px;
+  }
+
+  /* ---------- VOCAB LIST ---------- */
+  .vocab-list{
+    list-style:none;
+    margin:0;
+    padding:0;
+    display:grid;
+    grid-template-columns:1fr;
+    gap:6px;
+  }
+  .vocab-list li{
+    border-bottom:1px dashed rgba(31,51,46,.18);
+    padding:6px 0;
+  }
+  .vocab-list b{color:#1f3d36;}
+
+  /* ---------- SEASON CARDS ---------- */
+  .season-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:14px;
+    margin-top:16px;
+  }
+  @media (max-width:560px){ .season-grid{grid-template-columns:1fr;} }
+  .season-card{
+    border-radius:12px;
+    padding:16px 18px;
+    color:#1f3d36;
+    box-shadow:0 4px 0 rgba(0,0,0,.1);
+    transition:transform .15s ease;
+  }
+  .season-card:hover{transform:translateY(-3px);}
+  .season-card h4{
+    font-family:"Kalam",cursive;
+    margin:0 0 6px;
+    font-size:1.2rem;
+  }
+  .season-card p{margin:0; font-size:.93rem;}
+  .season-frühling{background:var(--spring);}
+  .season-sommer{background:var(--summer);}
+  .season-herbst{background:var(--autumn); color:#fff8f0;}
+  .season-winter{background:var(--winter); color:#f4fbff;}
+
+  /* ---------- TABLE (Ordinalzahlen) ---------- */
+  table.ordinal{
+    width:100%;
+    border-collapse:collapse;
+    font-size:.93rem;
+    margin-top:8px;
+  }
+  table.ordinal th, table.ordinal td{
+    border:1px solid rgba(31,51,46,.18);
+    padding:8px 10px;
+    text-align:left;
+  }
+  table.ordinal th{
+    background:rgba(31,61,54,.08);
+    font-family:"JetBrains Mono", monospace;
+    font-size:.78rem;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+  }
+  table.ordinal td:last-child, table.ordinal td:nth-child(2){
+    font-family:"JetBrains Mono", monospace;
+  }
+
+  .exceptions{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-top:12px;
+  }
+  .exceptions span{
+    font-family:"JetBrains Mono", monospace;
+    font-size:.85rem;
+    background:rgba(224,118,60,.12);
+    border:1px solid rgba(224,118,60,.4);
+    border-radius:8px;
+    padding:6px 10px;
+  }
+
+  /* ---------- DIALOG ---------- */
+  .dialog{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+    margin-top:16px;
+  }
+  .bubble{
+    max-width:78%;
+    padding:10px 16px;
+    border-radius:16px;
+    font-size:.95rem;
+    position:relative;
+  }
+  .bubble .speaker{
+    display:block;
+    font-family:"Kalam", cursive;
+    font-weight:700;
+    font-size:.85rem;
+    margin-bottom:2px;
+  }
+  .bubble.marta{
+    align-self:flex-start;
+    background:rgba(95,168,211,.18);
+    border:1px solid rgba(95,168,211,.5);
+    border-bottom-left-radius:4px;
+  }
+  .bubble.marta .speaker{color:#3c7ea3;}
+  .bubble.tom{
+    align-self:flex-end;
+    background:rgba(224,118,60,.16);
+    border:1px solid rgba(224,118,60,.45);
+    border-bottom-right-radius:4px;
+    text-align:right;
+  }
+  .bubble.tom .speaker{color:#b8552c;}
+
+  /* ---------- SUMMARY ---------- */
+  .summary-grid{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:10px;
+    margin-top:14px;
+  }
+  .summary-grid .row{
+    display:grid;
+    grid-template-columns:140px 1fr;
+    gap:10px;
+    font-size:.93rem;
+    align-items:baseline;
+  }
+  @media (max-width:560px){
+    .summary-grid .row{grid-template-columns:1fr;}
+  }
+  .summary-grid .row .key{
+    font-family:"JetBrains Mono", monospace;
+    font-size:.78rem;
+    text-transform:uppercase;
+    letter-spacing:.08em;
+    color:#a37a14;
+  }
+
+  /* ---------- FOOTER NAV ---------- */
+  .lesson-nav{
+    display:flex;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:10px;
+    border-top:2px dashed var(--line);
+    padding-top:24px;
+    margin-top:10px;
+    font-family:"JetBrains Mono", monospace;
+    font-size:.9rem;
+  }
+  .lesson-nav a{
+    color:var(--chalk);
+    text-decoration:none;
+    border:1px solid var(--line);
+    border-radius:999px;
+    padding:8px 16px;
+    transition: background .15s ease, border-color .15s ease;
+  }
+  .lesson-nav a:hover{background:rgba(245,241,230,.08); border-color:var(--gold); color:var(--gold);}
+
+  a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible, label:focus-within{
+    outline:3px solid var(--gold);
+    outline-offset:2px;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <div class="hero-text">
+      <p class="eyebrow">Lektion 11 · Niveau A1/A2</p>
+      <h1 class="lesson-title">Wochentage und Monate</h1>
+      <p>Heute lernst du, wie man über Tage, Monate, Jahreszeiten und Daten spricht — und wie man fragt, wann jemand Geburtstag hat.</p>
+      <div class="topics">
+        <span>1 · Die Wochentage</span>
+        <span>2 · Die Monate</span>
+        <span>3 · Die Jahreszeiten</span>
+        <span>4 · Daten &amp; Geburtstage</span>
+      </div>
+    </div>
+
+    <div class="wheel-box">
+      <svg viewBox="0 0 320 320" role="img" aria-label="Jahreskreis mit den vier Jahreszeiten und zwölf Monaten, Juni ist markiert">
+        <path class="ring-spring ring-seg" d="M160,55 A105,105 0 0,1 265,160 L225,160 A65,65 0 0,0 160,95 Z"/>
+        <path class="ring-summer ring-seg" d="M265,160 A105,105 0 0,1 160,265 L160,225 A65,65 0 0,0 225,160 Z"/>
+        <path class="ring-autumn ring-seg" d="M160,265 A105,105 0 0,1 55,160 L95,160 A65,65 0 0,0 160,225 Z"/>
+        <path class="ring-winter ring-seg" d="M55,160 A105,105 0 0,1 160,55 L160,95 A65,65 0 0,0 95,160 Z"/>
+
+        <!-- Season labels -->
+        <text class="season-label" x="251.9" y="68.1">Frühling</text>
+        <text class="season-label" x="251.9" y="251.9">Sommer</text>
+        <text class="season-label" x="68.1" y="251.9">Herbst</text>
+        <text class="season-label" x="68.1" y="68.1">Winter</text>
+
+        <!-- Month labels -->
+        <text class="month-label" x="182" y="77.9">Mär</text>
+        <text class="month-label" x="220.1" y="99.9">Apr</text>
+        <text class="month-label" x="242.1" y="138">Mai</text>
+        <text class="month-label now" x="242.1" y="182">Jun</text>
+        <text class="month-label" x="220.1" y="220.1">Jul</text>
+        <text class="month-label" x="182" y="242.1">Aug</text>
+        <text class="month-label" x="138" y="242.1">Sep</text>
+        <text class="month-label" x="99.9" y="220.1">Okt</text>
+        <text class="month-label" x="77.9" y="182">Nov</text>
+        <text class="month-label" x="77.9" y="138">Dez</text>
+        <text class="month-label" x="99.9" y="99.9">Jan</text>
+        <text class="month-label" x="138" y="77.9">Feb</text>
+
+        <!-- "now" marker on Juni -->
+        <circle class="now-marker" cx="242.1" cy="182" r="6"/>
+
+        <!-- center -->
+        <circle cx="160" cy="160" r="60" fill="#1f3d36"/>
+        <text class="center-label" x="160" y="155">Es ist</text>
+        <text class="center-label" x="160" y="178">Juni</text>
+        <text class="center-sub" x="160" y="196">☀ Sommer</text>
+      </svg>
+    </div>
+  </header>
+
+  <!-- ============ TEIL 1 — WOCHENTAGE ============ -->
+  <section class="part" id="teil1">
+    <div class="part-head">
+      <span class="part-num">Teil 1</span>
+      <h2 class="part-title">Die Wochentage</h2>
+    </div>
+
+    <div class="card">
+      <p>Eine Woche hat <b>sieben Tage</b>. In Deutschland beginnt die Woche am <b>Montag</b> — nicht am Sonntag!</p>
+
+      <ul class="vocab-list">
+        <li><b>am</b> + Wochentag → <i>Am Montag habe ich Deutschkurs.</i></li>
+        <li><b>heute</b> — dieser Tag. <i>Heute ist Mittwoch.</i></li>
+        <li><b>morgen</b> — der nächste Tag. <i>Morgen ist Donnerstag.</i></li>
+        <li><b>gestern</b> — der Tag davor. <i>Gestern war Dienstag.</i></li>
+        <li><b>das Wochenende</b> — Samstag und Sonntag</li>
+      </ul>
+
+      <div class="qa">
+        <div class="q">Welcher Tag ist heute?</div>
+        <div class="a">Heute ist Mittwoch.</div>
+        <div class="q">Was machst du am Samstag?</div>
+        <div class="a">Am Samstag spiele ich Fußball.</div>
+      </div>
+    </div>
+
+    
+  </section>
+
+  <!-- ============ TEIL 2 — MONATE ============ -->
+  <section class="part" id="teil2">
+    <div class="part-head">
+      <span class="part-num">Teil 2</span>
+      <h2 class="part-title">Die Monate</h2>
+    </div>
+
+    <div class="card">
+      <p>Ein Jahr hat <b>zwölf Monate</b>. Wir brauchen die Monate, um Daten und Geburtstage zu sagen.</p>
+
+      <div class="grammar-box">
+        <span class="label">Wichtige Präposition</span>
+        <b>im</b> + Monat → <i>Im Januar ist es kalt.</i><br>
+        <i>Im Dezember feiern wir Weihnachten.</i><br>
+        <i>Im Juli haben wir Sommerferien.</i>
+      </div>
+
+      <div class="qa">
+        <div class="q">Welcher Monat ist es jetzt?</div>
+        <div class="a">Es ist Juni.</div>
+        <div class="q">In welchem Monat hast du Urlaub?</div>
+        <div class="a">Ich habe im August Urlaub.</div>
+      </div>
+    </div>
+
+    
+  </section>
+
+  <!-- ============ TEIL 3 — JAHRESZEITEN ============ -->
+  <section class="part" id="teil3">
+    <div class="part-head">
+      <span class="part-num">Teil 3</span>
+      <h2 class="part-title">Die Jahreszeiten</h2>
+    </div>
+
+    <div class="card">
+      <p>Ein Jahr hat <b>vier Jahreszeiten</b>. Jede Jahreszeit hat drei Monate und ein typisches Wetter.</p>
+
+      <div class="grammar-box">
+        <span class="label">Wichtige Präposition</span>
+        <b>im</b> + Jahreszeit → <i>Im Sommer ist es warm und sonnig.</i>
+      </div>
+
+      <div class="season-grid">
+        <div class="season-card season-frühling">
+          <h4>🌱 im Frühling</h4>
+          <p>März, April, Mai — es wird wärmer, die Blumen blühen.</p>
+        </div>
+        <div class="season-card season-sommer">
+          <h4>☀️ im Sommer</h4>
+          <p>Juni, Juli, August — es ist warm und sonnig.</p>
+        </div>
+        <div class="season-card season-herbst">
+          <h4>🍂 im Herbst</h4>
+          <p>September, Oktober, November — die Blätter fallen.</p>
+        </div>
+        <div class="season-card season-winter">
+          <h4>❄️ im Winter</h4>
+          <p>Dezember, Januar, Februar — es schneit oft.</p>
+        </div>
+      </div>
+
+      <div class="qa">
+        <div class="q">Welche Jahreszeit gefällt dir am besten?</div>
+        <div class="a">Mir gefällt der Sommer am besten, weil es warm ist.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TEIL 4 — DATEN ============ -->
+  <section class="part" id="teil4">
+    <div class="part-head">
+      <span class="part-num">Teil 4</span>
+      <h2 class="part-title">Wann hast du Geburtstag? — Daten</h2>
+    </div>
+
+    <div class="card">
+      <p>Jetzt lernen wir, wie man ein Datum sagt — zum Beispiel den Geburtstag.</p>
+
+      <div class="qa">
+        <div class="q">Wann hast du Geburtstag? <i>(informell)</i></div>
+        <div class="q">Wann haben Sie Geburtstag? <i>(formell)</i></div>
+        <div class="a">Ich habe am … Geburtstag.</div>
+      </div>
+
+      <p>Für das Datum verwenden wir <b>Ordinalzahlen</b> (1. = erste, 2. = zweite …) mit der Endung <b>-ten</b> oder <b>-sten</b>.</p>
+
+      <table class="ordinal">
+        <thead>
+          <tr><th>Zahl</th><th>Ordinalzahl</th><th>Mit Präposition „am"</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>1.</td><td>erste</td><td>am ersten Januar</td></tr>
+          <tr><td>2.</td><td>zweite</td><td>am zweiten Februar</td></tr>
+          <tr><td>3.</td><td>dritte</td><td>am dritten März</td></tr>
+          <tr><td>4.–19.</td><td>+ „-te"</td><td>am vierten, am zehnten, am neunzehnten</td></tr>
+          <tr><td>20.–31.</td><td>+ „-ste"</td><td>am zwanzigsten, am einunddreißigsten</td></tr>
+        </tbody>
+      </table>
+
+      <p style="margin-top:14px;"><b>Beispiele — Geburtstage:</b></p>
+      <ul class="vocab-list">
+        <li>Ich habe am <b>ersten Mai</b> Geburtstag. (01.05.)</li>
+        <li>Sie hat am <b>dritten Oktober</b> Geburtstag. (03.10.)</li>
+        <li>Er hat am <b>zwölften Dezember</b> Geburtstag. (12.12.)</li>
+        <li>Wir haben am <b>zwanzigsten Juli</b> Urlaub. (20.07.)</li>
+      </ul>
+
+      <p style="margin-top:14px;"><b>Achtung — Ausnahmen:</b></p>
+      <div class="exceptions">
+        <span>1 → erste (nicht „einste")</span>
+        <span>3 → dritte (nicht „dreite")</span>
+        <span>7 → siebte (nicht „siebente")</span>
+        <span>8 → achte (nicht „achtte")</span>
+      </div>
+    </div>
+
+    
+  </section>
+
+  <!-- ============ DIALOG ============ -->
+  <section class="part" id="dialog">
+    <div class="part-head">
+      <span class="part-num">Dialog</span>
+      <h2 class="part-title">Lesen und sprechen</h2>
+    </div>
+    <div class="card">
+      <p>Achte auf die Wochentage, Monate und Daten.</p>
+      <div class="dialog">
+        <div class="bubble marta"><span class="speaker">Marta</span>Hallo Tom! Wann hast du eigentlich Geburtstag?</div>
+        <div class="bubble tom"><span class="speaker">Tom</span>Ich habe am vierzehnten Februar Geburtstag. Und du?</div>
+        <div class="bubble marta"><span class="speaker">Marta</span>Mein Geburtstag ist am zweiten Mai. Welche Jahreszeit gefällt dir am besten?</div>
+        <div class="bubble tom"><span class="speaker">Tom</span>Mir gefällt der Sommer am besten, weil es warm ist und ich schwimmen gehe. Und dir?</div>
+        <div class="bubble marta"><span class="speaker">Marta</span>Ich mag den Herbst — die Blätter sind so schön bunt!</div>
+        <div class="bubble tom"><span class="speaker">Tom</span>Was machst du am Wochenende?</div>
+        <div class="bubble marta"><span class="speaker">Marta</span>Am Samstag treffe ich Freunde, und am Sonntag bleibe ich zu Hause.</div>
+        <div class="bubble tom"><span class="speaker">Tom</span>Klingt gut! Bis Montag dann, im Deutschkurs!</div>
+        <div class="bubble marta"><span class="speaker">Marta</span>Bis Montag! Tschüss!</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ZUSAMMENFASSUNG ============ -->
+  <section class="part" id="zusammenfassung">
+    <div class="part-head">
+      <span class="part-num">Merken</span>
+      <h2 class="part-title">Das hast du heute gelernt!</h2>
+    </div>
+    <div class="card">
+      <div class="summary-grid">
+        <div class="row"><span class="key">Wochentage</span><span>Montag, Dienstag, Mittwoch, Donnerstag, Freitag, Samstag, Sonntag</span></div>
+        <div class="row"><span class="key">Monate</span><span>Januar, Februar, März, April, Mai, Juni, Juli, August, September, Oktober, November, Dezember</span></div>
+        <div class="row"><span class="key">Jahreszeiten</span><span>Frühling, Sommer, Herbst, Winter</span></div>
+        <div class="row"><span class="key">Präpositionen</span><span><b>am</b> + Wochentag/Datum · <b>im</b> + Monat/Jahreszeit</span></div>
+        <div class="row"><span class="key">Fragen</span><span>Welcher Tag ist heute? · Wann hast du Geburtstag? · Welche Jahreszeit gefällt dir am besten?</span></div>
+        <div class="row"><span class="key">Ordinalzahlen</span><span>der erste, der zweite, der dritte, der vierte … (am ersten, am zweiten …)</span></div>
+      </div>
+    </div>
+  </section>
+
+  <nav class="lesson-nav">
+    <a href="#" id="prev-lesson">← Lektion 10</a>
+    <a href="#" id="next-lesson">Lektion 12 →</a>
+  </nav>
+
+</div>
+
+<script>
+</script>
+</body>
+</html>
