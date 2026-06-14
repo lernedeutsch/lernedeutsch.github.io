@@ -643,20 +643,21 @@ body{
   gap:10px;
   background:#ffffff;
   color:#1d3557;
-  border:0;
+  border:2px solid #dce3ed;
   border-radius:999px;
   padding:20px 40px;
   font-weight:800;
   font-size:1.4rem;
   cursor:pointer;
   text-decoration:none;
-  transition:transform .15s ease, filter .15s ease, background .15s ease;
+  transition:transform .15s ease, filter .15s ease, background .15s ease, border-color .15s ease;
   box-shadow:0 6px 18px rgba(0,0,0,.25);
 }
 
 .az-btn:hover{
   transform:translateY(-3px);
   filter:brightness(1.05);
-  background:#f5f8fa;
+  background:#f9fbff;
+  border-color:#f4c95d;
   box-shadow:0 8px 22px rgba(0,0,0,.3);
 }
