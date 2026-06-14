@@ -1,22 +1,183 @@
 <!DOCTYPE html>
-<html lang="pl">
+<html lang="de">
 <head>
 <meta charset="UTF-8">
-<title>Wortschatz B2</title>
-<link rel="stylesheet" href="style.css">
-</head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lektion 12 — Hobbys und Freizeit</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&family=Nunito+Sans:opsz,wght@6..12,400,600,700,800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#20324a;
+    --bg-soft:#27405c;
+    --paper:#fbf6ec;
+    --ink:#23332e;
+    --chalk:#f4f7fb;
+    --gold:#f4c95d;
+    --green:#8bd17c;
+    --blue:#72b8ff;
+    --pink:#f08bb4;
+    --orange:#f29f67;
+    --line:rgba(244,247,251,.18);
+  }
 
-<body>
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
 
-<div class="page">
+  body{
+    margin:0;
+    background:var(--bg);
+    background-image:
+      radial-gradient(circle at 12% 10%, rgba(244,247,251,.05), transparent 35%),
+      radial-gradient(circle at 88% 90%, rgba(244,247,251,.05), transparent 40%);
+    color:var(--chalk);
+    font-family:"Nunito Sans",sans-serif;
+    line-height:1.6;
+    padding:0 0 60px;
+  }
 
-<h1>Wortschatz B2</h1>
+  .wrap{
+    max-width:980px;
+    margin:0 auto;
+    padding:32px 20px 0;
+  }
 
-<p>Tutaj będą słówka poziomu B2.</p>
+  header.hero{
+    display:flex;
+    flex-wrap:wrap;
+    align-items:center;
+    gap:28px;
+    padding:24px 0 36px;
+    border-bottom:2px dashed var(--line);
+    margin-bottom:36px;
+  }
 
-<a href="Wortschatz.html">← Zurück</a>
+  .hero-text{flex:1 1 340px;}
 
-</div>
+  .eyebrow{
+    font-family:"JetBrains Mono", monospace;
+    letter-spacing:.16em;
+    text-transform:uppercase;
+    font-size:.78rem;
+    color:var(--gold);
+    margin:0 0 10px;
+  }
 
-</body>
-</html>
+  h1.lesson-title{
+    font-family:"Kalam",cursive;
+    font-weight:700;
+    font-size:2.7rem;
+    line-height:1.12;
+    margin:0 0 14px;
+    color:var(--chalk);
+  }
+
+  .hero-text p{
+    margin:0;
+    color:rgba(244,247,251,.88);
+    max-width:52ch;
+  }
+
+  .topics{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-top:18px;
+  }
+
+  .topics span{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    background:rgba(244,247,251,.08);
+    border:1px solid var(--line);
+    border-radius:999px;
+    padding:7px 12px;
+    font-size:.92rem;
+  }
+
+  .wheel-box{
+    flex:0 1 320px;
+    display:grid;
+    place-items:center;
+  }
+
+  .wheel-box svg{
+    width:100%;
+    height:auto;
+    max-width:320px;
+    filter:drop-shadow(0 16px 30px rgba(0,0,0,.18));
+  }
+
+  .ring-seg{
+    stroke:rgba(255,255,255,.14);
+    stroke-width:2;
+  }
+
+  .ring-spring{fill:#5ca75b;}
+  .ring-summer{fill:#d9b24c;}
+  .ring-autumn{fill:#cf6b35;}
+  .ring-winter{fill:#4f86b8;}
+
+  .season-label,.month-label,.center-label,.center-sub{
+    fill:var(--chalk);
+    font-family:"JetBrains Mono", monospace;
+    text-anchor:middle;
+  }
+
+  .season-label{font-size:14px;font-weight:600;}
+  .month-label{font-size:13px;opacity:.95;}
+  .month-label.now{font-size:14px;font-weight:700;fill:#ffe98a;}
+  .center-label{font-size:18px;font-weight:700;}
+  .center-sub{font-size:13px;opacity:.9;}
+  .now-marker{fill:#ffe98a;stroke:#20324a;stroke-width:2;}
+
+  .part{margin:34px 0 42px;}
+  .part-head{
+    display:flex;
+    flex-wrap:wrap;
+    align-items:baseline;
+    gap:12px;
+    margin-bottom:14px;
+  }
+
+  .part-num{
+    font-family:"JetBrains Mono", monospace;
+    font-size:.82rem;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--gold);
+  }
+
+  .part-title{
+    font-family:"Kalam",cursive;
+    font-size:2rem;
+    margin:0;
+    color:var(--chalk);
+  }
+
+  .card{
+    background:rgba(244,247,251,.05);
+    border:1px solid var(--line);
+    border-radius:22px;
+    padding:22px 22px 20px;
+    box-shadow:0 12px 30px rgba(0,0,0,.12);
+    margin-top:14px;
+  }
+
+  .lead{font-size:1.04rem;}
+
+  .label{
+    display:inline-block;
+    font-family:"JetBrains Mono", monospace;
+    font-size:.74rem;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    color:var(--gold);
+    margin-bottom:8px;
+  }
+
+  .vocab-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(210px,1f
