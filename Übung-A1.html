@@ -493,6 +493,162 @@
     <a href="#übung13">Übung 13</a>
     <a href="#übung14">Übung 14 →</a>
   </nav>
+      </head>
+<body>
+
+
+<div class="wrap">
+
+  <header class="hero">
+    <div class="hero-text">
+      <p class="eyebrow">Deutschkurs A1 · Übung zu Lektion 2</p>
+      <h1 class="lesson-title">Übung — Woher kommen Sie?</h1>
+        <!-- ÜBUNG 1 — Lektion 2 (ćwiczenia dla Lektion 2) -->
+  <section class="part" id="übung2">
+    <div class="part-head"><span class="part-num">Übung 1</span><h2 class="part-title">Ergänzen Sie: komme, kommst oder kommt?</h2></div>
+    <div class="card">
+      <p class="lead">Schreiben Sie das richtige Wort in die Lücke.</p>
+      <ul class="exercise-list" id="ex2_1">
+        <li>Ich <input type="text" data-answer="komme"> aus Spanien. <span class="feedback"></span></li>
+        <li>Du <input type="text" data-answer="kommst"> aus Frankreich. <span class="feedback"></span></li>
+        <li>Anna <input type="text" data-answer="kommt"> aus Österreich. <span class="feedback"></span></li>
+        <li>Wir <input type="text" data-answer="kommen"> aus der Schweiz. <span class="feedback"></span></li>
+        <li>Ihr <input type="text" data-answer="kommt"> aus Italien. <span class="feedback"></span></li>
+        <li>Sie (formell) <input type="text" data-answer="kommen"> aus Deutschland. <span class="feedback"></span></li>
+      </ul>
+      <button class="check-btn" onclick="checkExercise('ex2_1')">Antworten prüfen ✓</button>
+      <div class="exercise-result" id="ex2_1-result"></div>
+    </div>
+  </section>
+
+  <!-- ÜBUNG 2 — Lektion 2 (ćwiczenia dla Lektion 2) -->
+  <section class="part" id="übung2_2">
+    <div class="part-head"><span class="part-num">Übung 2</span><h2 class="part-title">Welches Land? Wählen Sie</h2></div>
+    <div class="card">
+      <p class="lead">Klicken Sie auf die richtige Antwort.</p>
+      
+      <div class="quiz-q" data-correct="0">
+        <p>1. Ich komme aus _____. (Polen)</p>
+        <div class="quiz-options">
+          <label><input type="radio" name="q2_1" value="0">Polen</label>
+          <label><input type="radio" name="q2_1" value="1">Deutschland</label>
+          <label><input type="radio" name="q2_1" value="2">Österreich</label>
+        </div>
+      </div>
+
+      <div class="quiz-q" data-correct="1">
+        <p>2. Er ist Deutscher. Er kommt aus _____.</p>
+        <div class="quiz-options">
+          <label><input type="radio" name="q2_2" value="0">Polen</label>
+          <label><input type="radio" name="q2_2" value="1">Deutschland</label>
+          <label><input type="radio" name="q2_2" value="2">Schweiz</label>
+        </div>
+      </div>
+
+      <div class="quiz-q" data-correct="2">
+        <p>3. Sie ist Österreicherin. Sie kommt aus _____.</p>
+        <div class="quiz-options">
+          <label><input type="radio" name="q2_3" value="0">Deutschland</label>
+          <label><input type="radio" name="q2_3" value="1">Polen</label>
+          <label><input type="radio" name="q2_3" value="2">Österreich</label>
+        </div>
+      </div>
+
+      <div class="quiz-q" data-correct="0">
+        <p>4. Woher _____ Sie? (kommen Sie?)</p>
+        <div class="quiz-options">
+          <label><input type="radio" name="q2_4" value="0">kommen</label>
+          <label><input type="radio" name="q2_4" value="1">kommst</label>
+          <label><input type="radio" name="q2_4" value="2">kommt</label>
+        </div>
+      </div>
+
+      <div class="quiz-q" data-correct="1">
+        <p>5. Ich _____ aus Polen.</p>
+        <div class="quiz-options">
+          <label><input type="radio" name="q2_5" value="0">kommst</label>
+          <label><input type="radio" name="q2_5" value="1">komme</label>
+          <label><input type="radio" name="q2_5" value="2">kommt</label>
+        </div>
+      </div>
+
+      <button class="check-btn" onclick="checkQuiz2()">Quiz auswerten</button>
+      <div class="exercise-result" id="quiz2-result"></div>
+    </div>
+  </section>
+
+  <!-- ÜBUNG 3 — Lektion 2 (ćwiczenia dla Lektion 2) -->
+  <section class="part" id="übung2_3">
+    <div class="part-head"><span class="part-num">Übung 3</span><h2 class="part-title">Nationalitäten: Mann oder Frau?</h2></div>
+    <div class="card">
+      <p class="lead">Welche Form ist richtig? Schreiben Sie das Wort.</p>
+      <ul class="exercise-list" id="ex2_3">
+        <li>Mann: Deutscher · Frau: <input type="text" data-answer="deutsche"> <span class="feedback"></span></li>
+        <li>Mann: Pole · Frau: <input type="text" data-answer="polin"> <span class="feedback"></span></li>
+        <li>Mann: Österreicher · Frau: <input type="text" data-answer="österreicherin"> <span class="feedback"></span></li>
+        <li>Mann: Franzose · Frau: <input type="text" data-answer="französinn"> <span class="feedback"></span></li>
+      </ul>
+      <button class="check-btn" onclick="checkExercise('ex2_3')">Antworten prüfen ✓</button>
+      <div class="exercise-result" id="ex2_3-result"></div>
+    </div>
+  </section>
+
+  <!-- ÜBUNG 4 — Lektion 2 (ćwiczenia dla Lektion 2) -->
+  <section class="part" id="übung2_4">
+    <div class="part-head"><span class="part-num">Übung 4</span><h2 class="part-title">Woher kommen Sie?</h2></div>
+    <div class="card">
+      <p class="lead">Schreiben Sie vollständige Sätze.</p>
+      <div class="sentence-grid">
+        <div class="sentence-item">
+          1. Ich komme aus _____ . (twoje kraj)
+        </div>
+        <div class="sentence-item">
+          2. Ich bin _____ . (twoja narodowość jako mężczyzna/kobieta)
+        </div>
+        <div class="sentence-item">
+          3. Woher _____ Sie? (kommen / kommst / kommt)
+        </div>
+        <div class="sentence-item">
+          4. Ich _____ aus _____ . (komme / kommst + kraj)
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ÜBUNG 5 — Lektion 2 (ćwiczenia dla Lektion 2) -->
+  <section class="part" id="übung2_5">
+    <div class="part-head"><span class="part-num">Übung 5</span><h2 class="part-title">Zahlen 1–10</h2></div>
+    <div class="card">
+      <p class="lead">Schreiben Sie die Zahlen in deutschen Wörtern.</p>
+      <ul class="exercise-list" id="ex2_5">
+        <li>1 → <input type="text" data-answer="eins" style="width:100px;"> <span class="feedback"></span></li>
+        <li>2 → <input type="text" data-answer="zwei" style="width:100px;"> <span class="feedback"></span></li>
+        <li>3 → <input type="text" data-answer="drei" style="width:100px;"> <span class="feedback"></span></li>
+        <li>4 → <input type="text" data-answer="vier" style="width:100px;"> <span class="feedback"></span></li>
+        <li>5 → <input type="text" data-answer="fünf" style="width:100px;"> <span class="feedback"></span></li>
+        <li>6 → <input type="text" data-answer="sechs" style="width:100px;"> <span class="feedback"></span></li>
+        <li>7 → <input type="text" data-answer="sieben" style="width:100px;"> <span class="feedback"></span></li>
+        <li>8 → <input type="text" data-answer="acht" style="width:100px;"> <span class="feedback"></span></li>
+        <li>9 → <input type="text" data-answer="neun" style="width:100px;"> <span class="feedback"></span></li>
+        <li>10 → <input type="text" data-answer="zehn" style="width:100px;"> <span class="feedback"></span></li>
+      </ul>
+      <button class="check-btn" onclick="checkExercise('ex2_5')">Antworten prüfen ✓</button>
+      <div class="exercise-result" id="ex2_5-result"></div>
+    </div>
+  </section>
+
+  <!-- Przycisk powrotu do lekcji 2 -->
+  <div class="top-bar" style="margin:32px auto;">
+    <a href="A1.html#lektion2" class="back-btn">← Powrót do lekcji 2</a>
+  </div>
+
+  <nav class="lesson-nav">
+    <a href="#übung1">← Übung 1</a>
+    <a href="#übung2">Übung 2</a>
+    <a href="#übung12">Übung 12</a>
+    <a href="#übung13">Übung 13</a>
+    <a href="#übung14">Übung 14 →</a>
+  </nav>
 </head>
 <body>
 
