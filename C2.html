@@ -25,6 +25,8 @@
         overflow-y:auto;
         padding:15px;
         background:#fafafa;
+        position:relative;
+        overflow:hidden;
     }
 
     #chatLeft{
@@ -72,6 +74,46 @@
     #status{
         font-weight:bold;
     }
+
+    .waves {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        height: 140px;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.25s ease;
+    }
+
+    #chatRight.listening .waves,
+    #chatRight.speaking .waves{
+        opacity: 1;
+    }
+
+    .wave-group{
+        animation: moveForever 6s linear infinite;
+        transform-origin: center;
+    }
+
+    .wave-group.wave2{ animation-duration: 9s; }
+    .wave-group.wave3{ animation-duration: 12s; }
+
+    @keyframes moveForever{
+        0% { transform: translateX(-20px); }
+        50% { transform: translateX(20px); }
+        100% { transform: translateX(-20px); }
+    }
+
+    .wave-line{
+        fill: none;
+        stroke-width: 4;
+        stroke-linecap: round;
+    }
+
+    .wave1{ stroke: rgba(76,175,80,0.65); }
+    .wave2{ stroke: rgba(76,175,80,0.45); }
+    .wave3{ stroke: rgba(76,175,80,0.28); }
 </style>
 </head>
 
@@ -98,7 +140,19 @@
 
 <div class="chat-wrapper">
     <div id="chatLeft" class="chat-panel"></div>
-    <div id="chatRight" class="chat-panel"></div>
+    <div id="chatRight" class="chat-panel">
+        <svg class="waves" id="wavesSvg" viewBox="0 0 800 140" preserveAspectRatio="none">
+            <g class="wave-group wave1">
+                <path class="wave-line wave1" d="M0,70 C80,20 160,120 240,70 C320,20 400,120 480,70 C560,20 640,120 720,70 C760,45 780,35 800,70"></path>
+            </g>
+            <g class="wave-group wave2">
+                <path class="wave-line wave2" d="M0,90 C80,40 160,140 240,90 C320,40 400,140 480,90 C560,40 640,140 720,90 C760,65 780,55 800,90"></path>
+            </g>
+            <g class="wave-group wave3">
+                <path class="wave-line wave3" d="M0,50 C80,0 160,100 240,50 C320,0 400,100 480,50 C560,0 640,100 720,50 C760,25 780,15 800,50"></path>
+            </g>
+        </svg>
+    </div>
 </div>
 
 <button onclick="startLesson()">
@@ -147,6 +201,7 @@ if(SpeechRecognition){
 
         micButton.classList.remove("waiting");
         isWaitingForAnswer = false;
+        chatRight.classList.remove("listening");
 
         addUser(answer);
 
@@ -160,6 +215,7 @@ if(SpeechRecognition){
 
         micButton.classList.remove("waiting");
         isWaitingForAnswer = false;
+        chatRight.classList.remove("listening");
     };
 }
 
@@ -169,6 +225,9 @@ function addBot(text){
         `<div class="bot"><b>🤖 Nele:</b> ${text}</div>`;
 
     chatLeft.scrollTop = chatLeft.scrollHeight;
+
+    chatRight.classList.add("speaking");
+    chatRight.classList.remove("listening");
 
     speak(text);
 
@@ -238,13 +297,18 @@ function speak(text){
     utterance.pitch = 1.05;
     utterance.volume = 1;
 
+    utterance.onend = function(){
+        chatRight.classList.remove("speaking");
+    };
+
     speechSynthesis.speak(utterance);
 }
 
 function startLesson(){
 
     chatLeft.innerHTML = "";
-    chatRight.innerHTML = "";
+    chatRight.classList.remove("listening");
+    chatRight.classList.remove("speaking");
 
     lessonStep = 1;
     isWaitingForAnswer = false;
@@ -276,7 +340,7 @@ function listenAnswer(){
     if(!isWaitingForAnswer){
 
         statusText.textContent =
-            "Status: Nele wartet jeszcze nicht auf deine Antwort.";
+            "Status: Nele wartet noch nicht auf deine Antwort.";
 
         return;
     }
@@ -284,6 +348,7 @@ function listenAnswer(){
     statusText.textContent =
         "Status: Ich höre zu ...";
 
+    chatRight.classList.add("listening");
     recognition.start();
 }
 
