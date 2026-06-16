@@ -11,7 +11,7 @@
       padding: 20px;
       line-height: 1.6;
     }
-    h1, h2 {
+    h1, h2, h3 {
       color: #333;
     }
     .card {
@@ -101,6 +101,12 @@
       margin-top: 30px;
       text-align: center;
     }
+    .chat-user {
+      color: #0d47a1;
+    }
+    .chat-bot {
+      color: #2e7d32;
+    }
   </style>
 </head>
 <body>
@@ -122,7 +128,7 @@
 
   <!-- Dialogschritte für Lektion 1 -->
   <div id="dialogContainer" class="card">
-    <h2 class="section-header">Dialog – Begrüßung, Vorstellung, Alphabet</h2>
+    <h2 class="section-header">Geführte Übung – Begrüßung, Vorstellung, Alphabet</h2>
     <p class="info">
       Es gibt mehrere Schritte. Sprich immer <b>einen</b> Satz, dann siehst du Feedback.  
       Klicke danach auf „Nächste Frage“.
@@ -140,6 +146,37 @@
       <button id="nextBtn" class="btn btn-primary" disabled>Nächste Frage ➜</button>
       <button id="retryBtn" class="btn btn-secondary" disabled>Noch einmal antworten</button>
     </div>
+  </div>
+
+  <!-- Interaktiver Partner-Dialog (Stufe 2) -->
+  <div class="card">
+    <h2 class="section-header">Interaktiver Dialog – Partner spricht mit Ihnen</h2>
+    <p class="info">
+      Hier führen Sie einen kurzen Dialog mit einem Partner.  
+      Der Partner antwortet auf Deutsch: als Text auf dem Bildschirm und mit Stimme (Text‑to‑Speech).
+    </p>
+
+    <p class="klein">
+      Ablauf: Klicken Sie auf <b>„Interaktiven Dialog starten“</b>.  
+      Der Partner stellt eine Frage (Text + Stimme). Dann klicken Sie auf <b>„Aufnahme starten“</b>, antworten mündlich,  
+      bekommen ein kurzes Feedback und danach stellt der Partner die nächste Frage.
+    </p>
+
+    <button id="startInteractiveBtn" class="btn btn-primary">🤝 Interaktiven Dialog starten</button>
+    <button id="resetInteractiveBtn" class="btn btn-secondary btn-small" disabled>🔁 Dialog zurücksetzen</button>
+
+    <div id="interactiveArea" style="margin-top: 16px; display: none;">
+      <div id="botText" class="frage chat-bot"></div>
+      <div id="userInteractiveText" class="antwort chat-user"></div>
+      <div id="interactiveFeedback" class="status"></div>
+    </div>
+
+    <h3 class="section-header">Freier Modus – offene Unterhaltung</h3>
+    <p class="info klein">
+      Im freien Modus können Sie alles sagen, was zu Lektion 1 passt (Begrüßung, Vorstellung, Name, Alphabet).  
+      Der Partner versucht, Ihre Aussage zu erkennen und eine passende einfache Antwort zu geben.
+    </p>
+    <button id="freeModeBtn" class="btn btn-secondary btn-small" disabled>🗣️ Freier Modus: Partner antwortet</button>
   </div>
 
   <!-- Alphabet-Hilfe -->
@@ -164,56 +201,44 @@
   </div>
 
   <script>
-    // Dialogschritte für Lektion 1:
-    // Jeder Schritt enthält:
-    // - frage: was die App sagt / anzeigt
-    // - typ: "frei" = freie Antwort, "fix" = überprüfbar mit Standardsätzen
-    // - erwartungen: Array möglicher Zielantworten (klein geschrieben)
+    // -------------------------------
+    // Geführte Übung – dein ursprünglicher Teil
+    // -------------------------------
+
     const dialogSchritte = [
       {
         id: 1,
         frage: "Begrüßen Sie am Morgen.",
         typ: "fix",
-        erwartungen: [
-          "guten morgen"
-        ],
+        erwartungen: ["guten morgen"],
         hinweis: "Typischer Satz: „Guten Morgen!“"
       },
       {
         id: 2,
         frage: "Begrüßen Sie tagsüber.",
         typ: "fix",
-        erwartungen: [
-          "guten tag"
-        ],
+        erwartungen: ["guten tag"],
         hinweis: "Typischer Satz: „Guten Tag!“"
       },
       {
         id: 3,
         frage: "Begrüßen Sie am Abend.",
         typ: "fix",
-        erwartungen: [
-          "guten abend"
-        ],
+        erwartungen: ["guten abend"],
         hinweis: "Typischer Satz: „Guten Abend!“"
       },
       {
         id: 4,
         frage: "Begrüßen Sie informell.",
         typ: "fix",
-        erwartungen: [
-          "hallo"
-        ],
+        erwartungen: ["hallo"],
         hinweis: "Typischer Satz: „Hallo!“"
       },
       {
         id: 5,
         frage: "Verabschieden Sie sich.",
         typ: "fix",
-        erwartungen: [
-          "tschüss",
-          "tschuess" // für mögliche Schreibweise
-        ],
+        erwartungen: ["tschüss","tschuess"],
         hinweis: "Typischer Satz: „Tschüss!“"
       },
       {
@@ -227,10 +252,7 @@
         id: 7,
         frage: "Fragen Sie informell nach dem Namen. Sagen Sie: „Wie heißt du?“",
         typ: "fix",
-        erwartungen: [
-          "wie heißt du",
-          "wie heisst du"
-        ],
+        erwartungen: ["wie heißt du","wie heisst du"],
         hinweis: "Zielsatz: „Wie heißt du?“"
       },
       {
@@ -244,10 +266,7 @@
         id: 9,
         frage: "Fragen Sie formell nach dem Namen. Sagen Sie: „Wie heißen Sie?“",
         typ: "fix",
-        erwartungen: [
-          "wie heißen sie",
-          "wie heissen sie"
-        ],
+        erwartungen: ["wie heißen sie","wie heissen sie"],
         hinweis: "Zielsatz: „Wie heißen Sie?“"
       },
       {
@@ -268,10 +287,7 @@
         id: 12,
         frage: "Wie verabschieden Sie sich noch einmal?",
         typ: "fix",
-        erwartungen: [
-          "tschüss",
-          "tschuess"
-        ],
+        erwartungen: ["tschüss","tschuess"],
         hinweis: "Zielsatz: „Tschüss!“"
       }
     ];
@@ -295,7 +311,6 @@
     const repeatBtn = document.getElementById("repeatBtn");
     const ttsBtn = document.getElementById("ttsBtn");
 
-    // Initialisierung Spracherkennung
     function initSpeechRecognition() {
       const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
       if (!SpeechRecognition) {
@@ -345,7 +360,6 @@
       };
     }
 
-    // Dialog laden
     function ladeAktuellenSchritt() {
       const schritt = dialogSchritte[aktuellerIndex];
       frageText.textContent = "Frage " + (aktuellerIndex + 1) + " von " + dialogSchritte.length + ": " + schritt.frage;
@@ -368,13 +382,11 @@
       retryBtn.disabled = true;
     }
 
-    // Helfer: ersten Buchstaben groß für Anzeige
     function satzFallBack(text) {
       if (!text) return text;
       return text.charAt(0).toUpperCase() + text.slice(1);
     }
 
-    // Normalisierung von Text
     function normalisiereText(text) {
       return text
         .toLowerCase()
@@ -386,7 +398,6 @@
         .trim();
     }
 
-    // Abstand zwischen Strings (einfache Levenshtein-Distanz)
     function berechneDistanz(a, b) {
       const m = a.length;
       const n = b.length;
@@ -408,7 +419,7 @@
       return dp[m][n];
     }
 
-    // Antwort verarbeiten und Feedback geben
+    // Basis-Funktion (wird später erweitert)
     function verarbeiteAntwort(transcript, confidence) {
       const schritt = dialogSchritte[aktuellerIndex];
       const original = transcript;
@@ -436,29 +447,37 @@
         if (besteDistanz === 0) {
           feedbackText.textContent = "Sehr gut! Ihre Antwort stimmt mit dem Zielsatz überein.";
           feedbackText.className = "status status-ok";
+          botKorrigiertLeise(""); // hier keine Korrektur nötig
         } else if (besteDistanz <= maxFehler) {
-          feedbackText.innerHTML =
-            "Gut! Kleine Abweichung. Versuchen Sie noch einmal, klar zu sprechen: „" +
+          const satz = "Gut! Kleine Abweichung. Versuchen Sie noch einmal, klar zu sprechen: „" +
             satzFallBack(besteErwartung) +
             "!“";
+          feedbackText.innerHTML = satz;
           feedbackText.className = "status status-warn";
+          botKorrigiertLeise(satzFallBack(besteErwartung) + "!");
         } else {
+          const tipp = "Noch nicht ganz. Versuchen Sie: „" +
+            satzFallBack(besteErwartung) +
+            "!“";
           feedbackText.innerHTML =
             "Noch nicht ganz. Versuchen Sie: <span class='highlight'>„" +
             satzFallBack(besteErwartung) +
             "!“</span>";
           feedbackText.className = "status status-error";
+          botKorrigiertLeise(satzFallBack(besteErwartung) + "!");
         }
       } else {
-        // freie Antwort – nur sanftes Feedback
         if (norm.length === 0) {
           feedbackText.textContent = "Es wurde keine Antwort erkannt. Bitte versuchen Sie es noch einmal.";
           feedbackText.className = "status status-error";
+          botKorrigiertLeise("Ich habe nichts verstanden. Bitte sprechen Sie noch einmal.");
         } else {
-          feedbackText.innerHTML =
+          const text =
             "Danke! Ihre Antwort wird akzeptiert. Achten Sie auf klare Aussprache. Hinweis: " +
             schritt.hinweis;
+          feedbackText.innerHTML = text;
           feedbackText.className = "status status-ok";
+          // Hier nur bei Bedarf laut korrigieren – meist reicht visuelles Feedback
         }
       }
 
@@ -466,14 +485,11 @@
       retryBtn.disabled = false;
     }
 
-    // Buttons
     startBtn.addEventListener("click", () => {
       if (!recognition) return;
       try {
         recognition.start();
-      } catch (e) {
-        // Fehler, wenn bereits laufend
-      }
+      } catch (e) {}
     });
 
     stopBtn.addEventListener("click", () => {
@@ -511,7 +527,6 @@
       alert("Frage: " + schritt.frage + "\n\nHinweis: " + schritt.hinweis);
     });
 
-    // Text-to-Speech der Frage
     ttsBtn.addEventListener("click", () => {
       const schritt = dialogSchritte[aktuellerIndex];
       if (!("speechSynthesis" in window)) {
@@ -520,19 +535,14 @@
       }
       const utterance = new SpeechSynthesisUtterance(schritt.frage);
       utterance.lang = "de-DE";
+      utterance.rate = 0.95;
       window.speechSynthesis.speak(utterance);
     });
 
-    // Start
-    document.addEventListener("DOMContentLoaded", () => {
-      initSpeechRecognition();
-      ladeAktuellenSchritt();
-    });
-        // -------------------------------
+    // -------------------------------
     // Interaktiver Dialog – Partner spricht
     // -------------------------------
 
-    // Zustände für den Partnerdialog
     const dialogPartnerSchritte = [
       {
         id: 1,
@@ -549,7 +559,7 @@
       {
         id: 3,
         botFrage: "Buchstabieren Sie bitte Ihren Vornamen.",
-        erwarteteMuster: [], // frei, nur grobe Prüfung
+        erwarteteMuster: [],
         typ: "alphabet"
       },
       {
@@ -578,29 +588,36 @@
     const interactiveFeedback = document.getElementById("interactiveFeedback");
     const freeModeBtn = document.getElementById("freeModeBtn");
 
-    // Hilfsfunktion: Bot spricht Text (TTS)
     function botSpricht(text) {
       if (!("speechSynthesis" in window)) {
-        // Falls TTS nicht verfügbar ist, nur Text anzeigen
         return;
       }
       const utter = new SpeechSynthesisUtterance(text);
       utter.lang = "de-DE";
-      // optional: etwas langsamere Geschwindigkeit für Lernende
       utter.rate = 0.9;
       window.speechSynthesis.speak(utter);
     }
 
-    // Interaktion: Bot stellt aktuelle Frage
+    // Bot spricht korrigierenden Satz (laut), wenn gewünscht
+    function botKorrigiertLeise(text) {
+      if (!text) return;
+      if (!("speechSynthesis" in window)) return;
+      const utter = new SpeechSynthesisUtterance(text);
+      utter.lang = "de-DE";
+      utter.rate = 0.9;
+      window.speechSynthesis.speak(utter);
+    }
+
     function botStelltFrage() {
       if (!interaktiverModusAktiv) return;
 
       if (interaktiverIndex >= dialogPartnerSchritte.length) {
-        botText.textContent = "Danke für das Gespräch! Das war ein kurzer Dialog zu Begrüßung, Vorstellung und Alphabet.";
-        botSpricht("Danke für das Gespräch! Das war ein kurzer Dialog zu Begrüßung, Vorstellung und Alphabet.");
+        const ende = "Danke für das Gespräch! Das war ein kurzer Dialog zu Begrüßung, Vorstellung und Alphabet.";
+        botText.textContent = "Partner: " + ende;
+        botSpricht(ende);
         interactiveFeedback.textContent = "";
         interactiveFeedback.className = "status";
-        freeModeBtn.disabled = false; // freien Modus freischalten
+        freeModeBtn.disabled = false;
         return;
       }
 
@@ -608,19 +625,16 @@
       botText.textContent = "Partner: " + schritt.botFrage;
       botSpricht(schritt.botFrage);
       userInteractiveText.innerHTML = "";
-      interactiveFeedback.textContent = "Bitte antworten Sie und klicken Sie danach auf „Aufnahme starten“ (wie oben).";
+      interactiveFeedback.textContent = "Bitte antworten Sie und klicken Sie danach auf „Aufnahme starten“ (oben).";
       interactiveFeedback.className = "status status-warn";
     }
 
-    // Einfache Auswertung der Antwort im Partnerdialog
     function auswertungInteraktiverDialog(normAntwort) {
       const schritt = dialogPartnerSchritte[interaktiverIndex];
       const muster = schritt.erwarteteMuster;
 
-      // Sehr einfache Regel: prüfe, ob eines der Muster vorkommt
       let passt = false;
       if (muster.length === 0) {
-        // keine feste Erwartung, z. B. Buchstabieren
         passt = normAntwort.length > 0;
       } else {
         passt = muster.some(m => normAntwort.includes(m));
@@ -630,24 +644,26 @@
       if (!normAntwort || normAntwort.length === 0) {
         feedback = "Ich habe nichts verstanden. Bitte sprechen Sie noch einmal.";
         interactiveFeedback.className = "status status-error";
+        botKorrigiertLeise("Ich habe nichts verstanden. Bitte sprechen Sie noch einmal.");
       } else if (passt) {
         feedback = "Gut, das passt zu meiner Frage.";
         interactiveFeedback.className = "status status-ok";
+        // Bot lobt auch kurz
+        botKorrigiertLeise("Gut, das passt zu meiner Frage.");
       } else {
         feedback = "Danke! Die Antwort ist verständlich, aber sie passt nicht ganz zur Frage. Versuchen Sie, die Frage direkt zu beantworten.";
         interactiveFeedback.className = "status status-warn";
+        botKorrigiertLeise("Versuchen Sie bitte, die Frage direkt zu beantworten.");
       }
 
       interactiveFeedback.textContent = feedback;
     }
 
-    // Freier Modus: einfache Regelzuordnung
     function generiereFreieAntwort(normAntwort) {
       if (!normAntwort || normAntwort.length === 0) {
         return "Ich habe nichts verstanden. Können Sie das bitte wiederholen?";
       }
 
-      // Sehr einfache Regelmuster
       if (normAntwort.includes("guten morgen")) {
         return "Guten Morgen! Wie heißt du?";
       }
@@ -679,33 +695,32 @@
         return "Tschüss! Bis zum nächsten Mal!";
       }
 
-      // Standardantwort
       return "Danke! Das ist ein guter Satz für Lektion 1.";
     }
 
-    // Integration mit bestehender Spracherkennung:
-    // Wir erweitern verarbeiteAntwort so, dass sie im interaktiven/freien Modus reagiert.
+    // ursprüngliche Funktion merken
     const alteVerarbeiteAntwort = verarbeiteAntwort;
+
+    // verarbeiteAntwort überschreiben: jetzt mit Modi
     verarbeiteAntwort = function (transcript, confidence) {
       const original = transcript;
       const norm = normalisiereText(transcript);
 
-      // Wenn interaktiver Partnerdialog aktiv ist:
+      // Interaktiver Partnerdialog aktiv
       if (interaktiverModusAktiv) {
         userInteractiveText.innerHTML =
-          "<span class='label'>Ihre Antwort:</span> „" + original + "“";
+          "<span class='label'>Sie:</span> „" + original + "“";
         auswertungInteraktiverDialog(norm);
         interaktiverIndex++;
-        // Nächste Frage nach kurzer Pause
         setTimeout(() => {
           botStelltFrage();
         }, 1500);
-        // Zusätzlich weiterhin die bestehende Auswertung für den strukturierten Teil:
+        // Optional: zusätzlich Feedback im geführten Teil anzeigen
         alteVerarbeiteAntwort(transcript, confidence);
         return;
       }
 
-      // Wenn freier Modus aktiv ist:
+      // Freier Modus aktiv
       if (freierModusAktiv) {
         userInteractiveText.innerHTML =
           "<span class='label'>Sie:</span> „" + original + "“";
@@ -714,16 +729,15 @@
         botSpricht(botAntwort);
         interactiveFeedback.textContent = "";
         interactiveFeedback.className = "status";
-        // Optional: zusätzlich alte Funktion aufrufen, um Feedback zu geben
+        // Optional: ebenfalls Aussprache-Feedback
         alteVerarbeiteAntwort(transcript, confidence);
         return;
       }
 
-      // Standardverhalten (bisherige Übung)
+      // Standard – geführte Übung
       alteVerarbeiteAntwort(transcript, confidence);
     };
 
-    // Buttons für interaktiven Dialog
     startInteractiveBtn.addEventListener("click", () => {
       interaktiverIndex = 0;
       interaktiverModusAktiv = true;
@@ -742,7 +756,8 @@
       interaktiverIndex = 0;
       interaktiverModusAktiv = false;
       freierModusAktiv = false;
-      botText.textContent = "Dialog zurückgesetzt. Klicken Sie auf „Interaktiven Dialog starten“, um neu zu beginnen.";
+      interactiveArea.style.display = "block";
+      botText.textContent = "Partner: Dialog zurückgesetzt. Klicken Sie auf „Interaktiven Dialog starten“, um neu zu beginnen.";
       userInteractiveText.innerHTML = "";
       interactiveFeedback.textContent = "";
       interactiveFeedback.className = "status";
@@ -758,6 +773,11 @@
       userInteractiveText.innerHTML = "";
       interactiveFeedback.textContent = "Sprechen Sie frei. Der Partner versucht, passend zu antworten.";
       interactiveFeedback.className = "status status-warn";
+    });
+
+    document.addEventListener("DOMContentLoaded", () => {
+      initSpeechRecognition();
+      ladeAktuellenSchritt();
     });
   </script>
 </body>
