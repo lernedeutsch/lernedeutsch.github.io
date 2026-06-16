@@ -105,6 +105,7 @@ const micButton = document.getElementById("micButton");
 
 let lessonStep = 0;
 let isWaitingForAnswer = false;
+let selectedVoice = null;
 
 const SpeechRecognition =
     window.SpeechRecognition ||
@@ -177,16 +178,30 @@ function speak(text){
     const voices =
         speechSynthesis.getVoices();
 
-    const germanVoice =
-        voices.find(
-            voice => voice.lang.startsWith("de")
-        );
+    // Wybierz kobiecy głos niemiecki o naturalnym, ciepłym tonie
+    // Szukamy głosów z określeniami typu: female, woman, female, Google, Deutsch
+    selectedVoice = voices.find(voice => 
+        voice.lang.startsWith("de") && 
+        (voice.name.toLowerCase().includes("female") || 
+         voice.name.toLowerCase().includes("woman") ||
+         voice.name.toLowerCase().includes("female") ||
+         voice.name.toLowerCase().includes("google") ||
+         voice.name.toLowerCase().includes("deutsch"))
+    );
 
-    if(germanVoice){
-        utterance.voice = germanVoice;
+    // Jeśli nie znaleziono kobiecego, wybierz dowolny głos niemiecki
+    if(!selectedVoice){
+        selectedVoice = voices.find(voice => voice.lang.startsWith("de"));
+    }
+
+    if(selectedVoice){
+        utterance.voice = selectedVoice;
     }
 
     utterance.lang = "de-DE";
+    utterance.rate = 0.9;      // Nieco wolniejsza, bardziej naturalna tempa
+    utterance.pitch = 1.1;     // Nieco wyższy pitch dla kobiecego głosu
+    utterance.volume = 1;
 
     speechSynthesis.speak(utterance);
 }
@@ -363,7 +378,19 @@ function evaluate(answer){
     }
 }
 
-speechSynthesis.onvoiceschanged = () => {};
+speechSynthesis.onvoiceschanged = function() {
+    // Głosy są dostępne, możemy wybrać teraz
+    const voices = speechSynthesis.getVoices();
+    selectedVoice = voices.find(voice => 
+        voice.lang.startsWith("de") && 
+        (voice.name.toLowerCase().includes("female") || 
+         voice.name.toLowerCase().includes("woman") ||
+         voice.name.toLowerCase().includes("google"))
+    );
+    if(!selectedVoice){
+        selectedVoice = voices.find(voice => voice.lang.startsWith("de"));
+    }
+};
 
 </script>
 
