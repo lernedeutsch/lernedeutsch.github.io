@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lekcja 1 — Trening mówienia (Guten Tag!)</title>
+<title>Lekcja 1 — Guten Tag! (trening mówienia)</title>
 <style>
   :root{
     --bg:#15211C;
@@ -58,10 +58,10 @@
   .back-link:hover{color:var(--accent);border-color:var(--accent);}
   .layout{
     display:grid;
-    grid-template-columns:240px 1fr;
+    grid-template-columns:260px 1fr;
     gap:1.4rem;
-    padding:1.2rem 2rem 2rem;
-    max-width:1100px;
+    padding:1.6rem 2rem 3rem;
+    max-width:1180px;
     margin:0 auto;
   }
   @media (max-width:840px){.layout{grid-template-columns:1fr;}}
@@ -69,16 +69,16 @@
     background:var(--panel);
     border:1px solid var(--panel-line);
     border-radius:14px;
-    padding:0.9rem;
+    padding:1rem;
     align-self:start;
   }
   .channels h2{
     font-family:'IBM Plex Mono', monospace;
-    font-size:0.7rem;
+    font-size:0.72rem;
     letter-spacing:0.14em;
     text-transform:uppercase;
     color:var(--text-dim);
-    margin:0.2rem 0.4rem 0.7rem;
+    margin:0.2rem 0.4rem 0.8rem;
   }
   .channel-btn{
     width:100%;
@@ -90,16 +90,16 @@
     border-radius:10px;
     color:var(--text);
     text-align:left;
-    padding:0.6rem 0.7rem;
-    margin-bottom:0.3rem;
+    padding:0.65rem 0.7rem;
+    margin-bottom:0.35rem;
     cursor:pointer;
-    font-size:0.9rem;
+    font-size:0.92rem;
     font-family:inherit;
     transition:background 0.15s,border-color 0.15s;
   }
   .channel-btn .num{
     font-family:'IBM Plex Mono', monospace;
-    font-size:0.7rem;
+    font-size:0.72rem;
     color:var(--text-dim);
     min-width:1.6em;
   }
@@ -107,12 +107,12 @@
   .channel-btn.active{background:var(--accent-dim);border-color:var(--accent);}
   .channel-btn.active .num{color:var(--accent);}
   .hint-box{
-    margin-top:0.8rem;
-    padding:0.7rem 0.8rem;
+    margin-top:0.9rem;
+    padding:0.8rem 0.85rem;
     border-radius:10px;
     background:rgba(255,255,255,0.03);
     border:1px solid var(--panel-line);
-    font-size:0.75rem;
+    font-size:0.78rem;
     color:var(--text-dim);
   }
   .booth{
@@ -121,21 +121,21 @@
     border-radius:14px;
     display:flex;
     flex-direction:column;
-    min-height:540px;
+    min-height:560px;
   }
   .booth-head{
     display:flex;justify-content:space-between;align-items:center;
-    padding:0.9rem 1.2rem;
+    padding:1rem 1.2rem;
     border-bottom:1px solid var(--panel-line);
   }
   .booth-head .title{
     font-family:'Fraunces', Georgia, serif;
-    font-size:1.1rem;
+    font-size:1.15rem;
   }
   .booth-head .title small{
     display:block;
     font-family:'IBM Plex Sans', sans-serif;
-    font-size:0.75rem;
+    font-size:0.78rem;
     color:var(--text-dim);
     font-weight:400;
     margin-top:0.1rem;
@@ -146,22 +146,22 @@
     color:var(--text-dim);
     border-radius:8px;
     padding:0.4rem 0.7rem;
-    font-size:0.75rem;
+    font-size:0.78rem;
     cursor:pointer;
     font-family:'IBM Plex Mono', monospace;
   }
   .reset-btn:hover{color:var(--accent);border-color:var(--accent);}
   .transcript{
     flex:1;
-    padding:1.2rem 1.2rem 0.5rem;
+    padding:1.3rem 1.3rem 0.6rem;
     overflow-y:auto;
     display:flex;
     flex-direction:column;
-    gap:0.8rem;
+    gap:0.85rem;
   }
   .bubble{
-    max-width:80%;
-    padding:0.65rem 0.9rem;
+    max-width:78%;
+    padding:0.7rem 0.95rem;
     border-radius:14px;
     font-size:0.95rem;
     animation:rise 0.25s ease;
@@ -200,34 +200,34 @@
     font-size:0.82rem;
     padding:0.5rem 0.75rem;
     border-radius:10px;
-    max-width:80%;
+    max-width:78%;
   }
   .bubble.system{
     align-self:center;
     background:transparent;
     color:var(--text-dim);
     font-family:'IBM Plex Mono', monospace;
-    font-size:0.72rem;
+    font-size:0.74rem;
     letter-spacing:0.06em;
     text-transform:uppercase;
   }
   .bubble .pl{
     display:block;
-    margin-top:0.25rem;
-    font-size:0.75rem;
+    margin-top:0.3rem;
+    font-size:0.78rem;
     color:#5a5640;
     font-style:italic;
   }
   .console{
     border-top:1px solid var(--panel-line);
-    padding:0.9rem 1.2rem 1.2rem;
+    padding:1rem 1.3rem 1.3rem;
     display:flex;
     flex-direction:column;
     gap:0.7rem;
   }
   .status-line{
     font-family:'IBM Plex Mono', monospace;
-    font-size:0.75rem;
+    font-size:0.78rem;
     color:var(--text-dim);
     min-height:1.1em;
   }
@@ -269,7 +269,7 @@
   .mic-btn.on{background:var(--accent);color:#1b1208;}
   .mic-btn:disabled{opacity:0.35;cursor:not-allowed;}
   .text-fallback{
-    display:flex;gap:0.5rem;flex:1;min-width:200px;
+    display:flex;gap:0.5rem;flex:1;min-width:220px;
   }
   .text-fallback input{
     flex:1;
@@ -299,55 +299,9 @@
     color:#E8B6AC;
     border-radius:10px;
     padding:0.6rem 0.8rem;
-    font-size:0.75rem;
+    font-size:0.78rem;
     display:none;
   }
-  .mini-section{
-    padding:0 1.2rem 1rem;
-    display:grid;
-    gap:0.8rem;
-  }
-  .mini-block{
-    border:1px solid var(--panel-line);
-    border-radius:12px;
-    background:rgba(255,255,255,0.02);
-    padding:0.8rem;
-  }
-  .mini-title{
-    font-family:'IBM Plex Mono', monospace;
-    font-size:0.7rem;
-    letter-spacing:0.12em;
-    text-transform:uppercase;
-    color:var(--text-dim);
-    margin-bottom:0.5rem;
-  }
-  .pill-row{display:flex;flex-wrap:wrap;gap:0.4rem;}
-  .pill{
-    padding:0.4rem 0.65rem;
-    border-radius:999px;
-    border:1px solid var(--panel-line);
-    background:transparent;
-    color:var(--text);
-    font-size:0.85rem;
-    cursor:pointer;
-  }
-  .pill:hover{border-color:var(--accent);color:var(--accent);}
-  .alphabet-grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(60px,1fr));
-    gap:0.4rem;
-  }
-  .letter-btn{
-    padding:0.5rem 0.4rem;
-    border-radius:10px;
-    border:1px solid var(--panel-line);
-    background:rgba(255,255,255,0.02);
-    color:var(--text);
-    cursor:pointer;
-    font-family:'IBM Plex Mono', monospace;
-    font-size:0.88rem;
-  }
-  .letter-btn:hover{border-color:var(--accent);color:var(--accent);}
   ::-webkit-scrollbar{width:8px;}
   ::-webkit-scrollbar-thumb{background:var(--panel-line);border-radius:8px;}
 </style>
@@ -356,7 +310,7 @@
 <div class="topbar">
   <div>
     <h1>Guten <span>Tag!</span></h1>
-    <div class="sub">Lekcja 1 · Trening mówienia · Begrüßung · Vorstellung · Alphabet</div>
+    <div class="sub">Lekcja 1 · Trening mówienia · Begrüßung · Vorstellung</div>
   </div>
   <a class="back-link" href="A1.html">← Powrót do spisu treści</a>
 </div>
@@ -365,15 +319,11 @@
   <aside class="channels">
     <h2>Tryb</h2>
     <button class="channel-btn active" data-mode="dialog"><span class="num">00</span> Dialog głosowy</button>
-    <button class="channel-btn" data-mode="begruessung"><span class="num">01</span> Begrüßung</button>
-    <button class="channel-btn" data-mode="vorstellung"><span class="num">02</span> Vorstellung</button>
-    <button class="channel-btn" data-mode="alphabet"><span class="num">03</span> Alphabet</button>
     <div class="hint-box">
       W trybie <strong>Dialog głosowy</strong>:
       <br>– bot mówi po niemiecku,
       <br>– ty odpowiadasz mikrofonem lub tekstem,
-      <br>– możesz zadawać pytania (np. „Wie heißt du?", „Was bedeutet Guten Tag?"),
-      <br>– otrzymasz odpowiedź głosową + tłumaczenie.
+      <br>– otrzymasz feedback i kolejne pytanie.
       <br><br>
       ✏️ Poprawiam: brak „ich", odmianę czasowników, rodzajniki.
     </div>
@@ -386,7 +336,6 @@
     </div>
 
     <div class="transcript" id="transcript"></div>
-    <div class="mini-section" id="miniSection"></div>
 
     <div class="console">
       <div class="support-warning" id="supportWarning">
@@ -401,7 +350,7 @@
         </div>
         <button class="replay-btn" id="replayBtn">🔊 Powtórz ostatnią wypowiedź</button>
         <div class="text-fallback">
-          <input type="text" id="textInput" placeholder="…albo napisz odpowiedź/pytanie po niemiecku">
+          <input type="text" id="textInput" placeholder="…albo napisz odpowiedź po niemiecku">
           <button id="sendBtn">Wyślij</button>
         </div>
       </div>
@@ -411,23 +360,7 @@
 
 <script>
 (function(){
-  // ---------- DANE: lekcja 1 (minimalne bloki) ----------
-  const data = {
-    begruessung: {
-      title: 'Begrüßung',
-      phrases: ['Guten Morgen!', 'Guten Tag!', 'Guten Abend!', 'Hallo!', 'Tschüss!']
-    },
-    vorstellung: {
-      title: 'Vorstellung',
-      phrases: ['Hallo!', 'Ich heiște Anna.', 'Mein Name ist Anna Müller.', 'Ich bin Anna.', 'Wie heißt du?', 'Wie heißen Sie?']
-    },
-    alphabet: {
-      title: 'Alphabet',
-      letters: ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','Ä','Ö','Ü','ß']
-    }
-  };
-
-  // ---------- DANE: dialog etapowy (Lekcja 1) ----------
+  // ---------- DANE: dialog etapowy (jak w drugim kodzie) ----------
   const lesson = [
     {
       q: "Guten Tag! Wie heißt du?",
@@ -462,47 +395,6 @@
       plRetry: "Powiedz: Tschüss."
     }
   ];
-
-  // ---------- DANE: swobodna rozmowa (pytania użytkownika) ----------
-  const FREE_RULES = [
-    { test:["hallo","guten tag","guten morgen","hi "],
-      reply:"Hallo! Schön, dass du da bist. Wie heißt du?",
-      pl:"Cześć! Miło, że jesteś. Jak się nazywasz?" },
-    { test:["wie heißt","was bedeutet","t translates"],
-      reply:"Guten Tag bedeutet 'Dzień dobry' auf Polnisch.",
-      pl:"Guten Tag oznacza 'Dzień dobry' w języku polskim." },
-    { test:["wie geht"],
-      reply:"Mir geht es gut, danke! Und dir?",
-      pl:"Mam się dobrze, dzięki! A Ty?" },
-    { test:["gut","prima","super"],
-      reply:"Das freut mich zu hören!",
-      pl:"Cieszę się, że to słyszę!" },
-    { test:["schlecht","nicht so gut","müde"],
-      reply:"Oh, das tut mir leid. Erhole dich gut!",
-      pl:"Och, przykro mi. Odpocznij dobrze!" },
-    { test:["komme aus","ich bin aus"],
-      reply:"Interessant! Ich komme aus Deutschland.",
-      pl:"Interesujące! Ja jestem z Niemiec." },
-    { test:["wetter"],
-      reply:"Das Wetter ist heute schön, oder?",
-      pl:"Pogoda jest dziś piękna, prawda?" },
-    { test:["danke"],
-      reply:"Bitte, gern geschehen!",
-      pl:"Proszę, nie ma za co!" },
-    { test:["tschüss","wiedersehen","bis bald"],
-      reply:"Tschüss! Bis zum nächsten Mal!",
-      pl:"Cześć! Do następnego razu!" },
-    { test:["alphabet","buchstabe"],
-      reply:"Das deutsche Alphabet hat 26 Buchstaben, plus Ä, Ö, Ü und ß.",
-      pl:"Niemiecki alfabet ma 26 liter, plus Ä, Ö, Ü i ß." },
-    { test:["was bedeutet","bedeutet"],
-      reply:"Das ist eine gute Frage! Im Allgemeinen bedeutet 'bedeuten' = 'oznaczyć'.",
-      pl:"To dobre pytanie! Ogólnie 'bedeuten' = 'oznaczyć'." }
-  ];
-  const FREE_DEFAULT = {
-    reply:"Das ist interessant! Erzähl mir mehr.",
-    pl:"To interesujące! Powiedz mi więcej."
-  };
 
   // ---------- KOREKTOR BŁĘDÓW (offline) ----------
   const VERB_TABLE = {
@@ -571,14 +463,12 @@
 
   // ---------- STAN ----------
   let currentMode = "dialog";
-  let stepIndex = 0;
+  let i = 0;
   let lastText = "";
   let recognition = null;
   let listening = false;
-  let i = 0;
 
   const transcriptEl = document.getElementById("transcript");
-  const miniSection = document.getElementById("miniSection");
   const statusEl = document.getElementById("statusLine");
   const boothTitle = document.getElementById("boothTitle");
   const micBtn = document.getElementById("micBtn");
@@ -621,13 +511,14 @@
       listening = false;
       micWrap.classList.remove("listening");
       micBtn.classList.remove("on");
+      setStatus("Bereit.", "");
     };
     recognition.onerror = (e) => {
       setStatus("Nie udało się rozpoznać mowy (" + e.error + "). Spróbuj znowu albo wpisz tekst.", "err");
     };
     recognition.onresult = (e) => {
       const said = e.results[0][0].transcript;
-      handleStudentInput(said);
+      handle(said);
     };
   }
 
@@ -641,7 +532,7 @@
     const v = textInput.value.trim();
     if (!v) return;
     textInput.value = "";
-    handleStudentInput(v);
+    handle(v);
   });
   textInput.addEventListener("keydown", (e) => {
     if (e.key === "Enter") sendBtn.click();
@@ -652,13 +543,7 @@
   });
 
   resetBtn.addEventListener("click", () => {
-    if (currentMode === "dialog") {
-      i = 0;
-      transcriptEl.innerHTML = "";
-      ask();
-    } else {
-      renderMode();
-    }
+    chatReset();
   });
 
   // ---------- UI: dymki ----------
@@ -682,27 +567,35 @@
     statusEl.className = "status-line" + (mode ? " " + mode : "");
   }
 
-  function botSay(text, pl){
-    addBubble("bot", text, pl);
-    speakGerman(text);
+  function bubble(cls, txt, pl){
+    if (cls === "bot") {
+      addBubble("bot", txt, pl);
+    } else if (cls === "student") {
+      addBubble("student", txt, "");
+    } else {
+      addBubble("feedback", txt, "");
+    }
   }
 
-  // ---------- LOGIKA: tryb dialogowy (Lekcja 1) ----------
+  function normalize(t){
+    return t.toLowerCase().replace(/[.,!?]/g,"").trim();
+  }
+
   function ask(){
     if (i >= lesson.length){
-      addBubble("feedback", "🎉 Lektion beendet! · Koniec lekcji!");
+      bubble("feedback", "🎉 Lektion beendet! · Koniec lekcji!", "");
       speakGerman("Die Lektion ist beendet.");
-      setStatus("Rozmowa zakończona. Możesz zacząć od nowa (↺ Nowa rozmowa).");
+      setStatus("Rozmowa zakończona. Możesz zacząć od nowa (↺ Nowa rozmowa).", "");
       return;
     }
     const step = lesson[i];
-    addBubble("bot", step.q, step.plQ);
+    bubble("bot", step.q, step.plQ);
     speakGerman(step.q);
   }
 
-  function handleDialog(ans){
-    addBubble("student", ans);
-    const a = ans.toLowerCase().replace(/[.,!?]/g,"").trim();
+  function handle(ans){
+    bubble("student", ans, "");
+    const a = normalize(ans);
     const step = lesson[i];
     const ok = step.exp.some(e => a.includes(e));
     const errors = checkGrammar(ans);
@@ -712,102 +605,33 @@
     if (ok){
       addBubble("feedback good", "✅ " + step.ok);
       i++;
-      setTimeout(ask, errors.length ? 1600 : 1100);
+      setTimeout(ask, errors.length ? 1600 : 1200);
     } else {
       addBubble("feedback fix", "❌ " + step.retry);
       speakGerman(step.retry);
     }
   }
 
-  // ---------- LOGIKA: swobodna rozmowa (pytania użytkownika) ----------
-  function freeReply(said){
-    const errors = checkGrammar(said);
-    errors.forEach(msg => addBubble("feedback fix", msg));
-    const lower = said.toLowerCase();
-    const rule = FREE_RULES.find(r => r.test.some(t => lower.includes(t)));
-    const chosen = rule || FREE_DEFAULT;
-    setTimeout(() => botSay(chosen.reply, chosen.pl), errors.length ? 1500 : 700);
-  }
-
-  function handleStudentInput(said){
-    addBubble("student", said);
-    setStatus("Rozpoznano: „" + said + "”");
-    if (currentMode === "dialog"){
-      handleDialog(said);
-    } else {
-      freeReply(said);
-    }
-  }
-
-  // ---------- LOGIKA: tryby lekcji (tylko odsłuchy, bez dużych bloków) ----------
-  function renderMode(){
-    document.querySelectorAll(".channel-btn").forEach(b => {
-      b.classList.toggle("active", b.dataset.mode === currentMode);
-    });
-
-    if (currentMode === "dialog"){
-      boothTitle.innerHTML = "Dialog głosowy<small>Pytaj i odpowiadaj po niemiecku — Lekcja 1</small>";
-      transcriptEl.innerHTML = "";
-      miniSection.innerHTML = "";
-      setStatus("Naciśnij mikrofon i odpowiedz na pytanie. Możesz też zadawać pytania po niemiecku.");
-      i = 0;
-      ask();
-      return;
-    }
-
-    const d = data[currentMode];
-    boothTitle.innerHTML = d.title + "<small>Tylko odsłuch — kliknij i powtarzaj</small>";
+  function chatReset(){
     transcriptEl.innerHTML = "";
-    miniSection.innerHTML = "";
-
-    const block = document.createElement("div");
-    block.className = "mini-block";
-
-    const title = document.createElement("div");
-    title.className = "mini-title";
-    title.textContent = d.title;
-    block.appendChild(title);
-
-    if (currentMode === "alphabet"){
-      const grid = document.createElement("div");
-      grid.className = "alphabet-grid";
-      d.letters.forEach(l=>{
-        const b=document.createElement("button");
-        b.className="letter-btn";
-        b.textContent=l;
-        b.onclick=()=>speakGerman(l);
-        grid.appendChild(b);
-      });
-      block.appendChild(grid);
-    } else {
-      const row = document.createElement("div");
-      row.className = "pill-row";
-      d.phrases.forEach(p=>{
-        const btn=document.createElement("button");
-        btn.className="pill";
-        btn.textContent=p;
-        btn.onclick=()=>speakGerman(p);
-        row.appendChild(btn);
-      });
-      block.appendChild(row);
-    }
-
-    miniSection.appendChild(block);
-    addBubble("system", "— kliknij zwrot/literę, aby go usłyszeć i powtarzaj —");
-    setStatus("Kliknij i powtarzaj po niemiecku.");
+    i = 0;
+    ask();
   }
 
   // ---------- nawigacja ----------
   document.querySelectorAll(".channel-btn").forEach(btn => {
     btn.addEventListener("click", () => {
       currentMode = btn.dataset.mode;
-      renderMode();
+      if (currentMode === "dialog") {
+        chatReset();
+        boothTitle.innerHTML = "Dialog głosowy<small>Pytaj i odpowiadaj po niemiecku — Lekcja 1</small>";
+      }
     });
   });
 
   // ---------- start ----------
   currentMode = "dialog";
-  renderMode();
+  chatReset();
 })();
 </script>
 </body>
