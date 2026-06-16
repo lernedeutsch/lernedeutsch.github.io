@@ -1,15 +1,560 @@
 <!DOCTYPE html>
-<html lang="pl">
+<html lang="de">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sprechen B1</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Lektion 1 A1 – Guten Tag!</title>
+<style>
+  :root{
+    --bg:#15211C;
+    --bg-soft:#1B2A24;
+    --panel:#21312A;
+    --panel-line:rgba(238,232,210,0.10);
+    --paper:#ECE6D2;
+    --paper-ink:#22251B;
+    --accent:#D98A3D;
+    --accent-dim:rgba(217,138,61,0.18);
+    --sage:#74AE93;
+    --sage-dim:rgba(116,174,147,0.16);
+    --text:#F2EFE2;
+    --text-dim:#AEBDB3;
+    --danger:#C96A5A;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:radial-gradient(circle at 18% 0%, var(--bg-soft), var(--bg) 60%);
+    color:var(--text);
+    font-family:'IBM Plex Sans', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+    min-height:100vh;
+    line-height:1.45;
+  }
+  .topbar{
+    display:flex; align-items:baseline; justify-content:space-between;
+    gap:1rem; flex-wrap:wrap;
+    padding:1.6rem 2rem 1.1rem;
+    border-bottom:1px solid var(--panel-line);
+  }
+  .topbar h1{
+    font-family:'Fraunces', Georgia, serif;
+    font-weight:600;
+    font-size:2rem;
+    letter-spacing:0.01em;
+    margin:0;
+    color:var(--text);
+  }
+  .topbar h1 span{ color:var(--accent); font-style:italic; }
+  .topbar .sub{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.72rem;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    color:var(--text-dim);
+  }
+  .layout{
+    display:grid;
+    grid-template-columns:280px 1fr;
+    gap:1.4rem;
+    padding:1.6rem 2rem 3rem;
+    max-width:1180px;
+    margin:0 auto;
+  }
+  @media (max-width:840px){
+    .layout{ grid-template-columns:1fr; }
+  }
+  .channels{
+    background:var(--panel);
+    border:1px solid var(--panel-line);
+    border-radius:14px;
+    padding:1rem;
+    align-self:start;
+  }
+  .channels h2{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.72rem;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--text-dim);
+    margin:0.2rem 0.4rem 0.8rem;
+  }
+  .channel-btn{
+    width:100%;
+    display:flex;
+    align-items:center;
+    gap:0.7rem;
+    background:transparent;
+    border:1px solid transparent;
+    border-radius:10px;
+    color:var(--text);
+    text-align:left;
+    padding:0.65rem 0.7rem;
+    margin-bottom:0.35rem;
+    cursor:pointer;
+    font-size:0.92rem;
+    font-family:inherit;
+    transition:background 0.15s, border-color 0.15s;
+  }
+  .channel-btn .num{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.72rem;
+    color:var(--text-dim);
+    min-width:1.6em;
+  }
+  .channel-btn:hover{ background:rgba(255,255,255,0.04); }
+  .channel-btn.active{
+    background:var(--accent-dim);
+    border-color:var(--accent);
+  }
+  .channel-btn.active .num{ color:var(--accent); }
+  .hint-box{
+    margin-top:0.9rem;
+    padding:0.8rem 0.85rem;
+    border-radius:10px;
+    background:rgba(255,255,255,0.03);
+    border:1px solid var(--panel-line);
+    font-size:0.78rem;
+    color:var(--text-dim);
+  }
+  .booth{
+    background:var(--panel);
+    border:1px solid var(--panel-line);
+    border-radius:14px;
+    display:flex;
+    flex-direction:column;
+    min-height:560px;
+  }
+  .booth-head{
+    display:flex; justify-content:space-between; align-items:center;
+    padding:1rem 1.2rem;
+    border-bottom:1px solid var(--panel-line);
+  }
+  .booth-head .title{
+    font-family:'Fraunces', Georgia, serif;
+    font-size:1.15rem;
+  }
+  .booth-head .title small{
+    display:block;
+    font-family:'IBM Plex Sans', sans-serif;
+    font-size:0.78rem;
+    color:var(--text-dim);
+    font-weight:400;
+    margin-top:0.1rem;
+  }
+  .reset-btn{
+    background:transparent;
+    border:1px solid var(--panel-line);
+    color:var(--text-dim);
+    border-radius:8px;
+    padding:0.4rem 0.7rem;
+    font-size:0.78rem;
+    cursor:pointer;
+    font-family:'IBM Plex Mono', monospace;
+  }
+  .reset-btn:hover{ color:var(--accent); border-color:var(--accent); }
+  .transcript{
+    flex:1;
+    padding:1.3rem 1.3rem 0.6rem;
+    overflow-y:auto;
+    display:flex;
+    flex-direction:column;
+    gap:0.85rem;
+  }
+  .bubble{
+    max-width:78%;
+    padding:0.7rem 0.95rem;
+    border-radius:14px;
+    font-size:0.95rem;
+    animation:rise 0.25s ease;
+    position:relative;
+    white-space:pre-wrap;
+  }
+  @keyframes rise{ from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:translateY(0);} }
+  .bubble.bot{
+    align-self:flex-start;
+    background:var(--paper);
+    color:var(--paper-ink);
+    border-bottom-left-radius:4px;
+  }
+  .bubble.student{
+    align-self:flex-end;
+    background:var(--sage-dim);
+    border:1px solid rgba(116,174,147,0.4);
+    color:var(--text);
+    border-bottom-right-radius:4px;
+  }
+  .bubble.feedback{
+    align-self:flex-end;
+    background:rgba(217,138,61,0.10);
+    border:1px solid rgba(217,138,61,0.45);
+    color:#F0C892;
+    font-family:'IBM Plex Sans', sans-serif;
+    font-size:0.82rem;
+    padding:0.5rem 0.75rem;
+    border-radius:10px;
+    max-width:78%;
+  }
+  .bubble.system{
+    align-self:center;
+    background:transparent;
+    color:var(--text-dim);
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.74rem;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+  }
+  .suggestions{
+    display:flex; flex-wrap:wrap; gap:0.4rem;
+    padding:0 1.3rem 0.4rem;
+  }
+  .chip{
+    background:transparent;
+    border:1px solid var(--panel-line);
+    color:var(--text-dim);
+    border-radius:999px;
+    padding:0.35rem 0.7rem;
+    font-size:0.78rem;
+    cursor:pointer;
+    font-family:inherit;
+  }
+  .chip:hover{ border-color:var(--accent); color:var(--accent); }
+  .console{
+    border-top:1px solid var(--panel-line);
+    padding:1rem 1.3rem 1.3rem;
+    display:flex;
+    flex-direction:column;
+    gap:0.7rem;
+  }
+  .status-line{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.78rem;
+    color:var(--text-dim);
+    min-height:1.1em;
+  }
+  .status-line.live{ color:var(--sage); }
+  .status-line.err{ color:var(--danger); }
+  .controls{
+    display:flex;
+    align-items:center;
+    gap:1rem;
+    flex-wrap:wrap;
+  }
+  .mic-wrap{ position:relative; width:64px; height:64px; flex:none; }
+  .mic-ring{
+    position:absolute; inset:0;
+    border-radius:50%;
+    border:2px solid var(--accent);
+    opacity:0;
+  }
+  .mic-wrap.listening .mic-ring{
+    animation:pulse 1.4s ease-out infinite;
+  }
+  @keyframes pulse{
+    0%{ opacity:0.7; transform:scale(0.7); }
+    100%{ opacity:0; transform:scale(1.6); }
+  }
+  .mic-btn{
+    position:relative;
+    width:64px; height:64px;
+    border-radius:50%;
+    border:1px solid var(--accent);
+    background:var(--accent-dim);
+    color:var(--accent);
+    font-size:1.5rem;
+    cursor:pointer;
+    display:flex; align-items:center; justify-content:center;
+    transition:transform 0.1s;
+  }
+  .mic-btn:active{ transform:scale(0.94); }
+  .mic-btn.on{ background:var(--accent); color:#1b1208; }
+  .text-fallback{
+    display:flex; gap:0.5rem; flex:1; min-width:220px;
+  }
+  .text-fallback input{
+    flex:1;
+    background:var(--bg-soft);
+    border:1px solid var(--panel-line);
+    border-radius:8px;
+    color:var(--text);
+    padding:0.55rem 0.7rem;
+    font-size:0.9rem;
+    font-family:inherit;
+  }
+  .text-fallback input:focus{ outline:none; border-color:var(--sage); }
+  .text-fallback button, .replay-btn{
+    background:transparent;
+    border:1px solid var(--panel-line);
+    color:var(--text-dim);
+    border-radius:8px;
+    padding:0.55rem 0.8rem;
+    cursor:pointer;
+    font-size:0.85rem;
+    font-family:inherit;
+  }
+  .text-fallback button:hover, .replay-btn:hover{ color:var(--sage); border-color:var(--sage); }
+  ::-webkit-scrollbar{ width:8px; }
+  ::-webkit-scrollbar-thumb{ background:var(--panel-line); border-radius:8px; }
+</style>
 </head>
 <body>
-    <h1>Sprechen B1</h1>
 
-    <p>Tutaj wpisz materiały dla poziomu B1.</p>
+<div class="topbar">
+  <div>
+    <h1>Lektion <span>1</span> – Guten Tag!</h1>
+    <div class="sub">A1 · Begrüßung · Vorstellung · Alphabet</div>
+  </div>
+</div>
 
-    <p><a href="Wort.html">← Powrót do strony głównej</a></p>
+<div class="layout">
+
+  <aside class="channels">
+    <h2>Themen</h2>
+    <button class="channel-btn" data-topic="greetings"><span class="num">01</span> Begrüßung</button>
+    <button class="channel-btn" data-topic="introducing"><span class="num">02</span> Vorstellung</button>
+    <button class="channel-btn" data-topic="namequestion"><span class="num">03</span> Nach dem Namen fragen</button>
+    <button class="channel-btn" data-topic="alphabet"><span class="num">04</span> Deutsches Alphabet</button>
+    <div class="hint-box">
+      Sprich nur auf Deutsch. Wiederhole die Sätze und antworte kurz.
+    </div>
+  </aside>
+
+  <main class="booth">
+    <div class="booth-head">
+      <div class="title" id="boothTitle">Begrüßung<small>Sprich die passenden Sätze nach</small></div>
+      <button class="reset-btn" id="resetBtn">↺ Neu starten</button>
+    </div>
+
+    <div class="transcript" id="transcript"></div>
+    <div class="suggestions" id="suggestions"></div>
+
+    <div class="console">
+      <div class="status-line" id="statusLine">Klicke auf das Mikrofon oder schreibe deine Antwort.</div>
+      <div class="controls">
+        <div class="mic-wrap" id="micWrap">
+          <div class="mic-ring"></div>
+          <button class="mic-btn" id="micBtn">🎤</button>
+        </div>
+        <button class="replay-btn" id="replayBtn">🔊 Letzte Frage wiederholen</button>
+        <div class="text-fallback">
+          <input type="text" id="textInput" placeholder="Antwort auf Deutsch eingeben">
+          <button id="sendBtn">Senden</button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+</div>
+
+<script>
+(function(){
+
+  const LESSON = {
+    greetings: [
+      { bot:"Guten Morgen!", sug:["Guten Morgen!"] },
+      { bot:"Guten Tag!", sug:["Guten Tag!"] },
+      { bot:"Guten Abend!", sug:["Guten Abend!"] },
+      { bot:"Hallo!", sug:["Hallo!"] },
+      { bot:"Tschüss!", sug:["Tschüss!"] }
+    ],
+    introducing: [
+      { bot:"Hallo! Ich heiße Anna.", sug:["Ich heiße Anna.","Mein Name ist Anna.","Ich bin Anna."] },
+      { bot:"Ich heiße Max.", sug:["Ich heiße Max.","Mein Name ist Max.","Ich bin Max."] },
+      { bot:"Mein Name ist Julia.", sug:["Mein Name ist Julia.","Ich heiße Julia.","Ich bin Julia."] },
+      { bot:"Ich bin Thomas.", sug:["Ich bin Thomas.","Ich heiße Thomas.","Mein Name ist Thomas."] }
+    ],
+    namequestion: [
+      { bot:"Wie heißen Sie?", sug:["Ich heiße Anna.","Mein Name ist Anna."] },
+      { bot:"Wie heißt du?", sug:["Ich heiße Max.","Mein Name ist Max."] },
+      { bot:"Und du?", sug:["Ich heiße ...","Mein Name ist ..."] },
+      { bot:"Und Sie?", sug:["Ich heiße ...","Mein Name ist ..."] }
+    ],
+    alphabet: [
+      { bot:"A – a", sug:["A"] },
+      { bot:"B – be", sug:["B"] },
+      { bot:"C – ce", sug:["C"] },
+      { bot:"D – de", sug:["D"] },
+      { bot:"E – e", sug:["E"] },
+      { bot:"F – ef", sug:["F"] },
+      { bot:"G – ge", sug:["G"] },
+      { bot:"H – ha", sug:["H"] },
+      { bot:"I – i", sug:["I"] },
+      { bot:"J – jot", sug:["J"] },
+      { bot:"K – ka", sug:["K"] },
+      { bot:"L – el", sug:["L"] },
+      { bot:"M – em", sug:["M"] },
+      { bot:"N – en", sug:["N"] },
+      { bot:"O – o", sug:["O"] },
+      { bot:"P – pe", sug:["P"] },
+      { bot:"Q – ku", sug:["Q"] },
+      { bot:"R – er", sug:["R"] },
+      { bot:"S – es", sug:["S"] },
+      { bot:"T – te", sug:["T"] },
+      { bot:"U – u", sug:["U"] },
+      { bot:"V – vau", sug:["V"] },
+      { bot:"W – we", sug:["W"] },
+      { bot:"X – ix", sug:["X"] },
+      { bot:"Y – ypsilon", sug:["Y"] },
+      { bot:"Z – zet", sug:["Z"] },
+      { bot:"Ä – ä", sug:["Ä"] },
+      { bot:"Ö – ö", sug:["Ö"] },
+      { bot:"Ü – ü", sug:["Ü"] },
+      { bot:"ß – Eszett", sug:["ß"] }
+    ]
+  };
+
+  let currentTopic = "greetings";
+  let index = 0;
+  let lastBotText = "";
+  let recognition = null;
+  let listening = false;
+
+  const transcriptEl = document.getElementById("transcript");
+  const suggestionsEl = document.getElementById("suggestions");
+  const statusEl = document.getElementById("statusLine");
+  const boothTitle = document.getElementById("boothTitle");
+  const micBtn = document.getElementById("micBtn");
+  const micWrap = document.getElementById("micWrap");
+  const textInput = document.getElementById("textInput");
+  const sendBtn = document.getElementById("sendBtn");
+  const replayBtn = document.getElementById("replayBtn");
+  const resetBtn = document.getElementById("resetBtn");
+
+  let voices = [];
+  function loadVoices(){ voices = speechSynthesis.getVoices(); }
+  loadVoices();
+  if ("onvoiceschanged" in speechSynthesis) speechSynthesis.onvoiceschanged = loadVoices;
+
+  function speakGerman(text){
+    if (!("speechSynthesis" in window)) return;
+    speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(text);
+    u.lang = "de-DE";
+    const de = voices.find(v => v.lang && v.lang.startsWith("de"));
+    if (de) u.voice = de;
+    u.rate = 0.95;
+    speechSynthesis.speak(u);
+  }
+
+  function addBubble(kind, text){
+    const div = document.createElement("div");
+    div.className = "bubble " + kind;
+    div.textContent = text;
+    transcriptEl.appendChild(div);
+    transcriptEl.scrollTop = transcriptEl.scrollHeight;
+    return div;
+  }
+
+  function setStatus(text, mode){
+    statusEl.textContent = text;
+    statusEl.className = "status-line" + (mode ? " " + mode : "");
+  }
+
+  function setSuggestions(list){
+    suggestionsEl.innerHTML = "";
+    (list || []).forEach(s => {
+      const b = document.createElement("button");
+      b.className = "chip";
+      b.textContent = "🔊 " + s;
+      b.addEventListener("click", () => speakGerman(s));
+      suggestionsEl.appendChild(b);
+    });
+  }
+
+  function botSay(text, sug){
+    lastBotText = text;
+    addBubble("bot", text);
+    setSuggestions(sug);
+    speakGerman(text);
+  }
+
+  function showStep(){
+    const step = LESSON[currentTopic][index];
+    botSay(step.bot, step.sug);
+  }
+
+  function startTopic(topic){
+    currentTopic = topic;
+    index = 0;
+    transcriptEl.innerHTML = "";
+    document.querySelectorAll(".channel-btn").forEach(b => {
+      b.classList.toggle("active", b.dataset.topic === topic);
+    });
+    if (topic === "greetings") boothTitle.innerHTML = "Begrüßung<small>Guten Morgen, Guten Tag, Guten Abend, Hallo, Tschüss</small>";
+    if (topic === "introducing") boothTitle.innerHTML = "Vorstellung<small>Ich heiße…, Mein Name ist…, Ich bin…</small>";
+    if (topic === "namequestion") boothTitle.innerHTML = "Nach dem Namen fragen<small>Wie heißen Sie? / Wie heißt du?</small>";
+    if (topic === "alphabet") boothTitle.innerHTML = "Deutsches Alphabet<small>A, B, C, D … Z, Ä, Ö, Ü, ß</small>";
+    setStatus("Klicke auf das Mikrofon und antworte auf Deutsch.");
+    showStep();
+  }
+
+  function nextStep(){
+    index++;
+    if (index >= LESSON[currentTopic].length){
+      addBubble("system", "Ende der Lektion.");
+      setSuggestions([]);
+      setStatus("Die Lektion ist beendet.");
+      return;
+    }
+    setTimeout(showStep, 500);
+  }
+
+  function handleStudentInput(said){
+    addBubble("student", said);
+    setStatus("Erkannt: „" + said + "”");
+    addBubble("feedback", "Weiter: " + (LESSON[currentTopic][index].sug[0] || ""));
+    nextStep();
+  }
+
+  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+  if (SR){
+    recognition = new SR();
+    recognition.lang = "de-DE";
+    recognition.interimResults = false;
+    recognition.maxAlternatives = 1;
+
+    recognition.onstart = () => {
+      listening = true;
+      micWrap.classList.add("listening");
+      micBtn.classList.add("on");
+      setStatus("Ich höre zu...", "live");
+    };
+    recognition.onend = () => {
+      listening = false;
+      micWrap.classList.remove("listening");
+      micBtn.classList.remove("on");
+    };
+    recognition.onresult = (e) => handleStudentInput(e.results[0][0].transcript);
+  }
+
+  micBtn.addEventListener("click", () => {
+    if (!recognition) return;
+    if (listening) { recognition.stop(); return; }
+    try { recognition.start(); } catch(e) {}
+  });
+
+  sendBtn.addEventListener("click", () => {
+    const v = textInput.value.trim();
+    if (!v) return;
+    textInput.value = "";
+    handleStudentInput(v);
+  });
+
+  textInput.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") sendBtn.click();
+  });
+
+  replayBtn.addEventListener("click", () => {
+    if (lastBotText) speakGerman(lastBotText);
+  });
+
+  resetBtn.addEventListener("click", () => startTopic(currentTopic));
+
+  document.querySelectorAll(".channel-btn").forEach(btn => {
+    btn.addEventListener("click", () => startTopic(btn.dataset.topic));
+  });
+
+  startTopic("greetings");
+})();
+</script>
+
 </body>
 </html>
