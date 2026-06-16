@@ -214,6 +214,18 @@
     font-family:'IBM Plex Mono', monospace;
     padding:0 0.4rem;
   }
+  .bubble.feedback.good{ color:var(--sage); }
+  .bubble.feedback.fix{
+    align-self:flex-end;
+    background:rgba(217,138,61,0.10);
+    border:1px solid rgba(217,138,61,0.45);
+    color:#F0C892;
+    font-family:'IBM Plex Sans', sans-serif;
+    font-size:0.82rem;
+    padding:0.5rem 0.75rem;
+    border-radius:10px;
+    max-width:78%;
+  }
   .bubble.system{
     align-self:center;
     background:transparent;
@@ -356,6 +368,8 @@
     <div class="hint-box" id="hintBox">
       Naciśnij mikrofon i odpowiedz <strong>po niemiecku</strong> na zdanie partnera rozmowy.
       Jeśli mikrofon nie działa w Twojej przeglądarce, użyj pola tekstowego poniżej rozmowy.
+      <br><br>
+      ✏️ Asystent poprawia najczęstsze błędy: odmianę czasowników (ich/du/er...), rodzajniki (der/die/das) oraz pominięty zaimek „ich”.
     </div>
   </aside>
 
@@ -460,6 +474,85 @@
     { test:["tschüss","wiedersehen","bis bald"], reply:"Tschüss! Bis zum nächsten Mal!", pl:"Cześć! Do następnego razu!" }
   ];
   const FREE_DEFAULT = { reply:"Das ist interessant! Erzähl mir mehr.", pl:"To interesujące! Powiedz mi więcej." };
+
+  // ---------- KOREKTOR BŁĘDÓW (offline, działa bez internetu) ----------
+  // Tabela odmiany najczęstszych czasowników A1. Osoby: ich, du, er (er/sie/es), wir, ihr, sie_pl (sie-oni / Sie-Pan/Pani)
+  const VERB_TABLE = {
+    sein:     { ich:"bin",     du:"bist",      er:"ist",     wir:"sind",     ihr:"seid",     sie_pl:"sind" },
+    haben:    { ich:"habe",    du:"hast",      er:"hat",     wir:"haben",    ihr:"habt",     sie_pl:"haben" },
+    heißen:   { ich:"heiße",   du:"heißt",     er:"heißt",   wir:"heißen",   ihr:"heißt",    sie_pl:"heißen" },
+    kommen:   { ich:"komme",   du:"kommst",    er:"kommt",   wir:"kommen",   ihr:"kommt",    sie_pl:"kommen" },
+    wohnen:   { ich:"wohne",   du:"wohnst",    er:"wohnt",   wir:"wohnen",   ihr:"wohnt",    sie_pl:"wohnen" },
+    machen:   { ich:"mache",   du:"machst",    er:"macht",   wir:"machen",   ihr:"macht",    sie_pl:"machen" },
+    arbeiten: { ich:"arbeite", du:"arbeitest", er:"arbeitet",wir:"arbeiten", ihr:"arbeitet", sie_pl:"arbeiten" },
+    gehen:    { ich:"gehe",    du:"gehst",     er:"geht",    wir:"gehen",    ihr:"geht",     sie_pl:"gehen" },
+    möchten:  { ich:"möchte",  du:"möchtest",  er:"möchte",  wir:"möchten",  ihr:"möchtet",  sie_pl:"möchten" },
+    brauchen: { ich:"brauche", du:"brauchst",  er:"braucht", wir:"brauchen", ihr:"braucht",  sie_pl:"brauchen" },
+    suchen:   { ich:"suche",   du:"suchst",    er:"sucht",   wir:"suchen",   ihr:"sucht",    sie_pl:"suchen" },
+    nehmen:   { ich:"nehme",   du:"nimmst",    er:"nimmt",   wir:"nehmen",   ihr:"nehmt",    sie_pl:"nehmen" }
+  };
+  // Mapa: forma -> lista {verb, person}, zbudowana z tabeli wyżej
+  const VERB_FORM_MAP = {};
+  Object.keys(VERB_TABLE).forEach(verb => {
+    Object.keys(VERB_TABLE[verb]).forEach(person => {
+      const form = VERB_TABLE[verb][person];
+      (VERB_FORM_MAP[form] = VERB_FORM_MAP[form] || []).push({ verb, person });
+    });
+  });
+  // Które osoby są akceptowane dla danego zaimka (sie bywa "ona" lub "oni/Pan/Pani" - akceptujemy obie formy)
+  const PRONOUN_PERSONS = {
+    ich:["ich"], du:["du"], er:["er"], sie:["er","sie_pl"], es:["er"],
+    wir:["wir"], ihr:["ihr"]
+  };
+  // Rodzajniki najczęstszych rzeczowników z dialogów
+  const GENDERS = {
+    kaffee:"der", tee:"der", kuchen:"der", bahnhof:"der", mann:"der", lehrer:"der", student:"der", euro:"der",
+    frau:"die", schwester:"die", familie:"die", größe:"die", farbe:"die", jacke:"die", cola:"die",
+    lehrerin:"die", studentin:"die", uhr:"die",
+    wasser:"das", museum:"das", kind:"das"
+  };
+
+  function checkGrammar(said){
+    const clean = said.toLowerCase().replace(/[.,!?]/g,"");
+    const tokens = clean.split(/\s+/).filter(Boolean);
+    const errors = [];
+
+    // 1) brak zaimka "ich" na początku zdania (typowy błąd, gdy w polskim pomijamy podmiot)
+    const firstWord = tokens[0];
+    if (firstWord && VERB_FORM_MAP[firstWord]){
+      const ichMatch = VERB_FORM_MAP[firstWord].some(m => m.person === "ich");
+      if (ichMatch){
+        errors.push("✏️ W niemieckim nie można pominąć zaimka: zacznij od „Ich " + firstWord + "…”, a nie samo „" + firstWord + "…”.");
+      }
+    }
+
+    // 2) zgodność zaimek + czasownik (np. "ich kommt" -> "ich komme")
+    for (let i = 0; i < tokens.length - 1; i++){
+      const pron = tokens[i];
+      const next = tokens[i+1];
+      const expected = PRONOUN_PERSONS[pron];
+      if (!expected) continue;
+      const matches = VERB_FORM_MAP[next];
+      if (!matches) continue;
+      const isCorrect = matches.some(m => expected.includes(m.person));
+      if (!isCorrect){
+        const verb = matches[0].verb;
+        const correctForm = VERB_TABLE[verb][expected[0]];
+        errors.push("✏️ „" + pron + " " + next + "” → powinno być „" + pron + " " + correctForm + "” (czasownik „" + verb + "”).");
+      }
+    }
+
+    // 3) rodzajnik + rzeczownik (np. "die Kaffee" -> "der Kaffee")
+    for (let i = 0; i < tokens.length - 1; i++){
+      const art = tokens[i];
+      const noun = tokens[i+1];
+      if (["der","die","das"].includes(art) && GENDERS[noun] && GENDERS[noun] !== art){
+        errors.push("✏️ „" + art + " " + noun + "” → powinno być „" + GENDERS[noun] + " " + noun + "”.");
+      }
+    }
+
+    return errors;
+  }
 
   // ---------- STAN ----------
   let currentTopic = "free";
@@ -627,7 +720,14 @@
     const d = DIALOGS[currentTopic];
     const step = d.steps[stepIndex];
     const ok = checkKeywords(said, step.kw);
-    addBubble("feedback", ok ? "👍 Bardzo dobrze, to brzmiało naturalnie!" : "💬 Zanotowano. Spróbuj wykorzystać: " + (step.kw[0] || ""));
+    const errors = checkGrammar(said);
+
+    errors.forEach(msg => addBubble("feedback fix", msg));
+    if (errors.length === 0){
+      addBubble("feedback good", ok ? "👍 Bardzo dobrze, to brzmiało naturalnie!" : "💬 Spróbuj wykorzystać: " + (step.kw[0] || ""));
+    } else if (!ok){
+      addBubble("feedback", "💬 Spróbuj też wykorzystać: " + (step.kw[0] || ""));
+    }
 
     stepIndex++;
     if (stepIndex >= d.steps.length){
@@ -638,14 +738,16 @@
       }, 600);
       return;
     }
-    setTimeout(showStep, 900);
+    setTimeout(showStep, errors.length ? 1700 : 900);
   }
 
   function freeReply(said){
+    const errors = checkGrammar(said);
+    errors.forEach(msg => addBubble("feedback fix", msg));
     const lower = said.toLowerCase();
     const rule = FREE_RULES.find(r => r.test.some(t => lower.includes(t)));
     const chosen = rule || FREE_DEFAULT;
-    setTimeout(() => botSay(chosen.reply, chosen.pl, null), 700);
+    setTimeout(() => botSay(chosen.reply, chosen.pl, null), errors.length ? 1500 : 700);
   }
 
   function handleStudentInput(said){
