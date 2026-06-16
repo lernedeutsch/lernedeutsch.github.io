@@ -2,65 +2,45 @@
 <html lang="pl">
 <head>
 <meta charset="UTF-8">
-<title>Nauka Niemieckiego</title>
-</head>
-
-<body>
-
-<h1>Nauka Niemieckiego od Podstaw</h1>
-
-<h2>Witaj!</h2>
-
-<p>To moja strona do nauki języka niemieckiego.</p>
-
-<h2>Słówko dnia</h2>
-
-<p><b>Haus</b> = dom</p>
-
-<h2>Przydatne zwroty</h2>
-
-<ul>
-<li>Hallo = Cześć</li>
-<li>Guten Morgen = Dzień dobry</li>
-<li>Danke = Dziękuję</li>
-<li>Tschüss = Do widzenia</li>
-</ul>
-
-</body>
-</html>
-<!DOCTYPE html>
-<html lang="pl">
-<head>
-<meta charset="UTF-8">
-<title>Nauka Niemieckiego</title>
+<title>Nauka Niemieckiego – Lekcja 1</title>
 
 <style>
-body {
-    font-family: Arial, sans-serif;
-}
+    body{
+        font-family: Arial, sans-serif;
+        max-width:800px;
+        margin:auto;
+        padding:20px;
+        line-height:1.6;
+    }
 
-#chatbox {
-    width: 300px;
-    border: 1px solid #ccc;
-    padding: 10px;
-    margin-top: 20px;
-}
+    #chat{
+        border:1px solid #ccc;
+        height:350px;
+        overflow-y:auto;
+        padding:15px;
+        margin:20px 0;
+        background:#fafafa;
+    }
 
-#messages {
-    height: 200px;
-    overflow-y: auto;
-    border: 1px solid #ddd;
-    padding: 10px;
-    margin-bottom: 10px;
-}
+    .bot{
+        color:darkblue;
+        margin:10px 0;
+    }
 
-.user {
-    color: blue;
-}
+    .user{
+        color:green;
+        margin:10px 0;
+    }
 
-.bot {
-    color: green;
-}
+    button{
+        padding:10px 20px;
+        font-size:16px;
+        cursor:pointer;
+    }
+
+    #status{
+        font-weight:bold;
+    }
 </style>
 </head>
 
@@ -68,87 +48,246 @@ body {
 
 <h1>Nauka Niemieckiego od Podstaw</h1>
 
-<h2>Witaj!</h2>
+<h2>Lekcja 1 – Guten Tag!</h2>
 
-<p>To moja strona do nauki języka niemieckiego.</p>
-
-<h2>Słówko dnia</h2>
-
-<p><b>Haus</b> = dom</p>
-
-<h2>Przydatne zwroty</h2>
+<p>
+Temat: Powitania i przedstawianie się.
+</p>
 
 <ul>
-    <li>Hallo = Cześć</li>
-    <li>Guten Morgen = Dzień dobry</li>
-    <li>Danke = Dziękuję</li>
-    <li>Tschüss = Do widzenia</li>
+<li>Guten Morgen – Dzień dobry (rano)</li>
+<li>Guten Tag – Dzień dobry</li>
+<li>Guten Abend – Dobry wieczór</li>
+<li>Hallo – Cześć</li>
+<li>Tschüss – Do widzenia</li>
+<li>Ich heiße... – Nazywam się...</li>
+<li>Mein Name ist... – Mam na imię...</li>
+<li>Ich bin... – Jestem...</li>
+<li>Wie heißen Sie? – Jak się Pan/Pani nazywa?</li>
+<li>Wie heißt du? – Jak masz na imię?</li>
 </ul>
 
-<h2>Chatbot do nauki niemieckiego</h2>
+<h2>Chatbot nauczyciel</h2>
 
-<div id="chatbox">
-    <div id="messages"></div>
+<div id="chat"></div>
 
-    <input type="text" id="userInput" placeholder="Napisz wiadomość...">
-    <button onclick="sendMessage()">Wyślij</button>
-</div>
+<button onclick="startLesson()">
+▶ Rozpocznij lekcję
+</button>
+
+<button onclick="listenAnswer()">
+🎤 Odpowiedz głosem
+</button>
+
+<p id="status">
+Status: oczekiwanie
+</p>
 
 <script>
-function sendMessage() {
-    const input = document.getElementById("userInput");
-    const messages = document.getElementById("messages");
 
-    const userText = input.value.trim();
+const chat = document.getElementById("chat");
+const statusText = document.getElementById("status");
 
-    if (userText === "") {
+let lessonStep = 0;
+
+const SpeechRecognition =
+window.SpeechRecognition ||
+window.webkitSpeechRecognition;
+
+const recognition = new SpeechRecognition();
+
+recognition.lang = "de-DE";
+recognition.interimResults = false;
+recognition.maxAlternatives = 1;
+
+function addBot(text){
+    chat.innerHTML += `<div class="bot"><b>🤖 Nauczyciel:</b> ${text}</div>`;
+    chat.scrollTop = chat.scrollHeight;
+
+    speak(text);
+}
+
+function addUser(text){
+    chat.innerHTML += `<div class="user"><b>🧑 Ty:</b> ${text}</div>`;
+    chat.scrollTop = chat.scrollHeight;
+}
+
+function speak(text){
+
+    const utterance = new SpeechSynthesisUtterance(text);
+
+    const voices = speechSynthesis.getVoices();
+
+    const germanVoice = voices.find(
+        voice => voice.lang.startsWith("de")
+    );
+
+    if(germanVoice){
+        utterance.voice = germanVoice;
+    }
+
+    utterance.lang = "de-DE";
+
+    speechSynthesis.speak(utterance);
+}
+
+function startLesson(){
+
+    lessonStep = 1;
+
+    addBot(
+        "Guten Tag! Ich bin dein Deutschlehrer. Wie heißt du?"
+    );
+}
+
+function listenAnswer(){
+
+    statusText.textContent = "Status: słucham...";
+
+    recognition.start();
+}
+
+recognition.onresult = function(event){
+
+    const answer =
+    event.results[0][0].transcript.trim();
+
+    statusText.textContent =
+    "Status: rozpoznano odpowiedź";
+
+    addUser(answer);
+
+    evaluate(answer);
+};
+
+recognition.onerror = function(){
+
+    statusText.textContent =
+    "Status: błąd mikrofonu";
+};
+
+function evaluate(answer){
+
+    const text = answer.toLowerCase();
+
+    if(lessonStep === 1){
+
+        if(
+            text.includes("ich heiße") ||
+            text.includes("mein name ist")
+        ){
+
+            addBot(
+                "Sehr gut! Miło cię poznać."
+            );
+
+            lessonStep = 2;
+
+            setTimeout(() => {
+
+                addBot(
+                    "Jak powiesz po niemiecku: Dzień dobry?"
+                );
+
+            },1500);
+
+        }else{
+
+            addBot(
+                "Spróbuj odpowiedzieć: Ich heiße Anna. albo Mein Name ist Anna."
+            );
+        }
+
         return;
     }
 
-    messages.innerHTML += `<p class="user"><b>Ty:</b> ${userText}</p>`;
+    if(lessonStep === 2){
 
-    let response;
+        if(
+            text.includes("guten tag") ||
+            text.includes("guten morgen") ||
+            text.includes("hallo")
+        ){
 
-    switch (userText.toLowerCase()) {
-        case "hallo":
-            response = "Hallo! To po niemiecku znaczy: Cześć.";
-            break;
+            addBot(
+                "Doskonale!"
+            );
 
-        case "danke":
-            response = "Danke oznacza: Dziękuję.";
-            break;
+            lessonStep = 3;
 
-        case "haus":
-            response = "Haus oznacza: dom.";
-            break;
+            setTimeout(() => {
 
-        case "jak jest po niemiecku dom":
-            response = "Dom po niemiecku to: Haus.";
-            break;
+                addBot(
+                    "Jak pożegnasz się po niemiecku?"
+                );
 
-        case "jak jest po niemiecku dziękuję":
-            response = "Dziękuję po niemiecku to: Danke.";
-            break;
+            },1500);
 
-        case "pomoc":
-            response = "Możesz zapytać mnie np. o: Haus, Danke, Hallo.";
-            break;
+        }else{
 
-        default:
-            response = "Nie znam jeszcze tej odpowiedzi. Spróbuj wpisać: Haus, Danke, Hallo lub pomoc.";
+            addBot(
+                "To nie pasuje do pytania. Oczekiwałem na przykład: Guten Tag, Guten Morgen lub Hallo."
+            );
+        }
+
+        return;
     }
 
-    messages.innerHTML += `<p class="bot"><b>Bot:</b> ${response}</p>`;
+    if(lessonStep === 3){
 
-    messages.scrollTop = messages.scrollHeight;
-    input.value = "";
+        if(
+            text.includes("tschüss")
+        ){
+
+            addBot(
+                "Świetnie! Znasz już podstawowe powitania."
+            );
+
+            lessonStep = 4;
+
+            setTimeout(() => {
+
+                addBot(
+                    "Powiedz całym zdaniem: Hallo, ich heiße ... "
+                );
+
+            },1500);
+
+        }else{
+
+            addBot(
+                "Poprawna odpowiedź to: Tschüss."
+            );
+        }
+
+        return;
+    }
+
+    if(lessonStep === 4){
+
+        if(
+            text.includes("hallo") &&
+            (
+                text.includes("ich heiße") ||
+                text.includes("mein name ist")
+            )
+        ){
+
+            addBot(
+                "Perfekt! Ukończyłeś Lekcję 1. Gratuliere!"
+            );
+
+        }else{
+
+            addBot(
+                "Zdanie powinno wyglądać podobnie do: Hallo, ich heiße Anna."
+            );
+        }
+    }
 }
 
-document.getElementById("userInput").addEventListener("keypress", function(event) {
-    if (event.key === "Enter") {
-        sendMessage();
-    }
-});
+speechSynthesis.onvoiceschanged = () => {};
+
 </script>
 
 </body>
