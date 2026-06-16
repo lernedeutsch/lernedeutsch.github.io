@@ -528,6 +528,237 @@
       initSpeechRecognition();
       ladeAktuellenSchritt();
     });
+        // -------------------------------
+    // Interaktiver Dialog – Partner spricht
+    // -------------------------------
+
+    // Zustände für den Partnerdialog
+    const dialogPartnerSchritte = [
+      {
+        id: 1,
+        botFrage: "Guten Morgen! Wie heißt du?",
+        erwarteteMuster: ["ich heiße", "ich heisse", "ich bin"],
+        typ: "vorstellung-informell"
+      },
+      {
+        id: 2,
+        botFrage: "Hallo! Wie heißen Sie?",
+        erwarteteMuster: ["ich heiße", "ich heisse", "mein name ist"],
+        typ: "vorstellung-formell"
+      },
+      {
+        id: 3,
+        botFrage: "Buchstabieren Sie bitte Ihren Vornamen.",
+        erwarteteMuster: [], // frei, nur grobe Prüfung
+        typ: "alphabet"
+      },
+      {
+        id: 4,
+        botFrage: "Wie begrüßen Sie am Abend?",
+        erwarteteMuster: ["guten abend"],
+        typ: "begruessung-abend"
+      },
+      {
+        id: 5,
+        botFrage: "Wie verabschieden Sie sich?",
+        erwarteteMuster: ["tschüss", "tschuess"],
+        typ: "verabschiedung"
+      }
+    ];
+
+    let interaktiverIndex = 0;
+    let interaktiverModusAktiv = false;
+    let freierModusAktiv = false;
+
+    const startInteractiveBtn = document.getElementById("startInteractiveBtn");
+    const resetInteractiveBtn = document.getElementById("resetInteractiveBtn");
+    const interactiveArea = document.getElementById("interactiveArea");
+    const botText = document.getElementById("botText");
+    const userInteractiveText = document.getElementById("userInteractiveText");
+    const interactiveFeedback = document.getElementById("interactiveFeedback");
+    const freeModeBtn = document.getElementById("freeModeBtn");
+
+    // Hilfsfunktion: Bot spricht Text (TTS)
+    function botSpricht(text) {
+      if (!("speechSynthesis" in window)) {
+        // Falls TTS nicht verfügbar ist, nur Text anzeigen
+        return;
+      }
+      const utter = new SpeechSynthesisUtterance(text);
+      utter.lang = "de-DE";
+      // optional: etwas langsamere Geschwindigkeit für Lernende
+      utter.rate = 0.9;
+      window.speechSynthesis.speak(utter);
+    }
+
+    // Interaktion: Bot stellt aktuelle Frage
+    function botStelltFrage() {
+      if (!interaktiverModusAktiv) return;
+
+      if (interaktiverIndex >= dialogPartnerSchritte.length) {
+        botText.textContent = "Danke für das Gespräch! Das war ein kurzer Dialog zu Begrüßung, Vorstellung und Alphabet.";
+        botSpricht("Danke für das Gespräch! Das war ein kurzer Dialog zu Begrüßung, Vorstellung und Alphabet.");
+        interactiveFeedback.textContent = "";
+        interactiveFeedback.className = "status";
+        freeModeBtn.disabled = false; // freien Modus freischalten
+        return;
+      }
+
+      const schritt = dialogPartnerSchritte[interaktiverIndex];
+      botText.textContent = "Partner: " + schritt.botFrage;
+      botSpricht(schritt.botFrage);
+      userInteractiveText.innerHTML = "";
+      interactiveFeedback.textContent = "Bitte antworten Sie und klicken Sie danach auf „Aufnahme starten“ (wie oben).";
+      interactiveFeedback.className = "status status-warn";
+    }
+
+    // Einfache Auswertung der Antwort im Partnerdialog
+    function auswertungInteraktiverDialog(normAntwort) {
+      const schritt = dialogPartnerSchritte[interaktiverIndex];
+      const muster = schritt.erwarteteMuster;
+
+      // Sehr einfache Regel: prüfe, ob eines der Muster vorkommt
+      let passt = false;
+      if (muster.length === 0) {
+        // keine feste Erwartung, z. B. Buchstabieren
+        passt = normAntwort.length > 0;
+      } else {
+        passt = muster.some(m => normAntwort.includes(m));
+      }
+
+      let feedback;
+      if (!normAntwort || normAntwort.length === 0) {
+        feedback = "Ich habe nichts verstanden. Bitte sprechen Sie noch einmal.";
+        interactiveFeedback.className = "status status-error";
+      } else if (passt) {
+        feedback = "Gut, das passt zu meiner Frage.";
+        interactiveFeedback.className = "status status-ok";
+      } else {
+        feedback = "Danke! Die Antwort ist verständlich, aber sie passt nicht ganz zur Frage. Versuchen Sie, die Frage direkt zu beantworten.";
+        interactiveFeedback.className = "status status-warn";
+      }
+
+      interactiveFeedback.textContent = feedback;
+    }
+
+    // Freier Modus: einfache Regelzuordnung
+    function generiereFreieAntwort(normAntwort) {
+      if (!normAntwort || normAntwort.length === 0) {
+        return "Ich habe nichts verstanden. Können Sie das bitte wiederholen?";
+      }
+
+      // Sehr einfache Regelmuster
+      if (normAntwort.includes("guten morgen")) {
+        return "Guten Morgen! Wie heißt du?";
+      }
+      if (normAntwort.includes("guten tag")) {
+        return "Guten Tag! Wie heißen Sie?";
+      }
+      if (normAntwort.includes("guten abend")) {
+        return "Guten Abend! Wie geht es Ihnen?";
+      }
+      if (normAntwort.includes("hallo")) {
+        return "Hallo! Wie heißt du?";
+      }
+      if (normAntwort.includes("ich heiße") || normAntwort.includes("ich heisse")) {
+        return "Schön, dich kennenzulernen!";
+      }
+      if (normAntwort.includes("mein name ist")) {
+        return "Danke! Ich habe Ihren Namen verstanden.";
+      }
+      if (normAntwort.includes("wie heißt du") || normAntwort.includes("wie heisst du")) {
+        return "Ich bin Ihr Deutsch-Partner.";
+      }
+      if (normAntwort.includes("wie heißen sie") || normAntwort.includes("wie heissen sie")) {
+        return "Ich heiße Deutsch-Partner.";
+      }
+      if (normAntwort.includes("buchstabieren") || normAntwort.match(/[a-zäöüß]\s*[-,]\s*[a-zäöüß]/)) {
+        return "Danke für das Buchstabieren. Das klingt gut.";
+      }
+      if (normAntwort.includes("tschüss") || normAntwort.includes("tschuess")) {
+        return "Tschüss! Bis zum nächsten Mal!";
+      }
+
+      // Standardantwort
+      return "Danke! Das ist ein guter Satz für Lektion 1.";
+    }
+
+    // Integration mit bestehender Spracherkennung:
+    // Wir erweitern verarbeiteAntwort so, dass sie im interaktiven/freien Modus reagiert.
+    const alteVerarbeiteAntwort = verarbeiteAntwort;
+    verarbeiteAntwort = function (transcript, confidence) {
+      const original = transcript;
+      const norm = normalisiereText(transcript);
+
+      // Wenn interaktiver Partnerdialog aktiv ist:
+      if (interaktiverModusAktiv) {
+        userInteractiveText.innerHTML =
+          "<span class='label'>Ihre Antwort:</span> „" + original + "“";
+        auswertungInteraktiverDialog(norm);
+        interaktiverIndex++;
+        // Nächste Frage nach kurzer Pause
+        setTimeout(() => {
+          botStelltFrage();
+        }, 1500);
+        // Zusätzlich weiterhin die bestehende Auswertung für den strukturierten Teil:
+        alteVerarbeiteAntwort(transcript, confidence);
+        return;
+      }
+
+      // Wenn freier Modus aktiv ist:
+      if (freierModusAktiv) {
+        userInteractiveText.innerHTML =
+          "<span class='label'>Sie:</span> „" + original + "“";
+        const botAntwort = generiereFreieAntwort(norm);
+        botText.textContent = "Partner: " + botAntwort;
+        botSpricht(botAntwort);
+        interactiveFeedback.textContent = "";
+        interactiveFeedback.className = "status";
+        // Optional: zusätzlich alte Funktion aufrufen, um Feedback zu geben
+        alteVerarbeiteAntwort(transcript, confidence);
+        return;
+      }
+
+      // Standardverhalten (bisherige Übung)
+      alteVerarbeiteAntwort(transcript, confidence);
+    };
+
+    // Buttons für interaktiven Dialog
+    startInteractiveBtn.addEventListener("click", () => {
+      interaktiverIndex = 0;
+      interaktiverModusAktiv = true;
+      freierModusAktiv = false;
+      interactiveArea.style.display = "block";
+      resetInteractiveBtn.disabled = false;
+      freeModeBtn.disabled = true;
+      botText.textContent = "";
+      userInteractiveText.innerHTML = "";
+      interactiveFeedback.textContent = "";
+      interactiveFeedback.className = "status";
+      botStelltFrage();
+    });
+
+    resetInteractiveBtn.addEventListener("click", () => {
+      interaktiverIndex = 0;
+      interaktiverModusAktiv = false;
+      freierModusAktiv = false;
+      botText.textContent = "Dialog zurückgesetzt. Klicken Sie auf „Interaktiven Dialog starten“, um neu zu beginnen.";
+      userInteractiveText.innerHTML = "";
+      interactiveFeedback.textContent = "";
+      interactiveFeedback.className = "status";
+      freeModeBtn.disabled = true;
+    });
+
+    freeModeBtn.addEventListener("click", () => {
+      freierModusAktiv = true;
+      interaktiverModusAktiv = false;
+      interactiveArea.style.display = "block";
+      botText.textContent = "Partner: Sagen Sie etwas zu Begrüßung, Vorstellung oder Alphabet.";
+      botSpricht("Sagen Sie etwas zu Begrüßung, Vorstellung oder Alphabet.");
+      userInteractiveText.innerHTML = "";
+      interactiveFeedback.textContent = "Sprechen Sie frei. Der Partner versucht, passend zu antworten.";
+      interactiveFeedback.className = "status status-warn";
+    });
   </script>
 </body>
 </html>
