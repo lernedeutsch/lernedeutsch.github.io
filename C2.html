@@ -1,1 +1,265 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<title>Deutsch lernen – Lektion 1</title>
 
+<style>
+    body{
+        font-family: Arial, sans-serif;
+        max-width:800px;
+        margin:auto;
+        padding:20px;
+        line-height:1.6;
+    }
+
+    #chat{
+        border:1px solid #ccc;
+        height:350px;
+        overflow-y:auto;
+        padding:15px;
+        margin:20px 0;
+        background:#fafafa;
+    }
+
+    .bot{
+        color:darkblue;
+        margin:10px 0;
+    }
+
+    .user{
+        color:green;
+        margin:10px 0;
+    }
+
+    button{
+        padding:10px 20px;
+        font-size:16px;
+        cursor:pointer;
+    }
+
+    #status{
+        font-weight:bold;
+    }
+</style>
+</head>
+
+<body>
+
+<h1>Deutsch lernen von Anfang an</h1>
+
+<h2>Lektion 1 – Guten Tag!</h2>
+
+<p>
+Thema: Begrüßungen und sich vorstellen.
+</p>
+
+<ul>
+<li>Guten Morgen</li>
+<li>Guten Tag</li>
+<li>Guten Abend</li>
+<li>Hallo</li>
+<li>Tschüss</li>
+<li>Ich heiße ...</li>
+<li>Mein Name ist ...</li>
+<li>Ich bin ...</li>
+<li>Wie heißt du?</li>
+<li>Wie geht es dir?</li>
+<li>Gut, danke.</li>
+</ul>
+
+<h2>Tom</h2>
+
+<div id="chat"></div>
+
+<button onclick="startLesson()">
+▶ Lektion starten
+</button>
+
+<button onclick="listenAnswer()">
+🎤 Mit dem Mikrofon antworten
+</button>
+
+<p id="status">
+Status: Bereit
+</p>
+
+<script>
+
+const chat = document.getElementById("chat");
+const statusText = document.getElementById("status");
+
+let lessonStep = 0;
+
+const SpeechRecognition =
+window.SpeechRecognition ||
+window.webkitSpeechRecognition;
+
+const recognition = new SpeechRecognition();
+
+recognition.lang = "de-DE";
+recognition.interimResults = false;
+recognition.maxAlternatives = 1;
+
+function addBot(text){
+    chat.innerHTML += `<div class="bot"><b>🤖 Tom:</b> ${text}</div>`;
+    chat.scrollTop = chat.scrollHeight;
+
+    speak(text);
+}
+
+function addUser(text){
+    chat.innerHTML += `<div class="user"><b>🧑 Du:</b> ${text}</div>`;
+    chat.scrollTop = chat.scrollHeight;
+}
+
+function speak(text){
+
+    const utterance = new SpeechSynthesisUtterance(text);
+
+    const voices = speechSynthesis.getVoices();
+
+    const germanVoice = voices.find(
+        voice => voice.lang.startsWith("de")
+    );
+
+    if(germanVoice){
+        utterance.voice = germanVoice;
+    }
+
+    utterance.lang = "de-DE";
+
+    speechSynthesis.speak(utterance);
+}
+
+function startLesson(){
+
+    lessonStep = 1;
+
+    addBot(
+        "Guten Tag! Ich heiße Tom. Wie heißt du?"
+    );
+}
+
+function listenAnswer(){
+
+    statusText.textContent = "Status: Ich höre zu ...";
+
+    recognition.start();
+}
+
+recognition.onresult = function(event){
+
+    const answer =
+    event.results[0][0].transcript.trim();
+
+    statusText.textContent =
+    "Status: Antwort erkannt";
+
+    addUser(answer);
+
+    evaluate(answer);
+};
+
+recognition.onerror = function(){
+
+    statusText.textContent =
+    "Status: Mikrofonfehler";
+};
+
+function evaluate(answer){
+
+    const text = answer.toLowerCase();
+
+    /* Jak masz na imię? */
+    if(lessonStep === 1){
+
+        if(
+            text.includes("ich heiße") ||
+            text.includes("mein name ist") ||
+            text.includes("ich bin")
+        ){
+
+            addBot(
+                "Freut mich! Wie geht es dir?"
+            );
+
+            lessonStep = 2;
+
+        }else{
+
+            addBot(
+                "Du kannst zum Beispiel sagen: Ich heiße Anna. Wie heißt du?"
+            );
+        }
+
+        return;
+    }
+
+    /* Jak się masz? */
+    if(lessonStep === 2){
+
+        if(
+            text.includes("gut") ||
+            text.includes("sehr gut") ||
+            text.includes("prima") ||
+            text.includes("super") ||
+            text.includes("es geht")
+        ){
+
+            addBot(
+                "Schön! Und wie verabschiedest du dich?"
+            );
+
+            lessonStep = 3;
+
+        }else{
+
+            addBot(
+                "Du kannst zum Beispiel sagen: Gut, danke. Wie geht es dir?"
+            );
+        }
+
+        return;
+    }
+
+    /* Pożegnanie */
+    if(lessonStep === 3){
+
+        if(
+            text.includes("tschüss") ||
+            text.includes("auf wiedersehen") ||
+            text.includes("bis später") ||
+            text.includes("bis bald")
+        ){
+
+            addBot(
+                "Perfekt! Schön, mit dir Deutsch zu sprechen."
+            );
+
+            lessonStep = 4;
+
+        }else{
+
+            addBot(
+                "Zum Beispiel: Tschüss. Und wie verabschiedest du dich?"
+            );
+        }
+
+        return;
+    }
+
+    if(lessonStep === 4){
+
+        addBot(
+            "Danke für das Gespräch! Starte die Lektion gern noch einmal."
+        );
+    }
+}
+
+speechSynthesis.onvoiceschanged = () => {};
+
+</script>
+
+</body>
+</html>
