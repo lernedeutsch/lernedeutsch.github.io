@@ -314,19 +314,20 @@
 
         position: absolute;
 
-        top: 2px;
+        top: -2px;
 
         left: -2px;
 
         width: 122px;
 
-        height: 120px;
+        height: 122px;
 
         border-radius: 50%;
 
         background: #d8a12f;
 
-        clip-path: polygon(18% 0%, 82% 0%, 100% 14%, 100% 82%, 88% 100%, 62% 95%, 52% 100%, 36% 95%, 18% 100%, 0% 82%, 0% 14%);
+        clip-path: polygon(10% 5%, 25% 0%, 50% 0%, 75% 0%, 90% 5%, 100% 18%, 100% 82%, 88% 100%, 66% 96%, 50% 100%, 34% 96%, 12% 100%, 0% 82%, 0% 18%);
+        z-index: 0;
 
     }
 
@@ -352,6 +353,8 @@
 
         transform: rotate(-6deg);
 
+        z-index: 4;
+
     }
 
 
@@ -360,7 +363,7 @@
 
         position: absolute;
 
-        left: 6px;
+        left: 2px;
 
         top: 46px;
 
@@ -376,6 +379,8 @@
 
         clip-path: polygon(20% 0%, 100% 4%, 100% 88%, 78% 100%, 40% 96%, 0% 70%, 6% 20%);
 
+        z-index: 3;
+
     }
 
 
@@ -384,7 +389,7 @@
 
         position: absolute;
 
-        right: 8px;
+        right: 4px;
 
         top: 44px;
 
@@ -400,6 +405,8 @@
 
         clip-path: polygon(0% 6%, 80% 0%, 100% 20%, 96% 74%, 68% 100%, 24% 96%, 4% 84%);
 
+        z-index: 3;
+
     }
 
 
@@ -408,13 +415,13 @@
 
         position: absolute;
 
-        top: 48px;
+        top: 50px;
 
         width: 18px;
 
-        height: 18px;
+        height: 14px;
 
-        border-radius: 50%;
+        border-radius: 50% / 60%;
 
         background: radial-gradient(circle at 40% 40%, #7be04d 0%, #2ca63f 55%, #0f4d1d 100%);
 
@@ -610,7 +617,7 @@
 
 
 
-    .voice-figure .shirt{
+    .voice-figure .dress{
 
         position: absolute;
 
@@ -620,59 +627,200 @@
 
         height: 122px;
 
-        border-radius: 34px 34px 18px 18px;
+        border-radius: 28px 28px 18px 18px;
 
         background: linear-gradient(180deg, #3f8f38 0%, #2f7a2f 100%);
 
         border: 3px solid rgba(70,70,70,0.18);
 
+        clip-path: polygon(22% 0%, 78% 0%, 100% 18%, 88% 100%, 12% 100%, 0% 18%);
         box-shadow: 0 2px 6px rgba(0,0,0,0.08);
 
     }
 
 
 
-    .voice-figure .necklace{
+    .voice-figure .dress-neckline{
 
         position: absolute;
 
-        top: 92px;
+        top: 111px;
 
-        width: 52px;
+        width: 72px;
 
-        height: 34px;
+        height: 30px;
 
-        border: 2px solid #c79a2e;
+        border-radius: 0 0 34px 34px;
 
-        border-top: none;
+        border-bottom: 3px solid rgba(255,255,255,0.22);
 
-        border-radius: 0 0 30px 30px;
+        border-left: 3px solid transparent;
+
+        border-right: 3px solid transparent;
 
         z-index: 4;
+
+        box-sizing: border-box;
 
     }
 
 
 
-    .voice-figure .pendant{
+    .voice-figure .arm{
 
         position: absolute;
 
-        top: 121px;
+        top: 122px;
 
-        width: 16px;
+        width: 22px;
 
-        height: 16px;
+        height: 76px;
+
+        border-radius: 18px;
+
+        background: linear-gradient(180deg, #f0c59a 0%, #e7b98c 100%);
+
+        z-index: 1;
+
+    }
+
+
+
+    .voice-figure .arm.left{
+
+        left: 18px;
+
+        transform: rotate(18deg);
+
+    }
+
+
+
+    .voice-figure .arm.right{
+
+        right: 18px;
+
+        transform: rotate(-16deg);
+
+    }
+
+
+
+    .voice-figure .hand{
+
+        position: absolute;
+
+        bottom: -8px;
+
+        left: 50%;
+
+        transform: translateX(-50%);
+
+        width: 28px;
+
+        height: 22px;
 
         border-radius: 50%;
 
-        background: radial-gradient(circle at 35% 35%, #f7e28d 0%, #d9b13a 70%, #b98b1d 100%);
+        background: linear-gradient(180deg, #f0c59a 0%, #e7b98c 100%);
 
-        border: 1px solid rgba(140,100,20,0.35);
+    }
 
-        z-index: 4;
 
-        box-shadow: 0 1px 2px rgba(0,0,0,0.12);
+
+    .voice-figure .leg{
+
+        position: absolute;
+
+        top: 188px;
+
+        width: 20px;
+
+        height: 42px;
+
+        background: linear-gradient(180deg, #f0c59a 0%, #e7b98c 100%);
+
+        z-index: 1;
+
+    }
+
+
+
+    .voice-figure .leg.left{
+
+        left: 48px;
+
+        border-radius: 0 0 12px 12px;
+
+    }
+
+
+
+    .voice-figure .leg.right{
+
+        right: 48px;
+
+        border-radius: 0 0 12px 12px;
+
+    }
+
+
+
+    .voice-figure .boot{
+
+        position: absolute;
+
+        bottom: -2px;
+
+        width: 24px;
+
+        height: 18px;
+
+        background: #d8c6a2;
+
+        border-radius: 10px 10px 6px 6px;
+
+        border: 2px solid rgba(90,70,40,0.18);
+
+    }
+
+
+
+    .voice-figure .boot.left{
+
+        left: 42px;
+
+    }
+
+
+
+    .voice-figure .boot.right{
+
+        right: 42px;
+
+    }
+
+
+
+    .voice-figure .ring{
+
+        position: absolute;
+
+        right: 42px;
+
+        top: 158px;
+
+        width: 8px;
+
+        height: 8px;
+
+        border-radius: 50%;
+
+        background: radial-gradient(circle at 35% 35%, #fff3a0 0%, #d4a52d 75%, #9c6f10 100%);
+
+        box-shadow: 0 0 0 1px rgba(120,90,20,0.22);
+
+        z-index: 5;
 
     }
 
@@ -740,6 +888,8 @@
 
             <div class="head">
 
+                <div class="hair-front"></div>
+
                 <div class="eyebrow left"></div>
 
                 <div class="eyebrow right"></div>
@@ -756,11 +906,23 @@
 
             <div class="neck"></div>
 
-            <div class="necklace"></div>
+            <div class="dress-neckline"></div>
 
-            <div class="pendant"></div>
+            <div class="dress"></div>
 
-            <div class="shirt"></div>
+            <div class="arm left"><div class="hand"></div></div>
+
+            <div class="arm right"><div class="hand"></div></div>
+
+            <div class="leg left"></div>
+
+            <div class="leg right"></div>
+
+            <div class="boot left"></div>
+
+            <div class="boot right"></div>
+
+            <div class="ring"></div>
 
         </div>
 
@@ -934,8 +1096,7 @@ function addBot(text){
 
     chatLeft.innerHTML +=
 
-        `<div class="bot"><b>🤖 Nele:</b> ${text}</div>`;
-
+        `<div class="bot"><b>🤖 Nele:</b> ${text}</div> যেন`;
 
 
     chatLeft.scrollTop = chatLeft.scrollHeight;
