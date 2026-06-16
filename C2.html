@@ -28,3 +28,128 @@
 
 </body>
 </html>
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<title>Nauka Niemieckiego</title>
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+}
+
+#chatbox {
+    width: 300px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-top: 20px;
+}
+
+#messages {
+    height: 200px;
+    overflow-y: auto;
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.user {
+    color: blue;
+}
+
+.bot {
+    color: green;
+}
+</style>
+</head>
+
+<body>
+
+<h1>Nauka Niemieckiego od Podstaw</h1>
+
+<h2>Witaj!</h2>
+
+<p>To moja strona do nauki języka niemieckiego.</p>
+
+<h2>Słówko dnia</h2>
+
+<p><b>Haus</b> = dom</p>
+
+<h2>Przydatne zwroty</h2>
+
+<ul>
+    <li>Hallo = Cześć</li>
+    <li>Guten Morgen = Dzień dobry</li>
+    <li>Danke = Dziękuję</li>
+    <li>Tschüss = Do widzenia</li>
+</ul>
+
+<h2>Chatbot do nauki niemieckiego</h2>
+
+<div id="chatbox">
+    <div id="messages"></div>
+
+    <input type="text" id="userInput" placeholder="Napisz wiadomość...">
+    <button onclick="sendMessage()">Wyślij</button>
+</div>
+
+<script>
+function sendMessage() {
+    const input = document.getElementById("userInput");
+    const messages = document.getElementById("messages");
+
+    const userText = input.value.trim();
+
+    if (userText === "") {
+        return;
+    }
+
+    messages.innerHTML += `<p class="user"><b>Ty:</b> ${userText}</p>`;
+
+    let response;
+
+    switch (userText.toLowerCase()) {
+        case "hallo":
+            response = "Hallo! To po niemiecku znaczy: Cześć.";
+            break;
+
+        case "danke":
+            response = "Danke oznacza: Dziękuję.";
+            break;
+
+        case "haus":
+            response = "Haus oznacza: dom.";
+            break;
+
+        case "jak jest po niemiecku dom":
+            response = "Dom po niemiecku to: Haus.";
+            break;
+
+        case "jak jest po niemiecku dziękuję":
+            response = "Dziękuję po niemiecku to: Danke.";
+            break;
+
+        case "pomoc":
+            response = "Możesz zapytać mnie np. o: Haus, Danke, Hallo.";
+            break;
+
+        default:
+            response = "Nie znam jeszcze tej odpowiedzi. Spróbuj wpisać: Haus, Danke, Hallo lub pomoc.";
+    }
+
+    messages.innerHTML += `<p class="bot"><b>Bot:</b> ${response}</p>`;
+
+    messages.scrollTop = messages.scrollHeight;
+    input.value = "";
+}
+
+document.getElementById("userInput").addEventListener("keypress", function(event) {
+    if (event.key === "Enter") {
+        sendMessage();
+    }
+});
+</script>
+
+</body>
+</html>
