@@ -81,7 +81,7 @@
 <li>Tschüss</li>
 </ul>
 
-<h2>Tom</h2>
+<h2>Nele</h2>
 
 <div id="chat"></div>
 
@@ -149,7 +149,7 @@ if(SpeechRecognition){
 function addBot(text){
 
     chat.innerHTML +=
-        `<div class="bot"><b>🤖 Tom:</b> ${text}</div>`;
+        `<div class="bot"><b>🤖 Nele:</b> ${text}</div>`;
 
     chat.scrollTop = chat.scrollHeight;
 
@@ -179,17 +179,24 @@ function speak(text){
         speechSynthesis.getVoices();
 
     // Wybierz kobiecy głos niemiecki o naturalnym, ciepłym tonie
-    // Szukamy głosów z określeniami typu: female, woman, female, Google, Deutsch
+    // Preferujemy głosy Google, Microsoft z określeniem female lub woman
     selectedVoice = voices.find(voice => 
         voice.lang.startsWith("de") && 
-        (voice.name.toLowerCase().includes("female") || 
-         voice.name.toLowerCase().includes("woman") ||
-         voice.name.toLowerCase().includes("female") ||
-         voice.name.toLowerCase().includes("google") ||
-         voice.name.toLowerCase().includes("deutsch"))
+        (voice.name.toLowerCase().includes("google") && voice.name.toLowerCase().includes("female")) ||
+        (voice.name.toLowerCase().includes("microsoft") && voice.name.toLowerCase().includes("female")) ||
+        (voice.name.toLowerCase().includes("female")) ||
+        (voice.name.toLowerCase().includes("woman"))
     );
 
-    // Jeśli nie znaleziono kobiecego, wybierz dowolny głos niemiecki
+    // Jeśli nie znaleziono, spróbuj dowolny głos niemiecki Google
+    if(!selectedVoice){
+        selectedVoice = voices.find(voice => 
+            voice.lang.startsWith("de") && 
+            voice.name.toLowerCase().includes("google")
+        );
+    }
+
+    // Ostatecznie dowolny głos niemiecki
     if(!selectedVoice){
         selectedVoice = voices.find(voice => voice.lang.startsWith("de"));
     }
@@ -199,8 +206,8 @@ function speak(text){
     }
 
     utterance.lang = "de-DE";
-    utterance.rate = 0.9;      // Nieco wolniejsza, bardziej naturalna tempa
-    utterance.pitch = 1.1;     // Nieco wyższy pitch dla kobiecego głosu
+    utterance.rate = 0.85;      // Nieco wolniejsza, bardziej naturalna tempa
+    utterance.pitch = 1.15;     // Wyższy pitch dla wyraźnie kobiecego głosu
     utterance.volume = 1;
 
     speechSynthesis.speak(utterance);
@@ -215,7 +222,7 @@ function startLesson(){
     micButton.classList.remove("waiting");
 
     addBot(
-        "Guten Tag! Ich heiße Tom. Wie heißt du?"
+        "Guten Tag! Ich heiße Nele. Wie heißt du?"
     );
 }
 
@@ -232,7 +239,7 @@ function listenAnswer(){
     if(!isWaitingForAnswer){
 
         statusText.textContent =
-            "Status: Tom wartet jeszcze nicht auf deine Antwort.";
+            "Status: Nele wartet jeszcze nicht auf deine Antwort.";
 
         return;
     }
@@ -381,12 +388,32 @@ function evaluate(answer){
 speechSynthesis.onvoiceschanged = function() {
     // Głosy są dostępne, możemy wybrać teraz
     const voices = speechSynthesis.getVoices();
+    
+    // Preferujemy Google Female German
     selectedVoice = voices.find(voice => 
         voice.lang.startsWith("de") && 
-        (voice.name.toLowerCase().includes("female") || 
-         voice.name.toLowerCase().includes("woman") ||
-         voice.name.toLowerCase().includes("google"))
+        voice.name.toLowerCase().includes("google") && 
+        voice.name.toLowerCase().includes("female")
     );
+
+    // Jeśli nie,任何其他 kobiecy niemiecki
+    if(!selectedVoice){
+        selectedVoice = voices.find(voice => 
+            voice.lang.startsWith("de") && 
+            (voice.name.toLowerCase().includes("female") || 
+             voice.name.toLowerCase().includes("woman"))
+        );
+    }
+
+    // Jeśli nie, dowolny Google niemiecki
+    if(!selectedVoice){
+        selectedVoice = voices.find(voice => 
+            voice.lang.startsWith("de") && 
+            voice.name.toLowerCase().includes("google")
+        );
+    }
+
+    // Ostatecznie dowolny niemiecki
     if(!selectedVoice){
         selectedVoice = voices.find(voice => voice.lang.startsWith("de"));
     }
