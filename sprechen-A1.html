@@ -1,1 +1,533 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Sprechen A1 – Lektion 1: Guten Tag! Begrüßung und Vorstellung</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+      line-height: 1.6;
+    }
+    h1, h2 {
+      color: #333;
+    }
+    .card {
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      padding: 16px;
+      margin-bottom: 20px;
+      background: #f9f9f9;
+    }
+    .info {
+      font-size: 0.9rem;
+      color: #555;
+    }
+    .btn {
+      display: inline-block;
+      margin: 6px 4px;
+      padding: 8px 14px;
+      border-radius: 4px;
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+    .btn-primary {
+      background: #1976d2;
+      color: #fff;
+    }
+    .btn-secondary {
+      background: #eee;
+      color: #333;
+    }
+    .btn-small {
+      font-size: 0.85rem;
+      padding: 4px 8px;
+    }
+    .btn-primary:disabled {
+      background: #90caf9;
+      cursor: not-allowed;
+    }
+    .status {
+      font-weight: bold;
+      margin-top: 8px;
+    }
+    .status-ok {
+      color: #2e7d32;
+    }
+    .status-error {
+      color: #c62828;
+    }
+    .status-warn {
+      color: #ef6c00;
+    }
+    .frage {
+      font-weight: bold;
+      margin-bottom: 4px;
+    }
+    .erwartet, .antwort {
+      font-size: 0.95rem;
+      margin: 2px 0;
+    }
+    .antwort span.label {
+      font-weight: bold;
+    }
+    .highlight {
+      background: #fff3cd;
+    }
+    .klein {
+      font-size: 0.9rem;
+    }
+    .alphabet-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+      margin-top: 8px;
+    }
+    .alphabet-grid span {
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      padding: 4px 6px;
+      background: #fff;
+      font-size: 0.9rem;
+    }
+    .section-header {
+      margin-top: 24px;
+      margin-bottom: 8px;
+    }
+    .back-container {
+      margin-top: 30px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <h1>Sprechen A1 – Lektion 1: Guten Tag! Begrüßung und Vorstellung</h1>
+  <p class="info">
+    Sprich laut. Klicke auf <b>„Aufnahme starten“</b> und beantworte die Fragen.  
+    Die App erkennt deine Antwort, vergleicht sie mit dem Ziel‑Satz und zeigt Verbesserungsvorschläge.
+  </p>
 
+  <div class="card">
+    <div class="info">
+      Status Spracherkennung:
+      <span id="supportStatus">Wird geprüft …</span>
+    </div>
+    <button id="startBtn" class="btn btn-primary" disabled>🎙️ Aufnahme starten</button>
+    <button id="stopBtn" class="btn btn-secondary" disabled>⏹️ Aufnahme stoppen</button>
+    <div id="recStatus" class="status"></div>
+  </div>
+
+  <!-- Dialogschritte für Lektion 1 -->
+  <div id="dialogContainer" class="card">
+    <h2 class="section-header">Dialog – Begrüßung, Vorstellung, Alphabet</h2>
+    <p class="info">
+      Es gibt mehrere Schritte. Sprich immer <b>einen</b> Satz, dann siehst du Feedback.  
+      Klicke danach auf „Nächste Frage“.
+    </p>
+
+    <div id="frageText" class="frage"></div>
+    <div id="erwartetText" class="erwartet"></div>
+    <div id="antwortText" class="antwort"></div>
+    <div id="feedbackText" class="status"></div>
+
+    <button id="repeatBtn" class="btn btn-secondary btn-small">Frage wiederholen (Text)</button>
+    <button id="ttsBtn" class="btn btn-secondary btn-small">Frage vorlesen (TTS)</button>
+
+    <div style="margin-top: 10px;">
+      <button id="nextBtn" class="btn btn-primary" disabled>Nächste Frage ➜</button>
+      <button id="retryBtn" class="btn btn-secondary" disabled>Noch einmal antworten</button>
+    </div>
+  </div>
+
+  <!-- Alphabet-Hilfe -->
+  <div class="card">
+    <h2 class="section-header">Alphabet – Hilfe</h2>
+    <p class="info klein">
+      Beispiel: „Buchstabieren Sie Ihren Namen.“ – Du kannst sagen: „M – a – x“ oder „M – a – x, M wie Marta, a wie Anna, x wie Xaver“ (frei).  
+      Umlaute und ß: Ä, Ö, Ü, ß.
+    </p>
+    <div class="alphabet-grid">
+      <span>A</span><span>B</span><span>C</span><span>D</span><span>E</span><span>F</span><span>G</span><span>H</span>
+      <span>I</span><span>J</span><span>K</span><span>L</span><span>M</span><span>N</span><span>O</span><span>P</span>
+      <span>Q</span><span>R</span><span>S</span><span>T</span><span>U</span><span>V</span><span>W</span><span>X</span>
+      <span>Y</span><span>Z</span><span>Ä</span><span>Ö</span><span>Ü</span><span>ß</span>
+    </div>
+  </div>
+
+  <div class="back-container">
+    <button class="btn btn-secondary" onclick="window.location.href='A1.html#lektion1-guten-tag';">
+      ⬅️ Zurück zu A1 – Lektion 1: Guten Tag! – Begrüßung und Vorstellung
+    </button>
+  </div>
+
+  <script>
+    // Dialogschritte für Lektion 1:
+    // Jeder Schritt enthält:
+    // - frage: was die App sagt / anzeigt
+    // - typ: "frei" = freie Antwort, "fix" = überprüfbar mit Standardsätzen
+    // - erwartungen: Array möglicher Zielantworten (klein geschrieben)
+    const dialogSchritte = [
+      {
+        id: 1,
+        frage: "Begrüßen Sie am Morgen.",
+        typ: "fix",
+        erwartungen: [
+          "guten morgen"
+        ],
+        hinweis: "Typischer Satz: „Guten Morgen!“"
+      },
+      {
+        id: 2,
+        frage: "Begrüßen Sie tagsüber.",
+        typ: "fix",
+        erwartungen: [
+          "guten tag"
+        ],
+        hinweis: "Typischer Satz: „Guten Tag!“"
+      },
+      {
+        id: 3,
+        frage: "Begrüßen Sie am Abend.",
+        typ: "fix",
+        erwartungen: [
+          "guten abend"
+        ],
+        hinweis: "Typischer Satz: „Guten Abend!“"
+      },
+      {
+        id: 4,
+        frage: "Begrüßen Sie informell.",
+        typ: "fix",
+        erwartungen: [
+          "hallo"
+        ],
+        hinweis: "Typischer Satz: „Hallo!“"
+      },
+      {
+        id: 5,
+        frage: "Verabschieden Sie sich.",
+        typ: "fix",
+        erwartungen: [
+          "tschüss",
+          "tschuess" // für mögliche Schreibweise
+        ],
+        hinweis: "Typischer Satz: „Tschüss!“"
+      },
+      {
+        id: 6,
+        frage: "Stellen Sie sich informell vor. Sagen Sie: „Hallo! Ich heiße …“ mit Ihrem Namen.",
+        typ: "frei",
+        erwartungen: [],
+        hinweis: "Beispiel: „Hallo! Ich heiße Anna.“ oder „Hallo! Ich heiße Max.“"
+      },
+      {
+        id: 7,
+        frage: "Fragen Sie informell nach dem Namen. Sagen Sie: „Wie heißt du?“",
+        typ: "fix",
+        erwartungen: [
+          "wie heißt du",
+          "wie heisst du"
+        ],
+        hinweis: "Zielsatz: „Wie heißt du?“"
+      },
+      {
+        id: 8,
+        frage: "Stellen Sie sich formell vor. Sagen Sie: „Guten Tag. Ich heiße …“ oder „Mein Name ist …“",
+        typ: "frei",
+        erwartungen: [],
+        hinweis: "Beispiel: „Guten Tag. Ich heiße Thomas.“ oder „Guten Tag. Mein Name ist Julia Müller.“"
+      },
+      {
+        id: 9,
+        frage: "Fragen Sie formell nach dem Namen. Sagen Sie: „Wie heißen Sie?“",
+        typ: "fix",
+        erwartungen: [
+          "wie heißen sie",
+          "wie heissen sie"
+        ],
+        hinweis: "Zielsatz: „Wie heißen Sie?“"
+      },
+      {
+        id: 10,
+        frage: "Sagen Sie drei Alphabet-Buchstaben, zum Beispiel: „A, B, C“.",
+        typ: "frei",
+        erwartungen: [],
+        hinweis: "Du kannst irgendeine Kombination sagen, z. B. „A, B, C“ oder „M, A, X“."
+      },
+      {
+        id: 11,
+        frage: "Buchstabieren Sie Ihren Vornamen.",
+        typ: "frei",
+        erwartungen: [],
+        hinweis: "Beispiel: „M – a – x“ oder „A – n – n – a“."
+      },
+      {
+        id: 12,
+        frage: "Wie verabschieden Sie sich noch einmal?",
+        typ: "fix",
+        erwartungen: [
+          "tschüss",
+          "tschuess"
+        ],
+        hinweis: "Zielsatz: „Tschüss!“"
+      }
+    ];
+
+    let aktuellerIndex = 0;
+    let recognition = null;
+    let recognizing = false;
+
+    const supportStatus = document.getElementById("supportStatus");
+    const startBtn = document.getElementById("startBtn");
+    const stopBtn = document.getElementById("stopBtn");
+    const recStatus = document.getElementById("recStatus");
+
+    const frageText = document.getElementById("frageText");
+    const erwartetText = document.getElementById("erwartetText");
+    const antwortText = document.getElementById("antwortText");
+    const feedbackText = document.getElementById("feedbackText");
+
+    const nextBtn = document.getElementById("nextBtn");
+    const retryBtn = document.getElementById("retryBtn");
+    const repeatBtn = document.getElementById("repeatBtn");
+    const ttsBtn = document.getElementById("ttsBtn");
+
+    // Initialisierung Spracherkennung
+    function initSpeechRecognition() {
+      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+      if (!SpeechRecognition) {
+        supportStatus.textContent = "Ihr Browser unterstützt die Web Speech API leider nicht. Bitte verwenden Sie z. B. Chrome.";
+        supportStatus.classList.add("status-error");
+        return;
+      }
+
+      recognition = new SpeechRecognition();
+      recognition.lang = "de-DE";
+      recognition.interimResults = false;
+      recognition.maxAlternatives = 1;
+
+      supportStatus.textContent = "Spracherkennung ist verfügbar.";
+      supportStatus.classList.add("status-ok");
+      startBtn.disabled = false;
+
+      recognition.onstart = () => {
+        recognizing = true;
+        recStatus.textContent = "Bitte sprechen Sie jetzt …";
+        recStatus.className = "status status-warn";
+        startBtn.disabled = true;
+        stopBtn.disabled = false;
+        nextBtn.disabled = true;
+        retryBtn.disabled = true;
+      };
+
+      recognition.onend = () => {
+        recognizing = false;
+        recStatus.textContent = "Aufnahme beendet.";
+        recStatus.className = "status";
+        startBtn.disabled = false;
+        stopBtn.disabled = true;
+      };
+
+      recognition.onerror = (event) => {
+        recStatus.textContent = "Fehler bei der Spracherkennung: " + event.error;
+        recStatus.className = "status status-error";
+        startBtn.disabled = false;
+        stopBtn.disabled = true;
+      };
+
+      recognition.onresult = (event) => {
+        const transcript = event.results[0][0].transcript;
+        const confidence = event.results[0][0].confidence;
+        verarbeiteAntwort(transcript, confidence);
+      };
+    }
+
+    // Dialog laden
+    function ladeAktuellenSchritt() {
+      const schritt = dialogSchritte[aktuellerIndex];
+      frageText.textContent = "Frage " + (aktuellerIndex + 1) + " von " + dialogSchritte.length + ": " + schritt.frage;
+      erwartetText.innerHTML = "";
+      antwortText.innerHTML = "";
+      feedbackText.textContent = "";
+      feedbackText.className = "status";
+
+      if (schritt.typ === "fix" && schritt.erwartungen.length > 0) {
+        erwartetText.innerHTML =
+          "<span class='klein'><b>Typische Zielantwort(en):</b> " +
+          schritt.erwartungen.map(e => "„" + satzFallBack(e) + "!“").join(" oder ") +
+          "</span>";
+      } else {
+        erwartetText.innerHTML =
+          "<span class='klein highlight'><b>Hinweis:</b> " + schritt.hinweis + "</span>";
+      }
+
+      nextBtn.disabled = true;
+      retryBtn.disabled = true;
+    }
+
+    // Helfer: ersten Buchstaben groß für Anzeige
+    function satzFallBack(text) {
+      if (!text) return text;
+      return text.charAt(0).toUpperCase() + text.slice(1);
+    }
+
+    // Normalisierung von Text
+    function normalisiereText(text) {
+      return text
+        .toLowerCase()
+        .replace(/!/g, "")
+        .replace(/\?/g, "")
+        .replace(/,/g, "")
+        .replace(/\./g, "")
+        .replace(/\s+/g, " ")
+        .trim();
+    }
+
+    // Abstand zwischen Strings (einfache Levenshtein-Distanz)
+    function berechneDistanz(a, b) {
+      const m = a.length;
+      const n = b.length;
+      const dp = Array.from({ length: m + 1 }, () => new Array(n + 1).fill(0));
+
+      for (let i = 0; i <= m; i++) dp[i][0] = i;
+      for (let j = 0; j <= n; j++) dp[0][j] = j;
+
+      for (let i = 1; i <= m; i++) {
+        for (let j = 1; j <= n; j++) {
+          const kosten = a[i - 1] === b[j - 1] ? 0 : 1;
+          dp[i][j] = Math.min(
+            dp[i - 1][j] + 1,
+            dp[i][j - 1] + 1,
+            dp[i - 1][j - 1] + kosten
+          );
+        }
+      }
+      return dp[m][n];
+    }
+
+    // Antwort verarbeiten und Feedback geben
+    function verarbeiteAntwort(transcript, confidence) {
+      const schritt = dialogSchritte[aktuellerIndex];
+      const original = transcript;
+      const norm = normalisiereText(transcript);
+
+      antwortText.innerHTML =
+        "<span class='label'>Ihre Antwort (erkannt):</span> „" +
+        original +
+        "“<br><span class='klein'>Konfidenz: " + (confidence * 100).toFixed(1) + " %</span>";
+
+      if (schritt.typ === "fix" && schritt.erwartungen.length > 0) {
+        let besteDistanz = Infinity;
+        let besteErwartung = "";
+
+        schritt.erwartungen.forEach(e => {
+          const d = berechneDistanz(norm, e);
+          if (d < besteDistanz) {
+            besteDistanz = d;
+            besteErwartung = e;
+          }
+        });
+
+        const maxFehler = Math.max(1, Math.round(besteErwartung.length * 0.3));
+
+        if (besteDistanz === 0) {
+          feedbackText.textContent = "Sehr gut! Ihre Antwort stimmt mit dem Zielsatz überein.";
+          feedbackText.className = "status status-ok";
+        } else if (besteDistanz <= maxFehler) {
+          feedbackText.innerHTML =
+            "Gut! Kleine Abweichung. Versuchen Sie noch einmal, klar zu sprechen: „" +
+            satzFallBack(besteErwartung) +
+            "!“";
+          feedbackText.className = "status status-warn";
+        } else {
+          feedbackText.innerHTML =
+            "Noch nicht ganz. Versuchen Sie: <span class='highlight'>„" +
+            satzFallBack(besteErwartung) +
+            "!“</span>";
+          feedbackText.className = "status status-error";
+        }
+      } else {
+        // freie Antwort – nur sanftes Feedback
+        if (norm.length === 0) {
+          feedbackText.textContent = "Es wurde keine Antwort erkannt. Bitte versuchen Sie es noch einmal.";
+          feedbackText.className = "status status-error";
+        } else {
+          feedbackText.innerHTML =
+            "Danke! Ihre Antwort wird akzeptiert. Achten Sie auf klare Aussprache. Hinweis: " +
+            schritt.hinweis;
+          feedbackText.className = "status status-ok";
+        }
+      }
+
+      nextBtn.disabled = false;
+      retryBtn.disabled = false;
+    }
+
+    // Buttons
+    startBtn.addEventListener("click", () => {
+      if (!recognition) return;
+      try {
+        recognition.start();
+      } catch (e) {
+        // Fehler, wenn bereits laufend
+      }
+    });
+
+    stopBtn.addEventListener("click", () => {
+      if (!recognition) return;
+      try {
+        recognition.stop();
+      } catch (e) {}
+    });
+
+    nextBtn.addEventListener("click", () => {
+      if (aktuellerIndex < dialogSchritte.length - 1) {
+        aktuellerIndex++;
+        ladeAktuellenSchritt();
+      } else {
+        frageText.textContent = "Dialog beendet. Sehr gut! Sie können jetzt zur Lektion zurückkehren oder noch einmal üben.";
+        erwartetText.innerHTML = "";
+        feedbackText.textContent = "";
+        antwortText.innerHTML = "";
+        nextBtn.disabled = true;
+        retryBtn.disabled = true;
+      }
+    });
+
+    retryBtn.addEventListener("click", () => {
+      antwortText.innerHTML = "";
+      feedbackText.textContent = "";
+      feedbackText.className = "status";
+      nextBtn.disabled = true;
+      retryBtn.disabled = true;
+      startBtn.click();
+    });
+
+    repeatBtn.addEventListener("click", () => {
+      const schritt = dialogSchritte[aktuellerIndex];
+      alert("Frage: " + schritt.frage + "\n\nHinweis: " + schritt.hinweis);
+    });
+
+    // Text-to-Speech der Frage
+    ttsBtn.addEventListener("click", () => {
+      const schritt = dialogSchritte[aktuellerIndex];
+      if (!("speechSynthesis" in window)) {
+        alert("Text-to-Speech wird in diesem Browser nicht unterstützt.");
+        return;
+      }
+      const utterance = new SpeechSynthesisUtterance(schritt.frage);
+      utterance.lang = "de-DE";
+      window.speechSynthesis.speak(utterance);
+    });
+
+    // Start
+    document.addEventListener("DOMContentLoaded", () => {
+      initSpeechRecognition();
+      ladeAktuellenSchritt();
+    });
+  </script>
+</body>
+</html>
