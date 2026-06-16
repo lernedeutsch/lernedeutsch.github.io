@@ -178,25 +178,44 @@ function speak(text){
     const voices =
         speechSynthesis.getVoices();
 
-    // Wybierz kobiecy głos niemiecki o naturalnym, ciepłym tonie
-    // Preferujemy głosy Google, Microsoft z określeniem female lub woman
+    // Szukamy najlepszego naturalnego kobiecego głosu niemieckiego
+    // Priorytet: Google Deutsch (female), Microsoft Helene, Microsoft Katja
     selectedVoice = voices.find(voice => 
-        voice.lang.startsWith("de") && 
-        (voice.name.toLowerCase().includes("google") && voice.name.toLowerCase().includes("female")) ||
-        (voice.name.toLowerCase().includes("microsoft") && voice.name.toLowerCase().includes("female")) ||
-        (voice.name.toLowerCase().includes("female")) ||
-        (voice.name.toLowerCase().includes("woman"))
+        voice.lang === "de-DE" && 
+        voice.name.toLowerCase().includes("google") && 
+        voice.name.toLowerCase().includes("female")
     );
 
-    // Jeśli nie znaleziono, spróbuj dowolny głos niemiecki Google
+    // Jeśli nie, Microsoft Helene (kobiecy)
     if(!selectedVoice){
         selectedVoice = voices.find(voice => 
-            voice.lang.startsWith("de") && 
+            voice.lang === "de-DE" && 
+            voice.name.toLowerCase().includes("helene")
+        );
+    }
+
+    // Jeśli nie, Microsoft Katja (kobiecy)
+    if(!selectedVoice){
+        selectedVoice = voices.find(voice => 
+            voice.lang === "de-DE" && 
+            voice.name.toLowerCase().includes("katja")
+        );
+    }
+
+    // Jeśli nie, dowolny Google Deutsch
+    if(!selectedVoice){
+        selectedVoice = voices.find(voice => 
+            voice.lang === "de-DE" && 
             voice.name.toLowerCase().includes("google")
         );
     }
 
-    // Ostatecznie dowolny głos niemiecki
+    // Jeśli nie, dowolny de-DE
+    if(!selectedVoice){
+        selectedVoice = voices.find(voice => voice.lang === "de-DE");
+    }
+
+    // Jeśli nie, dowolny de
     if(!selectedVoice){
         selectedVoice = voices.find(voice => voice.lang.startsWith("de"));
     }
@@ -206,8 +225,8 @@ function speak(text){
     }
 
     utterance.lang = "de-DE";
-    utterance.rate = 0.85;      // Nieco wolniejsza, bardziej naturalna tempa
-    utterance.pitch = 1.15;     // Wyższy pitch dla wyraźnie kobiecego głosu
+    utterance.rate = 0.95;      // Bardziej naturalna szybkość (prawie normalna)
+    utterance.pitch = 1.05;     // Lekko wyższy, ale naturalny pitch
     utterance.volume = 1;
 
     speechSynthesis.speak(utterance);
@@ -220,6 +239,15 @@ function startLesson(){
     lessonStep = 1;
     isWaitingForAnswer = false;
     micButton.classList.remove("waiting");
+
+    // Upewnij się, że głos jest wybrany przed rozpoczęciem
+    if(!selectedVoice){
+        const voices = speechSynthesis.getVoices();
+        selectedVoice = voices.find(voice => voice.lang === "de-DE");
+        if(!selectedVoice){
+            selectedVoice = voices.find(voice => voice.lang.startsWith("de"));
+        }
+    }
 
     addBot(
         "Guten Tag! Ich heiße Nele. Wie heißt du?"
@@ -389,31 +417,43 @@ speechSynthesis.onvoiceschanged = function() {
     // Głosy są dostępne, możemy wybrać teraz
     const voices = speechSynthesis.getVoices();
     
-    // Preferujemy Google Female German
+    // Priorytet: Google Female Deutsch (de-DE)
     selectedVoice = voices.find(voice => 
-        voice.lang.startsWith("de") && 
+        voice.lang === "de-DE" && 
         voice.name.toLowerCase().includes("google") && 
         voice.name.toLowerCase().includes("female")
     );
 
-    // Jeśli nie,任何其他 kobiecy niemiecki
+    // Microsoft Helene
     if(!selectedVoice){
         selectedVoice = voices.find(voice => 
-            voice.lang.startsWith("de") && 
-            (voice.name.toLowerCase().includes("female") || 
-             voice.name.toLowerCase().includes("woman"))
+            voice.lang === "de-DE" && 
+            voice.name.toLowerCase().includes("helene")
         );
     }
 
-    // Jeśli nie, dowolny Google niemiecki
+    // Microsoft Katja
     if(!selectedVoice){
         selectedVoice = voices.find(voice => 
-            voice.lang.startsWith("de") && 
+            voice.lang === "de-DE" && 
+            voice.name.toLowerCase().includes("katja")
+        );
+    }
+
+    // Google Deutsch
+    if(!selectedVoice){
+        selectedVoice = voices.find(voice => 
+            voice.lang === "de-DE" && 
             voice.name.toLowerCase().includes("google")
         );
     }
 
-    // Ostatecznie dowolny niemiecki
+    // De-DE
+    if(!selectedVoice){
+        selectedVoice = voices.find(voice => voice.lang === "de-DE");
+    }
+
+    // De
     if(!selectedVoice){
         selectedVoice = voices.find(voice => voice.lang.startsWith("de"));
     }
