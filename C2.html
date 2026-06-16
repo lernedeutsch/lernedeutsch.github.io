@@ -1,8 +1,9 @@
+```html
 <!DOCTYPE html>
-<html lang="pl">
+<html lang="de">
 <head>
 <meta charset="UTF-8">
-<title>Nauka Niemieckiego – Lekcja 1</title>
+<title>Deutsch lernen – Lektion 1</title>
 
 <style>
     body{
@@ -46,41 +47,41 @@
 
 <body>
 
-<h1>Nauka Niemieckiego od Podstaw</h1>
+<h1>Deutsch lernen von Anfang an</h1>
 
-<h2>Lekcja 1 – Guten Tag!</h2>
+<h2>Lektion 1 – Guten Tag!</h2>
 
 <p>
-Temat: Powitania i przedstawianie się.
+Thema: Begrüßungen und sich vorstellen.
 </p>
 
 <ul>
-<li>Guten Morgen – Dzień dobry (rano)</li>
-<li>Guten Tag – Dzień dobry</li>
-<li>Guten Abend – Dobry wieczór</li>
-<li>Hallo – Cześć</li>
-<li>Tschüss – Do widzenia</li>
-<li>Ich heiße... – Nazywam się...</li>
-<li>Mein Name ist... – Mam na imię...</li>
-<li>Ich bin... – Jestem...</li>
-<li>Wie heißen Sie? – Jak się Pan/Pani nazywa?</li>
-<li>Wie heißt du? – Jak masz na imię?</li>
+<li>Guten Morgen</li>
+<li>Guten Tag</li>
+<li>Guten Abend</li>
+<li>Hallo</li>
+<li>Tschüss</li>
+<li>Ich heiße ...</li>
+<li>Mein Name ist ...</li>
+<li>Ich bin ...</li>
+<li>Wie heißen Sie?</li>
+<li>Wie heißt du?</li>
 </ul>
 
-<h2>Chatbot nauczyciel</h2>
+<h2>Lehrer-Chatbot</h2>
 
 <div id="chat"></div>
 
 <button onclick="startLesson()">
-▶ Rozpocznij lekcję
+▶ Lektion starten
 </button>
 
 <button onclick="listenAnswer()">
-🎤 Odpowiedz głosem
+🎤 Mit dem Mikrofon antworten
 </button>
 
 <p id="status">
-Status: oczekiwanie
+Status: Bereit
 </p>
 
 <script>
@@ -101,14 +102,14 @@ recognition.interimResults = false;
 recognition.maxAlternatives = 1;
 
 function addBot(text){
-    chat.innerHTML += `<div class="bot"><b>🤖 Nauczyciel:</b> ${text}</div>`;
+    chat.innerHTML += `<div class="bot"><b>🤖 Lehrer:</b> ${text}</div>`;
     chat.scrollTop = chat.scrollHeight;
 
     speak(text);
 }
 
 function addUser(text){
-    chat.innerHTML += `<div class="user"><b>🧑 Ty:</b> ${text}</div>`;
+    chat.innerHTML += `<div class="user"><b>🧑 Du:</b> ${text}</div>`;
     chat.scrollTop = chat.scrollHeight;
 }
 
@@ -142,7 +143,7 @@ function startLesson(){
 
 function listenAnswer(){
 
-    statusText.textContent = "Status: słucham...";
+    statusText.textContent = "Status: Ich höre zu ...";
 
     recognition.start();
 }
@@ -153,7 +154,7 @@ recognition.onresult = function(event){
     event.results[0][0].transcript.trim();
 
     statusText.textContent =
-    "Status: rozpoznano odpowiedź";
+    "Status: Antwort erkannt";
 
     addUser(answer);
 
@@ -163,7 +164,7 @@ recognition.onresult = function(event){
 recognition.onerror = function(){
 
     statusText.textContent =
-    "Status: błąd mikrofonu";
+    "Status: Mikrofonfehler";
 };
 
 function evaluate(answer){
@@ -178,7 +179,7 @@ function evaluate(answer){
         ){
 
             addBot(
-                "Sehr gut! Miło cię poznać."
+                "Sehr gut! Freut mich, dich kennenzulernen."
             );
 
             lessonStep = 2;
@@ -186,7 +187,7 @@ function evaluate(answer){
             setTimeout(() => {
 
                 addBot(
-                    "Jak powiesz po niemiecku: Dzień dobry?"
+                    "Wie begrüßt man jemanden auf Deutsch?"
                 );
 
             },1500);
@@ -194,7 +195,7 @@ function evaluate(answer){
         }else{
 
             addBot(
-                "Spróbuj odpowiedzieć: Ich heiße Anna. albo Mein Name ist Anna."
+                "Versuche zu antworten: Ich heiße Anna. oder Mein Name ist Anna."
             );
         }
 
@@ -206,11 +207,12 @@ function evaluate(answer){
         if(
             text.includes("guten tag") ||
             text.includes("guten morgen") ||
+            text.includes("guten abend") ||
             text.includes("hallo")
         ){
 
             addBot(
-                "Doskonale!"
+                "Ausgezeichnet!"
             );
 
             lessonStep = 3;
@@ -218,7 +220,7 @@ function evaluate(answer){
             setTimeout(() => {
 
                 addBot(
-                    "Jak pożegnasz się po niemiecku?"
+                    "Wie verabschiedest du dich auf Deutsch?"
                 );
 
             },1500);
@@ -226,7 +228,7 @@ function evaluate(answer){
         }else{
 
             addBot(
-                "To nie pasuje do pytania. Oczekiwałem na przykład: Guten Tag, Guten Morgen lub Hallo."
+                "Das passt nicht zur Frage. Zum Beispiel: Guten Tag, Guten Morgen, Guten Abend oder Hallo."
             );
         }
 
@@ -240,7 +242,7 @@ function evaluate(answer){
         ){
 
             addBot(
-                "Świetnie! Znasz już podstawowe powitania."
+                "Sehr gut! Du kennst jetzt die wichtigsten Begrüßungen."
             );
 
             lessonStep = 4;
@@ -248,7 +250,7 @@ function evaluate(answer){
             setTimeout(() => {
 
                 addBot(
-                    "Powiedz całym zdaniem: Hallo, ich heiße ... "
+                    "Bilde einen ganzen Satz: Hallo, ich heiße ..."
                 );
 
             },1500);
@@ -256,7 +258,7 @@ function evaluate(answer){
         }else{
 
             addBot(
-                "Poprawna odpowiedź to: Tschüss."
+                "Die richtige Antwort lautet: Tschüss."
             );
         }
 
@@ -274,13 +276,13 @@ function evaluate(answer){
         ){
 
             addBot(
-                "Perfekt! Ukończyłeś Lekcję 1. Gratuliere!"
+                "Perfekt! Du hast Lektion 1 erfolgreich abgeschlossen. Herzlichen Glückwunsch!"
             );
 
         }else{
 
             addBot(
-                "Zdanie powinno wyglądać podobnie do: Hallo, ich heiße Anna."
+                "Der Satz sollte zum Beispiel so aussehen: Hallo, ich heiße Anna."
             );
         }
     }
@@ -292,3 +294,4 @@ speechSynthesis.onvoiceschanged = () => {};
 
 </body>
 </html>
+```
