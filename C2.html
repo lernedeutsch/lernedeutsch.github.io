@@ -13,12 +13,18 @@
         line-height:1.6;
     }
 
-    #chat{
+    .chat-wrapper{
+        display:flex;
+        gap:15px;
+        margin:20px 0;
+    }
+
+    .chat-panel{
+        flex:1;
         border:1px solid #ccc;
         height:350px;
         overflow-y:auto;
         padding:15px;
-        margin:20px 0;
         background:#fafafa;
     }
 
@@ -83,7 +89,10 @@
 
 <h2>Nele</h2>
 
-<div id="chat"></div>
+<div class="chat-wrapper">
+    <div id="chatLeft" class="chat-panel"></div>
+    <div id="chatRight" class="chat-panel"></div>
+</div>
 
 <button onclick="startLesson()">
 ▶ Lektion starten
@@ -99,7 +108,8 @@ Status: Bereit
 
 <script>
 
-const chat = document.getElementById("chat");
+const chatLeft = document.getElementById("chatLeft");
+const chatRight = document.getElementById("chatRight");
 const statusText = document.getElementById("status");
 const micButton = document.getElementById("micButton");
 
@@ -148,24 +158,23 @@ if(SpeechRecognition){
 
 function addBot(text){
 
-    chat.innerHTML +=
+    chatLeft.innerHTML +=
         `<div class="bot"><b>🤖 Nele:</b> ${text}</div>`;
 
-    chat.scrollTop = chat.scrollHeight;
+    chatLeft.scrollTop = chatLeft.scrollHeight;
 
     speak(text);
 
-    // Ustaw przycisk na czekanie
     micButton.classList.add("waiting");
     isWaitingForAnswer = true;
 }
 
 function addUser(text){
 
-    chat.innerHTML +=
+    chatLeft.innerHTML +=
         `<div class="user"><b>🧑 Du:</b> ${text}</div>`;
 
-    chat.scrollTop = chat.scrollHeight;
+    chatLeft.scrollTop = chatLeft.scrollHeight;
 }
 
 function speak(text){
@@ -178,44 +187,37 @@ function speak(text){
     const voices =
         speechSynthesis.getVoices();
 
-    // Szukamy najlepszego naturalnego kobiecego głosu niemieckiego
-    // Priorytet: Google Deutsch (female), Microsoft Helene, Microsoft Katja
-    selectedVoice = voices.find(voice => 
-        voice.lang === "de-DE" && 
-        voice.name.toLowerCase().includes("google") && 
+    selectedVoice = voices.find(voice =>
+        voice.lang === "de-DE" &&
+        voice.name.toLowerCase().includes("google") &&
         voice.name.toLowerCase().includes("female")
     );
 
-    // Jeśli nie, Microsoft Helene (kobiecy)
     if(!selectedVoice){
-        selectedVoice = voices.find(voice => 
-            voice.lang === "de-DE" && 
+        selectedVoice = voices.find(voice =>
+            voice.lang === "de-DE" &&
             voice.name.toLowerCase().includes("helene")
         );
     }
 
-    // Jeśli nie, Microsoft Katja (kobiecy)
     if(!selectedVoice){
-        selectedVoice = voices.find(voice => 
-            voice.lang === "de-DE" && 
+        selectedVoice = voices.find(voice =>
+            voice.lang === "de-DE" &&
             voice.name.toLowerCase().includes("katja")
         );
     }
 
-    // Jeśli nie, dowolny Google Deutsch
     if(!selectedVoice){
-        selectedVoice = voices.find(voice => 
-            voice.lang === "de-DE" && 
+        selectedVoice = voices.find(voice =>
+            voice.lang === "de-DE" &&
             voice.name.toLowerCase().includes("google")
         );
     }
 
-    // Jeśli nie, dowolny de-DE
     if(!selectedVoice){
         selectedVoice = voices.find(voice => voice.lang === "de-DE");
     }
 
-    // Jeśli nie, dowolny de
     if(!selectedVoice){
         selectedVoice = voices.find(voice => voice.lang.startsWith("de"));
     }
@@ -225,8 +227,8 @@ function speak(text){
     }
 
     utterance.lang = "de-DE";
-    utterance.rate = 0.95;      // Bardziej naturalna szybkość (prawie normalna)
-    utterance.pitch = 1.05;     // Lekko wyższy, ale naturalny pitch
+    utterance.rate = 0.95;
+    utterance.pitch = 1.05;
     utterance.volume = 1;
 
     speechSynthesis.speak(utterance);
@@ -234,13 +236,13 @@ function speak(text){
 
 function startLesson(){
 
-    chat.innerHTML = "";
+    chatLeft.innerHTML = "";
+    chatRight.innerHTML = "";
 
     lessonStep = 1;
     isWaitingForAnswer = false;
     micButton.classList.remove("waiting");
 
-    // Upewnij się, że głos jest wybrany przed rozpoczęciem
     if(!selectedVoice){
         const voices = speechSynthesis.getVoices();
         selectedVoice = voices.find(voice => voice.lang === "de-DE");
@@ -282,7 +284,6 @@ function evaluate(answer){
 
     const text = answer.toLowerCase();
 
-    /* Imię */
     if(lessonStep === 1){
 
         if(
@@ -306,7 +307,6 @@ function evaluate(answer){
         return;
     }
 
-    /* Samopoczucie */
     if(lessonStep === 2){
 
         if(
@@ -333,7 +333,6 @@ function evaluate(answer){
         return;
     }
 
-    /* Skąd jesteś */
     if(lessonStep === 3){
 
         if(
@@ -356,7 +355,6 @@ function evaluate(answer){
         return;
     }
 
-    /* Hobby */
     if(lessonStep === 4){
 
         if(
@@ -379,7 +377,6 @@ function evaluate(answer){
         return;
     }
 
-    /* Pożegnanie */
     if(lessonStep === 5){
 
         if(
@@ -414,46 +411,39 @@ function evaluate(answer){
 }
 
 speechSynthesis.onvoiceschanged = function() {
-    // Głosy są dostępne, możemy wybrać teraz
     const voices = speechSynthesis.getVoices();
-    
-    // Priorytet: Google Female Deutsch (de-DE)
-    selectedVoice = voices.find(voice => 
-        voice.lang === "de-DE" && 
-        voice.name.toLowerCase().includes("google") && 
+
+    selectedVoice = voices.find(voice =>
+        voice.lang === "de-DE" &&
+        voice.name.toLowerCase().includes("google") &&
         voice.name.toLowerCase().includes("female")
     );
 
-    // Microsoft Helene
     if(!selectedVoice){
-        selectedVoice = voices.find(voice => 
-            voice.lang === "de-DE" && 
+        selectedVoice = voices.find(voice =>
+            voice.lang === "de-DE" &&
             voice.name.toLowerCase().includes("helene")
         );
     }
 
-    // Microsoft Katja
     if(!selectedVoice){
-        selectedVoice = voices.find(voice => 
-            voice.lang === "de-DE" && 
+        selectedVoice = voices.find(voice =>
+            voice.lang === "de-DE" &&
             voice.name.toLowerCase().includes("katja")
         );
     }
 
-    // Google Deutsch
     if(!selectedVoice){
-        selectedVoice = voices.find(voice => 
-            voice.lang === "de-DE" && 
+        selectedVoice = voices.find(voice =>
+            voice.lang === "de-DE" &&
             voice.name.toLowerCase().includes("google")
         );
     }
 
-    // De-DE
     if(!selectedVoice){
         selectedVoice = voices.find(voice => voice.lang === "de-DE");
     }
 
-    // De
     if(!selectedVoice){
         selectedVoice = voices.find(voice => voice.lang.startsWith("de"));
     }
