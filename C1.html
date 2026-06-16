@@ -1,44 +1,99 @@
-<!DOCTYPE html>
-<html lang="de">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Seite im Aufbau</title>
-    <style>
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background-color: #f5f5f5;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            text-align: center;
+function evaluate(answer){
+
+    const text = answer.toLowerCase();
+
+    /* Jak masz na imię? */
+    if(lessonStep === 1){
+
+        if(
+            text.includes("ich heiße") ||
+            text.includes("mein name ist") ||
+            text.includes("ich bin")
+        ){
+
+            let name = "";
+
+            const match =
+                answer.match(/ich heiße\s+([a-zäöüß]+)/i) ||
+                answer.match(/mein name ist\s+([a-zäöüß]+)/i);
+
+            if(match){
+                name = ", " + match[1];
+            }
+
+            addBot(
+                "Freut mich" + name + ". Wie geht es dir?"
+            );
+
+            lessonStep = 2;
+
+        }else{
+
+            addBot(
+                "Ich habe deinen Namen nicht verstanden. Du kannst zum Beispiel sagen: Ich heiße Anna. Wie heißt du?"
+            );
         }
 
-        .container {
-            padding: 20px;
+        return;
+    }
+
+    /* Jak się masz? */
+    if(lessonStep === 2){
+
+        if(
+            text.includes("gut") ||
+            text.includes("sehr gut") ||
+            text.includes("prima") ||
+            text.includes("super") ||
+            text.includes("es geht")
+        ){
+
+            addBot(
+                "Mir geht es auch gut, danke. Ich muss jetzt leider los."
+            );
+
+            lessonStep = 3;
+
+        }else{
+
+            addBot(
+                "Ich habe dich nicht ganz verstanden. Du kannst zum Beispiel sagen: Gut, danke. Wie geht es dir?"
+            );
         }
 
-        img {
-            max-width: 90%;
-            height: auto;
+        return;
+    }
+
+    /* Naturalne pożegnanie */
+    if(lessonStep === 3){
+
+        if(
+            text.includes("tschüss") ||
+            text.includes("auf wiedersehen") ||
+            text.includes("bis später") ||
+            text.includes("bis bald")
+        ){
+
+            addBot(
+                "Tschüss! Schön, mit dir Deutsch zu sprechen."
+            );
+
+            lessonStep = 4;
+
+        }else{
+
+            addBot(
+                "Ich habe das nicht verstanden. Wenn wir uns verabschieden, kannst du zum Beispiel 'Tschüss' sagen."
+            );
         }
 
-        p {
-            margin-top: 20px;
-            font-size: 20px;
-            color: #555;
-        }
-    </style>
-</head>
-<body>
+        return;
+    }
 
-    <div class="container">
-        <img src="ARBEIT.png" alt="Seite im Aufbau">
-        <p>Diese Seite befindet sich derzeit im Aufbau.</p>
-        <p>Bitte schauen Sie später noch einmal vorbei.</p>
-    </div>
+    if(lessonStep === 4){
 
-</body>
-</html>
+        addBot(
+            "Danke für das Gespräch! Starte die Lektion gern noch einmal."
+        );
+    }
+}
