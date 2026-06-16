@@ -1,15 +1,188 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sprechen A1</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sprechen A1 – Dialog po niemiecku</title>
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        max-width: 900px;
+        margin: 30px auto;
+        padding: 20px;
+        background: #f4f6f9;
+    }
+
+    h1 {
+        color: #1f4e79;
+    }
+
+    button {
+        padding: 12px 20px;
+        font-size: 18px;
+        margin: 10px 5px;
+        cursor: pointer;
+    }
+
+    #dialog {
+        background: white;
+        border-radius: 10px;
+        padding: 20px;
+        min-height: 300px;
+        overflow-y: auto;
+    }
+
+    .kursant {
+        color: #0b5394;
+        margin: 10px 0;
+    }
+
+    .nauczyciel {
+        color: #38761d;
+        margin: 10px 0;
+    }
+
+    #status {
+        font-weight: bold;
+        margin: 15px 0;
+    }
+</style>
 </head>
+
 <body>
-    <h1>Sprechen A1</h1>
 
-    <p>Tutaj wpisz materiały dla poziomu A1.</p>
+<h1>🎤 Sprechen A1 – Rozmowa po niemiecku</h1>
 
-    <p><a href="Wort.html">← Powrót do strony głównej</a></p>
+<p>
+Kliknij „Rozpocznij rozmowę”, powiedz coś po niemiecku,
+a komputer odpowie Ci głosem.
+</p>
+
+<button onclick="startListening()">▶ Rozpocznij rozmowę</button>
+<button onclick="stopListening()">⏹ Zatrzymaj</button>
+
+<p id="status">Gotowy.</p>
+
+<div id="dialog"></div>
+
+<p>
+<a href="Wort.html">← Powrót do strony głównej</a>
+</p>
+
+<script>
+const dialog = document.getElementById("dialog");
+const statusText = document.getElementById("status");
+
+const SpeechRecognition =
+    window.SpeechRecognition ||
+    window.webkitSpeechRecognition;
+
+if (!SpeechRecognition) {
+    statusText.innerHTML =
+        "Twoja przeglądarka nie obsługuje rozpoznawania mowy.";
+}
+
+const recognition = new SpeechRecognition();
+
+recognition.lang = "de-DE";
+recognition.continuous = true;
+recognition.interimResults = false;
+
+function addMessage(author, text, cssClass) {
+    dialog.innerHTML += `
+        <div class="${cssClass}">
+            <strong>${author}:</strong> ${text}
+        </div>
+    `;
+
+    dialog.scrollTop = dialog.scrollHeight;
+}
+
+function speak(text) {
+    const utterance = new SpeechSynthesisUtterance(text);
+
+    utterance.lang = "de-DE";
+    utterance.rate = 0.9;
+
+    speechSynthesis.speak(utterance);
+}
+
+function generateAnswer(userText) {
+
+    const text = userText.toLowerCase();
+
+    if (text.includes("hallo")) {
+        return "Hallo! Wie geht es dir?";
+    }
+
+    if (text.includes("wie heißt du")) {
+        return "Ich heiße Anna. Und wie heißt du?";
+    }
+
+    if (text.includes("ich heiße")) {
+        return "Freut mich, dich kennenzulernen.";
+    }
+
+    if (text.includes("wie alt bist du")) {
+        return "Ich bin fünfundzwanzig Jahre alt.";
+    }
+
+    if (text.includes("wo wohnst du")) {
+        return "Ich wohne in Berlin. Und du?";
+    }
+
+    if (text.includes("ich komme aus")) {
+        return "Interessant. Magst du Deutschland?";
+    }
+
+    if (text.includes("tschüss")) {
+        return "Auf Wiedersehen und bis bald!";
+    }
+
+    return "Interessant. Kannst du bitte mehr darüber erzählen?";
+}
+
+function startListening() {
+
+    recognition.start();
+
+    statusText.innerHTML =
+        "🎙 Słucham... mów po niemiecku.";
+}
+
+function stopListening() {
+
+    recognition.stop();
+
+    statusText.innerHTML =
+        "Zatrzymano.";
+}
+
+recognition.onresult = function(event) {
+
+    const transcript =
+        event.results[event.results.length - 1][0].transcript;
+
+    addMessage("Kursant", transcript, "kursant");
+
+    const answer = generateAnswer(transcript);
+
+    addMessage("Nauczyciel", answer, "nauczyciel");
+
+    speak(answer);
+};
+
+recognition.onerror = function(event) {
+    statusText.innerHTML =
+        "Błąd: " + event.error;
+};
+
+recognition.onend = function() {
+    statusText.innerHTML =
+        "Naciśnij „Rozpocznij rozmowę”, aby mówić dalej.";
+};
+</script>
+
 </body>
 </html>
