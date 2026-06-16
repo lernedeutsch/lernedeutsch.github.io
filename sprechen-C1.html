@@ -8,7 +8,7 @@
 body{font-family:Arial,sans-serif;background:#15211C;color:#F2EFE2;margin:0}
 header{padding:20px;background:#21312A}
 main{max-width:900px;margin:auto;padding:20px}
-#chat{min-height:400px;border:1px solid #444;padding:10px;background:#21312A}
+#chat{min-height:500px;border:1px solid #444;padding:10px;background:#21312A}
 .bot,.student,.feedback{margin:8px;padding:10px;border-radius:10px}
 .bot{background:#ECE6D2;color:#222}
 .student{background:#2d4d40}
@@ -29,12 +29,28 @@ button,input{padding:10px;margin:5px}
 
 <script>
 const lesson=[
- {q:"Guten Tag! Wie heißt du?",exp:["ich heiße","mein name ist","ich bin"],ok:"Sehr gut!",retry:"Antworte: Ich heiße ..."},
- {q:"Wie geht es dir?",exp:["gut","sehr gut","es geht"],ok:"Prima!",retry:"Sage: Gut, danke."},
- {q:"Wie begrüßt du dich?",exp:["guten morgen","guten tag","guten abend","hallo"],ok:"Perfekt!",retry:"Sage: Guten Tag oder Hallo."},
- {q:"Sage Tschüss!",exp:["tschüss","tschuss"],ok:"Winkel gut!",retry:"Sage: Tschüss."},
- {q:"Wie nennen Sie sich formell?",exp:["mein name ist","ich heiße"],ok:"Excellent!",retry:"Sage: Mein Name ist ..."},
- {q:"Nenne einen Buchstaben des deutschen Alphabets!",exp:["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"],ok:"Richtig!",retry:"Sage zum Beispiel: A oder B."}
+  // Teil 1: Begrüßung - Dialog nieformalny (1)
+  {q:"Hallo! Wie heißt du?",exp:["ich heiße","mein name ist","ich bin"],ok:"Sehr gut!",retry:"Antworte: Ich heiße ..."},
+  {q:"Gut! Und wie geht es dir?",exp:["gut","sehr gut","es geht"],ok:"Prima!",retry:"Sage: Gut, danke."},
+  {q:"Tschüss!",exp:["tschüss","tschuss"],ok:"Perfekt!",retry:"Sage: Tschüss."},
+  
+  // Teil 1: Begrüßung - różne grupy według czasu dnia
+  {q:"Wie sagt man morgens?",exp:["guten morgen"],ok:"Richtig!",retry:"Sage: Guten Morgen!"},
+  {q:"Wie sagt man tagsüber?",exp:["guten tag"],ok:"Winkel gut!",retry:"Sage: Guten Tag!"},
+  {q:"Wie sagt man abends?",exp:["guten abend"],ok:"Exzellent!",retry:"Sage: Guten Abend!"},
+  
+  // Teil 2: Vorstellung - Dialog formalny (2)
+  {q:"Guten Tag. Wie heißen Sie?",exp:["mein name ist","ich heiße","ich bin"],ok:"Sehr gut!",retry:"Antworte: Mein Name ist ..."},
+  {q:"Und Sie?",exp:["mein name ist","ich heiße"],ok:"Prima!",retry:"Sage: Ich heiße ..."},
+  
+  // Teil 2: Vorstellung - Dialog nieformalny (1 kontynuacja)
+  {q:"Hallo! Ich heiße Lena. Und du?",exp:["ich heiße","mein name ist"],ok:"Perfekt!",retry:"Sage: Ich heiße ..."},
+  
+  // Teil 3: Alphabet
+  {q:"Nenne den Buchstaben A!",exp:["a"],ok:"Richtig!",retry:"Sage: A"},
+  {q:"Nenne den Buchstaben B!",exp:["b"],ok:"Gut!",retry:"Sage: B"},
+  {q:"Nenne den Buchstaben C!",exp:["c"],ok:"Perfekt!",retry:"Sage: C"},
+  {q:"Nenne A, B oder C!",exp:["a","b","c"],ok:"Exzellent!",retry:"Sage A, B oder C"}
 ];
 
 let i=0, rec;
