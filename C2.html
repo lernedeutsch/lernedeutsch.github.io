@@ -1,943 +1,796 @@
 <!DOCTYPE html>
-
 <html lang="de">
-
 <head>
-
 <meta charset="UTF-8">
-
 <title>Deutsch lernen – Lektion 1</title>
 
-
-
 <style>
-
     body{
-
         font-family: Arial, sans-serif;
-
         max-width:800px;
-
         margin:auto;
-
         padding:20px;
-
         line-height:1.6;
-
     }
-
-
 
     .chat-wrapper{
-
         display:flex;
-
         gap:15px;
-
         margin:20px 0;
-
     }
-
-
 
     .chat-panel{
-
         border:1px solid #ccc;
-
         height:350px;
-
         overflow-y:auto;
-
         padding:15px;
-
         background:#fafafa;
-
         position:relative;
-
         overflow:hidden;
-
     }
-
-
 
     #chatLeft{
-
         flex:1;
-
     }
-
-
 
     #chatRight{
-
         flex:3;
-
     }
-
-
 
     .bot{
-
         color:darkblue;
-
         margin:10px 0;
-
     }
-
-
 
     .user{
-
         color:green;
-
         margin:10px 0;
-
     }
-
-
 
     button{
-
         padding:10px 20px;
-
         font-size:16px;
-
         cursor:pointer;
-
         margin-right:10px;
-
     }
-
-
 
     #micButton{
-
         background-color: #4CAF50;
-
         color: white;
-
     }
-
-
 
     #micButton.waiting{
-
         background-color: #ff4444;
-
         color: white;
-
         animation: pulse 1s infinite;
-
     }
-
-
 
     @keyframes pulse {
-
         0% { opacity: 1; }
-
         50% { opacity: 0.7; }
-
         100% { opacity: 1; }
-
     }
-
-
 
     #status{
-
         font-weight:bold;
-
     }
-
-
 
     .waves {
-
         position: absolute;
-
         left: 0;
-
         bottom: 0;
-
         width: 100%;
-
         height: 90px;
-
         opacity: 0;
-
         pointer-events: none;
-
         transition: opacity 0.15s ease;
-
         z-index: 1;
-
     }
-
-
 
     #chatRight.listening .waves,
-
     #chatRight.speaking .waves{
-
         opacity: 1;
-
     }
-
-
 
     .wave-group{
-
         transform-origin: center;
-
         animation: wavePulse 1.2s linear infinite;
-
     }
-
-
 
     .wave-group.wave2{ animation-duration: 0.9s; }
-
     .wave-group.wave3{ animation-duration: 0.7s; }
 
-
-
     @keyframes wavePulse{
-
         0% { transform: translateX(-24px) scaleY(0.85); }
-
         20% { transform: translateX(-10px) scaleY(1.15); }
-
         40% { transform: translateX(10px) scaleY(0.9); }
-
         60% { transform: translateX(24px) scaleY(1.2); }
-
         80% { transform: translateX(10px) scaleY(0.88); }
-
         100% { transform: translateX(-24px) scaleY(0.85); }
-
     }
-
-
 
     .wave-line{
-
         fill: none;
-
         stroke-width: 5;
-
         stroke-linecap: round;
-
         stroke-linejoin: round;
-
         filter: drop-shadow(0 0 2px rgba(0,0,0,0.12));
-
     }
-
-
 
     .wave1{
-
         stroke: rgba(0,0,0,0.85);
-
     }
-
-
 
     .wave2{
-
         stroke: rgba(120,75,35,0.78);
-
     }
-
-
 
     .wave3{
-
         stroke: rgba(120,120,120,0.78);
-
     }
-
-
 
     .voice-figure{
-
         position: absolute;
-
         right: 24px;
-
         top: 24px;
-
         width: 190px;
-
         height: 250px;
-
         z-index: 2;
-
         display: flex;
-
         align-items: center;
-
         justify-content: center;
-
         pointer-events: none;
-
     }
-
-
 
     .voice-figure .head{
-
         position: absolute;
-
         top: 0;
-
         width: 98px;
-
         height: 112px;
-
         border-radius: 50% / 56%;
-
         background: linear-gradient(180deg, #d7ad84 0%, #c79468 100%);
-
         border: 3px solid rgba(80,80,80,0.16);
-
         overflow: hidden;
-
         box-shadow: 0 2px 6px rgba(0,0,0,0.12);
-
     }
-
-
 
     .voice-figure .hair-back{
-
         position: absolute;
-
         top: 0px;
-
         left: 50%;
-
         transform: translateX(-50%);
-
         width: 100px;
-
         height: 114px;
-
         border-radius: 50%;
-
         background: #d8a12f;
-
         clip-path: polygon(12% 4%, 28% 0%, 50% 0%, 72% 0%, 88% 4%, 98% 16%, 100% 34%, 100% 78%, 90% 98%, 70% 100%, 50% 98%, 30% 100%, 10% 98%, 0% 78%, 0% 34%, 2% 16%);
-
         z-index: 0;
-
     }
-
-
 
     .voice-figure .hair-front{
-
         position: absolute;
-
         top: -1px;
-
         left: 7px;
-
         width: 84px;
-
         height: 62px;
-
         border-radius: 50% 50% 42% 42%;
-
         background: linear-gradient(180deg, #f4c55f 0%, #d79a20 100%);
-
         clip-path: polygon(0 44%, 6% 14%, 18% 4%, 32% 0%, 48% 6%, 62% 2%, 76% 6%, 90% 18%, 100% 40%, 96% 54%, 84% 50%, 72% 58%, 60% 50%, 48% 60%, 36% 54%, 24% 62%, 12% 56%, 0 64%);
-
         transform: rotate(-4deg);
-
         z-index: 4;
-
     }
-
-
 
     .voice-figure .hair-lock-left{
-
         position: absolute;
-
         left: 0px;
-
         top: 44px;
-
         width: 12px;
-
         height: 52px;
-
         border-radius: 0 0 18px 18px;
-
         background: linear-gradient(180deg, #f3c55e 0%, #d79a20 100%);
-
         transform: rotate(10deg);
-
         clip-path: polygon(20% 0%, 100% 4%, 100% 88%, 78% 100%, 40% 96%, 0% 70%, 6% 20%);
-
         z-index: 3;
-
     }
-
-
 
     .voice-figure .hair-lock-right{
-
         position: absolute;
-
         right: 0px;
-
         top: 42px;
-
         width: 12px;
-
         height: 54px;
-
         border-radius: 0 0 18px 18px;
-
         background: linear-gradient(180deg, #efbf53 0%, #d2931d 100%);
-
         transform: rotate(-8deg);
-
         clip-path: polygon(0% 6%, 80% 0%, 100% 20%, 96% 74%, 68% 100%, 24% 96%, 4% 84%);
-
         z-index: 3;
-
     }
-
-
 
     .voice-figure .hair-strand{
-
         position: absolute;
-
         top: 10px;
-
         width: 12px;
-
         height: 70px;
-
         background: linear-gradient(180deg, #e7c04e 0%, #c68d22 100%);
-
         border-radius: 8px 8px 16px 16px;
-
         z-index: 3;
-
         opacity: 0.95;
-
     }
-
-
 
     .voice-figure .hair-strand.s1{ left: 2px; transform: rotate(-10deg); }
-
     .voice-figure .hair-strand.s2{ left: 12px; transform: rotate(3deg); }
-
     .voice-figure .hair-strand.s3{ right: 2px; transform: rotate(10deg); }
-
     .voice-figure .hair-strand.s4{ right: 12px; transform: rotate(-3deg); }
 
-
-
     .voice-figure .hair-highlight{
-
         position: absolute;
-
         top: 12px;
-
         width: 8px;
-
         height: 62px;
-
         background: linear-gradient(180deg, #7a4d25 0%, #a06b33 100%);
-
         border-radius: 8px;
-
         z-index: 3;
-
         opacity: 0.55;
-
     }
-
-
 
     .voice-figure .hair-highlight.h1{ left: 8px; transform: rotate(-7deg); }
-
     .voice-figure .hair-highlight.h2{ right: 8px; transform: rotate(7deg); }
 
-
-
     .voice-figure .eye{
-
         position: absolute;
-
         top: 56px;
-
         width: 20px;
-
         height: 11px;
-
         border-radius: 50% / 75%;
-
         background: radial-gradient(circle at 40% 40%, #1d4fbc 0%, #103c96 55%, #061f59 100%);
-
         border: 3px solid #202020;
-
         box-sizing: border-box;
-
         z-index: 3;
-
         box-shadow: inset 0 0 0 2px rgba(255,255,255,0.18);
-
     }
-
-
 
     .voice-figure .eye::after{
-
         content: "";
-
         position: absolute;
-
         left: 4px;
-
         top: 2px;
-
         width: 4px;
-
         height: 4px;
-
         border-radius: 50%;
-
         background: #ffffff;
-
     }
-
-
 
     .voice-figure .eye.left{ left: 20px; }
-
     .voice-figure .eye.right{ right: 20px; }
 
-
-
     .voice-figure .eyebrow{
-
         position: absolute;
-
         top: 34px;
-
         width: 26px;
-
         height: 7px;
-
         border-top: 5px solid #6a3f12;
-
         border-radius: 30px 30px 0 0;
-
         z-index: 3;
-
     }
-
-
 
     .voice-figure .eyebrow.left{ left: 18px; transform: rotate(-6deg); }
-
     .voice-figure .eyebrow.right{ right: 18px; transform: rotate(6deg); }
 
-
-
     .voice-figure .nose{
-
         position: absolute;
-
         left: 50%;
-
         top: 68px;
-
         width: 10px;
-
         height: 14px;
-
         transform: translateX(-50%);
-
         border-left: 2px solid rgba(184,112,74,0.32);
-
         border-bottom: 2px solid rgba(184,112,74,0.18);
-
         border-radius: 0 0 10px 10px;
-
         z-index: 3;
-
     }
-
-
 
     .voice-figure .mouth{
-
         position: absolute;
-
         left: 50%;
-
         top: 90px;
-
         transform: translateX(-50%);
-
         width: 30px;
-
         height: 14px;
-
         border-radius: 0 0 20px 20px;
-
         background: linear-gradient(180deg, #8f2f2f 0%, #b94a4a 100%);
-
         z-index: 3;
-
         overflow: hidden;
-
         box-shadow: inset 0 2px 0 rgba(255,255,255,0.25);
-
     }
-
-
 
     .voice-figure .mouth::before{
-
         content: "";
-
         position: absolute;
-
         left: 4px;
-
         top: 2px;
-
         width: 22px;
-
         height: 6px;
-
         border-radius: 0 0 16px 16px;
-
         background: rgba(255,255,255,0.9);
-
     }
-
-
 
     .voice-figure.talking .mouth{
-
         animation: mouthMove 0.18s infinite alternate ease-in-out;
-
     }
-
-
 
     .voice-figure.talking .mouth::before{
-
         background: rgba(255,255,255,0.86);
-
         top: 3px;
-
         height: 5px;
-
     }
-
-
 
     @keyframes mouthMove{
-
         0% { transform: translateX(-50%) scaleY(0.72); }
-
         100% { transform: translateX(-50%) scaleY(1.38); }
-
     }
-
-
 
     .voice-figure .neck{
-
         position: absolute;
-
         top: 98px;
-
         width: 24px;
-
         height: 24px;
-
         background: linear-gradient(180deg, #c99669 0%, #b98259 100%);
-
         border-radius: 0 0 12px 12px;
-
         z-index: 2;
-
     }
-
-
 
     .voice-figure .dress{
-
         position: absolute;
-
         top: 118px;
-
         width: 126px;
-
         height: 116px;
-
         border-radius: 28px 28px 18px 18px;
-
         background: linear-gradient(180deg, #2f6f2b 0%, #255a24 100%);
-
         border: 3px solid rgba(70,70,70,0.18);
-
         clip-path: polygon(34% 0%, 66% 0%, 92% 18%, 84% 100%, 16% 100%, 8% 18%);
-
         box-shadow: 0 2px 6px rgba(0,0,0,0.08);
-
     }
-
-
 
     .voice-figure .dress-neckline{
-
         position: absolute;
-
         top: 116px;
-
         width: 92px;
-
         height: 34px;
-
         border-radius: 0 0 42px 42px;
-
         border-bottom: 3px solid rgba(255,255,255,0.22);
-
         z-index: 4;
-
         box-sizing: border-box;
-
     }
-
-
 
     .voice-figure .dress-belt{
-
         position: absolute;
-
         top: 160px;
-
         width: 116px;
-
         height: 12px;
-
         background: #6f5520;
-
         border-radius: 8px;
-
         z-index: 4;
-
         box-shadow: inset 0 1px 0 rgba(255,255,255,0.15);
-
     }
-
-
 
     .voice-figure .dress-rose{
-
         position: absolute;
-
         top: 156px;
-
         left: 50%;
-
         transform: translateX(-50%);
-
         width: 18px;
-
         height: 18px;
-
         border-radius: 50%;
-
         background: radial-gradient(circle at 35% 35%, #ffd8df 0%, #d86a86 60%, #9d2e4c 100%);
-
         z-index: 5;
-
         box-shadow: 0 0 0 2px rgba(255,255,255,0.12);
-
     }
-
-
 
     .voice-figure .arm{
-
         position: absolute;
-
         top: 128px;
-
         width: 20px;
-
         height: 72px;
-
         border-radius: 18px;
-
         background: linear-gradient(180deg, #c99669 0%, #b98259 100%);
-
         z-index: 1;
-
     }
-
-
 
     .voice-figure .arm.left{
-
         left: 18px;
-
         transform: rotate(18deg);
-
     }
-
-
 
     .voice-figure .arm.right{
-
         right: 18px;
-
         transform: rotate(-16deg);
-
     }
-
-
 
     .voice-figure .hand{
-
         position: absolute;
-
         bottom: -8px;
-
         left: 50%;
-
         transform: translateX(-50%);
-
         width: 26px;
-
         height: 20px;
-
         border-radius: 50%;
-
         background: linear-gradient(180deg, #c99669 0%, #b98259 100%);
-
     }
-
-
 
     .voice-figure .leg{
-
         position: absolute;
-
         top: 194px;
-
         width: 18px;
-
         height: 38px;
-
         background: linear-gradient(180deg, #c99669 0%, #b98259 100%);
-
         z-index: 1;
-
     }
-
-
 
     .voice-figure .leg.left{
-
         left: 50px;
-
         border-radius: 0 0 12px 12px;
-
     }
-
-
 
     .voice-figure .leg.right{
-
         right: 50px;
-
         border-radius: 0 0 12px 12px;
-
     }
-
-
 
     .voice-figure .boot{
-
         position: absolute;
-
         bottom: -2px;
-
         width: 24px;
-
         height: 18px;
-
         background: #d8c6a2;
-
         border-radius: 10px 10px 6px 6px;
-
         border: 2px solid rgba(90,70,40,0.18);
-
     }
-
-
 
     .voice-figure .boot.left{
-
         left: 44px;
-
     }
-
-
 
     .voice-figure .boot.right{
-
         right: 44px;
-
     }
-
-
 
     .voice-figure .ring{
-
         position: absolute;
-
         right: 40px;
-
         top: 162px;
-
         width: 8px;
-
         height: 8px;
-
         border-radius: 50%;
-
         background: radial-gradient(circle at 35% 35%, #fff3a0 0%, #d4a52d 75%, #9c6f10 100%);
-
         box-shadow: 0 0 0 1px rgba(120,90,20,0.22);
-
         z-index: 5;
-
     }
-
 </style>
-
 </head>
 
 <body>
-<!-- reszta bez zmian -->
-</body>
 
+<h1>Deutsch lernen von Anfang an</h1>
+
+<h2>Lektion 1 – Guten Tag!</h2>
+
+<p>Thema: Sich kennenlernen und ein kurzes Gespräch führen.</p>
+
+<ul>
+<li>Guten Tag</li>
+<li>Hallo</li>
+<li>Ich heiße ...</li>
+<li>Mein Name ist ...</li>
+<li>Wie geht es dir?</li>
+<li>Gut, danke.</li>
+<li>Ich komme aus ...</li>
+<li>Tschüss</li>
+</ul>
+
+<h2>Nele</h2>
+
+<div class="chat-wrapper">
+    <div id="chatLeft" class="chat-panel"></div>
+    <div id="chatRight" class="chat-panel">
+        <div class="voice-figure" id="voiceFigure">
+            <div class="hair-back"></div>
+            <div class="hair-lock-left"></div>
+            <div class="hair-lock-right"></div>
+            <div class="hair-strand s1"></div>
+            <div class="hair-strand s2"></div>
+            <div class="hair-strand s3"></div>
+            <div class="hair-strand s4"></div>
+            <div class="hair-highlight h1"></div>
+            <div class="hair-highlight h2"></div>
+            <div class="head">
+                <div class="hair-front"></div>
+                <div class="eyebrow left"></div>
+                <div class="eyebrow right"></div>
+                <div class="eye left"></div>
+                <div class="eye right"></div>
+                <div class="nose"></div>
+                <div class="mouth"></div>
+            </div>
+            <div class="neck"></div>
+            <div class="dress-neckline"></div>
+            <div class="dress"></div>
+            <div class="dress-belt"></div>
+            <div class="dress-rose"></div>
+            <div class="arm left"><div class="hand"></div></div>
+            <div class="arm right"><div class="hand"></div></div>
+            <div class="leg left"></div>
+            <div class="leg right"></div>
+            <div class="boot left"></div>
+            <div class="boot right"></div>
+            <div class="ring"></div>
+        </div>
+
+        <svg class="waves" id="wavesSvg" viewBox="0 0 800 180" preserveAspectRatio="none">
+            <g class="wave-group wave1">
+                <path class="wave-line wave1" d="M0,90 L30,90 L45,60 L60,120 L75,40 L90,140 L105,30 L120,150 L135,50 L150,110 L165,70 L180,90 L210,90 L225,55 L240,130 L255,35 L270,145 L285,25 L300,155 L315,45 L330,115 L345,75 L360,90 L390,90 L405,58 L420,132 L435,38 L450,148 L465,28 L480,152 L495,48 L510,112 L525,72 L540,90 L570,90 L585,62 L600,126 L615,42 L630,138 L645,32 L660,150 L675,52 L690,108 L705,78 L720,90 L750,90 L765,56 L780,128 L795,44"></path>
+            </g>
+            <g class="wave-group wave2">
+                <path class="wave-line wave2" d="M0,105 L24,105 L36,82 L48,128 L60,54 L72,148 L84,38 L96,156 L108,30 L120,140 L132,68 L144,105 L180,105 L192,80 L204,132 L216,50 L228,146 L240,34 L252,158 L264,26 L276,138 L288,70 L300,105 L336,105 L348,84 L360,130 L372,56 L384,146 L396,40 L408,154 L420,32 L432,140 L444,72 L456,105 L492,105 L504,82 L516,128 L528,54 L540,148 L552,38 L564,156 L576,30 L588,140 L600,68 L612,105 L648,105 L660,80 L672,132 L684,50 L696,146 L708,34 L720,158 L732,26 L744,138 L756,70 L768,105"></path>
+            </g>
+            <g class="wave-group wave3">
+                <path class="wave-line wave3" d="M0,70 L16,70 L24,48 L32,92 L40,30 L48,110 L56,22 L64,118 L72,26 L80,100 L88,56 L96,70 L120,70 L128,46 L136,94 L144,34 L152,112 L160,20 L168,120 L176,28 L184,102 L192,60 L200,70 L224,70 L232,50 L240,90 L248,32 L256,108 L264,24 L272,116 L280,26 L288,98 L296,54 L304,70 L328,70 L336,48 L344,92 L352,30 L360,110 L368,22 L376,118 L384,26 L392,100 L400,56 L408,70 L432,70 L440,46 L448,94 L456,34 L464,112 L472,20 L480,120 L488,28 L496,102 L504,60 L512,70"></path>
+            </g>
+        </svg>
+    </div>
+</div>
+
+<button onclick="startLesson()">▶ Lektion starten</button>
+<button id="micButton" onclick="listenAnswer()">🎤 Mit dem Mikrofon antworten</button>
+
+<p id="status">Status: Bereit</p>
+
+<script>
+const chatLeft = document.getElementById("chatLeft");
+const chatRight = document.getElementById("chatRight");
+const statusText = document.getElementById("status");
+const micButton = document.getElementById("micButton");
+const voiceFigure = document.getElementById("voiceFigure");
+
+let lessonStep = 0;
+let isWaitingForAnswer = false;
+let selectedVoice = null;
+
+const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+let recognition = null;
+
+if(SpeechRecognition){
+    recognition = new SpeechRecognition();
+    recognition.lang = "de-DE";
+    recognition.interimResults = false;
+    recognition.maxAlternatives = 1;
+
+    recognition.onresult = function(event){
+        const answer = event.results[0][0].transcript.trim();
+        statusText.textContent = "Status: Antwort erkannt";
+        micButton.classList.remove("waiting");
+        isWaitingForAnswer = false;
+        chatRight.classList.remove("listening");
+        voiceFigure.classList.remove("talking");
+        addUser(answer);
+        evaluate(answer);
+    };
+
+    recognition.onerror = function(){
+        statusText.textContent = "Status: Mikrofonfehler";
+        micButton.classList.remove("waiting");
+        isWaitingForAnswer = false;
+        chatRight.classList.remove("listening");
+        voiceFigure.classList.remove("talking");
+    };
+}
+
+function addBot(text){
+    chatLeft.innerHTML += `<div class="bot"><b>🤖 Nele:</b> ${text}</div>`;
+    chatLeft.scrollTop = chatLeft.scrollHeight;
+    chatRight.classList.add("speaking");
+    chatRight.classList.remove("listening");
+    voiceFigure.classList.add("talking");
+    speak(text);
+    micButton.classList.add("waiting");
+    isWaitingForAnswer = true;
+}
+
+function addUser(text){
+    chatLeft.innerHTML += `<div class="user"><b>🧑 Du:</b> ${text}</div>`;
+    chatLeft.scrollTop = chatLeft.scrollHeight;
+}
+
+function speak(text){
+    speechSynthesis.cancel();
+    const utterance = new SpeechSynthesisUtterance(text);
+    const voices = speechSynthesis.getVoices();
+
+    selectedVoice = voices.find(voice =>
+        voice.lang === "de-DE" &&
+        voice.name.toLowerCase().includes("google") &&
+        voice.name.toLowerCase().includes("female")
+    );
+
+    if(!selectedVoice){
+        selectedVoice = voices.find(voice =>
+            voice.lang === "de-DE" &&
+            voice.name.toLowerCase().includes("helene")
+        );
+    }
+
+    if(!selectedVoice){
+        selectedVoice = voices.find(voice =>
+            voice.lang === "de-DE" &&
+            voice.name.toLowerCase().includes("katja")
+        );
+    }
+
+    if(!selectedVoice){
+        selectedVoice = voices.find(voice =>
+            voice.lang === "de-DE" &&
+            voice.name.toLowerCase().includes("google")
+        );
+    }
+
+    if(!selectedVoice){
+        selectedVoice = voices.find(voice => voice.lang === "de-DE");
+    }
+
+    if(!selectedVoice){
+        selectedVoice = voices.find(voice => voice.lang.startsWith("de"));
+    }
+
+    if(selectedVoice){
+        utterance.voice = selectedVoice;
+    }
+
+    utterance.lang = "de-DE";
+    utterance.rate = 0.95;
+    utterance.pitch = 1.05;
+    utterance.volume = 1;
+
+    utterance.onend = function(){
+        chatRight.classList.remove("speaking");
+        voiceFigure.classList.remove("talking");
+    };
+
+    speechSynthesis.speak(utterance);
+}
+
+function startLesson(){
+    chatLeft.innerHTML = "";
+    chatRight.classList.remove("listening");
+    chatRight.classList.remove("speaking");
+    voiceFigure.classList.remove("talking");
+
+    lessonStep = 1;
+    isWaitingForAnswer = false;
+    micButton.classList.remove("waiting");
+
+    if(!selectedVoice){
+        const voices = speechSynthesis.getVoices();
+        selectedVoice = voices.find(voice => voice.lang === "de-DE");
+        if(!selectedVoice){
+            selectedVoice = voices.find(voice => voice.lang.startsWith("de"));
+        }
+    }
+
+    addBot("Guten Tag! Ich heiße Nele. Wie heißt du?");
+}
+
+function listenAnswer(){
+    if(!recognition){
+        statusText.textContent = "Status: Spracheingabe wird nicht unterstützt.";
+        return;
+    }
+
+    if(!isWaitingForAnswer){
+        statusText.textContent = "Status: Nele wartet noch nicht auf deine Antwort.";
+        return;
+    }
+
+    statusText.textContent = "Status: Ich höre zu ...";
+    chatRight.classList.add("listening");
+    recognition.start();
+}
+
+function evaluate(answer){
+    const text = answer.toLowerCase();
+
+    if(lessonStep === 1){
+        if(text.includes("ich heiße") || text.includes("mein name ist")){
+            addBot("Freut mich! Wie geht es dir?");
+            lessonStep = 2;
+        }else{
+            addBot("Ich habe deinen Namen nicht verstanden. Du kannst sagen: Ich heiße Anna. Wie heißt du?");
+        }
+        return;
+    }
+
+    if(lessonStep === 2){
+        if(text.includes("gut") || text.includes("sehr gut") || text.includes("prima") || text.includes("super") || text.includes("es geht")){
+            addBot("Schön! Woher kommst du?");
+            lessonStep = 3;
+        }else{
+            addBot("Ich habe dich nicht ganz verstanden. Du kannst sagen: Gut, danke. Wie geht es dir?");
+        }
+        return;
+    }
+
+    if(lessonStep === 3){
+        if(text.includes("ich komme aus")){
+            addBot("Interessant! Was machst du gern in deiner Freizeit?");
+            lessonStep = 4;
+        }else{
+            addBot("Du kannst zum Beispiel sagen: Ich komme aus Polen. Woher kommst du?");
+        }
+        return;
+    }
+
+    if(lessonStep === 4){
+        if(text.length > 2){
+            addBot("Das klingt interessant. Ich muss jetzt leider gehen.");
+            lessonStep = 5;
+        }else{
+            addBot("Erzähl mir etwas über deine Freizeit.");
+        }
+        return;
+    }
+
+    if(lessonStep === 5){
+        if(text.includes("tschüss") || text.includes("auf wiedersehen") || text.includes("bis bald") || text.includes("bis später")){
+            addBot("Tschüss! Schön, mit dir Deutsch zu sprechen.");
+            lessonStep = 6;
+        }else{
+            addBot("Ich gehe jetzt. Was sagt man zum Abschied?");
+        }
+        return;
+    }
+
+    if(lessonStep === 6){
+        addBot("Danke für das Gespräch! Starte die Lektion gern noch einmal.");
+    }
+}
+
+speechSynthesis.onvoiceschanged = function() {
+    const voices = speechSynthesis.getVoices();
+
+    selectedVoice = voices.find(voice =>
+        voice.lang === "de-DE" &&
+        voice.name.toLowerCase().includes("google") &&
+        voice.name.toLowerCase().includes("female")
+    );
+
+    if(!selectedVoice){
+        selectedVoice = voices.find(voice =>
+            voice.lang === "de-DE" &&
+            voice.name.toLowerCase().includes("helene")
+        );
+    }
+
+    if(!selectedVoice){
+        selectedVoice = voices.find(voice =>
+            voice.lang === "de-DE" &&
+            voice.name.toLowerCase().includes("katja")
+        );
+    }
+
+    if(!selectedVoice){
+        selectedVoice = voices.find(voice =>
+            voice.lang === "de-DE" &&
+            voice.name.toLowerCase().includes("google")
+        );
+    }
+
+    if(!selectedVoice){
+        selectedVoice = voices.find(voice => voice.lang === "de-DE");
+    }
+
+    if(!selectedVoice){
+        selectedVoice = voices.find(voice => voice.lang.startsWith("de"));
+    }
+};
+</script>
+
+</body>
 </html>
