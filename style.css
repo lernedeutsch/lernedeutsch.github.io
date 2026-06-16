@@ -162,23 +162,23 @@ body{
 }
 
 .hamburg{
-    top:22%;
-    left:52%;
-}
-
-.niedersachsen{
-    top:36%;
-    left:43%;
-}
-
-.nrw{
     top:52%;
     left:33%;
 }
 
-.hessen{
+.niedersachsen{
     top:59%;
     left:49%;
+}
+
+.nrw{
+    top:22%;
+    left:25%;
+}
+
+.hessen{
+    top:36%;
+    left:43%;
 }
 
 .baden{
@@ -192,7 +192,7 @@ body{
 }
 
 .berlin{
-    top:70%;
+    top:58%;
     left:67%;
 }
 
