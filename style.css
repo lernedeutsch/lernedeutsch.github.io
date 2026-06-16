@@ -183,12 +183,12 @@ body{
 
 .baden{
     top:84%;
-    left:40%;
+    left:90%;
 }
 
 .bayern{
     top:82%;
-    left:60%;
+    left:90%;
 }
 
 .berlin{
@@ -196,9 +196,9 @@ body{
     left:72%;
 }
 
-.brandenburg{
+.brandenburg{ 
     top:54%;
-    left:68%;
+    left:90%;
 }
 
 .sachsen{
@@ -208,7 +208,7 @@ body{
 
 .thueringen{
     top:60%;
-    left:55%;
+    left:90%;
 }
 
 /* ===== PODSTRONY ===== */
