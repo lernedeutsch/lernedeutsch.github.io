@@ -84,6 +84,7 @@
         opacity: 0;
         pointer-events: none;
         transition: opacity 0.15s ease;
+        z-index: 1;
     }
 
     #chatRight.listening .waves,
@@ -127,6 +128,112 @@
     .wave3{
         stroke: rgba(120,120,120,0.78);
     }
+
+    .voice-figure{
+        position: absolute;
+        right: 24px;
+        top: 24px;
+        width: 170px;
+        height: 250px;
+        z-index: 2;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        pointer-events: none;
+    }
+
+    .voice-figure .head{
+        position: absolute;
+        top: 0;
+        width: 78px;
+        height: 78px;
+        border-radius: 50%;
+        background: #f0c8aa;
+        border: 3px solid rgba(80,80,80,0.35);
+        overflow: hidden;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+    }
+
+    .voice-figure .hair{
+        position: absolute;
+        top: -6px;
+        left: -8px;
+        width: 94px;
+        height: 62px;
+        border-radius: 50% 50% 45% 45%;
+        background: #5a3b2e;
+    }
+
+    .voice-figure .hair::after{
+        content: "";
+        position: absolute;
+        left: 10px;
+        top: 18px;
+        width: 74px;
+        height: 88px;
+        border-radius: 0 0 42px 42px;
+        background: #5a3b2e;
+        clip-path: polygon(0 0, 100% 0, 100% 60%, 86% 100%, 70% 92%, 55% 100%, 42% 90%, 28% 100%, 14% 92%, 0 100%);
+    }
+
+    .voice-figure .eye{
+        position: absolute;
+        top: 34px;
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: #2f2f2f;
+        z-index: 3;
+    }
+
+    .voice-figure .eye.left{ left: 20px; }
+    .voice-figure .eye.right{ right: 20px; }
+
+    .voice-figure .mouth{
+        position: absolute;
+        left: 50%;
+        top: 50px;
+        transform: translateX(-50%);
+        width: 18px;
+        height: 8px;
+        border-radius: 0 0 18px 18px;
+        background: #9b4f4f;
+        transition: transform 0.12s ease, height 0.12s ease, border-radius 0.12s ease;
+        z-index: 3;
+    }
+
+    .voice-figure.talking .mouth{
+        height: 16px;
+        width: 22px;
+        border-radius: 0 0 18px 18px;
+        animation: mouthMove 0.18s infinite alternate ease-in-out;
+    }
+
+    @keyframes mouthMove{
+        0% { transform: translateX(-50%) scaleY(0.7); }
+        100% { transform: translateX(-50%) scaleY(1.35); }
+    }
+
+    .voice-figure .body{
+        position: absolute;
+        top: 78px;
+        width: 110px;
+        height: 150px;
+        border-radius: 28px 28px 18px 18px;
+        background: linear-gradient(180deg, #d9dde3 0%, #b9c0cb 100%);
+        border: 3px solid rgba(80,80,80,0.25);
+        box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    }
+
+    .voice-figure .shoulder{
+        position: absolute;
+        top: 92px;
+        width: 130px;
+        height: 46px;
+        border-radius: 40px;
+        background: linear-gradient(180deg, #8c9aad 0%, #6f7d90 100%);
+        opacity: 0.9;
+    }
 </style>
 </head>
 
@@ -154,6 +261,17 @@
 <div class="chat-wrapper">
     <div id="chatLeft" class="chat-panel"></div>
     <div id="chatRight" class="chat-panel">
+        <div class="voice-figure" id="voiceFigure">
+            <div class="head">
+                <div class="hair"></div>
+                <div class="eye left"></div>
+                <div class="eye right"></div>
+                <div class="mouth"></div>
+            </div>
+            <div class="shoulder"></div>
+            <div class="body"></div>
+        </div>
+
         <svg class="waves" id="wavesSvg" viewBox="0 0 800 180" preserveAspectRatio="none">
             <g class="wave-group wave1">
                 <path class="wave-line wave1" d="M0,90 L30,90 L45,60 L60,120 L75,40 L90,140 L105,30 L120,150 L135,50 L150,110 L165,70 L180,90 L210,90 L225,55 L240,130 L255,35 L270,145 L285,25 L300,155 L315,45 L330,115 L345,75 L360,90 L390,90 L405,58 L420,132 L435,38 L450,148 L465,28 L480,152 L495,48 L510,112 L525,72 L540,90 L570,90 L585,62 L600,126 L615,42 L630,138 L645,32 L660,150 L675,52 L690,108 L705,78 L720,90 L750,90 L765,56 L780,128 L795,44"></path>
@@ -186,6 +304,7 @@ const chatLeft = document.getElementById("chatLeft");
 const chatRight = document.getElementById("chatRight");
 const statusText = document.getElementById("status");
 const micButton = document.getElementById("micButton");
+const voiceFigure = document.getElementById("voiceFigure");
 
 let lessonStep = 0;
 let isWaitingForAnswer = false;
@@ -215,6 +334,7 @@ if(SpeechRecognition){
         micButton.classList.remove("waiting");
         isWaitingForAnswer = false;
         chatRight.classList.remove("listening");
+        voiceFigure.classList.remove("talking");
 
         addUser(answer);
 
@@ -229,6 +349,7 @@ if(SpeechRecognition){
         micButton.classList.remove("waiting");
         isWaitingForAnswer = false;
         chatRight.classList.remove("listening");
+        voiceFigure.classList.remove("talking");
     };
 }
 
@@ -241,6 +362,7 @@ function addBot(text){
 
     chatRight.classList.add("speaking");
     chatRight.classList.remove("listening");
+    voiceFigure.classList.add("talking");
 
     speak(text);
 
@@ -312,6 +434,7 @@ function speak(text){
 
     utterance.onend = function(){
         chatRight.classList.remove("speaking");
+        voiceFigure.classList.remove("talking");
     };
 
     speechSynthesis.speak(utterance);
@@ -322,6 +445,7 @@ function startLesson(){
     chatLeft.innerHTML = "";
     chatRight.classList.remove("listening");
     chatRight.classList.remove("speaking");
+    voiceFigure.classList.remove("talking");
 
     lessonStep = 1;
     isWaitingForAnswer = false;
