@@ -1,1 +1,112 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lektion 1 A1 – Deutscher Sprachtrainer</title>
+<style>
+body{font-family:Arial,sans-serif;background:#15211C;color:#F2EFE2;margin:0}
+header{padding:20px;background:#21312A}
+main{max-width:900px;margin:auto;padding:20px}
+#chat{min-height:400px;border:1px solid #444;padding:10px;background:#21312A}
+.bot,.student,.feedback{margin:8px;padding:10px;border-radius:10px}
+.bot{background:#ECE6D2;color:#222}
+.student{background:#2d4d40}
+.feedback{background:#664b2f}
+button,input{padding:10px;margin:5px}
+</style>
+</head>
+<body>
+<header><h1>Lektion 1 A1 – Guten Tag! — Begrüßung und Vorstellung</h1></header>
+<main>
+<div id="chat"></div>
+<p id="status">Bereit.</p>
+<button id="mic">🎤 Mikrofon</button>
+<input id="text" placeholder="Antwort eingeben">
+<button id="send">Senden</button>
+<button id="reset">Neu starten</button>
+</main>
 
+<script>
+const lesson=[
+ {q:"Guten Tag! Wie heißt du?",exp:["ich heiße","mein name ist","ich bin"],ok:"Sehr gut!",retry:"Antworte: Ich heiße ..."},
+ {q:"Wie geht es dir?",exp:["gut","sehr gut","es geht"],ok:"Prima!",retry:"Sage: Gut, danke."},
+ {q:"Wie begrüßt du dich?",exp:["guten morgen","guten tag","guten abend","hallo"],ok:"Perfekt!",retry:"Sage: Guten Tag oder Hallo."},
+ {q:"Sage Tschüss!",exp:["tschüss","tschuss"],ok:"Winkel gut!",retry:"Sage: Tschüss."},
+ {q:"Wie nennen Sie sich formell?",exp:["mein name ist","ich heiße"],ok:"Excellent!",retry:"Sage: Mein Name ist ..."},
+ {q:"Nenne einen Buchstaben des deutschen Alphabets!",exp:["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"],ok:"Richtig!",retry:"Sage zum Beispiel: A oder B."}
+];
+
+let i=0, rec;
+const chat=document.getElementById("chat");
+const status=document.getElementById("status");
+
+function bubble(cls,txt){
+ chat.innerHTML+=`<div class="${cls}">${txt}</div>`;
+ chat.scrollTop=chat.scrollHeight;
+}
+
+function speak(txt){
+ speechSynthesis.cancel();
+ const u=new SpeechSynthesisUtterance(txt);
+ u.lang="de-DE";
+ u.onend=()=>startListening();
+ speechSynthesis.speak(u);
+}
+
+function ask(){
+ if(i>=lesson.length){
+   bubble("feedback","Dialog ist beendt!");
+   speak("Dialog ist beendt!");
+   return;
+ }
+ bubble("bot",lesson[i].q);
+ speak(lesson[i].q);
+}
+
+function normalize(t){
+ return t.toLowerCase().replace(/[.,!?]/g,"").trim();
+}
+
+function handle(ans){
+ bubble("student",ans);
+ const a=normalize(ans);
+ const step=lesson[i];
+ const ok=step.exp.some(e=>a.includes(e));
+ if(ok){
+   bubble("feedback","✅ "+step.ok);
+   i++;
+   setTimeout(ask,1200);
+ }else{
+   bubble("feedback","❌ "+step.retry);
+   speak(step.retry);
+ }
+}
+
+function startListening(){
+ if(rec){
+   try{rec.start();status.textContent="Ich höre zu...";}catch(e){}
+ }
+}
+
+const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+if(SR){
+ rec=new SR();
+ rec.lang="de-DE";
+ rec.onresult=e=>handle(e.results[0][0].transcript);
+ rec.onend=()=>status.textContent="Bereit";
+}
+
+document.getElementById("mic").onclick=()=>startListening();
+document.getElementById("send").onclick=()=>{
+ const v=document.getElementById("text").value.trim();
+ if(v){ document.getElementById("text").value=""; handle(v);}
+};
+document.getElementById("reset").onclick=()=>{
+ chat.innerHTML=""; i=0; ask();
+};
+
+ask();
+</script>
+</body>
+</html>
