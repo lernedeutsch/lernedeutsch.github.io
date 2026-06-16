@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lekcja 1 — Guten Tag! (trening mówienia)</title>
+<title>Lekcja 1 — Guten Tag! (aktywny dialog)</title>
 <style>
   :root{
     --bg:#15211C;
@@ -72,7 +72,7 @@
     padding:1rem;
     align-self:start;
   }
-  .channels h2{
+  .channels h2,.section-title{
     font-family:'IBM Plex Mono', monospace;
     font-size:0.72rem;
     letter-spacing:0.14em;
@@ -218,6 +218,80 @@
     color:#5a5640;
     font-style:italic;
   }
+  .content{
+    padding:0 1.3rem 1.2rem;
+    display:grid;
+    gap:1rem;
+  }
+  .panel-block{
+    border:1px solid var(--panel-line);
+    border-radius:12px;
+    background:rgba(255,255,255,0.02);
+    padding:1rem;
+  }
+  .grid-2{
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:0.8rem;
+  }
+  @media (max-width:720px){.grid-2{grid-template-columns:1fr;}}
+  .pill-row{display:flex;flex-wrap:wrap;gap:0.5rem;}
+  .pill{
+    padding:0.45rem 0.7rem;
+    border-radius:999px;
+    border:1px solid var(--panel-line);
+    background:transparent;
+    color:var(--text);
+    font-size:0.88rem;
+    cursor:pointer;
+  }
+  .pill:hover{border-color:var(--accent);color:var(--accent);}
+  .alphabet-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(70px,1fr));
+    gap:0.45rem;
+  }
+  .letter-btn{
+    padding:0.55rem 0.45rem;
+    border-radius:10px;
+    border:1px solid var(--panel-line);
+    background:rgba(255,255,255,0.02);
+    color:var(--text);
+    cursor:pointer;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.9rem;
+  }
+  .letter-btn:hover{border-color:var(--accent);color:var(--accent);}
+  .info-table{
+    width:100%;
+    border-collapse:collapse;
+    font-size:0.88rem;
+    overflow:hidden;
+    border-radius:10px;
+  }
+  .info-table th,.info-table td{
+    padding:0.65rem 0.7rem;
+    border-bottom:1px solid var(--panel-line);
+    text-align:left;
+    vertical-align:top;
+  }
+  .info-table th{
+    color:var(--text-dim);
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.72rem;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+  }
+  .merke{
+    display:grid;
+    gap:0.5rem;
+  }
+  .merke-card{
+    border-left:3px solid var(--accent);
+    padding:0.5rem 0.75rem;
+    background:rgba(217,138,61,0.08);
+    border-radius:8px;
+  }
   .console{
     border-top:1px solid var(--panel-line);
     padding:1rem 1.3rem 1.3rem;
@@ -310,7 +384,7 @@
 <div class="topbar">
   <div>
     <h1>Guten <span>Tag!</span></h1>
-    <div class="sub">Lekcja 1 · Trening mówienia · Begrüßung · Vorstellung</div>
+    <div class="sub">Lekcja 1 · Begrüßung · Vorstellung · Alphabet · Aktywny dialog</div>
   </div>
   <a class="back-link" href="A1.html">← Powrót do spisu treści</a>
 </div>
@@ -318,40 +392,46 @@
 <div class="layout">
   <aside class="channels">
     <h2>Tryb</h2>
-    <button class="channel-btn active" data-mode="dialog"><span class="num">00</span> Dialog głosowy</button>
-    <div class="hint-box">
-      W trybie <strong>Dialog głosowy</strong>:
+    <button class="channel-btn active" data-mode="dialog"><span class="num">00</span> Aktywny dialog głosowy</button>
+    <button class="channel-btn" data-mode="begruessung"><span class="num">01</span> Begrüßung</button>
+    <button class="channel-btn" data-mode="vorstellung"><span class="num">02</span> Vorstellung</button>
+    <button class="channel-btn" data-mode="alphabet"><span class="num">03</span> Alphabet</button>
+    <button class="channel-btn" data-mode="merke"><span class="num">04</span> Merke</button>
+    <div class="hint-box" id="hintBox">
+      W trybie <strong>Aktywny dialog głosowy</strong>:
       <br>– bot mówi po niemiecku,
       <br>– ty odpowiadasz mikrofonem lub tekstem,
-      <br>– otrzymasz feedback i kolejne pytanie.
+      <br>– możesz też zadawać pytania (np. „Wie heißt du?", „Was bedeutet Guten Tag?"),
+      <br>– otrzymasz odpowiedź głosową i tłumaczenie.
       <br><br>
-      ✏️ Poprawiam: brak „ich", odmianę czasowników, rodzajniki.
+      ✏️ Asystent poprawia: brak „ich", odmianę czasowników (ich heiße / du heißt), rodzajniki (der/die/das).
     </div>
   </aside>
 
   <main class="booth">
     <div class="booth-head">
-      <div class="title" id="boothTitle">Dialog głosowy<small>Pytaj i odpowiadaj po niemiecku — Lekcja 1</small></div>
+      <div class="title" id="boothTitle">Aktywny dialog głosowy<small>Pytaj i odpowiadaj po niemiecku — wszystko w ramach Lekcji 1</small></div>
       <button class="reset-btn" id="resetBtn">↺ Nowa rozmowa</button>
     </div>
 
     <div class="transcript" id="transcript"></div>
+    <div class="content" id="content"></div>
 
     <div class="console">
       <div class="support-warning" id="supportWarning">
-        Twoja przeglądarka nie wspiera rozpoznawania mowy (najlepiej Chrome/Edge na komputerze).
-        Możesz słuchać odpowiedzi i pisać w polu tekstowym.
+        Twoja przeglądarka nie wspiera rozpoznawania mowy (najlepiej działa w Chrome/Edge na komputerze).
+        Możesz nadal słuchać odpowiedzi i pisać swoje zdania w polu tekstowym.
       </div>
-      <div class="status-line" id="statusLine">Naciśnij mikrofon, aby zacząć mówić po niemiecku.</div>
+      <div class="status-line" id="statusLine">Bereit.</div>
       <div class="controls">
         <div class="mic-wrap" id="micWrap">
           <div class="mic-ring"></div>
-          <button class="mic-btn" id="micBtn" title="Mów">🎤</button>
+          <button class="mic-btn" id="micBtn" title="Mikrofon">🎤</button>
         </div>
         <button class="replay-btn" id="replayBtn">🔊 Powtórz ostatnią wypowiedź</button>
         <div class="text-fallback">
-          <input type="text" id="textInput" placeholder="…albo napisz odpowiedź po niemiecku">
-          <button id="sendBtn">Wyślij</button>
+          <input type="text" id="textInput" placeholder="Antwort eingeben">
+          <button id="sendBtn">Senden</button>
         </div>
       </div>
     </div>
@@ -360,7 +440,7 @@
 
 <script>
 (function(){
-  // ---------- DANE: dialog etapowy (jak w drugim kodzie) ----------
+  // ---------- DANE: lekcja 1 (uproszczona, jak w drugim kodzie) ----------
   const lesson = [
     {
       q: "Guten Tag! Wie heißt du?",
@@ -396,13 +476,100 @@
     }
   ];
 
+  // ---------- DANE: pozostałe tryby (bez zmian) ----------
+  const data = {
+    begruessung: {
+      title: 'Begrüßung',
+      subtitle: 'Wir begrüßen uns',
+      intro: [
+        ['morgens', 'Guten Morgen!', 'ungefähr von 5:00/6:00 Uhr bis 10:00–11:00 Uhr'],
+        ['tagsüber', 'Guten Tag!', 'ungefähr von 10:00–11:00 Uhr bis 17:00–18:00 Uhr'],
+        ['abends', 'Guten Abend!', 'ungefähr von 17:00–18:00 Uhr bis spät am Abend'],
+        ['informell', 'Hallo!', 'zu jeder Tageszeit'],
+        ['beim Abschied', 'Tschüss!', 'zu jeder Tageszeit']
+      ],
+      phrases: ['Guten Morgen!', 'Guten Tag!', 'Guten Abend!', 'Hallo!', 'Tschüss!']
+    },
+    vorstellung: {
+      title: 'Vorstellung',
+      subtitle: 'Ich stelle mich vor',
+      intro: [],
+      phrases: ['Hallo!', 'Ich heiße Anna.', 'Mein Name ist Anna Müller.', 'Ich bin Anna.', 'Wie heißt du?', 'Wie heißen Sie?']
+    },
+    alphabet: {
+      title: 'Alphabet',
+      subtitle: 'Das deutsche Alphabet',
+      intro: [],
+      letters: ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','Ä','Ö','Ü','ß']
+    },
+    merke: {
+      title: 'Merke',
+      subtitle: 'Was kann ich jetzt?',
+      intro: [],
+      merks: [
+        '✅ Ich kann grüßen. Guten Morgen! · Guten Tag! · Guten Abend! · Hallo! · Tschüss!',
+        '✅ Ich kann mich vorstellen. Ich heiße ... · Mein Name ist ... · Ich bin ...',
+        '✅ Ich kann nach dem Namen fragen. Wie heißen Sie? · Wie heißt du?',
+        '✅ Ich kann das deutsche Alphabet sagen. A, B, C, D ...'
+      ]
+    }
+  };
+
+  // ---------- DANE: swobodna rozmowa (pytania użytkownika) ----------
+  const FREE_RULES = [
+    { test:["hallo","guten tag","guten morgen","hi "],
+      reply:"Hallo! Schön, dass du da bist. Wie heißt du?",
+      pl:"Cześć! Miło, że jesteś. Jak się nazywasz?" },
+    { test:["wie heißt","was bedeutet","t translates"],
+      reply:"Guten Tag bedeutet 'Dzień dobry' auf Polnisch.",
+      pl:"Guten Tag oznacza 'Dzień dobry' w języku polskim." },
+    { test:["wie geht"],
+      reply:"Mir geht es gut, danke! Und dir?",
+      pl:"Mam się dobrze, dzięki! A Ty?" },
+    { test:["gut","prima","super"],
+      reply:"Das freut mich zu hören!",
+      pl:"Cieszę się, że to słyszę!" },
+    { test:["schlecht","nicht so gut","müde"],
+      reply:"Oh, das tut mir leid. Erhole dich gut!",
+      pl:"Och, przykro mi. Odpocznij dobrze!" },
+    { test:["komme aus","ich bin aus"],
+      reply:"Interessant! Ich komme aus Deutschland.",
+      pl:"Interesujące! Ja jestem z Niemiec." },
+    { test:["wetter"],
+      reply:"Das Wetter ist heute schön, oder?",
+      pl:"Pogoda jest dziś piękna, prawda?" },
+    { test:["danke"],
+      reply:"Bitte, gern geschehen!",
+      pl:"Proszę, nie ma za co!" },
+    { test:["tschüss","wiedersehen","bis bald"],
+      reply:"Tschüss! Bis zum nächsten Mal!",
+      pl:"Cześć! Do następnego razu!" },
+    { test:["alphabet","buchstabe"],
+      reply:"Das deutsche Alphabet hat 26 Buchstaben, plus Ä, Ö, Ü und ß.",
+      pl:"Niemiecki alfabet ma 26 liter, plus Ä, Ö, Ü i ß." },
+    { test:["was bedeutet","bedeutet"],
+      reply:"Das ist eine gute Frage! Im Allgemeinen bedeutet 'bedeuten' = 'oznaczyć'.",
+      pl:"To dobre pytanie! Ogólnie 'bedeuten' = 'oznaczyć'." }
+  ];
+  const FREE_DEFAULT = {
+    reply:"Das ist interessant! Erzähl mir mehr.",
+    pl:"To interesujące! Powiedz mi więcej."
+  };
+
   // ---------- KOREKTOR BŁĘDÓW (offline) ----------
   const VERB_TABLE = {
     sein:     { ich:"bin",     du:"bist",      er:"ist",     wir:"sind",     ihr:"seid",     sie_pl:"sind" },
     haben:    { ich:"habe",    du:"hast",      er:"hat",     wir:"haben",    ihr:"habt",     sie_pl:"haben" },
     heißen:   { ich:"heiße",   du:"heißt",     er:"heißt",   wir:"heißen",   ihr:"heißt",    sie_pl:"heißen" },
     kommen:   { ich:"komme",   du:"kommst",    er:"kommt",   wir:"kommen",   ihr:"kommt",    sie_pl:"kommen" },
-    wohnen:   { ich:"wohne",   du:"wohnst",    er:"wohnt",   wir:"wohnen",   ihr:"wohnt",    sie_pl:"wohnen" }
+    wohnen:   { ich:"wohne",   du:"wohnst",    er:"wohnt",   wir:"wohnen",   ihr:"wohnt",    sie_pl:"wohnen" },
+    machen:   { ich:"mache",   du:"machst",    er:"macht",   wir:"machen",   ihr:"macht",    sie_pl:"machen" },
+    arbeiten: { ich:"arbeite", du:"arbeitest", er:"arbeitet",wir:"arbeiten", ihr:"arbeitet", sie_pl:"arbeiten" },
+    gehen:    { ich:"gehe",    du:"gehst",     er:"geht",    wir:"gehen",    ihr:"geht",     sie_pl:"gehen" },
+    möchten:  { ich:"möchte",  du:"möchtest",  er:"möchte",  wir:"möchten",  ihr:"möchtet",  sie_pl:"möchten" },
+    brauchen: { ich:"brauche", du:"brauchst",  er:"braucht", wir:"brauchen", ihr:"braucht",  sie_pl:"brauchen" },
+    suchen:   { ich:"suche",   du:"suchst",    er:"sucht",   wir:"suchen",   ihr:"sucht",    sie_pl:"suchen" },
+    nehmen:   { ich:"nehme",   du:"nimmst",    er:"nimmt",   wir:"nehmen",   ihr:"nehmt",    sie_pl:"nehmen" }
   };
   const VERB_FORM_MAP = {};
   Object.keys(VERB_TABLE).forEach(verb => {
@@ -462,13 +629,14 @@
   }
 
   // ---------- STAN ----------
-  let currentMode = "dialog";
-  let i = 0;
+  let currentMode = "dialog"; // dialog, begruessung, vorstellung, alphabet, merke
+  let stepIndex = 0;
   let lastText = "";
   let recognition = null;
   let listening = false;
 
   const transcriptEl = document.getElementById("transcript");
+  const contentEl = document.getElementById("content");
   const statusEl = document.getElementById("statusLine");
   const boothTitle = document.getElementById("boothTitle");
   const micBtn = document.getElementById("micBtn");
@@ -479,7 +647,7 @@
   const resetBtn = document.getElementById("resetBtn");
   const supportWarning = document.getElementById("supportWarning");
 
-  // ---------- SYNTEZA MOWY ----------
+  // ---------- SYNTETZA MOWY ----------
   function speakGerman(text){
     lastText = text;
     if (!("speechSynthesis" in window)) return;
@@ -518,7 +686,7 @@
     };
     recognition.onresult = (e) => {
       const said = e.results[0][0].transcript;
-      handle(said);
+      handleStudentInput(said);
     };
   }
 
@@ -532,7 +700,7 @@
     const v = textInput.value.trim();
     if (!v) return;
     textInput.value = "";
-    handle(v);
+    handleStudentInput(v);
   });
   textInput.addEventListener("keydown", (e) => {
     if (e.key === "Enter") sendBtn.click();
@@ -543,7 +711,13 @@
   });
 
   resetBtn.addEventListener("click", () => {
-    chatReset();
+    if (currentMode === "dialog") {
+      i = 0;
+      transcriptEl.innerHTML = "";
+      ask();
+    } else {
+      renderMode();
+    }
   });
 
   // ---------- UI: dymki ----------
@@ -567,34 +741,35 @@
     statusEl.className = "status-line" + (mode ? " " + mode : "");
   }
 
-  function bubble(cls, txt, pl){
-    if (cls === "bot") {
-      addBubble("bot", txt, pl);
-    } else if (cls === "student") {
-      addBubble("student", txt, "");
-    } else {
-      addBubble("feedback", txt, "");
-    }
+  function setSuggestions(list){
+    // (opcjonalnie można dodać chipsy)
+  }
+
+  function bubble(cls,txt){
+    addBubble(cls === "bot" ? "bot" : cls === "student" ? "student" : "feedback", txt, "");
   }
 
   function normalize(t){
     return t.toLowerCase().replace(/[.,!?]/g,"").trim();
   }
 
+  // ---------- LOGIKA: tryb dialogowy (UPROSZCZONA, jak w drugim kodzie) ----------
+  let i = 0;
+
   function ask(){
     if (i >= lesson.length){
-      bubble("feedback", "🎉 Lektion beendet! · Koniec lekcji!", "");
+      addBubble("feedback", "🎉 Lektion beendet! · Koniec lekcji!");
       speakGerman("Die Lektion ist beendet.");
-      setStatus("Rozmowa zakończona. Możesz zacząć od nowa (↺ Nowa rozmowa).", "");
+      setStatus("Rozmowa zakończona. Możesz zacząć od nowa (↺ Nowa rozmowa).");
       return;
     }
     const step = lesson[i];
-    bubble("bot", step.q, step.plQ);
+    addBubble("bot", step.q, step.plQ);
     speakGerman(step.q);
   }
 
-  function handle(ans){
-    bubble("student", ans, "");
+  function handleDialog(ans){
+    addBubble("student", ans);
     const a = normalize(ans);
     const step = lesson[i];
     const ok = step.exp.some(e => a.includes(e));
@@ -605,33 +780,162 @@
     if (ok){
       addBubble("feedback good", "✅ " + step.ok);
       i++;
-      setTimeout(ask, errors.length ? 1600 : 1200);
+      setTimeout(ask, errors.length ? 1600 : 1100);
     } else {
       addBubble("feedback fix", "❌ " + step.retry);
       speakGerman(step.retry);
     }
   }
 
-  function chatReset(){
+  // ---------- LOGIKA: swobodna rozmowa (pytania użytkownika) ----------
+  function freeReply(said){
+    const errors = checkGrammar(said);
+    errors.forEach(msg => addBubble("feedback fix", msg));
+    const lower = said.toLowerCase();
+    const rule = FREE_RULES.find(r => r.test.some(t => lower.includes(t)));
+    const chosen = rule || FREE_DEFAULT;
+    setTimeout(() => botSay(chosen.reply, chosen.pl), errors.length ? 1500 : 700);
+  }
+
+  function botSay(text, pl){
+    addBubble("bot", text, pl);
+    speakGerman(text);
+  }
+
+  function handleStudentInput(said){
+    addBubble("student", said);
+    setStatus("Rozpoznano: „" + said + "”");
+    if (currentMode === "dialog"){
+      handleDialog(said);
+    } else {
+      freeReply(said);
+    }
+  }
+
+  // ---------- LOGIKA: tryby lekcji (bez dialogu etapowego) ----------
+  function renderMode(){
+    document.querySelectorAll(".channel-btn").forEach(b => {
+      b.classList.toggle("active", b.dataset.mode === currentMode);
+    });
+
+    if (currentMode === "dialog"){
+      boothTitle.innerHTML = "Aktywny dialog głosowy<small>Pytaj i odpowiadaj po niemiecku — wszystko w ramach Lekcji 1</small>";
+      transcriptEl.innerHTML = "";
+      contentEl.innerHTML = "";
+      setStatus("Bereit.");
+      i = 0;
+      ask();
+      return;
+    }
+
+    const d = data[currentMode];
+    boothTitle.innerHTML = d.title + "<small>" + d.subtitle + "</small>";
     transcriptEl.innerHTML = "";
-    i = 0;
-    ask();
+    contentEl.innerHTML = "";
+
+    if (currentMode === "begruessung"){
+      const block = document.createElement("div");
+      block.className = "panel-block";
+      block.innerHTML = '<div class="section-title">Teil 1</div><div class="grid-2"><div><strong>Wir begrüßen uns</strong><br>Wir sagen verschiedene Grüße — je nach Tageszeit.</div><div class="pill-row"></div></div>';
+      const row = block.querySelector(".pill-row");
+      d.phrases.forEach(p=>{
+        const btn = document.createElement("button");
+        btn.className = "pill";
+        btn.textContent = p;
+        btn.onclick = ()=>speakGerman(p);
+        row.appendChild(btn);
+      });
+      contentEl.appendChild(block);
+
+      const table = document.createElement("div");
+      table.className = "panel-block";
+      table.innerHTML = '<div class="section-title">Wann używać</div>';
+      const tbl = document.createElement("table");
+      tbl.className="info-table";
+      tbl.innerHTML = '<thead><tr><th>Situation</th><th>Gruß</th><th>Wann wird er in Deutschland verwendet?</th></tr></thead>';
+      const tb = document.createElement("tbody");
+      d.intro.forEach(r=>{
+        const tr=document.createElement("tr");
+        tr.innerHTML = `<td>${r[0]}</td><td><strong>${r[1]}</strong></td><td>${r[2]}</td>`;
+        tb.appendChild(tr);
+      });
+      tbl.appendChild(tb);
+      table.appendChild(tbl);
+      contentEl.appendChild(table);
+
+      addBubble("system", "— kliknij dowolne wyrażenie, aby je usłyszeć —");
+      setStatus("Pozdrowienia: Guten Morgen, Guten Tag, Guten Abend, Hallo, Tschüss.");
+    } else if (currentMode === "vorstellung"){
+      const block = document.createElement("div");
+      block.className = "panel-block";
+      block.innerHTML = '<div class="section-title">Teil 2</div><strong>Ich stelle mich vor</strong><div style="margin-top:.5rem">Wie stellen wir uns vor? Hier sind wichtige Sätze.</div>';
+      const row = document.createElement("div");
+      row.className="pill-row";
+      d.phrases.forEach(p=>{
+        const btn=document.createElement("button");
+        btn.className="pill";
+        btn.textContent=p;
+        btn.onclick=()=>speakGerman(p);
+        row.appendChild(btn);
+      });
+      block.appendChild(row);
+      contentEl.appendChild(block);
+
+      addBubble("bot", "Hallo!");
+      addBubble("bot", "Wie heißt du?");
+      addBubble("bot", "Ich heiße Lena.");
+      addBubble("bot", "Und du?");
+      addBubble("bot", "Ich heiße Max.");
+      addBubble("bot", "Guten Tag.");
+      addBubble("bot", "Wie heißen Sie?");
+      addBubble("bot", "Ich heiße Thomas.");
+      addBubble("bot", "Und Sie?");
+      addBubble("bot", "Ich heiße Julia.");
+      setStatus("Przykłady: Ich heiße..., Mein Name ist..., Ich bin...");
+    } else if (currentMode === "alphabet"){
+      const block = document.createElement("div");
+      block.className = "panel-block";
+      block.innerHTML = '<div class="section-title">Teil 3</div><strong>Das deutsche Alphabet</strong><div style="margin-top:.5rem">Klicken Sie auf einen Buchstaben — dann hören Sie die deutsche Aussprache!</div>';
+      const grid = document.createElement("div");
+      grid.className="alphabet-grid";
+      d.letters.forEach(l=>{
+        const b=document.createElement("button");
+        b.className="letter-btn";
+        b.textContent=l;
+        b.onclick=()=>speakGerman(l);
+        grid.appendChild(b);
+      });
+      block.appendChild(grid);
+      contentEl.appendChild(block);
+
+      addBubble("system", "A, B, C, D ... / Ä, Ö, Ü, ß");
+      setStatus("Kliknij literę, aby usłyszeć wymowę.");
+    } else if (currentMode === "merke"){
+      const block = document.createElement("div");
+      block.className = "panel-block merke";
+      block.innerHTML = '<div class="section-title">Merken</div><strong>Was kann ich jetzt?</strong>';
+      d.merks.forEach(m=>{
+        const c=document.createElement("div");
+        c.className="merke-card";
+        c.textContent=m;
+        block.appendChild(c);
+      });
+      contentEl.appendChild(block);
+      setStatus("Powtórz najważniejsze zwroty i sprawdź, co już umiesz.");
+    }
   }
 
   // ---------- nawigacja ----------
   document.querySelectorAll(".channel-btn").forEach(btn => {
     btn.addEventListener("click", () => {
       currentMode = btn.dataset.mode;
-      if (currentMode === "dialog") {
-        chatReset();
-        boothTitle.innerHTML = "Dialog głosowy<small>Pytaj i odpowiadaj po niemiecku — Lekcja 1</small>";
-      }
+      renderMode();
     });
   });
 
   // ---------- start ----------
   currentMode = "dialog";
-  chatReset();
+  renderMode();
 })();
 </script>
 </body>
