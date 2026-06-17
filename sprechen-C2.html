@@ -4,12 +4,10 @@
 -->
 
 <div id="dialog-practice" style="
-  max-width:1100px; 
+  max-width:1200px; 
   margin:30px auto; 
-  background:white; 
-  border-radius:20px; 
-  padding:30px; 
-  box-shadow:0 8px 25px rgba(0,0,0,0.15);
+  background:transparent; 
+  padding:0;
   font-family: Arial, sans-serif;
 ">
 
@@ -22,18 +20,22 @@
 
   <!-- DWIE KOLUMNY: LEWO = DIALOG, PRAWO = EKRAN UCZNIA -->
   <div style="
-    display:flex; 
-    gap:20px; 
-    flex-wrap:wrap;
+    display:flex;
+    flex-direction:row;
+    align-items:stretch;
+    justify-content:center;
+    gap:24px;
   ">
 
-    <!-- LEWA KOLUMNA: dialog + przyciski + wynik -->
+    <!-- LEWE OKIENKO: dialog + przyciski + wynik -->
     <div style="
-      flex:1 1 55%; 
-      min-width:280px;
-      border-radius:16px;
-      padding:15px 20px;
-      background:#f9fafb;
+      flex:0 0 55%;
+      max-width:55%;
+      border-radius:20px;
+      padding:20px 24px;
+      background:white;
+      box-shadow:0 8px 25px rgba(0,0,0,0.12);
+      box-sizing:border-box;
     ">
 
       <!-- Kontener dialogu -->
@@ -69,16 +71,17 @@
       "></div>
     </div>
 
-    <!-- PRAWA KOLUMNA: „ekran ucznia” -->
+    <!-- PRAWE OKIENKO: „ekran ucznia” -->
     <div style="
-      flex:1 1 45%; 
-      min-width:260px;
-      border-radius:16px;
-      padding:15px 20px;
-      background:#eef2ff;
+      flex:0 0 45%;
+      max-width:45%;
+      border-radius:20px;
+      padding:20px 24px;
+      background:white;
+      box-shadow:0 8px 25px rgba(0,0,0,0.12);
+      box-sizing:border-box;
       display:flex;
       flex-direction:column;
-      justify-content:space-between;
     ">
       <div style="margin-bottom:10px;">
         <h3 style="margin:0 0 8px; color:#1e3a8a; text-align:center;">
@@ -96,15 +99,14 @@
         line-height:1.4;
         padding:18px; 
         border-radius:14px; 
-        background:white; 
+        background:#eef2ff; 
         color:#111827;
         border:2px dashed #93c5fd;
         display:flex;
         align-items:center;
         justify-content:center;
-        min-height:120px;
+        min-height:160px;
       ">
-        <!-- domyślny tekst startowy (JS go nadpisze) -->
         Kliknij „Start dialogu”, a potem powtórz na głos.
       </div>
     </div>
@@ -228,7 +230,6 @@ function speak(text) {
   utterance.rate = 0.92;
   utterance.pitch = 1;
 
-  // Próba wyboru niemieckiego głosu
   const voices = window.speechSynthesis.getVoices();
   const deVoice = voices.find(v => 
     v.lang && v.lang.toLowerCase().startsWith("de") && 
@@ -251,14 +252,12 @@ function startDialog() {
 }
 
 function nextAnnaLine() {
-  // Znajdź następną linię Annę po aktualnym stepie ucznia
   let nextIdx = currentStep + 1;
   while (nextIdx < dialogSteps.length && dialogSteps[nextIdx].speaker !== "Anna") {
     nextIdx++;
   }
 
   if (nextIdx >= dialogSteps.length) {
-    // Dialog zakończony
     resultArea.style.background = "#dcfce7";
     resultArea.style.color = "green";
     resultArea.textContent = "✓ Doskonale! Dialog zakończony.";
@@ -274,14 +273,12 @@ function nextAnnaLine() {
   const annaStep = dialogSteps[currentStep];
   speak(annaStep.text);
   
-  // Po Annie, pokazujemy podpowiedź ucznia i czekamy na jego odpowiedź
   setTimeout(() => {
     findAndAskStudent();
   }, 1600);
 }
 
 function findAndAskStudent() {
-  // Znajdź linię ucznia po aktualnej Annie
   let studentIdx = currentStep + 1;
   while (studentIdx < dialogSteps.length && dialogSteps[studentIdx].speaker !== "Uczeń") {
     studentIdx++;
@@ -344,15 +341,12 @@ function startRecognition() {
       }
     }
     
-    // Pokazuj słowa ucznia na żywo w prawym ekranie
     studentTranscript.textContent = transcript || "Słucham...";
 
-    // Jeśli wynik jest ostateczny, sprawdzamy poprawność
     if (finalText.trim()) {
       const step = dialogSteps[currentStep];
       
       if (isCorrect(finalText, step.patterns)) {
-        // ✓ POPRAWNE
         isListening = false;
         resultArea.style.background = "#dcfce7";
         resultArea.style.color = "green";
@@ -364,7 +358,6 @@ function startRecognition() {
           nextAnnaLine();
         }, 1800);
       } else {
-        // ✗ ŹLE
         resultArea.style.background = "#fee2e2";
         resultArea.style.color = "#dc2626";
         resultArea.textContent = `✗ Nie tak: „${finalText}". Powtórz jeszcze raz!`;
