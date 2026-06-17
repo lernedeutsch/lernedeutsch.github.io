@@ -1,1 +1,297 @@
+```html
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<title>Deutsch lernen – Lektion 1</title>
 
+<style>
+    body{
+        font-family: Arial, sans-serif;
+        max-width:800px;
+        margin:auto;
+        padding:20px;
+        line-height:1.6;
+    }
+
+    #chat{
+        border:1px solid #ccc;
+        height:350px;
+        overflow-y:auto;
+        padding:15px;
+        margin:20px 0;
+        background:#fafafa;
+    }
+
+    .bot{
+        color:darkblue;
+        margin:10px 0;
+    }
+
+    .user{
+        color:green;
+        margin:10px 0;
+    }
+
+    button{
+        padding:10px 20px;
+        font-size:16px;
+        cursor:pointer;
+    }
+
+    #status{
+        font-weight:bold;
+    }
+</style>
+</head>
+
+<body>
+
+<h1>Deutsch lernen von Anfang an</h1>
+
+<h2>Lektion 1 – Guten Tag!</h2>
+
+<p>
+Thema: Begrüßungen und sich vorstellen.
+</p>
+
+<ul>
+<li>Guten Morgen</li>
+<li>Guten Tag</li>
+<li>Guten Abend</li>
+<li>Hallo</li>
+<li>Tschüss</li>
+<li>Ich heiße ...</li>
+<li>Mein Name ist ...</li>
+<li>Ich bin ...</li>
+<li>Wie heißen Sie?</li>
+<li>Wie heißt du?</li>
+</ul>
+
+<h2>Lehrer-Chatbot</h2>
+
+<div id="chat"></div>
+
+<button onclick="startLesson()">
+▶ Lektion starten
+</button>
+
+<button onclick="listenAnswer()">
+🎤 Mit dem Mikrofon antworten
+</button>
+
+<p id="status">
+Status: Bereit
+</p>
+
+<script>
+
+const chat = document.getElementById("chat");
+const statusText = document.getElementById("status");
+
+let lessonStep = 0;
+
+const SpeechRecognition =
+window.SpeechRecognition ||
+window.webkitSpeechRecognition;
+
+const recognition = new SpeechRecognition();
+
+recognition.lang = "de-DE";
+recognition.interimResults = false;
+recognition.maxAlternatives = 1;
+
+function addBot(text){
+    chat.innerHTML += `<div class="bot"><b>🤖 Lehrer:</b> ${text}</div>`;
+    chat.scrollTop = chat.scrollHeight;
+
+    speak(text);
+}
+
+function addUser(text){
+    chat.innerHTML += `<div class="user"><b>🧑 Du:</b> ${text}</div>`;
+    chat.scrollTop = chat.scrollHeight;
+}
+
+function speak(text){
+
+    const utterance = new SpeechSynthesisUtterance(text);
+
+    const voices = speechSynthesis.getVoices();
+
+    const germanVoice = voices.find(
+        voice => voice.lang.startsWith("de")
+    );
+
+    if(germanVoice){
+        utterance.voice = germanVoice;
+    }
+
+    utterance.lang = "de-DE";
+
+    speechSynthesis.speak(utterance);
+}
+
+function startLesson(){
+
+    lessonStep = 1;
+
+    addBot(
+        "Guten Tag! Ich bin dein Deutschlehrer. Wie heißt du?"
+    );
+}
+
+function listenAnswer(){
+
+    statusText.textContent = "Status: Ich höre zu ...";
+
+    recognition.start();
+}
+
+recognition.onresult = function(event){
+
+    const answer =
+    event.results[0][0].transcript.trim();
+
+    statusText.textContent =
+    "Status: Antwort erkannt";
+
+    addUser(answer);
+
+    evaluate(answer);
+};
+
+recognition.onerror = function(){
+
+    statusText.textContent =
+    "Status: Mikrofonfehler";
+};
+
+function evaluate(answer){
+
+    const text = answer.toLowerCase();
+
+    if(lessonStep === 1){
+
+        if(
+            text.includes("ich heiße") ||
+            text.includes("mein name ist")
+        ){
+
+            addBot(
+                "Sehr gut! Freut mich, dich kennenzulernen."
+            );
+
+            lessonStep = 2;
+
+            setTimeout(() => {
+
+                addBot(
+                    "Wie begrüßt man jemanden auf Deutsch?"
+                );
+
+            },1500);
+
+        }else{
+
+            addBot(
+                "Versuche zu antworten: Ich heiße Anna. oder Mein Name ist Anna."
+            );
+        }
+
+        return;
+    }
+
+    if(lessonStep === 2){
+
+        if(
+            text.includes("guten tag") ||
+            text.includes("guten morgen") ||
+            text.includes("guten abend") ||
+            text.includes("hallo")
+        ){
+
+            addBot(
+                "Ausgezeichnet!"
+            );
+
+            lessonStep = 3;
+
+            setTimeout(() => {
+
+                addBot(
+                    "Wie verabschiedest du dich auf Deutsch?"
+                );
+
+            },1500);
+
+        }else{
+
+            addBot(
+                "Das passt nicht zur Frage. Zum Beispiel: Guten Tag, Guten Morgen, Guten Abend oder Hallo."
+            );
+        }
+
+        return;
+    }
+
+    if(lessonStep === 3){
+
+        if(
+            text.includes("tschüss")
+        ){
+
+            addBot(
+                "Sehr gut! Du kennst jetzt die wichtigsten Begrüßungen."
+            );
+
+            lessonStep = 4;
+
+            setTimeout(() => {
+
+                addBot(
+                    "Bilde einen ganzen Satz: Hallo, ich heiße ..."
+                );
+
+            },1500);
+
+        }else{
+
+            addBot(
+                "Die richtige Antwort lautet: Tschüss."
+            );
+        }
+
+        return;
+    }
+
+    if(lessonStep === 4){
+
+        if(
+            text.includes("hallo") &&
+            (
+                text.includes("ich heiße") ||
+                text.includes("mein name ist")
+            )
+        ){
+
+            addBot(
+                "Perfekt! Du hast Lektion 1 erfolgreich abgeschlossen. Herzlichen Glückwunsch!"
+            );
+
+        }else{
+
+            addBot(
+                "Der Satz sollte zum Beispiel so aussehen: Hallo, ich heiße Anna."
+            );
+        }
+    }
+}
+
+speechSynthesis.onvoiceschanged = () => {};
+
+</script>
+
+</body>
+</html>
+```
