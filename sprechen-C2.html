@@ -4,17 +4,18 @@
 -->
 
 <div id="dialog-practice" style="
-  max-width:1200px; 
-  margin:30px auto; 
+  max-width:1100px; 
+  margin:24px auto 40px; 
   background:transparent; 
   padding:0;
   font-family: Arial, sans-serif;
+  font-size:14px;
 ">
 
-  <h2 style="text-align:center; color:#1d4ed8; margin-bottom:10px;">
+  <h2 style="text-align:center; color:#1d4ed8; margin-bottom:6px; font-size:22px;">
     🗣️ Powtórz dialog głosowo
   </h2>
-  <p style="text-align:center; color:#0f766e; margin-bottom:25px; font-size:16px;">
+  <p style="text-align:center; color:#0f766e; margin-bottom:18px; font-size:14px;">
     Anna mówi → Ty widzisz podpowiedź → Powtórz głośno po niemiecku
   </p>
 
@@ -24,41 +25,53 @@
     flex-direction:row;
     align-items:stretch;
     justify-content:center;
-    gap:24px;
+    gap:16px;
   ">
 
     <!-- LEWE OKIENKO: dialog + przyciski + wynik -->
     <div style="
-      flex:0 0 55%;
-      max-width:55%;
-      border-radius:20px;
-      padding:20px 24px;
+      flex:0 0 56%;
+      max-width:56%;
+      border-radius:16px;
+      padding:14px 16px;
       background:white;
-      box-shadow:0 8px 25px rgba(0,0,0,0.12);
+      box-shadow:0 4px 14px rgba(0,0,0,0.08);
       box-sizing:border-box;
     ">
 
       <!-- Kontener dialogu -->
-      <div id="dialog-lines" style="margin-bottom:20px;"></div>
+      <div id="dialog-lines" style="margin-bottom:12px; max-height:260px; overflow-y:auto;"></div>
 
       <!-- Przyciski -->
-      <div style="display:flex; justify-content:center; gap:15px; flex-wrap:wrap; margin-bottom:15px;">
+      <div style="display:flex; justify-content:center; gap:8px; flex-wrap:wrap; margin-bottom:10px;">
         <button onclick="startDialog()" style="
           background:#2563eb; color:white; border:none; 
-          border-radius:12px; padding:14px 28px; font-size:17px; cursor:pointer;
+          border-radius:999px; padding:8px 18px; font-size:14px; cursor:pointer;
         ">
-          ▶️ Start dialogu
+          ▶ Start
         </button>
         <button onclick="repeatCurrent()" id="repeatBtn" style="
           background:#16a34a; color:white; border:none; 
-          border-radius:12px; padding:14px 28px; font-size:17px; cursor:pointer;
+          border-radius:999px; padding:8px 18px; font-size:14px; cursor:pointer;
           display:none;
         ">
-          🔄 Powtórz podpowiedź
+          🔄 Powtórz
+        </button>
+        <button onclick="pauseDialog()" id="pauseBtn" style="
+          background:#6b7280; color:white; border:none; 
+          border-radius:999px; padding:8px 18px; font-size:14px; cursor:pointer;
+        ">
+          ⏸ Stop
+        </button>
+        <button onclick="resumeDialog()" id="resumeBtn" style="
+          background:#0ea5e9; color:white; border:none; 
+          border-radius:999px; padding:8px 18px; font-size:14px; cursor:pointer;
+        ">
+          ▶ Dalej
         </button>
         <button onclick="resetDialog()" style="
           background:#ea580c; color:white; border:none; 
-          border-radius:12px; padding:14px 28px; font-size:17px; cursor:pointer;
+          border-radius:999px; padding:8px 18px; font-size:14px; cursor:pointer;
         ">
           ↺ Neustart
         </button>
@@ -66,48 +79,48 @@
 
       <!-- Wynik -->
       <div id="result-area" style="
-        text-align:center; font-size:20px; min-height:50px;
-        padding:12px; border-radius:12px; background:#f8fafc;
+        text-align:center; font-size:16px; min-height:32px;
+        padding:8px; border-radius:10px; background:#f8fafc;
       "></div>
     </div>
 
     <!-- PRAWE OKIENKO: „ekran ucznia” -->
     <div style="
-      flex:0 0 45%;
-      max-width:45%;
-      border-radius:20px;
-      padding:20px 24px;
+      flex:0 0 44%;
+      max-width:44%;
+      border-radius:16px;
+      padding:14px 16px;
       background:white;
-      box-shadow:0 8px 25px rgba(0,0,0,0.12);
+      box-shadow:0 4px 14px rgba(0,0,0,0.08);
       box-sizing:border-box;
       display:flex;
       flex-direction:column;
     ">
-      <div style="margin-bottom:10px;">
-        <h3 style="margin:0 0 8px; color:#1e3a8a; text-align:center;">
+      <div style="margin-bottom:6px;">
+        <h3 style="margin:0 0 4px; color:#1e3a8a; text-align:center; font-size:16px;">
           🎧 Co mówi uczeń
         </h3>
-        <p style="margin:0; font-size:14px; color:#4b5563; text-align:center;">
-          Podczas mówienia twoje słowa wyświetlają się tutaj na żywo.
+        <p style="margin:0; font-size:12px; color:#4b5563; text-align:center;">
+          Twoje słowa wyświetlają się tutaj na żywo.
         </p>
       </div>
       <div id="student-transcript" style="
         flex:1;
-        margin-top:10px; 
+        margin-top:6px; 
         text-align:center; 
-        font-size:22px; 
+        font-size:18px; 
         line-height:1.4;
-        padding:18px; 
-        border-radius:14px; 
+        padding:12px; 
+        border-radius:12px; 
         background:#eef2ff; 
         color:#111827;
-        border:2px dashed #93c5fd;
+        border:1px dashed #93c5fd;
         display:flex;
         align-items:center;
         justify-content:center;
-        min-height:160px;
+        min-height:130px;
       ">
-        Kliknij „Start dialogu”, a potem powtórz na głos.
+        Kliknij „Start”, a potem powtórz na głos.
       </div>
     </div>
 
@@ -167,12 +180,12 @@ const dialogSteps = [
   }
 ];
 
-// Filtrujemy tylko linie, gdzie uczeń musi mówić (speaker === "Uczeń")
 const practiceSteps = dialogSteps.filter(step => step.speaker === "Uczeń");
 
 let currentStep = 0;
 let recognition = null;
 let isListening = false;
+let isPaused = false;
 
 const linesContainer = document.getElementById("dialog-lines");
 const resultArea = document.getElementById("result-area");
@@ -186,26 +199,27 @@ function renderDialog() {
   dialogSteps.forEach((step, idx) => {
     const lineDiv = document.createElement("div");
     lineDiv.style.cssText = `
-      display:flex; gap:12px; align-items:flex-start; 
-      padding:12px; margin-bottom:8px; border-radius:10px;
+      display:flex; gap:8px; align-items:flex-start; 
+      padding:8px; margin-bottom:4px; border-radius:8px;
       border-bottom:1px solid #eee;
+      font-size:14px;
     `;
     
     if (idx === currentStep && step.speaker === "Uczeń") {
       lineDiv.style.background = "#fff7d6";
-      lineDiv.style.borderLeft = "5px solid #f5b301";
-      lineDiv.style.paddingLeft = "15px";
+      lineDiv.style.borderLeft = "4px solid #f5b301";
+      lineDiv.style.paddingLeft = "10px";
     }
 
     const nameDiv = document.createElement("div");
     nameDiv.style.cssText = `
-      min-width:80px; font-weight:700; color:#0f2f57; font-size:16px;
+      min-width:70px; font-weight:700; color:#0f2f57; font-size:13px;
     `;
     nameDiv.textContent = step.speaker;
 
     const textDiv = document.createElement("div");
     textDiv.style.cssText = `
-      flex:1; font-size:17px; line-height:1.4; color:#111;
+      flex:1; font-size:14px; line-height:1.4; color:#111;
     `;
     
     if (step.speaker === "Anna") {
@@ -227,7 +241,7 @@ function speak(text) {
   
   const utterance = new SpeechSynthesisUtterance(text);
   utterance.lang = "de-DE";
-  utterance.rate = 0.92;
+  utterance.rate = 0.9;
   utterance.pitch = 1;
 
   const voices = window.speechSynthesis.getVoices();
@@ -240,8 +254,9 @@ function speak(text) {
   window.speechSynthesis.speak(utterance);
 }
 
-// --- Start dialogu: Anna mówi -> czekamy -> pokazujemy podpowiedź ucznia ---
+// --- Start dialogu ---
 function startDialog() {
+  isPaused = false;
   currentStep = -1;
   resultArea.textContent = "";
   resultArea.style.background = "#f8fafc";
@@ -252,6 +267,8 @@ function startDialog() {
 }
 
 function nextAnnaLine() {
+  if (isPaused) return;
+
   let nextIdx = currentStep + 1;
   while (nextIdx < dialogSteps.length && dialogSteps[nextIdx].speaker !== "Anna") {
     nextIdx++;
@@ -274,11 +291,13 @@ function nextAnnaLine() {
   speak(annaStep.text);
   
   setTimeout(() => {
-    findAndAskStudent();
-  }, 1600);
+    if (!isPaused) findAndAskStudent();
+  }, 1400);
 }
 
 function findAndAskStudent() {
+  if (isPaused) return;
+
   let studentIdx = currentStep + 1;
   while (studentIdx < dialogSteps.length && dialogSteps[studentIdx].speaker !== "Uczeń") {
     studentIdx++;
@@ -300,6 +319,33 @@ function findAndAskStudent() {
   startRecognition();
 }
 
+// --- Stop/pauza dialogu ---
+function pauseDialog() {
+  isPaused = true;
+  window.speechSynthesis.pause();
+  if (recognition) {
+    try { recognition.abort(); } catch(e) {}
+  }
+  isListening = false;
+  resultArea.textContent = "⏸ Dialog zatrzymany. Kliknij „Dalej”, aby kontynuować.";
+}
+
+// --- Wznów dialog ---
+function resumeDialog() {
+  if (!isPaused) return;
+  isPaused = false;
+  window.speechSynthesis.resume();
+  resultArea.textContent = "";
+  // W zależności od tego, kto jest teraz „na ruchu”, wznawiamy:
+  const step = dialogSteps[currentStep];
+  if (step && step.speaker === "Uczeń") {
+    resultArea.textContent = "🎤 Powtórz głośno podpowiedź!";
+    startRecognition();
+  } else {
+    nextAnnaLine();
+  }
+}
+
 // --- Przycisk: Powtórz podpowiedź ---
 function repeatCurrent() {
   const step = dialogSteps[currentStep];
@@ -311,7 +357,7 @@ function repeatCurrent() {
 
 // --- Rozpoznawanie mowy (ulepszone + interimResults) ---
 function startRecognition() {
-  if (isListening) return;
+  if (isListening || isPaused) return;
 
   const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
   if (!SR) {
@@ -355,8 +401,8 @@ function startRecognition() {
         speak("Sehr gut!");
         
         setTimeout(() => {
-          nextAnnaLine();
-        }, 1800);
+          if (!isPaused) nextAnnaLine();
+        }, 1400);
       } else {
         resultArea.style.background = "#fee2e2";
         resultArea.style.color = "#dc2626";
@@ -365,14 +411,17 @@ function startRecognition() {
         speak("Bitte versuche es noch einmal.");
         
         setTimeout(() => {
-          studentTranscript.textContent = "Spróbuj jeszcze raz powtórzyć zdanie.";
-        }, 1500);
+          if (!isPaused) {
+            studentTranscript.textContent = "Spróbuj jeszcze raz powtórzyć zdanie.";
+          }
+        }, 1200);
       }
     }
   };
 
   recognition.onerror = () => {
     isListening = false;
+    if (isPaused) return;
     resultArea.style.background = "#fee2e2";
     resultArea.style.color = "#dc2626";
     resultArea.textContent = "✗ Nie udało się rozpoznać. Powtórz jeszcze raz.";
@@ -381,6 +430,7 @@ function startRecognition() {
 
   recognition.onend = () => {
     isListening = false;
+    if (isPaused) return;
     if (!studentTranscript.textContent || studentTranscript.textContent === "Słucham...") {
       studentTranscript.textContent = "Nie usłyszano wypowiedzi. Spróbuj jeszcze raz.";
     }
@@ -410,9 +460,12 @@ function isCorrect(answer, patterns) {
 // --- Neustart ---
 function resetDialog() {
   window.speechSynthesis.cancel();
-  if (recognition) recognition.abort();
+  if (recognition) {
+    try { recognition.abort(); } catch(e) {}
+  }
   isListening = false;
-  studentTranscript.textContent = "Kliknij „Start dialogu”, a potem powtórz na głos.";
+  isPaused = false;
+  studentTranscript.textContent = "Kliknij „Start”, a potem powtórz na głos.";
   startDialog();
 }
 
