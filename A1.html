@@ -909,6 +909,13 @@
     margin-top:25px; text-align:center; font-size:22px; min-height:50px;
     padding:15px; border-radius:12px; background:#f8fafc;
   "></div>
+  
+  <!-- transmisyjny tekst ucznia (gdy mówi) -->
+  <div id="student-transcript" style="
+    margin-top:15px; text-align:center; font-size:18px; min-height:30px;
+    padding:12px; border-radius:10px; background:#eef6ff; color:#1e40af;
+    display:none;
+  "></div>
 </div>
 
 <script>
@@ -940,7 +947,7 @@ const dialogSteps = [
   },
   {
     speaker: "Anna",
-    text: "Wie heißen Sie höflich?",
+    text: "Wie heißt¨en Sie höflich?",
     answer: "Wie heißen Sie?",
     patterns: ["wie heißen sie", "wie heissen sie"]
   },
@@ -974,6 +981,7 @@ let isListening = false;
 const linesContainer = document.getElementById("dialog-lines");
 const resultArea = document.getElementById("result-area");
 const repeatBtn = document.getElementById("repeatBtn");
+const studentTranscript = document.getElementById("student-transcript");
 
 // --- Generowanie wizualnego dialogu ---
 function renderDialog() {
@@ -1043,6 +1051,8 @@ function startDialog() {
   resultArea.textContent = "";
   resultArea.style.background = "#f8fafc";
   repeatBtn.style.display = "none";
+  studentTranscript.style.display = "none";
+  studentTranscript.textContent = "";
   renderDialog();
   nextAnnaLine();
 }
@@ -1061,6 +1071,7 @@ function nextAnnaLine() {
     resultArea.textContent = "✓ Doskonale! Dialog zakończony.";
     speak("Herzlichen Glückwunsch! Dialog beendet.");
     repeatBtn.style.display = "none";
+    studentTranscript.style.display = "none";
     return;
   }
 
@@ -1094,6 +1105,8 @@ function findAndAskStudent() {
   resultArea.textContent = "🎤 Powtórz głosno podpowiedź!";
   resultArea.style.background = "#fff7d6";
   repeatBtn.style.display = "inline-block";
+  studentTranscript.style.display = "block";
+  studentTranscript.textContent = "Słucham...";
   
   startRecognition();
 }
@@ -1108,7 +1121,7 @@ function repeatCurrent() {
   }
 }
 
-// --- Rozpoznawanie mowy (ulepszone) ---
+// --- Rozpoznawanie mowy (ulepszone + interimResults) ---
 function startRecognition() {
   if (isListening) return;
 
@@ -1123,32 +1136,54 @@ function startRecognition() {
   recognition = new SR();
   recognition.lang = "de-DE";
   recognition.continuous = false;
-  recognition.interimResults = false;
+  recognition.interimResults = true;  // <- DODANO: pokazujemy słowa w czasie rzeczywistym
   recognition.maxAlternatives = 2;
 
   isListening = true;
 
   recognition.onresult = (event) => {
-    const transcript = event.results[0][0].transcript;
-    const step = dialogSteps[currentStep];
+    let transcript = "";
+    let finalText = "";
     
-    if (isCorrect(transcript, step.patterns)) {
-      // ✓ POPRAWNE
-      isListening = false;
-      resultArea.style.background = "#dcfce7";
-      resultArea.style.color = "green";
-      resultArea.textContent = `✓ Sehr gut! „${transcript}"`;
-      speak("Sehr gut!");
+    for (let i = event.resultIndex; i < event.results.length; i++) {
+      transcript += event.results[i][0].transcript;
+      if (event.results[i].isFinal) {
+        finalText = transcript;
+      }
+    }
+    
+    // Pokazuj słowa ucznia w czasie rzeczywistym
+    studentTranscript.textContent = transcript;
+    
+    // Jeśli wynik jest ostateczny, sprawdzamy poprawność
+    if (finalText.trim()) {
+      const step = dialogSteps[currentStep];
       
-      setTimeout(() => {
-        nextAnnaLine();
-      }, 1800);
-    } else {
-      // ✗ ŹLE
-      resultArea.style.background = "#fee2e2";
-      resultArea.style.color = "#dc2626";
-      resultArea.textContent = `✗ Niechcę: „${transcript}". Powtórz jeszcze raz!`;
-      speak("Bitte versuche es noch einmal.");
+      if (isCorrect(finalText, step.patterns)) {
+        // ✓ POPRAWNE
+        isListening = false;
+        resultArea.style.background = "#dcfce7";
+        resultArea.style.color = "green";
+        resultArea.textContent = `✓ Sehr gut! „${finalText}"`;
+        studentTranscript.textContent = "✓ " + finalText;
+        speak("Sehr gut!");
+        
+        setTimeout(() => {
+          studentTranscript.style.display = "none";
+          nextAnnaLine();
+        }, 1800);
+      } else {
+        // ✗ ŹLE
+        resultArea.style.background = "#fee2e2";
+        resultArea.style.color = "#dc2626";
+        resultArea.textContent = `✗ Niechcę: „${finalText}". Powtórz jeszcze raz!`;
+        studentTranscript.textContent = "✗ " + finalText;
+        speak("Bitte versuche es noch einmal.");
+        
+        setTimeout(() => {
+          studentTranscript.textContent = "🎤 Powtórz głosno podpowiedź!";
+        }, 1500);
+      }
     }
   };
 
@@ -1157,11 +1192,15 @@ function startRecognition() {
     resultArea.style.background = "#fee2e2";
     resultArea.style.color = "#dc2626";
     resultArea.textContent = "✗ Nie udało się rozpoznać. Powtórz jeszcze raz.";
+    studentTranscript.style.display = "none";
   };
 
   recognition.onend = () => {
     isListening = false;
     // Jeśli nie rozpoznano niczego, zostaw w trybie oczekiwania
+    if (!studentTranscript.textContent.includes("✓") && !studentTranscript.textContent.includes("✗")) {
+      studentTranscript.textContent = "🎤 Powtórz głosno podpowiedź!";
+    }
   };
 
   recognition.start();
@@ -1190,6 +1229,8 @@ function resetDialog() {
   window.speechSynthesis.cancel();
   if (recognition) recognition.abort();
   isListening = false;
+  studentTranscript.style.display = "none";
+  studentTranscript.textContent = "";
   startDialog();
 }
 
