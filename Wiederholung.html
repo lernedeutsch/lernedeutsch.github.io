@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Lektion 1 — Guten Tag!</title>
+<title>Lektion 1 – Guten Tag! Powitania i przedstawianie się</title>
 <style>
   :root{
     --bg:#15211C;
@@ -110,6 +110,34 @@
   }
   .channel-btn.active .num{ color:var(--accent); }
 
+  .vocab-box{
+    background:rgba(255,255,255,0.03);
+    border:1px solid var(--panel-line);
+    border-radius:10px;
+    padding:0.85rem 0.9rem;
+    margin-top:0.9rem;
+    font-size:0.82rem;
+    color:var(--text);
+  }
+  .vocab-box h3{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.7rem;
+    text-transform:uppercase;
+    letter-spacing:0.14em;
+    color:var(--text-dim);
+    margin:0 0 0.6rem;
+  }
+  .vocab-item{
+    display:flex;
+    justify-content:space-between;
+    gap:0.6rem;
+    padding:0.25rem 0;
+    border-bottom:1px dashed var(--panel-line);
+  }
+  .vocab-item:last-child{ border-bottom:none; }
+  .vocab-de{ font-weight:600; color:var(--accent); }
+  .vocab-note{ font-size:0.78rem; color:var(--text-dim); }
+
   .hint-box{
     margin-top:0.9rem;
     padding:0.8rem 0.85rem;
@@ -126,7 +154,7 @@
     border-radius:14px;
     display:flex;
     flex-direction:column;
-    min-height:620px;
+    min-height:640px;
   }
   .booth-head{
     display:flex;
@@ -212,9 +240,6 @@
     font-size:0.74rem;
     letter-spacing:0.06em;
     text-transform:uppercase;
-  }
-  .bubble .de{
-    font-weight:600;
   }
   .bubble .hint{
     display:block;
@@ -346,8 +371,8 @@
 
   .alphabet-grid{
     display:grid;
-    grid-template-columns:repeat(auto-fit, minmax(68px, 1fr));
-    gap:0.5rem;
+    grid-template-columns:repeat(auto-fit, minmax(60px, 1fr));
+    gap:0.45rem;
     margin-top:0.8rem;
   }
   .letter-btn{
@@ -355,7 +380,7 @@
     background:rgba(255,255,255,0.03);
     color:var(--text);
     border-radius:10px;
-    padding:0.65rem 0.4rem;
+    padding:0.6rem 0.2rem;
     cursor:pointer;
     text-align:center;
     font-size:0.95rem;
@@ -384,9 +409,9 @@
 <div class="topbar">
   <div>
     <h1>Lektion <span>1</span></h1>
-    <div class="sub">Deutsch A1 · Begrüßung · Vorstellung · Alphabet</div>
+    <div class="sub">Guten Tag! · Powitania i przedstawianie się</div>
   </div>
-  <div class="sub">Interaktive Lernseite</div>
+  <div class="sub">Deutsch A1 · Interaktive Lernseite</div>
 </div>
 
 <div class="layout">
@@ -396,6 +421,25 @@
     <button class="channel-btn" data-topic="vorstellung"><span class="num">02</span> Vorstellung</button>
     <button class="channel-btn" data-topic="alphabet"><span class="num">03</span> Alphabet</button>
     <button class="channel-btn" data-topic="mix"><span class="num">04</span> Gemischte Übung</button>
+
+    <div class="vocab-box" id="vocabBox">
+      <h3>Wortschatz (Słownictwo)</h3>
+      <div class="vocab-item"><span class="vocab-de">Guten Morgen</span><span class="vocab-note">dzień dobry (rano)</span></div>
+      <div class="vocab-item"><span class="vocab-de">Guten Tag</span><span class="vocab-note">dzień dobry</span></div>
+      <div class="vocab-item"><span class="vocab-de">Guten Abend</span><span class="vocab-note">dzień dobry (wieczorem)</span></div>
+      <div class="vocab-item"><span class="vocab-de">Hallo</span><span class="vocab-note">cześć</span></div>
+      <div class="vocab-item"><span class="vocab-de">Tschüss</span><span class="vocab-note">cześć / pa</span></div>
+      <div style="margin-top:0.5rem; border-top:1px dashed var(--panel-line); padding-top:0.5rem;"></div>
+      <div class="vocab-item"><span class="vocab-de">Ich heiße …</span><span class="vocab-note">jestem … / mam na imię …</span></div>
+      <div class="vocab-item"><span class="vocab-de">Mein Name ist …</span><span class="vocab-note">moje nazwisko to …</span></div>
+      <div class="vocab-item"><span class="vocab-de">Ich bin …</span><span class="vocab-note">jestem …</span></div>
+      <div class="vocab-item"><span class="vocab-de">Wie heißen Sie?</span><span class="vocab-note">Jak się Pan/Pani nazywa? (formell)</span></div>
+      <div class="vocab-item"><span class="vocab-de">Wie heißt du?</span><span class="vocab-note">Jak się nazywasz? (informell)</span></div>
+      <div style="margin-top:0.5rem; border-top:1px dashed var(--panel-line); padding-top:0.5rem;"></div>
+      <div class="vocab-item"><span class="vocab-de">Alphabet</span><span class="vocab-note">alfabet</span></div>
+      <div class="vocab-item"><span class="vocab-de">Buchstabe</span><span class="vocab-note">litera</span></div>
+      <div class="vocab-item"><span class="vocab-de">Umlaute</span><span class="vocab-note">samogłoski miękkie (Ä, Ö, Ü)</span></div>
+    </div>
 
     <div class="hint-box" id="hintBox">
       Klicke auf ein Thema und beantworte die Sätze auf Deutsch.
@@ -646,7 +690,6 @@
     btn.addEventListener("click", () => startTopic(btn.dataset.topic));
   });
 
-  // Alphabet buttons in transcript
   transcriptEl.addEventListener("click", (e) => {
     if (e.target.classList.contains("letter-btn")) {
       speakGerman(e.target.dataset.letter);
@@ -671,12 +714,11 @@
   showStep = function(){
     const d = TOPICS[currentTopic];
     const step = d.steps[stepIndex];
-    transcriptEl.appendChild(document.createElement("div"));
     botSay(step.bot, step.hint, step.sug);
     if (currentTopic === "alphabet" && stepIndex === 3){
       const block = document.createElement("div");
       block.className = "bubble bot";
-      block.innerHTML = "<div class='de'>Aussprache des Alphabets</div><span class='hint'>Klicke auf einen Buchstaben.</span>";
+      block.innerHTML = "<div class='hint'>Aussprache des deutschen Alphabets</div><span class='hint'>Klicke auf einen Buchstaben.</span>";
       const grid = injectAlphabet();
       block.appendChild(grid);
       transcriptEl.appendChild(block);
