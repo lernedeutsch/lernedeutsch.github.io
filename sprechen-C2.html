@@ -95,7 +95,7 @@
       box-sizing:border-box;
       display:flex;
       flex-direction:column;
-    ">
+    "">
       <div style="margin-bottom:6px;">
         <h3 style="margin:0 0 4px; color:#1e3a8a; text-align:center; font-size:16px;">
           🎧 Was du sagst
@@ -186,6 +186,7 @@ let currentStep = 0;
 let recognition = null;
 let isListening = false;
 let isPaused = false;
+let lastFinalTranscript = ""; // zapamiętujemy ostatnią pełną odpowiedź
 
 const linesContainer = document.getElementById("dialog-lines");
 const resultArea = document.getElementById("result-area");
@@ -262,6 +263,7 @@ function startDialog() {
   resultArea.style.background = "#f8fafc";
   repeatBtn.style.display = "none";
   studentTranscript.textContent = "Hör gut zu und sprich danach laut.";
+  lastFinalTranscript = "";
   renderDialog();
   nextAnnaLine();
 }
@@ -280,7 +282,7 @@ function nextAnnaLine() {
     resultArea.textContent = "✓ Perfekt! Der Dialog ist beendet.";
     speak("Herzlichen Glückwunsch! Der Dialog ist beendet.");
     repeatBtn.style.display = "none";
-    studentTranscript.textContent = "Dialog beendet. Bravo!";
+    studentTranscript.textContent = lastFinalTranscript || "Dialog beendet. Bravo!";
     return;
   }
 
@@ -314,7 +316,10 @@ function findAndAskStudent() {
   resultArea.textContent = "🎤 Sprich den Satz laut nach!";
   resultArea.style.background = "#fff7d6";
   repeatBtn.style.display = "inline-block";
-  studentTranscript.textContent = "Ich höre...";
+  // nie nadpisujemy tu ostatniej odpowiedzi, jeśli istniała
+  if (!lastFinalTranscript) {
+    studentTranscript.textContent = "Ich höre...";
+  }
   
   startRecognition();
 }
@@ -376,6 +381,7 @@ function startRecognition() {
   recognition.maxAlternatives = 2;
 
   isListening = true;
+  lastFinalTranscript = ""; // czyścimy tylko na początku nowej próby
 
   recognition.onresult = (event) => {
     let transcript = "";
@@ -388,17 +394,21 @@ function startRecognition() {
       }
     }
     
-    studentTranscript.textContent = transcript || "Ich höre...";
+    // pokazujemy tekst na żywo
+    if (transcript) {
+      studentTranscript.textContent = transcript;
+    }
 
     if (finalText.trim()) {
+      lastFinalTranscript = finalText.trim();
       const step = dialogSteps[currentStep];
       
-      if (isCorrect(finalText, step.patterns)) {
+      if (isCorrect(lastFinalTranscript, step.patterns)) {
         isListening = false;
         resultArea.style.background = "#dcfce7";
         resultArea.style.color = "green";
-        resultArea.textContent = `✓ Sehr gut! „${finalText}"`;
-        studentTranscript.textContent = "✓ " + finalText;
+        resultArea.textContent = `✓ Sehr gut! „${lastFinalTranscript}"`;
+        // NIE nadpisujemy już później w onend – odpowiedź zostaje
         speak("Sehr gut!");
         
         setTimeout(() => {
@@ -408,15 +418,9 @@ function startRecognition() {
         isListening = false;
         resultArea.style.background = "#fee2e2";
         resultArea.style.color = "#dc2626";
-        resultArea.textContent = `✗ Nicht ganz: „${finalText}". Bitte noch einmal!`;
-        studentTranscript.textContent = "✗ " + finalText;
+        resultArea.textContent = `✗ Nicht ganz: „${lastFinalTranscript}". Bitte noch einmal!`;
         speak("Bitte versuche es noch einmal.");
-        
-        setTimeout(() => {
-          if (!isPaused) {
-            studentTranscript.textContent = "Bitte den Satz noch einmal sagen.";
-          }
-        }, 1200);
+        // odpowiedź ucznia zostaje widoczna
       }
     }
   };
@@ -427,13 +431,14 @@ function startRecognition() {
     resultArea.style.background = "#fee2e2";
     resultArea.style.color = "#dc2626";
     resultArea.textContent = "✗ Nicht erkannt. Bitte noch einmal sprechen.";
-    studentTranscript.textContent = "Fehler bei der Erkennung. Noch einmal.";
+    // nie czyścimy studentTranscript, pozostawiamy ostatni tekst jeśli był
   };
 
   recognition.onend = () => {
     isListening = false;
     if (isPaused) return;
-    if (!studentTranscript.textContent || studentTranscript.textContent === "Ich höre...") {
+    // jeśli nic nie zostało nagrane, pokaż komunikat, ale nie kasuj dobrych odpowiedzi
+    if (!lastFinalTranscript && (!studentTranscript.textContent || studentTranscript.textContent === "Ich höre...")) {
       studentTranscript.textContent = "Keine Antwort gehört. Bitte noch einmal.";
     }
   };
@@ -467,6 +472,7 @@ function resetDialog() {
   }
   isListening = false;
   isPaused = false;
+  lastFinalTranscript = "";
   studentTranscript.textContent = "Klicke auf „Start“ und sprich laut.";
   startDialog();
 }
