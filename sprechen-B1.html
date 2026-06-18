@@ -309,14 +309,17 @@
 
         <!-- HEAD + twarz -->
         <g id="head">
-          <!-- Neck -->
-          <path d="M177 288
-                   C181 307, 184 323, 182 337
-                   C192 346, 209 346, 219 337
-                   C217 323, 220 307, 224 288 Z"
+          <!-- Neck – nowy, bardziej naturalny kształt, połączony z tułowiem -->
+          <path d="M176 284
+                   C182 300, 186 314, 188 328
+                   C189 336, 193 342, 200 344
+                   C207 342, 211 336, 212 328
+                   C214 314, 218 300, 224 284
+                   C216 288, 208 291, 200 292
+                   C192 291, 184 288, 176 284 Z"
                 fill="url(#faceGrad)"/>
 
-          <!-- Face – PODMIANA ksztaltu: ellipse z drugiego kodu -->
+          <!-- Face – ellipse -->
           <ellipse cx="200" cy="212" rx="54" ry="82" fill="url(#faceGrad)"/>
 
           <!-- Hair front left -->
@@ -361,7 +364,7 @@
                    C138 139, 139 127, 143 117 Z"
                 fill="#d79a6c"/>
 
-          <!-- Ears – PODMIANA na mniejsze z drugiego kodu -->
+          <!-- Ears -->
           <path d="M120 223
                    C122 217, 126 213, 130 213
                    C133 213, 135 215, 135 218
@@ -411,12 +414,12 @@
                   stroke="var(--glasses)" stroke-width="2.5" stroke-linecap="round" fill="none"/>
           </g>
 
-          <!-- Eyes with lashes (białka + rzęsy) -->
+          <!-- Eyes with lashes -->
           <g id="eyesGroup" class="blink">
             <ellipse id="eyeLeft"  cx="176" cy="205" rx="9" ry="6.5" fill="#fff"/>
             <ellipse id="eyeRight" cx="224" cy="205" rx="9" ry="6.5" fill="#fff"/>
 
-            <!-- źrenice jako osobne elementy reagujące na mysz -->
+            <!-- źrenice -->
             <circle id="pupilLeft"  cx="176" cy="206" r="4.4" fill="var(--eye)"/>
             <circle id="pupilRight" cx="224" cy="206" r="4.4" fill="var(--eye)"/>
 
@@ -450,7 +453,7 @@
           <path d="M190 236 C195 240, 205 240, 210 236"
                 stroke="#cb9478" stroke-width="3" stroke-linecap="round" fill="none"/>
 
-          <!-- Usta – dodany id na potrzeby uśmiechu -->
+          <!-- Usta -->
           <path id="mouth" d="M180 258
                    C187 254, 193 252, 200 252
                    C207 252, 213 254, 220 258
@@ -469,7 +472,7 @@
           <ellipse id="faceHighlight" cx="200" cy="212" rx="46" ry="70" fill="url(#faceHighlightGrad)" opacity="0"/>
         </g>
 
-        <!-- Necklace – dopasowany do V dekoltu i krótszy -->
+        <!-- Necklace -->
         <path d="M172 344
                  C180 354, 190 360, 200 360
                  C210 360, 220 354, 228 344"
@@ -477,7 +480,7 @@
         <circle cx="200" cy="370" r="7" fill="var(--necklace)" opacity="0.96"/>
         <circle cx="200" cy="370" r="4" fill="#fff9e6" opacity="0.9"/>
 
-        <!-- Earrings with white inner circles -->
+        <!-- Earrings -->
         <g>
           <circle cx="123" cy="236" r="3" fill="var(--earring)"/>
           <path d="M123 239
