@@ -8,16 +8,22 @@
     :root{
       --bg1:#f7e8df;
       --bg2:#f0d8cc;
-      --skin:#f2c6a8;
-      --skin-shadow:#e6ad8b;
-      --skin-light:#ffd9bf;
+
+      /* kolory skóry jak w drugim kodzie */
+      --skin:#e6bb9d;        /* jaśniejsza skóra */
+      --skin-shadow:#cf997a; /* jaśniejszy cień */
+      --skin-light:#f8ece1;  /* jasny highlight */
+
       --hair:#7a4b2e;
       --hair-dark:#5c341f;
       --hair-light:#9a6240;
+
+      /* zostawiam kolory koszulki i dodatków z pierwszego kodu */
       --shirt:#f3f5ff;
       --shirt-shadow:#c9d4ff;
       --shirt-accent:#6f7ad8;
       --shirt-accent-soft:#a1b0ff;
+
       --eye:#4a2f22;
       --lip:#d66b76;
       --lip-dark:#b2505a;
@@ -200,16 +206,15 @@
           <circle cx="250" cy="421" r="2.1"/>
         </g>
 
-        <!-- Neck (extended to connect) -->
-        <path d="M176 288
-                 C180 305, 182 318, 182 335
-                 C182 347, 188 353, 200 353
-                 C212 353, 218 347, 218 335
-                 C218 318, 220 305, 224 288 Z"
+        <!-- Neck – ksztalt z drugiego kodu -->
+        <path d="M177 288
+                 C181 307, 184 323, 182 337
+                 C192 346, 209 346, 219 337
+                 C217 323, 220 307, 224 288 Z"
               fill="url(#faceGrad)"/>
 
-        <!-- Face -->
-        <ellipse cx="200" cy="215" rx="78" ry="92" fill="url(#faceGrad)"/>
+        <!-- Face – smuklejsza ellipse z drugiego kodu -->
+        <ellipse cx="200" cy="215" rx="62" ry="106" fill="url(#faceGrad)"/>
 
         <!-- Hair front left -->
         <path d="M128 198
@@ -257,7 +262,7 @@
         <ellipse cx="123" cy="223" rx="11" ry="18" fill="url(#faceGrad)"/>
         <ellipse cx="277" cy="223" rx="11" ry="18" fill="url(#faceGrad)"/>
 
-        <!-- Brows (łagodniej "uśmiechnięte") -->
+        <!-- Brows -->
         <path d="M158 179
                  C169 170, 180 168, 192 172"
               stroke="var(--hair-dark)" stroke-width="4.2" stroke-linecap="round" fill="none" opacity="0.95"/>
@@ -265,7 +270,7 @@
                  C220 168, 231 170, 242 179"
               stroke="var(--hair-dark)" stroke-width="4.2" stroke-linecap="round" fill="none" opacity="0.95"/>
 
-        <!-- Okulary powiększone -->
+        <!-- Okulary -->
         <g>
           <!-- lewa oprawka -->
           <path d="M144 196
@@ -326,7 +331,7 @@
         <path d="M190 236 C195 240, 205 240, 210 236"
               stroke="#cb9478" stroke-width="3" stroke-linecap="round" fill="none"/>
 
-        <!-- Usta: zostawiamy tylko wypełnione wargi, bez cienkiej linii pod nimi -->
+        <!-- Usta: tylko wypełnione wargi, bez cienkiej linii pod nimi -->
         <path d="M180 258
                  C187 254, 193 252, 200 252
                  C207 252, 213 254, 220 258
