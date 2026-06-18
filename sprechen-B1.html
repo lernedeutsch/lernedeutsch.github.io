@@ -88,13 +88,13 @@
           <stop offset="100%" stop-color="var(--skin-shadow)"/>
         </radialGradient>
 
-        <linearGradient id="hairGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+        earGradient id="hairGrad" x1="0%" y1="0%" x2="100%" y2="100%">
           <stop offset="0%" stop-color="var(--hair-light)"/>
           <stop offset="45%" stop-color="var(--hair)"/>
           <stop offset="100%" stop-color="var(--hair-dark)"/>
         </linearGradient>
 
-        <linearGradient id="shirtGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+        earGradient id="shirtGrad" x1="0%" y1="0%" x2="0%" y2="100%">
           <stop offset="0%" stop-color="var(--shirt)"/>
           <stop offset="100%" stop-color="var(--shirt-shadow)"/>
         </linearGradient>
@@ -193,11 +193,11 @@
 
         <!-- Simple blouse pattern (soft dots) -->
         <g fill="var(--shirt-accent-soft)" opacity="0.65">
-          <circle cx="155" cy="424" r="2.1"/>
-          <circle cx="180" cy="433" r="2.1"/>
-          <circle cx="205" cy="429" r="2.1"/>
-          <circle cx="230" cy="436" r="2.1"/>
-          <circle cx="250" cy="421" r="2.1"/>
+          ircle cx="155" cy="424" r="2.1"/>
+          ircle cx="180" cy="433" r="2.1"/>
+          ircle cx="205" cy="429" r="2.1"/>
+          ircle cx="230" cy="436" r="2.1"/>
+          ircle cx="250" cy="421" r="2.1"/>
         </g>
 
         <!-- Neck (extended to connect) -->
@@ -257,13 +257,19 @@
         <ellipse cx="123" cy="223" rx="11" ry="18" fill="url(#faceGrad)"/>
         <ellipse cx="277" cy="223" rx="11" ry="18" fill="url(#faceGrad)"/>
 
-        <!-- Brows (slightly thinner, softer) -->
-        <path d="M160 180
-                 C170 173, 180 171, 191 174"
-              stroke="var(--hair-dark)" stroke-width="4.2" stroke-linecap="round" fill="none" opacity="0.95"/>
-        <path d="M209 174
-                 C220 171, 230 173, 240 180"
-              stroke="var(--hair-dark)" stroke-width="4.2" stroke-linecap="round" fill="none" opacity="0.95"/>
+        <!-- Brows (more "happy" curve, still thin) -->
+        <path d="M158 179
+                 C169 170, 180 168, 192 172"
+              stroke="var(--hair-dark)" stroke-width="4" stroke-linecap="round" fill="none" opacity="0.95"/>
+        <path d="M208 172
+                 C220 168, 231 170, 242 179"
+              stroke="var(--hair-dark)" stroke-width="4" stroke-linecap="round" fill="none" opacity="0.95"/>
+
+        <!-- Subtle forehead smile-curve -->
+        <path d="M164 168
+                 C182 160, 218 160, 236 168"
+              stroke="rgba(122,75,46,0.18)" stroke-width="3"
+              stroke-linecap="round" fill="none"/>
 
         <!-- Modern glasses -->
         <g>
@@ -297,11 +303,11 @@
           <ellipse cx="176" cy="205" rx="9" ry="6.5" fill="#fff"/>
           <ellipse cx="224" cy="205" rx="9" ry="6.5" fill="#fff"/>
           <!-- iris -->
-          <circle cx="176" cy="206" r="4.4" fill="var(--eye)"/>
-          <circle cx="224" cy="206" r="4.4" fill="var(--eye)"/>
+          ircle cx="176" cy="206" r="4.4" fill="var(--eye)"/>
+          ircle cx="224" cy="206" r="4.4" fill="var(--eye)"/>
           <!-- highlights -->
-          <circle cx="177.3" cy="204" r="1.1" fill="#fff"/>
-          <circle cx="225.3" cy="204" r="1.1" fill="#fff"/>
+          ircle cx="177.3" cy="204" r="1.1" fill="#fff"/>
+          ircle cx="225.3" cy="204" r="1.1" fill="#fff"/>
           <!-- Eyeliner -->
           <path d="M166 202
                    C171 199, 181 199, 186 202"
@@ -326,7 +332,7 @@
         <path d="M190 236 C195 240, 205 240, 210 236"
               stroke="#cb9478" stroke-width="3" stroke-linecap="round" fill="none"/>
 
-        <!-- Softer, smaller smile -->
+        <!-- Softer, smaller smile (bez zmian – już delikatny) -->
         <path d="M182 259
                  C188 266, 195 269, 200 269
                  C205 269, 212 266, 218 259"
@@ -343,6 +349,16 @@
                  C193 263, 197 264, 201 264"
               stroke="#ffd5d9" stroke-width="1.4" stroke-linecap="round" opacity="0.75"/>
 
+        <!-- Smile lines on cheeks -->
+        <path d="M162 252
+                 C158 254, 156 256, 154 259"
+              stroke="rgba(203,148,120,0.8)" stroke-width="2"
+              stroke-linecap="round" fill="none"/>
+        <path d="M238 252
+                 C242 254, 244 256, 246 259"
+              stroke="rgba(203,148,120,0.8)" stroke-width="2"
+              stroke-linecap="round" fill="none"/>
+
         <!-- Cheek blush -->
         <ellipse cx="152" cy="243" rx="16" ry="10" fill="var(--blush)" opacity=".26"/>
         <ellipse cx="248" cy="243" rx="16" ry="10" fill="var(--blush)" opacity=".26"/>
@@ -355,25 +371,25 @@
                  C172 344, 186 352, 200 352
                  C214 352, 228 344, 244 324"
               stroke="var(--necklace)" stroke-width="4" stroke-linecap="round" fill="none"/>
-        <circle cx="200" cy="356" r="7" fill="var(--necklace)" opacity="0.96"/>
-        <circle cx="200" cy="356" r="4" fill="#fff9e6" opacity="0.9"/>
+        ircle cx="200" cy="356" r="7" fill="var(--necklace)" opacity="0.96"/>
+        ircle cx="200" cy="356" r="4" fill="#fff9e6" opacity="0.9"/>
 
         <!-- Earrings with white inner circles -->
         <g>
           <!-- left -->
-          <circle cx="123" cy="236" r="3" fill="var(--earring)"/>
+          ircle cx="123" cy="236" r="3" fill="var(--earring)"/>
           <path d="M123 239
                    C123 246, 123 252, 123 258"
                 stroke="var(--earring)" stroke-width="3" stroke-linecap="round"/>
-          <circle cx="123" cy="262" r="5.2" fill="var(--earring)"/>
-          <circle cx="123" cy="262" r="3" fill="#fff9e6"/>
+          ircle cx="123" cy="262" r="5.2" fill="var(--earring)"/>
+          ircle cx="123" cy="262" r="3" fill="#fff9e6"/>
           <!-- right -->
-          <circle cx="277" cy="236" r="3" fill="var(--earring)"/>
+          ircle cx="277" cy="236" r="3" fill="var(--earring)"/>
           <path d="M277 239
                    C277 246, 277 252, 277 258"
                 stroke="var(--earring)" stroke-width="3" stroke-linecap="round"/>
-          <circle cx="277" cy="262" r="5.2" fill="var(--earring)"/>
-          <circle cx="277" cy="262" r="3" fill="#fff9e6"/>
+          ircle cx="277" cy="262" r="5.2" fill="var(--earring)"/>
+          ircle cx="277" cy="262" r="3" fill="#fff9e6"/>
         </g>
       </g>
     </svg>
