@@ -18,11 +18,11 @@
       --hair-dark:#5c341f;
       --hair-light:#9a6240;
 
-      /* RÓŻOWA BLUZKA + delikatne akcenty */
-      --shirt:#f7c5dc;              /* jasny róż */
-      --shirt-shadow:#e9a8c9;       /* ciemniejszy róż – cień */
-      --shirt-accent:#d575a8;       /* różowy akcent (lamówka) */
-      --shirt-accent-soft:#f1d1e6;  /* bardzo jasny róż – wzór / dekor */
+      /* kolory koszulki i dodatków z pierwszego kodu */
+      --shirt:#f3f5ff;
+      --shirt-shadow:#c9d4ff;
+      --shirt-accent:#6f7ad8;
+      --shirt-accent-soft:#a1b0ff;
 
       --eye:#4a2f22;
       --lip:#d66b76;
@@ -182,13 +182,13 @@
           <stop offset="100%" stop-color="var(--skin-shadow)"/>
         </radialGradient>
 
-        earGradient id="hairGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <linearGradient id="hairGrad" x1="0%" y1="0%" x2="100%" y2="100%">
           <stop offset="0%" stop-color="var(--hair-light)"/>
           <stop offset="45%" stop-color="var(--hair)"/>
           <stop offset="100%" stop-color="var(--hair-dark)"/>
         </linearGradient>
 
-        earGradient id="shirtGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+        <linearGradient id="shirtGrad" x1="0%" y1="0%" x2="0%" y2="100%">
           <stop offset="0%" stop-color="var(--shirt)"/>
           <stop offset="100%" stop-color="var(--shirt-shadow)"/>
         </linearGradient>
@@ -297,56 +297,13 @@
                    C224 440, 244 432, 270 412"
                 fill="none" stroke="var(--shirt-accent-soft)" stroke-width="3" stroke-linecap="round" opacity="0.9"/>
 
-          <!-- Delikatny KWIATOWY wzór na bluzce -->
-          <g fill="none" stroke="var(--shirt-accent-soft)" stroke-width="1.2" opacity="0.85">
-            <!-- małe kwiatki po lewej -->
-            <g transform="translate(150, 420) scale(0.9)">
-              ircle cx="0" cy="0" r="3"/>
-              <path d="M0 -6 L0 -3"/>
-              <path d="M5 -2 L3 -1"/>
-              <path d="M5 3 L3 2"/>
-              <path d="M0 6 L0 3"/>
-              <path d="M-5 3 L-3 2"/>
-              <path d="M-5 -2 L-3 -1"/>
-            </g>
-            <g transform="translate(175, 432) scale(0.8)">
-              ircle cx="0" cy="0" r="3"/>
-              <path d="M0 -6 L0 -3"/>
-              <path d="M5 -2 L3 -1"/>
-              <path d="M5 3 L3 2"/>
-              <path d="M0 6 L0 3"/>
-              <path d="M-5 3 L-3 2"/>
-              <path d="M-5 -2 L-3 -1"/>
-            </g>
-
-            <!-- małe kwiatki po prawej -->
-            <g transform="translate(225, 428) scale(0.85)">
-              ircle cx="0" cy="0" r="3"/>
-              <path d="M0 -6 L0 -3"/>
-              <path d="M5 -2 L3 -1"/>
-              <path d="M5 3 L3 2"/>
-              <path d="M0 6 L0 3"/>
-              <path d="M-5 3 L-3 2"/>
-              <path d="M-5 -2 L-3 -1"/>
-            </g>
-            <g transform="translate(250, 417) scale(0.75)">
-              ircle cx="0" cy="0" r="3"/>
-              <path d="M0 -6 L0 -3"/>
-              <path d="M5 -2 L3 -1"/>
-              <path d="M5 3 L3 2"/>
-              <path d="M0 6 L0 3"/>
-              <path d="M-5 3 L-3 2"/>
-              <path d="M-5 -2 L-3 -1"/>
-            </g>
-          </g>
-
-          <!-- Simple blouse pattern (soft dots) – MOŻESZ USUNĄĆ, jeżeli za dużo się dzieje -->
+          <!-- Simple blouse pattern (soft dots) -->
           <g fill="var(--shirt-accent-soft)" opacity="0.65">
-            ircle cx="155" cy="424" r="2.1"/>
-            ircle cx="180" cy="433" r="2.1"/>
-            ircle cx="205" cy="429" r="2.1"/>
-            ircle cx="230" cy="436" r="2.1"/>
-            ircle cx="250" cy="421" r="2.1"/>
+            <circle cx="155" cy="424" r="2.1"/>
+            <circle cx="180" cy="433" r="2.1"/>
+            <circle cx="205" cy="429" r="2.1"/>
+            <circle cx="230" cy="436" r="2.1"/>
+            <circle cx="250" cy="421" r="2.1"/>
           </g>
         </g>
 
@@ -463,12 +420,12 @@
             <ellipse id="eyeRight" cx="224" cy="205" rx="9" ry="6.5" fill="#fff"/>
 
             <!-- źrenice -->
-            ircle id="pupilLeft"  cx="176" cy="206" r="4.4" fill="var(--eye)"/>
-            ircle id="pupilRight" cx="224" cy="206" r="4.4" fill="var(--eye)"/>
+            <circle id="pupilLeft"  cx="176" cy="206" r="4.4" fill="var(--eye)"/>
+            <circle id="pupilRight" cx="224" cy="206" r="4.4" fill="var(--eye)"/>
 
             <!-- highlights -->
-            ircle cx="177.3" cy="204" r="1.1" fill="#fff"/>
-            ircle cx="225.3" cy="204" r="1.1" fill="#fff"/>
+            <circle cx="177.3" cy="204" r="1.1" fill="#fff"/>
+            <circle cx="225.3" cy="204" r="1.1" fill="#fff"/>
 
             <!-- Eyeliner -->
             <path d="M166 202
@@ -520,26 +477,26 @@
                  C180 354, 190 360, 200 360
                  C210 360, 220 354, 228 344"
               stroke="var(--necklace)" stroke-width="4" stroke-linecap="round" fill="none"/>
-        ircle cx="200" cy="370" r="7" fill="var(--necklace)" opacity="0.96"/>
-        ircle cx="200" cy="370" r="4" fill="#fff9e6" opacity="0.9"/>
+        <circle cx="200" cy="370" r="7" fill="var(--necklace)" opacity="0.96"/>
+        <circle cx="200" cy="370" r="4" fill="#fff9e6" opacity="0.9"/>
 
         <!-- Earrings – na uszach -->
         <g>
           <!-- lewy kolczyk bliżej ucha -->
-          ircle cx="128" cy="232" r="3" fill="var(--earring)"/>
+          <circle cx="128" cy="232" r="3" fill="var(--earring)"/>
           <path d="M128 235
                    C128 242, 128 248, 128 254"
                 stroke="var(--earring)" stroke-width="3" stroke-linecap="round"/>
-          ircle cx="128" cy="258" r="5.2" fill="var(--earring)"/>
-          ircle cx="128" cy="258" r="3" fill="#fff9e6"/>
+          <circle cx="128" cy="258" r="5.2" fill="var(--earring)"/>
+          <circle cx="128" cy="258" r="3" fill="#fff9e6"/>
 
           <!-- prawy kolczyk bliżej ucha -->
-          ircle cx="272" cy="232" r="3" fill="var(--earring)"/>
+          <circle cx="272" cy="232" r="3" fill="var(--earring)"/>
           <path d="M272 235
                    C272 242, 272 248, 272 254"
                 stroke="var(--earring)" stroke-width="3" stroke-linecap="round"/>
-          ircle cx="272" cy="258" r="5.2" fill="var(--earring)"/>
-          ircle cx="272" cy="258" r="3" fill="#fff9e6"/>
+          <circle cx="272" cy="258" r="5.2" fill="var(--earring)"/>
+          <circle cx="272" cy="258" r="3" fill="#fff9e6"/>
         </g>
       </g>
     </svg>
@@ -662,4 +619,4 @@
     });
   </script>
 </body>
-</html>   
+</html>
