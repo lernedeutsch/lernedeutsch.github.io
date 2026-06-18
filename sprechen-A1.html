@@ -1,745 +1,1370 @@
 <!DOCTYPE html>
-<html lang="pl">
+<html lang="de">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sprechen A1 – Lekcja 1</title>
+<title>Deutsch lernen – Lektion 1</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700&family=Nunito:wght@400;600;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+
 <style>
-  :root{
-    --bg:#15211C;
-    --bg-soft:#1B2A24;
-    --panel:#21312A;
-    --panel-line:rgba(238,232,210,0.10);
-    --paper:#ECE6D2;
-    --paper-ink:#22251B;
-    --accent:#D98A3D;
-    --accent-dim:rgba(217,138,61,0.18);
-    --sage:#74AE93;
-    --sage-dim:rgba(116,174,147,0.16);
-    --text:#F2EFE2;
-    --text-dim:#AEBDB3;
-    --danger:#C96A5A;
-  }
-  *{box-sizing:border-box;}
-  html,body{margin:0;padding:0;}
-  body{
-    background:radial-gradient(circle at 18% 0%, var(--bg-soft), var(--bg) 60%);
-    color:var(--text);
-    font-family:'IBM Plex Sans', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
-    min-height:100vh;
-    line-height:1.45;
-  }
-  .topbar{
-    display:flex; align-items:baseline; justify-content:space-between;
-    gap:1rem; flex-wrap:wrap;
-    padding:1.6rem 2rem 1.1rem;
-    border-bottom:1px solid var(--panel-line);
-  }
-  .topbar h1{
-    font-family:'Fraunces', Georgia, serif;
-    font-weight:600;
-    font-size:2rem;
-    letter-spacing:0.01em;
-    margin:0;
-    color:var(--text);
-  }
-  .topbar h1 span{ color:var(--accent); font-style:italic; }
-  .topbar .sub{
-    font-family:'IBM Plex Mono', monospace;
-    font-size:0.72rem;
-    letter-spacing:0.12em;
-    text-transform:uppercase;
-    color:var(--text-dim);
-  }
-  .back-link{
-    font-size:0.85rem;
-    color:var(--text-dim);
-    text-decoration:none;
-    border-bottom:1px dashed var(--panel-line);
-  }
-  .back-link:hover{ color:var(--accent); border-color:var(--accent); }
 
-  .layout{
-    display:grid;
-    grid-template-columns:260px 1fr;
-    gap:1.4rem;
-    padding:1.6rem 2rem 3rem;
-    max-width:1180px;
-    margin:0 auto;
-  }
-  @media (max-width:840px){
-    .layout{ grid-template-columns:1fr; }
-  }
+    :root{
+        --cream:#fbf5e8;
+        --cream-deep:#f1e6c9;
+        --ink:#2c2a25;
+        --green:#2f6f2b;
+        --green-deep:#1f4d1e;
+        --gold:#c98a2c;
+        --berry:#b5415a;
+        --wood:#8b5e34;
+        --wood-deep:#5e3d20;
+    }
 
-  .channels{
-    background:var(--panel);
-    border:1px solid var(--panel-line);
-    border-radius:14px;
-    padding:1rem;
-    align-self:start;
-  }
-  .channels h2{
-    font-family:'IBM Plex Mono', monospace;
-    font-size:0.72rem;
-    letter-spacing:0.14em;
-    text-transform:uppercase;
-    color:var(--text-dim);
-    margin:0.2rem 0.4rem 0.8rem;
-  }
-  .channel-btn{
-    width:100%;
-    display:flex;
-    align-items:center;
-    gap:0.7rem;
-    background:transparent;
-    border:1px solid transparent;
-    border-radius:10px;
-    color:var(--text);
-    text-align:left;
-    padding:0.65rem 0.7rem;
-    margin-bottom:0.35rem;
-    cursor:pointer;
-    font-size:0.92rem;
-    font-family:inherit;
-    transition:background 0.15s, border-color 0.15s;
-  }
-  .channel-btn .num{
-    font-family:'IBM Plex Mono', monospace;
-    font-size:0.72rem;
-    color:var(--text-dim);
-    min-width:1.6em;
-  }
-  .channel-btn:hover{ background:rgba(255,255,255,0.04); }
-  .channel-btn.active{
-    background:var(--accent-dim);
-    border-color:var(--accent);
-  }
-  .channel-btn.active .num{ color:var(--accent); }
-  .channel-btn.free.active{
-    background:var(--sage-dim);
-    border-color:var(--sage);
-  }
-  .channel-btn.free.active .num{ color:var(--sage); }
+    *{ box-sizing:border-box; }
 
-  .hint-box{
-    margin-top:0.9rem;
-    padding:0.8rem 0.85rem;
-    border-radius:10px;
-    background:rgba(255,255,255,0.03);
-    border:1px solid var(--panel-line);
-    font-size:0.78rem;
-    color:var(--text-dim);
-  }
+    body{
+        font-family:'Nunito', 'Segoe UI', Arial, sans-serif;
+        max-width:920px;
+        margin:auto;
+        padding:14px 22px 60px;
+        line-height:1.6;
+        background: linear-gradient(160deg, #fdf9ef 0%, #f6efd9 100%);
+        color: var(--ink);
+    }
 
-  .booth{
-    background:var(--panel);
-    border:1px solid var(--panel-line);
-    border-radius:14px;
-    display:flex;
-    flex-direction:column;
-    min-height:560px;
-  }
-  .booth-head{
-    display:flex; justify-content:space-between; align-items:center;
-    padding:1rem 1.2rem;
-    border-bottom:1px solid var(--panel-line);
-  }
-  .booth-head .title{
-    font-family:'Fraunces', Georgia, serif;
-    font-size:1.15rem;
-  }
-  .booth-head .title small{
-    display:block;
-    font-family:'IBM Plex Sans', sans-serif;
-    font-size:0.78rem;
-    color:var(--text-dim);
-    font-weight:400;
-    margin-top:0.1rem;
-  }
-  .reset-btn{
-    background:transparent;
-    border:1px solid var(--panel-line);
-    color:var(--text-dim);
-    border-radius:8px;
-    padding:0.4rem 0.7rem;
-    font-size:0.78rem;
-    cursor:pointer;
-    font-family:'IBM Plex Mono', monospace;
-  }
-  .reset-btn:hover{ color:var(--accent); border-color:var(--accent); }
+    .page-header h1{
+        font-family:'Fraunces', serif;
+        font-size:1.4rem;
+        margin:0 0 2px;
+        color: var(--green-deep);
+        letter-spacing:.01em;
+    }
 
-  .transcript{
-    flex:1;
-    padding:1.3rem 1.3rem 0.6rem;
-    overflow-y:auto;
-    display:flex;
-    flex-direction:column;
-    gap:0.85rem;
-  }
-  .bubble{
-    max-width:78%;
-    padding:0.7rem 0.95rem;
-    border-radius:14px;
-    font-size:0.95rem;
-    animation:rise 0.25s ease;
-    position:relative;
-  }
-  @keyframes rise{ from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:translateY(0);} }
-  .bubble.bot{
-    align-self:flex-start;
-    background:var(--paper);
-    color:var(--paper-ink);
-    border-bottom-left-radius:4px;
-  }
-  .bubble.bot .pl{
-    display:block;
-    margin-top:0.3rem;
-    font-size:0.78rem;
-    color:#5a5640;
-    font-style:italic;
-  }
-  .bubble.student{
-    align-self:flex-end;
-    background:var(--sage-dim);
-    border:1px solid rgba(116,174,147,0.4);
-    color:var(--text);
-    border-bottom-right-radius:4px;
-  }
-  .bubble.feedback{
-    align-self:flex-end;
-    background:transparent;
-    border:none;
-    color:var(--text-dim);
-    font-size:0.8rem;
-    font-family:'IBM Plex Mono', monospace;
-    padding:0 0.4rem;
-  }
-  .bubble.feedback.good{ color:var(--sage); }
-  .bubble.feedback.fix{
-    align-self:flex-end;
-    background:rgba(217,138,61,0.10);
-    border:1px solid rgba(217,138,61,0.45);
-    color:#F0C892;
-    font-family:'IBM Plex Sans', sans-serif;
-    font-size:0.82rem;
-    padding:0.5rem 0.75rem;
-    border-radius:10px;
-    max-width:78%;
-  }
-  .bubble.system{
-    align-self:center;
-    background:transparent;
-    color:var(--text-dim);
-    font-family:'IBM Plex Mono', monospace;
-    font-size:0.74rem;
-    letter-spacing:0.06em;
-    text-transform:uppercase;
-  }
+    .page-header::after{
+        content:"";
+        display:block;
+        height:3px;
+        width:80px;
+        margin-top:6px;
+        border-radius:3px;
+        background: linear-gradient(90deg, var(--green), var(--gold));
+    }
 
-  .suggestions{
-    display:flex; flex-wrap:wrap; gap:0.4rem;
-    padding:0 1.3rem 0.4rem;
-  }
-  .chip{
-    background:transparent;
-    border:1px solid var(--panel-line);
-    color:var(--text-dim);
-    border-radius:999px;
-    padding:0.35rem 0.7rem;
-    font-size:0.78rem;
-    cursor:pointer;
-    font-family:inherit;
-  }
-  .chip:hover{ border-color:var(--accent); color:var(--accent); }
+    h2{
+        font-family:'Fraunces', serif;
+        font-weight:600;
+        font-size:1.15rem;
+        margin:0 0 4px;
+        color: var(--green-deep);
+    }
 
-  .console{
-    border-top:1px solid var(--panel-line);
-    padding:1rem 1.3rem 1.3rem;
-    display:flex;
-    flex-direction:column;
-    gap:0.7rem;
-  }
-  .status-line{
-    font-family:'IBM Plex Mono', monospace;
-    font-size:0.78rem;
-    color:var(--text-dim);
-    min-height:1.1em;
-  }
-  .status-line.live{ color:var(--sage); }
-  .status-line.err{ color:var(--danger); }
+    .subtitle{
+        margin:0 0 8px;
+        font-size:.88rem;
+        color:#5a5246;
+    }
 
-  .controls{
-    display:flex;
-    align-items:center;
-    gap:1rem;
-    flex-wrap:wrap;
-  }
-  .mic-wrap{ position:relative; width:64px; height:64px; flex:none; }
-  .mic-ring{
-    position:absolute; inset:0;
-    border-radius:50%;
-    border:2px solid var(--accent);
-    opacity:0;
-  }
-  .mic-wrap.listening .mic-ring{
-    animation:pulse 1.4s ease-out infinite;
-  }
-  @keyframes pulse{
-    0%{ opacity:0.7; transform:scale(0.7); }
-    100%{ opacity:0; transform:scale(1.6); }
-  }
-  .mic-btn{
-    position:relative;
-    width:64px; height:64px;
-    border-radius:50%;
-    border:1px solid var(--accent);
-    background:var(--accent-dim);
-    color:var(--accent);
-    font-size:1.5rem;
-    cursor:pointer;
-    display:flex; align-items:center; justify-content:center;
-    transition:transform 0.1s;
-  }
-  .mic-btn:active{ transform:scale(0.94); }
-  .mic-btn.on{ background:var(--accent); color:#1b1208; }
-  .mic-btn:disabled{ opacity:0.35; cursor:not-allowed; }
+    .vocab-card{
+        background: var(--cream);
+        border-radius:16px;
+        padding:12px 18px 14px;
+        margin-top:10px;
+        box-shadow:0 10px 24px rgba(90,60,10,0.10);
+    }
 
-  .text-fallback{
-    display:flex; gap:0.5rem; flex:1; min-width:220px;
-  }
-  .text-fallback input{
-    flex:1;
-    background:var(--bg-soft);
-    border:1px solid var(--panel-line);
-    border-radius:8px;
-    color:var(--text);
-    padding:0.55rem 0.7rem;
-    font-size:0.9rem;
-    font-family:inherit;
-  }
-  .text-fallback input:focus{ outline:none; border-color:var(--sage); }
-  .text-fallback button, .replay-btn{
-    background:transparent;
-    border:1px solid var(--panel-line);
-    color:var(--text-dim);
-    border-radius:8px;
-    padding:0.55rem 0.8rem;
-    cursor:pointer;
-    font-size:0.85rem;
-    font-family:inherit;
-  }
-  .text-fallback button:hover, .replay-btn:hover{ color:var(--sage); border-color:var(--sage); }
+    ul.vocab-grid{
+        list-style:none;
+        display:grid;
+        grid-template-columns:repeat(auto-fill, minmax(140px,1fr));
+        gap:6px;
+        padding:0;
+        margin:8px 0 0;
+    }
 
-  .support-warning{
-    background:rgba(201,106,90,0.12);
-    border:1px solid rgba(201,106,90,0.35);
-    color:#E8B6AC;
-    border-radius:10px;
-    padding:0.6rem 0.8rem;
-    font-size:0.78rem;
-    display:none;
-  }
+    ul.vocab-grid li{
+        background:#fff;
+        border:1px solid rgba(47,111,43,0.2);
+        border-radius:10px;
+        padding:6px 10px;
+        font-weight:700;
+        font-size:.82rem;
+        color: var(--green-deep);
+        transition: transform .15s ease, box-shadow .15s ease;
+    }
 
-  ::-webkit-scrollbar{ width:8px; }
-  ::-webkit-scrollbar-thumb{ background:var(--panel-line); border-radius:8px; }
+    ul.vocab-grid li:hover{
+        transform: translateY(-2px);
+        box-shadow:0 8px 16px rgba(47,111,43,0.14);
+    }
+
+    .progress-wrap{
+        margin:14px 0 4px;
+    }
+
+    .progress-track{
+        display:flex;
+        gap:8px;
+    }
+
+    .progress-step{
+        flex:1;
+        height:10px;
+        border-radius:8px;
+        background:#e7dec0;
+        box-shadow: inset 0 1px 2px rgba(0,0,0,0.08);
+        transition: background .35s ease;
+    }
+
+    .progress-step.active{
+        background: linear-gradient(90deg, var(--gold), #e3b54e);
+    }
+
+    .progress-label{
+        margin-top:8px;
+        font-family:'JetBrains Mono', monospace;
+        font-size:.8rem;
+        color: var(--wood-deep);
+    }
+
+    .lesson-layout{
+        display:flex;
+        gap:18px;
+        margin:18px 0 22px;
+        align-items:flex-start;
+    }
+
+    .lesson-main{
+        flex:1.3;
+        display:flex;
+        flex-direction:column;
+        min-width:0;
+    }
+
+    .chat-card{
+        background: var(--cream);
+        border-radius:20px;
+        box-shadow:0 14px 28px rgba(90,60,10,0.12);
+        overflow:hidden;
+        display:flex;
+        flex-direction:column;
+        min-width:0;
+    }
+
+    .chat-card-right{
+        flex:1;
+        position:sticky;
+        top:14px;
+        align-self:flex-start;
+    }
+
+    .chat-card-right::before,
+    .chat-card-right::after{
+        content:"❀";
+        position:absolute;
+        top:9px;
+        font-size:14px;
+        color: var(--gold);
+        opacity:.75;
+        z-index:3;
+    }
+    .chat-card-right::before{ left:16px; }
+    .chat-card-right::after{ right:16px; }
+
+    .panel-header{
+        padding:12px 18px;
+        font-weight:800;
+        font-size:.92rem;
+        letter-spacing:.02em;
+        color: var(--green-deep);
+        background: linear-gradient(180deg,#fff,var(--cream));
+        border-bottom:1px solid rgba(47,111,43,0.14);
+    }
+
+    .panel-header-right{
+        color: var(--wood-deep);
+        background: linear-gradient(180deg,#fff,#f2e8cf);
+        text-align:center;
+    }
+
+    .chat-panel{
+        flex:1 1 auto;
+        height:360px;
+        overflow-y:auto;
+        padding:16px 18px;
+        position:relative;
+    }
+
+    #chatLeft{
+        background-color:#fffdf7;
+        background-image: repeating-linear-gradient(to bottom, transparent 0 31px, rgba(47,111,43,0.10) 31px 32px);
+    }
+
+    #chatRight{
+        overflow:hidden;
+        background: radial-gradient(120% 100% at 50% 0%, #eef5e8 0%, #dcebd3 55%, #cde2c3 100%);
+    }
+
+    .bot, .user{
+        max-width:85%;
+        margin:10px 0;
+        padding:10px 14px;
+        border-radius:16px;
+        font-size:.95rem;
+        animation: fadeIn .25s ease;
+    }
+
+    .bot{
+        background:#e7f1e4;
+        color: var(--green-deep);
+        border-bottom-left-radius:4px;
+        margin-right:auto;
+    }
+
+    .user{
+        background:#fbe9ee;
+        color: var(--berry);
+        border-bottom-right-radius:4px;
+        margin-left:auto;
+        text-align:right;
+    }
+
+    .bot b, .user b{
+        display:block;
+        font-size:.74rem;
+        font-weight:800;
+        opacity:.7;
+        margin-bottom:2px;
+    }
+
+    @keyframes fadeIn{
+        from{ opacity:0; transform:translateY(4px); }
+        to{ opacity:1; transform:translateY(0); }
+    }
+
+    .actions-row{
+        margin-top:6px;
+    }
+
+    button{
+        padding:11px 22px;
+        font-size:15px;
+        font-weight:700;
+        font-family:'Nunito', sans-serif;
+        cursor:pointer;
+        margin-right:10px;
+        margin-top:10px;
+        border:none;
+        border-radius:30px;
+        background: linear-gradient(135deg, var(--green), #3f8a3a);
+        color:#fff;
+        box-shadow:0 6px 16px rgba(47,111,43,0.28);
+        transition: transform .15s ease, box-shadow .15s ease;
+    }
+
+    button:hover{
+        transform: translateY(-2px);
+        box-shadow:0 10px 20px rgba(47,111,43,0.32);
+    }
+
+    button:active{ transform: translateY(0); }
+
+    button:focus-visible, input:focus-visible{
+        outline:3px solid var(--gold);
+        outline-offset:2px;
+    }
+
+    #micButton{
+        background: linear-gradient(135deg, var(--gold), #e3a93f);
+        box-shadow:0 6px 16px rgba(201,138,44,0.32);
+    }
+
+    #micButton.waiting{
+        background: linear-gradient(135deg, #e2334f, var(--berry));
+        animation: pulse 1s infinite;
+        box-shadow:0 6px 18px rgba(226,51,79,0.35);
+    }
+
+    @keyframes pulse {
+        0%   { opacity:1;    transform:scale(1);    }
+        50%  { opacity:0.78; transform:scale(1.03);  }
+        100% { opacity:1;    transform:scale(1);    }
+    }
+
+    .ghost-btn{
+        background:#fff;
+        color: var(--wood-deep);
+        border:2px solid var(--wood);
+        box-shadow:none;
+        padding:9px 20px;
+    }
+
+    .ghost-btn:hover{
+        background: var(--cream);
+        box-shadow:0 4px 10px rgba(0,0,0,0.08);
+    }
+
+    .extra-controls{
+        display:flex;
+        flex-wrap:wrap;
+        gap:14px;
+        align-items:center;
+        margin-top:4px;
+    }
+
+    .rate-control{
+        display:flex;
+        align-items:center;
+        gap:8px;
+        font-size:.85rem;
+        color: var(--ink);
+        background:#fff;
+        padding:8px 16px;
+        border-radius:30px;
+        box-shadow:0 4px 10px rgba(0,0,0,0.07);
+    }
+
+    .rate-control input[type=range]{
+        accent-color: var(--green);
+        width:120px;
+    }
+
+    .rate-control-label{ opacity:.7; }
+
+    .type-row{
+        display:flex;
+        gap:8px;
+        flex:1;
+        min-width:240px;
+    }
+
+    .type-row input[type=text]{
+        flex:1;
+        padding:10px 16px;
+        border-radius:30px;
+        border:2px solid var(--cream-deep);
+        font-family:'Nunito', sans-serif;
+        font-size:.95rem;
+        background:#fff;
+    }
+
+    .type-row input[type=text]:focus{
+        outline:none;
+        border-color: var(--green);
+    }
+
+    #status{
+        font-weight:700;
+        font-family:'JetBrains Mono', monospace;
+        font-size:.85rem;
+        color: var(--wood-deep);
+        background:#fff;
+        display:inline-block;
+        padding:8px 16px;
+        border-radius:10px;
+        box-shadow:0 4px 10px rgba(0,0,0,0.06);
+        margin-top:14px;
+    }
+
+    .waves {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        height: 90px;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.15s ease;
+        z-index: 1;
+    }
+
+    #chatRight.listening .waves,
+    #chatRight.speaking .waves{
+        opacity: 1;
+    }
+
+    .wave-group{
+        transform-origin: center;
+        animation: wavePulse 1.2s linear infinite;
+    }
+
+    .wave-group.wave2{ animation-duration: 0.9s; }
+    .wave-group.wave3{ animation-duration: 0.7s; }
+
+    @keyframes wavePulse{
+        0% { transform: translateX(-24px) scaleY(0.85); }
+        20% { transform: translateX(-10px) scaleY(1.15); }
+        40% { transform: translateX(10px) scaleY(0.9); }
+        60% { transform: translateX(24px) scaleY(1.2); }
+        80% { transform: translateX(10px) scaleY(0.88); }
+        100% { transform: translateX(-24px) scaleY(0.85); }
+    }
+
+    .wave-line{
+        fill: none;
+        stroke-width: 5;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        filter: drop-shadow(0 0 2px rgba(0,0,0,0.10));
+    }
+
+    .wave1{ stroke: rgba(94,61,32,0.55); }
+    .wave2{ stroke: rgba(201,138,44,0.65); }
+    .wave3{ stroke: rgba(47,111,43,0.5); }
+
+    .voice-figure{
+        position: absolute;
+        right: 24px;
+        top: 24px;
+        width: 190px;
+        height: 250px;
+        z-index: 2;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        pointer-events: none;
+        animation: idleFloat 4.5s ease-in-out infinite;
+    }
+
+    @keyframes idleFloat{
+        0%, 100% { transform: translateY(0); }
+        50%      { transform: translateY(-5px); }
+    }
+
+    .voice-figure .head{
+        position: absolute;
+        top: 0;
+        width: 96px;
+        height: 108px;
+        border-radius: 50% / 56%;
+        background: linear-gradient(180deg, #d7ad84 0%, #c79468 100%);
+        border: 3px solid rgba(80,80,80,0.16);
+        overflow: hidden;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+        transition: box-shadow .3s ease;
+    }
+
+    #chatRight.speaking .voice-figure .head{
+        box-shadow: 0 0 0 9px rgba(201,138,44,0.25), 0 2px 6px rgba(0,0,0,0.12);
+    }
+
+    #chatRight.listening .voice-figure .head{
+        box-shadow: 0 0 0 9px rgba(181,65,90,0.25), 0 2px 6px rgba(0,0,0,0.12);
+    }
+
+    .voice-figure .hair-back{
+        position: absolute;
+        top: -2px;
+        left: 20px;
+        width: 150px;
+        height: 190px;
+        background: linear-gradient(180deg, #e8b94a 0%, #c98a2c 55%, #a8701f 100%);
+        border-radius: 50% 50% 35% 35% / 55% 55% 25% 25%;
+        z-index: 0;
+    }
+
+    .voice-figure .hair-streak{
+        position: absolute;
+        width: 6px;
+        background: linear-gradient(180deg, #fdeec0 0%, #f7d878 100%);
+        border-radius: 6px;
+        opacity: 0.85;
+        z-index: 4;
+        pointer-events: none;
+    }
+
+    .voice-figure .hair-streak.s-left{ left: 9px; top: 55px; height: 68px; transform: rotate(7deg); }
+    .voice-figure .hair-streak.s-right{ right: 11px; top: 53px; height: 72px; transform: rotate(-6deg); }
+
+    .voice-figure .hair-front{
+        position: absolute;
+        top: -2px;
+        left: 6px;
+        width: 86px;
+        height: 62px;
+        border-radius: 50% 50% 42% 42%;
+        background: linear-gradient(180deg, #f4c55f 0%, #d79a20 100%);
+        clip-path: polygon(0 40%, 6% 12%, 18% 2%, 34% 0%, 50% 5%, 66% 2%, 82% 7%, 95% 20%, 100% 42%, 94% 54%, 82% 48%, 70% 54%, 58% 47%, 46% 56%, 34% 50%, 22% 58%, 10% 52%, 0 60%);
+        transform: rotate(-6deg);
+        z-index: 4;
+    }
+
+    .voice-figure .hair-lock-left{
+        position: absolute;
+        left: 4px;
+        top: 48px;
+        width: 22px;
+        height: 95px;
+        border-radius: 0 0 24px 24px;
+        background: linear-gradient(180deg, #f3c55e 0%, #d79a20 100%);
+        transform: rotate(8deg);
+        clip-path: polygon(20% 0%, 100% 4%, 100% 88%, 78% 100%, 40% 96%, 0% 70%, 6% 20%);
+        z-index: 3;
+    }
+
+    .voice-figure .hair-lock-right{
+        position: absolute;
+        right: 6px;
+        top: 46px;
+        width: 24px;
+        height: 100px;
+        border-radius: 0 0 24px 24px;
+        background: linear-gradient(180deg, #efbf53 0%, #d2931d 100%);
+        transform: rotate(-5deg);
+        clip-path: polygon(0% 6%, 80% 0%, 100% 20%, 96% 74%, 68% 100%, 24% 96%, 4% 84%);
+        z-index: 3;
+    }
+
+    .voice-figure .eye{
+        position: absolute;
+        top: 46px;
+        width: 22px;
+        height: 9px;
+        border-radius: 60% 60% 40% 40% / 100% 100% 40% 40%;
+        background: radial-gradient(circle at 35% 35%, #6fa3e0 0%, #2a5fa8 55%, #0c2d57 100%);
+        border-top: 2px solid #241a10;
+        border-bottom: 1px solid rgba(36,26,16,0.4);
+        box-sizing: border-box;
+        z-index: 3;
+        box-shadow: inset 0 -1px 1px rgba(0,0,0,0.15);
+    }
+
+    .voice-figure .eye::after{
+        content: "";
+        position: absolute;
+        left: 3px;
+        top: 1px;
+        width: 3px;
+        height: 3px;
+        border-radius: 50%;
+        background: #ffffff;
+    }
+
+    .voice-figure .eye::before{
+        content: "";
+        position: absolute;
+        top: -3px;
+        width: 9px;
+        height: 2px;
+        background: #241a10;
+        border-radius: 2px;
+    }
+
+    .voice-figure .eye.left{ left: 17px; animation: blinkEyeLeft 5s ease-in-out infinite; }
+    .voice-figure .eye.right{ right: 17px; animation: blinkEyeRight 5s ease-in-out infinite; animation-delay: 0.15s; }
+
+    .voice-figure .eye.left::before{
+        left: 1px;
+        transform: rotate(-18deg);
+        box-shadow: 5px -1.5px 0 -0.5px #241a10, 9px -2.5px 0 -1px #241a10;
+    }
+
+    .voice-figure .eye.right::before{
+        right: 1px;
+        transform: rotate(18deg);
+        box-shadow: -5px -1.5px 0 -0.5px #241a10, -9px -2.5px 0 -1px #241a10;
+    }
+
+    .voice-figure .glasses{
+        position: absolute;
+        top: 50px;
+        left: 42px;
+        width: 12px;
+        height: 2.5px;
+        background: #2c2a25;
+        z-index: 5;
+        pointer-events: none;
+    }
+
+    .voice-figure .glasses::before,
+    .voice-figure .glasses::after{
+        content: "";
+        position: absolute;
+        top: -9px;
+        width: 28px;
+        height: 18px;
+        border: 2.5px solid #2c2a25;
+        border-radius: 9px;
+        background: rgba(255,255,255,0.05);
+    }
+
+    .voice-figure .glasses::before{ left: -26px; }
+    .voice-figure .glasses::after{ left: 10px; }
+
+    @keyframes blinkEyeLeft{
+        0%, 92%, 100% { transform: rotate(-5deg) scaleY(1); }
+        95%           { transform: rotate(-5deg) scaleY(0.12); }
+    }
+
+    @keyframes blinkEyeRight{
+        0%, 92%, 100% { transform: rotate(5deg) scaleY(1); }
+        95%           { transform: rotate(5deg) scaleY(0.12); }
+    }
+
+    .voice-figure .eyebrow{
+        position: absolute;
+        top: 28px;
+        width: 22px;
+        height: 6px;
+        border-top: 4px solid #6a3f12;
+        border-radius: 22px 22px 0 0;
+        z-index: 3;
+    }
+
+    .voice-figure .eyebrow.left{ left: 17px; transform: rotate(-6deg); }
+    .voice-figure .eyebrow.right{ right: 17px; transform: rotate(6deg); }
+
+    .voice-figure .nose{
+        position: absolute;
+        left: 50%;
+        top: 60px;
+        width: 9px;
+        height: 12px;
+        transform: translateX(-50%);
+        border-left: 2px solid rgba(184,112,74,0.32);
+        border-bottom: 2px solid rgba(184,112,74,0.18);
+        border-radius: 0 0 8px 8px;
+        z-index: 3;
+    }
+
+    .voice-figure .mouth{
+        position: absolute;
+        left: 50%;
+        top: 74px;
+        transform: translateX(-50%);
+        width: 28px;
+        height: 12px;
+        border-radius: 0 0 20px 20px;
+        background: linear-gradient(180deg, #8f2f2f 0%, #b94a4a 100%);
+        z-index: 3;
+        overflow: hidden;
+        box-shadow: inset 0 2px 0 rgba(255,255,255,0.25);
+    }
+
+    .voice-figure .mouth::before{
+        content: "";
+        position: absolute;
+        left: 4px;
+        top: 1px;
+        width: 21px;
+        height: 5px;
+        border-radius: 0 0 14px 14px;
+        background: rgba(255,255,255,0.9);
+    }
+
+    .voice-figure.talking .mouth{
+        animation: mouthMove 0.18s infinite alternate ease-in-out;
+    }
+
+    .voice-figure.talking .mouth::before{
+        background: rgba(255,255,255,0.86);
+        top: 2px;
+        height: 4px;
+    }
+
+    @keyframes mouthMove{
+        0% { transform: translateX(-50%) scaleY(0.72); }
+        100% { transform: translateX(-50%) scaleY(1.38); }
+    }
+
+    .voice-figure .neck{
+        position: absolute;
+        top: 102px;
+        width: 24px;
+        height: 24px;
+        background: linear-gradient(180deg, #c99669 0%, #b98259 100%);
+        border-radius: 0 0 12px 12px;
+        z-index: 2;
+    }
+
+    .voice-figure .dress{
+        position: absolute;
+        top: 118px;
+        width: 126px;
+        height: 116px;
+        border-radius: 28px 28px 18px 18px;
+        background: linear-gradient(180deg, #2f6f2b 0%, #1f4d1e 100%);
+        border: 3px solid rgba(70,70,70,0.18);
+        clip-path: polygon(24% 0%, 76% 0%, 100% 18%, 74% 46%, 100% 70%, 90% 100%, 10% 100%, 0% 70%, 26% 46%, 0% 18%);
+        box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    }
+
+    .voice-figure .dress-neckline{
+        position: absolute;
+        top: 116px;
+        width: 86px;
+        height: 34px;
+        border-radius: 0 0 40px 40px;
+        border-bottom: 3px solid rgba(255,255,255,0.22);
+        z-index: 4;
+        box-sizing: border-box;
+    }
+
+    .voice-figure .dress-belt{
+        position: absolute;
+        top: 172px;
+        width: 112px;
+        height: 9px;
+        background: var(--wood);
+        border-radius: 8px;
+        z-index: 4;
+        box-shadow: inset 0 1px 0 rgba(255,255,255,0.15);
+    }
+
+    .voice-figure .dress-rose{
+        position: absolute;
+        top: 168px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        background: radial-gradient(circle at 35% 35%, #ffd8df 0%, #d86a86 60%, var(--berry) 100%);
+        z-index: 5;
+        box-shadow: 0 0 0 2px rgba(255,255,255,0.12);
+    }
+
+    .voice-figure .arm{
+        position: absolute;
+        top: 128px;
+        width: 20px;
+        height: 72px;
+        border-radius: 18px;
+        background: linear-gradient(180deg, #c99669 0%, #b98259 100%);
+        z-index: 1;
+    }
+
+    .voice-figure .arm.left{ left: 18px; transform: rotate(18deg); }
+    .voice-figure .arm.right{ right: 18px; transform: rotate(-16deg); }
+
+    .voice-figure .hand{
+        position: absolute;
+        bottom: -8px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 26px;
+        height: 20px;
+        border-radius: 50%;
+        background: linear-gradient(180deg, #c99669 0%, #b98259 100%);
+    }
+
+    .voice-figure .leg{
+        position: absolute;
+        top: 222px;
+        width: 20px;
+        height: 48px;
+        background: linear-gradient(180deg, #c99669 0%, #b98259 100%);
+        clip-path: polygon(15% 0%, 85% 0%, 76% 100%, 24% 100%);
+        z-index: 1;
+    }
+
+    .voice-figure .leg.left{ left: 48px; }
+    .voice-figure .leg.right{ right: 48px; }
+
+    .voice-figure .boot{
+        position: absolute;
+        top: 262px;
+        width: 26px;
+        height: 24px;
+        background: linear-gradient(180deg, #7a4a26 0%, #4a2d16 100%);
+        border-radius: 8px 8px 5px 5px;
+        border: 2px solid rgba(40,22,8,0.35);
+        box-shadow: 0 2px 4px rgba(0,0,0,0.18);
+    }
+
+    .voice-figure .boot.left{ left: 45px; }
+    .voice-figure .boot.right{ right: 45px; }
+
+    .voice-figure .ring{
+        position: absolute;
+        right: 36px;
+        top: 174px;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: radial-gradient(circle at 35% 35%, #fff3a0 0%, #d4a52d 75%, #9c6f10 100%);
+        box-shadow: 0 0 0 1px rgba(120,90,20,0.22);
+        z-index: 5;
+    }
+
+    @media (max-width: 720px){
+        .lesson-layout{ flex-direction:column; }
+        .lesson-main{ flex:none; width:100%; padding-bottom:170px; }
+
+        .chat-card-right{
+            position:fixed;
+            right:10px;
+            bottom:10px;
+            width:118px;
+            z-index:60;
+            box-shadow:0 10px 26px rgba(40,25,5,0.32);
+        }
+
+        .chat-card-right .panel-header,
+        .chat-card-right::before,
+        .chat-card-right::after{
+            display:none;
+        }
+
+        .chat-card-right .chat-panel{
+            height:150px;
+            padding:0;
+        }
+
+        .voice-figure{ transform: scale(0.42); right:-12px; top:-22px; }
+
+        .extra-controls{ flex-direction:column; align-items:stretch; }
+        .type-row{ min-width:0; }
+    }
+
+    @media (prefers-reduced-motion: reduce){
+        *, *::before, *::after{
+            animation-duration: 0.001ms !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: 0.001ms !important;
+        }
+    }
+
 </style>
 </head>
+
 <body>
 
-<div class="topbar">
-  <div>
-    <h1>Sprechen <span>A1</span></h1>
-    <div class="sub">Lekcja 1 · Guten Tag! · Begrüßung & Vorstellung</div>
-  </div>
-  <a class="back-link" href="A1.html">← Powrót do spisu treści</a>
+<header class="page-header">
+<h1>Deutsch lernen von Anfang an</h1>
+</header>
+
+<div class="vocab-card">
+<h2>Lektion 1 – Guten Tag!</h2>
+<p class="subtitle">Thema: Sich kennenlernen und ein kurzes Gespräch führen.</p>
+
+<ul class="vocab-grid">
+<li>Guten Tag</li>
+<li>Hallo</li>
+<li>Ich heiße ...</li>
+<li>Mein Name ist ...</li>
+<li>Wie geht es dir?</li>
+<li>Gut, danke.</li>
+<li>Ich komme aus ...</li>
+<li>Tschüss</li>
+</ul>
 </div>
 
-<div class="layout">
-
-  <aside class="channels">
-    <h2>Wybierz scenariusz</h2>
-    <button class="channel-btn free" data-topic="free"><span class="num">00</span> Swobodna rozmowa</button>
-    <button class="channel-btn" data-topic="greeting"><span class="num">01</span> Grupy (w zależności od pory)</button>
-    <button class="channel-btn" data-topic="vorstellung"><span class="num">02</span> Przedstawianie się</button>
-    <button class="channel-btn" data-topic="formal"><span class="num">03</span> Formalne przedstawianie się</button>
-
-    <div class="hint-box" id="hintBox">
-      Naciśnij mikrofon i odpowiedz <strong>po niemiecku</strong>.
-      <br><br>
-      ✏️ Asystent poprawia: odmianę (ich/du/er), brak zaimka „ich" oraz „Guten" vs „Gute".
+<div class="progress-wrap">
+    <div class="progress-track" id="progressTrack">
+        <div class="progress-step" data-step="1"></div>
+        <div class="progress-step" data-step="2"></div>
+        <div class="progress-step" data-step="3"></div>
+        <div class="progress-step" data-step="4"></div>
+        <div class="progress-step" data-step="5"></div>
+        <div class="progress-step" data-step="6"></div>
     </div>
-  </aside>
+    <div class="progress-label" id="progressLabel" aria-live="polite">Bereit zum Start</div>
+</div>
 
-  <main class="booth">
-    <div class="booth-head">
-      <div class="title" id="boothTitle">Swobodna rozmowa<small>Mów, co chcesz — partner odpowie</small></div>
-      <button class="reset-btn" id="resetBtn">↺ Nowa rozmowa</button>
-    </div>
+<div class="lesson-layout">
 
-    <div class="transcript" id="transcript"></div>
-    <div class="suggestions" id="suggestions"></div>
+    <div class="lesson-main">
 
-    <div class="console">
-      <div class="support-warning" id="supportWarning">
-        Twoja przeglądarka nie wspiera rozpoznawania mowy (najlepiej działa w Chrome/Edge).
-        Możesz wpisać odpowiedź w polu tekstowym.
-      </div>
-      <div class="status-line" id="statusLine">Naciśnij mikrofon, aby zacząć mówić.</div>
-      <div class="controls">
-        <div class="mic-wrap" id="micWrap">
-          <div class="mic-ring"></div>
-          <button class="mic-btn" id="micBtn" title="Mów">🎤</button>
+        <div class="chat-card chat-card-left">
+            <div class="panel-header">📝 Gespräch</div>
+            <div id="chatLeft" class="chat-panel"></div>
         </div>
-        <button class="replay-btn" id="replayBtn">🔊 Powtórz ostatnią wypowiedź</button>
-        <div class="text-fallback">
-          <input type="text" id="textInput" placeholder="…albo napisz odpowiedź po niemiecku">
-          <button id="sendBtn">Wyślij</button>
+
+        <div class="actions-row">
+        <button onclick="startLesson()">▶ Lektion starten</button>
+        <button id="micButton" onclick="listenAnswer()">🎤 Mit dem Mikrofon antworten</button>
+        <button class="ghost-btn" onclick="repeatLast()">🔁 Wiederholen</button>
         </div>
-      </div>
+
+        <div class="extra-controls">
+            <label class="rate-control">
+                🐢
+                <input type="range" id="rateSlider" min="0.6" max="1.3" step="0.05" value="0.95" oninput="updateRate(this.value)">
+                🐇
+                <span class="rate-control-label">Sprechtempo</span>
+            </label>
+
+            <div class="type-row">
+                <input type="text" id="typedAnswer" placeholder="...oder hier antworten und Enter drücken" onkeydown="if(event.key==='Enter'){ sendTypedAnswer(); }">
+                <button class="ghost-btn" onclick="sendTypedAnswer()">Senden</button>
+            </div>
+        </div>
+
+        <p id="status" aria-live="polite">Status: Bereit</p>
+
     </div>
-  </main>
+
+    <div class="chat-card chat-card-right">
+        <div class="panel-header panel-header-right">👩 Nele</div>
+        <div id="chatRight" class="chat-panel">
+
+            <div class="voice-figure" id="voiceFigure">
+                <div class="hair-back"></div>
+                <div class="hair-streak s-left"></div>
+                <div class="hair-streak s-right"></div>
+                <div class="hair-lock-left"></div>
+                <div class="hair-lock-right"></div>
+                <div class="head">
+                    <div class="hair-front"></div>
+                    <div class="eyebrow left"></div>
+                    <div class="eyebrow right"></div>
+                    <div class="eye left"></div>
+                    <div class="eye right"></div>
+                    <div class="glasses"></div>
+                    <div class="nose"></div>
+                    <div class="mouth"></div>
+                </div>
+                <div class="neck"></div>
+                <div class="dress-neckline"></div>
+                <div class="dress"></div>
+                <div class="dress-belt"></div>
+                <div class="dress-rose"></div>
+                <div class="arm left"><div class="hand"></div></div>
+                <div class="arm right"><div class="hand"></div></div>
+                <div class="leg left"></div>
+                <div class="leg right"></div>
+                <div class="boot left"></div>
+                <div class="boot right"></div>
+                <div class="ring"></div>
+            </div>
+
+            <svg class="waves" id="wavesSvg" viewBox="0 0 800 180" preserveAspectRatio="none">
+                <g class="wave-group wave1">
+                    <path class="wave-line wave1" d="M0,90 L30,90 L45,60 L60,120 L75,40 L90,140 L105,30 L120,150 L135,50 L150,110 L165,70 L180,90 L210,90 L225,55 L240,130 L255,35 L270,145 L285,25 L300,155 L315,45 L330,115 L345,75 L360,90 L390,90 L405,58 L420,132 L435,38 L450,148 L465,28 L480,152 L495,48 L510,112 L525,72 L540,90 L570,90 L585,62 L600,126 L615,42 L630,138 L645,32 L660,150 L675,52 L690,108 L705,78 L720,90 L750,90 L765,56 L780,128 L795,44"></path>
+                </g>
+                <g class="wave-group wave2">
+                    <path class="wave-line wave2" d="M0,105 L24,105 L36,82 L48,128 L60,54 L72,148 L84,38 L96,156 L108,30 L120,140 L132,68 L144,105 L180,105 L192,80 L204,132 L216,50 L228,146 L240,34 L252,158 L264,26 L276,138 L288,70 L300,105 L336,105 L348,84 L360,130 L372,56 L384,146 L396,40 L408,154 L420,32 L432,140 L444,72 L456,105 L492,105 L504,82 L516,128 L528,54 L540,148 L552,38 L564,156 L576,30 L588,140 L600,68 L612,105 L648,105 L660,80 L672,132 L684,50 L696,146 L708,34 L720,158 L732,26 L744,138 L756,70 L768,105"></path>
+                </g>
+                <g class="wave-group wave3">
+                    <path class="wave-line wave3" d="M0,70 L16,70 L24,48 L32,92 L40,30 L48,110 L56,22 L64,118 L72,26 L80,100 L88,56 L96,70 L120,70 L128,46 L136,94 L144,34 L152,112 L160,20 L168,120 L176,28 L184,102 L192,60 L200,70 L224,70 L232,50 L240,90 L248,32 L256,108 L264,24 L272,116 L280,26 L288,98 L296,54 L304,70 L328,70 L336,48 L344,92 L352,30 L360,110 L368,22 L376,118 L384,26 L392,100 L400,56 L408,70 L432,70 L440,46 L448,94 L456,34 L464,112 L472,20 L480,120 L488,28 L496,102 L504,60 L512,70"></path>
+                </g>
+            </svg>
+
+        </div>
+    </div>
 
 </div>
 
 <script>
-(function(){
 
-  // ---------- DANE: dialogi tematyczne (Lekcja 1) ----------
-  const DIALOGS = {
-    greeting: {
-      label: "Grupy (w zależności od pory)",
-      steps: [
-        { bot:"Hallo! Wie geht es dir? Wie heißt du?", pl:"Cześć! Jak się masz? Jak się nazywasz?", kw:["hallo","guten tag"], sug:["Hallo! Mir geht es gut.","Hallo! Ich bin..."] },
-        { bot:"Guten Morgen! Wie heißt du?", pl:"Dzień dobry (rano)! Jak się nazywasz?", kw:["guten morgen","ich heiße","ich bin"], sug:["Guten Morgen! Ich heiße Anna.","Guten Morgen! Ich bin Max."] },
-        { bot:"Guten Tag! Woher kommst du?", pl:"Dzień dobry (w dzień)! Skąd jesteś?", kw:["guten tag","komme aus","polen"], sug:["Guten Tag! Ich komme aus Polen.","Guten Tag! Ich bin aus Krakau."] },
-        { bot:"Guten Abend! Wie geht es dir?", pl:"Dzień dobry (wieczór)! Jak się masz?", kw:["guten abend","gut","geht"], sug:["Guten Abend! Mir geht es gut.","Guten Abend! Es geht."] },
-        { bot:"Tschüss! Bis bald!", pl:"Cześć! Do zobaczenia!", kw:["tschüss","bis bald"], sug:["Tschüss! Bis bald!"] }
-      ]
-    },
-    vorstellung: {
-      label: "Przedstawianie się (nieformalne)",
-      steps: [
-        { bot:"Hallo! Wie heißt du?", pl:"Cześć! Jak się nazywasz?", kw:["ich heiße","ich bin","heiße"], sug:["Ich heiße Anna.","Ich bin Tomek."] },
-        { bot:"Und woher kommst du?", pl:"A skąd jesteś?", kw:["komme aus","aus polen","krakau"], sug:["Ich komme aus Polen.","Ich komme aus Krakau."] },
-        { bot:"Wie alt bist du?", pl:"Ile masz lat?", kw:["ich bin","jahre"], sug:["Ich bin zwanzig Jahre alt.","Ich bin achtzehn."] },
-        { bot:"Was machst du?", pl:"Co robisz? (jakieś zajęcie)", kw:["ich bin","student","lehrer"," arbeite"], sug:["Ich bin Student.","Ich bin Lehrerin.","Ich arbeite."] },
-        { bot:"Tschüss, [Name]! Bis morgen!", pl:"Cześć, [nazwa]! Do jutra!", kw:["tschüss","bis morgen"], sug:["Tschüss! Bis morgen!"] }
-      ]
-    },
-    formal: {
-      label: "Formalne przedstawianie się",
-      steps: [
-        { bot:"Guten Tag. Wie heißen Sie?", pl:"Dzień dobry. Jak się Pan/Pani nazywa?", kw:["guten tag","mein name","ich heiße"], sug:["Guten Tag. Mein Name ist Anna Müller.","Guten Tag. Ich heiße Thomas."] },
-        { bot:"Wo wohnen Sie?", pl:"Gdzie Pan/Pani mieszka?", kw:["wohne","in","warschau"], sug:["Ich wohne in Warschau.","Ich wohne in Berlin."] },
-        { bot:"Was sind Sie beruflich?", pl:"Kim jest Pan/Pani zawodowo?", kw:["bin","lehrer","student","arzt"], sug:["Ich bin Lehrer.","Ich bin Student.","Ich bin Arzt."] },
-        { bot:"Auf Wiedersehen, [Name]!", pl:"Do widzenia, [nazwa]!", kw:["auf wiedersehen"], sug:["Auf Wiedersehen!"] }
-      ]
-    }
-  };
+const chatLeft = document.getElementById("chatLeft");
+const chatRight = document.getElementById("chatRight");
+const statusText = document.getElementById("status");
+const micButton = document.getElementById("micButton");
+const voiceFigure = document.getElementById("voiceFigure");
 
-  // ---------- DANE: swobodna rozmowa (proste dopasowanie wzorców dla Lekcji 1) ----------
-  const FREE_RULES = [
-    { test:["hallo","guten tag","guten morgen","guten abend","hi "], reply:"Hallo! Schön, dass du da bist. Wie heißt du?", pl:"Cześć! Miło, że jesteś. Jak się nazywasz?" },
-    { test:["ich heiße","ich bin "], reply:"Freut mich! Wie geht es dir?", pl:"Bardzo mi przyjemnie! Jak się masz?" },
-    { test:["wie geht","gut","prima","super"], reply:"Das freut mich! Und woher kommst du?", pl:"Cieszę się! A skąd jesteś?" },
-    { test:["schlecht","müde"], reply:"Oh, das tut mir leid. Erhole dich gut!", pl:"Och, przykro mi. Odpocznij dobrze!" },
-    { test:["komme aus","ich bin aus","aus polen"], reply:"Interessant! Ich komme aus Deutschland.", pl:"Interesujące! Ja jestem z Niemiec." },
-    { test:["wohne","in warschau","in krakau"], reply:"Schön! Ich wohne in Berlin.", pl:"Miło! Ja mieszkam w Berlinie." },
-    { test:["student","lehrer","arbeite"], reply:"Das ist spannend!", pl:"To wspaniałe!" },
-    { test:["tschüss","wiedersehen","bis bald","bis morgen"], reply:"Tschüss! Bis zum nächsten Mal!", pl:"Cześć! Do następnego razu!" }
-  ];
-  const FREE_DEFAULT = { reply:"Das ist interessant! Erzähl mir mehr.", pl:"To interesujące! Powiedz mi więcej." };
+let lessonStep = 0;
+let isWaitingForAnswer = false;
+let selectedVoice = null;
+let lastBotText = "";
+let speechRate = 0.95;
 
-  // ---------- KOREKTOR BŁĘDÓW (offline) ----------
-  const VERB_TABLE = {
-    sein:     { ich:"bin",     du:"bist",      er:"ist",     wir:"sind",     ihr:"seid",     sie_pl:"sind" },
-    haben:    { ich:"habe",    du:"hast",      er:"hat",     wir:"haben",    ihr:"habt",     sie_pl:"haben" },
-    heißen:   { ich:"heiße",   du:"heißt",     er:"heißt",   wir:"heißen",   ihr:"heißt",    sie_pl:"heißen" },
-    kommen:   { ich:"komme",   du:"kommst",    er:"kommt",   wir:"kommen",   ihr:"kommt",    sie_pl:"kommen" },
-    wohnen:   { ich:"wohne",   du:"wohnst",    er:"wohnt",   wir:"wohnen",   ihr:"wohnt",    sie_pl:"wohnen" },
-    machen:   { ich:"mache",   du:"machst",    er:"macht",   wir:"machen",   ihr:"macht",    sie_pl:"machen" },
-    arbeiten: { ich:"arbeite", du:"arbeitest", er:"arbeitet",wir:"arbeiten", ihr:"arbeitet", sie_pl:"arbeiten" },
-    gehen:    { ich:"gehe",    du:"gehst",     er:"geht",    wir:"gehen",    ihr:"geht",     sie_pl:"gehen" },
-    möchten:  { ich:"möchte",  du:"möchtest",  er:"möchte",  wir:"möchten",  ihr:"möchtet",  sie_pl:"möchten" },
-    brauchen: { ich:"brauche", du:"brauchst",  er:"braucht", wir:"brauchen", ihr:"braucht",  sie_pl:"brauchen" },
-    suchen:   { ich:"suche",   du:"suchst",    er:"sucht",   wir:"suchen",   ihr:"sucht",    sie_pl:"suchen" },
-    nehmen:   { ich:"nehme",   du:"nimmst",    er:"nimmt",   wir:"nehmen",   ihr:"nehmt",    sie_pl:"nehmen" },
-    sind:     { ich:"bin",     du:"bist",      er:"ist",     wir:"sind",     ihr:"seid",     sie_pl:"sind" }, // forma "sind" jako błąd dla "ich"
-    bist:     { ich:"bin",     du:"bist",      er:"ist",     wir:"sind",     ihr:"seid",     sie_pl:"sind" }
-  };
-  const VERB_FORM_MAP = {};
-  Object.keys(VERB_TABLE).forEach(verb => {
-    Object.keys(VERB_TABLE[verb]).forEach(person => {
-      const form = VERB_TABLE[verb][person];
-      (VERB_FORM_MAP[form] = VERB_FORM_MAP[form] || []).push({ verb, person });
-    });
-  });
-  const PRONOUN_PERSONS = {
-    ich:["ich"], du:["du"], er:["er"], sie:["er","sie_pl"], es:["er"],
-    wir:["wir"], ihr:["ihr"]
-  };
-  const GENDERS = {
-    kaffee:"der", tee:"der", kuchen:"der", bahnhof:"der", mann:"der", lehrer:"der", student:"der", euro:"der",
-    frau:"die", schwester:"die", familie:"die", größe:"die", farbe:"die", jacke:"die", cola:"die",
-    lehrerin:"die", studentin:"die", uhr:"die",
-    wasser:"das", museum:"das", kind:"das", polen:"das", berlin:"das", warschau:"das", krakau:"das"
-  };
+const SpeechRecognition =
+    window.SpeechRecognition ||
+    window.webkitSpeechRecognition;
 
-  function checkGrammar(said){
-    const clean = said.toLowerCase().replace(/[.,!?]/g,"");
-    const tokens = clean.split(/\s+/).filter(Boolean);
-    const errors = [];
+let recognition = null;
 
-    // 1) brak zaimka "ich"
-    const firstWord = tokens[0];
-    if (firstWord && VERB_FORM_MAP[firstWord]){
-      const ichMatch = VERB_FORM_MAP[firstWord].some(m => m.person === "ich");
-      if (ichMatch){
-        errors.push("✏️ Zacznij od „Ich " + firstWord + "…”, a nie samo „" + firstWord + "…”.");
-      }
-    }
+if(SpeechRecognition){
+    recognition = new SpeechRecognition();
 
-    // 2) zgodność zaimek + czasownik
-    for (let i = 0; i < tokens.length - 1; i++){
-      const pron = tokens[i];
-      const next = tokens[i+1];
-      const expected = PRONOUN_PERSONS[pron];
-      if (!expected) continue;
-      const matches = VERB_FORM_MAP[next];
-      if (!matches) continue;
-      const isCorrect = matches.some(m => expected.includes(m.person));
-      if (!isCorrect){
-        const verb = matches[0].verb;
-        const correctForm = VERB_TABLE[verb][expected[0]];
-        errors.push("✏️ „" + pron + " " + next + "” → powinno być „" + pron + " " + correctForm + "” (czasownik „" + verb + "”).");
-      }
-    }
-
-    // 3) rodzajnik (dla Lekcji 1 rzadziej, ale zostawiam)
-    for (let i = 0; i < tokens.length - 1; i++){
-      const art = tokens[i];
-      const noun = tokens[i+1];
-      if (["der","die","das"].includes(art) && GENDERS[noun] && GENDERS[noun] !== art){
-        errors.push("✏️ „" + art + " " + noun + "” → powinno być „" + GENDERS[noun] + " " + noun + "”.");
-      }
-    }
-
-    return errors;
-  }
-
-  // ---------- STAN ----------
-  let currentTopic = "free";
-  let stepIndex = 0;
-  let lastBotText = "";
-  let recognition = null;
-  let listening = false;
-
-  const transcriptEl = document.getElementById("transcript");
-  const suggestionsEl = document.getElementById("suggestions");
-  const statusEl = document.getElementById("statusLine");
-  const boothTitle = document.getElementById("boothTitle");
-  const micBtn = document.getElementById("micBtn");
-  const micWrap = document.getElementById("micWrap");
-  const textInput = document.getElementById("textInput");
-  const sendBtn = document.getElementById("sendBtn");
-  const replayBtn = document.getElementById("replayBtn");
-  const resetBtn = document.getElementById("resetBtn");
-  const supportWarning = document.getElementById("supportWarning");
-
-  // ---------- SYNTEZA MOWY ----------
-  let voices = [];
-  function loadVoices(){ voices = speechSynthesis.getVoices(); }
-  loadVoices();
-  if ("onvoiceschanged" in speechSynthesis) speechSynthesis.onvoiceschanged = loadVoices;
-
-  function speakGerman(text){
-    if (!("speechSynthesis" in window)) return;
-    speechSynthesis.cancel();
-    const u = new SpeechSynthesisUtterance(text);
-    u.lang = "de-DE";
-    const de = voices.find(v => v.lang && v.lang.startsWith("de"));
-    if (de) u.voice = de;
-    u.rate = 0.95;
-    speechSynthesis.speak(u);
-  }
-
-  // ---------- ROZPOZNAWANIE MOWY ----------
-  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
-  if (!SR) {
-    supportWarning.style.display = "block";
-    micBtn.disabled = true;
-  } else {
-    recognition = new SR();
     recognition.lang = "de-DE";
     recognition.interimResults = false;
     recognition.maxAlternatives = 1;
 
-    recognition.onstart = () => {
-      listening = true;
-      micWrap.classList.add("listening");
-      micBtn.classList.add("on");
-      setStatus("Słucham... mów teraz po niemiecku.", "live");
+    recognition.onresult = function(event){
+
+        const answer =
+            event.results[0][0].transcript.trim();
+
+        statusText.textContent =
+            "Status: Antwort erkannt";
+
+        micButton.classList.remove("waiting");
+        isWaitingForAnswer = false;
+        chatRight.classList.remove("listening");
+        voiceFigure.classList.remove("talking");
+
+        addUser(answer);
+
+        evaluate(answer);
     };
-    recognition.onend = () => {
-      listening = false;
-      micWrap.classList.remove("listening");
-      micBtn.classList.remove("on");
+
+    recognition.onerror = function(){
+
+        statusText.textContent =
+            "Status: Mikrofonfehler";
+
+        micButton.classList.remove("waiting");
+        isWaitingForAnswer = false;
+        chatRight.classList.remove("listening");
+        voiceFigure.classList.remove("talking");
     };
-    recognition.onerror = (e) => {
-      setStatus("Nie udało się rozpoznać mowy (" + e.error + "). Spróbuj znowu.", "err");
-    };
-    recognition.onresult = (e) => {
-      const said = e.results[0][0].transcript;
-      handleStudentInput(said);
-    };
-  }
+}
 
-  micBtn.addEventListener("click", () => {
-    if (!recognition) return;
-    if (listening) { recognition.stop(); return; }
-    try { recognition.start(); } catch(err){ }
-  });
+function addBot(text){
 
-  sendBtn.addEventListener("click", () => {
-    const v = textInput.value.trim();
-    if (!v) return;
-    textInput.value = "";
-    handleStudentInput(v);
-  });
-  textInput.addEventListener("keydown", (e) => {
-    if (e.key === "Enter") sendBtn.click();
-  });
-
-  replayBtn.addEventListener("click", () => {
-    if (lastBotText) speakGerman(lastBotText);
-  });
-
-  resetBtn.addEventListener("click", () => startTopic(currentTopic));
-
-  // ---------- UI ----------
-  function addBubble(kind, text, plText){
-    const div = document.createElement("div");
-    div.className = "bubble " + kind;
-    div.textContent = text;
-    if (plText){
-      const small = document.createElement("span");
-      small.className = "pl";
-      small.textContent = plText;
-      div.appendChild(small);
-    }
-    transcriptEl.appendChild(div);
-    transcriptEl.scrollTop = transcriptEl.scrollHeight;
-    return div;
-  }
-
-  function setStatus(text, mode){
-    statusEl.textContent = text;
-    statusEl.className = "status-line" + (mode ? " " + mode : "");
-  }
-
-  function setSuggestions(list){
-    suggestionsEl.innerHTML = "";
-    (list || []).forEach(s => {
-      const b = document.createElement("button");
-      b.className = "chip";
-      b.textContent = "🔊 " + s;
-      b.addEventListener("click", () => speakGerman(s));
-      suggestionsEl.appendChild(b);
-    });
-  }
-
-  function botSay(text, pl, sug){
     lastBotText = text;
-    addBubble("bot", text, pl);
-    setSuggestions(sug);
-    speakGerman(text);
-  }
 
-  // ---------- LOGIKA ----------
-  function startTopic(topic){
-    currentTopic = topic;
-    stepIndex = 0;
-    transcriptEl.innerHTML = "";
-    document.querySelectorAll(".channel-btn").forEach(b => {
-      b.classList.toggle("active", b.dataset.topic === topic);
+    chatLeft.innerHTML +=
+        `<div class="bot"><b>🤖 Nele:</b> ${text}</div>`;
+
+    chatLeft.scrollTop = chatLeft.scrollHeight;
+
+    chatRight.classList.add("speaking");
+    chatRight.classList.remove("listening");
+    voiceFigure.classList.add("talking");
+
+    speak(text);
+
+    micButton.classList.add("waiting");
+    isWaitingForAnswer = true;
+}
+
+function addUser(text){
+
+    chatLeft.innerHTML +=
+        `<div class="user"><b>🧑 Du:</b> ${text}</div>`;
+
+    chatLeft.scrollTop = chatLeft.scrollHeight;
+}
+
+function pickGermanFemaleVoice(voices){
+
+    const germanVoices = voices.filter(voice =>
+        voice.lang && voice.lang.toLowerCase().startsWith("de")
+    );
+
+    if(germanVoices.length === 0){
+        return null;
+    }
+
+    const femaleNameHints = [
+        "katja", "helene", "anna", "petra", "marlene",
+        "vicki", "seraphina", "amala", "martha", "ingrid",
+        "frieda", "greta", "female"
+    ];
+
+    const maleNameHints = [
+        "conrad", "stefan", "klaus", "markus", "bernd",
+        "yannick", "florian", "ralf", "hans", "male"
+    ];
+
+    function scoreVoice(voice){
+
+        const name = voice.name.toLowerCase();
+        let score = 0;
+
+        if(name.includes("natural")){ score += 50; }
+        if(name.includes("neural")){ score += 45; }
+        if(name.includes("online")){ score += 25; }
+        if(name.includes("google")){ score += 15; }
+
+        if(femaleNameHints.some(hint => name.includes(hint))){
+            score += 20;
+        }
+
+        if(maleNameHints.some(hint => name.includes(hint))){
+            score -= 100;
+        }
+
+        if(voice.lang === "de-DE"){ score += 5; }
+
+        return score;
+    }
+
+    return germanVoices
+        .slice()
+        .sort((a, b) => scoreVoice(b) - scoreVoice(a))[0];
+}
+
+function speak(text){
+
+    speechSynthesis.cancel();
+
+    const utterance =
+        new SpeechSynthesisUtterance(text);
+
+    const voices =
+        speechSynthesis.getVoices();
+
+    selectedVoice = pickGermanFemaleVoice(voices);
+
+    if(selectedVoice){
+        utterance.voice = selectedVoice;
+    }
+
+    utterance.lang = "de-DE";
+    utterance.rate = speechRate;
+    utterance.pitch = 1.0;
+    utterance.volume = 1;
+
+    utterance.onend = function(){
+        chatRight.classList.remove("speaking");
+        voiceFigure.classList.remove("talking");
+    };
+
+    speechSynthesis.speak(utterance);
+}
+
+function updateRate(val){
+    speechRate = parseFloat(val);
+}
+
+function repeatLast(){
+
+    if(!lastBotText){
+        return;
+    }
+
+    chatRight.classList.add("speaking");
+    chatRight.classList.remove("listening");
+    voiceFigure.classList.add("talking");
+
+    speak(lastBotText);
+}
+
+function updateProgress(step){
+
+    document.querySelectorAll(".progress-step").forEach(function(el){
+        const s = parseInt(el.getAttribute("data-step"));
+        if(s <= step){
+            el.classList.add("active");
+        }else{
+            el.classList.remove("active");
+        }
     });
 
-    if (topic === "free"){
-      boothTitle.innerHTML = "Swobodna rozmowa<small>Mów, co chcesz — partner odpowie</small>";
-      addBubble("system", "— rozmowa otwarta (Lekcja 1) —");
-      setStatus("Powiedz cokolwiek po niemiecku, np. „Hallo, wie heißt du?”.");
-      setSuggestions(["Hallo, wie heißt du?","Ich heiße...","Guten Morgen!","Ich komme aus Polen."]);
-      return;
+    const labels = ["", "Begrüßung", "Befinden", "Herkunft", "Freizeit", "Abschied", "Fertig"];
+    const labelEl = document.getElementById("progressLabel");
+
+    if(step >= 1 && step <= 6){
+        labelEl.textContent = "Schritt " + step + " von 6: " + labels[step];
+    }else{
+        labelEl.textContent = "Bereit zum Start";
+    }
+}
+
+function startLesson(){
+
+    chatLeft.innerHTML = "";
+    chatRight.classList.remove("listening");
+    chatRight.classList.remove("speaking");
+    voiceFigure.classList.remove("talking");
+
+    lessonStep = 1;
+    isWaitingForAnswer = false;
+    micButton.classList.remove("waiting");
+
+    updateProgress(1);
+
+    if(!selectedVoice){
+        const voices = speechSynthesis.getVoices();
+        selectedVoice = pickGermanFemaleVoice(voices);
     }
 
-    const d = DIALOGS[topic];
-    boothTitle.innerHTML = d.label + "<small>Odpowiadaj na kolejne pytania</small>";
-    setStatus("Naciśnij mikrofon i odpowiedz.");
-    showStep();
-  }
+    addBot(
+        "Guten Tag! Ich heiße Nele. Wie heißt du?"
+    );
+}
 
-  function showStep(){
-    const d = DIALOGS[currentTopic];
-    const step = d.steps[stepIndex];
-    botSay(step.bot, step.pl, step.sug);
-  }
+function listenAnswer(){
 
-  function checkKeywords(said, kw){
-    const lower = said.toLowerCase();
-    return (kw || []).some(k => lower.includes(k));
-  }
+    if(!recognition){
 
-  function advanceScripted(said){
-    const d = DIALOGS[currentTopic];
-    const step = d.steps[stepIndex];
-    const ok = checkKeywords(said, step.kw);
-    const errors = checkGrammar(said);
+        statusText.textContent =
+            "Status: Spracheingabe wird nicht unterstützt.";
 
-    errors.forEach(msg => addBubble("feedback fix", msg));
-    if (errors.length === 0){
-      addBubble("feedback good", ok ? "👍 Bardzo dobrze!" : "💬 Spróbuj wykorzystać: " + (step.kw[0] || ""));
-    } else if (!ok){
-      addBubble("feedback", "💬 Spróbuj też wykorzystać: " + (step.kw[0] || ""));
+        return;
     }
 
-    stepIndex++;
-    if (stepIndex >= d.steps.length){
-      setTimeout(() => {
-        addBubble("system", "🎉 Koniec rozmowy — wybierz temat ponownie.");
-        setSuggestions([]);
-        setStatus("Rozmowa zakończona.");
-      }, 600);
-      return;
+    if(!isWaitingForAnswer){
+
+        statusText.textContent =
+            "Status: Nele wartet noch nicht auf deine Antwort.";
+
+        return;
     }
-    setTimeout(showStep, errors.length ? 1700 : 900);
-  }
 
-  function freeReply(said){
-    const errors = checkGrammar(said);
-    errors.forEach(msg => addBubble("feedback fix", msg));
-    const lower = said.toLowerCase();
-    const rule = FREE_RULES.find(r => r.test.some(t => lower.includes(t)));
-    const chosen = rule || FREE_DEFAULT;
-    setTimeout(() => botSay(chosen.reply, chosen.pl, null), errors.length ? 1500 : 700);
-  }
+    statusText.textContent =
+        "Status: Ich höre zu ...";
 
-  function handleStudentInput(said){
-    addBubble("student", said);
-    setStatus("Rozpoznano: „" + said + "”");
-    if (currentTopic === "free"){
-      freeReply(said);
-    } else {
-      advanceScripted(said);
+    chatRight.classList.add("listening");
+    recognition.start();
+}
+
+function sendTypedAnswer(){
+
+    const input = document.getElementById("typedAnswer");
+    const text = input.value.trim();
+
+    if(!text){
+        return;
     }
-  }
 
-  // ---------- start ----------
-  document.querySelectorAll(".channel-btn").forEach(btn => {
-    btn.addEventListener("click", () => startTopic(btn.dataset.topic));
-  });
+    if(!isWaitingForAnswer){
+        statusText.textContent =
+            "Status: Nele wartet noch nicht auf deine Antwort.";
+        return;
+    }
 
-  startTopic("free");
-})();
+    statusText.textContent =
+        "Status: Antwort erkannt";
+
+    micButton.classList.remove("waiting");
+    isWaitingForAnswer = false;
+    chatRight.classList.remove("listening");
+    voiceFigure.classList.remove("talking");
+
+    addUser(text);
+    evaluate(text);
+
+    input.value = "";
+}
+
+function evaluate(answer){
+
+    const text = answer.toLowerCase();
+
+    if(lessonStep === 1){
+
+        if(
+            text.includes("ich heiße") ||
+            text.includes("mein name ist")
+        ){
+
+            addBot(
+                "Freut mich! Wie geht es dir?"
+            );
+
+            lessonStep = 2;
+            updateProgress(2);
+
+        }else{
+
+            addBot(
+                "Ich habe deinen Namen nicht verstanden. Du kannst sagen: Ich heiße Anna. Wie heißt du?"
+            );
+        }
+
+        return;
+    }
+
+    if(lessonStep === 2){
+
+        if(
+            text.includes("gut") ||
+            text.includes("sehr gut") ||
+            text.includes("prima") ||
+            text.includes("super") ||
+            text.includes("es geht")
+        ){
+
+            addBot(
+                "Schön! Woher kommst du?"
+            );
+
+            lessonStep = 3;
+            updateProgress(3);
+
+        }else{
+
+            addBot(
+                "Ich habe dich nicht ganz verstanden. Du kannst sagen: Gut, danke. Wie geht es dir?"
+            );
+        }
+
+        return;
+    }
+
+    if(lessonStep === 3){
+
+        if(
+            text.includes("ich komme aus")
+        ){
+
+            addBot(
+                "Interessant! Was machst du gern in deiner Freizeit?"
+            );
+
+            lessonStep = 4;
+            updateProgress(4);
+
+        }else{
+
+            addBot(
+                "Du kannst zum Beispiel sagen: Ich komme aus Polen. Woher kommst du?"
+            );
+        }
+
+        return;
+    }
+
+    if(lessonStep === 4){
+
+        if(
+            text.length > 2
+        ){
+
+            addBot(
+                "Das klingt interessant. Ich muss jetzt leider gehen."
+            );
+
+            lessonStep = 5;
+            updateProgress(5);
+
+        }else{
+
+            addBot(
+                "Erzähl mir etwas über deine Freizeit."
+            );
+        }
+
+        return;
+    }
+
+    if(lessonStep === 5){
+
+        if(
+            text.includes("tschüss") ||
+            text.includes("auf wiedersehen") ||
+            text.includes("bis bald") ||
+            text.includes("bis später")
+        ){
+
+            addBot(
+                "Tschüss! Schön, mit dir Deutsch zu sprechen."
+            );
+
+            lessonStep = 6;
+            updateProgress(6);
+
+        }else{
+
+            addBot(
+                "Ich gehe jetzt. Was sagt man zum Abschied?"
+            );
+        }
+
+        return;
+    }
+
+    if(lessonStep === 6){
+
+        addBot(
+            "Danke für das Gespräch! Starte die Lektion gern noch einmal."
+        );
+    }
+}
+
+speechSynthesis.onvoiceschanged = function() {
+    const voices = speechSynthesis.getVoices();
+    selectedVoice = pickGermanFemaleVoice(voices);
+};
+
 </script>
 
 </body>
