@@ -18,7 +18,8 @@
       --shirt-shadow:#e9e9e9;
       --eye:#4a2f22;
       --lip:#d68b7d;
-      --outline:rgba(0,0,0,.08);
+      --glasses:#5a4638;
+      --glass:#ffffff;
     }
 
     html, body {
@@ -196,14 +197,30 @@
         <path d="M208 173 C218 170, 229 172, 240 180"
               stroke="var(--hair-dark)" stroke-width="6" stroke-linecap="round" fill="none"/>
 
+        <!-- Glasses -->
+        <g>
+          <rect x="154" y="192" width="44" height="30" rx="12"
+                fill="rgba(255,255,255,0.18)"
+                stroke="var(--glasses)" stroke-width="3"/>
+          <rect x="202" y="192" width="44" height="30" rx="12"
+                fill="rgba(255,255,255,0.18)"
+                stroke="var(--glasses)" stroke-width="3"/>
+          <path d="M198 206 C200 204, 202 204, 204 206"
+                stroke="var(--glasses)" stroke-width="3" stroke-linecap="round" fill="none"/>
+          <path d="M154 201 C146 198, 141 198, 136 200"
+                stroke="var(--glasses)" stroke-width="3" stroke-linecap="round" fill="none"/>
+          <path d="M246 201 C254 198, 259 198, 264 200"
+                stroke="var(--glasses)" stroke-width="3" stroke-linecap="round" fill="none"/>
+        </g>
+
         <!-- Eyes -->
         <g class="blink">
-          <ellipse cx="176" cy="205" rx="11" ry="8" fill="#fff"/>
-          <ellipse cx="224" cy="205" rx="11" ry="8" fill="#fff"/>
-          <circle cx="176" cy="206" r="4.7" fill="var(--eye)"/>
-          <circle cx="224" cy="206" r="4.7" fill="var(--eye)"/>
-          <circle cx="177.5" cy="204" r="1.3" fill="#fff"/>
-          <circle cx="225.5" cy="204" r="1.3" fill="#fff"/>
+          <ellipse cx="176" cy="205" rx="9" ry="6.5" fill="#fff"/>
+          <ellipse cx="224" cy="205" rx="9" ry="6.5" fill="#fff"/>
+          <circle cx="176" cy="206" r="4.4" fill="var(--eye)"/>
+          <circle cx="224" cy="206" r="4.4" fill="var(--eye)"/>
+          <circle cx="177.5" cy="204" r="1.1" fill="#fff"/>
+          <circle cx="225.5" cy="204" r="1.1" fill="#fff"/>
         </g>
 
         <!-- Nose -->
