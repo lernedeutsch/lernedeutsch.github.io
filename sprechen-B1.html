@@ -14,11 +14,11 @@
       --hair:#7a4b2e;
       --hair-dark:#5c341f;
       --hair-light:#9a6240;
-      --shirt:#f8ffff;
-      --shirt-shadow:#dbe6ff;
+      --shirt:#f3f5ff;
+      --shirt-shadow:#c9d4ff;
       --shirt-accent:#6f7ad8;
       --eye:#4a2f22;
-      --lip:#d06a70;
+      --lip:#d66b76;
       --lip-dark:#b2505a;
       --blush:#e8a6a0;
       --glasses:#2f2a3a;
@@ -128,7 +128,7 @@
                  C58 223, 68 198, 96 184 Z"
               fill="url(#hairGrad)"/>
 
-        <!-- Arms / shoulders -->
+        <!-- Arms / shoulders (blouse silhouette) -->
         <path d="M70 500
                  C80 432, 111 382, 156 360
                  C170 353, 183 352, 200 352
@@ -140,47 +140,54 @@
         <path d="M78 500
                  C82 452, 96 422, 118 402
                  C130 392, 144 386, 160 383
-                 C158 398, 156 414, 154 430
-                 C152 446, 146 464, 138 480
-                 C130 494, 108 502, 92 500 Z"
+                 C158 404, 155 426, 151 446
+                 C148 460, 142 474, 134 486
+                 C126 496, 110 502, 96 500 Z"
               fill="url(#faceGrad)" opacity="0.96"/>
 
         <!-- Left arm (our right) -->
         <path d="M322 500
                  C318 452, 304 422, 282 402
                  C270 392, 256 386, 240 383
-                 C242 398, 244 414, 246 430
-                 C248 446, 254 464, 262 480
-                 C270 494, 292 502, 308 500 Z"
+                 C242 404, 245 426, 249 446
+                 C252 460, 258 474, 266 486
+                 C274 496, 290 502, 304 500 Z"
               fill="url(#faceGrad)" opacity="0.96"/>
 
         <!-- Hands hints -->
-        <path d="M132 476
-                 C138 486, 144 492, 152 494"
+        <path d="M132 478
+                 C138 487, 145 493, 154 496"
               stroke="var(--nail)" stroke-width="3" stroke-linecap="round"/>
-        <path d="M268 476
-                 C262 486, 256 492, 248 494"
+        <path d="M268 478
+                 C262 487, 255 493, 246 496"
               stroke="var(--nail)" stroke-width="3" stroke-linecap="round"/>
 
-        <!-- Shirt (torso) z dekoltem -->
+        <!-- Shirt (torso) with V cutout -->
         <path d="M110 500
                  C118 430, 146 385, 186 362
-                 C192 379, 204 394, 220 394
-                 C236 394, 248 379, 254 362
-                 C294 385, 322 430, 330 500 Z"
+                 C192 380, 198 392, 200 399
+                 C202 392, 208 380, 214 362
+                 C254 385, 282 430, 290 500 Z"
               fill="url(#shirtGrad)"/>
 
-        <!-- Dekolt w kształcie litery V -->
+        <!-- V-neck opening (cut-out showing skin) -->
         <path d="M158 360
-                 C170 390, 184 406, 200 410
-                 C216 406, 230 390, 242 360"
+                 C170 390, 182 405, 200 410
+                 C218 405, 230 390, 242 360
+                 L200 338 Z"
+              fill="url(#faceGrad)" opacity="0.92"/>
+
+        <!-- V-neck border -->
+        <path d="M158 360
+                 C170 390, 182 405, 200 410
+                 C218 405, 230 390, 242 360"
               fill="none" stroke="var(--shirt-accent)" stroke-width="4" stroke-linecap="round"/>
 
-        <!-- Pasek dekoracyjny na bluzce -->
-        <path d="M130 410
-                 C156 430, 176 438, 200 438
-                 C224 438, 244 430, 270 410"
-              fill="none" stroke="var(--shirt-accent)" stroke-width="3" stroke-linecap="round" opacity="0.7"/>
+        <!-- Decorative stripe on blouse -->
+        <path d="M130 412
+                 C156 432, 176 440, 200 440
+                 C224 440, 244 432, 270 412"
+              fill="none" stroke="var(--shirt-accent)" stroke-width="3" stroke-linecap="round" opacity="0.8"/>
 
         <!-- Neck -->
         <path d="M177 288
@@ -244,26 +251,26 @@
         <path d="M208 173 C218 170, 229 172, 240 180"
               stroke="var(--hair-dark)" stroke-width="6" stroke-linecap="round" fill="none"/>
 
-        <!-- Nowoczesne okulary - lekko kocie, cienkie -->
+        <!-- Modern glasses -->
         <g>
-          <!-- lewa oprawka -->
+          <!-- left frame -->
           <path d="M148 198
                    C158 188, 178 188, 188 198
                    C180 206, 174 210, 168 210
                    C160 210, 154 206, 148 198 Z"
                 fill="rgba(255,255,255,0.15)"
                 stroke="var(--glasses)" stroke-width="3" stroke-linejoin="round"/>
-          <!-- prawa oprawka -->
+          <!-- right frame -->
           <path d="M212 198
                    C222 188, 242 188, 252 198
                    C244 206, 238 210, 232 210
                    C224 210, 218 206, 212 198 Z"
                 fill="rgba(255,255,255,0.15)"
                 stroke="var(--glasses)" stroke-width="3" stroke-linejoin="round"/>
-          <!-- mostek -->
+          <!-- bridge -->
           <path d="M188 200 C194 196, 206 196, 212 200"
                 stroke="var(--glasses)" stroke-width="3" stroke-linecap="round" fill="none"/>
-          <!-- delikatne zauszniki -->
+          <!-- temples -->
           <path d="M148 198 C140 194, 134 194, 128 198"
                 stroke="var(--glasses)" stroke-width="2.5" stroke-linecap="round" fill="none"/>
           <path d="M252 198 C260 194, 266 194, 272 198"
@@ -305,20 +312,21 @@
         <path d="M190 236 C195 240, 205 240, 210 236"
               stroke="#cb9478" stroke-width="3" stroke-linecap="round" fill="none"/>
 
-        <!-- Lips with makeup -->
+        <!-- Wider, happier smile -->
+        <path d="M176 258
+                 C186 270, 194 275, 200 275
+                 C206 275, 214 270, 224 258"
+              fill="none" stroke="var(--lip-dark)" stroke-width="3.2"
+              stroke-linecap="round"/>
         <path d="M180 259
                  C188 252, 194 249, 200 249
                  C206 249, 212 252, 220 259
-                 C215 268, 208 272, 200 272
-                 C192 272, 185 268, 180 259 Z"
+                 C215 268, 208 273, 200 273
+                 C192 273, 185 268, 180 259 Z"
               fill="var(--lip)"/>
-        <path d="M182 257
-                 C190 253, 196 252, 200 252
-                 C204 252, 210 253, 218 257"
-              stroke="var(--lip-dark)" stroke-width="2.2" stroke-linecap="round" fill="none"/>
-        <!-- Slight gloss -->
-        <path d="M188 263
-                 C192 265, 196 266, 200 266"
+        <!-- gloss -->
+        <path d="M188 264
+                 C192 266, 196 267, 200 267"
               stroke="#ffd5d9" stroke-width="1.6" stroke-linecap="round" opacity="0.7"/>
 
         <!-- Cheek blush -->
@@ -333,7 +341,6 @@
                  C174 332, 186 338, 200 338
                  C214 338, 226 332, 242 314"
               stroke="var(--necklace)" stroke-width="4" stroke-linecap="round" fill="none"/>
-        <!-- Pendant -->
         <circle cx="200" cy="342" r="7" fill="var(--necklace)" opacity="0.96"/>
         <circle cx="200" cy="342" r="4" fill="#fff9e6" opacity="0.9"/>
 
