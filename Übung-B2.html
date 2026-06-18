@@ -8,9 +8,9 @@
     :root{
       --bg1:#f7e8df;
       --bg2:#f0d8cc;
-      --skin:#e6bb9d;        /* jeszcze jaśniejszy */
-      --skin-shadow:#cf997a; /* jeszcze jaśniejszy */
-      --skin-light:#f8ece1;  /* jeszcze jaśniejszy */
+      --skin:#e6bb9d;
+      --skin-shadow:#cf997a;
+      --skin-light:#f8ece1;
       --hair:#7a4b2e;
       --hair-dark:#5c341f;
       --hair-light:#9a6240;
@@ -49,8 +49,18 @@
     }
 
     @keyframes float {
-      0%, 100% { transform: translateY(0px); }
-      50% { transform: translateY(-4px); }
+      0%, 100% {
+        transform: translateY(0px) translateX(0px) rotate(0deg);
+      }
+      25% {
+        transform: translateY(-3px) translateX(1px) rotate(0.4deg);
+      }
+      50% {
+        transform: translateY(0px) translateX(0px) rotate(0deg);
+      }
+      75% {
+        transform: translateY(-3px) translateX(-1px) rotate(-0.4deg);
+      }
     }
 
     .blink {
@@ -141,8 +151,15 @@
                  C216 414, 242 406, 260 392"
               fill="none" stroke="#ececec" stroke-width="6" stroke-linecap="round"/>
 
-        <!-- Face (wysmuklona i skrócona: mniejszy rx, mniejszy ry) -->
-        <ellipse cx="200" cy="215" rx="58" ry="92" fill="url(#faceGrad)"/>
+        <!-- Face (smuklejsza: mniejszy rx; żawa mniejsza: zwężony owal pod ustami) -->
+        <path d="M200 120
+                 C235 120, 258 160, 258 215
+                 C258 250, 248 275, 235 295
+                 C225 310, 215 318, 200 318
+                 C185 318, 175 310, 165 295
+                 C152 275, 142 250, 142 215
+                 C142 160, 165 120, 200 120 Z"
+              fill="url(#faceGrad)"/>
 
         <!-- Hair front left -->
         <path d="M128 198
@@ -178,38 +195,13 @@
               fill="url(#hairGrad)"/>
 
         <!-- Modna, kobieca grzywka (falowana, sięgająca tuż nad oczy) -->
-        <path d="M158 100
-                 C162 86, 170 78, 180 76
-                 C182 88, 181 98, 178 108
-                 C173 110, 168 109, 162 106
-                 C160 102, 159 101, 158 100 Z"
-              fill="url(#hairGrad)"/>
-        <path d="M180 76
-                 C190 74, 197 76, 203 80
-                 C203 92, 201 100, 198 108
-                 C193 108, 188 106, 184 102
-                 C182 96, 181 90, 180 76 Z"
-              fill="url(#hairGrad)"/>
-        <path d="M203 80
-                 C210 78, 218 78, 225 80
-                 C228 90, 229 98, 228 106
-                 C223 108, 218 107, 213 104
-                 C210 100, 206 94, 203 80 Z"
-              fill="url(#hairGrad)"/>
-        <path d="M225 80
-                 C232 82, 238 88, 242 94
-                 C243 102, 242 108, 240 114
-                 C234 114, 230 112, 227 108
-                 C225 104, 224 98, 225 80 Z"
-              fill="url(#hairGrad)"/>
-        <path d="M242 94
-                 C248 98, 252 104, 254 110
-                 C258 114, 260 116, 262 116
-                 C258 118, 253 117, 249 114
-                 C246 110, 244 104, 242 94 Z"
-              fill="url(#hairGrad)"/>
+        <path d="M158 100 C162 86, 170 78, 180 76 C182 88, 181 98, 178 108 C173 110, 168 109, 162 106 C160 102, 159 101, 158 100 Z" fill="url(#hairGrad)"/>
+        <path d="M180 76 C190 74, 197 76, 203 80 C203 92, 201 100, 198 108 C193 108, 188 106, 184 102 C182 96, 181 90, 180 76 Z" fill="url(#hairGrad)"/>
+        <path d="M203 80 C210 78, 218 78, 225 80 C228 90, 229 98, 228 106 C223 108, 218 107, 213 104 C210 100, 206 94, 203 80 Z" fill="url(#hairGrad)"/>
+        <path d="M225 80 C232 82, 238 88, 242 94 C243 102, 242 108, 240 114 C234 114, 230 112, 227 108 C225 104, 224 98, 225 80 Z" fill="url(#hairGrad)"/>
+        <path d="M242 94 C248 98, 252 104, 254 110 C258 114, 260 116, 262 116 C258 118, 253 117, 249 114 C246 110, 244 104, 242 94 Z" fill="url(#hairGrad)"/>
 
-        <!-- Jasne pasemka w włosach (kilka smug) -->
+        <!-- Jasne pasemka w włosach -->
         <g class="hair-sheen" fill="#d79a6c">
           <path d="M148 120 C156 110, 166 104, 176 102" stroke="#d79a6c" stroke-width="2.2" stroke-linecap="round"/>
           <path d="M200 92 C210 96, 218 102, 224 110" stroke="#d79a6c" stroke-width="2.2" stroke-linecap="round"/>
@@ -219,79 +211,55 @@
         </g>
 
         <!-- Sheen -->
-        <path class="hair-sheen" d="M143 117
-                 C166 100, 187 94, 202 94
-                 C179 107, 168 132, 168 158
-                 C168 174, 163 190, 154 205
-                 C146 186, 141 171, 140 154
-                 C138 139, 139 127, 143 117 Z"
-              fill="#d79a6c"/>
+        <path class="hair-sheen" d="M143 117 C166 100, 187 94, 202 94 C179 107, 168 132, 168 158 C168 174, 163 190, 154 205 C146 186, 141 171, 140 154 C138 139, 139 127, 143 117 Z" fill="#d79a6c"/>
 
-        <!-- Ears (śmiejsze, nieco mniejsze małżowiny) -->
-        <path d="M118 223
-                 C121 214, 127 208, 133 208
-                 C136 208, 138 210, 138 214
-                 C138 217, 137 219, 135 221
-                 C137 224, 138 227, 138 231
-                 C138 236, 136 239, 133 239
-                 C128 239, 123 234, 120 227
-                 C119 225, 118 224, 118 223 Z"
+        <!-- Ears (mniejsze) -->
+        <path d="M119 223
+                 C121 216, 126 211, 131 211
+                 C134 211, 136 213, 136 217
+                 C136 219, 135 221, 134 222
+                 C135 224, 136 227, 136 230
+                 C136 234, 134 237, 131 237
+                 C127 237, 123 233, 121 228
+                 C120 226, 119 225, 119 223 Z"
               fill="url(#faceGrad)"/>
-        <path d="M262 223
-                 C262 224, 261 225, 260 227
-                 C257 234, 252 239, 247 239
-                 C244 239, 242 236, 242 231
-                 C242 227, 243 224, 245 221
-                 C243 219, 242 217, 242 214
-                 C242 210, 244 208, 247 208
-                 C253 208, 259 214, 262 223 Z"
+        <path d="M261 223
+                 C261 225, 260 226, 259 228
+                 C257 233, 253 237, 249 237
+                 C246 237, 244 234, 244 230
+                 C244 227, 245 224, 246 222
+                 C245 221, 244 219, 244 217
+                 C244 213, 246 211, 249 211
+                 C254 211, 259 216, 261 223 Z"
               fill="url(#faceGrad)"/>
 
         <!-- Brows -->
-        <path d="M160 180 C171 172, 182 170, 192 173"
-              stroke="var(--hair-dark)" stroke-width="6" stroke-linecap="round" fill="none"/>
-        <path d="M208 173 C218 170, 229 172, 240 180"
-              stroke="var(--hair-dark)" stroke-width="6" stroke-linecap="round" fill="none"/>
+        <path d="M160 180 C171 172, 182 170, 192 173" stroke="var(--hair-dark)" stroke-width="6" stroke-linecap="round" fill="none"/>
+        <path d="M208 173 C218 170, 229 172, 240 180" stroke="var(--hair-dark)" stroke-width="6" stroke-linecap="round" fill="none"/>
 
         <!-- Eyes with lashes -->
         <g class="blink">
-          <!-- whites -->
           <ellipse cx="176" cy="205" rx="11" ry="8" fill="#fff"/>
           <ellipse cx="224" cy="205" rx="11" ry="8" fill="#fff"/>
-          <!-- iris -->
           <circle cx="176" cy="206" r="4.7" fill="var(--eye)"/>
           <circle cx="224" cy="206" r="4.7" fill="var(--eye)"/>
-          <!-- highlights -->
           <circle cx="177.5" cy="204" r="1.3" fill="#fff"/>
           <circle cx="225.5" cy="204" r="1.3" fill="#fff"/>
-
-          <!-- Eyelashes left -->
           <path d="M168 200 L163 195" stroke="#3b2620" stroke-width="2" stroke-linecap="round"/>
           <path d="M172 199 L168 194" stroke="#3b2620" stroke-width="1.8" stroke-linecap="round"/>
           <path d="M180 199 L181 194" stroke="#3b2620" stroke-width="1.8" stroke-linecap="round"/>
-
-          <!-- Eyelashes right -->
           <path d="M232 200 L237 195" stroke="#3b2620" stroke-width="2" stroke-linecap="round"/>
           <path d="M228 199 L232 194" stroke="#3b2620" stroke-width="1.8" stroke-linecap="round"/>
           <path d="M220 199 L219 194" stroke="#3b2620" stroke-width="1.8" stroke-linecap="round"/>
         </g>
 
         <!-- Nose -->
-        <path d="M199 208
-                 C196 220, 194 228, 190 234"
-              stroke="#cb9478" stroke-width="3" stroke-linecap="round" fill="none"/>
-        <path d="M190 236 C195 240, 205 240, 210 236"
-              stroke="#cb9478" stroke-width="3" stroke-linecap="round" fill="none"/>
+        <path d="M199 208 C196 220, 194 228, 190 234" stroke="#cb9478" stroke-width="3" stroke-linecap="round" fill="none"/>
+        <path d="M190 236 C195 240, 205 240, 210 236" stroke="#cb9478" stroke-width="3" stroke-linecap="round" fill="none"/>
 
-        <!-- Lips (delikatny uśmiech: lekko podniesione końce) -->
-        <path d="M178 260
-                 C186 254, 193 251, 200 251
-                 C207 251, 214 254, 222 260
-                 C215 268, 208 271, 200 271
-                 C192 271, 185 268, 178 260 Z"
-              fill="var(--lip)"/>
-        <path d="M182 258 C190 253, 196 251, 200 251 C204 251, 210 253, 218 258"
-              stroke="#c97c72" stroke-width="2" stroke-linecap="round" fill="none"/>
+        <!-- Lips (delikatny uśmiech) -->
+        <path d="M178 260 C186 254, 193 251, 200 251 C207 251, 214 254, 222 260 C215 268, 208 271, 200 271 C192 271, 185 268, 178 260 Z" fill="var(--lip)"/>
+        <path d="M182 258 C190 253, 196 251, 200 251 C204 251, 210 253, 218 258" stroke="#c97c72" stroke-width="2" stroke-linecap="round" fill="none"/>
 
         <!-- Cheek blush -->
         <ellipse cx="152" cy="243" rx="15" ry="10" fill="#e8a6a0" opacity=".22"/>
