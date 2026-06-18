@@ -18,9 +18,9 @@
       --hair-dark:#5c341f;
       --hair-light:#9a6240;
 
-      /* kolory koszulki i dodatków z pierwszego kodu – bazowy róż do wzoru */
-      --shirt:#ffd1dc;
-      --shirt-shadow:#f5a9c4;
+      /* kolory koszulki i dodatków z pierwszego kodu */
+      --shirt:#f3f5ff;
+      --shirt-shadow:#c9d4ff;
       --shirt-accent:#6f7ad8;
       --shirt-accent-soft:#a1b0ff;
 
@@ -182,31 +182,22 @@
           <stop offset="100%" stop-color="var(--skin-shadow)"/>
         </radialGradient>
 
-        earGradient id="hairGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <linearGradient id="hairGrad" x1="0%" y1="0%" x2="100%" y2="100%">
           <stop offset="0%" stop-color="var(--hair-light)"/>
           <stop offset="45%" stop-color="var(--hair)"/>
           <stop offset="100%" stop-color="var(--hair-dark)"/>
         </linearGradient>
 
-        <!-- różowa bluzka z drobnym kwiatkowym wzorem -->
-        <pattern id="shirtPattern" x="0" y="0" width="16" height="16" patternUnits="userSpaceOnUse">
-          <rect x="0" y="0" width="16" height="16" fill="var(--shirt)" />
-          ircle cx="4" cy="4" r="1.4" fill="#ff9fba"/>
-          ircle cx="12" cy="8" r="1.4" fill="#ff9fba"/>
-          ircle cx="8" cy="12" r="1.4" fill="#ff9fba"/>
-          ircle cx="4" cy="12" r="1.1" fill="#ffe4f0"/>
-          ircle cx="12" cy="4" r="1.1" fill="#ffe4f0"/>
-        </pattern>
-
-        earGradient id="shirtGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+        <linearGradient id="shirtGrad" x1="0%" y1="0%" x2="0%" y2="100%">
           <stop offset="0%" stop-color="var(--shirt)"/>
           <stop offset="100%" stop-color="var(--shirt-shadow)"/>
         </linearGradient>
 
+        <!-- cień z ruchomym offsetem -->
         <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
-          <feGaussianBlur in="SourceAlpha" stdDeviation="4"/>
-          <feOffset dy="4" result="offsetblur"/>
-          <feComponentTransfer>
+          <feGaussianBlur in="SourceAlpha" stdDeviation="4" result="blur"/>
+          <feOffset id="shadowOffset" in="blur" dx="0" dy="4" result="offsetblur"/>
+          <feComponentTransfer in="offsetblur">
             <feFuncA type="linear" slope="0.25"/>
           </feComponentTransfer>
           <feMerge>
@@ -214,6 +205,13 @@
             <feMergeNode in="SourceGraphic"/>
           </feMerge>
         </filter>
+
+        <!-- dynamiczne podświetlenie twarzy -->
+        <radialGradient id="faceHighlightGrad" cx="50%" cy="35%" r="30%">
+          <stop offset="0%" stop-color="#fff9f2" stop-opacity="0.9"/>
+          <stop offset="60%" stop-color="#fff3e5" stop-opacity="0.3"/>
+          <stop offset="100%" stop-color="#fff0e0" stop-opacity="0"/>
+        </radialGradient>
       </defs>
 
       <rect width="400" height="500" fill="transparent"/>
@@ -271,27 +269,25 @@
                    C262 487, 255 493, 246 496"
                 stroke="var(--nail)" stroke-width="3" stroke-linecap="round"/>
 
-          <!-- Shirt (torso) with V cutout – teraz róż z kwiatkami -->
+          <!-- Shirt (torso) with V cutout -->
           <path d="M110 500
                    C118 430, 146 385, 186 362
                    C190 376, 194 387, 198 395
                    C201 400, 206 405, 212 408
                    C234 386, 252 378, 254 362
                    C294 385, 322 430, 290 500 Z"
-                fill="url(#shirtPattern)"/>
+                fill="url(#shirtGrad)"/>
 
-          <!-- V-neck opening (cut-out showing skin) – lekko dopięte do szyi -->
+          <!-- V-neck opening (cut-out showing skin) -->
           <path d="M158 360
-                   C170 390, 182 405, 195 412
-                   C200 414, 205 414, 210 412
+                   C170 390, 182 405, 200 410
                    C218 405, 230 390, 242 360
                    L200 338 Z"
                 fill="url(#faceGrad)" opacity="0.9"/>
 
           <!-- V-neck border -->
           <path d="M158 360
-                   C170 390, 182 405, 195 412
-                   C200 414, 205 414, 210 412
+                   C170 390, 182 405, 200 410
                    C218 405, 230 390, 242 360"
                 fill="none" stroke="var(--shirt-accent)" stroke-width="4" stroke-linecap="round"/>
 
@@ -301,28 +297,26 @@
                    C224 440, 244 432, 270 412"
                 fill="none" stroke="var(--shirt-accent-soft)" stroke-width="3" stroke-linecap="round" opacity="0.9"/>
 
-          <!-- Simple blouse pattern (soft dots) – można zostawić jako lekkie rozświetlenia -->
-          <g fill="var(--shirt-accent-soft)" opacity="0.5">
-            ircle cx="155" cy="424" r="2.1"/>
-            ircle cx="180" cy="433" r="2.1"/>
-            ircle cx="205" cy="429" r="2.1"/>
-            ircle cx="230" cy="436" r="2.1"/>
-            ircle cx="250" cy="421" r="2.1"/>
+          <!-- Simple blouse pattern (soft dots) -->
+          <g fill="var(--shirt-accent-soft)" opacity="0.65">
+            <circle cx="155" cy="424" r="2.1"/>
+            <circle cx="180" cy="433" r="2.1"/>
+            <circle cx="205" cy="429" r="2.1"/>
+            <circle cx="230" cy="436" r="2.1"/>
+            <circle cx="250" cy="421" r="2.1"/>
           </g>
         </g>
 
         <!-- HEAD + twarz -->
         <g id="head">
-          <!-- Neck – bardziej naturalne przejście w dół -->
-          <path d="M182 288
-                   C184 304, 186 318, 186 332
-                   C186 340, 189 346, 194 350
-                   C198 353, 202 353, 206 350
-                   C211 346, 214 340, 214 332
-                   C214 318, 216 304, 218 288 Z"
+          <!-- Neck -->
+          <path d="M177 288
+                   C181 307, 184 323, 182 337
+                   C192 346, 209 346, 219 337
+                   C217 323, 220 307, 224 288 Z"
                 fill="url(#faceGrad)"/>
 
-          <!-- Face – smuklejsza twarz -->
+          <!-- Face – PODMIANA ksztaltu: ellipse z drugiego kodu -->
           <ellipse cx="200" cy="212" rx="54" ry="82" fill="url(#faceGrad)"/>
 
           <!-- Hair front left -->
@@ -367,7 +361,7 @@
                    C138 139, 139 127, 143 117 Z"
                 fill="#d79a6c"/>
 
-          <!-- Ears – mniejsze, zbliżone do twarzy -->
+          <!-- Ears – PODMIANA na mniejsze z drugiego kodu -->
           <path d="M120 223
                    C122 217, 126 213, 130 213
                    C133 213, 135 215, 135 218
@@ -423,12 +417,12 @@
             <ellipse id="eyeRight" cx="224" cy="205" rx="9" ry="6.5" fill="#fff"/>
 
             <!-- źrenice jako osobne elementy reagujące na mysz -->
-            ircle id="pupilLeft"  cx="176" cy="206" r="4.4" fill="var(--eye)"/>
-            ircle id="pupilRight" cx="224" cy="206" r="4.4" fill="var(--eye)"/>
+            <circle id="pupilLeft"  cx="176" cy="206" r="4.4" fill="var(--eye)"/>
+            <circle id="pupilRight" cx="224" cy="206" r="4.4" fill="var(--eye)"/>
 
             <!-- highlights -->
-            ircle cx="177.3" cy="204" r="1.1" fill="#fff"/>
-            ircle cx="225.3" cy="204" r="1.1" fill="#fff"/>
+            <circle cx="177.3" cy="204" r="1.1" fill="#fff"/>
+            <circle cx="225.3" cy="204" r="1.1" fill="#fff"/>
 
             <!-- Eyeliner -->
             <path d="M166 202
@@ -468,8 +462,11 @@
           <ellipse cx="152" cy="243" rx="16" ry="10" fill="var(--blush)" opacity=".26"/>
           <ellipse cx="248" cy="243" rx="16" ry="10" fill="var(--blush)" opacity=".26"/>
 
-          <!-- Face highlight -->
+          <!-- Face highlight (statyczny) -->
           <ellipse cx="184" cy="186" rx="22" ry="31" fill="#fff7ef" opacity=".20"/>
+
+          <!-- dynamiczny highlight reagujący na mysz -->
+          <ellipse id="faceHighlight" cx="200" cy="212" rx="46" ry="70" fill="url(#faceHighlightGrad)" opacity="0"/>
         </g>
 
         <!-- Necklace – dopasowany do V dekoltu i krótszy -->
@@ -477,26 +474,24 @@
                  C180 354, 190 360, 200 360
                  C210 360, 220 354, 228 344"
               stroke="var(--necklace)" stroke-width="4" stroke-linecap="round" fill="none"/>
-        ircle cx="200" cy="370" r="7" fill="var(--necklace)" opacity="0.96"/>
-        ircle cx="200" cy="370" r="4" fill="#fff9e6" opacity="0.9"/>
+        <circle cx="200" cy="370" r="7" fill="var(--necklace)" opacity="0.96"/>
+        <circle cx="200" cy="370" r="4" fill="#fff9e6" opacity="0.9"/>
 
-        <!-- Earrings with white inner circles – przesunięte na uszy -->
+        <!-- Earrings with white inner circles -->
         <g>
-          <!-- lewy kolczyk na uchu -->
-          ircle cx="128" cy="228" r="3" fill="var(--earring)"/>
-          <path d="M128 231
-                   C128 238, 128 244, 128 250"
+          <circle cx="123" cy="236" r="3" fill="var(--earring)"/>
+          <path d="M123 239
+                   C123 246, 123 252, 123 258"
                 stroke="var(--earring)" stroke-width="3" stroke-linecap="round"/>
-          ircle cx="128" cy="254" r="5.2" fill="var(--earring)"/>
-          ircle cx="128" cy="254" r="3" fill="#fff9e6"/>
+          <circle cx="123" cy="262" r="5.2" fill="var(--earring)"/>
+          <circle cx="123" cy="262" r="3" fill="#fff9e6"/>
 
-          <!-- prawy kolczyk na uchu -->
-          ircle cx="272" cy="228" r="3" fill="var(--earring)"/>
-          <path d="M272 231
-                   C272 238, 272 244, 272 250"
+          <circle cx="277" cy="236" r="3" fill="var(--earring)"/>
+          <path d="M277 239
+                   C277 246, 277 252, 277 258"
                 stroke="var(--earring)" stroke-width="3" stroke-linecap="round"/>
-          ircle cx="272" cy="254" r="5.2" fill="var(--earring)"/>
-          ircle cx="272" cy="254" r="3" fill="#fff9e6"/>
+          <circle cx="277" cy="262" r="5.2" fill="var(--earring)"/>
+          <circle cx="277" cy="262" r="3" fill="#fff9e6"/>
         </g>
       </g>
     </svg>
@@ -514,11 +509,17 @@
     const eyesGroup  = document.getElementById('eyesGroup');
     const mouth      = document.getElementById('mouth');
 
+    const faceHighlight = document.getElementById('faceHighlight');
+    const faceHighlightGrad = document.getElementById('faceHighlightGrad');
+    const shadowOffset = document.getElementById('shadowOffset');
+
     const eyeLeftCenter  = { x: 176, y: 205 };
     const eyeRightCenter = { x: 224, y: 205 };
     const pupilRadiusMax = 3; // maksymalne wychylenie źrenic
 
-    // --- RUCH ZA MYSZĄ (jak wcześniej) ---
+    const faceCenter = { x: 200, y: 212 }; // środek twarzy w układzie SVG
+
+    // --- RUCH ZA MYSZĄ + cień + highlight twarzy ---
     svg.addEventListener('mousemove', (e) => {
       const rect = svg.getBoundingClientRect();
       const relX = (e.clientX - rect.left) / rect.width - 0.5;  // -0.5..0.5
@@ -536,6 +537,27 @@
       const mouseY = e.clientY - rect.top;
       movePupil(pupilLeft,  eyeLeftCenter,  mouseX, mouseY);
       movePupil(pupilRight, eyeRightCenter, mouseX, mouseY);
+
+      // cień delikatnie "odjeżdża" w przeciwną stronę
+      const shadowDx = -relX * 10;
+      const shadowDy = -relY * 8;
+      shadowOffset.setAttribute('dx', shadowDx.toFixed(1));
+      shadowOffset.setAttribute('dy', (4 + shadowDy).toFixed(1));
+
+      // podświetlenie twarzy: centrum między twarzą a kursorem
+      const svgX = (mouseX / rect.width) * 400;
+      const svgY = (mouseY / rect.height) * 500;
+
+      const highlightX = faceCenter.x + (svgX - faceCenter.x) * 0.35;
+      const highlightY = faceCenter.y + (svgY - faceCenter.y) * 0.35;
+
+      const cxPercent = (highlightX / 400) * 100;
+      const cyPercent = (highlightY / 500) * 100;
+
+      faceHighlightGrad.setAttribute('cx', `${cxPercent}%`);
+      faceHighlightGrad.setAttribute('cy', `${cyPercent}%`);
+
+      faceHighlight.setAttribute('opacity', '0.85');
     });
 
     svg.addEventListener('mouseleave', () => {
@@ -548,6 +570,13 @@
       pupilLeft.setAttribute('cy', eyeLeftCenter.y + 1);
       pupilRight.setAttribute('cx', eyeRightCenter.x);
       pupilRight.setAttribute('cy', eyeRightCenter.y + 1);
+
+      // reset cienia i highlightu
+      shadowOffset.setAttribute('dx', '0');
+      shadowOffset.setAttribute('dy', '4');
+      faceHighlightGrad.setAttribute('cx', '50%');
+      faceHighlightGrad.setAttribute('cy', '35%');
+      faceHighlight.setAttribute('opacity', '0');
     });
 
     function movePupil(pupil, center, mouseX, mouseY) {
