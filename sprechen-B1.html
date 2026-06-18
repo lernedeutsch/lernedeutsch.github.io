@@ -18,7 +18,7 @@
       --hair-dark:#5c341f;
       --hair-light:#9a6240;
 
-      /* zostawiam kolory koszulki i dodatków z pierwszego kodu */
+      /* kolory koszulki i dodatków z pierwszego kodu */
       --shirt:#f3f5ff;
       --shirt-shadow:#c9d4ff;
       --shirt-accent:#6f7ad8;
@@ -59,6 +59,7 @@
     .breathe {
       transform-origin: center;
       animation: float 4s ease-in-out infinite;
+      transition: transform 0.12s ease-out;
     }
 
     @keyframes float {
@@ -82,11 +83,98 @@
       opacity: .35;
       mix-blend-mode: screen;
     }
+
+    /* delikatny ruch włosów (zostaje) */
+    .hair-group {
+      transform-box: fill-box;
+      transform-origin: center;
+      animation: hairWind 5s ease-in-out infinite;
+    }
+
+    .hair-left {
+      transform-box: fill-box;
+      transform-origin: top center;
+      animation: hairLeft 5.2s ease-in-out infinite;
+    }
+
+    .hair-right {
+      transform-box: fill-box;
+      transform-origin: top center;
+      animation: hairRight 5.2s ease-in-out infinite;
+    }
+
+    @keyframes hairWind {
+      0%, 100% { transform: translateX(0px) rotate(0deg); }
+      50%      { transform: translateX(-1px) rotate(-0.4deg); }
+    }
+
+    @keyframes hairLeft {
+      0%, 100% { transform: rotate(0deg) translateX(0px); }
+      50%      { transform: rotate(-1.2deg) translateX(-1px); }
+    }
+
+    @keyframes hairRight {
+      0%, 100% { transform: rotate(0deg) translateX(0px); }
+      50%      { transform: rotate(1.2deg) translateX(1px); }
+    }
+
+    /* przygotowanie elementów na transformacje zależne od myszy */
+    #character,
+    #head,
+    #body,
+    #hair,
+    #pupilLeft,
+    #pupilRight {
+      transform-box: fill-box;
+      transform-origin: center;
+      transition: transform 0.12s ease-out;
+    }
+
+    /* --- REAKCJE NA KLIK --- */
+
+    /* 1. uśmiech – chwilowa zmiana kształtu ust */
+    #mouth.smile {
+      animation: smileAnim 0.45s ease-out forwards;
+    }
+
+    @keyframes smileAnim {
+      0% {
+        d: path("M180 258 C187 254, 193 252, 200 252 C207 252, 213 254, 220 258 C214 263, 207 265, 200 265 C193 265, 186 263, 180 258 Z");
+      }
+      50% {
+        d: path("M178 258 C187 252, 193 250, 200 250 C207 250, 213 252, 222 258 C214 270, 207 274, 200 274 C193 274, 186 270, 178 258 Z");
+      }
+      100% {
+        d: path("M180 258 C187 254, 193 252, 200 252 C207 252, 213 254, 220 258 C214 263, 207 265, 200 265 C193 265, 186 263, 180 258 Z");
+      }
+    }
+
+    /* 2. podwójne szybkie mrugnięcie na klik w oczy */
+    .eyes-click-blink {
+      animation: eyesClickBlink 0.3s ease-in-out 1;
+    }
+
+    @keyframes eyesClickBlink {
+      0%, 100% { transform: scaleY(1); }
+      30%, 70% { transform: scaleY(0.12); }
+    }
+
+    /* 3. przytaknięcie głową */
+    #head.nod {
+      animation: headNod 0.35s ease-out 1;
+    }
+
+    @keyframes headNod {
+      0%   { transform: translate(0px, 0px) rotate(0deg); }
+      40%  { transform: translate(0px, 4px) rotate(3deg); }
+      70%  { transform: translate(0px, -1px) rotate(-1deg); }
+      100% { transform: translate(0px, 0px) rotate(0deg); }
+    }
   </style>
 </head>
 <body>
   <div class="wrap">
-    <svg viewBox="0 0 400 500" xmlns="http://www.w3.org/2000/svg" aria-label="Portret kobiety">
+    <svg id="avatar" viewBox="0 0 400 500" xmlns="http://www.w3.org/2000/svg" aria-label="Portret kobiety">
       <defs>
         <radialGradient id="faceGrad" cx="45%" cy="30%" r="70%">
           <stop offset="0%" stop-color="var(--skin-light)"/>
@@ -120,252 +208,257 @@
 
       <rect width="400" height="500" fill="transparent"/>
 
-      <g class="breathe" filter="url(#softShadow)">
-        <!-- Hair back -->
-        <path d="M96 184
-                 C92 118, 138 70, 200 70
-                 C266 70, 310 116, 307 186
-                 C332 198, 342 223, 337 250
-                 C332 281, 312 306, 298 327
-                 C286 344, 280 359, 273 387
-                 C267 415, 237 426, 200 426
-                 C163 426, 133 415, 127 387
-                 C120 359, 114 344, 102 327
-                 C88 306, 68 281, 63 250
-                 C58 223, 68 198, 96 184 Z"
-              fill="url(#hairGrad)"/>
+      <!-- CAŁA POSTAĆ -->
+      <g id="character" class="breathe" filter="url(#softShadow)">
+        <!-- Hair back – cała grupa włosów z tyłu -->
+        <g id="hair" class="hair-group">
+          <path d="M96 184
+                   C92 118, 138 70, 200 70
+                   C266 70, 310 116, 307 186
+                   C332 198, 342 223, 337 250
+                   C332 281, 312 306, 298 327
+                   C286 344, 280 359, 273 387
+                   C267 415, 237 426, 200 426
+                   C163 426, 133 415, 127 387
+                   C120 359, 114 344, 102 327
+                   C88 306, 68 281, 63 250
+                   C58 223, 68 198, 96 184 Z"
+                fill="url(#hairGrad)"/>
+        </g>
 
         <!-- Arms / shoulders (blouse silhouette) -->
-        <path d="M70 500
-                 C80 432, 111 382, 156 360
-                 C170 353, 183 352, 200 352
-                 C217 352, 230 353, 244 360
-                 C289 382, 320 432, 330 500 Z"
-              fill="url(#shirtGrad)"/>
+        <g id="body">
+          <path d="M70 500
+                   C80 432, 111 382, 156 360
+                   C170 353, 183 352, 200 352
+                   C217 352, 230 353, 244 360
+                   C289 382, 320 432, 330 500 Z"
+                fill="url(#shirtGrad)"/>
 
-        <!-- Right arm (our left) -->
-        <path d="M78 500
-                 C82 452, 96 422, 118 402
-                 C130 392, 144 386, 160 383
-                 C158 404, 155 426, 151 446
-                 C148 460, 142 474, 134 486
-                 C126 496, 110 502, 96 500 Z"
-              fill="url(#faceGrad)" opacity="0.96"/>
+          <!-- Right arm (our left) -->
+          <path d="M78 500
+                   C82 452, 96 422, 118 402
+                   C130 392, 144 386, 160 383
+                   C158 404, 155 426, 151 446
+                   C148 460, 142 474, 134 486
+                   C126 496, 110 502, 96 500 Z"
+                fill="url(#faceGrad)" opacity="0.96"/>
 
-        <!-- Left arm (our right) -->
-        <path d="M322 500
-                 C318 452, 304 422, 282 402
-                 C270 392, 256 386, 240 383
-                 C242 404, 245 426, 249 446
-                 C252 460, 258 474, 266 486
-                 C274 496, 290 502, 304 500 Z"
-              fill="url(#faceGrad)" opacity="0.96"/>
+          <!-- Left arm (our right) -->
+          <path d="M322 500
+                   C318 452, 304 422, 282 402
+                   C270 392, 256 386, 240 383
+                   C242 404, 245 426, 249 446
+                   C252 460, 258 474, 266 486
+                   C274 496, 290 502, 304 500 Z"
+                fill="url(#faceGrad)" opacity="0.96"/>
 
-        <!-- Hands hints -->
-        <path d="M132 478
-                 C138 487, 145 493, 154 496"
-              stroke="var(--nail)" stroke-width="3" stroke-linecap="round"/>
-        <path d="M268 478
-                 C262 487, 255 493, 246 496"
-              stroke="var(--nail)" stroke-width="3" stroke-linecap="round"/>
+          <!-- Hands hints -->
+          <path d="M132 478
+                   C138 487, 145 493, 154 496"
+                stroke="var(--nail)" stroke-width="3" stroke-linecap="round"/>
+          <path d="M268 478
+                   C262 487, 255 493, 246 496"
+                stroke="var(--nail)" stroke-width="3" stroke-linecap="round"/>
 
-        <!-- Shirt (torso) with V cutout -->
-        <path d="M110 500
-                 C118 430, 146 385, 186 362
-                 C190 376, 194 387, 198 395
-                 C201 400, 206 405, 212 408
-                 C234 386, 252 378, 254 362
-                 C294 385, 322 430, 290 500 Z"
-              fill="url(#shirtGrad)"/>
+          <!-- Shirt (torso) with V cutout -->
+          <path d="M110 500
+                   C118 430, 146 385, 186 362
+                   C190 376, 194 387, 198 395
+                   C201 400, 206 405, 212 408
+                   C234 386, 252 378, 254 362
+                   C294 385, 322 430, 290 500 Z"
+                fill="url(#shirtGrad)"/>
 
-        <!-- V-neck opening (cut-out showing skin) -->
-        <path d="M158 360
-                 C170 390, 182 405, 200 410
-                 C218 405, 230 390, 242 360
-                 L200 338 Z"
-              fill="url(#faceGrad)" opacity="0.9"/>
+          <!-- V-neck opening (cut-out showing skin) -->
+          <path d="M158 360
+                   C170 390, 182 405, 200 410
+                   C218 405, 230 390, 242 360
+                   L200 338 Z"
+                fill="url(#faceGrad)" opacity="0.9"/>
 
-        <!-- V-neck border -->
-        <path d="M158 360
-                 C170 390, 182 405, 200 410
-                 C218 405, 230 390, 242 360"
-              fill="none" stroke="var(--shirt-accent)" stroke-width="4" stroke-linecap="round"/>
+          <!-- V-neck border -->
+          <path d="M158 360
+                   C170 390, 182 405, 200 410
+                   C218 405, 230 390, 242 360"
+                fill="none" stroke="var(--shirt-accent)" stroke-width="4" stroke-linecap="round"/>
 
-        <!-- Decorative stripe on blouse -->
-        <path d="M130 412
-                 C156 432, 176 440, 200 440
-                 C224 440, 244 432, 270 412"
-              fill="none" stroke="var(--shirt-accent-soft)" stroke-width="3" stroke-linecap="round" opacity="0.9"/>
+          <!-- Decorative stripe on blouse -->
+          <path d="M130 412
+                   C156 432, 176 440, 200 440
+                   C224 440, 244 432, 270 412"
+                fill="none" stroke="var(--shirt-accent-soft)" stroke-width="3" stroke-linecap="round" opacity="0.9"/>
 
-        <!-- Simple blouse pattern (soft dots) -->
-        <g fill="var(--shirt-accent-soft)" opacity="0.65">
-          <circle cx="155" cy="424" r="2.1"/>
-          <circle cx="180" cy="433" r="2.1"/>
-          <circle cx="205" cy="429" r="2.1"/>
-          <circle cx="230" cy="436" r="2.1"/>
-          <circle cx="250" cy="421" r="2.1"/>
+          <!-- Simple blouse pattern (soft dots) -->
+          <g fill="var(--shirt-accent-soft)" opacity="0.65">
+            <circle cx="155" cy="424" r="2.1"/>
+            <circle cx="180" cy="433" r="2.1"/>
+            <circle cx="205" cy="429" r="2.1"/>
+            <circle cx="230" cy="436" r="2.1"/>
+            <circle cx="250" cy="421" r="2.1"/>
+          </g>
         </g>
 
-        <!-- Neck – ksztalt z drugiego kodu -->
-        <path d="M177 288
-                 C181 307, 184 323, 182 337
-                 C192 346, 209 346, 219 337
-                 C217 323, 220 307, 224 288 Z"
-              fill="url(#faceGrad)"/>
+        <!-- HEAD + twarz -->
+        <g id="head">
+          <!-- Neck -->
+          <path d="M177 288
+                   C181 307, 184 323, 182 337
+                   C192 346, 209 346, 219 337
+                   C217 323, 220 307, 224 288 Z"
+                fill="url(#faceGrad)"/>
 
-        <!-- Face – smuklejsza ellipse z drugiego kodu -->
-        <ellipse cx="200" cy="215" rx="62" ry="106" fill="url(#faceGrad)"/>
+          <!-- Face -->
+          <ellipse cx="200" cy="215" rx="62" ry="106" fill="url(#faceGrad)"/>
 
-        <!-- Hair front left -->
-        <path d="M128 198
-                 C118 164, 131 123, 162 103
-                 C172 96, 182 93, 193 92
-                 C162 108, 151 138, 154 170
-                 C155 189, 150 208, 140 224
-                 C136 216, 132 207, 128 198 Z"
-              fill="url(#hairGrad)"/>
-        <!-- Hair front right -->
-        <path d="M272 197
-                 C282 163, 270 123, 239 103
-                 C229 96, 219 93, 208 92
-                 C239 108, 250 138, 247 170
-                 C246 189, 251 208, 261 224
-                 C265 216, 269 207, 272 197 Z"
-              fill="url(#hairGrad)"/>
+          <!-- Hair front left -->
+          <path class="hair-left" d="M128 198
+                   C118 164, 131 123, 162 103
+                   C172 96, 182 93, 193 92
+                   C162 108, 151 138, 154 170
+                   C155 189, 150 208, 140 224
+                   C136 216, 132 207, 128 198 Z"
+                fill="url(#hairGrad)"/>
+          <!-- Hair front right -->
+          <path class="hair-right" d="M272 197
+                   C282 163, 270 123, 239 103
+                   C229 96, 219 93, 208 92
+                   C239 108, 250 138, 247 170
+                   C246 189, 251 208, 261 224
+                   C265 216, 269 207, 272 197 Z"
+                fill="url(#hairGrad)"/>
 
-        <!-- Hair lower waves -->
-        <path d="M112 205
-                 C90 228, 84 270, 101 303
-                 C114 329, 141 349, 155 360
-                 C142 326, 140 292, 147 263
-                 C153 238, 155 217, 145 197
-                 C133 191, 121 194, 112 205 Z"
-              fill="url(#hairGrad)"/>
-        <path d="M288 205
-                 C310 228, 316 270, 299 303
-                 C286 329, 259 349, 245 360
-                 C258 326, 260 292, 253 263
-                 C247 238, 245 217, 255 197
-                 C267 191, 279 194, 288 205 Z"
-              fill="url(#hairGrad)"/>
+          <!-- Hair lower waves -->
+          <path class="hair-left" d="M112 205
+                   C90 228, 84 270, 101 303
+                   C114 329, 141 349, 155 360
+                   C142 326, 140 292, 147 263
+                   C153 238, 155 217, 145 197
+                   C133 191, 121 194, 112 205 Z"
+                fill="url(#hairGrad)"/>
+          <path class="hair-right" d="M288 205
+                   C310 228, 316 270, 299 303
+                   C286 329, 259 349, 245 360
+                   C258 326, 260 292, 253 263
+                   C247 238, 245 217, 255 197
+                   C267 191, 279 194, 288 205 Z"
+                fill="url(#hairGrad)"/>
 
-        <!-- Sheen -->
-        <path class="hair-sheen" d="M143 117
-                 C166 100, 187 94, 202 94
-                 C179 107, 168 132, 168 158
-                 C168 174, 163 190, 154 205
-                 C146 186, 141 171, 140 154
-                 C138 139, 139 127, 143 117 Z"
-              fill="#d79a6c"/>
+          <!-- Sheen -->
+          <path class="hair-sheen" d="M143 117
+                   C166 100, 187 94, 202 94
+                   C179 107, 168 132, 168 158
+                   C168 174, 163 190, 154 205
+                   C146 186, 141 171, 140 154
+                   C138 139, 139 127, 143 117 Z"
+                fill="#d79a6c"/>
 
-        <!-- Ears -->
-        <ellipse cx="123" cy="223" rx="11" ry="18" fill="url(#faceGrad)"/>
-        <ellipse cx="277" cy="223" rx="11" ry="18" fill="url(#faceGrad)"/>
+          <!-- Ears -->
+          <ellipse cx="123" cy="223" rx="11" ry="18" fill="url(#faceGrad)"/>
+          <ellipse cx="277" cy="223" rx="11" ry="18" fill="url(#faceGrad)"/>
 
-        <!-- Brows -->
-        <path d="M158 179
-                 C169 170, 180 168, 192 172"
-              stroke="var(--hair-dark)" stroke-width="4.2" stroke-linecap="round" fill="none" opacity="0.95"/>
-        <path d="M208 172
-                 C220 168, 231 170, 242 179"
-              stroke="var(--hair-dark)" stroke-width="4.2" stroke-linecap="round" fill="none" opacity="0.95"/>
+          <!-- Brows -->
+          <path d="M158 179
+                   C169 170, 180 168, 192 172"
+                stroke="var(--hair-dark)" stroke-width="4.2" stroke-linecap="round" fill="none" opacity="0.95"/>
+          <path d="M208 172
+                   C220 168, 231 170, 242 179"
+                stroke="var(--hair-dark)" stroke-width="4.2" stroke-linecap="round" fill="none" opacity="0.95"/>
 
-        <!-- Okulary -->
-        <g>
-          <!-- lewa oprawka -->
-          <path d="M144 196
-                   C157 184, 181 184, 194 196
-                   C185 207, 177 213, 170 213
-                   C160 213, 151 207, 144 196 Z"
-                fill="rgba(255,255,255,0.15)"
-                stroke="var(--glasses)" stroke-width="3" stroke-linejoin="round"/>
-          <!-- prawa oprawka -->
-          <path d="M206 196
-                   C219 184, 243 184, 256 196
-                   C247 207, 239 213, 232 213
-                   C222 213, 213 207, 206 196 Z"
-                fill="rgba(255,255,255,0.15)"
-                stroke="var(--glasses)" stroke-width="3" stroke-linejoin="round"/>
-          <!-- mostek -->
-          <path d="M194 198 C199 193, 207 193, 212 198"
-                stroke="var(--glasses)" stroke-width="3" stroke-linecap="round" fill="none"/>
-          <!-- zauszniki -->
-          <path d="M144 196 C136 192, 131 192, 126 196"
-                stroke="var(--glasses)" stroke-width="2.5" stroke-linecap="round" fill="none"/>
-          <path d="M256 196 C264 192, 269 192, 274 196"
-                stroke="var(--glasses)" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+          <!-- Okulary -->
+          <g>
+            <path d="M144 196
+                     C157 184, 181 184, 194 196
+                     C185 207, 177 213, 170 213
+                     C160 213, 151 207, 144 196 Z"
+                  fill="rgba(255,255,255,0.15)"
+                  stroke="var(--glasses)" stroke-width="3" stroke-linejoin="round"/>
+            <path d="M206 196
+                     C219 184, 243 184, 256 196
+                     C247 207, 239 213, 232 213
+                     C222 213, 213 207, 206 196 Z"
+                  fill="rgba(255,255,255,0.15)"
+                  stroke="var(--glasses)" stroke-width="3" stroke-linejoin="round"/>
+            <path d="M194 198 C199 193, 207 193, 212 198"
+                  stroke="var(--glasses)" stroke-width="3" stroke-linecap="round" fill="none"/>
+            <path d="M144 196 C136 192, 131 192, 126 196"
+                  stroke="var(--glasses)" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+            <path d="M256 196 C264 192, 269 192, 274 196"
+                  stroke="var(--glasses)" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+          </g>
+
+          <!-- Eyes with lashes (białka + rzęsy) -->
+          <g id="eyesGroup" class="blink">
+            <ellipse id="eyeLeft"  cx="176" cy="205" rx="9" ry="6.5" fill="#fff"/>
+            <ellipse id="eyeRight" cx="224" cy="205" rx="9" ry="6.5" fill="#fff"/>
+
+            <!-- źrenice jako osobne elementy reagujące na mysz -->
+            <circle id="pupilLeft"  cx="176" cy="206" r="4.4" fill="var(--eye)"/>
+            <circle id="pupilRight" cx="224" cy="206" r="4.4" fill="var(--eye)"/>
+
+            <!-- highlights -->
+            <circle cx="177.3" cy="204" r="1.1" fill="#fff"/>
+            <circle cx="225.3" cy="204" r="1.1" fill="#fff"/>
+
+            <!-- Eyeliner -->
+            <path d="M166 202
+                     C171 199, 181 199, 186 202"
+                  stroke="#3b2620" stroke-width="2.4" stroke-linecap="round" fill="none"/>
+            <path d="M214 202
+                     C219 199, 229 199, 234 202"
+                  stroke="#3b2620" stroke-width="2.4" stroke-linecap="round" fill="none"/>
+
+            <!-- Eyelashes left -->
+            <path d="M168 199 L163 195" stroke="#3b2620" stroke-width="2" stroke-linecap="round"/>
+            <path d="M172 198 L168 193" stroke="#3b2620" stroke-width="1.8" stroke-linecap="round"/>
+            <path d="M180 198 L181 193" stroke="#3b2620" stroke-width="1.8" stroke-linecap="round"/>
+
+            <!-- Eyelashes right -->
+            <path d="M232 199 L237 195" stroke="#3b2620" stroke-width="2" stroke-linecap="round"/>
+            <path d="M228 198 L232 193" stroke="#3b2620" stroke-width="1.8" stroke-linecap="round"/>
+            <path d="M220 198 L219 193" stroke="#3b2620" stroke-width="1.8" stroke-linecap="round"/>
+          </g>
+
+          <!-- Nose -->
+          <path d="M199 208
+                   C196 220, 194 228, 190 234"
+                stroke="#cb9478" stroke-width="3" stroke-linecap="round" fill="none"/>
+          <path d="M190 236 C195 240, 205 240, 210 236"
+                stroke="#cb9478" stroke-width="3" stroke-linecap="round" fill="none"/>
+
+          <!-- Usta – dodany id na potrzeby uśmiechu -->
+          <path id="mouth" d="M180 258
+                   C187 254, 193 252, 200 252
+                   C207 252, 213 254, 220 258
+                   C214 263, 207 265, 200 265
+                   C193 265, 186 263, 180 258 Z"
+                fill="var(--lip)"/>
+
+          <!-- Cheek blush -->
+          <ellipse cx="152" cy="243" rx="16" ry="10" fill="var(--blush)" opacity=".26"/>
+          <ellipse cx="248" cy="243" rx="16" ry="10" fill="var(--blush)" opacity=".26"/>
+
+          <!-- Face highlight -->
+          <ellipse cx="184" cy="186" rx="22" ry="31" fill="#fff7ef" opacity=".20"/>
         </g>
 
-        <!-- Eyes with lashes -->
-        <g class="blink">
-          <!-- whites -->
-          <ellipse cx="176" cy="205" rx="9" ry="6.5" fill="#fff"/>
-          <ellipse cx="224" cy="205" rx="9" ry="6.5" fill="#fff"/>
-          <!-- iris -->
-          <circle cx="176" cy="206" r="4.4" fill="var(--eye)"/>
-          <circle cx="224" cy="206" r="4.4" fill="var(--eye)"/>
-          <!-- highlights -->
-          <circle cx="177.3" cy="204" r="1.1" fill="#fff"/>
-          <circle cx="225.3" cy="204" r="1.1" fill="#fff"/>
-          <!-- Eyeliner -->
-          <path d="M166 202
-                   C171 199, 181 199, 186 202"
-                stroke="#3b2620" stroke-width="2.4" stroke-linecap="round" fill="none"/>
-          <path d="M214 202
-                   C219 199, 229 199, 234 202"
-                stroke="#3b2620" stroke-width="2.4" stroke-linecap="round" fill="none"/>
-          <!-- Eyelashes left -->
-          <path d="M168 199 L163 195" stroke="#3b2620" stroke-width="2" stroke-linecap="round"/>
-          <path d="M172 198 L168 193" stroke="#3b2620" stroke-width="1.8" stroke-linecap="round"/>
-          <path d="M180 198 L181 193" stroke="#3b2620" stroke-width="1.8" stroke-linecap="round"/>
-          <!-- Eyelashes right -->
-          <path d="M232 199 L237 195" stroke="#3b2620" stroke-width="2" stroke-linecap="round"/>
-          <path d="M228 198 L232 193" stroke="#3b2620" stroke-width="1.8" stroke-linecap="round"/>
-          <path d="M220 198 L219 193" stroke="#3b2620" stroke-width="1.8" stroke-linecap="round"/>
-        </g>
-
-        <!-- Nose -->
-        <path d="M199 208
-                 C196 220, 194 228, 190 234"
-              stroke="#cb9478" stroke-width="3" stroke-linecap="round" fill="none"/>
-        <path d="M190 236 C195 240, 205 240, 210 236"
-              stroke="#cb9478" stroke-width="3" stroke-linecap="round" fill="none"/>
-
-        <!-- Usta: tylko wypełnione wargi, bez cienkiej linii pod nimi -->
-        <path d="M180 258
-                 C187 254, 193 252, 200 252
-                 C207 252, 213 254, 220 258
-                 C214 263, 207 265, 200 265
-                 C193 265, 186 263, 180 258 Z"
-              fill="var(--lip)"/>
-
-        <!-- Cheek blush -->
-        <ellipse cx="152" cy="243" rx="16" ry="10" fill="var(--blush)" opacity=".26"/>
-        <ellipse cx="248" cy="243" rx="16" ry="10" fill="var(--blush)" opacity=".26"/>
-
-        <!-- Face highlight -->
-        <ellipse cx="184" cy="186" rx="22" ry="31" fill="#fff7ef" opacity=".20"/>
-
-        <!-- Necklace – dopasowany do V dekoltu -->
-        <!-- łuk łańcuszka tuż przy krawędzi V -->
-        <path d="M164 344
-                 C176 356, 188 362, 200 362
-                 C212 362, 224 356, 236 344"
+        <!-- Necklace – dopasowany do V dekoltu i krótszy -->
+        <path d="M172 344
+                 C180 354, 190 360, 200 360
+                 C210 360, 220 354, 228 344"
               stroke="var(--necklace)" stroke-width="4" stroke-linecap="round" fill="none"/>
-        <!-- medalik dokładnie w osi V, trochę poniżej -->
         <circle cx="200" cy="370" r="7" fill="var(--necklace)" opacity="0.96"/>
         <circle cx="200" cy="370" r="4" fill="#fff9e6" opacity="0.9"/>
 
         <!-- Earrings with white inner circles -->
         <g>
-          <!-- left -->
           <circle cx="123" cy="236" r="3" fill="var(--earring)"/>
           <path d="M123 239
                    C123 246, 123 252, 123 258"
                 stroke="var(--earring)" stroke-width="3" stroke-linecap="round"/>
           <circle cx="123" cy="262" r="5.2" fill="var(--earring)"/>
           <circle cx="123" cy="262" r="3" fill="#fff9e6"/>
-          <!-- right -->
+
           <circle cx="277" cy="236" r="3" fill="var(--earring)"/>
           <path d="M277 239
                    C277 246, 277 252, 277 258"
@@ -378,17 +471,85 @@
   </div>
 
   <script>
-    const svg = document.querySelector('svg');
+    const svg = document.getElementById('avatar');
+    const character = document.getElementById('character');
+    const head = document.getElementById('head');
+    const body = document.getElementById('body');
+    const hair = document.getElementById('hair');
+
+    const pupilLeft  = document.getElementById('pupilLeft');
+    const pupilRight = document.getElementById('pupilRight');
+    const eyesGroup  = document.getElementById('eyesGroup');
+    const mouth      = document.getElementById('mouth');
+
+    const eyeLeftCenter  = { x: 176, y: 205 };
+    const eyeRightCenter = { x: 224, y: 205 };
+    const pupilRadiusMax = 3; // maksymalne wychylenie źrenic
+
+    // --- RUCH ZA MYSZĄ (jak wcześniej) ---
     svg.addEventListener('mousemove', (e) => {
-      const r = svg.getBoundingClientRect();
-      const x = (e.clientX - r.left) / r.width - 0.5;
-      const y = (e.clientY - r.top) / r.height - 0.5;
-      const group = document.querySelector('.breathe');
-      group.style.transform = `translate(${x * 8}px, ${y * 8}px)`;
+      const rect = svg.getBoundingClientRect();
+      const relX = (e.clientX - rect.left) / rect.width - 0.5;  // -0.5..0.5
+      const relY = (e.clientY - rect.top) / rect.height - 0.5;
+
+      const tiltY = relX * 6;
+      character.style.transform =
+        `translate(${relX * 8}px, ${relY * 6}px) rotate(${tiltY * 0.35}deg)`;
+
+      head.style.transform = `translate(${relX * 4}px, ${relY * 3}px)`;
+      hair.style.transform = `translate(${relX * 5}px, ${relY * 4}px)`;
+      body.style.transform = `translate(${relX * 2}px, ${relY * 1.5}px)`;
+
+      const mouseX = e.clientX - rect.left;
+      const mouseY = e.clientY - rect.top;
+      movePupil(pupilLeft,  eyeLeftCenter,  mouseX, mouseY);
+      movePupil(pupilRight, eyeRightCenter, mouseX, mouseY);
     });
 
     svg.addEventListener('mouseleave', () => {
-      document.querySelector('.breathe').style.transform = 'translate(0px, 0px)';
+      character.style.transform = 'translate(0px, 0px)';
+      head.style.transform = 'translate(0px, 0px)';
+      hair.style.transform = 'translate(0px, 0px)';
+      body.style.transform = 'translate(0px, 0px)';
+
+      pupilLeft.setAttribute('cx', eyeLeftCenter.x);
+      pupilLeft.setAttribute('cy', eyeLeftCenter.y + 1);
+      pupilRight.setAttribute('cx', eyeRightCenter.x);
+      pupilRight.setAttribute('cy', eyeRightCenter.y + 1);
+    });
+
+    function movePupil(pupil, center, mouseX, mouseY) {
+      const dx = mouseX - center.x;
+      const dy = mouseY - center.y;
+      const angle = Math.atan2(dy, dx);
+      const dist = Math.min(Math.hypot(dx, dy), pupilRadiusMax);
+
+      const offsetX = Math.cos(angle) * dist;
+      const offsetY = Math.sin(angle) * dist;
+
+      pupil.setAttribute('cx', center.x + offsetX);
+      pupil.setAttribute('cy', center.y + offsetY);
+    }
+
+    // --- REAKCJE NA KLIK ---
+
+    // 1. klik w twarz (głowę) = przytaknięcie + uśmiech
+    head.addEventListener('click', () => {
+      head.classList.remove('nod');
+      void head.offsetWidth; // wymuszenie restartu animacji
+      head.classList.add('nod');
+
+      mouth.classList.remove('smile');
+      void mouth.offsetWidth;
+      mouth.classList.add('smile');
+    });
+
+    // 2. klik w oczy = szybkie podwójne mrugnięcie
+    eyesGroup.addEventListener('click', (e) => {
+      e.stopPropagation(); // żeby nie wywołać jednocześnie kliknięcia na head
+      eyesGroup.classList.remove('eyes-click-blink');
+      void eyesGroup.offsetWidth;
+      eyesGroup.classList.add('eyes-click-blink');
     });
   </script>
 </body>
