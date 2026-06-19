@@ -500,7 +500,6 @@ const micButton = document.getElementById("micButton");
 
 let lessonStep = 0;
 let isWaitingForAnswer = false;
-let selectedVoice = null;
 let lastBotText = "";
 let speechRate = 0.95;
 
@@ -557,8 +556,8 @@ function addBot(text){
     chatRight.classList.add("speaking");
     chatRight.classList.remove("listening");
 
-    // używamy nowej, „naturalnej” mowy
-    speak(text);
+    // teraz Nele mówi przez funkcję "powiedz"
+    powiedz(text);
 
     micButton.classList.add("waiting");
     isWaitingForAnswer = true;
@@ -572,56 +571,38 @@ function addUser(text){
     chatLeft.scrollTop = chatLeft.scrollHeight;
 }
 
-// NOWA WERSJA WYBORU GŁOSU – inspirowana drugim kodem
-function pickGermanFemaleVoice(voices){
+// funkcja z Twojego przykładu – użyta do głosu Nele
+function powiedz(tekst) {
+    const tekstDoPowiedzenia = new SpeechSynthesisUtterance(tekst);
+    tekstDoPowiedzenia.lang = 'de-DE';
 
-    // Szukamy najpierw głosu 'de-DE' z 'Google' w nazwie,
-    // a jeśli go nie ma – dowolny niemiecki.
-    const googleDe = voices.find(v => v.lang === 'de-DE' && v.name.includes('Google'));
-    if (googleDe) return googleDe;
-
-    const anyDe = voices.find(v => v.lang === 'de-DE');
-    if (anyDe) return anyDe;
-
-    // gdyby naprawdę nie było, zostaje null
-    return null;
-}
-
-function speak(text){
-
-    // zatrzymaj poprzednią mowę
-    window.speechSynthesis.cancel();
-
-    const utterance = new SpeechSynthesisUtterance(text);
-    utterance.lang = "de-DE";
-
-    // pobierz dostępne głosy
+    // pobieramy wszystkie dostępne głosy
     const voices = window.speechSynthesis.getVoices();
 
-    // wybierz najbardziej naturalny niemiecki głos (Google / systemowy)
-    selectedVoice = pickGermanFemaleVoice(voices);
+    // najpierw szukamy Google de-DE, potem dowolnego de-DE
+    const deVoice = voices.find(voice => voice.lang === 'de-DE' && voice.name.includes('Google')) ||
+                    voices.find(voice => voice.lang === 'de-DE');
 
-    if(selectedVoice){
-        utterance.voice = selectedVoice;
+    if (deVoice) {
+        tekstDoPowiedzenia.voice = deVoice;
     }
 
-    utterance.rate = speechRate;
-    utterance.pitch = 1.0;
-    utterance.volume = 1;
+    // zachowujemy Twoją kontrolę szybkości
+    tekstDoPowiedzenia.rate = speechRate;
+    tekstDoPowiedzenia.pitch = 1.0;
+    tekstDoPowiedzenia.volume = 1;
 
-    utterance.onend = function(){
+    tekstDoPowiedzenia.onend = function(){
         chatRight.classList.remove("speaking");
     };
 
-    window.speechSynthesis.speak(utterance);
+    window.speechSynthesis.cancel();
+    window.speechSynthesis.speak(tekstDoPowiedzenia);
 }
 
-// „łatka” jak w Twoim drugim kodzie – część przeglądarek ładuje głosy asynchronicznie
+// łatka: część przeglądarek ładuje głosy asynchronicznie
 if (window.speechSynthesis.onvoiceschanged !== undefined) {
-    window.speechSynthesis.onvoiceschanged = function() {
-        const voices = window.speechSynthesis.getVoices();
-        selectedVoice = pickGermanFemaleVoice(voices);
-    };
+    window.speechSynthesis.onvoiceschanged = window.speechSynthesis.getVoices;
 }
 
 function updateRate(val){
@@ -637,7 +618,7 @@ function repeatLast(){
     chatRight.classList.add("speaking");
     chatRight.classList.remove("listening");
 
-    speak(lastBotText);
+    powiedz(lastBotText);
 }
 
 function updateProgress(step){
@@ -672,11 +653,6 @@ function startLesson(){
     micButton.classList.remove("waiting");
 
     updateProgress(1);
-
-    if(!selectedVoice){
-        const voices = window.speechSynthesis.getVoices();
-        selectedVoice = pickGermanFemaleVoice(voices);
-    }
 
     addBot(
         "Guten Tag! Ich heiße Nele. Wie heißt du?"
@@ -870,12 +846,6 @@ function evaluate(answer){
         );
     }
 }
-
-// dodatkowo – gdy przeglądarka załaduje głosy już po starcie:
-speechSynthesis.onvoiceschanged = function() {
-    const voices = window.speechSynthesis.getVoices();
-    selectedVoice = pickGermanFemaleVoice(voices);
-};
 
 </script>
 
