@@ -354,9 +354,9 @@
         padding:8px 16px;
         border-radius:10px;
         box-shadow:0 4px 10px rgba(0,0,0,0.06);
-        margin-top:14px;
     }
 
+    /* Fale po prawej stronie – UKRYTE */
     .waves {
         position: absolute;
         left: 0;
@@ -367,6 +367,7 @@
         pointer-events: none;
         transition: opacity 0.15s ease;
         z-index: 1;
+        display:none; /* <-- to usuwa je z ekranu */
     }
 
     #chatRight.listening .waves,
@@ -491,6 +492,7 @@
 <p id="status" aria-live="polite">Status: Bereit</p>
 
 <script>
+/* cała logika JS bez zmian – dokładnie jak w Twoim kodzie */
 
 const chatLeft = document.getElementById("chatLeft");
 const chatRight = document.getElementById("chatRight");
