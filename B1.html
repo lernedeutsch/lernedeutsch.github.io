@@ -61,20 +61,47 @@
             startBtn.disabled = false;
         };
 
-        function odpowiedzBot(wypowiedz) {
-            if (wypowiedz.includes("hallo") || wypowiedz.includes("guten tag")) {
-                powiedz("Hallo! Wie kann ich dir heute helfen?");
-            } else if (wypowiedz.includes("wie geht es dir") || wypowiedz.includes("wie geht's")) {
-                powiedz("Mir geht es sehr gut, danke! Und wie geht es dir?");
-            } else if (wypowiedz.includes("wie heißt du") || wypowiedz.includes("wer bist du")) {
-                powiedz("Ich bin dein KI-Bot zum Deutschlernen.");
-            } else if (wypowiedz.includes("gut") || wypowiedz.includes("super")) {
-                powiedz("Das freut mich zu hören!");
-            } else {
-                powiedz("Das ist interessant, aber ich habe dich nicht ganz verstanden. Kannst du das anders sagen?");
+      function odpowiedzBot(wypowiedz) {
+    // 1. Powitania
+    if (wypowiedz.includes("hallo") || wypowiedz.includes("guten tag") || wypowiedz.includes("hi")) {
+        powiedz("Hallo! Es freut mich sehr, dich zu hören. Wie kann ich dir heute beim Deutschlernen helfen? Möchtest du über das Wetter oder deine Hobbys sprechen?");
+    } 
+    // 2. Samopoczucie
+    else if (wypowiedz.includes("wie geht es dir") || wypowiedz.includes("wie geht's")) {
+        powiedz("Mir geht es fantastisch, danke der Nachfrage! Ich bin bereit, Deutsch mit dir zu üben. Und wie geht es dir heute? Bist du müde oder hast du gute Laune?");
+    } 
+    // 3. Tożsamość bota
+    else if (wypowiedz.includes("wie heißt du") || wypowiedz.includes("wer bist du")) {
+        powiedz("Ich bin dein persönlicher Sprachassistent. Mein Name ist Nele. Ich liebe es, Grammatik und Vokabeln zu üben!");
+    } 
+    // 4. Pochwały i pozytywne odpowiedzi
+    else if (wypowiedz.includes("gut") || wypowiedz.includes("super") || wypowiedz.includes("toll")) {
+        powiedz("Das ist wunderbar! Wenn es dir gut geht, lernt es sich viel leichter. Erzähl mir mehr: Was hast du heute Schönes gemacht?");
+    } 
+    // 5. Temat: Pogoda (Wetter)
+    else if (wypowiedz.includes("wetter") || wypowiedz.includes("sonne") || wypowiedz.includes("regen")) {
+        powiedz("Das Wetter ist immer ein gutes Thema! Bei mir im Computer scheint immer die Sonne. Wie ist das Wetter heute bei dir? Ist es warm oder regnet es?");
+    }
+    // 6. Temat: Jedzenie (Essen)
+    else if (wypowiedz.includes("essen") || wypowiedz.includes("hunger") || wypowiedz.includes("pizza")) {
+        powiedz("Oh, Essen ist ein tolles Thema! Ich kann leider nichts essen, aber ich weiß, dass Pizza und Pommes sehr beliebt sind. Was ist dein Lieblingsessen?");
+    }
+    // 7. Temat: Hobby i wolny czas
+    else if (wypowiedz.includes("hobby") || wypowiedz.includes("musik") || wypowiedz.includes("sport")) {
+        powiedz("In meiner Freizeit lese ich gerne das Wörterbuch! Und was machst du in deiner Freizeit? Hörst du gerne Musik oder treibst du Sport?");
+    }
+    // 8. Gdy użytkownik mówi, że nie rozumie
+    else if (wypowiedz.includes("nicht verstehen") || wypowiedz.includes("keine ahnung")) {
+        powiedz("Kein Problem! Deutsch ist nicht einfach. Sag einfach 'Hallo' oder 'Wie geht es dir', um das Gespräch noch einmal neu zu starten.");
+    }
+    // 9. Dłuższa odpowiedź domyślna (awaryjna)
+    else {
+        powiedz("Das ist interessant, aber ich habe dich nicht ganz verstanden. Kannst du das anders sagen?"); 
             }
-        }
+}
 
+
+Odpowiedz
         function dodajLog(kto, tekst) {
             const p = document.createElement('p');
             p.innerHTML = `<strong>${kto}:</strong> ${tekst}`;
