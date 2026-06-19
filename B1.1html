@@ -40,6 +40,9 @@
        function powiedz(tekst) {
     const tekstDoPowiedzenia = new SpeechSynthesisUtterance(tekst);
     tekstDoPowiedzenia.lang = 'de-DE';
+tekstDoPowiedzenia.rate = 0.9; // Tempo: 1.0 to norma. 0.9 lekko zwalnia bota, co pomaga w nauce i brzmi bardziej ludzko.
+tekstDoPowiedzenia.pitch = 1.0; // Ton głosu: od 0 do 2. Możesz poeksperymentować (np. 1.1), aby głos był wyższy lub niższy.
+
     
     // Pobieramy wszystkie dostępne głosy w systemie
     const voices = window.speechSynthesis.getVoices();
