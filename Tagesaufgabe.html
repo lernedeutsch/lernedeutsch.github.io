@@ -581,16 +581,10 @@ let isWaitingForAnswer = false;
 let lastBotText = "";
 let speechRate = 0.95;
 
-// 🎯 licznik odpowiedzi bot
 let botReplyCounter = 0;
-
-// 🎯 ZAPAMIĘTYWANIE IMIENIA UŻYTKOWNIKA
 let userName = "";
-
-// 🎯 opcja wyłączenia poprawek w czacie (domyślnie: włączone)
 let showCorrections = true;
 
-// przy starcie strony odczytujemy imię z localStorage
 function loadUserName() {
     const saved = localStorage.getItem("nele_userName");
     if (saved && saved.trim() !== "") {
@@ -601,21 +595,18 @@ function loadUserName() {
     updateStatusText();
 }
 
-// zapisujemy imię do localStorage
 function saveUserName(name) {
     userName = name.trim();
     localStorage.setItem("nele_userName", userName);
     updateStatusText();
 }
 
-// czyścimy imię (np. gdy chcesz opcjonalnie możliwość resetu)
 function clearUserName() {
     userName = "";
     localStorage.removeItem("nele_userName");
     updateStatusText();
 }
 
-// 🎯 aktualizacja tekstu statusu z imieniem
 function updateStatusText() {
     if (userName && userName.trim() !== "") {
         statusText.textContent = `Status: Bereit – ${userName}`;
@@ -626,7 +617,6 @@ function updateStatusText() {
 
 loadUserName();
 
-// 🎯 funkcja przełączająca poprawki (przycisk "Bez poprawek")
 function toggleCorrection() {
     showCorrections = !showCorrections;
 
@@ -639,129 +629,125 @@ function toggleCorrection() {
     }
 }
 
-// 🎯 FUNKCJA: poprawianie podstawowych błędów gramatycznych w języku niemieckim
-// rozszerzona wersja: przypadki, czasowniki rozdzielnie złożone, szyk zdania, zaimki, przyimki, dopełnienia
-function correctGermanGrammar(text) {
-    let corrected = text.toLowerCase();
-
-    // -------- PRZYMIKI / PRZYPAKI --------
-
-    // 1. "ich komme von" → "ich komme aus"
-    corrected = corrected.replace(/ich komme von (\w+)/g, "ich komme aus $1");
-
-    // 2. "von polen" → "aus Polen" (nominacja kraju)
-    corrected = corrected.replace(/von polen/g, "aus Polen");
-    corrected = corrected.replace(/von deutschland/g, "aus Deutschland");
-    corrected = corrected.replace(/von frankreich/g, "aus Frankreich");
-    corrected = corrected.replace(/von italien/g, "aus Italien");
-    corrected = corrected.replace(/von spanien/g, "aus Spanien");
-
-    // 3. "in dem polen" → "in Polen"
-    corrected = corrected.replace(/in dem polen/g, "in Polen");
-    corrected = corrected.replace(/in dem deutschland/g, "in Deutschland");
-
-    // 4. "in polen" → "in Polen"
-    corrected = corrected.replace(/in polen/g, "in Polen");
-    corrected = corrected.replace(/in deutschland/g, "in Deutschland");
-
-    // 5. "zu Haus" → "zu Hause"
-    corrected = corrected.replace(/zu haus/g, "zu Hause");
-
-    // 6. "in die schule" → "zur Schule"
-    corrected = corrected.replace(/in die schule/g, "zur Schule");
-
-    // -------- SZYK ZDANIA --------
-
-    // 7. "ich heute gehe" → "ich gehe heute"
-    corrected = corrected.replace(/ich heute (\w+)/g, "ich gehe heute");
-    corrected = corrected.replace(/ich (\w+) heute (\w+)/g, "ich $1 heute $2");
-    corrected = corrected.replace(/ich (\w+) immer (\w+)/g, "ich $1 immer $2");
-    corrected = corrected.replace(/ich (\w+) oft (\w+)/g, "ich $1 oft $2");
-    corrected = corrected.replace(/ich (\w+) gerne (\w+)/g, "ich $1 gerne $2");
-
-    // 8. "ich musik höre" → "ich höre musik"
-    corrected = corrected.replace(/ich (\w+) höre/g, "ich höre $1");
-
-    // 9. "mir gut" → "mir gut" (tu nie zmieniamy, ale można dodać inne konstrukcje)
-
-    // -------- CZASOWNIKI I KONSTRUKCJE --------
-
-    // 10. "du bist von woher" → "woher kommst du"
-    corrected = corrected.replace(/du bist von woher/g, "woher kommst du");
-
-    // 11. "ich bin aus polen komme" → "ich komme aus Polen"
-    corrected = corrected.replace(/ich bin aus (\w+) komme/g, "ich komme aus $1");
-
-    // 12. "was machst du in deiner freizeit ich" → "was machst du in deiner freizeit? ich"
-    corrected = corrected.replace(/in deiner freizeit ich/g, "in deiner freizeit? ich");
-
-    // 13. "ich mache sport und ich höre musik" → "ich mache sport und höre musik"
-    corrected = corrected.replace(/und ich höre musik/g, "und höre musik");
-    corrected = corrected.replace(/und ich mache (\w+)/g, "und mache $1");
-
-    // 14. "ich habe gut" → "es geht gut"
-    corrected = corrected.replace(/ich habe gut/g, "es geht gut");
-
-    // 15. "ich gehe zu sport" → "ich mache sport"
-    corrected = corrected.replace(/ich gehe zu sport/g, "ich mache sport");
-
-    // 16. "ich liebe musik hören" → "ich höre gerne musik"
-    corrected = corrected.replace(/ich liebe (\w+) hören/g, "ich höre gerne $1");
-
-    // 17. "ich spiele gern musik" → "ich höre gerne musik"
-    corrected = corrected.replace(/ich spiele gern musik/g, "ich höre gerne musik");
-
-    // 18. "ich bin gern musik" → "ich höre gerne musik"
-    corrected = corrected.replace(/ich bin gern musik/g, "ich höre gerne musik");
-
-    // 19. czasowniki rozdzielnie złożone: "ich stehe auf 7" → "ich stehe um 7 auf"
-    corrected = corrected.replace(/ich stehe auf (\d+)/g, "ich stehe um $1 auf");
-
-    // 20. "ich mache auf 7" → "ich stehe um 7 auf"
-    corrected = corrected.replace(/ich mache auf (\d+)/g, "ich stehe um $1 auf");
-
-    // 21. "ich habe keine musik" → "ich höre keine musik"
-    corrected = corrected.replace(/ich habe keine musik/g, "ich höre keine musik");
-
-    // 22. "ich gebe dir das buch" → "ich gebe dir das Buch" (kapitalizacja rzeczownika)
-    corrected = corrected.replace(/ich gebe dir das buch/g, "ich gebe dir das Buch");
-
-    // 23. "ich habe ein buch" → "ich habe ein Buch"
-    corrected = corrected.replace(/ich habe ein buch/g, "ich habe ein Buch");
-
-    // 24. "ich lese ein buch" → "ich lese ein Buch"
-    corrected = corrected.replace(/ich lese ein buch/g, "ich lese ein Buch");
-
-    // 25. "ich mag das buch" → "ich mag das Buch"
-    corrected = corrected.replace(/ich mag das buch/g, "ich mag das Buch");
-
-    // -------- KAPITALIZACJA --------
-
-    // 26. kapitalizacja: pierwsza litera zdania
-    corrected = corrected.trim();
-    if (corrected.length > 0) {
-        corrected = corrected.charAt(0).toUpperCase() + corrected.slice(1);
-    }
-
-    // 27. kapitalizacja nazw krajów (prosta wersja)
-    corrected = corrected.replace(/aus polen/g, "aus Polen");
-    corrected = corrected.replace(/aus deutschland/g, "aus Deutschland");
-    corrected = corrected.replace(/aus frankreich/g, "aus Frankreich");
-    corrected = corrected.replace(/aus italien/g, "aus Italien");
-    corrected = corrected.replace(/aus spanien/g, "aus Spanien");
-
-    // 28. kapitalizacja innych rzeczowników (prosta wersja)
-    corrected = corrected.replace(/die schule/g, "die Schule");
-    corrected = corrected.replace(/zur schule/g, "zur Schule");
-    corrected = corrected.replace(/das buch/g, "das Buch");
-    corrected = corrected.replace(/ein buch/g, "ein Buch");
-    corrected = corrected.replace(/die musik/g, "die Musik");
-    corrected = corrected.replace(/keine musik/g, "keine Musik");
-
-    return corrected;
+function normalize(text) {
+    return text
+        .trim()
+        .replace(/\s+/g, " ")
+        .toLowerCase();
 }
 
-// 🎯 FUNKCJA: dodawanie wiadomości poprawki w czacie
+function fixBasicSpelling(t) {
+    t = t.replace(/ich heute (\w+)/g, "ich gehe heute");
+    t = t.replace(/ich bin aus (\w+) komme/g, "ich komme aus $1");
+    t = t.replace(/was machst du in deiner freizeit ich/g, "was machst du in deiner freizeit? ich");
+    t = t.replace(/und ich höre musik/g, "und höre musik");
+    t = t.replace(/und ich mache (\w+)/g, "und mache $1");
+    t = t.replace(/ich habe gut/g, "es geht gut");
+    t = t.replace(/ich gehe zu sport/g, "ich mache sport");
+    return t;
+}
+
+const PREPOSITION_MAP = [
+    [/ich komme von polen/g, "ich komme aus Polen"],
+    [/ich komme von deutschland/g, "ich komme aus Deutschland"],
+    [/ich komme von frankreich/g, "ich komme aus Frankreich"],
+    [/ich komme von italien/g, "ich komme aus Italien"],
+    [/ich komme von spanien/g, "ich komme aus Spanien"],
+    [/von polen/g, "aus Polen"],
+    [/von deutschland/g, "aus Deutschland"],
+    [/von frankreich/g, "aus Frankreich"],
+    [/von italien/g, "aus Italien"],
+    [/von spanien/g, "aus Spanien"],
+    [/in dem polen/g, "in Polen"],
+    [/in dem deutschland/g, "in Deutschland"],
+    [/in polen/g, "in Polen"],
+    [/in deutschland/g, "in Deutschland"],
+    [/in die schule/g, "zur Schule"],
+    [/zu haus(e)?/g, "zu Hause"]
+];
+
+function fixPrepositions(t) {
+    for (const [regex, repl] of PREPOSITION_MAP) {
+        t = t.replace(regex, repl);
+    }
+    return t;
+}
+
+function fixWordOrder(t) {
+    const words = t.split(" ");
+
+    if (words.length >= 3 && words[0] === "ich") {
+        const adverbs = ["heute", "immer", "oft", "gerne", "morgen", "gestern"];
+        if (adverbs.includes(words[1])) {
+            const rest = words.slice(2).join(" ");
+            return `ich ${rest} ${words[1]}`;
+        }
+    }
+
+    t = t.replace(/^ich (\w+) höre\b/, "ich höre $1");
+    t = t.replace(/^ich (\w+) mache\b/, "ich mache $1");
+    t = t.replace(/^ich (\w+) spiele\b/, "ich spiele $1");
+
+    return t;
+}
+
+function fixVerbs(t) {
+    t = t.replace(/ich stehe auf (\d+)/g, "ich stehe um $1 auf");
+    t = t.replace(/ich mache auf (\d+)/g, "ich stehe um $1 auf");
+    t = t.replace(/ich liebe (\w+) hören/g, "ich höre gerne $1");
+    t = t.replace(/ich spiele gern musik/g, "ich höre gerne musik");
+    t = t.replace(/ich bin gern musik/g, "ich höre gerne musik");
+    t = t.replace(/ich habe keine musik/g, "ich höre keine musik");
+    t = t.replace(/ich gehe in die schule/g, "ich gehe zur Schule");
+    return t;
+}
+
+const NOUNS = {
+    "schule": "Schule",
+    "buch": "Buch",
+    "musik": "Musik",
+    "polen": "Polen",
+    "deutschland": "Deutschland",
+    "frankreich": "Frankreich",
+    "italien": "Italien",
+    "spanien": "Spanien"
+};
+
+function fixNouns(t) {
+    for (const [k, v] of Object.entries(NOUNS)) {
+        const regex = new RegExp("\\b" + k + "\\b", "g");
+        t = t.replace(regex, v);
+    }
+    return t;
+}
+
+function fixFinalCleanup(t) {
+    return t
+        .replace(/\s+,/g, ",")
+        .replace(/,\./g, ".")
+        .replace(/\s+\./g, ".")
+        .replace(/\s{2,}/g, " ")
+        .trim();
+}
+
+function capitalize(t) {
+    if (!t) return t;
+    return t.charAt(0).toUpperCase() + t.slice(1);
+}
+
+function correctGermanGrammar(text) {
+    let t = normalize(text);
+
+    t = fixBasicSpelling(t);
+    t = fixPrepositions(t);
+    t = fixWordOrder(t);
+    t = fixVerbs(t);
+    t = fixNouns(t);
+    t = fixFinalCleanup(t);
+
+    return capitalize(t);
+}
+
 function addKorrektion(correctedText) {
     if (!showCorrections) {
         return;
@@ -791,10 +777,8 @@ if(SpeechRecognition){
         const answer =
             event.results[0][0].transcript.trim();
 
-        // 🎯 popraw gramatycznie przed oceną
         const corrected = correctGermanGrammar(answer);
 
-        // jeśli była poprawka, informujemy w statusie i w czacie (jeśli poprawki są włączone)
         if (corrected !== answer.toLowerCase()) {
             if (showCorrections) {
                 statusText.textContent = `Status: Antwort erkannt – Korrektion: ${corrected}`;
@@ -812,7 +796,6 @@ if(SpeechRecognition){
 
         addUser(answer);
 
-        // oceniamy na poprawionym tekście
         evaluate(corrected);
     };
 
@@ -827,7 +810,6 @@ if(SpeechRecognition){
     };
 }
 
-// 🎯 ZMODYFIKOWANA funkcja addBot() z licznikiem i usuwaniem imienia co 5. odpowiedź
 function addBot(text){
 
     botReplyCounter++;
@@ -846,10 +828,8 @@ function addBot(text){
 
             if (botReplyCounter % 5 !== 0) {
 
-                // usuwa imię ze środka zdania
                 text = text.replaceAll(userName, "");
 
-                // usuwa zbędne przecinki i spacje
                 text = text
                     .replace(/\s+,/g, ",")
                     .replace(/,\./g, ".")
@@ -871,7 +851,6 @@ function addBot(text){
     chatRight.classList.add("speaking");
     chatRight.classList.remove("listening");
 
-    // teraz Nele mówi przez funkcję "powiedz"
     powiedz(text);
 
     micButton.classList.add("waiting");
@@ -886,15 +865,11 @@ function addUser(text){
     chatLeft.scrollTop = chatLeft.scrollHeight;
 }
 
-// funkcja z Twojego przykładu – użyta do głosu Nele
 function powiedz(tekst) {
     const tekstDoPowiedzenia = new SpeechSynthesisUtterance(tekst);
     tekstDoPowiedzenia.lang = 'de-DE';
 
-    // pobieramy wszystkie dostępne głosy
     const voices = window.speechSynthesis.getVoices();
-
-    // najpierw szukamy Google de-DE, potem dowolnego de-DE
     const deVoice = voices.find(voice => voice.lang === 'de-DE' && voice.name.includes('Google')) ||
                     voices.find(voice => voice.lang === 'de-DE');
 
@@ -902,7 +877,6 @@ function powiedz(tekst) {
         tekstDoPowiedzenia.voice = deVoice;
     }
 
-    // zachowujemy Twoją kontrolę szybkości
     tekstDoPowiedzenia.rate = speechRate;
     tekstDoPowiedzenia.pitch = 1.0;
     tekstDoPowiedzenia.volume = 1;
@@ -915,7 +889,6 @@ function powiedz(tekst) {
     window.speechSynthesis.speak(tekstDoPowiedzenia);
 }
 
-// łatka: część przeglądarek ładuje głosy asynchronicznie
 if (window.speechSynthesis.onvoiceschanged !== undefined) {
     window.speechSynthesis.onvoiceschanged = window.speechSynthesis.getVoices;
 }
@@ -936,10 +909,8 @@ function repeatLast(){
     powiedz(lastBotText);
 }
 
-// 🎯 funkcja przycisku Resetuj imię
 function resetUserName() {
     clearUserName();
-    // opcjonalnie: krótki komunikat w statusie
     statusText.textContent = "Status: Imię zostało usunięte";
     setTimeout(() => {
         updateStatusText();
@@ -980,12 +951,10 @@ function startLesson(){
 
     updateProgress(1);
 
-    // jeśli imię jest już zapamiętane, Nele od razu je używa
     if (userName) {
         addBot(
             `Guten Tag! Ich heiße Nele. Ich erinnere mich: Du bist ${userName}. Wie geht es dir?`
         );
-        // pomijamy krok 1 (pytanie o imię), zaczynamy od kroku 2
         lessonStep = 2;
         updateProgress(2);
     } else {
@@ -1035,7 +1004,6 @@ function sendTypedAnswer(){
         return;
     }
 
-    // 🎯 popraw gramatycznie przed oceną
     const corrected = correctGermanGrammar(text);
 
     if (corrected !== text.toLowerCase()) {
@@ -1055,7 +1023,6 @@ function sendTypedAnswer(){
 
     addUser(text);
 
-    // oceniamy na poprawionym tekście
     evaluate(corrected);
 
     input.value = "";
@@ -1065,7 +1032,6 @@ function evaluate(answer){
 
     const text = answer.toLowerCase();
 
-    // 🎯 tryb swobodnej rozmowy po zakończonej lekcji
     if(chatMode){
 
         odpowiedzBot(text);
@@ -1073,7 +1039,6 @@ function evaluate(answer){
         return;
     }
 
-    // 🎯 KROK 1 – Name
     if(lessonStep === 1){
 
         if(
@@ -1081,9 +1046,6 @@ function evaluate(answer){
             text.includes("mein name ist")
         ){
 
-            // 🎯 wyciąganie imienia z odpowiedzi
-            // „Ich heiße Adam" → Adam
-            // „Mein Name ist Anna" → Anna
             let name = "";
 
             if (text.includes("ich heiße")) {
@@ -1098,9 +1060,7 @@ function evaluate(answer){
                 }
             }
 
-            // jeśli imię zostało znalezione i ma zawartość
             if (name && name.length > 0) {
-                // ewentualnie usuń ewentualne kropki/spacje na końcu
                 name = name.replace(/[.,;:!?"']$/, "").trim();
 
                 saveUserName(name);
@@ -1129,7 +1089,6 @@ function evaluate(answer){
         return;
     }
 
-    // 🎯 KROK 2 – Befinden
     if(lessonStep === 2){
 
         if(
@@ -1163,7 +1122,6 @@ function evaluate(answer){
         return;
     }
 
-    // 🎯 KROK 3 – Herkunft
     if(lessonStep === 3){
 
         if(
@@ -1193,7 +1151,6 @@ function evaluate(answer){
         return;
     }
 
-    // 🎯 KROK 4 – Freizeit
     if(lessonStep === 4){
 
         if(
@@ -1223,7 +1180,6 @@ function evaluate(answer){
         return;
     }
 
-    // 🎯 KROK 5 – Abschied + od razu tryb czatu
     if(lessonStep === 5){
 
         if(
@@ -1233,7 +1189,6 @@ function evaluate(answer){
             text.includes("bis später")
         ){
 
-            // od razu przejście w tryb swobodnej rozmowy
             chatMode = true;
             lessonStep = 0;
 
@@ -1258,18 +1213,9 @@ function evaluate(answer){
 
         return;
     }
-
-    // opcjonalnie: miękki fallback gdyby lessonStep miał dziwną wartość
-    // else {
-    //     chatMode = true;
-    //     lessonStep = 0;
-    //     addBot("Die Lektion ist beendet. Jetzt können wir frei Deutsch sprechen.");
-    // }
 }
 
-// 🎯 POPRAWIONA FUNKCJA: odpowiedzBot - teraz używa addBot zamiast powiedz
 function odpowiedzBot(wypowiedz) {
-    // 1. Powitania
     if (wypowiedz.includes("hallo") || wypowiedz.includes("guten tag") || wypowiedz.includes("hi")) {
         if (userName) {
             addBot(`Hallo, ${userName}! Es freut mich sehr, dich zu hören. Wie kann ich dir heute beim Deutschlernen helfen? Möchtest du über das Wetter oder deine Hobbys sprechen?`);
@@ -1277,15 +1223,12 @@ function odpowiedzBot(wypowiedz) {
             addBot("Hallo! Es freut mich sehr, dich zu hören. Wie kann ich dir heute beim Deutschlernen helfen? Möchtest du über das Wetter oder deine Hobbys sprechen?");
         }
     } 
-    // 2. Samopoczucie
     else if (wypowiedz.includes("wie geht es dir") || wypowiedz.includes("wie geht's")) {
         addBot("Mir geht es fantastisch, danke der Nachfrage! Ich bin bereit, Deutsch mit dir zu üben. Und wie geht es dir heute? Bist du müde oder hast du gute Laune?");
     } 
-    // 3. Tożsamość bota
     else if (wypowiedz.includes("wie heißt du") || wypowiedz.includes("wer bist du")) {
         addBot("Ich bin dein persönlicher Sprachassistent. Mein Name ist Nele. Ich liebe es, Grammatik und Vokabeln zu üben!");
     } 
-    // 4. Pochwały i pozytywne odpowiedzi
     else if (wypowiedz.includes("gut") || wypowiedz.includes("super") || wypowiedz.includes("toll")) {
         if (userName) {
             addBot(`Das ist wunderbar, ${userName}! Wenn es dir gut geht, lernt es sich viel leichter. Erzähl mir mehr: Was hast du heute Schönes gemacht?`);
@@ -1293,7 +1236,6 @@ function odpowiedzBot(wypowiedz) {
             addBot("Das ist wunderbar! Wenn es dir gut geht, lernt es sich viel leichter. Erzähl mir mehr: Was hast du heute Schönes gemacht?");
         }
     } 
-    // 5. Temat: Pogoda (Wetter)
     else if (wypowiedz.includes("wetter") || wypowiedz.includes("sonne") || wypowiedz.includes("regen")) {
         if (userName) {
             addBot(`Das Wetter ist immer ein gutes Thema, ${userName}! Bei mir im Computer scheint immer die Sonne. Wie ist das Wetter heute bei dir? Ist es warm oder regnet es?`);
@@ -1301,7 +1243,6 @@ function odpowiedzBot(wypowiedz) {
             addBot("Das Wetter ist immer ein gutes Thema! Bei mir im Computer scheint immer die Sonne. Wie ist das Wetter heute bei dir? Ist es warm oder regnet es?");
         }
     }
-    // 6. Temat: Jedzenie (Essen)
     else if (wypowiedz.includes("essen") || wypowiedz.includes("hunger") || wypowiedz.includes("pizza")) {
         if (userName) {
             addBot(`Oh, Essen ist ein tolles Thema, ${userName}! Ich kann leider nichts essen, aber ich weiß, dass Pizza und Pommes sehr beliebt sind. Was ist dein Lieblingsessen?`);
@@ -1309,7 +1250,6 @@ function odpowiedzBot(wypowiedz) {
             addBot("Oh, Essen ist ein tolles Thema! Ich kann leider nichts essen, aber ich weiß, dass Pizza und Pommes sehr beliebt sind. Was ist dein Lieblingsessen?");
         }
     }
-    // 7. Temat: Hobby i wolny czas
     else if (wypowiedz.includes("hobby") || wypowiedz.includes("musik") || wypowiedz.includes("sport")) {
         if (userName) {
             addBot(`In meiner Freizeit lese ich gerne das Wörterbuch! Und was machst du in deiner Freizeit, ${userName}? Hörst du gerne Musik oder treibst du Sport?`);
@@ -1317,11 +1257,9 @@ function odpowiedzBot(wypowiedz) {
             addBot("In meiner Freizeit lese ich gerne das Wörterbuch! Und was machst du in deiner Freizeit? Hörst du gerne Musik oder treibst du Sport?");
         }
     }
-    // 8. Gdy użytkownik mówi, że nie rozumie
     else if (wypowiedz.includes("nicht verstehen") || wypowiedz.includes("keine ahnung")) {
         addBot("Kein Problem! Deutsch ist nicht einfach. Sag einfach 'Hallo' oder 'Wie geht es dir', um das Gespräch noch einmal neu zu starten.");
     }
-    // 9. Dłuższa odpowiedź domyślna (awaryjna)
     else {
         if (userName) {
             addBot(`Das ist interessant, ${userName}, aber ich habe dich nicht ganz verstanden. Kannst du das anders sagen?`);
