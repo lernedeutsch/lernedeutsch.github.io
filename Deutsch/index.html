@@ -1,1 +1,89 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
 
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Nauka Niemieckiego</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    overflow:hidden;
+    background:black;
+}
+
+#mapa{
+    position:relative;
+    width:100vw;
+    height:100vh;
+}
+
+/* Ziemia */
+
+#earth{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+}
+
+/* Klikalne Niemcy */
+
+#niemcy{
+    position:absolute;
+
+    /* położenie nad Niemcami */
+    top:28%;
+    left:43.5%;
+
+    width:120px;
+    height:auto;
+
+    transition:0.3s;
+    cursor:pointer;
+
+    filter:
+    drop-shadow(0 0 10px gold)
+    drop-shadow(0 0 25px gold);
+}
+
+#niemcy:hover{
+    transform:scale(1.12);
+}
+
+/* obrazek Niemiec */
+
+#niemcy img{
+    width:100%;
+    height:auto;
+    display:block;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div id="mapa">
+
+    <img src="earth.png" id="earth" alt="Ziemia">
+
+    <a href="mapa-niemiec.html" id="niemcy">
+
+        <img src="germany.png" alt="Niemcy">
+
+    </a>
+
+</div>
+
+</body>
+</html>
