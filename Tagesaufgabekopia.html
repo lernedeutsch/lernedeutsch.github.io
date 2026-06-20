@@ -356,6 +356,30 @@
         box-shadow:0 4px 10px rgba(0,0,0,0.06);
     }
 
+    /* przycisk Resetuj imię */
+    #resetNameButton {
+        margin-left: 10px;
+        margin-top: 10px;
+        padding: 8px 16px;
+        font-size: 13px;
+        font-weight: 700;
+        font-family: 'Nunito', sans-serif;
+        border: none;
+        border-radius: 20px;
+        background: #fff;
+        color: var(--wood-deep);
+        border: 2px solid var(--wood);
+        box-shadow: none;
+        cursor: pointer;
+        transition: transform .15s ease, box-shadow .15s ease, background .15s ease;
+    }
+
+    #resetNameButton:hover {
+        background: var(--cream);
+        box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+        transform: translateY(-1px);
+    }
+
     /* fale po prawej stronie ukryte */
     .waves {
         position: absolute;
@@ -473,6 +497,7 @@
 <button onclick="startLesson()">▶ Lektion starten</button>
 <button id="micButton" onclick="listenAnswer()">🎤 Mit dem Mikrofon antworten</button>
 <button class="ghost-btn" onclick="repeatLast()">🔁 Wiederholen</button>
+<button id="resetNameButton" onclick="resetUserName()">✖ Resetuj imię</button>
 </div>
 
 <div class="extra-controls">
@@ -503,6 +528,45 @@ let isWaitingForAnswer = false;
 let lastBotText = "";
 let speechRate = 0.95;
 let chatMode = false;
+
+// 🎯 ZAPAMIĘTYWANIE IMIENIA UŻYTKOWNIKA
+let userName = "";
+
+// przy starcie strony odczytujemy imię z localStorage
+function loadUserName() {
+    const saved = localStorage.getItem("nele_userName");
+    if (saved && saved.trim() !== "") {
+        userName = saved.trim();
+    } else {
+        userName = "";
+    }
+    updateStatusText();
+}
+
+// zapisujemy imię do localStorage
+function saveUserName(name) {
+    userName = name.trim();
+    localStorage.setItem("nele_userName", userName);
+    updateStatusText();
+}
+
+// czyścimy imię (np. gdy chcesz opcjonalnie możliwość resetu)
+function clearUserName() {
+    userName = "";
+    localStorage.removeItem("nele_userName");
+    updateStatusText();
+}
+
+// 🎯 aktualizacja tekstu statusu z imieniem
+function updateStatusText() {
+    if (userName && userName.trim() !== "") {
+        statusText.textContent = `Status: Bereit – ${userName}`;
+    } else {
+        statusText.textContent = "Status: Bereit";
+    }
+}
+
+loadUserName();
 
 const SpeechRecognition =
     window.SpeechRecognition ||
@@ -622,6 +686,16 @@ function repeatLast(){
     powiedz(lastBotText);
 }
 
+// 🎯 funkcja przycisku Resetuj imię
+function resetUserName() {
+    clearUserName();
+    // opcjonalnie: krótki komunikat w statusie
+    statusText.textContent = "Status: Imię zostało ус washed";
+    setTimeout(() => {
+        updateStatusText();
+    }, 1200);
+}
+
 function updateProgress(step){
 
     document.querySelectorAll(".progress-step").forEach(function(el){
@@ -656,9 +730,19 @@ function startLesson(){
 
     updateProgress(1);
 
-    addBot(
-        "Guten Tag! Ich heiße Nele. Wie heißt du?"
-    );
+    // jeśli imię jest już zapamiętane, Nele od razu je używa
+    if (userName) {
+        addBot(
+            `Guten Tag! Ich heiße Nele. Ich erinnere mich: Du bist ${userName}. Wie geht es dir?`
+        );
+        // pomijamy krok 1 (pytanie o imię), zaczynamy od kroku 2
+        lessonStep = 2;
+        updateProgress(2);
+    } else {
+        addBot(
+            "Guten Tag! Ich heiße Nele. Wie heißt du?"
+        );
+    }
 }
 
 function listenAnswer(){
@@ -734,12 +818,43 @@ function evaluate(answer){
             text.includes("mein name ist")
         ){
 
-            addBot(
-                "Freut mich! Wie geht es dir?"
-            );
+            // 🎯 wyciąganie imienia z odpowiedzi
+            // „Ich heiße Adam" → Adam
+            // „Mein Name ist Anna" → Anna
+            let name = "";
 
-            lessonStep = 2;
-            updateProgress(2);
+            if (text.includes("ich heiße")) {
+                const parts = text.split("ich heiße");
+                if (parts.length > 1) {
+                    name = parts[1].trim();
+                }
+            } else if (text.includes("mein name ist")) {
+                const parts = text.split("mein name ist");
+                if (parts.length > 1) {
+                    name = parts[1].trim();
+                }
+            }
+
+            // jeśli imię zostało znalezione i ma zawartość
+            if (name && name.length > 0) {
+                // ewentualnie usuń ewentualne kropki/spacje na końcu
+                name = name.replace(/[.,;:!?"']$/, "").trim();
+
+                saveUserName(name);
+
+                addBot(
+                    `Freut mich, ${name}! Wie geht es dir?`
+                );
+
+                lessonStep = 2;
+                updateProgress(2);
+
+            } else {
+
+                addBot(
+                    "Ich habe deinen Namen nicht verstanden. Du kannst sagen: Ich heiße Anna. Wie heißt du?"
+                );
+            }
 
         }else{
 
@@ -762,9 +877,15 @@ function evaluate(answer){
             text.includes("es geht")
         ){
 
-            addBot(
-                "Schön! Woher kommst du?"
-            );
+            if (userName) {
+                addBot(
+                    `Schön, ${userName}! Woher kommst du?`
+                );
+            } else {
+                addBot(
+                    "Schön! Woher kommst du?"
+                );
+            }
 
             lessonStep = 3;
             updateProgress(3);
@@ -786,9 +907,15 @@ function evaluate(answer){
             text.includes("ich komme aus")
         ){
 
-            addBot(
-                "Interessant! Was machst du gern in deiner Freizeit?"
-            );
+            if (userName) {
+                addBot(
+                    `Interessant, ${userName}! Was machst du gern in deiner Freizeit?`
+                );
+            } else {
+                addBot(
+                    "Interessant! Was machst du gern in deiner Freizeit?"
+                );
+            }
 
             lessonStep = 4;
             updateProgress(4);
@@ -810,9 +937,15 @@ function evaluate(answer){
             text.length > 2
         ){
 
-            addBot(
-                "Das klingt interessant. Ich muss jetzt leider gehen."
-            );
+            if (userName) {
+                addBot(
+                    `Das klingt interessant, ${userName}. Ich muss jetzt leider gehen.`
+                );
+            } else {
+                addBot(
+                    "Das klingt interessant. Ich muss jetzt leider gehen."
+                );
+            }
 
             lessonStep = 5;
             updateProgress(5);
@@ -841,9 +974,15 @@ function evaluate(answer){
             chatMode = true;
             lessonStep = 0;
 
-            addBot(
-                "Tschüss! Schön, mit dir Deutsch zu sprechen. Jetzt können wir frei Deutsch sprechen."
-            );
+            if (userName) {
+                addBot(
+                    `Tschüss, ${userName}! Schön, mit dir Deutsch zu sprechen. Jetzt können wir frei Deutsch sprechen.`
+                );
+            } else {
+                addBot(
+                    "Tschüss! Schön, mit dir Deutsch zu sprechen. Jetzt können wir frei Deutsch sprechen."
+                );
+            }
 
             updateProgress(6);
 
@@ -869,7 +1008,11 @@ function evaluate(answer){
 function odpowiedzBot(wypowiedz) {
     // 1. Powitania
     if (wypowiedz.includes("hallo") || wypowiedz.includes("guten tag") || wypowiedz.includes("hi")) {
-        addBot("Hallo! Es freut mich sehr, dich zu hören. Wie kann ich dir heute beim Deutschlernen helfen? Möchtest du über das Wetter oder deine Hobbys sprechen?");
+        if (userName) {
+            addBot(`Hallo, ${userName}! Es freut mich sehr, dich zu hören. Wie kann ich dir heute beim Deutschlernen helfen? Möchtest du über das Wetter oder deine Hobbys sprechen?`);
+        } else {
+            addBot("Hallo! Es freut mich sehr, dich zu hören. Wie kann ich dir heute beim Deutschlernen helfen? Möchtest du über das Wetter oder deine Hobbys sprechen?");
+        }
     } 
     // 2. Samopoczucie
     else if (wypowiedz.includes("wie geht es dir") || wypowiedz.includes("wie geht's")) {
@@ -881,19 +1024,35 @@ function odpowiedzBot(wypowiedz) {
     } 
     // 4. Pochwały i pozytywne odpowiedzi
     else if (wypowiedz.includes("gut") || wypowiedz.includes("super") || wypowiedz.includes("toll")) {
-        addBot("Das ist wunderbar! Wenn es dir gut geht, lernt es sich viel leichter. Erzähl mir mehr: Was hast du heute Schönes gemacht?");
+        if (userName) {
+            addBot(`Das ist wunderbar, ${userName}! Wenn es dir gut geht, lernt es sich viel leichter. Erzähl mir mehr: Was hast du heute Schönes gemacht?`);
+        } else {
+            addBot("Das ist wunderbar! Wenn es dir gut geht, lernt es sich viel leichter. Erzähl mir mehr: Was hast du heute Schönes gemacht?");
+        }
     } 
     // 5. Temat: Pogoda (Wetter)
     else if (wypowiedz.includes("wetter") || wypowiedz.includes("sonne") || wypowiedz.includes("regen")) {
-        addBot("Das Wetter ist immer ein gutes Thema! Bei mir im Computer scheint immer die Sonne. Wie ist das Wetter heute bei dir? Ist es warm oder regnet es?");
+        if (userName) {
+            addBot(`Das Wetter ist immer ein gutes Thema, ${userName}! Bei mir im Computer scheint immer die Sonne. Wie ist das Wetter heute bei dir? Ist es warm oder regnet es?`);
+        } else {
+            addBot("Das Wetter ist immer ein gutes Thema! Bei mir im Computer scheint immer die Sonne. Wie ist das Wetter heute bei dir? Ist es warm oder regnet es?");
+        }
     }
     // 6. Temat: Jedzenie (Essen)
     else if (wypowiedz.includes("essen") || wypowiedz.includes("hunger") || wypowiedz.includes("pizza")) {
-        addBot("Oh, Essen ist ein tolles Thema! Ich kann leider nichts essen, aber ich weiß, dass Pizza und Pommes sehr beliebt sind. Was ist dein Lieblingsessen?");
+        if (userName) {
+            addBot(`Oh, Essen ist ein tolles Thema, ${userName}! Ich kann leider nichts essen, aber ich weiß, dass Pizza und Pommes sehr beliebt sind. Was ist dein Lieblingsessen?`);
+        } else {
+            addBot("Oh, Essen ist ein tolles Thema! Ich kann leider nichts essen, aber ich weiß, dass Pizza und Pommes sehr beliebt sind. Was ist dein Lieblingsessen?");
+        }
     }
     // 7. Temat: Hobby i wolny czas
     else if (wypowiedz.includes("hobby") || wypowiedz.includes("musik") || wypowiedz.includes("sport")) {
-        addBot("In meiner Freizeit lese ich gerne das Wörterbuch! Und was machst du in deiner Freizeit? Hörst du gerne Musik oder treibst du Sport?");
+        if (userName) {
+            addBot(`In meiner Freizeit lese ich gerne das Wörterbuch! Und was machst du in deiner Freizeit, ${userName}? Hörst du gerne Musik oder treibst du Sport?`);
+        } else {
+            addBot("In meiner Freizeit lese ich gerne das Wörterbuch! Und was machst du in deiner Freizeit? Hörst du gerne Musik oder treibst du Sport?");
+        }
     }
     // 8. Gdy użytkownik mówi, że nie rozumie
     else if (wypowiedz.includes("nicht verstehen") || wypowiedz.includes("keine ahnung")) {
@@ -901,7 +1060,11 @@ function odpowiedzBot(wypowiedz) {
     }
     // 9. Dłuższa odpowiedź domyślna (awaryjna)
     else {
-        addBot("Das ist interessant, aber ich habe dich nicht ganz verstanden. Kannst du das anders sagen?"); 
+        if (userName) {
+            addBot(`Das ist interessant, ${userName}, aber ich habe dich nicht ganz verstanden. Kannst du das anders sagen?`);
+        } else {
+            addBot("Das ist interessant, aber ich habe dich nicht ganz verstanden. Kannst du das anders sagen?");
+        }
     }
 }
 
