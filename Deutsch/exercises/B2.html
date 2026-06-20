@@ -1,1 +1,548 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SVG Portrait</title>
+  <style>
+    :root{
+      --bg1:#f7e8df;
+      --bg2:#f0d8cc;
 
+      --skin:#efc6a8;
+      --skin-shadow:#d89f7f;
+      --skin-light:#fff4ea;
+
+      --hair:#6b4026;
+      --hair-dark:#4e2d1b;
+      --hair-light:#8a5838;
+
+      --shirt:#fcfcfc;
+      --shirt-shadow:#eaeaea;
+      --shirt-accent:#d7d7d7;
+      --shirt-accent-soft:#efefef;
+
+      --eye:#553325;
+      --lip:#d97a79;
+      --lip-dark:#bf6064;
+      --blush:#eaa59e;
+      --glasses:#2f2a3a;
+      --earring:#f4c64f;
+      --necklace:#f4c64f;
+      --nail:#d86c7c;
+    }
+
+    html, body {
+      height: 100%;
+      margin: 0;
+      background: radial-gradient(circle at 50% 30%, var(--bg1), var(--bg2));
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      font-family: system-ui, sans-serif;
+    }
+
+    .wrap {
+      width: min(420px, 92vw);
+      aspect-ratio: 1 / 1.25;
+      filter: drop-shadow(0 18px 35px rgba(0,0,0,.12));
+    }
+
+    svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .breathe {
+      transform-origin: center;
+      animation: float 4s ease-in-out infinite;
+      transition: transform 0.12s ease-out;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-4px); }
+    }
+
+    .blink {
+      transform-box: fill-box;
+      transform-origin: center;
+      animation: blink 5s infinite;
+    }
+
+    @keyframes blink {
+      0%, 92%, 100% { transform: scaleY(1); }
+      94% { transform: scaleY(0.12); }
+      96% { transform: scaleY(1); }
+    }
+
+    .hair-sheen {
+      opacity: .28;
+      mix-blend-mode: screen;
+    }
+
+    .hair-group {
+      transform-box: fill-box;
+      transform-origin: center;
+      animation: hairWind 5s ease-in-out infinite;
+    }
+
+    .hair-left {
+      transform-box: fill-box;
+      transform-origin: top center;
+      animation: hairLeft 5.2s ease-in-out infinite;
+    }
+
+    .hair-right {
+      transform-box: fill-box;
+      transform-origin: top center;
+      animation: hairRight 5.2s ease-in-out infinite;
+    }
+
+    @keyframes hairWind {
+      0%, 100% { transform: translateX(0px) rotate(0deg); }
+      50%      { transform: translateX(-1px) rotate(-0.4deg); }
+    }
+
+    @keyframes hairLeft {
+      0%, 100% { transform: rotate(0deg) translateX(0px); }
+      50%      { transform: rotate(-1.2deg) translateX(-1px); }
+    }
+
+    @keyframes hairRight {
+      0%, 100% { transform: rotate(0deg) translateX(0px); }
+      50%      { transform: rotate(1.2deg) translateX(1px); }
+    }
+
+    #character,
+    #head,
+    #body,
+    #hair,
+    #pupilLeft,
+    #pupilRight {
+      transform-box: fill-box;
+      transform-origin: center;
+      transition: transform 0.12s ease-out;
+    }
+
+    #mouth.smile {
+      animation: smileAnim 0.45s ease-out forwards;
+    }
+
+    @keyframes smileAnim {
+      0% {
+        d: path("M180 258 C187 254, 193 252, 200 252 C207 252, 213 254, 220 258 C214 263, 207 265, 200 265 C193 265, 186 263, 180 258 Z");
+      }
+      50% {
+        d: path("M178 258 C187 252, 193 250, 200 250 C207 250, 213 252, 222 258 C214 270, 207 274, 200 274 C193 274, 186 270, 178 258 Z");
+      }
+      100% {
+        d: path("M180 258 C187 254, 193 252, 200 252 C207 252, 213 254, 220 258 C214 263, 207 265, 200 265 C193 265, 186 263, 180 258 Z");
+      }
+    }
+
+    .eyes-click-blink {
+      animation: eyesClickBlink 0.3s ease-in-out 1;
+    }
+
+    @keyframes eyesClickBlink {
+      0%, 100% { transform: scaleY(1); }
+      30%, 70% { transform: scaleY(0.12); }
+    }
+
+    #head.nod {
+      animation: headNod 0.35s ease-out 1;
+    }
+
+    @keyframes headNod {
+      0%   { transform: translate(0px, 0px) rotate(0deg); }
+      40%  { transform: translate(0px, 4px) rotate(3deg); }
+      70%  { transform: translate(0px, -1px) rotate(-1deg); }
+      100% { transform: translate(0px, 0px) rotate(0deg); }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <svg id="avatar" viewBox="0 0 400 500" xmlns="http://www.w3.org/2000/svg" aria-label="Portret kobiety">
+      <defs>
+        <radialGradient id="faceGrad" cx="45%" cy="28%" r="72%">
+          <stop offset="0%" stop-color="var(--skin-light)"/>
+          <stop offset="60%" stop-color="var(--skin)"/>
+          <stop offset="100%" stop-color="var(--skin-shadow)"/>
+        </radialGradient>
+
+        <linearGradient id="hairGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="var(--hair-light)"/>
+          <stop offset="45%" stop-color="var(--hair)"/>
+          <stop offset="100%" stop-color="var(--hair-dark)"/>
+        </linearGradient>
+
+        <linearGradient id="shirtGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="var(--shirt)"/>
+          <stop offset="100%" stop-color="var(--shirt-shadow)"/>
+        </linearGradient>
+
+        <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
+          <feGaussianBlur in="SourceAlpha" stdDeviation="4" result="blur"/>
+          <feOffset id="shadowOffset" in="blur" dx="0" dy="4" result="offsetblur"/>
+          <feComponentTransfer in="offsetblur">
+            <feFuncA type="linear" slope="0.25"/>
+          </feComponentTransfer>
+          <feMerge>
+            <feMergeNode/>
+            <feMergeNode in="SourceGraphic"/>
+          </feMerge>
+        </filter>
+
+        <radialGradient id="faceHighlightGrad" cx="50%" cy="35%" r="30%">
+          <stop offset="0%" stop-color="#fff9f2" stop-opacity="0.9"/>
+          <stop offset="60%" stop-color="#fff3e5" stop-opacity="0.3"/>
+          <stop offset="100%" stop-color="#fff0e0" stop-opacity="0"/>
+        </radialGradient>
+      </defs>
+
+      <rect width="400" height="500" fill="transparent"/>
+
+      <g id="character" class="breathe" filter="url(#softShadow)">
+        <g id="hair" class="hair-group">
+          <path d="M98 178
+                   C96 116, 138 66, 200 66
+                   C263 66, 310 114, 308 183
+                   C331 194, 342 218, 339 247
+                   C336 275, 320 300, 304 326
+                   C292 345, 284 362, 277 389
+                   C270 419, 241 428, 200 428
+                   C159 428, 130 419, 123 389
+                   C116 362, 108 345, 96 326
+                   C80 300, 64 275, 61 247
+                   C58 218, 69 194, 98 178 Z"
+                fill="url(#hairGrad)"/>
+        </g>
+
+        <g id="body">
+          <path d="M72 500
+                   C80 436, 111 386, 156 362
+                   C170 354, 183 352, 200 352
+                   C217 352, 230 354, 244 362
+                   C289 386, 320 436, 328 500 Z"
+                fill="url(#shirtGrad)"/>
+
+          <path d="M79 500
+                   C82 454, 96 423, 118 403
+                   C129 393, 143 387, 159 384
+                   C158 405, 155 426, 151 446
+                   C148 460, 142 474, 134 486
+                   C126 497, 111 502, 96 500 Z"
+                fill="url(#faceGrad)" opacity="0.96"/>
+
+          <path d="M321 500
+                   C318 454, 304 423, 282 403
+                   C271 393, 257 387, 241 384
+                   C242 405, 245 426, 249 446
+                   C252 460, 258 474, 266 486
+                   C274 497, 289 502, 304 500 Z"
+                fill="url(#faceGrad)" opacity="0.96"/>
+
+          <path d="M132 478
+                   C138 487, 145 493, 154 496"
+                stroke="var(--nail)" stroke-width="3" stroke-linecap="round"/>
+          <path d="M268 478
+                   C262 487, 255 493, 246 496"
+                stroke="var(--nail)" stroke-width="3" stroke-linecap="round"/>
+
+          <path d="M110 500
+                   C118 432, 146 386, 186 363
+                   C190 377, 194 388, 198 395
+                   C201 401, 206 405, 212 408
+                   C234 386, 252 378, 254 363
+                   C294 386, 322 432, 290 500 Z"
+                fill="url(#shirtGrad)"/>
+
+          <path d="M158 363
+                   C170 392, 182 406, 200 410
+                   C218 406, 230 392, 242 363
+                   L200 340 Z"
+                fill="url(#faceGrad)" opacity="0.9"/>
+
+          <path d="M158 363
+                   C170 392, 182 406, 200 410
+                   C218 406, 230 392, 242 363"
+                fill="none" stroke="var(--shirt-accent)" stroke-width="4" stroke-linecap="round"/>
+
+          <path d="M130 412
+                   C156 432, 176 440, 200 440
+                   C224 440, 244 432, 270 412"
+                fill="none" stroke="var(--shirt-accent-soft)" stroke-width="3" stroke-linecap="round" opacity="0.9"/>
+
+          <g fill="var(--shirt-accent-soft)" opacity="0.65">
+            <circle cx="155" cy="424" r="2.1"/>
+            <circle cx="180" cy="433" r="2.1"/>
+            <circle cx="205" cy="429" r="2.1"/>
+            <circle cx="230" cy="436" r="2.1"/>
+            <circle cx="250" cy="421" r="2.1"/>
+          </g>
+        </g>
+
+        <g id="head">
+          <path d="M170 283
+                   C178 299, 183 313, 186 328
+                   C188 339, 193 347, 200 349
+                   C207 347, 212 339, 214 328
+                   C217 313, 222 299, 230 283
+                   C221 286, 210 289, 200 290
+                   C190 289, 179 286, 170 283 Z"
+                fill="url(#faceGrad)"/>
+
+          <ellipse cx="200" cy="214" rx="53" ry="80" fill="url(#faceGrad)"/>
+
+          <path class="hair-left" d="M132 198
+                   C122 166, 134 126, 164 106
+                   C175 99, 184 96, 195 95
+                   C166 110, 155 139, 157 171
+                   C158 189, 152 208, 142 225
+                   C138 216, 135 207, 132 198 Z"
+                fill="url(#hairGrad)"/>
+
+          <path class="hair-right" d="M268 198
+                   C278 166, 266 126, 236 106
+                   C225 99, 216 96, 205 95
+                   C234 110, 245 139, 243 171
+                   C242 189, 248 208, 258 225
+                   C262 216, 265 207, 268 198 Z"
+                fill="url(#hairGrad)"/>
+
+          <path class="hair-left" d="M112 206
+                   C91 230, 85 271, 101 304
+                   C114 330, 140 350, 154 361
+                   C143 327, 140 294, 147 264
+                   C153 239, 155 218, 146 198
+                   C134 191, 121 194, 112 206 Z"
+                fill="url(#hairGrad)"/>
+
+          <path class="hair-right" d="M288 206
+                   C309 230, 315 271, 299 304
+                   C286 330, 260 350, 246 361
+                   C257 327, 260 294, 253 264
+                   C247 239, 245 218, 254 198
+                   C266 191, 279 194, 288 206 Z"
+                fill="url(#hairGrad)"/>
+
+          <path class="hair-sheen" d="M144 118
+                   C166 101, 186 95, 202 95
+                   C179 108, 168 133, 168 159
+                   C168 175, 163 191, 154 206
+                   C146 187, 141 172, 140 155
+                   C138 140, 139 128, 144 118 Z"
+                fill="#d79a6c"/>
+
+          <path d="M120 224
+                   C122 218, 126 214, 130 214
+                   C133 214, 135 216, 135 219
+                   C135 221, 134 222, 133 223
+                   C134 225, 135 227, 135 230
+                   C135 233, 133 235, 130 235
+                   C127 235, 124 232, 122 228
+                   C121 227, 120 226, 120 224 Z"
+                fill="url(#faceGrad)"/>
+
+          <path d="M260 224
+                   C260 226, 259 227, 258 228
+                   C256 232, 253 235, 250 235
+                   C247 235, 245 233, 245 230
+                   C245 227, 246 225, 247 223
+                   C246 222, 245 221, 245 219
+                   C245 216, 247 214, 250 214
+                   C254 214, 258 218, 260 224 Z"
+                fill="url(#faceGrad)"/>
+
+          <path d="M160 180
+                   C171 171, 181 169, 192 172"
+                stroke="var(--hair-dark)" stroke-width="4.2" stroke-linecap="round" fill="none" opacity="0.95"/>
+          <path d="M208 172
+                   C219 169, 229 171, 240 180"
+                stroke="var(--hair-dark)" stroke-width="4.2" stroke-linecap="round" fill="none" opacity="0.95"/>
+
+          <g id="eyesGroup" class="blink">
+            <ellipse id="eyeLeft"  cx="176" cy="205" rx="9" ry="6.5" fill="#fff"/>
+            <ellipse id="eyeRight" cx="224" cy="205" rx="9" ry="6.5" fill="#fff"/>
+
+            <circle id="pupilLeft"  cx="176" cy="206" r="4.4" fill="var(--eye)"/>
+            <circle id="pupilRight" cx="224" cy="206" r="4.4" fill="var(--eye)"/>
+
+            <circle cx="177.3" cy="204" r="1.1" fill="#fff"/>
+            <circle cx="225.3" cy="204" r="1.1" fill="#fff"/>
+
+            <path d="M166 202
+                     C171 199, 181 199, 186 202"
+                  stroke="#3b2620" stroke-width="2.4" stroke-linecap="round" fill="none"/>
+            <path d="M214 202
+                     C219 199, 229 199, 234 202"
+                  stroke="#3b2620" stroke-width="2.4" stroke-linecap="round" fill="none"/>
+
+            <path d="M168 199 L163 195" stroke="#3b2620" stroke-width="2" stroke-linecap="round"/>
+            <path d="M172 198 L168 193" stroke="#3b2620" stroke-width="1.8" stroke-linecap="round"/>
+            <path d="M180 198 L181 193" stroke="#3b2620" stroke-width="1.8" stroke-linecap="round"/>
+
+            <path d="M232 199 L237 195" stroke="#3b2620" stroke-width="2" stroke-linecap="round"/>
+            <path d="M228 198 L232 193" stroke="#3b2620" stroke-width="1.8" stroke-linecap="round"/>
+            <path d="M220 198 L219 193" stroke="#3b2620" stroke-width="1.8" stroke-linecap="round"/>
+          </g>
+
+          <path d="M199 209
+                   C196 220, 194 228, 190 234"
+                stroke="#cb9478" stroke-width="3" stroke-linecap="round" fill="none"/>
+          <path d="M190 236 C195 240, 205 240, 210 236"
+                stroke="#cb9478" stroke-width="3" stroke-linecap="round" fill="none"/>
+
+          <path id="mouth" d="M180 258
+                   C187 254, 193 252, 200 252
+                   C207 252, 213 254, 220 258
+                   C214 263, 207 265, 200 265
+                   C193 265, 186 263, 180 258 Z"
+                fill="var(--lip)"/>
+
+          <ellipse cx="152" cy="243" rx="16" ry="10" fill="var(--blush)" opacity=".22"/>
+          <ellipse cx="248" cy="243" rx="16" ry="10" fill="var(--blush)" opacity=".22"/>
+
+          <ellipse cx="184" cy="187" rx="22" ry="31" fill="#fff7ef" opacity=".20"/>
+          <ellipse id="faceHighlight" cx="200" cy="214" rx="46" ry="70" fill="url(#faceHighlightGrad)" opacity="0"/>
+        </g>
+
+        <path d="M172 344
+                 C180 354, 190 360, 200 360
+                 C210 360, 220 354, 228 344"
+              stroke="var(--necklace)" stroke-width="4" stroke-linecap="round" fill="none"/>
+        <circle cx="200" cy="370" r="7" fill="var(--necklace)" opacity="0.96"/>
+        <circle cx="200" cy="370" r="4" fill="#fff9e6" opacity="0.9"/>
+
+        <g>
+          <circle cx="128" cy="232" r="3" fill="var(--earring)"/>
+          <path d="M128 235
+                   C128 242, 128 248, 128 254"
+                stroke="var(--earring)" stroke-width="3" stroke-linecap="round"/>
+          <circle cx="128" cy="258" r="5.2" fill="var(--earring)"/>
+          <circle cx="128" cy="258" r="3" fill="#fff9e6"/>
+
+          <circle cx="272" cy="232" r="3" fill="var(--earring)"/>
+          <path d="M272 235
+                   C272 242, 272 248, 272 254"
+                stroke="var(--earring)" stroke-width="3" stroke-linecap="round"/>
+          <circle cx="272" cy="258" r="5.2" fill="var(--earring)"/>
+          <circle cx="272" cy="258" r="3" fill="#fff9e6"/>
+        </g>
+      </g>
+    </svg>
+  </div>
+
+  <script>
+    const svg = document.getElementById('avatar');
+    const character = document.getElementById('character');
+    const head = document.getElementById('head');
+    const body = document.getElementById('body');
+    const hair = document.getElementById('hair');
+
+    const pupilLeft  = document.getElementById('pupilLeft');
+    const pupilRight = document.getElementById('pupilRight');
+    const eyesGroup  = document.getElementById('eyesGroup');
+    const mouth      = document.getElementById('mouth');
+
+    const faceHighlight = document.getElementById('faceHighlight');
+    const faceHighlightGrad = document.getElementById('faceHighlightGrad');
+    const shadowOffset = document.getElementById('shadowOffset');
+
+    const eyeLeftCenter  = { x: 176, y: 205 };
+    const eyeRightCenter = { x: 224, y: 205 };
+    const pupilRadiusMax = 3;
+
+    const faceCenter = { x: 200, y: 214 };
+
+    svg.addEventListener('mousemove', (e) => {
+      const rect = svg.getBoundingClientRect();
+      const relX = (e.clientX - rect.left) / rect.width - 0.5;
+      const relY = (e.clientY - rect.top) / rect.height - 0.5;
+
+      const tiltY = relX * 6;
+      character.style.transform =
+        `translate(${relX * 8}px, ${relY * 6}px) rotate(${tiltY * 0.35}deg)`;
+
+      head.style.transform = `translate(${relX * 4}px, ${relY * 3}px)`;
+      hair.style.transform = `translate(${relX * 5}px, ${relY * 4}px)`;
+      body.style.transform = `translate(${relX * 2}px, ${relY * 1.5}px)`;
+
+      const mouseX = e.clientX - rect.left;
+      const mouseY = e.clientY - rect.top;
+      movePupil(pupilLeft,  eyeLeftCenter,  mouseX, mouseY);
+      movePupil(pupilRight, eyeRightCenter, mouseX, mouseY);
+
+      const shadowDx = -relX * 10;
+      const shadowDy = -relY * 8;
+      shadowOffset.setAttribute('dx', shadowDx.toFixed(1));
+      shadowOffset.setAttribute('dy', (4 + shadowDy).toFixed(1));
+
+      const svgX = (mouseX / rect.width) * 400;
+      const svgY = (mouseY / rect.height) * 500;
+
+      const highlightX = faceCenter.x + (svgX - faceCenter.x) * 0.35;
+      const highlightY = faceCenter.y + (svgY - faceCenter.y) * 0.35;
+
+      const cxPercent = (highlightX / 400) * 100;
+      const cyPercent = (highlightY / 500) * 100;
+
+      faceHighlightGrad.setAttribute('cx', `${cxPercent}%`);
+      faceHighlightGrad.setAttribute('cy', `${cyPercent}%`);
+
+      faceHighlight.setAttribute('opacity', '0.85');
+    });
+
+    svg.addEventListener('mouseleave', () => {
+      character.style.transform = 'translate(0px, 0px)';
+      head.style.transform = 'translate(0px, 0px)';
+      hair.style.transform = 'translate(0px, 0px)';
+      body.style.transform = 'translate(0px, 0px)';
+
+      pupilLeft.setAttribute('cx', eyeLeftCenter.x);
+      pupilLeft.setAttribute('cy', eyeLeftCenter.y + 1);
+      pupilRight.setAttribute('cx', eyeRightCenter.x);
+      pupilRight.setAttribute('cy', eyeRightCenter.y + 1);
+
+      shadowOffset.setAttribute('dx', '0');
+      shadowOffset.setAttribute('dy', '4');
+      faceHighlightGrad.setAttribute('cx', '50%');
+      faceHighlightGrad.setAttribute('cy', '35%');
+      faceHighlight.setAttribute('opacity', '0');
+    });
+
+    function movePupil(pupil, center, mouseX, mouseY) {
+      const dx = mouseX - center.x;
+      const dy = mouseY - center.y;
+      const angle = Math.atan2(dy, dx);
+      const dist = Math.min(Math.hypot(dx, dy), pupilRadiusMax);
+
+      const offsetX = Math.cos(angle) * dist;
+      const offsetY = Math.sin(angle) * dist;
+
+      pupil.setAttribute('cx', center.x + offsetX);
+      pupil.setAttribute('cy', center.y + offsetY);
+    }
+
+    head.addEventListener('click', () => {
+      head.classList.remove('nod');
+      void head.offsetWidth;
+      head.classList.add('nod');
+
+      mouth.classList.remove('smile');
+      void mouth.offsetWidth;
+      mouth.classList.add('smile');
+    });
+
+    eyesGroup.addEventListener('click', (e) => {
+      e.stopPropagation();
+      eyesGroup.classList.remove('eyes-click-blink');
+      void eyesGroup.offsetWidth;
+      eyesGroup.classList.add('eyes-click-blink');
+    });
+  </script>
+</body>
+</html>
