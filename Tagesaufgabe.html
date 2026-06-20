@@ -225,7 +225,8 @@
         font-size:.74rem;
         font-weight:800;
         opacity:.7;
-        margin-bottom:2px;
+        
+margin-bottom:2px;
     }
 
     @keyframes fadeIn{
@@ -527,7 +528,9 @@ let lessonStep = 0;
 let isWaitingForAnswer = false;
 let lastBotText = "";
 let speechRate = 0.95;
-let chatMode = false;
+
+// 🎯 licznik odpowiedzi bot
+let botReplyCounter = 0;
 
 // 🎯 ZAPAMIĘTYWANIE IMIENIA UŻYTKOWNIKA
 let userName = "";
@@ -609,7 +612,39 @@ if(SpeechRecognition){
     };
 }
 
+// 🎯 ZMODYFIKOWANA funkcja addBot() z licznikiem i usuwaniem imienia co 5. odpowiedź
 function addBot(text){
+
+    botReplyCounter++;
+
+    if (userName) {
+
+        const greeting =
+            text.startsWith("Hallo") ||
+            text.startsWith("Guten Tag");
+
+        const goodbye =
+            text.startsWith("Tschüss") ||
+            text.startsWith("Auf Wiedersehen");
+
+        if (!greeting && !goodbye) {
+
+            if (botReplyCounter % 5 !== 0) {
+
+                // usuwa imię ze środka zdania
+                text = text.replaceAll(userName, "");
+
+                // usuwa zbędne przecinki i spacje
+                text = text
+                    .replace(/\s+,/g, ",")
+                    .replace(/,\./g, ".")
+                    .replace(/\s{2,}/g, " ")
+                    .replace(/\s+\./g, ".")
+                    .replace(/\s+,/g, ",")
+                    .trim();
+            }
+        }
+    }
 
     lastBotText = text;
 
@@ -690,7 +725,7 @@ function repeatLast(){
 function resetUserName() {
     clearUserName();
     // opcjonalnie: krótki komunikat w statusie
-    statusText.textContent = "Status: Imię zostało ус washed";
+    statusText.textContent = "Status: Imię zostało usunięte";
     setTimeout(() => {
         updateStatusText();
     }, 1200);
