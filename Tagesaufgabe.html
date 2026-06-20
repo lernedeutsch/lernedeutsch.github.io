@@ -356,6 +356,30 @@
         box-shadow:0 4px 10px rgba(0,0,0,0.06);
     }
 
+    /* przycisk Resetuj imię */
+    #resetNameButton {
+        margin-left: 10px;
+        margin-top: 10px;
+        padding: 8px 16px;
+        font-size: 13px;
+        font-weight: 700;
+        font-family: 'Nunito', sans-serif;
+        border: none;
+        border-radius: 20px;
+        background: #fff;
+        color: var(--wood-deep);
+        border: 2px solid var(--wood);
+        box-shadow: none;
+        cursor: pointer;
+        transition: transform .15s ease, box-shadow .15s ease, background .15s ease;
+    }
+
+    #resetNameButton:hover {
+        background: var(--cream);
+        box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+        transform: translateY(-1px);
+    }
+
     /* fale po prawej stronie ukryte */
     .waves {
         position: absolute;
@@ -473,6 +497,7 @@
 <button onclick="startLesson()">▶ Lektion starten</button>
 <button id="micButton" onclick="listenAnswer()">🎤 Mit dem Mikrofon antworten</button>
 <button class="ghost-btn" onclick="repeatLast()">🔁 Wiederholen</button>
+<button id="resetNameButton" onclick="resetUserName()">✖ Resetuj imię</button>
 </div>
 
 <div class="extra-controls">
@@ -515,18 +540,30 @@ function loadUserName() {
     } else {
         userName = "";
     }
+    updateStatusText();
 }
 
 // zapisujemy imię do localStorage
 function saveUserName(name) {
     userName = name.trim();
     localStorage.setItem("nele_userName", userName);
+    updateStatusText();
 }
 
 // czyścimy imię (np. gdy chcesz opcjonalnie możliwość resetu)
 function clearUserName() {
     userName = "";
     localStorage.removeItem("nele_userName");
+    updateStatusText();
+}
+
+// 🎯 aktualizacja tekstu statusu z imieniem
+function updateStatusText() {
+    if (userName && userName.trim() !== "") {
+        statusText.textContent = `Status: Bereit – ${userName}`;
+    } else {
+        statusText.textContent = "Status: Bereit";
+    }
 }
 
 loadUserName();
@@ -647,6 +684,16 @@ function repeatLast(){
     chatRight.classList.remove("listening");
 
     powiedz(lastBotText);
+}
+
+// 🎯 funkcja przycisku Resetuj imię
+function resetUserName() {
+    clearUserName();
+    // opcjonalnie: krótki komunikat w statusie
+    statusText.textContent = "Status: Imię zostało ус washed";
+    setTimeout(() => {
+        updateStatusText();
+    }, 1200);
 }
 
 function updateProgress(step){
@@ -772,8 +819,8 @@ function evaluate(answer){
         ){
 
             // 🎯 wyciąganie imienia z odpowiedzi
-            // „Ich heiße Adam” → Adam
-            // „Mein Name ist Anna” → Anna
+            // „Ich heiße Adam" → Adam
+            // „Mein Name ist Anna" → Anna
             let name = "";
 
             if (text.includes("ich heiße")) {
