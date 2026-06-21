@@ -9,11 +9,15 @@ const menu = {
 function renderMenu(containerId, section) {
   const container = document.getElementById(containerId);
 
+  if (!container) return;
+
+  if (!menu[section]) return;
+
   menu[section].forEach(item => {
     const a = document.createElement("a");
     a.href = item.link;
     a.textContent = item.name;
-    a.className = "menu-btn";
+    a.className = "land"; // styl z mapy
     container.appendChild(a);
   });
 }
