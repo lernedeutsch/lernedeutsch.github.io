@@ -1,5 +1,5 @@
 /**
- * routes.js - Definicje tras aplikacji
+ * routes.js - Definicje tras aplikacji (tylko niemiecki)
  */
 
 const routes = {
@@ -33,7 +33,7 @@ function getRoute(name) {
   return routes[name];
 }
 
-// Eksport
+// Eksport (jeśli używasz modulów Node.js)
 if (typeof module !== 'undefined' && module.exports) {
   module.exports = routes;
 }
