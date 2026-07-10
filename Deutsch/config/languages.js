@@ -3,8 +3,8 @@
  */
 
 const languages = {
-  domyślny: "de",  // ← Zmieniono na "de"
-  wspierane: ["de"],  // ← Tylko niemiecki
+  domyślny: "de",           // ← Tylko niemiecki
+  wspierane: ["de"],        // ← Tylko niemiecki
 
   // Tłumaczenia (tylko niemiecki)
   tłumaczenia: {
@@ -12,23 +12,28 @@ const languages = {
       nazwa: "Lerne Deutsch",
       opis: "Deutsch lernen",
       lekcje: "Lektionen",
-      ćwiczenia: "Übungen",  // ← Zmieniono na "Übungen"
+      ćwiczenia: "Übungen",
       chatbot: "Chatbot",
       gramatyka: "Grammatik",
-      słownictwo: "Wortschatz",  // ← Zmieniono na "Wortschatz"
+      słownictwo: "Wortschatz",
       start: "Starten",
       mapa: "Karte",
-     タワー: "Turm"  // ← Usunąć, jeśli niepotrzebne
+      powrót: "Zurück",
+      dalszy: "Weiter",
+      zakończ: "Beenden",
+      sukces: "Erfolg",
+      błąd: "Fehler",
+      postęp: "Fortschritt"
     }
   }
 };
 
-// Funkcja pomocnicza do pobierania tłumaczenia
+// Funkcja pomocnicza do pobierania tłumaczenia (tylko niemiecki)
 function getTranslation(klucz) {
   return languages.tłumaczenia[languages.domyślny][klucz] || "";
 }
 
-// Eksport
+// Eksport (jeśli używasz modulów Node.js)
 if (typeof module !== 'undefined' && module.exports) {
-  module.exports = languages;
+  module.exports = { languages, getTranslation };
 }
