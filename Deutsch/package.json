@@ -1,1 +1,23 @@
-
+{
+  "name": "lerne-deutsch",
+  "version": "0.1.0",
+  "description": "Interaktywna strona do nauki języka niemieckiego z lekcjami, ćwiczeniami, chatbotem i mapą Niemiec.",
+  "author": "Twoje Imię",
+  "license": "MIT",
+  "scripts": {
+    "test": "node tests/index.js",
+    "lint": "eslint js/",
+    "start": "echo 'Otwórz index.html w przeglądarce'"
+  },
+  "keywords": [
+    "niemiecki",
+    "nauka",
+    "język",
+    "edukacja",
+    "chatbot",
+    "mapa"
+  ],
+  "devDependencies": {
+    "eslint": "^9.0.0"
+  }
+}
