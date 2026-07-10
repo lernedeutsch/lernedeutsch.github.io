@@ -1,1 +1,35 @@
+# Pliki tymczasowe i cache
+temp/
+tmp/
+.cache/
 
+# Logi
+*.log
+
+# Pliki systemowe
+.DS_Store
+
+# IDE i środowiska deweloperskiego
+.idea/
+*.iml
+.vscode/
+*.swp
+*.swo
+
+# Pliki konfiguracyjne lokalne
+.env
+.env.local
+*.local
+
+# Folder output (jeśli używasz eksportów)
+output/
+
+# Artefakty kompilacji
+build/
+dist/
+
+# Tymczasowe pliki JS/Node
+node_modules/
+
+# Pliki GitKeep/GitEmpty (jeśli używasz)
+.gitkeep
