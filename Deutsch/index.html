@@ -1,107 +1,44 @@
+index.html
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Nauka Niemieckiego</title>
-
-<style>
-
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
-
-body{
-    overflow:hidden;
-    background:black;
-}
-
-#mapa{
-    position:relative;
-    width:100vw;
-    height:100vh;
-}
-
-/* Ziemia */
-
-#earth{
-    width:100%;
-    height:100%;
-    object-fit:cover;
-    display:block;
-}
-
-/* Klikalne Niemcy */
-
-#niemcy{
-    position:absolute;
-
-    /* położenie nad Niemcami */
-    top:28%;
-    left:43.5%;
-
-    width:120px;
-    height:auto;
-
-    transition:0.3s;
-    cursor:pointer;
-
-    filter:
-    drop-shadow(0 0 10px gold)
-    drop-shadow(0 0 25px gold);
-}
-
-#niemcy:hover{
-    transform:scale(1.12);
-}
-
-/* obrazek Niemiec */
-
-#niemcy img{
-    width:100%;
-    height:auto;
-    display:block;
-}
-
-</style>
-
-<!-- Ładowanie CSS -->
-<link rel="stylesheet" href="css/style.css">
-<link rel="stylesheet" href="css/mobile.css">
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lerne Deutsch</title>
+  <meta name="description" content="Interaktywna strona do nauki języka niemieckiego z mapą, lekcjami i chatbotem.">
+  <link rel="stylesheet" href="css/style.css">
 </head>
+<body class="germany-page">
 
-<body>
+  <header class="site-header">
+    <h1>Lerne Deutsch</h1>
+    <p>Wybierz poziom, przejdź do lekcji i ćwicz z chatbotem.</p>
+    <a href="chatbot/index.html" class="chatbot-button">Otwórz chatbota</a>
+  </header>
 
-<div id="mapa">
+  <main>
+    <section class="map-section" aria-label="Mapa poziomów nauki">
+      <div class="map-container">
+        <img src="assets/images/mapa-niemiec.png" alt="Mapa Niemiec z poziomami nauki niemieckiego" class="germany-map">
 
-    <img src="earth.png" id="earth" alt="Ziemia">
+        <a href="lessons/C2/index.html" class="land schleswig">C2</a>
+        <a href="lessons/B1/index.html" class="land hamburg">B1</a>
+        <a href="lessons/A2/index.html" class="land niedersachsen">A2</a>
+        <a href="lessons/B2/index.html" class="land nrw">B2</a>
+        <a href="lessons/C1/index.html" class="land hessen">C1</a>
+        <a href="lessons/grammar/index.html" class="land baden">Grammatik</a>
+        <a href="exercises/A1/index.html" class="land bayern">Übung</a>
+        <a href="lessons/A1/index.html" class="land berlin">A1</a>
+        <a href="lessons/vocabulary/index.html" class="land brandenburg">Wort</a>
+        <a href="lessons/revision/index.html" class="land sachsen">Wiederholung</a>
+        <a href="lessons/daily-task/index.html" class="land thueringen">Tagesaufgabe</a>
+      </div>
+    </section>
+  </main>
 
-    <a href="mapa-niemiec.html" id="niemcy">
-
-        <img src="germany.png" alt="Niemcy">
-
-    </a>
-
-</div>
-<nav>
-  <a href="Deutsch/lessons/A1/index.html">A1 – Übersicht</a>
-  <a href="Deutsch/lessons/A1/A1-1.html">A1-1: Begrüßung</a>
-</nav>
-
-<!-- Ładowanie skryptów -->
-<script src="js/app.js"></script>
-<script src="js/navigation.js"></script>
-<script src="js/router.js"></script>
-<script src="js/storage.js"></script>
-<script src="js/speech.js"></script>
-<script src="js/animation.js"></script>
-<script src="js/utils.js"></script>
-<script src="js/ui.js"></script>
+  <footer class="site-footer">
+    <p>&copy; 2026 Lerne Deutsch</p>
+  </footer>
 
 </body>
 </html>
