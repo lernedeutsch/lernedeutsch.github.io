@@ -1,1 +1,70 @@
+:root{
+  --bg:#20324a;
+  --bg-soft:#27405c;
+  --paper:#fbf6ec;
+  --ink:#23332e;
+  --chalk:#1d2b39;
+  --chalk-light:#2a3b50;
+  --gold:#f4c95d;
+  --green:#8bd17c;
+  --blue:#72b8ff;
+  --pink:#f08bb4;
+  --orange:#f29f67;
+  --line:rgba(35,51,46,.18);
+  --text:#111820;
+  --text-light:#2a3b50;
+}
 
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+
+body{
+  margin:0;
+  background:var(--bg);
+  background-image:
+    radial-gradient(circle at 12% 10%, rgba(255,255,255,.05), transparent 35%),
+    radial-gradient(circle at 88% 90%, rgba(255,255,255,.05), transparent 40%);
+  color:var(--text);
+  font-family:"Nunito Sans",sans-serif;
+  line-height:1.6;
+  padding:0 0 60px;
+}
+
+.course-nav{...}
+.course-nav-title{...}
+.course-section{...}
+.section-title{...}
+.lesson-list{...}
+.lesson-list a{...}
+.lesson-list a:hover{...}
+section[id^="lektion"]{...}
+.wrap{...}
+header.hero{...}
+.hero-text{...}
+.eyebrow{...}
+h1.lesson-title{...}
+.hero-text p{...}
+.topics{...}
+.topics span{...}
+.wheel-box{...}
+.wheel-box svg{...}
+.ring-seg{...}
+.ring-spring{...}
+.ring-summer{...}
+.ring-autumn{...}
+.ring-winter{...}
+.season-label,.month-label,.center-label,.center-sub{...}
+.part{...}
+.part-head{...}
+.part-num{...}
+.part-title{...}
+.card{...}
+.lead{...}
+.label{...}
+.vocab-grid{...}
+.hobby-card{...}
+.hobby-card:hover{...}
+.hobby-card h4{...}
+.hobby-card p{...}
+.hobby-card .example{...}
+.hobby-card.show .example{display:block;}
