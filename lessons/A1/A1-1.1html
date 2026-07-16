@@ -38,4 +38,70 @@
 
 <div class="top-bar">
     <a href="A-Z-A1.html" class="aza1-btn">A-Z</a>
+<!-- Spis treści kursu A1 -->
+<nav class="course-nav" aria-label="Spis treści kursu A1">
+
+    <h2 class="course-nav-title">Deutschkurs A1 – Spis treści</h2>
+
+    <div class="course-section">
+        <h3 class="section-title">1 – Erste Schritte (1–5)</h3>
+
+        <ul class="lesson-list">
+            <li><a href="#lektion1">Lektion 1 – Begrüßung, ich heiße ..., das Alphabet</a></li>
+            <li><a href="#lektion2">Lektion 2 – Woher kommen Sie?</a></li>
+            <li><a href="#lektion3">Lektion 3 – Wie alt sind Sie?</a></li>
+            <li><a href="#lektion4">Lektion 4 – Was machen Sie beruflich?</a></li>
+            <li><a href="#lektion5">Lektion 5 – Du oder Sie?</a></li>
+        </ul>
+    </div>
+
+    <div class="course-section">
+        <h3 class="section-title">2 – Alltag (6–11)</h3>
+
+        <ul class="lesson-list">
+            <li><a href="#lektion6">Lektion 6 – Meine Familie</a></li>
+            <li><a href="#lektion7">Lektion 7 – Wohnen</a></li>
+            <li><a href="#lektion8">Lektion 8 – Essen und Trinken</a></li>
+            <li><a href="#lektion9">Lektion 9 – Einkaufen</a></li>
+            <li><a href="#lektion10">Lektion 10 – Uhrzeiten</a></li>
+            <li><a href="#lektion11">Lektion 11 – Wochentage und Monate</a></li>
+        </ul>
+    </div>
+<div class="course-section">
+    <h3 class="section-title">3 – Freizeit und Hobbys (12–17)</h3>
+    <ul class="lesson-list">
+        <li><a href="#lektion12">Lektion 12 – Hobbys und Freizeit</a></li>
+        <li><a href="#lektion13">Lektion 13 – Sport und Bewegung</a></li>
+        <li><a href="#lektion14">Lektion 14 – Musik und Kultur</a></li>
+        <li><a href="#lektion15">Lektion 15 – Reisen</a></li>
+        <li><a href="#lektion16">Lektion 16 – Das Wetter</a></li>
+        <li><a href="#lektion17">Lektion 17 – Gesundheit</a></li>
+    </ul>
+</div>
+
+<div class="course-section">
+    <h3 class="section-title">4 – Grammatik und Kommunikation (18–22)</h3>
+
+    <ul class="lesson-list">
+        <li><a href="#lektion18">Lektion 18 – Nominativ und Akkusativ</a></li>
+        <li><a href="#lektion19">Lektion 19 – Dativ</a></li>
+        <li><a href="#lektion20">Lektion 20 – Modalverben</a></li>
+        <li><a href="#lektion21">Lektion 21 – Trennbare und untrennbare Verben</a></li>
+        <li><a href="#lektion22">Lektion 22 – Perfekt</a></li>
+    </ul>
+</div>
+
+<div class="course-section">
+    <h3 class="section-title">5 – Die Welt um uns (23–27)</h3>
+
+    <ul class="lesson-list">
+        <li><a href="#lektion23">Lektion 23 – In der Stadt</a></li>
+        <li><a href="#lektion24">Lektion 24 – Öffentliche Verkehrsmittel</a></li>
+        <li><a href="#lektion25">Lektion 25 – Im Restaurant</a></li>
+        <li><a href="#lektion26">Lektion 26 – Kleidung</a></li>
+        <li><a href="#lektion27">Lektion 27 – Schule und Studium</a></li>
+    </ul>
+
+
+
 
