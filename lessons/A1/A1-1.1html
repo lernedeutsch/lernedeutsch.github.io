@@ -851,6 +851,113 @@ function isCorrect(answer, patterns) {
     const normalized = answer.toLowerCase()
         .replace(/[.,!?¿]/g, "")
         .trim();
+  for (let pattern of patterns) {
+        const normalizedPattern = pattern.toLowerCase()
+            .replace(/[.,!?¡¿]/g, "")
+            .trim();
+
+        if (normalized.includes(normalizedPattern)) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+// --- Neustart ---
+function resetDialog() {
+    window.speechSynthesis.cancel();
+    if (recognition) recognition.abort();
+    isListening = false;
+    studentTranscript.style.display = "none";
+    studentTranscript.textContent = "";
+    startDialog();
+}
+
+// --- Inicjalizacja ---
+window.speechSynthesis.onvoiceschanged = () => {};
+renderDialog();
+</script>
+
+<a href="Übung-A1.html#übung1" class="übung-btn">Übung</a>
+<a href="#" class="back-to-top">↟ Powrót do spisu treści</a>
+
+<nav class="lesson-nav">
+<a href="#lektion2">→ Lektion 2</a>
+</nav>
+
+</div>
+</section>
+
+<script>
+function playAudio(letter){
+    const speech = new SpeechSynthesisUtterance();
+    speech.text = letter;
+    speech.lang = "de-DE";
+    speech.rate = 0.8;
+    speech.volume = 1;
+    speech.pitch = 1;
+    window.speechSynthesis.speak(speech);
+}
+</script>
+
+</nav>
+
+</div>
+</section>
+
+<!-- LEKCJA 2 -->
+<section class="part" id="lektion2">
+<div class="wrap" style="background:linear-gradient(135deg,#e8f5e9,#c8e6c9);border-radius:22px;padding:32px;">
+
+<header class="hero">
+    <div class="hero-text">
+        <p class="eyebrow">Deutschkurs A1 · Lektion 2 von 30</p>
+        <h1 class="lesson-title">Woher kommen Sie?</h1>
+        <p>Heute lernen wir Länder, Nationalitäten, das Verb <b>kommen</b> und die Zahlen von 1 bis 20.</p>
+<div class="topics">
+    <span>1 · Länder und Nationalitäten</span>
+    <span>2 · kommen</span>
+    <span>3 · Zahlen 1–20</span>
+</div>
+
+</div>
+
+<div class="wheel-box">
+<svg viewBox="0 0 320 320" role="img" aria-label="Karte mit Ländern und Zahlen">
+    <circle cx="160" cy="160" r="132" fill="rgba(255,255,255,.05)" stroke="rgba(35,51,46,.16)"/>
+    <circle cx="160" cy="160" r="70" fill="#20324a" stroke="rgba(35,51,46,.12)"/>
+
+    <text class="center-label" x="160" y="152">Herkunft</text>
+    <text class="center-sub" x="160" y="175">Länder</text>
+
+    <text x="160" y="40" class="month-label" font-size="20">DE</text>
+    <text x="252" y="82" class="month-label" font-size="20">PL</text>
+    <text x="282" y="164" class="month-label" font-size="20">CH</text>
+    <text x="250" y="246" class="month-label" font-size="20">AT</text>
+    <text x="160" y="292" class="month-label" font-size="20">🗺️</text>
+    <text x="70" y="246" class="month-label" font-size="20">🌍</text>
+    <text x="38" y="164" class="month-label" font-size="20">🌎</text>
+    <text x="70" y="82" class="month-label" font-size="20">🌏</text>
+</svg>
+</div>
+
+</header>
+
+<section class="part" id="teil1">
+    <div class="part-head">
+        <span class="part-num">Teil 1</span>
+        <h2 class="part-title">Woher kommen Sie?</h2>
+    </div>
+
+    <div class="card">
+        <p class="lead">
+            Wenn wir nach der Herkunft fragen, benutzen wir diese Fragen:
+        </p>
+
+        <div class="grammar-box" style="margin:24px 0;">
+
+
 
 
 
