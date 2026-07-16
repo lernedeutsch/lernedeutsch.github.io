@@ -429,6 +429,141 @@
                 <span class="key" style="font-size:1.1rem;">
                     ✅ Ich kann nach dem Namen fragen.
                 </span>
+<div class="row" style="padding:16px 18px;">
+    <span class="key" style="font-size:1.1rem;">✅ Ich kann nach dem Namen fragen.</span>
+</div>
+
+<div class="row" style="padding:16px 18px;">
+    <span class="key" style="font-size:1.1rem;">✅ Ich kann das deutsche Alphabet.</span>
+</div>
+
+</div>
+
+</section>
+
+<!--
+
+DOŁĄCZ TO DO SWOJEJ LEKCJI 1
+
+(Wstaw w miejscu, gdzie chcesz mieć dialog po przeczytaniu treści lekcji)
+
+-->
+
+<div id="dialog-practice" style="
+    max-width:800px;
+    margin:30px auto;
+    background:white;
+    border-radius:20px;
+    padding:30px;
+    box-shadow:0 8px 25px rgba(0,0,0,0.15);
+    font-family:Arial, sans-serif;
+">
+
+<h2 style="text-align:center; color:#1d4ed8; margin-bottom:10px;">
+🗣️ Powtórz dialog głosowo
+</h2>
+
+<p style="text-align:center; color:#0f766e; margin-bottom:25px; font-size:16px;">
+Anna mówi ➜ Ty widzisz podpowiedź ➜ Powtórz głośno po niemiecku
+</p>
+
+<!-- Kontener dialogu -->
+
+<div id="dialog-lines" style="margin-bottom:25px;"></div>
+
+<!-- Przyciski -->
+
+<div style="display:flex; justify-content:center; gap:15px; flex-wrap:wrap;">
+ <button onclick="startDialog()" style="
+        background:#2563eb;
+        color:white;
+        border:none;
+        border-radius:12px;
+        padding:14px 28px;
+        font-size:17px;
+        cursor:pointer;
+    ">
+        ▶️ Start dialogu
+    </button>
+
+    <button onclick="repeatCurrent()" id="repeatBtn" style="
+        background:#16a34a;
+        color:white;
+        border:none;
+        border-radius:12px;
+        padding:14px 28px;
+        font-size:17px;
+        cursor:pointer;
+        display:none;
+    ">
+        🔄 Powtórz podpowiedź
+    </button>
+
+    <button onclick="resetDialog()" style="
+        background:#ea580c;
+        color:white;
+        border:none;
+        border-radius:12px;
+        padding:14px 28px;
+        font-size:17px;
+        cursor:pointer;
+    ">
+        ↺ Neustart
+    </button>
+
+</div>
+
+<!-- Wynik -->
+
+<div id="result-area" style="
+    margin-top:25px;
+    text-align:center;
+    font-size:22px;
+    min-height:50px;
+    padding:15px;
+    border-radius:12px;
+    background:#f8fafc;
+"></div>
+
+<!-- transkrypcyjny tekst ucznia (gdy mówi) -->
+
+<div id="student-transcript" style="
+    margin-top:15px;
+    text-align:center;
+    font-size:18px;
+    min-height:30px;
+<script>
+
+// --- DIALOG: Anna (Lehrer) + Uczeń ---
+
+const dialogSteps = [
+
+{
+    speaker: "Anna",
+    text: "Hallo! Wie heißt du?",
+    answer: "Ich heiße [Twoje imię].",
+    patterns: ["ich heiße", "mein name ist", "ich bin"]
+},
+
+{
+    speaker: "Uczeń",
+    text: "",
+    hint: "Powtórz: Ich heiße ...",
+    patterns: ["ich heiße", "mein name ist", "ich bin"]
+},
+
+{
+    speaker: "Anna",
+    text: "Guten Tag! Mein Name ist Anna Müller.",
+    answer: "Mein Name ist ...",
+    patterns: ["mein name ist", "ich heiße"]
+},
+
+{
+    speaker: "Uczeń",
+    text: "",
+    hint: "Powtórz: Mein Name ist ...",
+
 
 
 
