@@ -760,6 +760,99 @@ function repeatCurrent() {
 
 // --- Rozpoznawanie mowy (ulepszone + interimResults) ---
 function startRecognition() {
+// --- Rozpoznawanie mowy (ulepszone + interimResults) ---
+function startRecognition() {
+    if (isListening) return;
+
+    const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if (!SR) {
+        resultArea.textContent = "❌ Użyj Google Chrome lub Edge (rozpoznawanie mowy).";
+        resultArea.style.background = "#fee2e2";
+        resultArea.style.color = "#dc2626";
+        return;
+    }
+
+    recognition = new SR();
+    recognition.lang = "de-DE";
+    recognition.continuous = false;
+    recognition.interimResults = true; // <- DODANO: pokazujemy słowa w czasie rzeczywistym
+    recognition.maxAlternatives = 2;
+
+    isListening = true;
+
+    recognition.onresult = (event) => {
+        let transcript = "";
+        let finalText = "";
+
+        for (let i = event.resultIndex; i < event.results.length; i++) {
+            transcript += event.results[i][0].transcript;
+            if (event.results[i].isFinal) {
+                finalText = transcript;
+            }
+        }
+// Pokazuj słowa ucznia w czasie rzeczywistym
+studentTranscript.textContent = transcript;
+
+// Jeśli wynik jest ostateczny, sprawdzamy poprawność
+if (finalText.trim()) {
+    const step = dialogSteps[currentStep];
+
+    if (isCorrect(finalText, step.patterns)) {
+        // ✓ POPRAWNE
+        isListening = false;
+        resultArea.style.background = "#dcfce7";
+        resultArea.style.color = "green";
+        resultArea.textContent = `✓ Sehr gut! „${finalText}”`;
+        studentTranscript.textContent = "✓ " + finalText;
+        speak("Sehr gut!");
+
+        setTimeout(() => {
+            studentTranscript.style.display = "none";
+            nextAnnaLine();
+        }, 1800);
+
+    } else {
+        // ✗ ŹLE
+        resultArea.style.background = "#fee2e2";
+        resultArea.style.color = "#dc2626";
+        resultArea.textContent = `✗ Niechęć: „${finalText}”. Powtórz jeszcze raz!`;
+        studentTranscript.textContent = "✗ " + finalText;
+        speak("Bitte versuche es noch einmal.");
+
+        setTimeout(() => {
+            studentTranscript.textContent = "🎤 Powtórz głośno podpowiedź!";
+    }, 1500);
+    }
+};
+
+recognition.onerror = () => {
+    isListening = false;
+    resultArea.style.background = "#fee2e2";
+    resultArea.style.color = "#dc2626";
+    resultArea.textContent = "✗ Nie udało się rozpoznać. Powtórz jeszcze raz.";
+    studentTranscript.style.display = "none";
+};
+
+recognition.onend = () => {
+    isListening = false;
+
+    // Jeśli nie rozpoznano niczego, zostaw w trybie oczekiwania
+    if (!studentTranscript.textContent.includes("✓") &&
+        !studentTranscript.textContent.includes("✗")) {
+        studentTranscript.textContent = "🎤 Powtórz głośno podpowiedź!";
+    }
+};
+
+recognition.start();
+}
+
+// --- Sprawdzenie poprawności ---
+function isCorrect(answer, patterns) {
+    const normalized = answer.toLowerCase()
+        .replace(/[.,!?¿]/g, "")
+        .trim();
+
+
 
 
 
