@@ -34,3 +34,8 @@
 </head>
 
 <body>
+<!-- Przycisk A-Z na samej górze po lewej, zaraz pod tytułem, nad spisem treści -->
+
+<div class="top-bar">
+    <a href="A-Z-A1.html" class="aza1-btn">A-Z</a>
+
