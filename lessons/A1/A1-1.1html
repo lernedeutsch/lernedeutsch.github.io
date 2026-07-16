@@ -669,6 +669,100 @@ function speak(text) {
     utterance.lang = "de-DE";
     utterance.rate = 0.92;
     utterance.pitch = 1;
+// Próba wyboru niemieckiego głosu
+const voices = window.speechSynthesis.getVoices();
+const deVoice = voices.find(v =>
+    v.lang &&
+    v.lang.toLowerCase().startsWith("de") &&
+    v.name.toLowerCase().includes("de")
+);
+
+if (deVoice) utterance.voice = deVoice;
+
+window.speechSynthesis.speak(utterance);
+}
+
+// --- Start dialogu: Anna mówi -> czekamy -> pokazujemy podpowiedź ucznia ---
+function startDialog() {
+    currentStep = -1;
+    resultArea.textContent = "";
+    resultArea.style.background = "#f8fafc";
+    repeatBtn.style.display = "none";
+    studentTranscript.style.display = "none";
+    studentTranscript.textContent = "";
+    renderDialog();
+    nextAnnaLine();
+}
+
+function nextAnnaLine() {
+    // Znajdź następną linię Anny po aktualnym etapie ucznia
+    let nextIdx = currentStep + 1;
+    while (nextIdx < dialogSteps.length &&
+           dialogSteps[nextIdx].speaker !== "Anna") {
+        nextIdx++;
+    }
+if (nextIdx >= dialogSteps.length) {
+    // Dialog zakończony
+    resultArea.style.background = "#dcfce7";
+    resultArea.style.color = "green";
+    resultArea.textContent = "✓ Doskonale! Dialog zakończony.";
+    speak("Herzlichen Glückwunsch! Dialog beendet.");
+    repeatBtn.style.display = "none";
+    studentTranscript.style.display = "none";
+    return;
+}
+
+currentStep = nextIdx;
+renderDialog();
+
+const annaStep = dialogSteps[currentStep];
+speak(annaStep.text);
+
+// Po Annie, pokazujemy podpowiedź ucznia i czekamy na jego odpowiedź
+setTimeout(() => {
+    findAndAskStudent();
+}, 1600);
+}
+
+function findAndAskStudent() {
+    // Znajdź linię ucznia po aktualnej Annie
+    let studentIdx = currentStep + 1;
+    while (studentIdx < dialogSteps.length &&
+           dialogSteps[studentIdx].speaker !== "Uczeń") {
+        studentIdx++;
+    }
+if (studentIdx >= dialogSteps.length) {
+    nextAnnaLine();
+    return;
+}
+
+currentStep = studentIdx;
+renderDialog();
+
+resultArea.textContent = "🎤 Powtórz głośno podpowiedź!";
+resultArea.style.background = "#fff7d6";
+repeatBtn.style.display = "inline-block";
+studentTranscript.style.display = "block";
+studentTranscript.textContent = "Słucham...";
+
+startRecognition();
+}
+
+// --- Przycisk: Powtórz podpowiedź ---
+function repeatCurrent() {
+    const step = dialogSteps[currentStep];
+    if (step && step.hint) {
+        // Wyczyść podpowiedź z "Powtórz: ..."
+        const cleanHint = step.hint.replace("Powtórz: ", "");
+        speak(cleanHint);
+    }
+}
+
+// --- Rozpoznawanie mowy (ulepszone + interimResults) ---
+function startRecognition() {
+
+
+
 
 
 
