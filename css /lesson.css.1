@@ -83,3 +83,65 @@ body {
     padding: 10px 12px;
     border-radius: 12px;
     background: #ffffff;
+     border: 1px solid #dce3ed;
+    transition: background .15s ease,
+                border-color .15s ease,
+                transform .15s ease;
+}
+.lesson-list a:hover {
+    background: #f0f4f8;
+    border-color: #f4c95d;
+    transform: translateX(4px);
+    color: #0a1220;
+}
+
+section[id^="lektion"] {
+    scroll-margin-top: 40px;
+}
+
+.wrap {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 32px 20px 0;
+}
+
+header.hero {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 28px;
+    padding: 24px 0 36px;
+    border-bottom: 2px dashed rgba(35, 51, 46, .18);
+    margin-bottom: 36px;
+}
+.hero-text {
+    flex: 1 1 340px;
+}
+
+.eyebrow {
+    font-family: "JetBrains Mono", monospace;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    font-size: .78rem;
+    color: #f4c95d;
+    margin: 0 0 10px;
+}
+
+h1.lesson-title {
+    font-family: "Kalam", cursive;
+    font-weight: 700;
+    font-size: 2.7rem;
+    line-height: 1.12;
+    margin: 0 0 14px;
+    color: #111820;
+}
+
+.hero-text p {
+    margin: 0;
+    color: #2a3b50;
+    max-width: 52ch;
+}
+
+.topics {
+    display: flex;
+    flex-wrap: wrap;
