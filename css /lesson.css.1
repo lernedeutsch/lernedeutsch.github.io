@@ -15,3 +15,27 @@
 
     --line: rgba(35, 51, 46, 0.18);
 }
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    background: var(--bg);
+    background-image:
+        radial-gradient(circle at 12% 10%, rgba(255,255,255,.05), transparent 35%),
+        radial-gradient(circle at 88% 90%, rgba(255,255,255,.05), transparent 40%);
+    color: var(--text);
+    font-family: "Nunito Sans", sans-serif;
+    line-height: 1.6;
+    padding: 0 0 60px;
+}
+
+.course-nav {
+    max-width: 880px;
+    margin: 40px auto 60px;
+}
