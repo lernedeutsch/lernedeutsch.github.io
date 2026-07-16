@@ -145,3 +145,100 @@ h1.lesson-title {
 .topics {
     display: flex;
     flex-wrap: wrap;
+    .topics {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 18px;
+}
+.topics span {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #f0f4f8;
+    border: 1px solid #dce3ed;
+    border-radius: 999px;
+    padding: 7px 12px;
+    font-size: .92rem;
+    color: #111820;
+}
+
+.wheel-box {
+    flex: 0 1 320px;
+    display: grid;
+    place-items: center;
+}
+
+.wheel-box svg {
+    width: 100%;
+    height: auto;
+    max-width: 320px;
+    filter: drop-shadow(0 16px 30px rgba(0,0,0,.18));
+}
+.ring-seg {
+    stroke: rgba(255,255,255,.14);
+    stroke-width: 2;
+}
+
+.ring-spring { fill: #5ca75b; }
+.ring-summer { fill: #d9b24c; }
+.ring-autumn { fill: #cf6b35; }
+.ring-winter { fill: #4f86b8; }
+
+.season-label,
+.month-label,
+.center-label,
+.center-sub {
+    fill: #111820;
+    font-family: "JetBrains Mono", monospace;
+    text-anchor: middle;
+}
+
+.season-label {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.month-label {
+    font-size: 13px;
+    opacity: .95;
+}
+
+.month-label.now {
+    font-size: 14px;
+    font-weight: 700;
+    fill: #f4c95d;
+}
+
+.center-label {
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.center-sub {
+    font-size: 13px;
+    opacity: .9;
+}
+
+.now-marker {
+    fill: #f4c95d;
+    stroke: #20324a;
+    stroke-width: 2;
+}
+
+.part {
+    margin: 34px 0 42px;
+}
+
+.part-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 12px;
+.part-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 12px;
+
+    
