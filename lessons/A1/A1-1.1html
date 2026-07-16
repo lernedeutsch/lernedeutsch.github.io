@@ -101,6 +101,125 @@
         <li><a href="#lektion26">Lektion 26 – Kleidung</a></li>
         <li><a href="#lektion27">Lektion 27 – Schule und Studium</a></li>
     </ul>
+<div class="course-section">
+    <h3 class="section-title">6 – Wiederholung und Prüfung (28–30)</h3>
+
+    <ul class="lesson-list">
+        <li><a href="#lektion28">Lektion 28 – Große Wiederholung I</a></li>
+        <li><a href="#lektion29">Lektion 29 – Große Wiederholung II</a></li>
+        <li><a href="#lektion30">Lektion 30 – Prüfungsvorbereitung</a></li>
+    </ul>
+</div>
+
+</nav>
+
+<!-- LEKCJA 1 -->
+<section class="part" id="lektion1">
+
+<div class="wrap" style="background:linear-gradient(135deg,#fff5e6,#ffe0b2);border-radius:22px;padding:32px;">
+
+<header class="hero">
+
+<div class="hero-text">
+
+<p class="eyebrow">Deutschkurs A1 · Lektion 1 von 30</p>
+
+<h1 class="lesson-title">Guten Tag! – Begrüßung und Vorstellung</h1>
+
+<p>Heute lernen wir: Wie begrüßen wir uns? Wie stellen wir uns vor? Und das deutsche Alphabet.</p>
+
+<div class="topics">
+    <span>1 · Begrüßung</span>
+    <span>2 · Vorstellung</span>
+    <span>3 · Alphabet</span>
+</div>
+
+</div>
+
+<div class="wheel-box">
+
+<svg viewBox="0 0 320 320" role="img" aria-label="Begrüßung-Symbol mit Händen und Worten">
+<circle cx="160" cy="160" r="132" fill="rgba(255,255,255,.05)" stroke="rgba(35,51,46,.16)"/>
+<circle cx="160" cy="160" r="70" fill="#20324a" stroke="rgba(35,51,46,.12)"/>
+
+<text class="center-label" x="160" y="152">Hallo!</text>
+<text class="center-sub" x="160" y="175">Guten Tag!</text>
+
+<text x="160" y="40" class="month-label" font-size="20">👋</text>
+<text x="252" y="82" class="month-label" font-size="20">😊</text>
+<text x="282" y="164" class="month-label" font-size="20">🗣️</text>
+<text x="250" y="246" class="month-label" font-size="20">👤</text>
+<text x="160" y="292" class="month-label" font-size="20">✍️</text>
+<text x="70" y="246" class="month-label" font-size="20">🎯</text>
+<text x="38" y="164" class="month-label" font-size="20">✨</text>
+<text x="70" y="82" class="month-label" font-size="20">🌟</text>
+
+</svg>
+</div>
+</header>
+
+<section class="part" id="teil1">
+
+<div class="part-head">
+    <span class="part-num">Teil 1</span>
+    <h2 class="part-title">Wir begrüßen uns</h2>
+</div>
+
+<div class="card">
+
+<p class="lead">Wir sagen verschiedene Grüße – je nach Tageszeit.</p>
+
+<div class="gruessen">
+    <p style="font-size:1.4rem;margin:12px 0;">Guten Morgen!</p>
+    <p style="font-size:1.4rem;margin:12px 0;">Guten Tag!</p>
+    <p style="font-size:1.4rem;margin:12px 0;">Guten Abend!</p>
+    <p style="font-size:1.4rem;margin:12px 0;">Hallo!</p>
+    <p style="font-size:1.4rem;margin:12px 0;">Tschüss!</p>
+</div>
+
+<div class="grammar-box" style="margin:24px 0;">
+    <b>Merke!</b><br><br>
+    morgens → <b>Guten Morgen!</b><br><br>
+    tagsüber → <b>Guten Tag!</b><br><br>
+<tr>
+    <th style="padding:20px 16px;">Situation</th>
+    <th style="padding:20px 16px;">Gruß</th>
+    <th style="padding:20px 16px;">Wann wird er in Deutschland verwendet?</th>
+</tr>
+</thead>
+
+<tbody>
+
+<tr>
+    <td style="padding:20px 16px;">morgens</td>
+    <td style="padding:20px 16px;"><b style="font-size:1.1rem;">Guten Morgen!</b></td>
+    <td style="padding:20px 16px;">ungefähr von <b>5:00/6:00 Uhr bis 10:00–11:00 Uhr</b></td>
+</tr>
+
+<tr>
+    <td style="padding:20px 16px;">tagsüber</td>
+    <td style="padding:20px 16px;"><b style="font-size:1.1rem;">Guten Tag!</b></td>
+    <td style="padding:20px 16px;">ungefähr von <b>10:00–11:00 Uhr bis 17:00–18:00 Uhr</b></td>
+</tr>
+
+<tr>
+    <td style="padding:20px 16px;">abends</td>
+    <td style="padding:20px 16px;"><b style="font-size:1.1rem;">Guten Abend!</b></td>
+    <td style="padding:20px 16px;">ungefähr von <b>17:00–18:00 Uhr bis spät am Abend</b></td>
+</tr>
+
+<tr>
+    <td style="padding:20px 16px;">informell</td>
+    <td style="padding:20px 16px;"><b style="font-size:1.1rem;">Hallo!</b></td>
+    <td style="padding:20px 16px;"><b>zu jeder Tageszeit</b></td>
+</tr>
+
+<tr>
+    <td style="padding:20px 16px;">beim Abschied</td>
+    <td style="padding:20px 16px;"><b style="font-size:1.1rem;">Tschüss!</b></td>
+    <td style="padding:20px 16px;"><b>zu jeder Tageszeit</b></td>
+</tr>
+
 
 
 
