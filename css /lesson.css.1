@@ -235,10 +235,69 @@ h1.lesson-title {
     flex-wrap: wrap;
     align-items: baseline;
     gap: 12px;
-.part-head {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: baseline;
-    gap: 12px;
+     margin-bottom: 14px;
+}
 
-    
+.part-num {
+    font-family: "JetBrains Mono", monospace;
+    font-size: .82rem;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: #f4c95d;
+}
+
+.part-title {
+    font-family: "Kalam", cursive;
+    font-size: 2rem;
+    margin: 0;
+    color: #111820;
+}
+
+.card {
+    background: #f7f9fc;
+    border: 1px solid #dce3ed;
+    border-radius: 22px;
+    padding: 22px 22px 20px;
+    box-shadow: 0 12px 30px rgba(0,0,0,.06);
+    margin-top: 14px;
+}
+
+.lead {
+    font-size: 1.04rem;
+    color: #111820;
+}
+.label {
+    display: inline-block;
+    font-family: "JetBrains Mono", monospace;
+    font-size: .74rem;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: #f4c95d;
+    margin-bottom: 8px;
+}
+.vocab-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+    gap: 12px;
+    margin-top: 16px;
+}
+
+.hobby-card {
+    background: #ffffff;
+    border: 1px solid #dce3ed;
+    border-radius: 18px;
+    padding: 14px;
+    cursor: pointer;
+    transition: transform .15s ease,
+                border-color .15s ease,
+                background .15s ease;
+    min-height: 112px;
+}
+
+.hobby-card:hover {
+    transform: translateY(-2px);
+    border-color: #f4c95d;
+    background: #f9fbff;
+}
+
+
