@@ -563,6 +563,115 @@ const dialogSteps = [
     speaker: "Uczeń",
     text: "",
     hint: "Powtórz: Mein Name ist ...",
+patterns: ["mein name ist", "ich heiße"]
+},
+
+{
+    speaker: "Anna",
+    text: "Wie heißt man Sie höflich?",
+    answer: "Wie heißen Sie?",
+    patterns: ["wie heißen sie", "wie heissen sie"]
+},
+
+{
+    speaker: "Uczeń",
+    text: "",
+    hint: "Powtórz: Wie heißen Sie?",
+    patterns: ["wie heißen sie", "wie heissen sie"]
+},
+
+{
+    speaker: "Anna",
+    text: "Auf Wiedersehen!",
+    answer: "Auf Wiedersehen!",
+    patterns: ["auf wiedersehen", "wiedersehen"]
+},
+
+{
+    speaker: "Uczeń",
+    text: "",
+    hint: "Powtórz: Auf Wiedersehen!",
+    patterns: ["auf wiedersehen", "wiedersehen"]
+}
+
+];
+
+// Filtrujemy tylko linie, gdzie uczeń musi mówić (speaker === "Uczeń")
+
+const practiceSteps = dialogSteps.filter(step => step.speaker === "Uczeń");
+let currentStep = 0;
+let recognition = null;
+let isListening = false;
+
+const linesContainer = document.getElementById("dialog-lines");
+const resultArea = document.getElementById("result-area");
+const repeatBtn = document.getElementById("repeatBtn");
+const studentTranscript = document.getElementById("student-transcript");
+
+// --- Generowanie wizualnego dialogu ---
+
+function renderDialog() {
+    linesContainer.innerHTML = "";
+
+    dialogSteps.forEach((step, idx) => {
+        const lineDiv = document.createElement("div");
+        lineDiv.style.cssText = `
+            display:flex;
+            gap:12px;
+            align-items:flex-start;
+            padding:12px;
+            margin-bottom:8px;
+            border-radius:10px;
+            border-bottom:1px solid #eee;
+        `;
+
+        if (idx === currentStep && step.speaker === "Uczeń") {
+            lineDiv.style.background = "#fff7d6";
+            lineDiv.style.borderLeft = "5px solid #f5b301";
+            lineDiv.style.paddingLeft = "15px";
+        }
+
+        const nameDiv = document.createElement("div");
+        nameDiv.style.cssText = `
+  min-width:80px;
+    font-weight:700;
+    color:#0f2f57;
+    font-size:16px;
+`;
+nameDiv.textContent = step.speaker;
+
+const textDiv = document.createElement("div");
+textDiv.style.cssText = `
+    flex:1;
+    font-size:17px;
+    line-height:1.4;
+    color:#111;
+`;
+
+if (step.speaker === "Anna") {
+    textDiv.textContent = step.text;
+} else {
+    textDiv.textContent = step.hint || "";
+    textDiv.style.color = "#0b8043";
+}
+
+lineDiv.appendChild(nameDiv);
+lineDiv.appendChild(textDiv);
+linesContainer.appendChild(lineDiv);
+});
+}
+
+// --- Głos: bardziej naturalny (niemiecki) ---
+function speak(text) {
+    window.speechSynthesis.cancel();
+
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = "de-DE";
+    utterance.rate = 0.92;
+    utterance.pitch = 1;
+
+
+
 
 
 
