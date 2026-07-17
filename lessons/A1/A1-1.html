@@ -532,6 +532,15 @@ Anna mówi ➜ Ty widzisz podpowiedź ➜ Powtórz głośno po niemiecku
     text-align:center;
     font-size:18px;
     min-height:30px;
+    padding:12px;
+    border-radius:10px;
+    background:#eef6ff;
+    color:#1e40af;
+    display:none;
+"></div>
+
+</div>
+
 <script>
 
 // --- DIALOG: Anna (Lehrer) + Uczeń ---
@@ -758,8 +767,6 @@ function repeatCurrent() {
     }
 }
 
-// --- Rozpoznawanie mowy (ulepszone + interimResults) ---
-function startRecognition() {
 // --- Rozpoznawanie mowy (ulepszone + interimResults) ---
 function startRecognition() {
     if (isListening) return;
@@ -2122,7 +2129,7 @@ Meine Adresse ist …
         fill="#20324a"
         stroke="rgba(35,51,46,.12)"/>
 
-<text class="center-label" x="160" y="152">Du/text>
+<text class="center-label" x="160" y="152">Du</text>
 
 <text class="center-sub" x="160" y="175">Sie</text>
 
