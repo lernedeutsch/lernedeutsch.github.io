@@ -1242,6 +1242,247 @@ Lesen Sie die Zahlen laut. Lernen Sie von 11 bis 100.
 </p>
 
 <div class="alphabet" style="display:flex;flex-wrap:wrap;gap:14px;margin:24px 0;">
+<span style="background:#f0f4f8;padding:14px 18px;border-radius:12px;font-weight:700;font-size:1.3rem;border:1px solid #dce3ed;">11 – elf</span>
+<span style="background:#f0f4f8;padding:14px 18px;border-radius:12px;font-weight:700;font-size:1.3rem;border:1px solid #dce3ed;">12 – zwölf</span>
+<span style="background:#f0f4f8;padding:14px 18px;border-radius:12px;font-weight:700;font-size:1.3rem;border:1px solid #dce3ed;">13 – dreizehn</span>
+<span style="background:#f0f4f8;padding:14px 18px;border-radius:12px;font-weight:700;font-size:1.3rem;border:1px solid #dce3ed;">14 – vierzehn</span>
+<span style="background:#f0f4f8;padding:14px 18px;border-radius:12px;font-weight:700;font-size:1.3rem;border:1px solid #dce3ed;">15 – fünfzehn</span>
+<span style="background:#f0f4f8;padding:14px 18px;border-radius:12px;font-weight:700;font-size:1.3rem;border:1px solid #dce3ed;">16 – sechzehn</span>
+<span style="background:#f0f4f8;padding:14px 18px;border-radius:12px;font-weight:700;font-size:1.3rem;border:1px solid #dce3ed;">17 – siebzehn</span>
+<span style="background:#f0f4f8;padding:14px 18px;border-radius:12px;font-weight:700;font-size:1.3rem;border:1px solid #dce3ed;">18 – achtzehn</span>
+<span style="background:#f0f4f8;padding:14px 18px;border-radius:12px;font-weight:700;font-size:1.3rem;border:1px solid #dce3ed;">19 – neunzehn</span>
+<span style="background:#f0f4f8;padding:14px 18px;border-radius:12px;font-weight:700;font-size:1.3rem;border:1px solid #dce3ed;">20 – zwanzig</span>
+
+<span style="background:#f0f4f8;padding:14px 18px;border-radius:12px;font-weight:700;font-size:1.3rem;border:1px solid #dce3ed;">30 – dreißig</span>
+<span style="background:#f0f4f8;padding:14px 18px;border-radius:12px;font-weight:700;font-size:1.3rem;border:1px solid #dce3ed;">40 – vierzig</span>
+<span style="background:#f0f4f8;padding:14px 18px;border-radius:12px;font-weight:700;font-size:1.3rem;border:1px solid #dce3ed;">50 – fünfzig</span>
+<span style="background:#f0f4f8;padding:14px 18px;border-radius:12px;font-weight:700;font-size:1.3rem;border:1px solid #dce3ed;">60 – sechzig</span>
+<span style="background:#f0f4f8;padding:14px 18px;border-radius:12px;font-weight:700;font-size:1.3rem;border:1px solid #dce3ed;">70 – siebzig</span>
+<span style="background:#f0f4f8;padding:14px 18px;border-radius:12px;font-weight:700;font-size:1.3rem;border:1px solid #dce3ed;">80 – achtzig</span>
+<span style="background:#f0f4f8;padding:14px 18px;border-radius:12px;font-weight:700;font-size:1.3rem;border:1px solid #dce3ed;">90 – neunzig</span>
+<span style="background:#f0f4f8;padding:14px 18px;border-radius:12px;font-weight:700;font-size:1.3rem;border:1px solid #dce3ed;">100 – hundert</span>
+
+</div>
+
+<div class="grammar-box" style="margin:24px 0;">
+<br><b>Beispiele für kombinierte Zahlen:</b><br><br>
+21 – einundzwanzig<br>
+35 – fünfunddreißig<br>
+48 – achtundvierzig
+</div>
+
+</div>
+</section>
+
+<section class="part" id="teil3">
+
+<div class="part-head">
+    <span class="part-num">Teil 3</span>
+    <h2 class="part-title">Das Verb „sein“</h2>
+</div>
+
+<div class="card">
+
+<p class="lead">
+„sein“ ist ein sehr wichtiges Verb. Hier ist die Konjugation:
+</p>
+
+<table class="gruss-tabelle" style="margin:24px 0;">
+<thead>
+<tr>
+    <th style="padding:18px 14px;">Pronomen</th>
+    <th style="padding:18px 14px;">sein</th>
+    <th style="padding:18px 14px;">Beispielsatz</th>
+</tr>
+</thead>
+
+<tbody>
+
+<tr>
+    <td style="padding:18px 14px;">ich</td>
+    <td style="padding:18px 14px;"><b style="font-size:1.1rem;">bin</b></td>
+    <td style="padding:18px 14px;">Ich bin Anna.</td>
+</tr>
+
+<tr>
+    <td style="padding:18px 14px;">du</td>
+    <td style="padding:18px 14px;"><b style="font-size:1.1rem;">bist</b></td>
+    <td style="padding:18px 14px;">Du bist Paul.</td>
+</tr>
+
+<tr>
+    <td style="padding:18px 14px;">Sie / er / sie / es</td>
+    <td style="padding:18px 14px;"><b style="font-size:1.1rem;">ist</b></td>
+    <td style="padding:18px 14px;">Sie ist Herr Müller.</td>
+</tr>
+
+<tr>
+    <td style="padding:18px 14px;">wir</td>
+    <td style="padding:18px 14px;"><b style="font-size:1.1rem;">sind</b></td>
+    <td style="padding:18px 14px;">Wir sind hier.</td>
+</tr>
+
+<tr>
+    <td style="padding:18px 14px;">ihr</td>
+    <td style="padding:18px 14px;"><b style="font-size:1.1rem;">seid</b></td>
+    <td style="padding:18px 14px;">Ihr seid praktisch.</td>
+</tr>
+<tr>
+    <td style="padding:18px 14px;">sie / Sie</td>
+    <td style="padding:18px 14px;"><b style="font-size:1.1rem;">sind</b></td>
+    <td style="padding:18px 14px;">Sie sind Lehrer.</td>
+</tr>
+
+</tbody>
+</table>
+
+<div class="gruessen">
+
+<p style="font-size:1.3rem;margin:16px 0;">
+Ich ___ 30 Jahre alt.
+→ Ich <b>bin</b> 30 Jahre alt.
+</p>
+
+<p style="font-size:1.3rem;margin:16px 0;">
+Sie ___ Lehrer.
+→ Sie <b>ist</b> Lehrer.
+</p>
+
+<p style="font-size:1.3rem;margin:16px 0;">
+Du ___ müde.
+→ Du <b>bist</b> müde.
+</p>
+
+</div>
+
+</div>
+</section>
+
+<section class="part" id="teil4">
+
+<div class="part-head">
+    <span class="part-num">Teil 4</span>
+    <h2 class="part-title">Persönliche Daten</h2>
+</div>
+
+<div class="card">
+
+<p class="lead">
+Wichtige Wörter für persönliche Daten:
+</p>
+
+<div class="alphabet" style="display:flex;flex-wrap:wrap;gap:14px;margin:24px 0;">
+
+<span style="background:#f0f4f8;padding:14px 18px;border-radius:12px;font-weight:700;font-size:1.2rem;border:1px solid #dce3ed;">Name</span>
+
+<span style="background:#f0f4f8;padding:14px 18px;border-radius:12px;font-weight:700;font-size:1.2rem;border:1px solid #dce3ed;">Vorname</span>
+
+<span style="background:#f0f4f8;padding:14px 18px;border-radius:12px;font-weight:700;font-size:1.2rem;border:1px solid #dce3ed;">Adresse</span>
+
+<span style="background:#f0f4f8;padding:14px 18px;border-radius:12px;font-weight:700;font-size:1.2rem;border:1px solid #dce3ed;">Telefonnummer</span>
+
+</div>
+
+<div class="grammar-box" style="margin:24px 0;">
+<br><b>Fragen:</b><br><br>
+Wie ist Ihr Name?<br><br>
+Wie ist Ihr Vorname?<br><br>
+Wie ist Ihre Adresse?
+</div>
+
+<div class="grammar-box" style="margin:24px 0;">
+<br><b>Antworten:</b><br><br>
+Mein Name ist Schmidt.<br><br>
+Mein Vorname ist Anna.<br><br>
+Meine Adresse ist …
+<section class="part" id="dialog">
+
+    <div class="part-head">
+        <span class="part-num">Dialog</span>
+        <h2 class="part-title">Lesen und sprechen</h2>
+    </div>
+
+    <div class="card">
+
+        <p>Lesen Sie den Dialog laut vor.</p>
+
+        <div class="dialog">
+
+            <div class="bubble marta">
+                <span class="speaker">A</span>
+                Guten Tag. Wie ist Ihr Name?
+            </div>
+
+            <div class="bubble tom">
+                <span class="speaker">B</span>
+                Mein Name ist Becker.
+            </div>
+
+            <div class="bubble marta">
+                <span class="speaker">A</span>
+                Wie ist Ihr Vorname?
+            </div>
+
+            <div class="bubble tom">
+                <span class="speaker">B</span>
+                Mein Vorname ist Julia.
+            </div>
+
+            <div class="bubble marta">
+                <span class="speaker">A</span>
+                Wie alt sind Sie?
+            </div>
+
+            <div class="bubble tom">
+                <span class="speaker">B</span>
+                Ich bin 28 Jahre alt.
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<section class="part" id="zusammenfassung">
+
+    <div class="part-head">
+        <span class="part-num">Merken</span>
+        <h2 class="part-title">Abschluss – Was haben wir gelernt?</h2>
+    </div>
+
+    <div class="card">
+
+        <div class="summary-grid">
+
+            <div class="row" style="padding:16px 18px;">
+                <span class="key" style="font-size:1.1rem;">✅ Alter fragen und sagen</span>
+            </div>
+
+            <div class="row" style="padding:16px 18px;">
+                <span class="key" style="font-size:1.1rem;">✅ Zahlen</span>
+            </div>
+
+            <div class="row" style="padding:16px 18px;">
+                <span class="key" style="font-size:1.1rem;">✅ Verb „sein“</span>
+            </div>
+
+            <div class="row" style="padding:16px 18px;">
+                <span class="key" style="font-size:1.1rem;">✅ Persönliche Daten</span>
+            </div>
+
+        </div>
+
+        <p style="text-align:center;margin:24px 0;font-size:1.3rem;color:#111820;">
+            Sehr gut! Bis zum nächsten Mal!
+        </p>
+
+    </div>
+
+</section>
+
+<a href="Übung-A1.html#übung3" class="übung-btn">Übung</a>
+
 
 
 
