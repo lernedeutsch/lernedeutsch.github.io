@@ -1107,3 +1107,68 @@
     <div class="hero-text">
       <p class="eyebrow">Deutschkurs A1 · Übung zu Lektion 6</p>
       <h1 class="lesson-title">Übung — Meine Familie</h1>
+       </nav>
+
+</div>
+
+<script>
+function normalize(str){
+  return str.trim().toLowerCase().replace(/ß/g,'ss').replace(/[.!?]/g,'').replace(/ä/g,'a').replace(/ö/g,'o').replace(/ü/g,'u');
+}
+
+function checkExercise(exId){
+  const list=document.getElementById(exId);
+  const inputs=list.querySelectorAll('input[type="text"]');
+  let correct=0;
+  inputs.forEach(input=>{
+    const feedback=input.nextElementSibling;
+    const accepted=input.dataset.answer.split(',').map(normalize);
+    const value=normalize(input.value);
+    if(accepted.includes(value)){
+      feedback.textContent='✓';
+      feedback.className='feedback ok';
+      correct++;
+    }else{
+      feedback.textContent='✗';
+      feedback.className='feedback no';
+    }
+  });
+  const result=document.getElementById(exId+'-result');
+  result.textContent=`${correct} / ${inputs.length} richtig.`;
+  result.textContent += correct<inputs.length ? ' Versuchen Sie es noch einmal.' : ' Super! 🎉';
+}
+
+function checkQuiz14(){
+  const questions=document.querySelectorAll('#übung14_3 .quiz-q');
+  let correct=0,answered=0;
+  questions.forEach(q=>{
+    const correctIndex=q.dataset.correct;
+    const labels=q.querySelectorAll('.quiz-options label');
+    const selected=q.querySelector('input[type="radio"]:checked');
+    labels.forEach(l=>l.classList.remove('correct','incorrect'));
+    if(selected){
+      answered++;
+      const chosenLabel=selected.closest('label');
+      if(selected.value===correctIndex){
+        chosenLabel.classList.add('correct');
+        correct++;
+      }else{
+        chosenLabel.classList.add('incorrect');
+        labels[correctIndex].classList.add('correct');
+      }
+    }else{
+      labels[correctIndex].classList.add('correct');
+    }
+  });
+  const result=document.getElementById('quiz14-result');
+  result.textContent=answered<questions.length ? `Bitte beantworten Sie alle Fragen. (${answered}/${questions.length} beantwortet)` : `Ergebnis: ${correct} / ${questions.length} richtig.`;
+  if(answered===questions.length && correct===questions.length) result.textContent += ' Ausgezeichnet! 🎉';
+}
+
+// Matching (jeśli potrzebne)
+let selected=null;
+let matches=0;
+</script>
+
+</body>
+</html>
