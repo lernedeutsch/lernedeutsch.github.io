@@ -956,6 +956,171 @@ function playAudio(letter){
         </p>
 
         <div class="grammar-box" style="margin:24px 0;">
+<br><b>Woher kommen Sie?</b> – formell, mit Erwachsenen und Fremden.
+<br><br><b>Woher kommst du?</b> – informell.
+</div>
+
+<div class="grammar-box" style="margin:24px 0;">
+<br>Die Antwort ist immer:
+<br><br><b>Ich komme aus + Land.</b>
+<br><br>
+</div>
+
+<div class="gruessen">
+    <p style="font-size:1.3rem;margin:16px 0;">🇵🇱 Ich komme aus Polen.</p>
+    <p style="font-size:1.3rem;margin:16px 0;">🇩🇪 Ich komme aus Deutschland.</p>
+    <p style="font-size:1.3rem;margin:16px 0;">🇨🇭 Ich komme aus der Schweiz.</p>
+    <p style="font-size:1.1rem;margin:12px 0;color:#b8860b;">
+        (Achtung: „die Schweiz“ → „aus der Schweiz“!)
+    </p>
+    <p style="font-size:1.3rem;margin:16px 0;">🇺🇸 Ich komme aus den USA.</p>
+    <p style="font-size:1.1rem;margin:12px 0;color:#b8860b;">
+        (Achtung: „die USA“ → „aus den USA“!)
+    </p>
+</div>
+
+</div>
+</section>
+
+<section class="part" id="teil2">
+    <div class="part-head">
+        <span class="part-num">Teil 2</span>
+        <h2 class="part-title">Länder und Nationalitäten</h2>
+    </div>
+
+    <div class="card">
+        <p class="lead">
+            Die Nationalität beschreibt, woher eine Person kommt.
+        </p>
+
+        <div class="gruessen">
+            <p style="font-size:1.3rem;margin:16px 0;">
+                Ich bin <b>Pole</b> / <b>Polin</b>. – Ich komme aus Polen.
+            </p>
+
+            <p style="font-size:1.3rem;margin:16px 0;">
+                Er ist <b>Deutscher</b>. – Er kommt aus Deutschland.
+            </p>
+
+            <p style="font-size:1.3rem;margin:16px 0;">
+                Sie ist <b>Österreicherin</b>. – Sie kommt aus Österreich.
+            </p>
+        </div>
+
+        <div class="grammar-box" style="margin:24px 0;">
+            <br><b>Wichtige Regel:</b>
+            <br><br>Mann: Deutscher, Pole, Österreicher, Franzose …
+            <br><br>Frau: Deutsche, Polin, …
+<table class="gruss-tabelle" style="margin:24px 0;">
+    <thead>
+        <tr>
+            <th style="padding:18px 14px;">Pronomen</th>
+            <th style="padding:18px 14px;">kommen</th>
+            <th style="padding:18px 14px;">Beispielsatz</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <tr>
+            <td style="padding:18px 14px;">ich</td>
+            <td style="padding:18px 14px;">
+                <b style="font-size:1.1rem;">komme</b>
+            </td>
+            <td style="padding:18px 14px;">
+                Ich komme aus Spanien.
+            </td>
+        </tr>
+
+        <tr>
+            <td style="padding:18px 14px;">du</td>
+            <td style="padding:18px 14px;">
+                <b style="font-size:1.1rem;">kommst</b>
+            </td>
+            <td style="padding:18px 14px;">
+                Du kommst aus Frankreich.
+            </td>
+        </tr>
+
+        <tr>
+            <td style="padding:18px 14px;">er / sie / es</td>
+            <td style="padding:18px 14px;">
+                <b style="font-size:1.1rem;">kommt</b>
+            </td>
+            <td style="padding:18px 14px;">
+                Anna kommt aus Österreich.
+            </td>
+        </tr>
+
+        <tr>
+            <td style="padding:18px 14px;">wir</td>
+            <td style="padding:18px 14px;">
+                <b style="font-size:1.1rem;">kommen</b>
+            </td>
+            <td style="padding:18px 14px;">
+                Wir kommen aus der Schweiz.
+            </td>
+        </tr>
+
+        <tr>
+            <td style="padding:18px 14px;">ihr</td>
+ <td style="padding:18px 14px;"><b style="font-size:1.1rem;">kommt</b></td>
+            <td style="padding:18px 14px;">Ihr kommt aus Italien.</td>
+        </tr>
+
+        <tr>
+            <td style="padding:18px 14px;">sie / Sie</td>
+            <td style="padding:18px 14px;"><b style="font-size:1.1rem;">kommen</b></td>
+            <td style="padding:18px 14px;">Sie kommen aus Deutschland.</td>
+        </tr>
+    </tbody>
+</table>
+
+<div class="grammar-box" style="margin:24px 0;">
+    <br><b>Merksatz:</b>
+    Die Endungen sind immer:
+    <br><br>
+    <b>-e · -st · -t · -en · -t · -en</b>
+</div>
+
+</section>
+
+<section class="part" id="teil4">
+    <div class="part-head">
+        <span class="part-num">Teil 4</span>
+        <h2 class="part-title">Zahlen 1–20</h2>
+    </div>
+
+    <div class="card">
+        <p class="lead">
+            Lesen Sie die Zahlen laut. Lernen Sie die Formen von 1 bis 20.
+        </p>
+
+        <div class="alphabet" style="display:flex;flex-wrap:wrap;gap:14px;margin:24px 0;">
+
+            <span style="background:#f0f4f8;padding:14px 18px;border-radius:12px;font-weight:700;font-size:1.3rem;border:1px solid #dce3ed;">1 – eins</span>
+
+            <span style="background:#f0f4f8;padding:14px 18px;border-radius:12px;font-weight:700;font-size:1.3rem;border:1px solid #dce3ed;">2 – zwei</span>
+
+            <span style="background:#f0f4f8;padding:14px 18px;border-radius:12px;font-weight:700;font-size:1.3rem;border:1px solid #dce3ed;">3 – drei</span>
+
+            <span style="background:#f0f4f8;padding:14px 18px;border-radius:12px;font-weight:700;font-size:1.3rem;border:1px solid #dce3ed;">4 – vier</span>
+
+            <span style="background:#f0f4f8;padding:14px 18px;border-radius:12px;font-weight:700;font-size:1.3rem;border:1px solid #dce3ed;">5 – fünf</span>
+
+            <span style="background:#f0f4f8;padding:14px 18px;border-radius:12px;font-weight:700;font-size:1.3rem;border:1px solid #dce3ed;">6 – sechs</span>
+
+            <span style="background:#f0f4f8;padding:14px 18px;border-radius:12px;font-weight:700;font-size:1.3rem;border:1px solid #dce3ed;">7 – sieben</span>
+
+            <span style="background:#f0f4f8;padding:14px 18px;border-radius:12px;font-weight:700;font-size:1.3rem;border:1px solid #dce3ed;">8 – acht</span>
+
+            <span style="background:#f0f4f8;padding:14px 18px;border-radius:12px;font-weight:700;font-size:1.3rem;border:1px solid #dce3ed;">9 – neun</span>
+
+            <span style="background:#f0f4f8;padding:14px 18px;border-radius:12px;font-weight:700;font-size:1.3rem;border:1px solid #dce3ed;">10 – zehn</span>
+
+            <span style="background:#f0f4f8;padding:14px 18px;border-radius:12px;font-weight:700;font-size:1.3rem;border:1px solid #dce3ed;">11 – elf</span>
+
+
+
 
 
 
