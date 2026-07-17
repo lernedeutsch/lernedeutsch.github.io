@@ -353,3 +353,1086 @@
     <div class="hero-text">
       <p class="eyebrow">Deutschkurs A1 · Übung zu Lektion 1</p>
       <h1 class="lesson-title">Übung — Guten Tag! — Begrüßung und Vorstellung</h1>
+ </nav>
+</head>
+<body>
+
+
+<div class="wrap">
+
+  <header class="hero">
+    <div class="hero-text">
+      <p class="eyebrow">Deutschkurs A1 · Übung zu Lektion 12</p>
+      <h1 class="lesson-title">Übung — Hobbys und Freizeit</h1>
+  <!-- ÜBUNG 1 — Lektion 12 (ćwiczenia dla Lektion 12) -->
+  <section class="part" id="übung12">
+    <div class="part-head"><span class="part-num">Übung 1</span><h2 class="part-title">Ergänzen Sie „gern"</h2></div>
+    <div class="card">
+      <p class="lead">Schreiben Sie <b>gern</b> an der richtigen Stelle in dem Satz.</p>
+      <ul class="exercise-list" id="ex1">
+        <li>Ich lese <input type="text" data-answer="gern"> Bücher. <span class="feedback"></span></li>
+        <li>Er treibt <input type="text" data-answer="gern"> Sport. <span class="feedback"></span></li>
+        <li>Wir kochen <input type="text" data-answer="gern">. <span class="feedback"></span></li>
+        <li>Sie hört <input type="text" data-answer="gern"> Musik. <span class="feedback"></span></li>
+        <li>Ich spiele <input type="text" data-answer="gern"> Tennis. <span class="feedback"></span></li>
+      </ul>
+      <button class="check-btn" onclick="checkExercise('ex1')">Antworten prüfen ✓</button>
+      <div class="exercise-result" id="ex1-result"></div>
+    </div>
+  </section>
+
+  <!-- ÜBUNG 2 — Hobbys verbinden -->
+  <section class="part" id="übung2">
+    <div class="part-head"><span class="part-num">Übung 2</span><h2 class="part-title">Welches Hobby? Verbinden Sie!</h2></div>
+    <div class="card">
+      <p class="lead">Klicken Sie auf ein Wort links und dann auf das richtige Wort rechts.</p>
+      <div class="matching-grid" id="matching2">
+        <div class="matching-item" data-match="1">Fußball</div>
+        <div class="matching-item" data-match="2">Musik</div>
+        <div class="matching-item" data-match="3">Bücher</div>
+        <div class="matching-item" data-match="4">Foto</div>
+        
+        <div class="matching-item" data-id="1">spielen</div>
+        <div class="matching-item" data-id="2">hören</div>
+        <div class="matching-item" data-id="3">lesen</div>
+        <div class="matching-item" data-id="4">machen</div>
+      </div>
+      <div class="exercise-result" id="matching2-result" style="margin-top:16px;font-weight:700;color:#111820;"></div>
+    </div>
+  </section>
+
+  <!-- ÜBUNG 3 —pizza oder nicht? -->
+  <section class="part" id="übung3">
+    <div class="part-head"><span class="part-num">Übung 3</span><h2 class="part-title">Was passt? Wählen Sie das richtige Verb</h2></div>
+    <div class="card">
+      <p class="lead">Welches Verb ist richtig? Klicken Sie auf die richtige Antwort.</p>
+      
+      <div class="quiz-q" data-correct="0">
+        <p>1. Ich _____ gern Fußball.</p>
+        <div class="quiz-options">
+          <label><input type="radio" name="q1" value="0">spiele</label>
+          <label><input type="radio" name="q1" value="1">mache</label>
+          <label><input type="radio" name="q1" value="2">treibe</label>
+        </div>
+      </div>
+
+      <div class="quiz-q" data-correct="1">
+        <p>2. Ich _____ gern Yoga.</p>
+        <div class="quiz-options">
+          <label><input type="radio" name="q2" value="0">spiele</label>
+          <label><input type="radio" name="q2" value="1">mache</label>
+          <label><input type="radio" name="q2" value="2">hören</label>
+        </div>
+      </div>
+
+      <div class="quiz-q" data-correct="2">
+        <p>3. Ich _____ gern Musik.</p>
+        <div class="quiz-options">
+          <label><input type="radio" name="q3" value="0">spiele</label>
+          <label><input type="radio" name="q3" value="1">mache</label>
+          <label><input type="radio" name="q3" value="2">höre</label>
+        </div>
+      </div>
+
+      <div class="quiz-q" data-correct="0">
+        <p>4. Ich _____ gern Tennis.</p>
+        <div class="quiz-options">
+          <label><input type="radio" name="q4" value="0">spiele</label>
+          <label><input type="radio" name="q4" value="1">mache</label>
+          <label><input type="radio" name="q4" value="2">lese</label>
+        </div>
+      </div>
+
+      <div class="quiz-q" data-correct="1">
+        <p>5. Ich _____ gern Bücher.</p>
+        <div class="quiz-options">
+          <label><input type="radio" name="q5" value="0">höre</label>
+          <label><input type="radio" name="q5" value="1">lese</label>
+          <label><input type="radio" name="q5" value="2">spiele</label>
+        </div>
+      </div>
+
+      <button class="check-btn" onclick="checkQuiz()">Quiz auswerten</button>
+      <div class="exercise-result" id="quiz-result"></div>
+    </div>
+  </section>
+
+  <!-- ÜBUNG 4 —gern oder nicht gern -->
+  <section class="part" id="übung4">
+    <div class="part-head"><span class="part-num">Übung 4</span><h2 class="part-title">Was machen Sie gern?</h2></div>
+    <div class="card">
+      <p class="lead">Schreiben Sie vollständige Sätze mit <b>gern</b>.</p>
+      <div class="sentence-grid">
+        <div class="sentence-item">
+          1. Ich spiele gern _____ . (Fußball / Tennis / Karten)
+        </div>
+        <div class="sentence-item">
+          2. Ich höre gern _____ . (Musik / Radio)
+        </div>
+        <div class="sentence-item">
+          3. Ich lese gern _____ . (Bücher / Zeitungen)
+        </div>
+        <div class="sentence-item">
+          4. Ich koche _____ . (gern / nicht gern)
+        </div>
+        <div class="sentence-item">
+          5. Ich gehe gern _____ . (schwimmen / joggen / wandern)
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ÜBUNG 5 — Satz bauen -->
+  <section class="part" id="übung5">
+    <div class="part-head"><span class="part-num">Übung 5</span><h2 class="part-title">Sätze bauen</h2></div>
+    <div class="card">
+      <p class="lead">Machen Sie richtige Sätze. schreiben Sie den ganzen Satz.</p>
+      <ul class="exercise-list" id="ex5">
+        <li>Ich / spiele / gern / Fußball → <input type="text" data-answer="ich spiele gern fußball,ich spiele fußball gern" style="width:300px;"> <span class="feedback"></span></li>
+        <li>Sie / hört / gern / Musik → <input type="text" data-answer="sie hört gern musik,sie hört musik gern" style="width:300px;"> <span class="feedback"></span></li>
+        <li>Wir / lesen / gern / Bücher → <input type="text" data-answer="wir lesen gern bücher,wir lesen bücher gern" style="width:300px;"> <span class="feedback"></span></li>
+      </ul>
+      <button class="check-btn" onclick="checkExercise('ex5')">Antworten prüfen ✓</button>
+      <div class="exercise-result" id="ex5-result"></div>
+    </div>
+  </section>
+<div class="top-bar">
+  <a href="A1.html#lektion12" class="back-btn">← Powrót do lekcji</a>
+</div>
+  <nav class="lesson-nav">
+    <a href="#übung1">← Übung 1</a>
+    <a href="#übung2">Übung 2</a>
+    <a href="#übung3">Übung 3</a>
+    <a href="#übung4">Übung 4</a>
+    <a href="#übung5">Übung 5 →</a>
+  </nav>
+
+</div>
+
+<script>
+function normalize(str){
+  return str.trim().toLowerCase().replace(/ß/g,'ss').replace(/[.!?]/g,'').replace(/ä/g,'a').replace(/ö/g,'o').replace(/ü/g,'u');
+}
+
+function checkExercise(exId){
+  const list=document.getElementById(exId);
+  const inputs=list.querySelectorAll('input[type="text"]');
+  let correct=0;
+  inputs.forEach(input=>{
+    const feedback=input.nextElementSibling;
+    const accepted=input.dataset.answer.split(',').map(normalize);
+    const value=normalize(input.value);
+    if(accepted.includes(value)){
+      feedback.textContent='✓';
+      feedback.className='feedback ok';
+      correct++;
+    }else{
+      feedback.textContent='✗';
+      feedback.className='feedback no';
+    }
+  });
+  const result=document.getElementById(exId+'-result');
+  result.textContent=`${correct} / ${inputs.length} richtig.`;
+  result.textContent += correct<inputs.length ? ' Versuchen Sie es noch einmal.' : ' Super! 🎉';
+}
+
+function checkQuiz(){
+  const questions=document.querySelectorAll('.quiz-q');
+  let correct=0,answered=0;
+  questions.forEach(q=>{
+    const correctIndex=q.dataset.correct;
+    const labels=q.querySelectorAll('.quiz-options label');
+    const selected=q.querySelector('input[type="radio"]:checked');
+    labels.forEach(l=>l.classList.remove('correct','incorrect'));
+    if(selected){
+      answered++;
+      const chosenLabel=selected.closest('label');
+      if(selected.value===correctIndex){
+        chosenLabel.classList.add('correct');
+        correct++;
+      }else{
+        chosenLabel.classList.add('incorrect');
+        labels[correctIndex].classList.add('correct');
+      }
+    }else{
+      labels[correctIndex].classList.add('correct');
+    }
+  });
+  const result=document.getElementById('quiz-result');
+  result.textContent=answered<questions.length ? `Bitte beantworten Sie alle Fragen. (${answered}/${questions.length} beantwortet)` : `Ergebnis: ${correct} / ${questions.length} richtig.`;
+  if(answered===questions.length && correct===questions.length) result.textContent += ' Ausgezeichnet! 🎉';
+}
+
+// Matching Übung 2
+let selected=null;
+let matches=0;
+
+document.getElementById('matching2').addEventListener('click',function(e){
+  const item=e.target.closest('.matching-item');
+  if(!item||item.classList.contains('matched'))return;
+  
+  if(!selected){
+    selected=item;
+    item.classList.add('selected');
+  }else{
+    if(selected===item){
+      selected.classList.remove('selected');
+      selected=null;
+      return;
+    }
+    
+    const match1=selected.dataset.match;
+    const id1=selected.dataset.id;
+    const match2=item.dataset.match;
+    const id2=item.dataset.id;
+    
+    if(match1===id2&&match2===id1){
+      selected.classList.add('matched');
+      item.classList.add('matched');
+      selected.classList.remove('selected');
+      selected=null;
+      matches++;
+      document.getElementById('matching2-result').textContent=`${matches} / 4 richtig!`;
+      if(matches===4)document.getElementById('matching2-result').textContent='Super! Alle richtig! 🎉';
+    }else{
+      selected.classList.remove('selected');
+      selected=null;
+      document.getElementById('matching2-result').textContent='Nicht richtig. Versuch es noch einmal.';
+    }
+  }
+});
+</script>
+
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Übung-A1 — Lektion 13: Sport und Bewegung</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&family=Nunito+Sans:opsz,wght@6..12,400,600,700,800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#20324a;
+    --bg-soft:#27405c;
+    --paper:#fbf6ec;
+    --ink:#23332e;
+    --chalk:#1d2b39;
+    --gold:#f4c95d;
+    --green:#8bd17c;
+    --blue:#72b8ff;
+    --pink:#f08bb4;
+    --orange:#f29f67;
+    --line:rgba(35,51,46,.18);
+    --text:#111820;
+    --text-light:#2a3b50;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+
+  body{
+    margin:0;
+    background:var(--bg);
+    background-image:
+      radial-gradient(circle at 12% 10%, rgba(255,255,255,.05), transparent 35%),
+      radial-gradient(circle at 88% 90%, rgba(255,255,255,.05), transparent 40%);
+    color:var(--text);
+    font-family:"Nunito Sans",sans-serif;
+    line-height:1.6;
+    padding:0 0 60px;
+  }
+
+  .top-bar{
+    max-width:880px;
+    margin:20px auto 0;
+    padding:0 20px;
+    display:flex;
+    align-items:center;
+    gap:16px;
+  }
+
+  .back-btn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+    background:#ffffff;
+    color:#1d3557;
+    border:2px solid #dce3ed;
+    border-radius:999px;
+    padding:20px 40px;
+    font-weight:800;
+    font-size:1.4rem;
+    cursor:pointer;
+    text-decoration:none;
+    transition:transform .15s ease, filter .15s ease, background .15s ease, border-color .15s ease;
+    box-shadow:0 6px 18px rgba(0,0,0,.25);
+  }
+
+  .back-btn:hover{
+    transform:translateY(-3px);
+    filter:brightness(1.05);
+    background:#f9fbff;
+    border-color:#f4c95d;
+    box-shadow:0 8px 22px rgba(0,0,0,.3);
+  }
+
+  .wrap{
+    max-width:980px;
+    margin:0 auto;
+    padding:32px 20px 0;
+  }
+
+  header.hero{
+    display:flex;
+    flex-wrap:wrap;
+    align-items:center;
+    gap:28px;
+    padding:24px 0 36px;
+    border-bottom:2px dashed rgba(35,51,46,.18);
+    margin-bottom:36px;
+  }
+
+  .hero-text{flex:1 1 340px;}
+
+  .eyebrow{
+    font-family:"JetBrains Mono", monospace;
+    letter-spacing:.16em;
+    text-transform:uppercase;
+    font-size:.78rem;
+    color:#f4c95d;
+    margin:0 0 10px;
+  }
+
+  h1.lesson-title{
+    font-family:"Kalam",cursive;
+    font-weight:700;
+    font-size:2.7rem;
+    line-height:1.12;
+    margin:0 0 14px;
+    color:#111820;
+  }
+
+  .hero-text p{
+    margin:0;
+    color:#2a3b50;
+    max-width:52ch;
+  }
+
+  .part{margin:34px 0 42px;}
+  .part-head{
+    display:flex;
+    flex-wrap:wrap;
+    align-items:baseline;
+    gap:12px;
+    margin-bottom:14px;
+  }
+
+  .part-num{
+    font-family:"JetBrains Mono", monospace;
+    font-size:.82rem;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:#f4c95d;
+  }
+
+  .part-title{
+    font-family:"Kalam",cursive;
+    font-size:2rem;
+    margin:0;
+    color:#111820;
+  }
+
+  .card{
+    background:#f7f9fc;
+    border:1px solid #dce3ed;
+    border-radius:22px;
+    padding:22px 22px 20px;
+    box-shadow:0 12px 30px rgba(0,0,0,.06);
+    margin-top:14px;
+  }
+
+  .lead{font-size:1.04rem;color:#111820;}
+
+  .exercise-list{padding-left:18px;margin-top:16px;}
+  .exercise-list li{margin:14px 0;font-size:1.05rem;color:#111820;}
+
+  input[type="text"]{
+    background:#f9fbff;
+    color:#1d2b39;
+    border:1px solid #dce3ed;
+    border-radius:12px;
+    padding:9px 12px;
+    font:inherit;
+    font-size:1rem;
+    min-width:150px;
+    vertical-align:middle;
+  }
+
+  .feedback{
+    display:inline-block;
+    min-width:22px;
+    font-weight:800;
+    margin-left:8px;
+    font-size:1.2rem;
+  }
+
+  .ok{color:#2e7d32;}
+  .no{color:#c62828;}
+
+  .check-btn{
+    margin-top:16px;
+    background:linear-gradient(135deg,#f4c95d,#ffd976);
+    color:#1d2b39;
+    border:0;
+    border-radius:999px;
+    padding:14px 28px;
+    font-weight:800;
+    font-size:1.1rem;
+    cursor:pointer;
+  }
+
+  .check-btn:hover{filter:brightness(1.03);}
+  .exercise-result{margin-top:14px;font-weight:700;color:#111820;font-size:1.1rem;}
+
+  .quiz-q{
+    background:#ffffff;
+    border:1px solid #dce3ed;
+    border-radius:16px;
+    padding:16px;
+    margin:16px 0;
+  }
+
+  .quiz-q p{
+    margin:0 0 12px;
+    font-size:1.1rem;
+    color:#111820;
+    font-weight:600;
+  }
+
+  .quiz-options{
+    display:grid;
+    gap:10px;
+  }
+
+  .quiz-options label{
+    display:block;
+    background:#f9fbff;
+    border-radius:12px;
+    padding:12px 14px;
+    border:1px solid #dce3ed;
+    color:#111820;
+    cursor:pointer;
+    transition:background .15s ease, border-color .15s ease;
+  }
+
+  .quiz-options label:hover{
+    background:#f0f4f8;
+    border-color:#72b8ff;
+  }
+
+  .quiz-options label.correct{
+    border-color:#2e7d32;
+    background:#e8f9e8;
+  }
+
+  .quiz-options label.incorrect{
+    border-color:#c62828;
+    background:#f9e8e8;
+  }
+
+  .quiz-options input[type="radio"]{
+    margin-right:8px;
+  }
+
+  .matching-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:16px;
+    margin-top:16px;
+  }
+
+  .matching-item{
+    background:#ffffff;
+    border:1px solid #dce3ed;
+    border-radius:12px;
+    padding:14px;
+    cursor:pointer;
+    transition:background .15s ease, border-color .15s ease;
+    color:#111820;
+    font-size:1.05rem;
+  }
+
+  .matching-item:hover{
+    background:#f0f4f8;
+    border-color:#72b8ff;
+  }
+
+  .matching-item.selected{
+    background:#e8f3ff;
+    border-color:#72b8ff;
+  }
+
+  .matching-item.matched{
+    background:#e8f9e8;
+    border-color:#2e7d32;
+  }
+
+  .sentence-grid{
+    display:grid;
+    gap:12px;
+    margin-top:16px;
+  }
+
+  .sentence-item{
+    background:#ffffff;
+    border:1px solid #dce3ed;
+    border-radius:12px;
+    padding:14px;
+    color:#111820;
+    font-size:1.05rem;
+  }
+
+  .sentence-item .answer{
+    display:inline-block;
+    background:#f0f4f8;
+    border:1px solid #72b8ff;
+    border-radius:8px;
+    padding:4px 10px;
+    margin-left:8px;
+    font-weight:600;
+  }
+
+  .lesson-nav{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:10px;
+    border-top:2px dashed rgba(35,51,46,.18);
+    padding-top:24px;
+    margin-top:30px;
+    font-family:"JetBrains Mono", monospace;
+    font-size:.9rem;
+  }
+
+  .lesson-nav a{
+    color:#111820;
+    text-decoration:none;
+    border:1px solid #dce3ed;
+    border-radius:999px;
+    padding:10px 20px;
+    transition:background .15s ease,border-color .15s ease;
+    background:#ffffff;
+    font-weight:600;
+  }
+
+  .lesson-nav a:hover{
+    background:#f0f4f8;
+    border-color:#f4c95d;
+    color:#0a1220;
+  }
+
+  a:focus-visible,button:focus-visible,input:focus-visible{
+    outline:3px solid #f4c95d;
+    outline-offset:2px;
+  }
+
+  @media (max-width:720px){
+    h1.lesson-title{font-size:2.2rem;}
+    .part-title{font-size:1.7rem;}
+    .matching-grid{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+
+
+<div class="wrap">
+
+  <header class="hero">
+    <div class="hero-text">
+      <p class="eyebrow">Deutschkurs A1 · Übung zu Lektion 13</p>
+      <h1 class="lesson-title">Übung — Sport und Bewegung</h1>
+      <p>Machen Sie alle Übungen. Lesen Sie jede Aufgabe und schreiben Sie die richtige Antwort.</p>
+    </div>
+  </header>
+
+   <!-- ÜBUNG 1 — Lektion 13 (ćwiczenia dla Lektion 13) -->
+  <section class="part" id="übung13">
+    <div class="part-head"><span class="part-num">Übung 1</span><h2 class="part-title">Ergänzen Sie: spielen, machen, treiben oder fahren?</h2></div>
+    <div class="card">
+      <p class="lead">Schreiben Sie das richtige Verb in die Lücke.</p>
+      <ul class="exercise-list" id="ex1">
+        <li>Ich <input type="text" data-answer="spiele"> gern Fußball. <span class="feedback"></span></li>
+        <li>Sie <input type="text" data-answer="mache"> jeden Morgen Yoga. <span class="feedback"></span></li>
+        <li>Wir <input type="text" data-answer="treiben"> oft Sport. <span class="feedback"></span></li>
+        <li>Er <input type="text" data-answer="fahre"> gern Rad. <span class="feedback"></span></li>
+        <li>Du <input type="text" data-answer="spielst"> sehr gut Tennis. <span class="feedback"></span></li>
+        <li>Ich <input type="text" data-answer="mache"> dreimal pro Woche Fitness. <span class="feedback"></span></li>
+      </ul>
+      <button class="check-btn" onclick="checkExercise('ex1')">Antworten prüfen ✓</button>
+      <div class="exercise-result" id="ex1-result"></div>
+    </div>
+  </section>
+
+  <!-- ÜBUNG 2 — können -->
+  <section class="part" id="übung2">
+    <div class="part-head"><span class="part-num">Übung 2</span><h2 class="part-title">Ergänzen Sie „können"</h2></div>
+    <div class="card">
+      <p class="lead">Schreiben Sie die richtige Form von <b>können</b>.</p>
+      <ul class="exercise-list" id="ex2">
+        <li>Ich <input type="text" data-answer="kann"> sehr gut Tennis spielen. <span class="feedback"></span></li>
+        <li><input type="text" data-answer="kannst"> du schwimmen? <span class="feedback"></span></li>
+        <li>Er <input type="text" data-answer="kann"> leider nicht tanzen. <span class="feedback"></span></li>
+        <li>Wir <input type="text" data-answer="können"> gut Fußball spielen. <span class="feedback"></span></li>
+        <li><input type="text" data-answer="könnt"> ihr Rad fahren? <span class="feedback"></span></li>
+        <li>Sie (formell) <input type="text" data-answer="können"> sehr gut kochen. <span class="feedback"></span></li>
+      </ul>
+      <button class="check-btn" onclick="checkExercise('ex2')">Antworten prüfen ✓</button>
+      <div class="exercise-result" id="ex2-result"></div>
+    </div>
+  </section>
+
+  <!-- ÜBUNG 3 — Verbindung Sport und Verb -->
+  <section class="part" id="übung3">
+    <div class="part-head"><span class="part-num">Übung 3</span><h2 class="part-title">Welches Verb? Verbinden Sie!</h2></div>
+    <div class="card">
+      <p class="lead">Klicken Sie auf ein Sport links und dann auf das richtige Verb rechts.</p>
+      <div class="matching-grid" id="matching3">
+        <div class="matching-item" data-match="1">Fußball</div>
+        <div class="matching-item" data-match="2">Yoga</div>
+        <div class="matching-item" data-match="3">Sport</div>
+        <div class="matching-item" data-match="4">Rad</div>
+        
+        <div class="matching-item" data-id="1">spielen</div>
+        <div class="matching-item" data-id="2">machen</div>
+        <div class="matching-item" data-id="3">treiben</div>
+        <div class="matching-item" data-id="4">fahren</div>
+      </div>
+      <div class="exercise-result" id="matching3-result" style="margin-top:16px;font-weight:700;color:#111820;"></div>
+    </div>
+  </section>
+
+  <!-- ÜBUNG 4 — Quiz können -->
+  <section class="part" id="übung4">
+    <div class="part-head"><span class="part-num">Übung 4</span><h2 class="part-title">Was ist richtig? Wählen Sie</h2></div>
+    <div class="card">
+      <p class="lead">Klicken Sie auf die richtige Antwort.</p>
+      
+      <div class="quiz-q" data-correct="0">
+        <p>1. Ich _____ gut schwimmen.</p>
+        <div class="quiz-options">
+          <label><input type="radio" name="q1" value="0">kann</label>
+          <label><input type="radio" name="q1" value="1">kannst</label>
+          <label><input type="radio" name="q1" value="2">können</label>
+        </div>
+      </div>
+
+      <div class="quiz-q" data-correct="1">
+        <p>2. _____ du Tennis spielen?</p>
+        <div class="quiz-options">
+          <label><input type="radio" name="q2" value="0">Kann</label>
+          <label><input type="radio" name="q2" value="1">Kannst</label>
+          <label><input type="radio" name="q2" value="2">Könnt</label>
+        </div>
+      </div>
+
+      <div class="quiz-q" data-correct="0">
+        <p>3. Sie (er) _____ nicht tanzen.</p>
+        <div class="quiz-options">
+          <label><input type="radio" name="q3" value="0">kann</label>
+          <label><input type="radio" name="q3" value="1">kannst</label>
+          <label><input type="radio" name="q3" value="2">können</label>
+        </div>
+      </div>
+
+      <div class="quiz-q" data-correct="2">
+        <p>4. Wir _____ Fußball spielen.</p>
+        <div class="quiz-options">
+          <label><input type="radio" name="q4" value="0">kann</label>
+          <label><input type="radio" name="q4" value="1">kannst</label>
+          <label><input type="radio" name="q4" value="2">können</label>
+        </div>
+      </div>
+
+      <div class="quiz-q" data-correct="1">
+        <p>5. _____ ihr joggen gehen?</p>
+        <div class="quiz-options">
+          <label><input type="radio" name="q5" value="0">Kann</label>
+          <label><input type="radio" name="q5" value="1">Könnt</label>
+          <label><input type="radio" name="q5" value="2">Können</label>
+        </div>
+      </div>
+
+      <button class="check-btn" onclick="checkQuiz()">Quiz auswerten</button>
+      <div class="exercise-result" id="quiz-result"></div>
+    </div>
+  </section>
+
+  <!-- ÜBUNG 5 — Fähigkeiten -->
+  <section class="part" id="übung5">
+    <div class="part-head"><span class="part-num">Übung 5</span><h2 class="part-title">Was können Sie?</h2></div>
+    <div class="card">
+      <p class="lead">Schreiben Sie vollständige Sätze mit <b>können</b>.</p>
+      <div class="sentence-grid">
+        <div class="sentence-item">
+          1. Ich kann _____ . (schwachimmen / Tennis spielen / Fußball spielen)
+        </div>
+        <div class="sentence-item">
+          2. Ich kann _____ tanzen. (gut / leider nicht / ein bisschen)
+        </div>
+        <div class="sentence-item">
+          3. Ich kann _____ Rad fahren. (sehr gut / gut / nicht so gut)
+        </div>
+        <div class="sentence-item">
+          4. _____ du schwimmen? (Kann / Kannst / Können)
+        </div>
+        <div class="sentence-item">
+          5. Ja, ich _____ schwimmen. (kann / kannst / können)
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ÜBUNG 6 — Satz bauen -->
+  <section class="part" id="übung6">
+    <div class="part-head"><span class="part-num">Übung 6</span><h2 class="part-title">Sätze bauen</h2></div>
+    <div class="card">
+      <p class="lead">Machen Sie richtige Sätze. Schreiben Sie den ganzen Satz.</p>
+      <ul class="exercise-list" id="ex6">
+        <li>Ich / kann / gut / Tennis spielen → <input type="text" data-answer="ich kann gut tennis spielen" style="width:300px;"> <span class="feedback"></span></li>
+        <li>Kannst / du / schwimmen? → <input type="text" data-answer="kannst du schwimmen" style="width:300px;"> <span class="feedback"></span></li>
+        <li>Sie / kann / nicht / tanzen → <input type="text" data-answer="sie kann nicht tanzen" style="width:300px;"> <span class="feedback"></span></li>
+      </ul>
+      <button class="check-btn" onclick="checkExercise('ex6')">Antworten prüfen ✓</button>
+      <div class="exercise-result" id="ex6-result"></div>
+    </div>
+  </section>
+  
+<div class="top-bar">
+  <a href="A1.html#lektion13" class="back-btn">← Powrót do lekcji</a>
+</div>
+
+  <nav class="lesson-nav">
+    <a href="#übung1">← Übung 1</a>
+    <a href="#übung2">Übung 2</a>
+    <a href="#übung3">Übung 3</a>
+    <a href="#übung4">Übung 4</a>
+    <a href="#übung5">Übung 5</a>
+    <a href="#übung6">Übung 6 →</a>
+  </nav>
+
+</div>
+
+<script>
+function normalize(str){
+  return str.trim().toLowerCase().replace(/ß/g,'ss').replace(/[.!?]/g,'').replace(/ä/g,'a').replace(/ö/g,'o').replace(/ü/g,'u');
+}
+
+function checkExercise(exId){
+  const list=document.getElementById(exId);
+  const inputs=list.querySelectorAll('input[type="text"]');
+  let correct=0;
+  inputs.forEach(input=>{
+    const feedback=input.nextElementSibling;
+    const accepted=input.dataset.answer.split(',').map(normalize);
+    const value=normalize(input.value);
+    if(accepted.includes(value)){
+      feedback.textContent='✓';
+      feedback.className='feedback ok';
+      correct++;
+    }else{
+      feedback.textContent='✗';
+      feedback.className='feedback no';
+    }
+  });
+  const result=document.getElementById(exId+'-result');
+  result.textContent=`${correct} / ${inputs.length} richtig.`;
+  result.textContent += correct<inputs.length ? ' Versuchen Sie es noch einmal.' : ' Super! 🎉';
+}
+
+function checkQuiz(){
+  const questions=document.querySelectorAll('.quiz-q');
+  let correct=0,answered=0;
+  questions.forEach(q=>{
+    const correctIndex=q.dataset.correct;
+    const labels=q.querySelectorAll('.quiz-options label');
+    const selected=q.querySelector('input[type="radio"]:checked');
+    labels.forEach(l=>l.classList.remove('correct','incorrect'));
+    if(selected){
+      answered++;
+      const chosenLabel=selected.closest('label');
+      if(selected.value===correctIndex){
+        chosenLabel.classList.add('correct');
+        correct++;
+      }else{
+        chosenLabel.classList.add('incorrect');
+        labels[correctIndex].classList.add('correct');
+      }
+    }else{
+      labels[correctIndex].classList.add('correct');
+    }
+  });
+  const result=document.getElementById('quiz-result');
+  result.textContent=answered<questions.length ? `Bitte beantworten Sie alle Fragen. (${answered}/${questions.length} beantwortet)` : `Ergebnis: ${correct} / ${questions.length} richtig.`;
+  if(answered===questions.length && correct===questions.length) result.textContent += ' Ausgezeichnet! 🎉';
+}
+
+// Matching Übung 3
+let selected=null;
+let matches=0;
+
+document.getElementById('matching3').addEventListener('click',function(e){
+  const item=e.target.closest('.matching-item');
+  if(!item||item.classList.contains('matched'))return;
+  
+  if(!selected){
+    selected=item;
+    item.classList.add('selected');
+  }else{
+    if(selected===item){
+      selected.classList.remove('selected');
+      selected=null;
+      return;
+    }
+    
+    const match1=selected.dataset.match;
+    const id1=selected.dataset.id;
+    const match2=item.dataset.match;
+    const id2=item.dataset.id;
+    
+    if(match1===id2&&match2===id1){
+      selected.classList.add('matched');
+      item.classList.add('matched');
+      selected.classList.remove('selected');
+      selected=null;
+      matches++;
+      document.getElementById('matching3-result').textContent=`${matches} / 4 richtig!`;
+      if(matches===4)document.getElementById('matching3-result').textContent='Super! Alle richtig! 🎉';
+    }else{
+      selected.classList.remove('selected');
+      selected=null;
+      document.getElementById('matching3-result').textContent='Nicht richtig. Versuch es noch einmal.';
+    }
+  }
+});
+</script>
+
+</body>
+</html>
+<body>
+
+
+<div class="wrap">
+
+  <header class="hero">
+    <div class="hero-text">
+      <p class="eyebrow">Deutschkurs A1 · Übung zu Lektion 14</p>
+      <h1 class="lesson-title">Übung — Musik und Kultur</h1>
+  <!-- ÜBUNG 1 — Lektion 14 (ćwiczenia dla Lektion 14) -->
+  <section class="part" id="übung14">
+    <div class="part-head"><span class="part-num">Übung 1</span><h2 class="part-title">Ergänzen Sie: hören, spielen, singen oder tanzen?</h2></div>
+    <div class="card">
+      <p class="lead">Schreiben Sie das richtige Verb in die Lücke.</p>
+      <ul class="exercise-list" id="ex14_1">
+        <li>Ich <input type="text" data-answer="höre"> gern klassische Musik. <span class="feedback"></span></li>
+        <li>Er <input type="text" data-answer="spielt"> sehr gut Klavier. <span class="feedback"></span></li>
+        <li>Sie <input type="text" data-answer="singt"> in einem Chor. <span class="feedback"></span></li>
+        <li>Wir <input type="text" data-answer="tanzen"> gern auf Partys. <span class="feedback"></span></li>
+      </ul>
+      <button class="check-btn" onclick="checkExercise('ex14_1')">Antworten prüfen ✓</button>
+      <div class="exercise-result" id="ex14_1-result"></div>
+    </div>
+  </section>
+
+  <!-- ÜBUNG 2 — Lektion 14 (ćwiczenia dla Lektion 14) -->
+  <section class="part" id="übung14_2">
+    <div class="part-head"><span class="part-num">Übung 2</span><h2 class="part-title">Ergänzen Sie: ins oder in die?</h2></div>
+    <div class="card">
+      <p class="lead">Schreiben Sie das richtige Wort in die Lücke.</p>
+      <ul class="exercise-list" id="ex14_2">
+        <li>Ich gehe heute Abend <input type="text" data-answer="ins"> Kino. <span class="feedback"></span></li>
+        <li>Wir gehen am Samstag <input type="text" data-answer="in die"> Disco. <span class="feedback"></span></li>
+        <li>Gehst du morgen <input type="text" data-answer="ins"> Museum? <span class="feedback"></span></li>
+        <li>Sie geht oft <input type="text" data-answer="in die"> Bibliothek. <span class="feedback"></span></li>
+        <li>Er geht heute <input type="text" data-answer="ins"> Theater. <span class="feedback"></span></li>
+        <li>Gehen Sie gern <input type="text" data-answer="in die"> Oper? <span class="feedback"></span></li>
+      </ul>
+      <button class="check-btn" onclick="checkExercise('ex14_2')">Antworten prüfen ✓</button>
+      <div class="exercise-result" id="ex14_2-result"></div>
+    </div>
+  </section>
+
+  <!-- ÜBUNG 3 — Lektion 14 (ćwiczenia dla Lektion 14) -->
+  <section class="part" id="übung14_3">
+    <div class="part-head"><span class="part-num">Übung 3</span><h2 class="part-title">Was ist richtig? Wählen Sie</h2></div>
+    <div class="card">
+      <p class="lead">Klicken Sie auf die richtige Antwort.</p>
+      
+      <div class="quiz-q" data-correct="0">
+        <p>1. Ich _____ gern Klavier.</p>
+        <div class="quiz-options">
+          <label><input type="radio" name="q14_1" value="0">spiele</label>
+          <label><input type="radio" name="q14_1" value="1">höre</label>
+          <label><input type="radio" name="q14_1" value="2">singe</label>
+        </div>
+      </div>
+
+      <div class="quiz-q" data-correct="1">
+        <p>2. Ich gehe _____ Kino.</p>
+        <div class="quiz-options">
+          <label><input type="radio" name="q14_2" value="0">in die</label>
+          <label><input type="radio" name="q14_2" value="1">ins</label>
+          <label><input type="radio" name="q14_2" value="2">zu</label>
+        </div>
+      </div>
+
+      <div class="quiz-q" data-correct="0">
+        <p>3. _____ du Lust, ins Kino zu gehen?</p>
+        <div class="quiz-options">
+          <label><input type="radio" name="q14_3" value="0">Hast</label>
+          <label><input type="radio" name="q14_3" value="1">Haben</label>
+          <label><input type="radio" name="q14_3" value="2">Hätt</label>
+        </div>
+      </div>
+
+      <div class="quiz-q" data-correct="2">
+        <p>4. Ich gehe _____ Oper.</p>
+        <div class="quiz-options">
+          <label><input type="radio" name="q14_4" value="0">ins</label>
+          <label><input type="radio" name="q14_4" value="1">zu</label>
+          <label><input type="radio" name="q14_4" value="2">in die</label>
+        </div>
+      </div>
+
+      <div class="quiz-q" data-correct="1">
+        <p>5. Ja, _____! (positive Antwort)</p>
+        <div class="quiz-options">
+          <label><input type="radio" name="q14_5" value="0">leider</label>
+          <label><input type="radio" name="q14_5" value="1">gern</label>
+          <label><input type="radio" name="q14_5" value="2">nicht</label>
+        </div>
+      </div>
+
+      <button class="check-btn" onclick="checkQuiz14()">Quiz auswerten</button>
+      <div class="exercise-result" id="quiz14-result"></div>
+    </div>
+  </section>
+
+  <!-- ÜBUNG 4 — Lektion 14 (ćwiczenia dla Lektion 14) -->
+  <section class="part" id="übung14_4">
+    <div class="part-head"><span class="part-num">Übung 4</span><h2 class="part-title">Was machen Sie?</h2></div>
+    <div class="card">
+      <p class="lead">Schreiben Sie vollständige Sätze.</p>
+      <div class="sentence-grid">
+        <div class="sentence-item">
+          1. Ich höre gern _____ Musik. (Klassik / Pop / Rock)
+        </div>
+        <div class="sentence-item">
+          2. Ich spiele _____ . (Klavier / Gitarre / nichts)
+        </div>
+        <div class="sentence-item">
+          3. Am liebsten gehe ich _____ . (ins Kino / ins Theater / ins Museum)
+        </div>
+        <div class="sentence-item">
+          4. _____ du Lust, ins Kino zu gehen? (Hast / Haben / Hätt)
+        </div>
+        <div class="sentence-item">
+          5. Ja, ich _____ Lust! (habe / hast / haben)
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ÜBUNG 5 — Lektion 14 (ćwiczenia dla Lektion 14) -->
+  <section class="part" id="übung14_5">
+    <div class="part-head"><span class="part-num">Übung 5</span><h2 class="part-title">Sätze bauen</h2></div>
+    <div class="card">
+      <p class="lead">Machen Sie richtige Sätze. Schreiben Sie den ganzen Satz.</p>
+      <ul class="exercise-list" id="ex14_5">
+        <li>Ich / gehe / ins / Kino → <input type="text" data-answer="ich gehe ins kino" style="width:300px;"> <span class="feedback"></span></li>
+        <li>Hast / du / Lust / ins Theater? → <input type="text" data-answer="hast du lust ins theater" style="width:300px;"> <span class="feedback"></span></li>
+        <li>Sie / geht / in die / Oper → <input type="text" data-answer="sie geht in die oper" style="width:300px;"> <span class="feedback"></span></li>
+      </ul>
+      <button class="check-btn" onclick="checkExercise('ex14_5')">Antworten prüfen ✓</button>
+      <div class="exercise-result" id="ex14_5-result"></div>
+    </div>
+  </section>
+<div class="top-bar">
+  <a href="A1.html#lektion14" class="back-btn">← Powrót do lekcji</a>
+</div>
+
+  <nav class="lesson-nav">
+    <a href="#übung12">← Übung 12</a>
+    <a href="#übung13">Übung 13</a>
+    <a href="#übung14">Übung 14</a>
+    <a href="#top">Nach oben ↑</a>
+  </nav>
+
+</div>
+
+<script>
+function normalize(str){
+  return str.trim().toLowerCase().replace(/ß/g,'ss').replace(/[.!?]/g,'').replace(/ä/g,'a').replace(/ö/g,'o').replace(/ü/g,'u');
+}
+
+function checkExercise(exId){
+  const list=document.getElementById(exId);
+  const inputs=list.querySelectorAll('input[type="text"]');
+  let correct=0;
+  inputs.forEach(input=>{
+    const feedback=input.nextElementSibling;
+    const accepted=input.dataset.answer.split(',').map(normalize);
+    const value=normalize(input.value);
+    if(accepted.includes(value)){
+      feedback.textContent='✓';
+      feedback.className='feedback ok';
+      correct++;
+    }else{
+      feedback.textContent='✗';
+      feedback.className='feedback no';
+    }
+  });
+  const result=document.getElementById(exId+'-result');
+  result.textContent=`${correct} / ${inputs.length} richtig.`;
+  result.textContent += correct<inputs.length ? ' Versuchen Sie es noch einmal.' : ' Super! 🎉';
+}
+
+function checkQuiz14(){
+  const questions=document.querySelectorAll('#übung14_3 .quiz-q');
+  let correct=0,answered=0;
+  questions.forEach(q=>{
+    const correctIndex=q.dataset.correct;
+    const labels=q.querySelectorAll('.quiz-options label');
+    const selected=q.querySelector('input[type="radio"]:checked');
+    labels.forEach(l=>l.classList.remove('correct','incorrect'));
+    if(selected){
+      answered++;
+      const chosenLabel=selected.closest('label');
+      if(selected.value===correctIndex){
+        chosenLabel.classList.add('correct');
+        correct++;
+      }else{
+        chosenLabel.classList.add('incorrect');
+        labels[correctIndex].classList.add('correct');
+      }
+    }else{
+      labels[correctIndex].classList.add('correct');
+    }
+  });
+  const result=document.getElementById('quiz14-result');
+  result.textContent=answered<questions.length ? `Bitte beantworten Sie alle Fragen. (${answered}/${questions.length} beantwortet)` : `Ergebnis: ${correct} / ${questions.length} richtig.`;
+  if(answered===questions.length && correct===questions.length) result.textContent += ' Ausgezeichnet! 🎉';
+}
+
+// Matching (jeśli potrzebne)
+let selected=null;
+let matches=0;
+</script>
+
+</body>
+</html>
