@@ -1482,6 +1482,617 @@ Meine Adresse ist …
 </section>
 
 <a href="Übung-A1.html#übung3" class="übung-btn">Übung</a>
+<!-- LEKCJA 4 -->
+
+<section class="part" id="lektion4">
+
+    <div class="wrap" style="background:linear-gradient(135deg,#e3f2fd,#bbdefb);border-radius:22px;padding:32px;">
+
+        <header class="hero">
+
+            <div class="hero-text">
+
+                <p class="eyebrow">Deutschkurs A1 · Lektion 4 von 30</p>
+
+                <h1 class="lesson-title">Was machen Sie beruflich?</h1>
+
+                <p>
+                    Heute lernen wir:
+                    Berufe,
+                    Fragen nach dem Beruf,
+                    <b>ein/eine</b>
+                    und das Verb
+                    <b>arbeiten</b>.
+                </p>
+
+                <div class="topics">
+                    <span>1 · Berufe</span>
+                    <span>2 · Beruf fragen</span>
+                    <span>3 · ein / eine</span>
+                    <span>4 · arbeiten</span>
+                </div>
+
+            </div>
+
+            <div class="wheel-box">
+
+                <svg viewBox="0 0 320 320"
+                     role="img"
+                     aria-label="Beruf und Arbeit-Symbol mit Werkzeugen">
+
+                    <circle
+                        cx="160"
+                        cy="160"
+                        r="132"
+                        fill="rgba(255,255,255,.05)"
+                        stroke="rgba(35,51,46,.16)" />
+
+                    <circle
+                        cx="160"
+                        cy="160"
+                        r="70"
+                        fill="#20324a"
+                        stroke="rgba(35,51,46,.12)" />
+<circle cx="160" cy="160" r="70" fill="#20324a" stroke="rgba(35,51,46,.12)"/>
+
+<text class="center-label" x="160" y="152">Beruf</text>
+<text class="center-sub" x="160" y="175">Arbeit</text>
+
+<text x="160" y="40" class="month-label" font-size="20">💼</text>
+<text x="252" y="82" class="month-label" font-size="20">🛠️</text>
+<text x="282" y="164" class="month-label" font-size="20">👩‍🏫</text>
+<text x="250" y="246" class="month-label" font-size="20">🩺</text>
+<text x="160" y="292" class="month-label" font-size="20">📚</text>
+<text x="70" y="246" class="month-label" font-size="20">🔧</text>
+<text x="38" y="164" class="month-label" font-size="20">🏠</text>
+<text x="70" y="82" class="month-label" font-size="20">🧰</text>
+
+</svg>
+
+</div>
+
+</header>
+
+<section class="part" id="teil1">
+
+    <div class="part-head">
+        <span class="part-num">Teil 1</span>
+        <h2 class="part-title">Berufe</h2>
+    </div>
+
+    <div class="card">
+
+        <p class="lead">
+            Jetzt lernen wir die Berufe. Hier sind wichtige Wörter:
+        </p>
+
+        <div class="alphabet" style="display:flex;flex-wrap:wrap;gap:14px;margin:24px 0;">
+
+            <span style="background:#f0f4f8;padding:14px 18px;border-radius:12px;font-weight:700;font-size:1.2rem;border:1px solid #dce3ed;">
+                der Arzt
+            </span>
+
+            <span style="background:#f0f4f8;padding:14px 18px;border-radius:12px;font-weight:700;font-size:1.2rem;border:1px solid #dce3ed;">
+                die Ärztin
+            </span>
+
+            <span style="background:#f0f4f8;padding:14px 18px;border-radius:12px;font-weight:700;font-size:1.2rem;border:1px solid #dce3ed;">
+                der Lehrer
+            </span>
+
+            <span style="background:#f0f4f8;padding:14px 18px;border-radius:12px;font-weight:700;font-size:1.2rem;border:1px solid #dce3ed;">
+                die Lehrerin
+            </span>
+
+            <span style="background:#f0f4f8;padding:14px 18px;border-radius:12px;font-weight:700;font-size:1.2rem;border:1px solid #dce3ed;">
+                der Ingenieur
+            </span>
+
+            <span style="background:#f0f4f8;padding:14px 18px;border-radius:12px;font-weight:700;font-size:1.2rem;border:1px solid #dce3ed;">
+                die Ingenieurin
+            </span>
+
+            <span style="background:#f0f4f8;padding:14px 18px;border-radius:12px;font-weight:700;font-size:1.2rem;border:1px solid #dce3ed;">
+                der Student
+            </span>
+
+            <span style="background:#f0f4f8;padding:14px 18px;border-radius:12px;font-weight:700;font-size:1.2rem;border:1px solid #dce3ed;">
+                die Studentin
+            </span>
+
+            <span style="background:#f0f4f8;padding:14px 18px;border-radius:12px;font-weight:700;font-size:1.2rem;border:1px solid #dce3ed;">
+                der Verkäufer
+            </span>
+
+            <span style="background:#f0f4f8;padding:14px 18px;border-radius:12px;font-weight:700;font-size:1.2rem;border:1px solid #dce3ed;">
+                die Verkäuferin
+            </span>
+<div class="gruessen">
+
+    <p style="font-size:1.3rem;margin:16px 0;">
+        Ich bin <b>Arzt</b>.
+    </p>
+
+    <p style="font-size:1.3rem;margin:16px 0;">
+        Ich bin <b>Lehrerin</b>.
+    </p>
+
+    <p style="font-size:1.3rem;margin:16px 0;">
+        Ich bin <b>Student</b>.
+    </p>
+
+</div>
+
+</div>
+
+</section>
+
+<section class="part" id="teil2">
+
+    <div class="part-head">
+        <span class="part-num">Teil 2</span>
+        <h2 class="part-title">Was sind Sie von Beruf?</h2>
+    </div>
+
+    <div class="card">
+
+        <p class="lead">
+            Wir fragen nach dem Beruf und antworten.
+        </p>
+
+        <div class="grammar-box" style="margin:24px 0;">
+            <br><b>Frage:</b><br><br>
+            Was sind Sie von Beruf?<br>
+        </div>
+
+        <div class="grammar-box" style="margin:24px 0;">
+            <br><b>Antworten:</b><br><br>
+            Ich bin Lehrer.<br><br>
+            Ich bin Ärztin.<br><br>
+            Ich bin Ingenieur.<br><br>
+            Ich bin Student.
+        </div>
+
+        <div class="dialog" style="margin:32px 0;">
+
+            <div class="bubble marta">
+                <span class="speaker">A</span>
+                Was sind Sie von Beruf?
+            </div>
+
+            <div class="bubble tom">
+                <span class="speaker">B</span>
+                Ich bin Ingenieur.
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<section class="part" id="teil3">
+
+    <div class="part-head">
+        <span class="part-num">Teil 3</span>
+        <h2 class="part-title">ein / eine</h2>
+    </div>
+
+    <div class="card">
+
+        <p class="lead">
+            Der unbestimmte Artikel:
+            <b>ein</b> (maskulin)
+            und
+            <b>eine</b> (feminin).
+        </p>
+
+        <table class="gruss-tabelle" style="margin:24px 0;">
+
+            <thead>
+
+                <tr>
+
+                    <th style="padding:18px 14px;">
+                        Geschlecht
+                    </th>
+
+                    <th style="padding:18px 14px;">
+                        Artikel
+                    </th>
+<th style="padding:18px 14px;">Beispiel</th>
+
+</tr>
+</thead>
+
+<tbody>
+
+<tr>
+    <td style="padding:18px 14px;">Maskulin</td>
+    <td style="padding:18px 14px;"><b style="font-size:1.1rem;">ein</b></td>
+    <td style="padding:18px 14px;">
+        ein Arzt · ein Lehrer · ein Ingenieur
+    </td>
+</tr>
+
+<tr>
+    <td style="padding:18px 14px;">Feminin</td>
+    <td style="padding:18px 14px;"><b style="font-size:1.1rem;">eine</b></td>
+    <td style="padding:18px 14px;">
+        eine Ärztin · eine Lehrerin · eine Ingenieurin
+    </td>
+</tr>
+
+</tbody>
+</table>
+
+<div class="gruessen">
+
+    <p style="font-size:1.3rem;margin:16px 0;">
+        Ich bin <b>ein</b> Lehrer.
+    </p>
+
+    <p style="font-size:1.3rem;margin:16px 0;">
+        Ich bin <b>eine</b> Lehrerin.
+    </p>
+
+</div>
+
+<div class="gruessen">
+
+    <p style="font-size:1.3rem;margin:16px 0;">
+        Ich bin ___ Arzt. → Ich bin <b>ein</b> Arzt.
+    </p>
+
+    <p style="font-size:1.3rem;margin:16px 0;">
+        Ich bin ___ Lehrerin. → Ich bin <b>eine</b> Lehrerin.
+    </p>
+
+    <p style="font-size:1.3rem;margin:16px 0;">
+        Ich bin ___ Student. → Ich bin <b>ein</b> Student.
+    </p>
+
+    <p style="font-size:1.3rem;margin:16px 0;">
+        Ich bin ___ Studentin. → Ich bin <b>eine</b> Studentin.
+    </p>
+
+</div>
+
+</section>
+
+<section class="part" id="teil4">
+  <div class="part-head">
+        <span class="part-num">Teil 4</span>
+        <h2 class="part-title">Das Verb „arbeiten”</h2>
+    </div>
+
+    <div class="card">
+
+        <p class="lead">
+            „arbeiten” ist ein regelmäßiges Verb.
+            Hier ist die Konjugation:
+        </p>
+
+        <table class="gruss-tabelle" style="margin:24px 0;">
+
+            <thead>
+
+                <tr>
+
+                    <th style="padding:18px 14px;">Pronomen</th>
+                    <th style="padding:18px 14px;">arbeiten</th>
+                    <th style="padding:18px 14px;">Beispielsatz</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                <tr>
+
+                    <td style="padding:18px 14px;">ich</td>
+
+                    <td style="padding:18px 14px;">
+                        <b style="font-size:1.1rem;">arbeite</b>
+                    </td>
+
+                    <td style="padding:18px 14px;">
+                        Ich arbeite.
+                    </td>
+
+                </tr>
+
+                <tr>
+
+                    <td style="padding:18px 14px;">du</td>
+
+                    <td style="padding:18px 14px;">
+                        <b style="font-size:1.1rem;">arbeitest</b>
+                    </td>
+
+                    <td style="padding:18px 14px;">
+                        Du arbeitest.
+                    </td>
+
+                </tr>
+
+                <tr>
+
+                    <td style="padding:18px 14px;">
+                        Sie / er / sie / es
+                    </td>
+
+                    <td style="padding:18px 14px;">
+                        <b style="font-size:1.1rem;">arbeitet</b>
+                    </td>
+
+                    <td style="padding:18px 14px;">
+                        Sie arbeitet.
+                    </td>
+
+                </tr>
+
+                <tr>
+
+                    <td style="padding:18px 14px;">wir</td>
+
+                    <td style="padding:18px 14px;">
+                        <b style="font-size:1.1rem;">arbeiten</b>
+                    </td>
+   <tr>
+
+                    <td style="padding:18px 14px;">wir</td>
+
+                    <td style="padding:18px 14px;">
+                        <b style="font-size:1.1rem;">arbeiten</b>
+                    </td>
+
+                    <td style="padding:18px 14px;">
+                        Wir arbeiten.
+                    </td>
+
+                </tr>
+
+                <tr>
+
+                    <td style="padding:18px 14px;">ihr</td>
+
+                    <td style="padding:18px 14px;">
+                        <b style="font-size:1.1rem;">arbeitet</b>
+                    </td>
+
+                    <td style="padding:18px 14px;">
+                        Ihr arbeitet.
+                    </td>
+
+                </tr>
+
+                <tr>
+
+                    <td style="padding:18px 14px;">sie / Sie</td>
+
+                    <td style="padding:18px 14px;">
+                        <b style="font-size:1.1rem;">arbeiten</b>
+                    </td>
+
+                    <td style="padding:18px 14px;">
+                        Sie arbeiten.
+                    </td>
+
+                </tr>
+
+            </tbody>
+
+        </table>
+
+        <div class="gruessen">
+
+            <p style="font-size:1.3rem;margin:16px 0;">
+                Ich arbeite.
+            </p>
+
+            <p style="font-size:1.3rem;margin:16px 0;">
+                Ich arbeite in Frankfurt.
+            </p>
+
+            <p style="font-size:1.3rem;margin:16px 0;">
+                Ich arbeite im Büro.
+            </p>
+
+        </div>
+
+        <div class="grammar-box" style="margin:24px 0;">
+
+            <br><b>Weitere Verben:</b>
+
+            <br><br>
+
+            lernen · studieren · wohnen
+
+            <br>
+
+        </div>
+
+        <div class="gruessen">
+
+            <p style="font-size:1.3rem;margin:16px 0;">
+                Ich lerne Deutsch.
+            </p>
+
+            <p style="font-size:1.3rem;margin:16px 0;">
+                Ich studiere.
+            </p>
+
+            <p style="font-size:1.3rem;margin:16px 0;">
+                Ich wohne in Frankfurt.
+            </p>
+
+        </div>
+
+        <div class="gruessen">
+
+            <p style="font-size:1.3rem;margin:16px 0;">
+                Ich ___ in Frankfurt. → Ich <b>wohne</b> in Frankfurt.
+            </p>
+
+            <p style="font-size:1.3rem;margin:16px 0;">
+                Ich ___ Deutsch. → Ich <b>lerne</b> Deutsch.
+            </p>
+
+            <p style="font-size:1.3rem;margin:16px 0;">
+                Ich ___ im Büro. → Ich <b>arbeite</b> im Büro.
+            </p>
+
+        </div>
+</section>
+
+<section class="part" id="dialog">
+
+    <div class="part-head">
+        <span class="part-num">Dialog</span>
+        <h2 class="part-title">Lesen und sprechen</h2>
+    </div>
+
+    <div class="card">
+
+        <p>Lesen Sie den Dialog laut vor.</p>
+
+        <div class="dialog">
+
+            <div class="bubble marta">
+                <span class="speaker">A</span>
+                Guten Tag.
+            </div>
+
+            <div class="bubble tom">
+                <span class="speaker">B</span>
+                Guten Tag.
+            </div>
+
+            <div class="bubble marta">
+                <span class="speaker">A</span>
+                Was sind Sie von Beruf?
+            </div>
+
+            <div class="bubble tom">
+                <span class="speaker">B</span>
+                Ich bin Verkäuferin.
+            </div>
+
+            <div class="bubble marta">
+                <span class="speaker">A</span>
+                Wo arbeiten Sie?
+            </div>
+
+            <div class="bubble tom">
+                <span class="speaker">B</span>
+                Ich arbeite in Frankfurt.
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<section class="part" id="sprechen">
+
+    <div class="part-head">
+        <span class="part-num">Sprechen</span>
+        <h2 class="part-title">Was sagen Sie?</h2>
+    </div>
+
+    <div class="card">
+
+        <p class="lead">Sprechen Sie diese Fragen laut:</p>
+
+        <div class="gruessen">
+
+            <p style="font-size:1.3rem;margin:16px 0;">
+                Was sind Sie von Beruf?
+            </p>
+
+            <p style="font-size:1.3rem;margin:16px 0;">
+                Wo arbeiten Sie?
+            </p>
+
+            <p style="font-size:1.3rem;margin:16px 0;">
+                Lernen Sie Deutsch?
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+<section class="part" id="zusammenfassung">
+
+    <div class="part-head">
+        <span class="part-num">Merken</span>
+        <h2 class="part-title">Abschluss – Was haben wir gelernt?</h2>
+    </div>
+
+    <div class="card">
+
+        <div class="summary-grid">
+
+            <div class="row" style="padding:16px 18px;">
+                <span class="key" style="font-size:1.1rem;">✅ Berufe</span>
+                <span style="font-size:1.05rem;">Arzt, Ärztin, Lehrer, Lehrerin …</span>
+            </div>
+
+            <div class="row" style="padding:16px 18px;">
+                <span class="key" style="font-size:1.1rem;">✅ Beruf fragen</span>
+                <span style="font-size:1.05rem;">Was sind Sie von Beruf?</span>
+            </div>
+
+            <div class="row" style="padding:16px 18px;">
+                <span class="key" style="font-size:1.1rem;">✅ ein / eine</span>
+                <span style="font-size:1.05rem;">ein Lehrer · eine Lehrerin</span>
+            </div>
+
+            <div class="row" style="padding:16px 18px;">
+                <span class="key" style="font-size:1.1rem;">✅ arbeiten</span>
+                <span style="font-size:1.05rem;">arbeite · arbeitest · arbeitet …</span>
+            </div>
+
+        </div>
+
+        <p style="text-align:center;margin:24px 0;font-size:1.3rem;color:#111820;">
+            Sehr gut! Bis zum nächsten Mal!
+        </p>
+
+    </div>
+
+</section>
+
+<a href="Übung-A1.html#übung4" class="übung-btn">Übung</a>
+
+<a href="#" class="back-to-top">⬆ Powrót do spisu treści</a>
+
+<nav class="lesson-nav">
+    <a href="#lektion3">← Lektion 3</a>
+    <a href="#lektion5">Lektion 5 →</a>
+</nav>
+
+</div>
+
+</section>
+
+<!-- LEKCJA 5 -->
+
+<section class="part" id="lektion5">
+
+    <div class="wrap" style="background:linear-gradient(135deg,#f3e5f5,#e1bee7);border-radius:22px;padding:32px;">
+
+        <header class="hero">
+
+            <div class="hero-text">
+
+                <p class="eyebrow">Deutschkurs A1 · Lektion 5 von 30</p>
+
+
 
 
 
