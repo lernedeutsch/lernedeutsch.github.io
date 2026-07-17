@@ -1118,6 +1118,132 @@ function playAudio(letter){
             <span style="background:#f0f4f8;padding:14px 18px;border-radius:12px;font-weight:700;font-size:1.3rem;border:1px solid #dce3ed;">10 – zehn</span>
 
             <span style="background:#f0f4f8;padding:14px 18px;border-radius:12px;font-weight:700;font-size:1.3rem;border:1px solid #dce3ed;">11 – elf</span>
+<span style="background:#f0f4f8;padding:14px 18px;border-radius:12px;font-weight:700;font-size:1.3rem;border:1px solid #dce3ed;">12 – zwölf</span>
+
+<span style="background:#f0f4f8;padding:14px 18px;border-radius:12px;font-weight:700;font-size:1.3rem;border:1px solid #dce3ed;">13 – dreizehn</span>
+
+<span style="background:#f0f4f8;padding:14px 18px;border-radius:12px;font-weight:700;font-size:1.3rem;border:1px solid #dce3ed;">14 – vierzehn</span>
+
+<span style="background:#f0f4f8;padding:14px 18px;border-radius:12px;font-weight:700;font-size:1.3rem;border:1px solid #dce3ed;">15 – fünfzehn</span>
+
+<span style="background:#f0f4f8;padding:14px 18px;border-radius:12px;font-weight:700;font-size:1.3rem;border:1px solid #dce3ed;">16 – sechzehn</span>
+
+<span style="background:#f0f4f8;padding:14px 18px;border-radius:12px;font-weight:700;font-size:1.3rem;border:1px solid #dce3ed;">17 – siebzehn</span>
+
+<span style="background:#f0f4f8;padding:14px 18px;border-radius:12px;font-weight:700;font-size:1.3rem;border:1px solid #dce3ed;">18 – achtzehn</span>
+
+<span style="background:#f0f4f8;padding:14px 18px;border-radius:12px;font-weight:700;font-size:1.3rem;border:1px solid #dce3ed;">19 – neunzehn</span>
+
+<span style="background:#f0f4f8;padding:14px 18px;border-radius:12px;font-weight:700;font-size:1.3rem;border:1px solid #dce3ed;">20 – zwanzig</span>
+
+</div>
+</div>
+</section>
+
+<section class="part" id="zusammenfassung">
+
+<div class="part-head">
+    <span class="part-num">Merken</span>
+    <h2 class="part-title">Was kann ich jetzt?</h2>
+</div>
+
+<div class="card">
+
+<div class="summary-grid">
+
+<div class="row" style="padding:16px 18px;">
+    <span class="key" style="font-size:1.1rem;">✅ Ich kann nach der Herkunft fragen.</span>
+</div>
+
+<div class="row" style="padding:16px 18px;">
+    <span class="key" style="font-size:1.1rem;">✅ Ich kann antworten.</span>
+</div>
+
+<div class="row" style="padding:16px 18px;">
+    <span class="key" style="font-size:1.1rem;">✅ Ich kann Länder und Nationalitäten sagen.</span>
+</div>
+
+<div class="row" style="padding:16px 18px;">
+    <span class="key" style="font-size:1.1rem;">✅ Ich kann das Verb „kommen“ benutzen.</span>
+</div>
+
+<div class="row" style="padding:16px 18px;">
+    <span class="key" style="font-size:1.1rem;">✅ Ich kann Zahlen 1–20 sagen.</span>
+</div>
+
+</div>
+</div>
+</section>
+
+<a href="Übung-A1.html#übung2" class="übung-btn">Übung</a>
+
+<a href="#" class="back-to-top">⬆ Powrót do spisu treści</a>
+
+<nav class="lesson-nav">
+</svg>
+</div>
+</header>
+
+<section class="part" id="teil1">
+
+<div class="part-head">
+    <span class="part-num">Teil 1</span>
+    <h2 class="part-title">Wie alt sind Sie?</h2>
+</div>
+
+<div class="card">
+
+<p class="lead">
+Wir fragen nach dem Alter und sagen unser Alter.
+</p>
+
+<div class="grammar-box" style="margin:24px 0;">
+<b>Fragen:</b><br><br>
+
+Wie alt sind Sie? – formell<br>
+Wie alt bist du? – informell
+</div>
+
+<div class="grammar-box" style="margin:24px 0;">
+<b>Antworten:</b><br><br>
+
+Ich bin 25 Jahre alt.<br><br>
+Ich bin 32.
+</div>
+
+<div class="dialog" style="margin:32px 0;">
+
+<div class="bubble marta">
+<span class="speaker">Ich frage:</span>
+Wie alt sind Sie?
+</div>
+
+<div class="bubble tom">
+<span class="speaker">Sie antworten:</span>
+Ich bin ____ Jahre alt.
+</div>
+
+</div>
+
+</div>
+</section>
+
+<section class="part" id="teil2">
+
+<div class="part-head">
+    <span class="part-num">Teil 2</span>
+    <h2 class="part-title">Zahlen 11–100</h2>
+</div>
+
+<div class="card">
+
+<p class="lead">
+Lesen Sie die Zahlen laut. Lernen Sie von 11 bis 100.
+</p>
+
+<div class="alphabet" style="display:flex;flex-wrap:wrap;gap:14px;margin:24px 0;">
+
+
 
 
 
