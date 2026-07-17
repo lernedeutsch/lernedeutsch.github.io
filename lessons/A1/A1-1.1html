@@ -2147,6 +2147,390 @@ Meine Adresse ist …
         <span class="part-num">Teil 1</span>
         <h2 class="part-title">Personalpronomen</h2>
     </div>
+<div class="card">
+
+    <p class="lead">
+        Hören und sprechen Sie die Personalpronomen:
+    </p>
+
+    <div class="alphabet" style="display:flex;flex-wrap:wrap;gap:14px;margin:24px 0;">
+
+        <span style="background:#f0f4f8;padding:14px 18px;border-radius:12px;font-weight:700;font-size:1.4rem;border:1px solid #dce3ed;">ich</span>
+
+        <span style="background:#f0f4f8;padding:14px 18px;border-radius:12px;font-weight:700;font-size:1.4rem;border:1px solid #dce3ed;">du</span>
+
+        <span style="background:#f0f4f8;padding:14px 18px;border-radius:12px;font-weight:700;font-size:1.4rem;border:1px solid #dce3ed;">er</span>
+
+        <span style="background:#f0f4f8;padding:14px 18px;border-radius:12px;font-weight:700;font-size:1.4rem;border:1px solid #dce3ed;">sie</span>
+
+        <span style="background:#f0f4f8;padding:14px 18px;border-radius:12px;font-weight:700;font-size:1.4rem;border:1px solid #dce3ed;">es</span>
+
+        <span style="background:#f0f4f8;padding:14px 18px;border-radius:12px;font-weight:700;font-size:1.4rem;border:1px solid #dce3ed;">wir</span>
+
+        <span style="background:#f0f4f8;padding:14px 18px;border-radius:12px;font-weight:700;font-size:1.4rem;border:1px solid #dce3ed;">ihr</span>
+
+        <span style="background:#f0f4f8;padding:14px 18px;border-radius:12px;font-weight:700;font-size:1.4rem;border:1px solid #dce3ed;">Sie</span>
+
+    </div>
+
+    <div class="gruessen">
+
+        <p style="font-size:1.3rem;margin:16px 0;">Ich bin Anna.</p>
+
+        <p style="font-size:1.3rem;margin:16px 0;">Du bist Paul.</p>
+
+        <p style="font-size:1.3rem;margin:16px 0;">Er ist Lehrer.</p>
+
+        <p style="font-size:1.3rem;margin:16px 0;">Sie ist Ärztin.</p>
+
+        <p style="font-size:1.3rem;margin:16px 0;">Wir lernen Deutsch.</p>
+
+        <p style="font-size:1.3rem;margin:16px 0;">Ihr arbeitet viel.</p>
+
+        <p style="font-size:1.3rem;margin:16px 0;">Sie sind freundlich.</p>
+
+    </div>
+
+</div>
+
+</section>
+
+<section class="part" id="teil2">
+
+    <div class="part-head">
+        <span class="part-num">Teil 2</span>
+        <h2 class="part-title">du und Sie</h2>
+    </div>
+
+    <div class="card">
+
+        <p class="lead">
+            Wann benutzen wir <b>du</b> und wann <b>Sie</b>?
+        </p>
+
+        <table class="gruss-tabelle" style="margin:24px 0;">
+<thead>
+
+<tr>
+
+<th style="padding:18px 14px;">Form</th>
+
+<th style="padding:18px 14px;">Wann benutzen wir?</th>
+
+<th style="padding:18px 14px;">Beispiel</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td style="padding:18px 14px;">
+<b style="font-size:1.1rem;color:#7b1fa2;">du</b>
+</td>
+
+<td style="padding:18px 14px;">
+für Freunde, Familie, Kinder
+</td>
+
+<td style="padding:18px 14px;">
+Wie <b>heißt du</b>? &nbsp;
+Wo <b>wohnst du</b>?
+</td>
+
+</tr>
+
+<tr>
+
+<td style="padding:18px 14px;">
+<b style="font-size:1.1rem;color:#1976d2;">Sie</b>
+</td>
+
+<td style="padding:18px 14px;">
+für fremde Personen, im Beruf, höflich
+</td>
+
+<td style="padding:18px 14px;">
+Wie <b>heißen Sie</b>? &nbsp;
+Wo <b>wohnen Sie</b>?
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+<div class="grammar-box" style="margin:24px 0;">
+
+<br><b>Formell (Sie):</b>
+
+<br><br>
+
+Wie heißen Sie?
+
+<br>
+
+Wo wohnen Sie?
+
+</div>
+
+<div class="grammar-box" style="margin:24px 0;">
+
+<br><b>Informell (du):</b>
+
+<br><br>
+
+Wie heißt du?
+
+<br>
+
+Wo wohnst du?
+
+</div>
+
+</div>
+
+</section>
+
+<section class="part" id="teil3">
+
+<div class="part-head">
+
+<span class="part-num">Teil 3</span>
+
+<h2 class="part-title">Verben im Präsens</h2>
+
+</div>
+
+<div class="card">
+
+<p class="lead">
+Regular Verben im Präsens. Hier sind zwei Beispiele:
+</p>
+
+<table class="gruss-tabelle" style="margin:24px 0;">
+
+<thead>
+<tr>
+
+<td style="padding:18px 14px;">wir</td>
+
+<td style="padding:18px 14px;"><b style="font-size:1.1rem;">lernen</b></td>
+
+<td style="padding:18px 14px;"><b style="font-size:1.1rem;">arbeiten</b></td>
+
+</tr>
+
+<tr>
+
+<td style="padding:18px 14px;">ihr</td>
+
+<td style="padding:18px 14px;"><b style="font-size:1.1rem;">lernt</b></td>
+
+<td style="padding:18px 14px;"><b style="font-size:1.1rem;">arbeitet</b></td>
+
+</tr>
+
+<tr>
+
+<td style="padding:18px 14px;">sie / Sie</td>
+
+<td style="padding:18px 14px;"><b style="font-size:1.1rem;">lernen</b></td>
+
+<td style="padding:18px 14px;"><b style="font-size:1.1rem;">arbeiten</b></td>
+
+</tr>
+
+</tbody>
+
+</table>
+<div class="gruessen">
+
+<p style="font-size:1.3rem;margin:16px 0;">*ich ___ (lernen) → ich <b>lerne</b></p>
+
+<p style="font-size:1.3rem;margin:16px 0;">*du ___ (arbeiten) → du <b>arbeitest</b></p>
+
+<p style="font-size:1.3rem;margin:16px 0;">*wir ___ (lernen) → wir <b>lernen</b></p>
+
+<p style="font-size:1.3rem;margin:16px 0;">*Sie ___ (arbeiten) → Sie <b>arbeiten</b></p>
+
+</div>
+
+</section>
+
+<section class="part" id="dialog">
+
+<div class="part-head"><span class="part-num">Dialoge</span><h2 class="part-title">Lesen und sprechen</h2></div>
+
+<div class="card">
+
+<p>Lesen Sie die Dialoge laut vor.</p>
+
+<h4 style="color:#111820;margin:24px 0 16px;font-size:1.3rem;">Dialog 1 (formal)</h4>
+
+<div class="dialog">
+
+<div class="bubble marta"><span class="speaker">A</span>Guten Tag. Wie heißen Sie?</div>
+
+<div class="bubble tom"><span class="speaker">B</span>Ich heiße Müller.</div>
+
+<div class="bubble marta"><span class="speaker">A</span>Wo wohnen Sie?</div>
+
+<div class="bubble tom"><span class="speaker">B</span>Ich wohne in Frankfurt.</div>
+</div>
+
+<h4 style="color:#111820;margin:24px 0 16px;font-size:1.3rem;">
+Dialog 2 (informell)
+</h4>
+
+<div class="dialog">
+
+<div class="bubble marta">
+<span class="speaker">A</span>Hallo! Wie heißt du?
+</div>
+
+<div class="bubble tom">
+<span class="speaker">B</span>Ich heiße Tom.
+</div>
+
+<div class="bubble marta">
+<span class="speaker">A</span>Wo wohnst du?
+</div>
+
+<div class="bubble tom">
+<span class="speaker">B</span>Ich wohne in Berlin.
+</div>
+
+</div>
+
+</section>
+
+<section class="part" id="sprechen">
+
+<div class="part-head">
+<span class="part-num">Sprechen</span>
+<h2 class="part-title">Antworten Sie</h2>
+</div>
+
+<div class="card">
+
+<p class="lead">Sprechen Sie diese Fragen laut:</p>
+
+<h4 style="color:#111820;margin:24px 0 16px;font-size:1.3rem;">
+Formell (Sie)
+</h4>
+
+<div class="gruessen">
+
+<p style="font-size:1.3rem;margin:16px 0;">
+Wie heißen Sie?
+</p>
+
+<p style="font-size:1.3rem;margin:16px 0;">
+Wo wohnen Sie?
+</p>
+
+<p style="font-size:1.3rem;margin:16px 0;">
+Was machen Sie?
+</p>
+
+</div>
+
+<h4 style="color:#111820;margin:24px 0 16px;font-size:1.3rem;">
+Informell (du)
+</h4>
+
+<div class="gruessen">
+
+<p style="font-size:1.3rem;margin:16px 0;">
+Wie heißt du?
+</p>
+
+<p style="font-size:1.3rem;margin:16px 0;">
+Wo wohnst du?
+</p>
+
+<p style="font-size:1.3rem;margin:16px 0;">
+Was machst du?
+</p>
+
+</div>
+
+</div>
+
+</section>
+<section class="part" id="zusammenfassung">
+
+<div class="part-head">
+<span class="part-num">Merken</span>
+<h2 class="part-title">Abschluss – Was haben wir gelernt?</h2>
+</div>
+
+<div class="card">
+
+<div class="summary-grid">
+
+<div class="row" style="padding:16px 18px;">
+<span class="key" style="font-size:1.1rem;">✅ Personalpronomen</span>
+<span style="font-size:1.05rem;">ich · du · er · sie · es · wir · ihr · Sie</span>
+</div>
+
+<div class="row" style="padding:16px 18px;">
+<span class="key" style="font-size:1.1rem;">✅ du und Sie</span>
+<span style="font-size:1.05rem;">du → Freunde / Sie → höflich</span>
+</div>
+
+<div class="row" style="padding:16px 18px;">
+<span class="key" style="font-size:1.1rem;">✅ Verben im Präsens</span>
+<span style="font-size:1.05rem;">lernen · arbeiten</span>
+</div>
+
+<div class="row" style="padding:16px 18px;">
+<span class="key" style="font-size:1.1rem;">✅ Dialoge</span>
+<span style="font-size:1.05rem;">Formell und informell</span>
+</div>
+
+</div>
+
+<p style="text-align:center;margin:24px 0;font-size:1.3rem;color:#111820;">
+Sehr gut! Bis zum nächsten Mal!
+</p>
+
+</div>
+
+</section>
+
+<a href="Übung-A1.html#übung5" class="übung-btn">Übung</a>
+<a href="#" class="back-to-top">← Powrót do spisu treści</a>
+
+<nav class="lesson-nav">
+    <a href="#lektion4">← Lektion 4</a>
+    <a href="#lektion6">Lektion 6 →</a>
+</nav>
+
+</div>
+
+</section>
+<footer class="course-footer">
+    <h2>Herzlichen Glückwunsch!</h2>
+    <p>Sie haben die Lektionen 1–5 abgeschlossen.</p>
+    <p>Weiter geht es mit Lektion 6 im nächsten Kapitel.</p>
+
+    <a href="A1-2.html" class="next-lesson-btn">
+        ➜ Weiter zu Lektion 6
+    </a>
+</footer>
+
+</main>
+
+</body>
+</html>
+
+
+
 
 
 
