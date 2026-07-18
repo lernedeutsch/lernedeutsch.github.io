@@ -58,3 +58,53 @@ async function askNele(message) {
         );
     }
 }
+function startNeleListening() {
+    const SpeechRecognition =
+        window.SpeechRecognition || window.webkitSpeechRecognition;
+
+    if (!SpeechRecognition) {
+        speakNele(
+            "Entschuldigung. Die Spracherkennung wird in diesem Browser nicht unterstützt."
+        );
+        return;
+    }
+
+    window.speechSynthesis.cancel();
+
+    const recognition = new SpeechRecognition();
+
+    recognition.lang = "de-DE";
+    recognition.continuous = false;
+    recognition.interimResults = false;
+    recognition.maxAlternatives = 1;
+
+    recognition.onstart = function () {
+        console.log("Nele hört zu...");
+    };
+
+    recognition.onresult = function (event) {
+        const recognizedText = event.results[0][0].transcript;
+
+        console.log("Erkannt:", recognizedText);
+
+        askNele(recognizedText);
+    };
+
+    recognition.onerror = function (event) {
+        console.error("Fehler bei der Spracherkennung:", event.error);
+
+        if (event.error === "not-allowed") {
+            speakNele(
+                "Bitte erlauben Sie den Zugriff auf das Mikrofon."
+            );
+        } else if (event.error !== "no-speech") {
+            speakNele(
+                "Entschuldigung. Ich konnte Sie nicht verstehen."
+            );
+        }
+    };
+
+    recognition.start();
+}
+
+
