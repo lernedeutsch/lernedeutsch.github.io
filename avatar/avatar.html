@@ -222,6 +222,16 @@ if (head && nodRequested) {
       camera.updateProjectionMatrix();
       renderer.setSize(window.innerWidth, window.innerHeight);
     });
+    function speakNele(text) {
+    const speech = new SpeechSynthesisUtterance(text);
+
+    speech.lang = "de-DE";
+    speech.rate = 0.95;
+    speech.pitch = 1.0;
+    speech.volume = 1.0;
+
+    window.speechSynthesis.speak(speech);
+}
   </script>
 </body>
 </html>
