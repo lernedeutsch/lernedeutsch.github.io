@@ -115,7 +115,19 @@
         VRMUtils.removeUnnecessaryJoints(gltf.scene);
 
         currentVrm = vrm;
+        const leftUpperArm =
+  currentVrm.humanoid?.getNormalizedBoneNode("leftUpperArm");
 
+const rightUpperArm =
+  currentVrm.humanoid?.getNormalizedBoneNode("rightUpperArm");
+
+if (leftUpperArm) {
+  leftUpperArm.rotation.z = -1.15;
+}
+
+if (rightUpperArm) {
+  rightUpperArm.rotation.z = 1.15;
+}
         vrm.scene.rotation.y = Math.PI;
         vrm.scene.position.set(0, 0, 0);
         vrm.scene.scale.set(1, 1, 1);
