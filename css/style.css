@@ -340,3 +340,27 @@ body {
   display: block;
   background: transparent;
 }
+.nele-button {
+    position: fixed;
+    left: 30px;
+    bottom: 30px;
+    z-index: 1000;
+
+    padding: 15px 25px;
+    font-size: 20px;
+    font-weight: bold;
+
+    border: none;
+    border-radius: 15px;
+
+    background: #2d7df6;
+    color: white;
+
+    cursor: pointer;
+
+    box-shadow: 0 5px 15px rgba(0,0,0,.3);
+}
+
+.nele-button:hover {
+    background: #155ec9;
+}
