@@ -22,3 +22,39 @@ function speakNele(text) {
 
     window.speechSynthesis.speak(speech);
 }
+async function askNele(message) {
+    if (!message || !message.trim()) {
+        return;
+    }
+
+    try {
+        const response = await fetch(
+            "https://nele-backend.onrender.com/chat",
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    message: message.trim()
+                })
+            }
+        );
+
+        if (!response.ok) {
+            throw new Error(`Błąd serwera: ${response.status}`);
+        }
+
+        const data = await response.json();
+
+        if (data.reply) {
+            speakNele(data.reply);
+        }
+    } catch (error) {
+        console.error("Nie udało się połączyć z Nele:", error);
+
+        speakNele(
+            "Entschuldigung. Die Verbindung zum Server funktioniert gerade nicht."
+        );
+    }
+}
