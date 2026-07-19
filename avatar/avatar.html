@@ -114,8 +114,11 @@
         VRMUtils.removeUnnecessaryVertices(gltf.scene);
         VRMUtils.removeUnnecessaryJoints(gltf.scene);
 
-        currentVrm = vrm;
-        const leftUpperArm =
+     currentVrm = vrm;
+
+VRMUtils.rotateVRM0(vrm);
+
+const leftUpperArm =
   currentVrm.humanoid?.getNormalizedBoneNode("leftUpperArm");
 
 const rightUpperArm =
@@ -128,11 +131,11 @@ if (leftUpperArm) {
 if (rightUpperArm) {
   rightUpperArm.rotation.z = 1.15;
 }
-        vrm.scene.rotation.y = 0;
-        vrm.scene.position.set(0, 0, 0);
-        vrm.scene.scale.set(1, 1, 1);
 
-        scene.add(vrm.scene);
+vrm.scene.position.set(0, 0, 0);
+vrm.scene.scale.set(1, 1, 1);
+
+scene.add(vrm.scene);
 
         document.getElementById("info").innerText = "Nele ist bereit.";
       },
