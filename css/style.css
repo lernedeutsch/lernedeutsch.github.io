@@ -364,3 +364,9 @@ body {
 .nele-button:hover {
     background: #155ec9;
 }
+/* ===== NELE – ODWRÓCENIE NA PRZÓD ===== */
+
+.nele-avatar-frame {
+    transform: scaleX(-1);
+    transform-origin: center center;
+}
