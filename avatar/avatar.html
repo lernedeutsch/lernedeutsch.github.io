@@ -172,7 +172,7 @@ scene.add(vrm.scene);
         const breath = Math.sin(elapsed * 2) * 0.01;
         currentVrm.scene.position.y = breath;
 
-        currentVrm.scene.rotation.y = Math.PI + Math.sin(elapsed * 0.7) * 0.03;
+        currentVrm.scene.rotation.y = Math.sin(elapsed * 0.7) * 0.03;
 
         setMouth(mouthValue);
 
