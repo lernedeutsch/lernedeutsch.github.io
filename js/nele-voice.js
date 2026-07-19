@@ -3,10 +3,18 @@
 /*
 ========================================================
 NELE VOICE
-Mikrofon → /chat → /tts
 
-Jeżeli serwer /tts nie może utworzyć pliku WAV,
-Nele automatycznie użyje niemieckiego głosu przeglądarki.
+Działanie:
+1. Uczeń klika przycisk rozmowy.
+2. Mikrofon rozpoznaje niemiecką wypowiedź.
+3. Tekst trafia do endpointu /chat.
+4. Nele otrzymuje odpowiedź.
+5. Strona próbuje pobrać naturalny głos z /tts.
+6. Jeżeli Piper na serwerze nie działa, Nele automatycznie
+   używa niemieckiego głosu przeglądarki.
+
+Dzięki temu rozmowa działa już teraz, a Piper pozostaje
+przygotowany na przyszłość.
 ========================================================
 */
 
@@ -19,19 +27,28 @@ let neleAudioUrl = null;
 
 /*
 ========================================================
-STATUS NELE NA STRONIE
+AKTUALIZOWANIE KOMUNIKATU NELE
 ========================================================
 */
 
 function setNeleStatus(message) {
-    const possibleElements = [
-        document.getElementById("neleStatus"),
-        document.querySelector(".nele-status"),
-        document.querySelector(".nele-message"),
-        document.querySelector(".nele-avatar-box p")
+    const selectors = [
+        "#neleStatus",
+        ".nele-status",
+        ".nele-message",
+        ".nele-text",
+        "[data-nele-status]"
     ];
 
-    const statusElement = possibleElements.find(Boolean);
+    let statusElement = null;
+
+    for (const selector of selectors) {
+        statusElement = document.querySelector(selector);
+
+        if (statusElement) {
+            break;
+        }
+    }
 
     if (statusElement) {
         statusElement.textContent = message;
@@ -55,7 +72,10 @@ function stopNeleVoice() {
             neleAudio.removeAttribute("src");
             neleAudio.load();
         } catch (error) {
-            console.warn("Nie udało się zatrzymać audio:", error);
+            console.warn(
+                "Nie udało się zatrzymać audio Nele:",
+                error
+            );
         }
 
         neleAudio = null;
@@ -80,54 +100,60 @@ WYBÓR NIEMIECKIEGO GŁOSU PRZEGLĄDARKI
 ========================================================
 */
 
-function findGermanVoice() {
+function getGermanVoice() {
     if (!("speechSynthesis" in window)) {
         return null;
     }
 
     const voices = window.speechSynthesis.getVoices();
 
-    const preferredNames = [
+    const preferredVoiceNames = [
         "Katja",
+        "Hedda",
         "Anna",
         "Amala",
         "Vicki",
         "Petra",
         "Marlene",
-        "Hedda",
         "Google Deutsch",
         "Microsoft Katja",
         "Microsoft Hedda"
     ];
 
-    for (const preferredName of preferredNames) {
-        const preferredVoice = voices.find((voice) => {
+    for (const preferredName of preferredVoiceNames) {
+        const voice = voices.find((availableVoice) => {
+            const voiceLanguage =
+                String(availableVoice.lang || "").toLowerCase();
+
+            const voiceName =
+                String(availableVoice.name || "").toLowerCase();
+
             return (
-                voice.lang &&
-                voice.lang.toLowerCase().startsWith("de") &&
-                voice.name.toLowerCase().includes(
+                voiceLanguage.startsWith("de") &&
+                voiceName.includes(
                     preferredName.toLowerCase()
                 )
             );
         });
 
-        if (preferredVoice) {
-            return preferredVoice;
+        if (voice) {
+            return voice;
         }
     }
 
-    return voices.find((voice) => {
-        return (
-            voice.lang &&
-            voice.lang.toLowerCase().startsWith("de")
-        );
-    }) || null;
+    return (
+        voices.find((voice) => {
+            return String(voice.lang || "")
+                .toLowerCase()
+                .startsWith("de");
+        }) || null
+    );
 }
 
 
 /*
 ========================================================
-AWARYJNY GŁOS PRZEGLĄDARKI
+GŁOS AWARYJNY PRZEGLĄDARKI
 ========================================================
 */
 
@@ -149,42 +175,64 @@ function speakWithBrowserVoice(text) {
                     "Przeglądarka nie obsługuje syntezy mowy."
                 )
             );
+
             return;
         }
 
         window.speechSynthesis.cancel();
 
-        const speech = new SpeechSynthesisUtterance(cleanText);
+        const speech =
+            new SpeechSynthesisUtterance(cleanText);
 
         speech.lang = "de-DE";
-        speech.rate = 0.92;
+        speech.rate = 0.95;
         speech.pitch = 1.0;
         speech.volume = 1.0;
 
-        const germanVoice = findGermanVoice();
+        const germanVoice = getGermanVoice();
 
         if (germanVoice) {
             speech.voice = germanVoice;
+
+            console.log(
+                "Wybrany głos przeglądarki:",
+                germanVoice.name
+            );
         }
 
         speech.onstart = function () {
-            document.body.classList.add("nele-is-speaking");
+            console.log("Nele spricht...");
+
+            document.body.classList.add(
+                "nele-is-speaking"
+            );
+
             setNeleStatus("Nele spricht …");
         };
 
         speech.onend = function () {
-            document.body.classList.remove("nele-is-speaking");
+            console.log("Nele hat aufgehört zu sprechen.");
+
+            document.body.classList.remove(
+                "nele-is-speaking"
+            );
+
             setNeleStatus("Nele ist bereit.");
+
             resolve();
         };
 
         speech.onerror = function (event) {
-            document.body.classList.remove("nele-is-speaking");
+            document.body.classList.remove(
+                "nele-is-speaking"
+            );
+
             setNeleStatus("Nele ist bereit.");
 
             reject(
                 new Error(
-                    event.error || "Fehler bei der Sprachausgabe."
+                    event.error ||
+                    "Fehler bei der Sprachausgabe."
                 )
             );
         };
@@ -196,11 +244,15 @@ function speakWithBrowserVoice(text) {
 
 /*
 ========================================================
-PRÓBA GŁOSU PIPER PRZEZ /tts
+NATURALNY GŁOS PIPER Z ENDPOINTU /tts
 ========================================================
 */
 
 async function speakWithServerVoice(text) {
+    const cleanText = String(text || "").trim();
+
+    console.log("TTS wysyła tekst:", cleanText);
+
     const response = await fetch(
         `${NELE_BACKEND_URL}/tts`,
         {
@@ -211,22 +263,27 @@ async function speakWithServerVoice(text) {
             },
 
             body: JSON.stringify({
-                text: text
+                text: cleanText
             })
         }
     );
 
+    console.log("Odpowiedź /tts:", response.status);
+
     if (!response.ok) {
-        let errorMessage = `TTS error: ${response.status}`;
+        let errorMessage =
+            `TTS jest niedostępny: ${response.status}`;
 
         try {
             const errorData = await response.json();
 
             if (errorData.error) {
-                errorMessage = errorData.error;
+                errorMessage = String(errorData.error);
             }
         } catch (error) {
-            // Serwer nie zwrócił JSON.
+            console.warn(
+                "Backend TTS nie zwrócił komunikatu JSON."
+            );
         }
 
         throw new Error(errorMessage);
@@ -246,18 +303,45 @@ async function speakWithServerVoice(text) {
     neleAudio.preload = "auto";
 
     neleAudio.onplay = function () {
-        document.body.classList.add("nele-is-speaking");
+        console.log("Nele odtwarza głos Piper.");
+
+        document.body.classList.add(
+            "nele-is-speaking"
+        );
+
         setNeleStatus("Nele spricht …");
     };
 
     neleAudio.onended = function () {
-        stopNeleVoice();
+        document.body.classList.remove(
+            "nele-is-speaking"
+        );
+
+        if (neleAudioUrl) {
+            URL.revokeObjectURL(neleAudioUrl);
+        }
+
+        neleAudio = null;
+        neleAudioUrl = null;
+
         setNeleStatus("Nele ist bereit.");
     };
 
     neleAudio.onerror = function () {
-        stopNeleVoice();
-        setNeleStatus("Nele ist bereit.");
+        document.body.classList.remove(
+            "nele-is-speaking"
+        );
+
+        if (neleAudioUrl) {
+            URL.revokeObjectURL(neleAudioUrl);
+        }
+
+        neleAudio = null;
+        neleAudioUrl = null;
+
+        console.error(
+            "Nie udało się odtworzyć pliku audio Piper."
+        );
     };
 
     await neleAudio.play();
@@ -278,33 +362,39 @@ async function speakNele(text) {
     }
 
     stopNeleVoice();
-    setNeleStatus("Nele bereitet die Antwort vor …");
+
+    setNeleStatus(
+        "Nele bereitet die Antwort vor …"
+    );
 
     try {
         /*
-        Najpierw próbujemy użyć docelowego głosu Piper.
+        Najpierw próbujemy docelowego głosu Piper.
         */
 
         await speakWithServerVoice(cleanText);
 
     } catch (serverVoiceError) {
+        /*
+        Render zwraca obecnie 503, ponieważ nie ma jeszcze
+        programu Piper lub modelu głosu.
+
+        Dlatego automatycznie uruchamiamy działający głos
+        przeglądarki.
+        */
+
         console.warn(
-            "Głos Piper jest niedostępny. " +
-            "Uruchamiam głos przeglądarki:",
+            "Piper jest niedostępny. " +
+            "Uruchamiam niemiecki głos przeglądarki:",
             serverVoiceError
         );
-
-        /*
-        Jeżeli Piper na Renderze nie działa,
-        Nele natychmiast używa głosu przeglądarki.
-        */
 
         try {
             await speakWithBrowserVoice(cleanText);
 
         } catch (browserVoiceError) {
             console.error(
-                "Nie udało się odtworzyć głosu Nele:",
+                "Nie udało się odtworzyć odpowiedzi Nele:",
                 browserVoiceError
             );
 
@@ -318,7 +408,7 @@ async function speakNele(text) {
 
 /*
 ========================================================
-WYSŁANIE WYPOWIEDZI DO /chat
+WYSŁANIE WYPOWIEDZI UCZNIA DO /chat
 ========================================================
 */
 
@@ -329,7 +419,8 @@ async function askNele(message) {
         return;
     }
 
-    console.log("Uczeń:", cleanMessage);
+    console.log("Wysyłam do Nele:", cleanMessage);
+
     setNeleStatus("Nele denkt nach …");
 
     try {
@@ -348,7 +439,10 @@ async function askNele(message) {
             }
         );
 
-        console.log("Status /chat:", response.status);
+        console.log(
+            "Odpowiedź /chat:",
+            response.status
+        );
 
         if (!response.ok) {
             throw new Error(
@@ -357,15 +451,21 @@ async function askNele(message) {
         }
 
         const data = await response.json();
-        const reply = String(data.reply || "").trim();
+
+        const reply = String(
+            data.reply || ""
+        ).trim();
+
+        console.log(
+            "Nele odpowiedziała:",
+            reply
+        );
 
         if (!reply) {
             throw new Error(
-                "Serwer nie zwrócił odpowiedzi Nele."
+                "Backend nie zwrócił odpowiedzi Nele."
             );
         }
-
-        console.log("Nele:", reply);
 
         await speakNele(reply);
 
@@ -377,7 +477,7 @@ async function askNele(message) {
             error
         );
 
-        const errorMessage =
+        const connectionMessage =
             "Entschuldigung. Die Verbindung zum Server funktioniert gerade nicht.";
 
         setNeleStatus(
@@ -385,18 +485,24 @@ async function askNele(message) {
         );
 
         /*
-        Komunikat awaryjny używa głosu przeglądarki,
-        ponieważ backend może być niedostępny.
+        W przypadku błędu /chat nie korzystamy z backendu TTS.
+        Komunikat zostanie odczytany bezpośrednio przez
+        przeglądarkę.
         */
 
         try {
-            await speakWithBrowserVoice(errorMessage);
+            await speakWithBrowserVoice(
+                connectionMessage
+            );
+
         } catch (voiceError) {
             console.error(
-                "Nie udało się odtworzyć komunikatu:",
+                "Nie udało się odtworzyć komunikatu błędu:",
                 voiceError
             );
         }
+
+        return null;
     }
 }
 
@@ -414,6 +520,7 @@ function stopNeleListening() {
 
     try {
         neleRecognition.abort();
+
     } catch (error) {
         console.warn(
             "Nie udało się zatrzymać mikrofonu:",
@@ -422,7 +529,10 @@ function stopNeleListening() {
     }
 
     neleRecognition = null;
-    document.body.classList.remove("nele-is-listening");
+
+    document.body.classList.remove(
+        "nele-is-listening"
+    );
 }
 
 
@@ -433,7 +543,9 @@ URUCHOMIENIE MIKROFONU
 */
 
 function startNeleListening() {
-    console.log("Kliknięto przycisk rozmowy z Nele.");
+    console.log(
+        "Kliknięto przycisk rozmowy z Nele."
+    );
 
     const SpeechRecognition =
         window.SpeechRecognition ||
@@ -444,11 +556,17 @@ function startNeleListening() {
             "Entschuldigung. Die Spracherkennung wird in diesem Browser nicht unterstützt.";
 
         console.error(message);
+
         setNeleStatus(message);
 
-        speakWithBrowserVoice(message).catch((error) => {
-            console.error(error);
-        });
+        speakWithBrowserVoice(message).catch(
+            function (error) {
+                console.error(
+                    "Nie udało się odtworzyć komunikatu:",
+                    error
+                );
+            }
+        );
 
         return;
     }
@@ -456,7 +574,8 @@ function startNeleListening() {
     stopNeleVoice();
     stopNeleListening();
 
-    const recognition = new SpeechRecognition();
+    const recognition =
+        new SpeechRecognition();
 
     neleRecognition = recognition;
 
@@ -466,28 +585,41 @@ function startNeleListening() {
     recognition.maxAlternatives = 1;
 
     recognition.onstart = function () {
-        console.log("Nele hört zu …");
+        console.log("Nele hört zu...");
 
-        document.body.classList.add("nele-is-listening");
+        document.body.classList.add(
+            "nele-is-listening"
+        );
+
         setNeleStatus("Nele hört zu …");
     };
 
     recognition.onresult = function (event) {
-        const result = event.results[0][0];
+        const result =
+            event.results[0][0];
 
         const recognizedText = String(
             result.transcript || ""
         ).trim();
 
-        console.log("Erkannt:", recognizedText);
+        console.log(
+            "Erkannt:",
+            recognizedText
+        );
 
-        if (recognizedText) {
+        if (!recognizedText) {
             setNeleStatus(
-                `Sie haben gesagt: ${recognizedText}`
+                "Ich habe nichts gehört."
             );
 
-            askNele(recognizedText);
+            return;
         }
+
+        setNeleStatus(
+            `Sie haben gesagt: ${recognizedText}`
+        );
+
+        askNele(recognizedText);
     };
 
     recognition.onerror = function (event) {
@@ -501,8 +633,27 @@ function startNeleListening() {
         );
 
         if (event.error === "not-allowed") {
-            setNeleStatus(
-                "Bitte erlauben Sie den Zugriff auf das Mikrofon."
+            const message =
+                "Bitte erlauben Sie den Zugriff auf das Mikrofon.";
+
+            setNeleStatus(message);
+
+            speakWithBrowserVoice(message).catch(
+                function (error) {
+                    console.error(error);
+                }
+            );
+
+        } else if (event.error === "audio-capture") {
+            const message =
+                "Das Mikrofon wurde nicht gefunden.";
+
+            setNeleStatus(message);
+
+            speakWithBrowserVoice(message).catch(
+                function (error) {
+                    console.error(error);
+                }
             );
 
         } else if (event.error === "no-speech") {
@@ -511,14 +662,23 @@ function startNeleListening() {
             );
 
         } else {
-            setNeleStatus(
-                "Entschuldigung. Ich konnte Sie nicht verstehen."
+            const message =
+                "Entschuldigung. Ich konnte Sie nicht verstehen.";
+
+            setNeleStatus(message);
+
+            speakWithBrowserVoice(message).catch(
+                function (error) {
+                    console.error(error);
+                }
             );
         }
     };
 
     recognition.onend = function () {
-        console.log("Mikrofon wurde beendet.");
+        console.log(
+            "Rozpoznawanie mowy zakończone."
+        );
 
         document.body.classList.remove(
             "nele-is-listening"
@@ -540,10 +700,28 @@ function startNeleListening() {
 
         neleRecognition = null;
 
+        document.body.classList.remove(
+            "nele-is-listening"
+        );
+
         setNeleStatus(
             "Das Mikrofon konnte nicht gestartet werden."
         );
     }
+}
+
+
+/*
+========================================================
+ZATRZYMANIE WSZYSTKICH FUNKCJI NELE
+========================================================
+*/
+
+function stopNele() {
+    stopNeleListening();
+    stopNeleVoice();
+
+    setNeleStatus("Nele ist bereit.");
 }
 
 
@@ -558,16 +736,20 @@ window.askNele = askNele;
 window.startNeleListening = startNeleListening;
 window.stopNeleListening = stopNeleListening;
 window.stopNeleVoice = stopNeleVoice;
+window.stopNele = stopNele;
 
 
 /*
-Głosy przeglądarki czasem ładują się chwilę po stronie.
+========================================================
+WCZYTYWANIE GŁOSÓW PRZEGLĄDARKI
+========================================================
 */
 
 if ("speechSynthesis" in window) {
     window.speechSynthesis.getVoices();
 
-    window.speechSynthesis.onvoiceschanged = function () {
-        window.speechSynthesis.getVoices();
-    };
+    window.speechSynthesis.onvoiceschanged =
+        function () {
+            window.speechSynthesis.getVoices();
+        };
 }
