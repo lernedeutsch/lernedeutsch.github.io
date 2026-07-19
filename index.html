@@ -1,114 +1,199 @@
 <!DOCTYPE html>
+
 <html lang="pl">
+
 <head>
 
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Nauka Niemieckiego</title>
 
 <style>
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-body{
-    overflow:hidden;
-    background:black;
+html,
+body {
+    width: 100%;
+    height: 100%;
 }
 
-#mapa{
-    position:relative;
-    width:100vw;
-    height:100vh;
+body {
+    overflow: hidden;
+    background: black;
+}
+
+#mapa {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
 }
 
 /* Ziemia */
 
-#earth{
-    width:100%;
-    height:100%;
-    object-fit:cover;
-    display:block;
+#earth {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
 }
 
 /* Klikalne Niemcy */
 
-#niemcy{
-    position:absolute;
+#niemcy {
+    position: absolute;
 
     /* położenie nad Niemcami */
-    top:28%;
-    left:43.5%;
 
-    width:120px;
-    height:auto;
+    top: 28%;
+    left: 43.5%;
 
-    transition:0.3s;
-    cursor:pointer;
+    width: 120px;
+    height: auto;
+
+    transition: transform 0.3s ease;
+    cursor: pointer;
 
     filter:
-    drop-shadow(0 0 10px gold)
-    drop-shadow(0 0 25px gold);
+        drop-shadow(0 0 10px gold)
+        drop-shadow(0 0 25px gold);
 }
 
-#niemcy:hover{
-    transform:scale(1.12);
+#niemcy:hover {
+    transform: scale(1.12);
 }
 
-/* obrazek Niemiec */
+/* Obrazek Niemiec */
 
-#niemcy img{
-    width:100%;
-    height:auto;
-    display:block;
+#niemcy img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/*
+Ukrywamy menu na stronie startowej.
+Kod menu pozostaje w projekcie,
+ale nie jest tutaj wyświetlany.
+*/
+
+#nav-placeholder {
+    display: none;
+}
+
+.start-page-nav {
+    display: none;
 }
 
 </style>
 
 <!-- Ładowanie CSS -->
+
 <link rel="stylesheet" href="css/style.css">
+
 <link rel="stylesheet" href="css/mobile.css">
 
 </head>
 
 <body>
+
 <div id="nav-placeholder"></div>
+
 <div id="mapa">
 
-    <img src="images/earth.png" id="earth" alt="Ziemia">
+    <img
+        src="images/earth.png"
+        id="earth"
+        alt="Ziemia"
+    >
 
-    <a href="mapa-niemiec.html" id="niemcy">
+    <a
+        href="mapa-niemiec.html"
+        id="niemcy"
+        aria-label="Przejdź do mapy Niemiec"
+    >
 
-        <img src="images/germany.png" alt="Niemcy">
+        <img
+            src="images/germany.png"
+            alt="Niemcy"
+        >
 
     </a>
 
 </div>
-<nav>
-  <a href="Deutsch/lessons/A1/index.html">A1 – Übersicht</a>
-  <a href="Deutsch/lessons/A1/A1-1.html">A1-1: Begrüßung</a>
+
+<nav class="start-page-nav">
+
+    <a href="Deutsch/lessons/A1/index.html">
+        A1 – Übersicht
+    </a>
+
+    <a href="Deutsch/lessons/A1/A1-1.html">
+        A1-1: Begrüßung
+    </a>
+
 </nav>
 
 <!-- Ładowanie skryptów -->
+
 <script src="js/app.js"></script>
+
 <script src="js/navigation.js"></script>
+
 <script src="js/router.js"></script>
+
 <script src="js/storage.js"></script>
+
 <script src="js/speech.js"></script>
+
 <script src="js/animation.js"></script>
+
 <script src="js/utils.js"></script>
+
 <script src="js/ui.js"></script>
+
 <script>
-  fetch('nav.html')
-    .then(r => r.text())
-    .then(html => {
-      document.getElementById('nav-placeholder').innerHTML = html;
+
+fetch("nav.html")
+    .then(function(response) {
+
+        if (!response.ok) {
+            throw new Error(
+                "Nie udało się pobrać pliku nav.html."
+            );
+        }
+
+        return response.text();
     })
-    .catch(err => console.error('Błąd ładowania menu:', err));
+    .then(function(html) {
+
+        const navPlaceholder =
+            document.getElementById(
+                "nav-placeholder"
+            );
+
+        if (navPlaceholder) {
+            navPlaceholder.innerHTML = html;
+        }
+
+    })
+    .catch(function(error) {
+
+        console.error(
+            "Błąd ładowania menu:",
+            error
+        );
+
+    });
+
 </script>
+
 </body>
+
 </html>
