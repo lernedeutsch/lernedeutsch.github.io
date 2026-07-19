@@ -192,14 +192,20 @@ fetch("nav.html")
         }
 
     })
-    .catch(function(error) {
+   .catch(function(error) {
 
-        console.error(
-            "Błąd ładowania menu:",
-            error
-        );
+    console.error(
+        "Błąd ładowania menu:",
+        error
+    );
 
-    });
+});
+
+const mapa = document.getElementById("mapa");
+
+setTimeout(function () {
+    mapa.style.transform = "scale(1)";
+}, 500);
 
 </script>
 
