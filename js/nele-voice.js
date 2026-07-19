@@ -1,60 +1,24 @@
 "use strict";
 
-/*
-=========================================================
-NELE VOICE
-Połączenie strony z backendem Nele:
-
-1. Mikrofon rozpoznaje wypowiedź ucznia.
-2. Tekst jest wysyłany do /chat.
-3. Odpowiedź Nele jest wysyłana do /tts.
-4. Backend tworzy plik WAV.
-5. Przeglądarka odtwarza głos Nele.
-=========================================================
-*/
-
 const NELE_BACKEND_URL = "https://nele-backend.onrender.com";
 
+let neleRecognition = null;
 let neleAudio = null;
 let neleAudioUrl = null;
-let neleRecognition = null;
-
-let chatAbortController = null;
-let ttsAbortController = null;
 
 
 /*
-=========================================================
-Pomocnicze zdarzenia strony
-=========================================================
+====================================================
+ZATRZYMANIE GŁOSU
+====================================================
 */
 
-function dispatchNeleEvent(eventName, detail = {}) {
-    document.dispatchEvent(
-        new CustomEvent(eventName, {
-            detail
-        })
-    );
-}
-
-
-/*
-=========================================================
-Czyszczenie pliku audio
-=========================================================
-*/
-
-function cleanupNeleAudio() {
-    document.body.classList.remove("nele-is-speaking");
-
+function stopNeleVoice() {
     if (neleAudio) {
-        neleAudio.onplay = null;
-        neleAudio.onended = null;
-        neleAudio.onerror = null;
-
+        neleAudio.pause();
+        neleAudio.currentTime = 0;
         neleAudio.removeAttribute("src");
         neleAudio.load();
-
         neleAudio = null;
     }
 
@@ -62,75 +26,15 @@ function cleanupNeleAudio() {
         URL.revokeObjectURL(neleAudioUrl);
         neleAudioUrl = null;
     }
+
+    document.body.classList.remove("nele-is-speaking");
 }
 
 
 /*
-=========================================================
-Zatrzymanie głosu Nele
-=========================================================
-*/
-
-function stopNeleVoice() {
-    if (ttsAbortController) {
-        ttsAbortController.abort();
-        ttsAbortController = null;
-    }
-
-    if (neleAudio) {
-        try {
-            neleAudio.pause();
-            neleAudio.currentTime = 0;
-        } catch (error) {
-            console.warn("Nie udało się zatrzymać audio Nele:", error);
-        }
-    }
-
-    cleanupNeleAudio();
-
-    dispatchNeleEvent("nele:speech-stop");
-}
-
-
-/*
-=========================================================
-Odczytanie komunikatu błędu zwróconego przez backend
-=========================================================
-*/
-
-async function readBackendError(response) {
-    try {
-        const contentType = response.headers.get("content-type") || "";
-
-        if (contentType.includes("application/json")) {
-            const errorData = await response.json();
-
-            if (errorData.error) {
-                return String(errorData.error);
-            }
-
-            if (errorData.message) {
-                return String(errorData.message);
-            }
-        }
-
-        const errorText = await response.text();
-
-        if (errorText.trim()) {
-            return errorText.trim();
-        }
-    } catch (error) {
-        console.warn("Nie udało się odczytać błędu backendu:", error);
-    }
-
-    return `Serverfehler: ${response.status}`;
-}
-
-
-/*
-=========================================================
-Głos Nele przez backend /tts
-=========================================================
+====================================================
+GŁOS NELE — ENDPOINT /tts
+====================================================
 */
 
 async function speakNele(text) {
@@ -142,112 +46,75 @@ async function speakNele(text) {
 
     stopNeleVoice();
 
-    ttsAbortController = new AbortController();
-
-    dispatchNeleEvent("nele:speech-loading", {
-        text: cleanText
-    });
+    console.log("TTS wysyła tekst:", cleanText);
 
     try {
         const response = await fetch(
             `${NELE_BACKEND_URL}/tts`,
             {
                 method: "POST",
-
                 headers: {
                     "Content-Type": "application/json"
                 },
-
                 body: JSON.stringify({
                     text: cleanText
-                }),
-
-                signal: ttsAbortController.signal
+                })
             }
         );
 
+        console.log("Odpowiedź /tts:", response.status);
+
         if (!response.ok) {
-            const errorMessage = await readBackendError(response);
-            throw new Error(errorMessage);
+            let message = `TTS error: ${response.status}`;
+
+            try {
+                const errorData = await response.json();
+
+                if (errorData.error) {
+                    message = errorData.error;
+                }
+            } catch (error) {
+                console.warn("Nie udało się odczytać błędu TTS.");
+            }
+
+            throw new Error(message);
         }
 
         const audioBlob = await response.blob();
 
-        if (!audioBlob || audioBlob.size === 0) {
-            throw new Error(
-                "Der Server hat keine Audiodatei zurückgegeben."
-            );
-        }
-
-        const contentType = audioBlob.type || "";
-
-        if (
-            contentType &&
-            !contentType.includes("audio") &&
-            !contentType.includes("octet-stream")
-        ) {
-            throw new Error(
-                "Der Server hat keine gültige Audiodatei zurückgegeben."
-            );
+        if (!audioBlob.size) {
+            throw new Error("Serwer nie zwrócił pliku audio.");
         }
 
         neleAudioUrl = URL.createObjectURL(audioBlob);
         neleAudio = new Audio(neleAudioUrl);
 
-        neleAudio.preload = "auto";
-
         neleAudio.onplay = function () {
             document.body.classList.add("nele-is-speaking");
-
-            dispatchNeleEvent("nele:speech-start", {
-                text: cleanText
-            });
         };
 
         neleAudio.onended = function () {
-            cleanupNeleAudio();
-
-            dispatchNeleEvent("nele:speech-end", {
-                text: cleanText
-            });
+            stopNeleVoice();
         };
 
         neleAudio.onerror = function () {
-            cleanupNeleAudio();
-
-            dispatchNeleEvent("nele:speech-error", {
-                message: "Die Audiodatei konnte nicht abgespielt werden."
-            });
+            console.error("Nie udało się odtworzyć pliku audio.");
+            stopNeleVoice();
         };
 
         await neleAudio.play();
 
     } catch (error) {
-        if (error.name === "AbortError") {
-            console.log("Odtwarzanie głosu Nele zostało przerwane.");
-            return;
-        }
-
-        cleanupNeleAudio();
-
-        console.error("Błąd głosu Nele:", error);
-
-        dispatchNeleEvent("nele:speech-error", {
-            message: error.message
-        });
-
-        throw error;
-
-    } finally {
-        ttsAbortController = null;
+        console.error("Błąd speakNele:", error);
+        stopNeleVoice();
     }
 }
 
 
 /*
-=========================================================
-Wysłanie wypowiedzi ucznia do /chat
-=========================================================
+====================================================
+WYSŁANIE WIADOMOŚCI DO /chat
+====================================================
 */
 
 async function askNele(message) {
@@ -257,92 +124,53 @@ async function askNele(message) {
         return;
     }
 
-    if (chatAbortController) {
-        chatAbortController.abort();
-    }
-
-    chatAbortController = new AbortController();
-
-    dispatchNeleEvent("nele:thinking", {
-        message: cleanMessage
-    });
+    console.log("Wysyłam do Nele:", cleanMessage);
 
     try {
         const response = await fetch(
             `${NELE_BACKEND_URL}/chat`,
             {
                 method: "POST",
-
                 headers: {
                     "Content-Type": "application/json"
                 },
-
                 body: JSON.stringify({
                     message: cleanMessage
-                }),
-
-                signal: chatAbortController.signal
+                })
             }
         );
 
+        console.log("Odpowiedź /chat:", response.status);
+
         if (!response.ok) {
-            const errorMessage = await readBackendError(response);
-            throw new Error(errorMessage);
+            throw new Error(
+                `Błąd serwera /chat: ${response.status}`
+            );
         }
 
         const data = await response.json();
         const reply = String(data.reply || "").trim();
 
+        console.log("Nele odpowiedziała:", reply);
+
         if (!reply) {
-            throw new Error(
-                "Der Server hat keine Antwort zurückgegeben."
-            );
+            throw new Error("Backend nie zwrócił odpowiedzi.");
         }
-
-        console.log("Nele:", reply);
-
-        dispatchNeleEvent("nele:reply", {
-            userMessage: cleanMessage,
-            reply
-        });
 
         await speakNele(reply);
 
         return reply;
 
     } catch (error) {
-        if (error.name === "AbortError") {
-            console.log("Poprzednie zapytanie do Nele zostało przerwane.");
-            return;
-        }
-
-        console.error("Nie udało się połączyć z Nele:", error);
-
-        const connectionMessage =
-            "Entschuldigung. Die Verbindung zum Server funktioniert gerade nicht.";
-
-        dispatchNeleEvent("nele:chat-error", {
-            message: error.message,
-            reply: connectionMessage
-        });
-
-        /*
-        Nie uruchamiamy tutaj ponownie speakNele(),
-        ponieważ błąd może dotyczyć właśnie połączenia z backendem.
-        */
-
-        return connectionMessage;
-
-    } finally {
-        chatAbortController = null;
+        console.error("Błąd askNele:", error);
     }
 }
 
 
 /*
-=========================================================
-Zatrzymanie mikrofonu
-=========================================================
+====================================================
+ZATRZYMANIE MIKROFONU
+====================================================
 */
 
 function stopNeleListening() {
@@ -358,39 +186,26 @@ function stopNeleListening() {
 
     neleRecognition = null;
     document.body.classList.remove("nele-is-listening");
-
-    dispatchNeleEvent("nele:listening-stop");
 }
 
 
 /*
-=========================================================
-Uruchomienie mikrofonu
-=========================================================
+====================================================
+URUCHOMIENIE MIKROFONU
+====================================================
 */
 
 function startNeleListening() {
+    console.log("Kliknięto przycisk rozmowy z Nele.");
+
     const SpeechRecognition =
         window.SpeechRecognition ||
         window.webkitSpeechRecognition;
 
     if (!SpeechRecognition) {
-        const message =
-            "Entschuldigung. Die Spracherkennung wird in diesem Browser nicht unterstützt.";
-
-        console.error(message);
-
-        dispatchNeleEvent("nele:recognition-error", {
-            error: "not-supported",
-            message
-        });
-
-        speakNele(message).catch(function (error) {
-            console.error(
-                "Nie udało się odtworzyć komunikatu Nele:",
-                error
-            );
-        });
+        console.error(
+            "Ta przeglądarka nie obsługuje rozpoznawania mowy."
+        );
 
         return;
     }
@@ -398,138 +213,58 @@ function startNeleListening() {
     stopNeleVoice();
     stopNeleListening();
 
-    const recognition = new SpeechRecognition();
+    neleRecognition = new SpeechRecognition();
 
-    neleRecognition = recognition;
+    neleRecognition.lang = "de-DE";
+    neleRecognition.continuous = false;
+    neleRecognition.interimResults = false;
+    neleRecognition.maxAlternatives = 1;
 
-    recognition.lang = "de-DE";
-    recognition.continuous = false;
-    recognition.interimResults = false;
-    recognition.maxAlternatives = 1;
-
-    recognition.onstart = function () {
+    neleRecognition.onstart = function () {
         console.log("Nele hört zu...");
-
         document.body.classList.add("nele-is-listening");
-
-        dispatchNeleEvent("nele:listening-start");
     };
 
-    recognition.onresult = async function (event) {
-        const result = event.results?.[0]?.[0];
-        const recognizedText = String(
-            result?.transcript || ""
-        ).trim();
-
-        if (!recognizedText) {
-            return;
-        }
+    neleRecognition.onresult = function (event) {
+        const recognizedText =
+            event.results[0][0].transcript.trim();
 
         console.log("Erkannt:", recognizedText);
 
-        dispatchNeleEvent("nele:recognized", {
-            text: recognizedText,
-            confidence: result.confidence
-        });
-
-        await askNele(recognizedText);
+        askNele(recognizedText);
     };
 
-    recognition.onerror = function (event) {
+    neleRecognition.onerror = function (event) {
         console.error(
             "Fehler bei der Spracherkennung:",
             event.error
         );
 
         document.body.classList.remove("nele-is-listening");
-
-        let message = "";
-
-        if (event.error === "not-allowed") {
-            message =
-                "Bitte erlauben Sie den Zugriff auf das Mikrofon.";
-
-        } else if (event.error === "audio-capture") {
-            message =
-                "Das Mikrofon wurde nicht gefunden.";
-
-        } else if (event.error === "network") {
-            message =
-                "Die Spracherkennung hat keine Verbindung zum Netzwerk.";
-
-        } else if (event.error !== "no-speech") {
-            message =
-                "Entschuldigung. Ich konnte Sie nicht verstehen.";
-        }
-
-        dispatchNeleEvent("nele:recognition-error", {
-            error: event.error,
-            message
-        });
-
-        if (message) {
-            speakNele(message).catch(function (error) {
-                console.error(
-                    "Nie udało się odtworzyć komunikatu Nele:",
-                    error
-                );
-            });
-        }
     };
 
-    recognition.onend = function () {
+    neleRecognition.onend = function () {
+        console.log("Rozpoznawanie mowy zakończone.");
+
         document.body.classList.remove("nele-is-listening");
-
-        if (neleRecognition === recognition) {
-            neleRecognition = null;
-        }
-
-        dispatchNeleEvent("nele:listening-end");
+        neleRecognition = null;
     };
 
     try {
-        recognition.start();
-
+        neleRecognition.start();
     } catch (error) {
-        neleRecognition = null;
-        document.body.classList.remove("nele-is-listening");
-
         console.error(
             "Nie udało się uruchomić mikrofonu:",
             error
         );
-
-        dispatchNeleEvent("nele:recognition-error", {
-            error: "start-error",
-            message: error.message
-        });
     }
 }
 
 
 /*
-=========================================================
-Zatrzymanie wszystkich procesów Nele
-=========================================================
-*/
-
-function stopNele() {
-    stopNeleListening();
-    stopNeleVoice();
-
-    if (chatAbortController) {
-        chatAbortController.abort();
-        chatAbortController = null;
-    }
-
-    dispatchNeleEvent("nele:stop");
-}
-
-
-/*
-=========================================================
-Udostępnienie funkcji pozostałym plikom strony
-=========================================================
+====================================================
+UDOSTĘPNIENIE FUNKCJI DLA HTML
+====================================================
 */
 
 window.speakNele = speakNele;
@@ -537,4 +272,3 @@ window.askNele = askNele;
 window.startNeleListening = startNeleListening;
 window.stopNeleListening = stopNeleListening;
 window.stopNeleVoice = stopNeleVoice;
-window.stopNele = stopNele;
