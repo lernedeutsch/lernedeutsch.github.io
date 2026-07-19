@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nauka Niemieckiego</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    overflow: hidden;
+    background: black;
+}
+
+#mapa {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+}
+
+#earth {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transform: scale(1) translate(0, 0);
+    transform-origin: center center;
+    transition: transform 5s ease-out;
+}
+
+#mapa.zoomed #earth {
+    transform: scale(1.35) translate(-6%, -2%);
+}
+
+#niemcy {
+    position: absolute;
+    top: 28%;
+    left: 43.5%;
+    width: 120px;
+    height: auto;
+    transition: transform 0.3s ease;
+    cursor: pointer;
+    filter:
+        drop-shadow(0 0 10px gold)
+        drop-shadow(0 0 25px gold);
+    z-index: 5;
+}
+
+#niemcy:hover {
+    transform: scale(1.12);
+}
+
+#niemcy img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+#nav-placeholder {
+    display: none;
+}
+
+.start-page-nav {
+    display: none;
+}
+</style>
+
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/mobile.css">
+</head>
+
+<body>
+
+<div id="nav-placeholder"></div>
+
+<div id="mapa">
+    <img
+        src="images/earth.png"
+        id="earth"
+        alt="Ziemia"
+    >
+
+    <a
+        href="mapa-niemiec.html"
+        id="niemcy"
+        aria-label="Przejdź do mapy Niemiec"
+    >
+        <img
+            src="images/germany.png"
+            alt="Niemcy"
+        >
+    </a>
+</div>
+
+<nav class="start-page-nav">
+    <a href="Deutsch/lessons/A1/index.html">A1 – Übersicht</a>
+    <a href="Deutsch/lessons/A1/A1-1.html">A1-1: Begrüßung</a>
+</nav>
+
+<script src="js/app.js"></script>
+<script src="js/navigation.js"></script>
+<script src="js/router.js"></script>
+<script src="js/storage.js"></script>
+<script src="js/speech.js"></script>
+<script src="js/animation.js"></script>
+<script src="js/utils.js"></script>
+<script src="js/ui.js"></script>
+
+<script>
+fetch("nav.html")
+    .then(function(response) {
+        if (!response.ok) {
+            throw new Error("Nie udało się pobrać pliku nav.html.");
+        }
+        return response.text();
+    })
+    .then(function(html) {
+        const navPlaceholder = document.getElementById("nav-placeholder");
+        if (navPlaceholder) {
+            navPlaceholder.innerHTML = html;
+        }
+    })
+    .catch(function(error) {
+        console.error("Błąd ładowania menu:", error);
+    });
+
+const niemcy = document.getElementById("niemcy");
+const mapa = document.getElementById("mapa");
+
+niemcy.addEventListener("click", function(e) {
+    e.preventDefault();
+    mapa.classList.add("zoomed");
+
+    setTimeout(function() {
+        window.location.href = "mapa-niemiec.html";
+    }, 1500);
+});
+</script>
+
+</body>
+</html>
