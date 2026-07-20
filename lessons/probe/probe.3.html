@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html lang="de">
+<html lang="pl">
 
 <head>
 
@@ -8,175 +8,755 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Deutsch A1 – Lektion 1</title>
+<title>Lekcja 1 — Guten Tag! (aktywny dialog)</title>
 
 <style>
 
+:root{
+
+--bg:#15211C;
+
+--bg-soft:#1B2A24;
+
+--panel:#21312A;
+
+--panel-line:rgba(238,232,210,0.10);
+
+--paper:#ECE6D2;
+
+--paper-ink:#22251B;
+
+--accent:#D98A3D;
+
+--accent-dim:rgba(217,138,61,0.18);
+
+--sage:#74AE93;
+
+--sage-dim:rgba(116,174,147,0.16);
+
+--text:#F2EFE2;
+
+--text-dim:#AEBDB3;
+
+--danger:#C96A5A;
+
+}
+
+*{box-sizing:border-box;}
+
+html,body{margin:0;padding:0;}
+
 body{
 
-font-family: Arial, sans-serif;
+background:radial-gradient(circle at 18% 0%, var(--bg-soft), var(--bg) 60%);
 
-background: linear-gradient(135deg,#dbeafe,#fef9c3);
+color:var(--text);
+
+font-family:'IBM Plex Sans', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+
+min-height:100vh;
+
+line-height:1.45;
+
+}
+
+.topbar{
+
+display:flex;align-items:baseline;justify-content:space-between;gap:1rem;flex-wrap:wrap;
+
+padding:1.6rem 2rem 1.1rem;border-bottom:1px solid var(--panel-line);
+
+}
+
+.topbar h1{
+
+font-family:'Fraunces', Georgia, serif;
+
+font-weight:600;
+
+font-size:2rem;
+
+letter-spacing:0.01em;
 
 margin:0;
 
-padding:20px;
+color:var(--text);
 
 }
 
-.container{
+.topbar h1 span{color:var(--accent);font-style:italic;}
 
-max-width:800px;
+.topbar .sub{
 
-margin:auto;
+font-family:'IBM Plex Mono', monospace;
 
-background:white;
+font-size:0.72rem;
 
-border-radius:20px;
+letter-spacing:0.12em;
 
-padding:30px;
+text-transform:uppercase;
 
-box-shadow:0 8px 20px rgba(0,0,0,0.2);
-
-}
-
-h1{
-
-text-align:center;
-
-color:#1d4ed8;
+color:var(--text-dim);
 
 }
 
-.lesson{
+.back-link{
 
-text-align:center;
+font-size:0.85rem;
 
-color:#0f766e;
+color:var(--text-dim);
 
-font-size:20px;
+text-decoration:none;
 
-margin-bottom:20px;
-
-}
-
-#question{
-
-background:#eff6ff;
-
-padding:20px;
-
-border-radius:15px;
-
-font-size:28px;
-
-text-align:center;
-
-margin:20px 0;
-
-color:#1e3a8a;
+border-bottom:1px dashed var(--panel-line);
 
 }
 
-#result{
+.back-link:hover{color:var(--accent);border-color:var(--accent);}
 
-font-size:24px;
+.layout{
 
-text-align:center;
+display:grid;
 
-min-height:40px;
+grid-template-columns:260px 1fr;
 
-margin:20px;
+gap:1.4rem;
 
-}
+padding:1.6rem 2rem 3rem;
 
-.correct{
+max-width:1180px;
 
-color:green;
-
-}
-
-.wrong{
-
-color:red;
+margin:0 auto;
 
 }
 
-#transcript{
+@media (max-width:840px){.layout{grid-template-columns:1fr;}}
 
-background:#f8fafc;
+.channels{
 
-padding:15px;
+background:var(--panel);
 
-border-radius:10px;
+border:1px solid var(--panel-line);
 
-min-height:30px;
+border-radius:14px;
 
-margin-top:20px;
+padding:1rem;
+
+align-self:start;
 
 }
 
-.buttons{
+.channels h2,.section-title{
+
+font-family:'IBM Plex Mono', monospace;
+
+font-size:0.72rem;
+
+letter-spacing:0.14em;
+
+text-transform:uppercase;
+
+color:var(--text-dim);
+
+margin:0.2rem 0.4rem 0.8rem;
+
+}
+
+.channel-btn{
+
+width:100%;
 
 display:flex;
 
-justify-content:center;
+align-items:center;
 
-gap:15px;
+gap:0.7rem;
 
-flex-wrap:wrap;
+background:transparent;
 
-margin-top:25px;
+border:1px solid transparent;
+
+border-radius:10px;
+
+color:var(--text);
+
+text-align:left;
+
+padding:0.65rem 0.7rem;
+
+margin-bottom:0.35rem;
+
+cursor:pointer;
+
+font-size:0.92rem;
+
+font-family:inherit;
+
+transition:background 0.15s,border-color 0.15s;
 
 }
 
-button{
+.channel-btn .num{
+
+font-family:'IBM Plex Mono', monospace;
+
+font-size:0.72rem;
+
+color:var(--text-dim);
+
+min-width:1.6em;
+
+}
+
+.channel-btn:hover{background:rgba(255,255,255,0.04);}
+
+.channel-btn.active{background:var(--accent-dim);border-color:var(--accent);}
+
+.channel-btn.active .num{color:var(--accent);}
+
+.hint-box{
+
+margin-top:0.9rem;
+
+padding:0.8rem 0.85rem;
+
+border-radius:10px;
+
+background:rgba(255,255,255,0.03);
+
+border:1px solid var(--panel-line);
+
+font-size:0.78rem;
+
+color:var(--text-dim);
+
+}
+
+.booth{
+
+background:var(--panel);
+
+border:1px solid var(--panel-line);
+
+border-radius:14px;
+
+display:flex;
+
+flex-direction:column;
+
+min-height:560px;
+
+}
+
+.booth-head{
+
+display:flex;justify-content:space-between;align-items:center;
+
+padding:1rem 1.2rem;
+
+border-bottom:1px solid var(--panel-line);
+
+}
+
+.booth-head .title{
+
+font-family:'Fraunces', Georgia, serif;
+
+font-size:1.15rem;
+
+}
+
+.booth-head .title small{
+
+display:block;
+
+font-family:'IBM Plex Sans', sans-serif;
+
+font-size:0.78rem;
+
+color:var(--text-dim);
+
+font-weight:400;
+
+margin-top:0.1rem;
+
+}
+
+.reset-btn{
+
+background:transparent;
+
+border:1px solid var(--panel-line);
+
+color:var(--text-dim);
+
+border-radius:8px;
+
+padding:0.4rem 0.7rem;
+
+font-size:0.78rem;
+
+cursor:pointer;
+
+font-family:'IBM Plex Mono', monospace;
+
+}
+
+.reset-btn:hover{color:var(--accent);border-color:var(--accent);}
+
+.transcript{
+
+flex:1;
+
+padding:1.3rem 1.3rem 0.6rem;
+
+overflow-y:auto;
+
+display:flex;
+
+flex-direction:column;
+
+gap:0.85rem;
+
+}
+
+.bubble{
+
+max-width:78%;
+
+padding:0.7rem 0.95rem;
+
+border-radius:14px;
+
+font-size:0.95rem;
+
+animation:rise 0.25s ease;
+
+position:relative;
+
+}
+
+@keyframes rise{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
+
+.bubble.bot{
+
+align-self:flex-start;
+
+background:var(--paper);
+
+color:var(--paper-ink);
+
+border-bottom-left-radius:4px;
+
+}
+
+.bubble.student{
+
+align-self:flex-end;
+
+background:var(--sage-dim);
+
+border:1px solid rgba(116,174,147,0.4);
+
+color:var(--text);
+
+border-bottom-right-radius:4px;
+
+}
+
+.bubble.feedback{
+
+align-self:flex-end;
+
+background:transparent;
 
 border:none;
 
+color:var(--text-dim);
+
+font-size:0.8rem;
+
+font-family:'IBM Plex Mono', monospace;
+
+padding:0 0.4rem;
+
+}
+
+.bubble.feedback.good{color:var(--sage);}
+
+.bubble.feedback.fix{
+
+align-self:flex-end;
+
+background:rgba(217,138,61,0.10);
+
+border:1px solid rgba(217,138,61,0.45);
+
+color:#F0C892;
+
+font-family:'IBM Plex Sans', sans-serif;
+
+font-size:0.82rem;
+
+padding:0.5rem 0.75rem;
+
+border-radius:10px;
+
+max-width:78%;
+
+}
+
+.bubble.system{
+
+align-self:center;
+
+background:transparent;
+
+color:var(--text-dim);
+
+font-family:'IBM Plex Mono', monospace;
+
+font-size:0.74rem;
+
+letter-spacing:0.06em;
+
+text-transform:uppercase;
+
+}
+
+.bubble .pl{
+
+display:block;
+
+margin-top:0.3rem;
+
+font-size:0.78rem;
+
+color:#5a5640;
+
+font-style:italic;
+
+}
+
+.content{
+
+padding:0 1.3rem 1.2rem;
+
+display:grid;
+
+gap:1rem;
+
+}
+
+.panel-block{
+
+border:1px solid var(--panel-line);
+
 border-radius:12px;
 
-padding:15px 25px;
+background:rgba(255,255,255,0.02);
 
-font-size:18px;
+padding:1rem;
+
+}
+
+.grid-2{
+
+display:grid;
+
+grid-template-columns:repeat(2,minmax(0,1fr));
+
+gap:0.8rem;
+
+}
+
+@media (max-width:720px){.grid-2{grid-template-columns:1fr;}}
+
+.pill-row{display:flex;flex-wrap:wrap;gap:0.5rem;}
+
+.pill{
+
+padding:0.45rem 0.7rem;
+
+border-radius:999px;
+
+border:1px solid var(--panel-line);
+
+background:transparent;
+
+color:var(--text);
+
+font-size:0.88rem;
 
 cursor:pointer;
 
 }
 
-.listen{
+.pill:hover{border-color:var(--accent);color:var(--accent);}
 
-background:#2563eb;
+.alphabet-grid{
 
-color:white;
+display:grid;
 
-}
+grid-template-columns:repeat(auto-fit,minmax(70px,1fr));
 
-.speak{
-
-background:#16a34a;
-
-color:white;
+gap:0.45rem;
 
 }
 
-.restart{
+.letter-btn{
 
-background:#ea580c;
+padding:0.55rem 0.45rem;
 
-color:white;
+border-radius:10px;
+
+border:1px solid var(--panel-line);
+
+background:rgba(255,255,255,0.02);
+
+color:var(--text);
+
+cursor:pointer;
+
+font-family:'IBM Plex Mono', monospace;
+
+font-size:0.9rem;
 
 }
 
-.progress{
+.letter-btn:hover{border-color:var(--accent);color:var(--accent);}
 
-text-align:center;
+.info-table{
 
-font-size:18px;
+width:100%;
 
-margin-top:20px;
+border-collapse:collapse;
+
+font-size:0.88rem;
+
+overflow:hidden;
+
+border-radius:10px;
 
 }
+
+.info-table th,.info-table td{
+
+padding:0.65rem 0.7rem;
+
+border-bottom:1px solid var(--panel-line);
+
+text-align:left;
+
+vertical-align:top;
+
+}
+
+.info-table th{
+
+color:var(--text-dim);
+
+font-family:'IBM Plex Mono', monospace;
+
+font-size:0.72rem;
+
+letter-spacing:0.08em;
+
+text-transform:uppercase;
+
+}
+
+.merke{
+
+display:grid;
+
+gap:0.5rem;
+
+}
+
+.merke-card{
+
+border-left:3px solid var(--accent);
+
+padding:0.5rem 0.75rem;
+
+background:rgba(217,138,61,0.08);
+
+border-radius:8px;
+
+}
+
+.console{
+
+border-top:1px solid var(--panel-line);
+
+padding:1rem 1.3rem 1.3rem;
+
+display:flex;
+
+flex-direction:column;
+
+gap:0.7rem;
+
+}
+
+.status-line{
+
+font-family:'IBM Plex Mono', monospace;
+
+font-size:0.78rem;
+
+color:var(--text-dim);
+
+min-height:1.1em;
+
+}
+
+.status-line.live{color:var(--sage);}
+
+.status-line.err{color:var(--danger);}
+
+.controls{
+
+display:flex;
+
+align-items:center;
+
+gap:1rem;
+
+flex-wrap:wrap;
+
+}
+
+.mic-wrap{position:relative;width:64px;height:64px;flex:none;}
+
+.mic-ring{
+
+position:absolute;inset:0;
+
+border-radius:50%;
+
+border:2px solid var(--accent);
+
+opacity:0;
+
+}
+
+.mic-wrap.listening .mic-ring{
+
+animation:pulse 1.4s ease-out infinite;
+
+}
+
+@keyframes pulse{
+
+0%{opacity:0.7;transform:scale(0.7);}
+
+100%{opacity:0;transform:scale(1.6);}
+
+}
+
+.mic-btn{
+
+position:relative;
+
+width:64px;height:64px;
+
+border-radius:50%;
+
+border:1px solid var(--accent);
+
+background:var(--accent-dim);
+
+color:var(--accent);
+
+font-size:1.5rem;
+
+cursor:pointer;
+
+display:flex;align-items:center;justify-content:center;
+
+transition:transform 0.1s;
+
+}
+
+.mic-btn:active{transform:scale(0.94);}
+
+.mic-btn.on{background:var(--accent);color:#1b1208;}
+
+.mic-btn:disabled{opacity:0.35;cursor:not-allowed;}
+
+.text-fallback{
+
+display:flex;gap:0.5rem;flex:1;min-width:220px;
+
+}
+
+.text-fallback input{
+
+flex:1;
+
+background:var(--bg-soft);
+
+border:1px solid var(--panel-line);
+
+border-radius:8px;
+
+color:var(--text);
+
+padding:0.55rem 0.7rem;
+
+font-size:0.9rem;
+
+font-family:inherit;
+
+}
+
+.text-fallback input:focus{outline:none;border-color:var(--sage);}
+
+.text-fallback button,.replay-btn{
+
+background:transparent;
+
+border:1px solid var(--panel-line);
+
+color:var(--text-dim);
+
+border-radius:8px;
+
+padding:0.55rem 0.8rem;
+
+cursor:pointer;
+
+font-size:0.85rem;
+
+font-family:inherit;
+
+}
+
+.text-fallback button:hover,.replay-btn:hover{color:var(--sage);border-color:var(--sage);}
+
+.support-warning{
+
+background:rgba(201,106,90,0.12);
+
+border:1px solid rgba(201,106,90,0.35);
+
+color:#E8B6AC;
+
+border-radius:10px;
+
+padding:0.6rem 0.8rem;
+
+font-size:0.78rem;
+
+display:none;
+
+}
+
+::-webkit-scrollbar{width:8px;}
+
+::-webkit-scrollbar-thumb{background:var(--panel-line);border-radius:8px;}
 
 </style>
 
@@ -184,345 +764,1025 @@ margin-top:20px;
 
 <body>
 
-<div class="container">
+<div class="topbar">
 
-<h1>Deutsch A1</h1>
+<div>
 
-<div class="lesson">
+<h1>Guten <span>Tag!</span></h1>
 
-Lektion 1 – Guten Tag!
-
-</div>
-
-<div class="progress" id="progress"></div>
-
-<div id="question"></div>
-
-<div class="buttons">
-
-<button class="listen" onclick="playQuestion()">
-
-🔊 Frage hören
-
-</button>
-
-<button class="speak" onclick="startRecognition()">
-
-🎤 Antworten
-
-</button>
-
-<button class="restart" onclick="restartLesson()">
-
-↺ Neustart
-
-</button>
+<div class="sub">Lekcja 1 · Begrüßung · Vorstellung · Alphabet · Aktywny dialog</div>
 
 </div>
 
-<div id="transcript"></div>
+<a class="back-link" href="A1.html">← Powrót do spisu treści</a>
 
-<div id="result"></div>
+</div>
+
+<div class="layout">
+
+<aside class="channels">
+
+<h2>Tryb</h2>
+
+<button class="channel-btn active" data-mode="dialog"><span class="num">00</span> Aktywny dialog głosowy</button>
+
+<button class="channel-btn" data-mode="begruessung"><span class="num">01</span> Begrüßung</button>
+
+<button class="channel-btn" data-mode="vorstellung"><span class="num">02</span> Vorstellung</button>
+
+<button class="channel-btn" data-mode="alphabet"><span class="num">03</span> Alphabet</button>
+
+<button class="channel-btn" data-mode="merke"><span class="num">04</span> Merke</button>
+
+<div class="hint-box" id="hintBox">
+
+W trybie <strong>Aktywny dialog głosowy</strong>:
+
+<br>– bot mówi po niemiecku,
+
+<br>– ty odpowiadasz mikrofonem lub tekstem,
+
+<br>– możesz też zadawać pytania (np. „Wie heißt du?", „Was bedeutet Guten Tag?"),
+
+<br>– otrzymasz odpowiedź głosową i tłumaczenie.
+
+<br><br>
+
+✏️ Asystent poprawia: brak „ich", odmianę czasowników (ich heiße / du heißt), rodzajniki (der/die/das).
+
+</div>
+
+</aside>
+
+<main class="booth">
+
+<div class="booth-head">
+
+<div class="title" id="boothTitle">Aktywny dialog głosowy<small>Pytaj i odpowiadaj po niemiecku — wszystki w ramach Lekcji 1</small></div>
+
+<button class="reset-btn" id="resetBtn">↺ Nowa rozmowa</button>
+
+</div>
+
+<div class="transcript" id="transcript"></div>
+
+<div class="content" id="content"></div>
+
+<div class="console">
+
+<div class="support-warning" id="supportWarning">
+
+Twoja przeglądarka nie wspiera rozpoznawania mowy (najlepiej działa w Chrome/Edge na komputerze).
+
+Możesz nadal słuchać odpowiedzi i pisać swoje zdania w polu tekstowym.
+
+</div>
+
+<div class="status-line" id="statusLine">Naciśnij mikrofon, aby zacząć mówić po niemiecku.</div>
+
+<div class="controls">
+
+<div class="mic-wrap" id="micWrap">
+
+<div class="mic-ring"></div>
+
+<button class="mic-btn" id="micBtn" title="Mów">🎤</button>
+
+</div>
+
+<button class="replay-btn" id="replayBtn">🔊 Powtórz ostatnią wypowiedź</button>
+
+<div class="text-fallback">
+
+<input type="text" id="textInput" placeholder="…albo napisz odpowiedź/pytanie po niemiecku">
+
+<button id="sendBtn">Wyślij</button>
+
+</div>
+
+</div>
+
+</div>
+
+</main>
 
 </div>
 
 <script>
 
-const steps = [
+(function(){
+
+// ---------- DANE: lekcja 1 ----------
+
+const data = {
+
+begruessung: {
+
+title: 'Begrüßung',
+
+subtitle: 'Wir begrüßen uns',
+
+intro: [
+
+['morgens', 'Guten Morgen!', 'ungefähr von 5:00/6:00 Uhr bis 10:00–11:00 Uhr'],
+
+['tagsüber', 'Guten Tag!', 'ungefähr von 10:00–11:00 Uhr bis 17:00–18:00 Uhr'],
+
+['abends', 'Guten Abend!', 'ungefähr von 17:00–18:00 Uhr bis spät am Abend'],
+
+['informell', 'Hallo!', 'zu jeder Tageszeit'],
+
+['beim Abschied', 'Tschüss!', 'zu jeder Tageszeit']
+
+],
+
+phrases: ['Guten Morgen!', 'Guten Tag!', 'Guten Abend!', 'Hallo!', 'Tschüss!']
+
+},
+
+vorstellung: {
+
+title: 'Vorstellung',
+
+subtitle: 'Ich stelle mich vor',
+
+intro: [],
+
+phrases: ['Hallo!', 'Ich heiße Anna.', 'Mein Name ist Anna Müller.', 'Ich bin Anna.', 'Wie heißt du?', 'Wie heißen Sie?']
+
+},
+
+alphabet: {
+
+title: 'Alphabet',
+
+subtitle: 'Das deutsche Alphabet',
+
+intro: [],
+
+letters: ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','Ä','Ö','Ü','ß']
+
+},
+
+merke: {
+
+title: 'Merke',
+
+subtitle: 'Was kann ich jetzt?',
+
+intro: [],
+
+merks: [
+
+'✅ Ich kann grüßen. Guten Morgen! · Guten Tag! · Guten Abend! · Hallo! · Tschüss!',
+
+'✅ Ich kann mich vorstellen. Ich heiße ... · Mein Name ist ... · Ich bin ...',
+
+'✅ Ich kann nach dem Namen fragen. Wie heißen Sie? · Wie heißt du?',
+
+'✅ Ich kann das deutsche Alphabet sagen. A, B, C, D ...'
+
+]
+
+}
+
+};
+
+// ---------- DANE: dialog etapowy (Lekcja 1) ----------
+
+const lesson = [
 
 {
 
-question: "Sage: Guten Morgen.",
+q: "Guten Tag! Wie heißt du?",
 
-patterns: [
+exp: ["ich heiße","mein name ist","ich bin"],
 
-"guten morgen"
+ok: "Sehr gut!",
 
-]
+retry: "Antworte: Ich heiße ...",
+
+plQ: "Dzień dobry! Jak się nazywasz?",
+
+plRetry: "Odpowiedz: Ich heiße ..."
 
 },
 
 {
 
-question: "Sage: Hallo.",
+q: "Wie geht es dir?",
 
-patterns: [
+exp: ["gut","sehr gut","es geht","prima","super"],
 
-"hallo"
+ok: "Prima!",
 
-]
+retry: "Sage: Gut, danke.",
 
-},
+plQ: "Jak się masz?",
 
-{
-
-question: "Stelle dich vor.",
-
-patterns: [
-
-"ich heiße",
-
-"mein name ist",
-
-"ich bin"
-
-]
+plRetry: "Powiedz: Gut, danke."
 
 },
 
 {
 
-question: "Frage: Wie heißt du?",
+q: "Woher kommst du?",
 
-patterns: [
+exp: ["ich komme aus","aus polen","aus"],
 
-"wie heißt du",
+ok: "Interessant!",
 
-"wie heisst du"
+retry: "Sage: Ich komme aus Polen.",
 
-]
+plQ: "Skąd jesteś?",
 
-},
-
-{
-
-question: "Frage höflich: Wie heißen Sie?",
-
-patterns: [
-
-"wie heißen sie",
-
-"wie heissen sie"
-
-]
+plRetry: "Powiedz: Ich komme aus Polen."
 
 },
 
 {
 
-question: "Sage das deutsche Alphabet.",
+q: "Wie verabschiedest du dich?",
 
-patterns: [
+exp: ["tschüss","auf wiedersehen","bis bald"],
 
-"a b c",
+ok: "Perfekt!",
 
-"a, b, c",
+retry: "Sage: Tschüss.",
 
-"ah beh tse"
+plQ: "Jak się rozstajesz?",
 
-]
-
-},
-
-{
-
-question: "Verabschiede dich.",
-
-patterns: [
-
-"tschüss",
-
-"tschüss!",
-
-"auf wiedersehen"
-
-]
+plRetry: "Powiedz: Tschüss."
 
 }
 
 ];
 
-let currentStep = 0;
+// ---------- DANE: swobodna rozmowa (pytania użytkownika) ----------
 
-const questionEl = document.getElementById("question");
+const FREE_RULES = [
 
-const resultEl = document.getElementById("result");
+{ test:["hallo","guten tag","guten morgen","hi "],
+
+reply:"Hallo! Schön, dass du da bist. Wie heißt du?",
+
+pl:"Cześć! Miło, że jesteś. Jak się nazywasz?" },
+
+{ test:["wie heißt","was bedeutet","t translates"],
+
+reply:"Guten Tag bedeutet 'Dzień dobry' auf Polnisch.",
+
+pl:"Guten Tag oznacza 'Dzień dobry' w języku polskim." },
+
+{ test:["wie geht"],
+
+reply:"Mir geht es gut, danke! Und dir?",
+
+pl:"Mam się dobrze, dzięki! A Ty?" },
+
+{ test:["gut","prima","super"],
+
+reply:"Das freut mich zu hören!",
+
+pl:"Cieszę się, że to słyszę!" },
+
+{ test:["schlecht","nicht so gut","müde"],
+
+reply:"Oh, das tut mir leid. Erhole dich gut!",
+
+pl:"Och, przykro mi. Odpocznij dobrze!" },
+
+{ test:["komme aus","ich bin aus"],
+
+reply:"Interessant! Ich komme aus Deutschland.",
+
+pl:"Interesujące! Ja jestem z Niemiec." },
+
+{ test:["wetter"],
+
+reply:"Das Wetter ist heute schön, oder?",
+
+pl:"Pogoda jest dziś piękna, prawda?" },
+
+{ test:["danke"],
+
+reply:"Bitte, gern geschehen!",
+
+pl:"Proszę, nie ma za co!" },
+
+{ test:["tschüss","wiedersehen","bis bald"],
+
+reply:"Tschüss! Bis zum nächsten Mal!",
+
+pl:"Cześć! Do następnego razu!" },
+
+{ test:["alphabet","buchstabe"],
+
+reply:"Das deutsche Alphabet hat 26 Buchstaben, plus Ä, Ö, Ü und ß.",
+
+pl:"Niemiecki alfabet ma 26 liter, plus Ä, Ö, Ü i ß." },
+
+{ test:["was bedeutet","bedeutet"],
+
+reply:"Das ist eine gute Frage! Im Allgemeinen bedeutet 'bedeuten' = 'oznaczyć'.",
+
+pl:"To dobre pytanie! Ogólnie 'bedeuten' = 'oznaczyć'." }
+
+];
+
+const FREE_DEFAULT = {
+
+reply:"Das ist interessant! Erzähl mir mehr.",
+
+pl:"To interesujące! Powiedz mi więcej."
+
+};
+
+// ---------- KOREKTOR BŁĘDÓW (offline) ----------
+
+const VERB_TABLE = {
+
+sein: { ich:"bin", du:"bist", er:"ist", wir:"sind", ihr:"seid", sie_pl:"sind" },
+
+haben: { ich:"habe", du:"hast", er:"hat", wir:"haben", ihr:"habt", sie_pl:"haben" },
+
+heißen: { ich:"heiße", du:"heißt", er:"heißt", wir:"heißen", ihr:"heißt", sie_pl:"heißen" },
+
+kommen: { ich:"komme", du:"kommst", er:"kommt", wir:"kommen", ihr:"kommt", sie_pl:"kommen" },
+
+wohnen: { ich:"wohne", du:"wohnst", er:"wohnt", wir:"wohnen", ihr:"wohnt", sie_pl:"wohnen" },
+
+machen: { ich:"mache", du:"machst", er:"macht", wir:"machen", ihr:"macht", sie_pl:"machen" },
+
+arbeiten: { ich:"arbeite", du:"arbeitest", er:"arbeitet",wir:"arbeiten", ihr:"arbeitet", sie_pl:"arbeiten" },
+
+gehen: { ich:"gehe", du:"gehst", er:"geht", wir:"gehen", ihr:"geht", sie_pl:"gehen" },
+
+möchten: { ich:"möchte", du:"möchtest", er:"möchte", wir:"möchten", ihr:"möchtet", sie_pl:"möchten" },
+
+brauchen: { ich:"brauche", du:"brauchst", er:"braucht", wir:"brauchen", ihr:"braucht", sie_pl:"brauchen" },
+
+suchen: { ich:"suche", du:"suchst", er:"sucht", wir:"suchen", ihr:"sucht", sie_pl:"suchen" },
+
+nehmen: { ich:"nehme", du:"nimmst", er:"nimmt", wir:"nehmen", ihr:"nehmt", sie_pl:"nehmen" }
+
+};
+
+const VERB_FORM_MAP = {};
+
+Object.keys(VERB_TABLE).forEach(verb => {
+
+Object.keys(VERB_TABLE[verb]).forEach(person => {
+
+const form = VERB_TABLE[verb][person];
+
+(VERB_FORM_MAP[form] = VERB_FORM_MAP[form] || []).push({ verb, person });
+
+});
+
+});
+
+const PRONOUN_PERSONS = {
+
+ich:["ich"], du:["du"], er:["er"], sie:["er","sie_pl"], es:["er"],
+
+wir:["wir"], ihr:["ihr"]
+
+};
+
+const GENDERS = {
+
+kaffee:"der", tee:"der", kuchen:"der", bahnhof:"der", mann:"der", lehrer:"der", student:"der", euro:"der",
+
+frau:"die", schwester:"die", familie:"die", größe:"die", farbe:"die", jacke:"die", cola:"die",
+
+lehrerin:"die", studentin:"die", uhr:"die",
+
+wasser:"das", museum:"das", kind:"das"
+
+};
+
+function checkGrammar(said){
+
+const clean = said.toLowerCase().replace(/[.,!?]/g,"");
+
+const tokens = clean.split(/\s+/).filter(Boolean);
+
+const errors = [];
+
+const firstWord = tokens[0];
+
+if (firstWord && VERB_FORM_MAP[firstWord]){
+
+const ichMatch = VERB_FORM_MAP[firstWord].some(m => m.person === "ich");
+
+if (ichMatch){
+
+errors.push("✏️ W niemieckim nie można pominąć zaimka: zacznij od „Ich " + firstWord + "…”, a nie samo „" + firstWord + "…”.");
+
+}
+
+}
+
+for (let i = 0; i < tokens.length - 1; i++){
+
+const pron = tokens[i];
+
+const next = tokens[i+1];
+
+const expected = PRONOUN_PERSONS[pron];
+
+if (!expected) continue;
+
+const matches = VERB_FORM_MAP[next];
+
+if (!matches) continue;
+
+const isCorrect = matches.some(m => expected.includes(m.person));
+
+if (!isCorrect){
+
+const verb = matches[0].verb;
+
+const correctForm = VERB_TABLE[verb][expected[0]];
+
+errors.push("✏️ „" + pron + " " + next + "” → powinno być „" + pron + " " + correctForm + "” (czasownik „" + verb + "”).");
+
+}
+
+}
+
+for (let i = 0; i < tokens.length - 1; i++){
+
+const art = tokens[i];
+
+const noun = tokens[i+1];
+
+if (["der","die","das"].includes(art) && GENDERS[noun] && GENDERS[noun] !== art){
+
+errors.push("✏️ „" + art + " " + noun + "” → powinno być „" + GENDERS[noun] + " " + noun + "”.");
+
+}
+
+}
+
+return errors;
+
+}
+
+// ---------- STAN ----------
+
+let currentMode = "dialog"; // dialog, begruessung, vorstellung, alphabet, merke
+
+let stepIndex = 0;
+
+let lastText = "";
+
+let recognition = null;
+
+let listening = false;
 
 const transcriptEl = document.getElementById("transcript");
 
-const progressEl = document.getElementById("progress");
+const contentEl = document.getElementById("content");
 
-function updateScreen(){
+const statusEl = document.getElementById("statusLine");
 
-questionEl.textContent = steps[currentStep].question;
+const boothTitle = document.getElementById("boothTitle");
 
-progressEl.textContent =
+const micBtn = document.getElementById("micBtn");
 
-"Aufgabe " + (currentStep+1) +
+const micWrap = document.getElementById("micWrap");
 
-" von " + steps.length;
+const textInput = document.getElementById("textInput");
 
-resultEl.textContent = "";
+const sendBtn = document.getElementById("sendBtn");
 
-transcriptEl.textContent = "";
+const replayBtn = document.getElementById("replayBtn");
 
-}
+const resetBtn = document.getElementById("resetBtn");
 
-function speak(text){
+const supportWarning = document.getElementById("supportWarning");
 
-const utterance = new SpeechSynthesisUtterance(text);
+// ---------- SYNTEZA MOWY ----------
 
-utterance.lang = "de-DE";
+function speakGerman(text){
 
-utterance.rate = 0.9;
+lastText = text;
 
-speechSynthesis.speak(utterance);
+if (!("speechSynthesis" in window)) return;
 
-}
+speechSynthesis.cancel();
 
-function playQuestion(){
+const u = new SpeechSynthesisUtterance(text);
 
-speak(steps[currentStep].question);
+u.lang = "de-DE";
 
-}
+u.rate = 0.95;
 
-function normalize(text){
-
-return text
-
-.toLowerCase()
-
-.replace(/[.,!?]/g,"")
-
-.trim();
+speechSynthesis.speak(u);
 
 }
 
-function isCorrect(answer){
+// ---------- ROZPOZNAWANIE MOWY ----------
 
-answer = normalize(answer);
+const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
 
-for(let pattern of steps[currentStep].patterns){
+if (!SR) {
 
-if(answer.includes(normalize(pattern))){
+supportWarning.style.display = "block";
 
-return true;
+micBtn.disabled = true;
 
-}
+} else {
 
-}
-
-return false;
-
-}
-
-function success(){
-
-resultEl.className = "correct";
-
-resultEl.textContent = "✓ Sehr gut!";
-
-speak("Sehr gut!");
-
-setTimeout(()=>{
-
-currentStep++;
-
-if(currentStep >= steps.length){
-
-questionEl.textContent =
-
-"Herzlichen Glückwunsch! Du hast die Lektion geschafft.";
-
-progressEl.textContent = "";
-
-resultEl.className = "correct";
-
-resultEl.textContent = "Lektion beendet.";
-
-speak("Herzlichen Glückwunsch. Du hast die Lektion geschafft.");
-
-return;
-
-}
-
-updateScreen();
-
-},2000);
-
-}
-
-function fail(){
-
-resultEl.className = "wrong";
-
-resultEl.textContent = "✗ Bitte versuche es noch einmal.";
-
-speak("Bitte versuche es noch einmal.");
-
-}
-
-function startRecognition(){
-
-const SpeechRecognition =
-
-window.SpeechRecognition ||
-
-window.webkitSpeechRecognition;
-
-if(!SpeechRecognition){
-
-alert("Diese Funktion funktioniert in Google Chrome.");
-
-return;
-
-}
-
-const recognition = new SpeechRecognition();
+recognition = new SR();
 
 recognition.lang = "de-DE";
 
 recognition.interimResults = false;
 
-recognition.maxAlternatives = 3;
+recognition.maxAlternatives = 1;
 
-recognition.start();
+recognition.onstart = () => {
 
-recognition.onresult = function(event){
+listening = true;
 
-let answer =
+micWrap.classList.add("listening");
 
-event.results[0][0].transcript;
+micBtn.classList.add("on");
 
-transcriptEl.textContent =
-
-"Du: " + answer;
-
-if(isCorrect(answer)){
-
-success();
-
-}else{
-
-fail();
-
-}
+setStatus("Słucham... mów teraz po niemiecku.", "live");
 
 };
 
-recognition.onerror = function(){
+recognition.onend = () => {
 
-fail();
+listening = false;
+
+micWrap.classList.remove("listening");
+
+micBtn.classList.remove("on");
+
+};
+
+recognition.onerror = (e) => {
+
+setStatus("Nie udało się rozpoznać mowy (" + e.error + "). Spróbuj znowu albo wpisz tekst.", "err");
+
+};
+
+recognition.onresult = (e) => {
+
+const said = e.results[0][0].transcript;
+
+handleStudentInput(said);
 
 };
 
 }
 
-function restartLesson(){
+micBtn.addEventListener("click", () => {
 
-speechSynthesis.cancel();
+if (!recognition) return;
 
-currentStep = 0;
+if (listening) { recognition.stop(); return; }
 
-updateScreen();
+try { recognition.start(); } catch(err){ }
 
-speak("Willkommen zur ersten Lektion.");
+});
+
+sendBtn.addEventListener("click", () => {
+
+const v = textInput.value.trim();
+
+if (!v) return;
+
+textInput.value = "";
+
+handleStudentInput(v);
+
+});
+
+textInput.addEventListener("keydown", (e) => {
+
+if (e.key === "Enter") sendBtn.click();
+
+});
+
+replayBtn.addEventListener("click", () => {
+
+if (lastText) speakGerman(lastText);
+
+});
+
+resetBtn.addEventListener("click", () => {
+
+if (currentMode === "dialog") {
+
+i = 0;
+
+transcriptEl.innerHTML = "";
+
+ask();
+
+} else {
+
+renderMode();
 
 }
 
-updateScreen();
+});
 
-speak("Willkommen zur ersten Lektion.");
+// ---------- UI: dymki ----------
+
+function addBubble(kind, text, plText){
+
+const div = document.createElement("div");
+
+div.className = "bubble " + kind;
+
+div.textContent = text;
+
+if (plText){
+
+const small = document.createElement("span");
+
+small.className = "pl";
+
+small.textContent = plText;
+
+div.appendChild(small);
+
+}
+
+transcriptEl.appendChild(div);
+
+transcriptEl.scrollTop = transcriptEl.scrollHeight;
+
+return div;
+
+}
+
+function setStatus(text, mode){
+
+statusEl.textContent = text;
+
+statusEl.className = "status-line" + (mode ? " " + mode : "");
+
+}
+
+function setSuggestions(list){
+
+// (opcjonalnie można dodać chipsy)
+
+}
+
+function botSay(text, pl){
+
+addBubble("bot", text, pl);
+
+speakGerman(text);
+
+}
+
+// ---------- LOGIKA: tryb dialogowy (Lekcja 1) ----------
+
+let i = 0;
+
+function bubble(cls,txt){
+
+addBubble(cls === "bot" ? "bot" : cls === "student" ? "student" : "feedback", txt, "");
+
+}
+
+function normalize(t){
+
+return t.toLowerCase().replace(/[.,!?]/g,"").trim();
+
+}
+
+function ask(){
+
+if (i >= lesson.length){
+
+addBubble("feedback", "🎉 Lektion beendet! · Koniec lekcji!");
+
+speakGerman("Die Lektion ist beendet.");
+
+setStatus("Rozmowa zakończona. Możesz zacząć od nowa (↺ Nowa rozmowa).");
+
+return;
+
+}
+
+const step = lesson[i];
+
+addBubble("bot", step.q, step.plQ);
+
+speakGerman(step.q);
+
+}
+
+function handleDialog(ans){
+
+addBubble("student", ans);
+
+const a = normalize(ans);
+
+const step = lesson[i];
+
+const ok = step.exp.some(e => a.includes(e));
+
+const errors = checkGrammar(ans);
+
+errors.forEach(msg => addBubble("feedback fix", msg));
+
+if (ok){
+
+addBubble("feedback good", "✅ " + step.ok);
+
+i++;
+
+setTimeout(ask, errors.length ? 1600 : 1100);
+
+} else {
+
+addBubble("feedback fix", "❌ " + step.retry);
+
+speakGerman(step.retry);
+
+}
+
+}
+
+// ---------- LOGIKA: swobodna rozmowa (pytania użytkownika) ----------
+
+function freeReply(said){
+
+const errors = checkGrammar(said);
+
+errors.forEach(msg => addBubble("feedback fix", msg));
+
+const lower = said.toLowerCase();
+
+const rule = FREE_RULES.find(r => r.test.some(t => lower.includes(t)));
+
+const chosen = rule || FREE_DEFAULT;
+
+setTimeout(() => botSay(chosen.reply, chosen.pl), errors.length ? 1500 : 700);
+
+}
+
+function handleStudentInput(said){
+
+addBubble("student", said);
+
+setStatus("Rozpoznano: „" + said + "”");
+
+if (currentMode === "dialog"){
+
+handleDialog(said);
+
+} else {
+
+freeReply(said);
+
+}
+
+}
+
+// ---------- LOGIKA: tryby lekcji (bez dialogu etapowego) ----------
+
+function renderMode(){
+
+document.querySelectorAll(".channel-btn").forEach(b => {
+
+b.classList.toggle("active", b.dataset.mode === currentMode);
+
+});
+
+if (currentMode === "dialog"){
+
+boothTitle.innerHTML = "Aktywny dialog głosowy<small>Pytaj i odpowiadaj po niemiecku — wszystko w ramach Lekcji 1</small>";
+
+transcriptEl.innerHTML = "";
+
+contentEl.innerHTML = "";
+
+setStatus("Naciśnij mikrofon i odpowiedz na pytanie. Możesz też zadawać pytania po niemiecku.");
+
+i = 0;
+
+ask();
+
+return;
+
+}
+
+const d = data[currentMode];
+
+boothTitle.innerHTML = d.title + "<small>" + d.subtitle + "</small>";
+
+transcriptEl.innerHTML = "";
+
+contentEl.innerHTML = "";
+
+if (currentMode === "begruessung"){
+
+const block = document.createElement("div");
+
+block.className = "panel-block";
+
+block.innerHTML = '<div class="section-title">Teil 1</div><div class="grid-2"><div><strong>Wir begrüßen uns</strong><br>Wir sagen verschiedene Grüße — je nach Tageszeit.</div><div class="pill-row"></div></div>';
+
+const row = block.querySelector(".pill-row");
+
+d.phrases.forEach(p=>{
+
+const btn = document.createElement("button");
+
+btn.className = "pill";
+
+btn.textContent = p;
+
+btn.onclick = ()=>speakGerman(p);
+
+row.appendChild(btn);
+
+});
+
+contentEl.appendChild(block);
+
+const table = document.createElement("div");
+
+table.className = "panel-block";
+
+table.innerHTML = '<div class="section-title">Wann używać</div>';
+
+const tbl = document.createElement("table");
+
+tbl.className="info-table";
+
+tbl.innerHTML = '<thead><tr><th>Situation</th><th>Gruß</th><th>Wann wird er in Deutschland verwendet?</th></tr></thead>';
+
+const tb = document.createElement("tbody");
+
+d.intro.forEach(r=>{
+
+const tr=document.createElement("tr");
+
+tr.innerHTML = `<td>${r[0]}</td><td><strong>${r[1]}</strong></td><td>${r[2]}</td>`;
+
+tb.appendChild(tr);
+
+});
+
+tbl.appendChild(tb);
+
+table.appendChild(tbl);
+
+contentEl.appendChild(table);
+
+addBubble("system", "— kliknij dowolne wyrażenie, aby je usłyszeć —");
+
+setStatus("Pozdrowienia: Guten Morgen, Guten Tag, Guten Abend, Hallo, Tschüss.");
+
+} else if (currentMode === "vorstellung"){
+
+const block = document.createElement("div");
+
+block.className = "panel-block";
+
+block.innerHTML = '<div class="section-title">Teil 2</div><strong>Ich stelle mich vor</strong><div style="margin-top:.5rem">Wie stellen wir uns vor? Hier sind wichtige Sätze.</div>';
+
+const row = document.createElement("div");
+
+row.className="pill-row";
+
+d.phrases.forEach(p=>{
+
+const btn=document.createElement("button");
+
+btn.className="pill";
+
+btn.textContent=p;
+
+btn.onclick=()=>speakGerman(p);
+
+row.appendChild(btn);
+
+});
+
+block.appendChild(row);
+
+contentEl.appendChild(block);
+
+addBubble("bot", "Hallo!");
+
+addBubble("bot", "Wie heißt du?");
+
+addBubble("bot", "Ich heiße Lena.");
+
+addBubble("bot", "Und du?");
+
+addBubble("bot", "Ich heiße Max.");
+
+addBubble("bot", "Guten Tag.");
+
+addBubble("bot", "Wie heißen Sie?");
+
+addBubble("bot", "Ich heiße Thomas.");
+
+addBubble("bot", "Und Sie?");
+
+addBubble("bot", "Ich heiße Julia.");
+
+setStatus("Przykłady: Ich heiße..., Mein Name ist..., Ich bin...");
+
+} else if (currentMode === "alphabet"){
+
+const block = document.createElement("div");
+
+block.className = "panel-block";
+
+block.innerHTML = '<div class="section-title">Teil 3</div><strong>Das deutsche Alphabet</strong><div style="margin-top:.5rem">Klicken Sie auf einen Buchstaben — dann hören Sie die deutsche Aussprache!</div>';
+
+const grid = document.createElement("div");
+
+grid.className="alphabet-grid";
+
+d.letters.forEach(l=>{
+
+const b=document.createElement("button");
+
+b.className="letter-btn";
+
+b.textContent=l;
+
+b.onclick=()=>speakGerman(l);
+
+grid.appendChild(b);
+
+});
+
+block.appendChild(grid);
+
+contentEl.appendChild(block);
+
+addBubble("system", "A, B, C, D ... / Ä, Ö, Ü, ß");
+
+setStatus("Kliknij literę, aby usłyszeć wymowę.");
+
+} else if (currentMode === "merke"){
+
+const block = document.createElement("div");
+
+block.className = "panel-block merke";
+
+block.innerHTML = '<div class="section-title">Merken</div><strong>Was kann ich jetzt?</strong>';
+
+d.merks.forEach(m=>{
+
+const c=document.createElement("div");
+
+c.className="merke-card";
+
+c.textContent=m;
+
+block.appendChild(c);
+
+});
+
+contentEl.appendChild(block);
+
+setStatus("Powtórz najważniejsze zwroty i sprawdź, co już umiesz.");
+
+}
+
+}
+
+// ---------- nawigacja ----------
+
+document.querySelectorAll(".channel-btn").forEach(btn => {
+
+btn.addEventListener("click", () => {
+
+currentMode = btn.dataset.mode;
+
+renderMode();
+
+});
+
+});
+
+// ---------- start ----------
+
+currentMode = "dialog";
+
+renderMode();
+
+})();
 
 </script>
 
