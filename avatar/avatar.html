@@ -169,7 +169,79 @@
       );
 
     scene.add(ambientLight);
+const deskGeometry = new THREE.BoxGeometry(
+  2.2,
+  0.08,
+  0.9
+);
 
+const deskMaterial = new THREE.MeshStandardMaterial({
+  color: 0x8b5a2b,
+  roughness: 0.7,
+  metalness: 0.1
+});
+
+const desk = new THREE.Mesh(
+  deskGeometry,
+  deskMaterial
+);
+
+desk.position.set(
+  0,
+  0.85,
+  0.25
+);
+
+scene.add(desk);
+    const frontGeometry = new THREE.BoxGeometry(
+  2.2,
+  0.75,
+  0.05
+);
+
+const frontMaterial = new THREE.MeshStandardMaterial({
+  color: 0x6d4423
+});
+
+const front = new THREE.Mesh(
+  frontGeometry,
+  frontMaterial
+);
+
+front.position.set(
+  0,
+  0.47,
+  0.67
+);
+
+scene.add(front);
+    const legGeometry = new THREE.BoxGeometry(
+  0.08,
+  0.8,
+  0.08
+);
+
+const legMaterial = new THREE.MeshStandardMaterial({
+  color: 0x5c3b20
+});
+
+[
+  [-1.02, 0.45, -0.15],
+  [ 1.02, 0.45, -0.15],
+  [-1.02, 0.45,  0.60],
+  [ 1.02, 0.45,  0.60]
+].forEach(pos => {
+
+  const leg = new THREE.Mesh(
+    legGeometry,
+    legMaterial
+  );
+
+  leg.position.set(...pos);
+
+  scene.add(leg);
+
+});
     const controls =
       new OrbitControls(
         camera,
