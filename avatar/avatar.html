@@ -1,13 +1,11 @@
 <!DOCTYPE html>
 <html lang="de">
-
 <head>
   <meta charset="UTF-8" />
   <title>Nele 3D</title>
 
   <style>
-    html,
-    body {
+    html, body {
       width: 100%;
       height: 100%;
     }
@@ -60,7 +58,6 @@
 </head>
 
 <body>
-
   <div id="info">Nele 3D wird geladen...</div>
 
   <script type="module">
@@ -75,35 +72,12 @@
     const camera = new THREE.PerspectiveCamera(30, window.innerWidth / window.innerHeight, 0.1, 100);
     camera.position.set(0, 1.42, 2.15);
 
-    const renderer = new THREE.WebGLRenderer({
-      antialias: true,
-      alpha: true
-    });
-
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     renderer.setClearColor(0x000000, 0);
     renderer.outputColorSpace = THREE.SRGBColorSpace;
     document.body.appendChild(renderer.domElement);
-
-    const keyLight = new THREE.DirectionalLight(0xffffff, 2.2);
-    keyLight.position.set(1.5, 2.5, 3);
-    scene.add(keyLight);
-
-    const fillLight = new THREE.DirectionalLight(0x9ec9ff, 1.2);
-    fillLight.position.set(-2, 1.4, 2);
-    scene.add(fillLight);
-
-    const ambientLight = new THREE.AmbientLight(0xffffff, 1.25);
-    scene.add(ambientLight);
-
-    const warmLight = new THREE.PointLight(0xffc980, 1.1, 8);
-    warmLight.position.set(-1.35, 1.15, 1.3);
-    scene.add(warmLight);
-
-    const blueAccent = new THREE.PointLight(0x3c86ff, 0.6, 8);
-    blueAccent.position.set(1.4, 1.5, 1.8);
-    scene.add(blueAccent);
 
     const controls = new OrbitControls(camera, renderer.domElement);
     controls.target.set(0, 1.35, 0);
@@ -257,6 +231,36 @@
       return group;
     }
 
+    const roomBack = new THREE.Mesh(
+      new THREE.PlaneGeometry(8, 5),
+      new THREE.MeshStandardMaterial({
+        color: 0x0b1730,
+        roughness: 1,
+        metalness: 0
+      })
+    );
+    roomBack.position.set(0, 2.1, -2.6);
+    scene.add(roomBack);
+
+    const roomGlow = new THREE.PointLight(0x3c86ff, 1.2, 10);
+    roomGlow.position.set(0, 1.8, -1.5);
+    scene.add(roomGlow);
+
+    const warmBackGlow = new THREE.PointLight(0xffc980, 0.9, 8);
+    warmBackGlow.position.set(-1.2, 1.4, -1.4);
+    scene.add(warmBackGlow);
+
+    const ambientLight = new THREE.AmbientLight(0xffffff, 1.4);
+    scene.add(ambientLight);
+
+    const keyLight = new THREE.DirectionalLight(0xffffff, 2.2);
+    keyLight.position.set(1.5, 2.5, 3);
+    scene.add(keyLight);
+
+    const fillLight = new THREE.DirectionalLight(0x9ec9ff, 1.0);
+    fillLight.position.set(-2, 1.4, 2);
+    scene.add(fillLight);
+
     const floor = new THREE.Mesh(
       new THREE.CircleGeometry(2.6, 64),
       new THREE.MeshStandardMaterial({ color: 0x1a2436, roughness: 1 })
@@ -315,14 +319,18 @@
     picture.position.set(-0.15, 1.9, -1.35);
     scene.add(picture);
 
+    let currentVrm = null;
+    let mouthValue = 0;
+    let emotion = "neutral";
+    let nodRequested = false;
+    let nodTime = 0;
+
     async function checkSpeakingStatus() {
       try {
         const response = await fetch("https://nele-backend.onrender.com/status");
         const data = await response.json();
-
         mouthValue = Number(data.mouth || 0);
         emotion = data.emotion || "neutral";
-
         if (data.nod) {
           nodRequested = true;
           nodTime = 0;
@@ -338,7 +346,6 @@
       "../assets/avatars/Nele.vrm",
       (gltf) => {
         const vrm = gltf.userData.vrm;
-
         VRMUtils.removeUnnecessaryVertices(gltf.scene);
         VRMUtils.removeUnnecessaryJoints(gltf.scene);
 
@@ -359,9 +366,7 @@
         const info = document.getElementById("info");
         info.innerText = "Nele ist bereit.";
 
-        setTimeout(function () {
-          info.classList.add("ready");
-        }, 900);
+        setTimeout(() => info.classList.add("ready"), 900);
       },
       (progress) => {
         console.log("Ładowanie Nele:", progress);
@@ -390,10 +395,8 @@
 
       if (currentVrm) {
         currentVrm.update(delta);
-
         const breath = Math.sin(elapsed * 2) * 0.008;
         currentVrm.scene.position.y = -0.15 + breath;
-
         currentVrm.scene.rotation.y = Math.sin(elapsed * 0.7) * 0.02;
 
         setMouth(mouthValue);
@@ -445,6 +448,5 @@
       renderer.setSize(window.innerWidth, window.innerHeight);
     });
   </script>
-
 </body>
 </html>
