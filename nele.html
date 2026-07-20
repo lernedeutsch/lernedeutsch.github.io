@@ -437,6 +437,341 @@
         white-space: normal;
       }
     }
+    /* =========================================
+   CAŁA STRONA NELE W JEDNYM EKRANIE
+========================================= */
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow: hidden;
+}
+
+/*
+Główny kontener strony.
+Obsługujemy obie możliwe nazwy:
+.page oraz .nele-page
+*/
+
+.page,
+.nele-page {
+  width: 100%;
+  height: 100vh;
+  height: 100dvh;
+
+  min-height: 0;
+
+  padding:
+    12px
+    clamp(14px, 2vw, 30px)
+    10px;
+
+  display: flex;
+  flex-direction: column;
+
+  overflow: hidden;
+}
+
+
+/* =========================================
+   NAGŁÓWEK
+========================================= */
+
+.page-header {
+  flex: 0 0 auto;
+
+  margin: 0 0 10px;
+  padding: 0;
+}
+
+.page-header h1 {
+  margin: 0;
+
+  font-size:
+    clamp(
+      30px,
+      3.3vw,
+      50px
+    );
+
+  line-height: 1.05;
+}
+
+.page-header p {
+  margin:
+    5px
+    0
+    0;
+
+  font-size:
+    clamp(
+      15px,
+      1.35vw,
+      20px
+    );
+
+  line-height: 1.25;
+}
+
+
+/* =========================================
+   NELE I CZAT
+========================================= */
+
+.main-layout {
+  flex: 1 1 auto;
+
+  width: 100%;
+  min-height: 0;
+
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 1.05fr)
+    minmax(0, 0.95fr);
+
+  gap:
+    clamp(
+      10px,
+      1.4vw,
+      18px
+    );
+
+  overflow: hidden;
+}
+
+.avatar-panel,
+.chat-panel {
+  width: 100%;
+  height: 100%;
+
+  min-width: 0;
+  min-height: 0;
+
+  overflow: hidden;
+}
+
+.avatar-panel iframe,
+iframe.nele-avatar {
+  display: block;
+
+  width: 100%;
+  height: 100%;
+
+  min-height: 0;
+
+  border: 0;
+}
+
+
+/* =========================================
+   CZAT
+========================================= */
+
+.chat-panel {
+  display: flex;
+  flex-direction: column;
+}
+
+.messages,
+.chat-messages {
+  flex: 1 1 auto;
+  min-height: 0;
+
+  overflow-y: auto;
+}
+
+.message-form,
+.chat-form {
+  flex: 0 0 auto;
+}
+
+
+/* =========================================
+   PANEL MIKROFONU
+========================================= */
+
+.voice-controls,
+.controls-panel,
+.microphone-panel {
+  flex: 0 0 auto;
+
+  min-height: 0;
+
+  margin-top: 10px;
+
+  padding:
+    8px
+    18px;
+
+  text-align: center;
+}
+
+.microphone-button {
+  width: 82px;
+  height: 82px;
+
+  min-width: 82px;
+  min-height: 82px;
+}
+
+.microphone-button svg,
+.microphone-button img {
+  width: 36px;
+  height: 36px;
+}
+
+.microphone-label {
+  margin-top: 4px;
+
+  font-size: 14px;
+  line-height: 1.2;
+}
+
+.tip {
+  margin:
+    5px
+    0
+    0;
+
+  font-size: 13px;
+  line-height: 1.2;
+}
+
+
+/* =========================================
+   DOLNE PRZYCISKI
+========================================= */
+
+.bottom-buttons,
+.action-buttons,
+.footer-buttons {
+  flex: 0 0 auto;
+
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+
+  gap: 8px;
+
+  margin-top: 7px;
+}
+
+.bottom-buttons button,
+.action-buttons button,
+.footer-buttons button {
+  min-height: 36px;
+
+  padding:
+    7px
+    13px;
+
+  font-size: 14px;
+}
+
+
+/* =========================================
+   NIŻSZE EKRANY KOMPUTERA
+========================================= */
+
+@media (max-height: 820px) {
+  .page,
+  .nele-page {
+    padding-top: 8px;
+    padding-bottom: 6px;
+  }
+
+  .page-header {
+    margin-bottom: 7px;
+  }
+
+  .page-header h1 {
+    font-size:
+      clamp(
+        27px,
+        3vw,
+        42px
+      );
+  }
+
+  .page-header p {
+    margin-top: 3px;
+    font-size: 15px;
+  }
+
+  .voice-controls,
+  .controls-panel,
+  .microphone-panel {
+    margin-top: 7px;
+    padding-top: 5px;
+    padding-bottom: 4px;
+  }
+
+  .microphone-button {
+    width: 68px;
+    height: 68px;
+
+    min-width: 68px;
+    min-height: 68px;
+  }
+
+  .microphone-button svg,
+  .microphone-button img {
+    width: 30px;
+    height: 30px;
+  }
+
+  .tip {
+    margin-top: 3px;
+    font-size: 12px;
+  }
+}
+
+
+/* =========================================
+   TELEFON I TABLET
+========================================= */
+
+@media (max-width: 850px) {
+  body {
+    overflow-y: auto;
+  }
+
+  .page,
+  .nele-page {
+    height: auto;
+    min-height: 100dvh;
+
+    overflow: visible;
+  }
+
+  .main-layout {
+    display: flex;
+    flex-direction: column;
+
+    overflow: visible;
+  }
+
+  .avatar-panel {
+    height: 46vh;
+    min-height: 320px;
+  }
+
+  .chat-panel {
+    min-height: 420px;
+  }
+  }
   </style>
 </head>
 <body>
