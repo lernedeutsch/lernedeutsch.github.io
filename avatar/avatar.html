@@ -5,7 +5,8 @@
   <title>Nele 3D</title>
 
   <style>
-    html, body {
+    html,
+    body {
       width: 100%;
       height: 100%;
     }
@@ -110,12 +111,154 @@
     let blinkTimer = 0;
     let nextBlinkTime = 2 + Math.random() * 3;
 
+    function makeDesk(width, height, depth, color) {
+      const geom = new THREE.BoxGeometry(width, height, depth);
+      const mat = new THREE.MeshStandardMaterial({
+        color,
+        roughness: 0.9,
+        metalness: 0.05
+      });
+      return new THREE.Mesh(geom, mat);
+    }
+
+    function makeLamp() {
+      const group = new THREE.Group();
+
+      const base = new THREE.Mesh(
+        new THREE.CylinderGeometry(0.09, 0.11, 0.03, 24),
+        new THREE.MeshStandardMaterial({ color: 0x6c4b2e, roughness: 0.8 })
+      );
+      base.position.y = 0.015;
+      group.add(base);
+
+      const stem = new THREE.Mesh(
+        new THREE.CylinderGeometry(0.018, 0.018, 0.38, 16),
+        new THREE.MeshStandardMaterial({ color: 0x8c6d4a, roughness: 0.7 })
+      );
+      stem.position.y = 0.21;
+      group.add(stem);
+
+      const shade = new THREE.Mesh(
+        new THREE.ConeGeometry(0.16, 0.24, 24, 1, true),
+        new THREE.MeshStandardMaterial({
+          color: 0xf1d7a8,
+          emissive: 0xffdca0,
+          emissiveIntensity: 0.35,
+          side: THREE.DoubleSide
+        })
+      );
+      shade.position.y = 0.43;
+      shade.rotation.x = Math.PI;
+      group.add(shade);
+
+      const bulb = new THREE.PointLight(0xffd38a, 1.7, 2.5);
+      bulb.position.set(0, 0.46, 0);
+      group.add(bulb);
+
+      return group;
+    }
+
+    function makeBookshelf() {
+      const group = new THREE.Group();
+
+      const frameMat = new THREE.MeshStandardMaterial({
+        color: 0x4f3a25,
+        roughness: 0.95
+      });
+
+      const side1 = new THREE.Mesh(new THREE.BoxGeometry(0.06, 0.95, 0.28), frameMat);
+      side1.position.set(-0.23, 0.48, 0);
+      group.add(side1);
+
+      const side2 = new THREE.Mesh(new THREE.BoxGeometry(0.06, 0.95, 0.28), frameMat);
+      side2.position.set(0.23, 0.48, 0);
+      group.add(side2);
+
+      const top = new THREE.Mesh(new THREE.BoxGeometry(0.52, 0.06, 0.28), frameMat);
+      top.position.set(0, 0.93, 0);
+      group.add(top);
+
+      const bottom = new THREE.Mesh(new THREE.BoxGeometry(0.52, 0.06, 0.28), frameMat);
+      bottom.position.set(0, 0.03, 0);
+      group.add(bottom);
+
+      const shelf1 = new THREE.Mesh(new THREE.BoxGeometry(0.46, 0.04, 0.26), frameMat);
+      shelf1.position.set(0, 0.33, 0);
+      group.add(shelf1);
+
+      const shelf2 = new THREE.Mesh(new THREE.BoxGeometry(0.46, 0.04, 0.26), frameMat);
+      shelf2.position.set(0, 0.62, 0);
+      group.add(shelf2);
+
+      const colors = [0x8b3d3d, 0x355f8f, 0x5b8c4a, 0xc28a2b, 0x7b4fc0, 0x2d6fb2];
+
+      for (let i = 0; i < 8; i++) {
+        const book = new THREE.Mesh(
+          new THREE.BoxGeometry(0.04, 0.16 + (i % 3) * 0.03, 0.18),
+          new THREE.MeshStandardMaterial({ color: colors[i % colors.length] })
+        );
+        book.position.set(-0.17 + i * 0.05, 0.37 + (i % 2) * 0.02, 0.01);
+        group.add(book);
+      }
+
+      for (let i = 0; i < 7; i++) {
+        const book = new THREE.Mesh(
+          new THREE.BoxGeometry(0.04, 0.14 + (i % 2) * 0.04, 0.18),
+          new THREE.MeshStandardMaterial({ color: colors[(i + 2) % colors.length] })
+        );
+        book.position.set(-0.16 + i * 0.05, 0.67 + (i % 2) * 0.02, 0.01);
+        group.add(book);
+      }
+
+      return group;
+    }
+
+    const roomLight = new THREE.PointLight(0x2e78ff, 0.7, 8);
+    roomLight.position.set(0, 1.8, 2.4);
+    scene.add(roomLight);
+
+    const warmLampGlow = new THREE.PointLight(0xffcc88, 1.2, 4);
+    warmLampGlow.position.set(-1.7, 1.15, 1.2);
+    scene.add(warmLampGlow);
+
+    const deskFront = makeDesk(1.25, 0.16, 0.42, 0x3c2c1e);
+    deskFront.position.set(0, 0.42, 0.62);
+    scene.add(deskFront);
+
+    const deskTop = makeDesk(1.25, 0.05, 0.42, 0x5a4029);
+    deskTop.position.set(0, 0.52, 0.62);
+    scene.add(deskTop);
+
+    const deskLeftLeg = makeDesk(0.07, 0.75, 0.07, 0x2b2118);
+    deskLeftLeg.position.set(-0.54, 0.18, 0.62);
+    scene.add(deskLeftLeg);
+
+    const deskRightLeg = makeDesk(0.07, 0.75, 0.07, 0x2b2118);
+    deskRightLeg.position.set(0.54, 0.18, 0.62);
+    scene.add(deskRightLeg);
+
+    const deskBack = makeDesk(1.25, 0.18, 0.08, 0x2d2218);
+    deskBack.position.set(0, 0.35, 0.42);
+    scene.add(deskBack);
+
+    const leftLampDesk = makeLamp();
+    leftLampDesk.position.set(-1.15, 0.0, -0.9);
+    leftLampDesk.scale.set(1.05, 1.05, 1.05);
+    scene.add(leftLampDesk);
+
+    const shelf = makeBookshelf();
+    shelf.position.set(1.1, 0.48, -1.18);
+    shelf.scale.set(1.2, 1.2, 1.2);
+    scene.add(shelf);
+
     async function checkSpeakingStatus() {
       try {
         const response = await fetch("https://nele-backend.onrender.com/status");
         const data = await response.json();
+
         mouthValue = Number(data.mouth || 0);
         emotion = data.emotion || "neutral";
+
         if (data.nod) {
           nodRequested = true;
           nodTime = 0;
@@ -136,7 +279,6 @@
         VRMUtils.removeUnnecessaryJoints(gltf.scene);
 
         currentVrm = vrm;
-
         VRMUtils.rotateVRM0(vrm);
 
         const leftUpperArm = currentVrm.humanoid?.getNormalizedBoneNode("leftUpperArm");
@@ -145,8 +287,8 @@
         if (leftUpperArm) leftUpperArm.rotation.z = -1.05;
         if (rightUpperArm) rightUpperArm.rotation.z = 1.05;
 
-        vrm.scene.position.set(0, -0.15, 0);
-        vrm.scene.scale.set(1.28, 1.28, 1.28);
+        vrm.scene.position.set(0, -0.32, 0.1);
+        vrm.scene.scale.set(1.34, 1.34, 1.34);
 
         scene.add(vrm.scene);
 
@@ -185,8 +327,9 @@
       if (currentVrm) {
         currentVrm.update(delta);
 
-        const breath = Math.sin(elapsed * 2) * 0.008;
-        currentVrm.scene.position.y = -0.15 + breath;
+        const breath = Math.sin(elapsed * 2) * 0.006;
+        currentVrm.scene.position.y = -0.32 + breath;
+
         currentVrm.scene.rotation.y = Math.sin(elapsed * 0.7) * 0.02;
 
         setMouth(mouthValue);
