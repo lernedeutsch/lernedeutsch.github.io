@@ -1649,15 +1649,23 @@ function speakGerman(text, options = {}) {
    ALFABET
 ================================================== */
 
-document.querySelectorAll("[data-speech]").forEach(button => {
-  button.addEventListener("click", () => {
-    const text = button.dataset.speech;
-    speakGerman(text, { rate:0.8 });
-  });
-});
-</script>
+const alphabetSpeed = 0.8;
 
-<!--
+document.querySelectorAll("[data-speech]").forEach(button => {
+
+  button.addEventListener("click", () => {
+
+    const text = button.dataset.speech;
+
+    speakGerman(text, {
+      rate: alphabetSpeed
+    });
+
+  });
+
+});
+
+</script>
 ====================================================
 ENDE DER DATEI lessons/A1/1.html
 
