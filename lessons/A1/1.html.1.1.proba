@@ -184,3 +184,76 @@ header.hero{
   font-size:13px;
   opacity:.9;
 }
+.part{
+  margin:34px 0 42px;
+}
+
+.part-head{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:baseline;
+  gap:12px;
+  margin-bottom:14px;
+}
+
+.part-num{
+  color:#f4c95d;
+  font:.82rem "JetBrains Mono",monospace;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+}
+
+.part-title{
+  margin:0;
+  color:#111820;
+  font:2rem "Kalam",cursive;
+}
+
+.card{
+  margin-top:14px;
+  padding:22px 22px 20px;
+  background:#f7f9fc;
+  border:1px solid #dce3ed;
+  border-radius:22px;
+  box-shadow:0 12px 30px rgba(0,0,0,.06);
+}
+
+.lead{
+  color:#111820;
+  font-size:1.04rem;
+}
+
+.grammar-box{
+  margin:24px 0;
+  padding:14px 16px;
+  background:#f9fbff;
+  border-left:4px solid #f4c95d;
+  border-radius:16px;
+}
+
+.intro-card{
+  min-height:180px;
+}
+
+.intro-icon{
+  margin-bottom:10px;
+  font-size:60px;
+}
+
+.intro-title{
+  margin:16px 0;
+  font-size:1.4rem;
+}
+
+.intro-text{
+  margin:12px 0;
+  color:#111820;
+  font-size:1.1rem;
+}
+
+.dialog-title{
+  margin:32px 0 16px;
+  color:#111820;
+  font-size:1.3rem;
+}
+
