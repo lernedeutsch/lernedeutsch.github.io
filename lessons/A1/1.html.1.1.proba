@@ -256,4 +256,70 @@ header.hero{
   color:#111820;
   font-size:1.3rem;
 }
+.gruss-tabelle{
+  width:100%;
+  margin:32px 0;
+  overflow:hidden;
+  background:#fff;
+  border:1px solid #dce3ed;
+  border-radius:16px;
+  border-collapse:separate;
+  border-spacing:0;
+}
+
+.gruss-tabelle th{
+  background:#f0f4f8;
+  color:#111820;
+  text-align:left;
+}
+
+.gruss-tabelle th,
+.gruss-tabelle td{
+  padding:20px 16px;
+  border-bottom:1px solid #dce3ed;
+}
+
+.gruss-tabelle tbody tr:last-child td{
+  border-bottom:none;
+}
+
+.greeting{
+  margin:12px 0;
+  font-size:1.4rem;
+}
+
+.gruss{
+  font-size:1.1rem;
+  font-weight:700;
+}
+
+.dialog{
+  display:grid;
+  gap:10px;
+}
+
+.bubble{
+  max-width:86%;
+  padding:12px 14px;
+  color:#111820;
+  border-radius:18px;
+}
+
+.marta{
+  background:#f0f4f8;
+}
+
+.tom{
+  margin-left:auto;
+  background:#fff8e1;
+}
+
+.speaker{
+  display:block;
+  margin-bottom:4px;
+  color:#b8860b;
+  font:.76rem "JetBrains Mono",monospace;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+}
 
