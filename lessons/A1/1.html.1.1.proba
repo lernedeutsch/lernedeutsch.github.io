@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Deutschkurs A1 — Lektion 1</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&family=Nunito+Sans:opsz,wght@6..12,400,600,700,800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#20324a;
+  --text:#111820;
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+
+body{
+  margin:0;
+  padding:0 0 60px;
+  background:var(--bg);
+  background-image:
+    radial-gradient(circle at 12% 10%,rgba(255,255,255,.05),transparent 35%),
+    radial-gradient(circle at 88% 90%,rgba(255,255,255,.05),transparent 40%);
+  color:var(--text);
+  font:400 1rem/1.6 "Nunito Sans",sans-serif;
+}
+
+.course-nav{
+  max-width:880px;
+  margin:40px auto 60px;
+  padding:0 20px;
+}
+
+.course-nav-title{
+  margin:0 0 24px;
+  color:var(--text);
+  text-align:center;
+  font:2.2rem "Kalam",cursive;
+}
+
+.course-section{
+  margin-bottom:16px;
+  padding:16px 18px 14px;
+  background:#f7f9fc;
+  border:1px solid #dce3ed;
+  border-radius:18px;
+}
+
+.section-title{
+  margin:0 0 12px;
+  color:var(--text);
+  font:1rem "JetBrains Mono",monospace;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+}
+
+.lesson-list{
+  display:grid;
+  gap:8px;
+  margin:0;
+  padding:0;
+  list-style:none;
+}
+
+.lesson-list a{
+  display:block;
+  padding:10px 12px;
+  color:var(--text);
+  text-decoration:none;
+  background:#fff;
+  border:1px solid #dce3ed;
+  border-radius:12px;
+  transition:background .15s,border-color .15s,transform .15s;
+}
+
+.lesson-list a:hover{
+  background:#f0f4f8;
+  border-color:#f4c95d;
+  color:#0a1220;
+  transform:translateX(4px);
+}
+
+section[id^="lektion"]{scroll-margin-top:40px}
+
+.wrap{
+  max-width:980px;
+  margin:0 auto;
+  padding:32px 20px 0;
+}
+
+#lektion1 .wrap{
+  padding:32px;
+  background:linear-gradient(135deg,#fff5e6,#ffe0b2);
+  border-radius:22px;
+}
+
+header.hero{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  gap:28px;
+  margin-bottom:36px;
+  padding:24px 0 36px;
+  border-bottom:2px dashed rgba(35,51,46,.18);
+}
+
+.hero-text{flex:1 1 340px}
+
+.eyebrow{
+  margin:0 0 10px;
+  color:#f4c95d;
+  font:.78rem "JetBrains Mono",monospace;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+}
+
+.lesson-title{
+  margin:0 0 14px;
+  color:var(--text);
+  font:700 2.7rem/1.12 "Kalam",cursive;
+}
+
+.hero-text p{
+  margin:0;
+  max-width:52ch;
+  color:#2a3b50;
+}
+
+.topics{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-top:18px;
+}
+
+.topics span{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:7px 12px;
+  color:var(--text);
+  background:#f0f4f8;
+  border:1px solid #dce3ed;
+  border-radius:999px;
+  font-size:.92rem;
+}
+
+.wheel-box{
+  flex:0 1 320px;
+  display:grid;
+  place-items:center;
+}
+
+.wheel-box svg{
+  width:100%;
+  max-width:320px;
+  height:auto;
+  filter:drop-shadow(0 16px 30px rgba(0,0,0,.18));
+}
+
+.month-label,
+.center-label,
+.center-sub{
+  fill:var(--text);
+  font-family:"JetBrains Mono",monospace;
+  text-anchor:middle;
+}
+
+.month-label{
+  font-size:13px;
+  opacity:.95;
+}
+
+.center-label{
+  font-size:18px;
+  font-weight:700;
+}
+
+.center-sub{
+  font-size:13px;
+  opacity:.9;
+}
