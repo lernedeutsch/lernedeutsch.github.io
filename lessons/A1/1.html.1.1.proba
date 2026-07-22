@@ -404,4 +404,77 @@ header.hero{
   border:2px solid #e5ddff;
   background:linear-gradient(180deg,#a88af5,#7958d8);
 }
+.summary-grid{
+  display:grid;
+  gap:12px;
+}
+
+.row{
+  display:grid;
+  grid-template-columns:180px 1fr;
+  align-items:start;
+  gap:14px;
+  padding:16px 18px;
+  background:#fff;
+  border:1px solid #dce3ed;
+  border-radius:14px;
+}
+
+.key{
+  color:#b8860b;
+  font:800 1.1rem "Nunito Sans",sans-serif;
+}
+
+.summary-text{
+  font-size:1.05rem;
+}
+
+.back-to-top{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:10px;
+  width:max-content;
+  margin:20px auto 0;
+  padding:12px 26px;
+  color:#111820;
+  background:#fff;
+  border:1px solid #dce3ed;
+  border-radius:999px;
+  text-decoration:none;
+  font:700 1rem "Nunito Sans",sans-serif;
+  transition:background .15s,border-color .15s;
+}
+
+.back-to-top:hover{
+  background:#f0f4f8;
+  border-color:#f4c95d;
+}
+
+.lesson-nav{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:space-between;
+  gap:10px;
+  margin-top:28px;
+  padding-top:24px;
+  border-top:2px dashed rgba(35,51,46,.18);
+  font:.9rem "JetBrains Mono",monospace;
+}
+
+.lesson-nav a{
+  padding:8px 16px;
+  color:#111820;
+  background:#fff;
+  border:1px solid #dce3ed;
+  border-radius:999px;
+  text-decoration:none;
+  transition:background .15s,border-color .15s;
+}
+
+.lesson-nav a:hover{
+  background:#f0f4f8;
+  border-color:#f4c95d;
+  color:#0a1220;
+}
 
