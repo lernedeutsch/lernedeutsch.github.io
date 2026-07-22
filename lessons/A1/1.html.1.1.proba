@@ -477,4 +477,134 @@ header.hero{
   border-color:#f4c95d;
   color:#0a1220;
 }
+<style>
+a:focus-visible,
+button:focus-visible,
+.alphabet-letter:focus-visible{
+  outline:3px solid #f4c95d;
+  outline-offset:3px;
+}
+
+@media (max-width:720px){
+  body{padding-bottom:30px}
+  .course-nav{margin:28px auto 38px}
+  .course-nav-title{font-size:1.8rem}
+  #lektion1 .wrap{padding:20px 14px;border-radius:16px}
+  header.hero{padding-top:12px}
+  .lesson-title{font-size:2.2rem}
+  .part-title{font-size:1.7rem}
+  .row{grid-template-columns:1fr}
+  .bubble{max-width:100%}
+  .card{padding:18px 14px}
+  .gruss-tabelle{display:block;overflow-x:auto}
+  .alphabet-letter{padding:12px 15px}
+  .training-buttons-wrapper{gap:7px;margin-top:26px}
+  .training-btn{
+    min-width:0;
+    min-height:52px;
+    padding:10px 7px;
+    gap:4px;
+    border-radius:16px;
+    font-size:.82rem;
+    white-space:normal;
+  }
+}
+
+@media (max-width:430px){
+  .training-buttons-wrapper{flex-wrap:wrap}
+  .training-btn{
+    flex:1 1 100%;
+    max-width:100%;
+    font-size:1rem;
+  }
+}
+
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,
+  *::before,
+  *::after{
+    animation-duration:.01ms!important;
+    animation-iteration-count:1!important;
+    transition-duration:.01ms!important;
+  }
+}
+</style>
+</head>
+
+<body id="seitenanfang">
+
+<nav class="course-nav" aria-label="Inhaltsverzeichnis des A1-Kurses">
+  <h2 class="course-nav-title">A1 — 1</h2>
+
+  <div class="course-section">
+    <h3 class="section-title">Erste Schritte</h3>
+
+    <ul class="lesson-list">
+      <li>
+        <a href="#lektion1">
+          Begrüßung, ich heiße …, das Alphabet
+        </a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<section class="part" id="lektion1">
+<div class="wrap">
+
+<header class="hero">
+
+  <div class="hero-text">
+
+    <p class="eyebrow">Deutschkurs A1 · 1 von 30</p>
+
+    <h1 class="lesson-title">
+      Guten Tag! — Begrüßung und Vorstellung
+    </h1>
+
+    <p>
+      Heute lernen wir: Wie begrüßen wir uns?
+      Wie stellen wir uns vor?
+      Und das deutsche Alphabet.
+    </p>
+
+    <div class="topics">
+      <span>1 · Begrüßung</span>
+      <span>2 · Vorstellung</span>
+      <span>3 · Alphabet</span>
+    </div>
+
+  </div>
+
+  <div class="wheel-box">
+
+    <svg viewBox="0 0 320 320" role="img"
+         aria-label="Begrüßungssymbol mit Händen und Wörtern">
+
+      <circle cx="160" cy="160" r="132"
+              fill="rgba(255,255,255,.05)"
+              stroke="rgba(35,51,46,.16)"/>
+
+      <circle cx="160" cy="160" r="70"
+              fill="#20324a"
+              stroke="rgba(35,51,46,.12)"/>
+
+      <text class="center-label" x="160" y="152">Hallo!</text>
+      <text class="center-sub" x="160" y="175">Guten Tag</text>
+
+      <text x="160" y="40" class="month-label" font-size="20">👋</text>
+      <text x="252" y="82" class="month-label" font-size="20">😊</text>
+      <text x="282" y="164" class="month-label" font-size="20">🗣️</text>
+      <text x="250" y="246" class="month-label" font-size="20">👤</text>
+      <text x="160" y="292" class="month-label" font-size="20">📖</text>
+      <text x="70" y="246" class="month-label" font-size="20">🎯</text>
+      <text x="38" y="164" class="month-label" font-size="20">✨</text>
+      <text x="70" y="82" class="month-label" font-size="20">🌟</text>
+
+    </svg>
+
+  </div>
+
+</header>
 
