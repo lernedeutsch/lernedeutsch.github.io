@@ -1,1 +1,1093 @@
+<!DOCTYPE html>
+
+<html lang="de">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Guten Tag! – Begrüßung und Vorstellung</title>
+
+<style>
+
+body {
+
+font-family: Arial, sans-serif;
+
+background: linear-gradient(135deg, #dbeafe, #fef9c3);
+
+margin: 0;
+
+padding: 20px;
+
+color: #111;
+
+}
+
+.container {
+
+max-width: 900px;
+
+margin: auto;
+
+background: white;
+
+border-radius: 20px;
+
+padding: 30px;
+
+box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+
+}
+
+h1 {
+
+text-align: center;
+
+color: #1d4ed8;
+
+margin: 0 0 10px;
+
+font-size: 32px;
+
+}
+
+.lesson-title {
+
+text-align: center;
+
+color: #0f766e;
+
+font-size: 20px;
+
+margin-bottom: 20px;
+
+}
+
+.tabs {
+
+display: flex;
+
+justify-content: center;
+
+gap: 10px;
+
+margin: 20px 0;
+
+flex-wrap: wrap;
+
+}
+
+.tab {
+
+padding: 10px 20px;
+
+border-radius: 12px;
+
+background: #eff6ff;
+
+color: #1e3a8a;
+
+cursor: pointer;
+
+font-size: 16px;
+
+border: none;
+
+}
+
+.tab.active {
+
+background: #1d4ed8;
+
+color: white;
+
+}
+
+.section {
+
+display: none;
+
+margin-top: 20px;
+
+}
+
+.section.active {
+
+display: block;
+
+}
+
+.card {
+
+background: #fff;
+
+border-radius: 20px;
+
+padding: 24px;
+
+box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+
+margin-bottom: 18px;
+
+}
+
+h2 {
+
+color: #0f2f57;
+
+margin: 0 0 12px;
+
+font-size: 24px;
+
+}
+
+p {
+
+margin: 0 0 12px;
+
+font-size: 16px;
+
+}
+
+.grid {
+
+display: grid;
+
+grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+
+gap: 12px;
+
+margin: 16px 0;
+
+}
+
+.box {
+
+background: #f4f8ff;
+
+padding: 14px;
+
+border-radius: 12px;
+
+font-size: 16px;
+
+}
+
+.table {
+
+width: 100%;
+
+border-collapse: collapse;
+
+margin: 16px 0;
+
+}
+
+.table th, .table td {
+
+border: 1px solid #ddd;
+
+padding: 10px;
+
+text-align: left;
+
+font-size: 15px;
+
+}
+
+.table th {
+
+background: #eff6ff;
+
+color: #1e3a8a;
+
+}
+
+.dialog {
+
+margin: 16px 0;
+
+}
+
+.dialog-line {
+
+display: flex;
+
+gap: 12px;
+
+align-items: flex-start;
+
+padding: 12px 0;
+
+border-bottom: 1px solid #eee;
+
+}
+
+.dialog-line:last-child {
+
+border-bottom: none;
+
+}
+
+.name {
+
+min-width: 110px;
+
+font-weight: 700;
+
+color: #0f2f57;
+
+}
+
+.text {
+
+flex: 1;
+
+font-size: 18px;
+
+line-height: 1.5;
+
+}
+
+.active {
+
+background: #fff7d6;
+
+border-left: 6px solid #f5b301;
+
+padding-left: 10px;
+
+border-radius: 8px;
+
+}
+
+.alphabet {
+
+display: grid;
+
+grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
+
+gap: 10px;
+
+margin: 20px 0;
+
+}
+
+.letter {
+
+background: #eff6ff;
+
+border: 2px solid #1d4ed8;
+
+border-radius: 10px;
+
+padding: 10px;
+
+text-align: center;
+
+font-size: 18px;
+
+cursor: pointer;
+
+transition: all 0.2s;
+
+}
+
+.letter:hover {
+
+background: #1d4ed8;
+
+color: white;
+
+transform: scale(1.1);
+
+}
+
+.controls {
+
+display: flex;
+
+flex-wrap: wrap;
+
+gap: 12px;
+
+margin-top: 18px;
+
+}
+
+button.btn {
+
+border: none;
+
+border-radius: 999px;
+
+padding: 14px 22px;
+
+font-size: 16px;
+
+cursor: pointer;
+
+color: #fff;
+
+background: #0f62fe;
+
+}
+
+button.btn:hover {
+
+opacity: 0.92;
+
+}
+
+.stop {
+
+background: #d93025;
+
+}
+
+.next {
+
+background: #0b8043;
+
+}
+
+.status {
+
+margin-top: 14px;
+
+font-size: 16px;
+
+color: #333;
+
+min-height: 24px;
+
+}
+
+.answer-box {
+
+margin-top: 14px;
+
+padding: 14px 16px;
+
+background: #f4f8ff;
+
+border-radius: 12px;
+
+font-size: 17px;
+
+}
+
+.progress {
+
+text-align: center;
+
+font-size: 18px;
+
+margin-top: 20px;
+
+color: #0f766e;
+
+}
+
+.result {
+
+font-size: 24px;
+
+text-align: center;
+
+min-height: 40px;
+
+margin: 20px;
+
+}
+
+.correct {
+
+color: green;
+
+}
+
+.wrong {
+
+color: red;
+
+}
+
+.icons {
+
+text-align: center;
+
+font-size: 24px;
+
+margin: 10px 0;
+
+color: #1d4ed8;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Guten Tag!</h1>
+
+<div class="lesson-title">Begrüßung und Vorstellung – Lektion 1</div>
+
+<div class="icons">👋😊🗣️👤📖🎯✨🌟</div>
+
+<div class="progress" id="progress"></div>
+
+<div class="tabs">
+
+<button class="tab active" data-tab="teil1">1 · Begrüßung</button>
+
+<button class="tab" data-tab="teil2">2 · Vorstellung</button>
+
+<button class="tab" data-tab="teil3">3 · Alphabet</button>
+
+<button class="tab" data-tab="praxis">🗣️ Praxis</button>
+
+</div>
+
+<!-- Teil 1: Begrüßung -->
+
+<div class="section active" id="teil1">
+
+<div class="card">
+
+<h2>Wir begrüßen uns</h2>
+
+<p>Wir sagen verschiedene Grüße — je nach Tageszeit.</p>
+
+
+
+<div class="grid">
+
+<div class="box">Guten Morgen! 🌅</div>
+
+<div class="box">Guten Tag! ☀️</div>
+
+<div class="box">Guten Abend! 🌙</div>
+
+<div class="box">Hallo! 👋</div>
+
+<div class="box">Tschüss! ✌️</div>
+
+</div>
+
+<h3>Merke!</h3>
+
+<ul>
+
+<li>morgens → <strong>Guten Morgen!</strong></li>
+
+<li>tagsuber → <strong>Guten Tag!</strong></li>
+
+<li>abends → <strong>Guten Abend!</strong></li>
+
+<li>informell → <strong>Hallo!</strong></li>
+
+<li>beim Abschied → <strong>Tschüss!</strong></li>
+
+</ul>
+
+<table class="table">
+
+<thead>
+
+<tr>
+
+<th>Situation</th>
+
+<th>Gruß</th>
+
+<th>Wann in Deutschland?</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr><td>morgens</td><td>Guten Morgen!</td><td>5:00/6:00 bis 10:00–11:00</td></tr>
+
+<tr><td>tagsüber</td><td>Guten Tag!</td><td>10:00–11:00 bis 17:00–18:00</td></tr>
+
+<tr><td>abends</td><td>Guten Abend!</td><td>17:00–18:00 bis spät</td></tr>
+
+<tr><td>informell</td><td>Hallo!</td><td>zu jeder Zeit</td></tr>
+
+<tr><td>Abschied</td><td>Tschüss!</td><td>zu jeder Zeit</td></tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+<!-- Teil 2: Vorstellung -->
+
+<div class="section" id="teil2">
+
+<div class="card">
+
+<h2>Ich stelle mich vor</h2>
+
+<p>Wichtige Sätze zur Vorstellung:</p>
+
+
+
+<div class="grid">
+
+<div class="box">Hallo! Ich heiße Anna.</div>
+
+<div class="box">Mein Name ist Anna Müller.</div>
+
+<div class="box">Ich bin Anna.</div>
+
+</div>
+
+<h3>Informell — Dialog 1</h3>
+
+<div class="dialog">
+
+<div class="dialog-line">
+
+<div class="name">A</div>
+
+<div class="text">Hallo!</div>
+
+</div>
+
+<div class="dialog-line">
+
+<div class="name">B</div>
+
+<div class="text">Wie heißt du?</div>
+
+</div>
+
+<div class="dialog-line">
+
+<div class="name">A</div>
+
+<div class="text">Ich heiße Lena.</div>
+
+</div>
+
+<div class="dialog-line">
+
+<div class="name">B</div>
+
+<div class="text">Und du?</div>
+
+</div>
+
+<div class="dialog-line">
+
+<div class="name">A</div>
+
+<div class="text">Ich heiße Max.</div>
+
+</div>
+
+</div>
+
+<h3>Formell — Dialog 2</h3>
+
+<div class="dialog">
+
+<div class="dialog-line">
+
+<div class="name">A</div>
+
+<div class="text">Guten Tag.</div>
+
+</div>
+
+<div class="dialog-line">
+
+<div class="name">B</div>
+
+<div class="text">Wie heißen Sie?</div>
+
+</div>
+
+<div class="dialog-line">
+
+<div class="name">A</div>
+
+<div class="text">Ich heiße Thomas.</div>
+
+</div>
+
+<div class="dialog-line">
+
+<div class="name">B</div>
+
+<div class="text">Und Sie?</div>
+
+</div>
+
+<div class="dialog-line">
+
+<div class="name">A</div>
+
+<div class="text">Ich heiße Julia.</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- Teil 3: Alphabet -->
+
+<div class="section" id="teil3">
+
+<div class="card">
+
+<h2>Das deutsche Alphabet</h2>
+
+<p>Klicken Sie auf einen Buchstaben — dann hören Sie die deutsche Aussprache!</p>
+
+
+
+<div class="alphabet" id="alphabet"></div>
+
+
+
+<h3>Die Umlaute</h3>
+
+<div class="grid">
+
+<div class="box">Ä – ä</div>
+
+<div class="box">Ö – ö</div>
+
+<div class="box">Ü – ü</div>
+
+<div class="box">ß – Eszett</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- Praxis: Dialog & Powtórka -->
+
+<div class="section" id="praxis">
+
+<div class="card">
+
+<h2>🗣️ Praxis — Dialog hören und sprechen</h2>
+
+<p class="lead">Kursant mówi. Strona słyszy odpowiedź i odtwarza dialog po niemiecku.</p>
+
+<div id="dialogContainer">
+
+<!-- Dialog lines will be inserted here -->
+
+</div>
+
+<div class="controls">
+
+<button class="btn" id="startBtn">Start</button>
+
+<button class="btn stop" id="stopBtn">Stop</button>
+
+<button class="btn next" id="nextBtn">Nächste Frage</button>
+
+</div>
+
+<div class="status" id="status">Kliknij Start, aby rozpocząć dialog.</div>
+
+<div class="answer-box" id="answerBox">Odpowiedź kursanta pojawi się tutaj po rozpoznaniu mowy.</div>
+
+</div>
+
+<div class="card" style="margin-top:20px;">
+
+<h2>🎤 Powtórka głosowa lekcji</h2>
+
+<p>Kliknij, aby powtórzyć całość lub fragment:</p>
+
+<div class="controls">
+
+<button class="btn" onclick="playFullLesson()">🔊 Cała lekcja</button>
+
+<button class="btn" onclick="playBegrüßung()">🔊 Begrüßung</button>
+
+<button class="btn" onclick="playVorstellung()">🔊 Vorstellung</button>
+
+<button class="btn" onclick="playAlphabet()">🔊 Alphabet</button>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+// --- Tab switching ---
+
+document.querySelectorAll('.tab').forEach(tab => {
+
+tab.addEventListener('click', () => {
+
+document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+
+document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+
+tab.classList.add('active');
+
+document.getElementById(tab.dataset.tab).classList.add('active');
+
+});
+
+});
+
+// --- Alphabet ---
+
+const alphabetData = [
+
+['A','a','a'], ['B','b','be'], ['C','c','ce'], ['D','d','de'], ['E','e','e'],
+
+['F','f','ef'], ['G','g','ge'], ['H','h','ha'], ['I','i','i'], ['J','j','jot'],
+
+['K','k','ka'], ['L','l','el'], ['M','m','em'], ['N','n','en'], ['O','o','o'],
+
+['P','p','pe'], ['Q','q','ku'], ['R','r','er'], ['S','s','es'], ['T','t','te'],
+
+['U','u','u'], ['V','v','vau'], ['W','w','we'], ['X','x','ix'], ['Y','y','ypsilon'],
+
+['Z','z','zet']
+
+];
+
+const umlauteData = [['Ä','ä','ä'], ['Ö','ö','ö'], ['Ü','ü','ü'], ['ß','ß','eszett']];
+
+function speak(text, lang='de-DE', rate=0.95){
+
+speechSynthesis.cancel();
+
+const u = new SpeechSynthesisUtterance(text);
+
+u.lang = lang;
+
+u.rate = rate;
+
+const voices = speechSynthesis.getVoices();
+
+const deVoice = voices.find(v => v.lang && v.lang.toLowerCase().startsWith('de'));
+
+if(deVoice) u.voice = deVoice;
+
+speechSynthesis.speak(u);
+
+}
+
+const alphabetEl = document.getElementById('alphabet');
+
+alphabetData.forEach(([cap, low, name]) => {
+
+const div = document.createElement('div');
+
+div.className = 'letter';
+
+div.textContent = `${cap} – ${low}`;
+
+div.addEventListener('click', () => speak(name));
+
+alphabetEl.appendChild(div);
+
+});
+
+umlauteData.forEach(([cap, low, name]) => {
+
+const div = document.createElement('div');
+
+div.className = 'letter';
+
+div.textContent = `${cap} – ${low}`;
+
+div.addEventListener('click', () => speak(name));
+
+alphabetEl.appendChild(div);
+
+});
+
+// --- Dialog für Praxis ---
+
+const lines = [
+
+{speaker:'Lehrer', text:'Hallo! Wie geht es dir heute?'},
+
+{speaker:'Kursant', text:'Mir geht es gut, danke. Und dir?'},
+
+{speaker:'Lehrer', text:'Mir geht es auch gut. Was hast du heute gemacht?'},
+
+{speaker:'Kursant', text:'Ich habe Deutsch gelernt und etwas geübt.'},
+
+{speaker:'Lehrer', text:'Sehr gut! Möchtest du weiter sprechen?'},
+
+{speaker:'Kursant', text:'Ja, gern!'}
+
+];
+
+let current = 0;
+
+let listening = false;
+
+let recognition;
+
+const statusEl = document.getElementById('status');
+
+const answerBox = document.getElementById('answerBox');
+
+const dialogContainer = document.getElementById('dialogContainer');
+
+// Render dialog lines
+
+lines.forEach((line, i) => {
+
+const div = document.createElement('div');
+
+div.className = 'dialog-line';
+
+div.id = 'line' + i;
+
+div.innerHTML = `<div class="name">${line.speaker}</div><div class="text">${line.text}</div>`;
+
+dialogContainer.appendChild(div);
+
+});
+
+function highlightLine(index){
+
+lines.forEach((_, i) => {
+
+const el = document.getElementById('line'+i);
+
+if(el) el.classList.toggle('active', i === index);
+
+});
+
+}
+
+function askCurrent(){
+
+if(current >= lines.length) current = 0;
+
+highlightLine(current);
+
+statusEl.textContent = lines[current].speaker + ' mówi.';
+
+if(lines[current].speaker === 'Lehrer'){
+
+speak(lines[current].text);
+
+setTimeout(startListening, 1400);
+
+} else {
+
+statusEl.textContent = 'Powiedz odpowiedź po niemiecku.';
+
+startListening();
+
+}
+
+}
+
+function startRecognition(){
+
+const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+if(!SR){
+
+statusEl.textContent = 'Twoja przeglądarka nie obsługuje rozpoznawania mowy. Użyj Chrome lub Edge.';
+
+return null;
+
+}
+
+const r = new SR();
+
+r.lang = 'de-DE';
+
+r.continuous = false;
+
+r.interimResults = true;
+
+r.maxAlternatives = 1;
+
+return r;
+
+}
+
+function startListening(){
+
+if(listening) return;
+
+recognition = startRecognition();
+
+if(!recognition) return;
+
+listening = true;
+
+answerBox.textContent = 'Słucham...';
+
+statusEl.textContent = 'Mów teraz po niemiecku.';
+
+let finalText = '';
+
+recognition.onresult = (event) => {
+
+let transcript = '';
+
+for(let i = event.resultIndex; i < event.results.length; i++){
+
+transcript += event.results[i][0].transcript;
+
+if(event.results[i].isFinal) finalText = transcript;
+
+}
+
+answerBox.textContent = transcript;
+
+};
+
+recognition.onerror = () => {
+
+listening = false;
+
+statusEl.textContent = 'Nie udało się rozpoznać mowy. Spróbuj ponownie.';
+
+};
+
+recognition.onend = () => {
+
+listening = false;
+
+if(finalText.trim()){
+
+statusEl.textContent = 'Usłyszano: ' + finalText.trim();
+
+current++;
+
+if(current < lines.length){
+
+setTimeout(askCurrent, 900);
+
+} else {
+
+statusEl.textContent = 'Dialog zakończony. Możesz zacząć od nowa.';
+
+}
+
+} else {
+
+statusEl.textContent = 'Nie usłyszano odpowiedzi. Spróbuj jeszcze raz.';
+
+}
+
+};
+
+recognition.start();
+
+}
+
+function stopAll(){
+
+listening = false;
+
+speechSynthesis.cancel();
+
+if(recognition) recognition.abort();
+
+statusEl.textContent = 'Zatrzymano.';
+
+}
+
+document.getElementById('startBtn').onclick = () => {
+
+current = 0;
+
+askCurrent();
+
+};
+
+document.getElementById('stopBtn').onclick = stopAll;
+
+document.getElementById('nextBtn').onclick = () => {
+
+speechSynthesis.cancel();
+
+if(recognition) recognition.abort();
+
+current++;
+
+if(current >= lines.length) current = 0;
+
+askCurrent();
+
+};
+
+window.speechSynthesis.onvoiceschanged = () => {};
+
+// --- Powtórka głosowa ---
+
+function playFullLesson(){
+
+speak("Guten Tag! Begrüßung und Vorstellung. Heute lernen wir: Wie begrüßen wir uns? Wie stellen wir uns vor? Und das deutsche Alphabet.");
+
+setTimeout(playBegrüßung, 3000);
+
+}
+
+function playBegrüßung(){
+
+speak("Teil 1: Begrüßung. Guten Morgen! Guten Tag! Guten Abend! Hallo! Tschüss! Morgens: Guten Morgen! Tagsüber: Guten Tag! Abends: Guten Abend! Informell: Hallo! Beim Abschied: Tschüss!");
+
+}
+
+function playVorstellung(){
+
+speak("Teil 2: Vorstellung. Hallo! Ich heiße Anna. Mein Name ist Anna Müller. Ich bin Anna. Informell: Hallo! Wie heißt du? Ich heiße ... Formell: Guten Tag. Wie heißen Sie? Ich heiße ... oder Mein Name ist ...");
+
+}
+
+function playAlphabet(){
+
+speak("Teil 3: Das deutsche Alphabet. A B C D E F G H I J K L M N O P Q R S T U V W X Y Z. Die Umlaute: Ä Ö Ü ß.");
+
+}
+
+// --- Progress ---
+
+const progressEl = document.getElementById('progress');
+
+progressEl.textContent = 'Lektion 1 – Guten Tag!';
+
+</script>
+
+</body>
+
+</html>
+
 
