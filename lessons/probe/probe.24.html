@@ -1,1 +1,1079 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Deutschkurs A1 — Lektion 1</title>
 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&family=Nunito+Sans:wght@400;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#20324a;
+  --panel:#f7f9fc;
+  --panel-2:#ffffff;
+  --line:#dce3ed;
+  --text:#111820;
+  --muted:#40556f;
+  --accent:#f4c95d;
+  --accent-2:#43aef4;
+  --accent-3:#5fbd28;
+  --accent-4:#7958d8;
+  --shadow:0 14px 32px rgba(0,0,0,.10);
+  --radius:22px;
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  background:
+    radial-gradient(circle at 12% 10%,rgba(255,255,255,.06),transparent 30%),
+    radial-gradient(circle at 88% 90%,rgba(255,255,255,.06),transparent 36%),
+    var(--bg);
+  color:var(--text);
+  font:400 1rem/1.6 "Nunito Sans",sans-serif;
+  padding:0 0 64px;
+}
+
+a,button{font:inherit}
+button{cursor:pointer}
+:focus-visible{
+  outline:3px solid var(--accent);
+  outline-offset:3px;
+}
+
+.page{
+  max-width:1080px;
+  margin:0 auto;
+  padding:30px 18px 0;
+}
+
+.course-nav{
+  max-width:900px;
+  margin:28px auto 34px;
+  padding:0 18px;
+}
+.course-nav-title{
+  margin:0 0 16px;
+  color:#fff;
+  text-align:center;
+  font:700 2rem "Kalam",cursive;
+}
+.course-nav-card{
+  background:rgba(255,255,255,.95);
+  border:1px solid var(--line);
+  border-radius:20px;
+  padding:18px;
+  box-shadow:var(--shadow);
+}
+.course-nav-list{
+  display:grid;
+  gap:10px;
+  padding:0;
+  margin:0;
+  list-style:none;
+}
+.course-nav-list a{
+  display:block;
+  padding:12px 14px;
+  text-decoration:none;
+  color:var(--text);
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:14px;
+  transition:transform .15s, background .15s, border-color .15s;
+}
+.course-nav-list a:hover{
+  transform:translateX(4px);
+  background:#f0f4f8;
+  border-color:var(--accent);
+}
+
+.lesson{
+  background:linear-gradient(135deg,#fff7e7,#ffe3b8);
+  border-radius:28px;
+  padding:28px;
+  box-shadow:0 20px 45px rgba(0,0,0,.12);
+}
+
+.hero{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  justify-content:space-between;
+  gap:26px;
+  padding-bottom:28px;
+  margin-bottom:30px;
+  border-bottom:2px dashed rgba(35,51,46,.18);
+}
+.hero-text{
+  flex:1 1 360px;
+}
+.eyebrow{
+  margin:0 0 8px;
+  color:#b8860b;
+  font:600 .8rem "JetBrains Mono",monospace;
+  text-transform:uppercase;
+  letter-spacing:.16em;
+}
+.title{
+  margin:0 0 12px;
+  font:700 2.8rem/1.08 "Kalam",cursive;
+}
+.hero-text p{
+  margin:0;
+  max-width:58ch;
+  color:var(--muted);
+  font-size:1.05rem;
+}
+.topics{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-top:18px;
+}
+.topics span{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:8px 12px;
+  background:#f0f4f8;
+  border:1px solid var(--line);
+  border-radius:999px;
+  font-size:.95rem;
+}
+
+.hero-badge{
+  flex:0 1 340px;
+  width:100%;
+  display:grid;
+  place-items:center;
+}
+.hero-badge svg{
+  width:100%;
+  max-width:340px;
+  height:auto;
+  filter:drop-shadow(0 16px 30px rgba(0,0,0,.18));
+}
+.center-label{
+  fill:var(--text);
+  font-family:"JetBrains Mono",monospace;
+  font-size:18px;
+  font-weight:700;
+  text-anchor:middle;
+}
+.center-sub{
+  fill:var(--text);
+  font-family:"JetBrains Mono",monospace;
+  font-size:13px;
+  text-anchor:middle;
+  opacity:.9;
+}
+.mini-label{
+  fill:var(--text);
+  font-family:"JetBrains Mono",monospace;
+  font-size:13px;
+  text-anchor:middle;
+  opacity:.95;
+}
+
+.section{
+  margin:34px 0 44px;
+}
+.section-head{
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+  align-items:baseline;
+  margin-bottom:14px;
+}
+.section-num{
+  color:#b8860b;
+  font:600 .82rem "JetBrains Mono",monospace;
+  text-transform:uppercase;
+  letter-spacing:.14em;
+}
+.section-title{
+  margin:0;
+  font:700 2rem "Kalam",cursive;
+}
+
+.card{
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:24px;
+  padding:22px;
+  box-shadow:var(--shadow);
+}
+.lead{
+  margin:0 0 16px;
+  font-size:1.05rem;
+  color:var(--text);
+}
+
+.grid-3{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:14px;
+}
+.info-card{
+  background:var(--panel-2);
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:18px;
+  min-height:150px;
+  transition:transform .16s, box-shadow .16s, border-color .16s;
+}
+.info-card:hover{
+  transform:translateY(-2px);
+  border-color:#f4c95d;
+  box-shadow:0 12px 25px rgba(0,0,0,.08);
+}
+.info-icon{
+  font-size:40px;
+  margin-bottom:10px;
+}
+.info-title{
+  margin:0 0 8px;
+  font-size:1.2rem;
+}
+.info-text{
+  margin:0;
+  color:var(--muted);
+}
+
+.quote-box{
+  margin-top:16px;
+  padding:16px 18px;
+  border-left:4px solid var(--accent);
+  background:#f9fbff;
+  border-radius:16px;
+}
+
+.table-wrap{
+  overflow-x:auto;
+  border-radius:18px;
+  border:1px solid var(--line);
+  background:#fff;
+}
+.greeting-table{
+  width:100%;
+  border-collapse:collapse;
+  min-width:760px;
+}
+.greeting-table th,
+.greeting-table td{
+  padding:16px;
+  border-bottom:1px solid var(--line);
+  text-align:left;
+}
+.greeting-table th{
+  background:#f0f4f8;
+}
+.greeting-table tr:last-child td{border-bottom:none}
+
+.badge-row{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-top:16px;
+}
+.pill{
+  padding:8px 12px;
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:999px;
+  font-size:.93rem;
+}
+
+.dialog{
+  display:grid;
+  gap:10px;
+  margin-top:14px;
+}
+.bubble{
+  max-width:88%;
+  padding:12px 14px;
+  border-radius:18px;
+  background:#fff;
+  border:1px solid var(--line);
+}
+.bubble.left{background:#f0f4f8}
+.bubble.right{
+  margin-left:auto;
+  background:#fff8e1;
+}
+.speaker{
+  display:block;
+  margin-bottom:4px;
+  color:#b8860b;
+  font:600 .76rem "JetBrains Mono",monospace;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+}
+
+.row{
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:12px;
+  align-items:center;
+  padding:14px 16px;
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:16px;
+  margin-top:10px;
+}
+.row strong{color:#b8860b}
+
+.button-bar{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-top:16px;
+}
+.action-btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  min-height:52px;
+  padding:12px 16px;
+  border:none;
+  border-radius:16px;
+  color:#fff;
+  box-shadow:0 8px 18px rgba(0,0,0,.18), inset 0 1px 0 rgba(255,255,255,.35);
+  transition:transform .16s, filter .16s, box-shadow .16s;
+}
+.action-btn:hover{
+  transform:translateY(-2px);
+  filter:brightness(1.04);
+  box-shadow:0 12px 24px rgba(0,0,0,.2), inset 0 1px 0 rgba(255,255,255,.35);
+}
+.btn-blue{background:linear-gradient(180deg,#68c7ff,#43aef4)}
+.btn-green{background:linear-gradient(180deg,#84df42,#5fbd28)}
+.btn-purple{background:linear-gradient(180deg,#a88af5,#7958d8)}
+.btn-dark{background:linear-gradient(180deg,#334e68,#24384b)}
+
+.choice-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:12px;
+  margin-top:16px;
+}
+.choice{
+  min-height:54px;
+  padding:12px 14px;
+  border:1px solid var(--line);
+  background:#fff;
+  border-radius:16px;
+  transition:background .15s, border-color .15s, transform .15s;
+}
+.choice:hover{
+  transform:translateY(-2px);
+  background:#f0f4f8;
+  border-color:#f4c95d;
+}
+.choice.correct{
+  background:#ecffd9;
+  border-color:#5fbd28;
+}
+.choice.wrong{
+  background:#ffe5e5;
+  border-color:#ef5350;
+}
+
+.feedback{
+  margin-top:14px;
+  padding:14px 16px;
+  border-radius:16px;
+  background:#fff;
+  border:1px solid var(--line);
+  min-height:56px;
+  color:var(--text);
+}
+.feedback.ok{
+  border-color:#5fbd28;
+  background:#ecffd9;
+}
+.feedback.no{
+  border-color:#ef5350;
+  background:#ffe5e5;
+}
+
+.alphabet{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-top:16px;
+}
+.alpha-btn{
+  padding:12px 14px;
+  min-width:74px;
+  min-height:54px;
+  border:1px solid var(--line);
+  background:#fff;
+  border-radius:14px;
+  font:700 1.05rem "Nunito Sans",sans-serif;
+  transition:transform .15s, background .15s, border-color .15s;
+}
+.alpha-btn:hover{
+  transform:translateY(-2px);
+  background:#e8f3ff;
+  border-color:#72b8ff;
+}
+.alpha-btn.active{
+  background:#20324a;
+  color:#fff;
+  border-color:#20324a;
+}
+
+.summary-grid{
+  display:grid;
+  gap:12px;
+}
+.summary-item{
+  display:grid;
+  grid-template-columns:190px 1fr;
+  gap:14px;
+  padding:16px 18px;
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:16px;
+}
+.summary-key{
+  color:#b8860b;
+  font-weight:800;
+}
+.summary-value{
+  color:var(--text);
+}
+
+.nav-bottom{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:space-between;
+  gap:10px;
+  padding-top:22px;
+  margin-top:28px;
+  border-top:2px dashed rgba(35,51,46,.18);
+}
+.nav-bottom a{
+  text-decoration:none;
+  color:var(--text);
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:999px;
+  padding:10px 16px;
+}
+.nav-bottom a:hover{
+  background:#f0f4f8;
+  border-color:var(--accent);
+}
+
+.back-top{
+  display:flex;
+  justify-content:center;
+  margin-top:18px;
+}
+.back-top a{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:max-content;
+  padding:12px 22px;
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:999px;
+  color:var(--text);
+  text-decoration:none;
+}
+
+dialog{
+  border:none;
+  border-radius:20px;
+  padding:0;
+  max-width:min(560px,92vw);
+  box-shadow:0 20px 60px rgba(0,0,0,.28);
+}
+dialog::backdrop{background:rgba(0,0,0,.45)}
+.dialog-panel{
+  padding:22px;
+  background:#fff;
+}
+.dialog-panel h3{
+  margin:0 0 10px;
+  font:700 1.4rem "Kalam",cursive;
+}
+.dialog-panel p{margin:0 0 14px;color:var(--muted)}
+
+.small{
+  font-size:.95rem;
+  color:var(--muted);
+}
+
+@media (max-width:860px){
+  .grid-3{grid-template-columns:1fr}
+  .summary-item{grid-template-columns:1fr}
+  .choice-grid{grid-template-columns:1fr}
+}
+
+@media (max-width:720px){
+  .lesson{padding:18px;border-radius:20px}
+  .title{font-size:2.2rem}
+  .section-title{font-size:1.7rem}
+  .hero{padding-bottom:22px}
+  .bubble{max-width:100%}
+  .card{padding:16px}
+}
+
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{
+    animation-duration:.01ms !important;
+    animation-iteration-count:1 !important;
+    transition-duration:.01ms !important;
+  }
+}
+</style>
+</head>
+
+<body id="seitenanfang">
+
+<nav class="course-nav" aria-label="Inhaltsverzeichnis des A1-Kurses">
+  <h2 class="course-nav-title">A1 — Lektion 1</h2>
+  <div class="course-nav-card">
+    <ul class="course-nav-list">
+      <li><a href="#warmup">1. Start</a></li>
+      <li><a href="#gruss">2. Begrüßung</a></li>
+      <li><a href="#vorstellung">3. Vorstellung</a></li>
+      <li><a href="#alphabet">4. Alphabet</a></li>
+      <li><a href="#uebung">5. Mini-Quiz</a></li>
+      <li><a href="#zusammenfassung">6. Merken</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main class="page">
+  <section class="lesson" id="lektion1">
+
+    <header class="hero">
+      <div class="hero-text">
+        <p class="eyebrow">Deutschkurs A1 · 1 von 30</p>
+        <h1 class="title">Guten Tag! — Begrüßung und Vorstellung</h1>
+        <p>
+          In dieser Lektion lernen wir, wie man sich begrüßt, sich vorstellt und die ersten Buchstaben des deutschen Alphabets sicher ausspricht.
+          Die Lektion ist bewusst interaktiv aufgebaut, damit der Nutzer nicht nur liest, sondern klickt, hört, entdeckt und direkt mitmacht.
+        </p>
+        <div class="topics" aria-label="Themen">
+          <span>👋 Begrüßung</span>
+          <span>🙋 Vorstellung</span>
+          <span>🔤 Alphabet</span>
+          <span>🎧 Hören und nachsprechen</span>
+        </div>
+      </div>
+
+      <div class="hero-badge" aria-hidden="true">
+        <svg viewBox="0 0 320 320">
+          <circle cx="160" cy="160" r="132" fill="rgba(255,255,255,.08)" stroke="rgba(35,51,46,.16)"></circle>
+          <circle cx="160" cy="160" r="72" fill="#20324a" stroke="rgba(35,51,46,.12)"></circle>
+          <text x="160" y="152" class="center-label">Hallo!</text>
+          <text x="160" y="175" class="center-sub">Los geht’s</text>
+          <text x="160" y="40" class="mini-label">👋</text>
+          <text x="252" y="82" class="mini-label">😊</text>
+          <text x="282" y="164" class="mini-label">🗣️</text>
+          <text x="250" y="246" class="mini-label">👤</text>
+          <text x="160" y="292" class="mini-label">📖</text>
+          <text x="70" y="246" class="mini-label">🎯</text>
+          <text x="38" y="164" class="mini-label">✨</text>
+          <text x="70" y="82" class="mini-label">🌟</text>
+        </svg>
+      </div>
+    </header>
+
+    <section class="section" id="warmup">
+      <div class="section-head">
+        <span class="section-num">Teil 1</span>
+        <h2 class="section-title">Start in die Lektion</h2>
+      </div>
+
+      <div class="card">
+        <p class="lead">Klicke auf die Karten und öffne die Begriffe. So startet die Lektion aktiv statt passiv.</p>
+
+        <div class="grid-3">
+          <article class="info-card">
+            <div class="info-icon">👋</div>
+            <h3 class="info-title">Begrüßen</h3>
+            <p class="info-text">Wie sagt man Guten Morgen, Guten Tag, Guten Abend und Tschüss?</p>
+          </article>
+
+          <article class="info-card">
+            <div class="info-icon">🙋</div>
+            <h3 class="info-title">Vorstellen</h3>
+            <p class="info-text">Wie heißt du? — Ich heiße … / Wie heißen Sie? — Ich heiße …</p>
+          </article>
+
+          <article class="info-card">
+            <div class="info-icon">🔤</div>
+            <h3 class="info-title">Alphabet</h3>
+            <p class="info-text">Die ersten Buchstaben hören, anklicken und nachsprechen.</p>
+          </article>
+        </div>
+
+        <div class="quote-box">
+          <strong>Heute lernst du:</strong> kurze Sätze, die du sofort im Alltag benutzen kannst.
+        </div>
+
+        <div class="button-bar">
+          <button class="action-btn btn-dark" type="button" data-open-dialog="introDialog">Starten</button>
+          <button class="action-btn btn-blue" type="button" id="speakIntroBtn">🎧 Überschrift vorlesen</button>
+          <button class="action-btn btn-green" type="button" id="showPathBtn">✨ Was kommt zuerst?</button>
+        </div>
+
+        <div class="feedback" id="pathFeedback" aria-live="polite">
+          Tipp: Beginne oben links mit der Begrüßung.
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="gruss">
+      <div class="section-head">
+        <span class="section-num">Teil 2</span>
+        <h2 class="section-title">Wir begrüßen uns</h2>
+      </div>
+
+      <div class="card">
+        <p class="lead">Wähle einen Gruß nach Tageszeit. Die Tabelle kannst du später als schnelle Wiederholung nutzen.</p>
+
+        <div class="button-bar">
+          <button class="action-btn btn-blue" type="button" data-speak="Guten Morgen!">Guten Morgen</button>
+          <button class="action-btn btn-green" type="button" data-speak="Guten Tag!">Guten Tag</button>
+          <button class="action-btn btn-purple" type="button" data-speak="Guten Abend!">Guten Abend</button>
+          <button class="action-btn btn-dark" type="button" data-speak="Tschüss!">Tschüss</button>
+        </div>
+
+        <div class="table-wrap" style="margin-top:18px;">
+          <table class="greeting-table">
+            <thead>
+              <tr>
+                <th>Situation</th>
+                <th>Gruß</th>
+                <th>Mini-Hilfe</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>morgens</td>
+                <td><strong>Guten Morgen!</strong></td>
+                <td>früh am Tag</td>
+              </tr>
+              <tr>
+                <td>tagsüber</td>
+                <td><strong>Guten Tag!</strong></td>
+                <td>am Vormittag und Nachmittag</td>
+              </tr>
+              <tr>
+                <td>abends</td>
+                <td><strong>Guten Abend!</strong></td>
+                <td>später am Tag</td>
+              </tr>
+              <tr>
+                <td>informell</td>
+                <td><strong>Hallo!</strong></td>
+                <td>immer möglich</td>
+              </tr>
+              <tr>
+                <td>Abschied</td>
+                <td><strong>Tschüss!</strong></td>
+                <td>beim Weggehen</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="badge-row" aria-label="Schnelle Merkhilfen">
+          <span class="pill">morgens = Guten Morgen</span>
+          <span class="pill">tagsüber = Guten Tag</span>
+          <span class="pill">abends = Guten Abend</span>
+          <span class="pill">immer = Hallo</span>
+          <span class="pill">Abschied = Tschüss</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="vorstellung">
+      <div class="section-head">
+        <span class="section-num">Teil 3</span>
+        <h2 class="section-title">Ich stelle mich vor</h2>
+      </div>
+
+      <div class="card">
+        <p class="lead">Hier lernst du zwei wichtige Formen: informell und formell.</p>
+
+        <div class="grid-3">
+          <article class="info-card">
+            <div class="info-icon">🙂</div>
+            <h3 class="info-title">Informell</h3>
+            <p class="info-text">Wie heißt du? — Ich heiße Anna.</p>
+            <p class="small">Für Freunde, Kinder, Bekannte.</p>
+          </article>
+
+          <article class="info-card">
+            <div class="info-icon">👔</div>
+            <h3 class="info-title">Formell</h3>
+            <p class="info-text">Wie heißen Sie? — Ich heiße Thomas.</p>
+            <p class="small">Für Lehrer, Erwachsene, offizielle Situationen.</p>
+          </article>
+
+          <article class="info-card">
+            <div class="info-icon">🎙️</div>
+            <h3 class="info-title">Nachsprechen</h3>
+            <p class="info-text">Tippe auf die Sätze, höre sie an und sprich direkt nach.</p>
+            <p class="small">Kurze Wiederholung stärkt das Sprechen.</p>
+          </article>
+        </div>
+
+        <div class="button-bar">
+          <button class="action-btn btn-blue" type="button" data-speak="Hallo! Ich heiße Anna.">Hallo! Ich heiße Anna.</button>
+          <button class="action-btn btn-green" type="button" data-speak="Guten Tag. Wie heißen Sie?">Guten Tag. Wie heißen Sie?</button>
+          <button class="action-btn btn-purple" type="button" data-speak="Mein Name ist Thomas.">Mein Name ist Thomas.</button>
+        </div>
+
+        <h3 class="section-head" style="margin-top:22px;">
+          <span class="section-num">Dialog</span>
+          <span class="section-title" style="font-size:1.4rem;">Mini-Gespräch</span>
+        </h3>
+
+        <div class="dialog" aria-label="Dialogbeispiel">
+          <div class="bubble left"><span class="speaker">A</span>Hallo!</div>
+          <div class="bubble right"><span class="speaker">B</span>Wie heißt du?</div>
+          <div class="bubble left"><span class="speaker">A</span>Ich heiße Lena.</div>
+          <div class="bubble right"><span class="speaker">B</span>Und du?</div>
+          <div class="bubble left"><span class="speaker">A</span>Ich heiße Max.</div>
+        </div>
+
+        <div class="button-bar">
+          <button class="action-btn btn-dark" type="button" id="playDialogBtn">🎭 Dialog abspielen</button>
+          <button class="action-btn btn-blue" type="button" id="formalBtn">⚡ Formell üben</button>
+          <button class="action-btn btn-green" type="button" id="informalBtn">⚡ Informell üben</button>
+        </div>
+
+        <div class="feedback" id="dialogFeedback" aria-live="polite">
+          Wähle eine Übungsart.
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="alphabet">
+      <div class="section-head">
+        <span class="section-num">Teil 4</span>
+        <h2 class="section-title">Das deutsche Alphabet</h2>
+      </div>
+
+      <div class="card">
+        <p class="lead">Klicke auf einen Buchstaben. Die Seite spricht ihn mit der Browser-Stimme aus.</p>
+
+        <div class="button-bar">
+          <button class="action-btn btn-dark" type="button" id="playAlphabetSeq">🔁 A bis Z anhören</button>
+          <button class="action-btn btn-blue" type="button" id="playUmlautSeq">🔁 Umlaute anhören</button>
+          <button class="action-btn btn-green" type="button" id="clearAlphabetState">Zurücksetzen</button>
+        </div>
+
+        <div class="alphabet" id="alphabetButtons"></div>
+
+        <h3 class="section-head" style="margin-top:24px;">
+          <span class="section-num">Sonderzeichen</span>
+          <span class="section-title" style="font-size:1.4rem;">Umlaute und Eszett</span>
+        </h3>
+
+        <div class="alphabet" id="umlautButtons"></div>
+
+        <div class="feedback" id="alphabetFeedback" aria-live="polite">
+          Tipp: Klick auf A, dann auf Ä, Ö, Ü und ß.
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="uebung">
+      <div class="section-head">
+        <span class="section-num">Teil 5</span>
+        <h2 class="section-title">Mini-Quiz</h2>
+      </div>
+
+      <div class="card">
+        <p class="lead">Eine schnelle Übung mit sofortiger Rückmeldung. So bleibt die Lektion lebendig.</p>
+
+        <div class="info-card" style="margin-top:0;">
+          <h3 class="info-title">Welche Antwort passt?</h3>
+          <p class="info-text">Jemand sagt: „Wie heißen Sie?“ — Welche Antwort ist richtig?</p>
+
+          <div class="choice-grid" role="group" aria-label="Antwortmöglichkeiten">
+            <button class="choice" type="button" data-answer="wrong">Ich bin gut.</button>
+            <button class="choice" type="button" data-answer="correct">Ich heiße Maria.</button>
+            <button class="choice" type="button" data-answer="wrong">Guten Morgen.</button>
+            <button class="choice" type="button" data-answer="wrong">Tschüss.</button>
+          </div>
+
+          <div class="feedback" id="quizFeedback" aria-live="polite">
+            Wähle eine Antwort.
+          </div>
+        </div>
+
+        <div class="button-bar">
+          <button class="action-btn btn-purple" type="button" id="repeatQuizBtn">🔄 Noch einmal</button>
+          <button class="action-btn btn-blue" type="button" id="openSummaryDialogBtn">📌 Was habe ich gelernt?</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="zusammenfassung">
+      <div class="section-head">
+        <span class="section-num">Teil 6</span>
+        <h2 class="section-title">Was kann ich jetzt?</h2>
+      </div>
+
+      <div class="card">
+        <div class="summary-grid">
+          <div class="summary-item">
+            <div class="summary-key">✅ Ich kann grüßen.</div>
+            <div class="summary-value">Guten Morgen, Guten Tag, Guten Abend, Hallo, Tschüss.</div>
+          </div>
+          <div class="summary-item">
+            <div class="summary-key">✅ Ich kann mich vorstellen.</div>
+            <div class="summary-value">Ich heiße … / Mein Name ist … / Ich bin …</div>
+          </div>
+          <div class="summary-item">
+            <div class="summary-key">✅ Ich kann fragen.</div>
+            <div class="summary-value">Wie heißt du? / Wie heißen Sie?</div>
+          </div>
+          <div class="summary-item">
+            <div class="summary-key">✅ Ich kann Buchstaben sagen.</div>
+            <div class="summary-value">A, B, C … sowie Ä, Ö, Ü und ß.</div>
+          </div>
+        </div>
+
+        <div class="button-bar" style="margin-top:18px;">
+          <button class="action-btn btn-dark" type="button" data-speak="Guten Tag! Ich heiße Anna.">🗣️ Beispiel satz hören</button>
+          <button class="action-btn btn-green" type="button" id="finalChallengeBtn">🏁 Abschluss-Challenge</button>
+        </div>
+
+        <div class="back-top">
+          <a href="#seitenanfang">↑ Nach oben</a>
+        </div>
+
+        <div class="nav-bottom" aria-label="Navigation zwischen Lektionen">
+          <a href="A1-2.html#lektion2">Lektion 2 →</a>
+        </div>
+      </div>
+    </section>
+  </section>
+</main>
+
+<dialog id="introDialog">
+  <div class="dialog-panel">
+    <h3>Willkommen!</h3>
+    <p>Diese Lektion ist interaktiv: Du kannst klicken, hören, nachsprechen und sofort üben.</p>
+    <p class="small">Beginne mit der Begrüßung, gehe dann zur Vorstellung und beende die Lektion mit dem Alphabet und dem Mini-Quiz.</p>
+    <div class="button-bar">
+      <button class="action-btn btn-blue" type="button" onclick="document.getElementById('introDialog').close()">Los geht’s</button>
+    </div>
+  </div>
+</dialog>
+
+<dialog id="summaryDialog">
+  <div class="dialog-panel">
+    <h3>Was du gelernt hast</h3>
+    <p>Du kannst jetzt einfache Grüße, eine erste Vorstellung und das Alphabet üben.</p>
+    <p class="small">Versuche danach, die Sätze laut zu sagen, ohne mitzulesen.</p>
+    <div class="button-bar">
+      <button class="action-btn btn-green" type="button" onclick="document.getElementById('summaryDialog').close()">Verstanden</button>
+    </div>
+  </div>
+</dialog>
+
+<script>
+"use strict";
+
+const alphabet = [
+  ["A","a"],["B","be"],["C","ce"],["D","de"],["E","e"],["F","ef"],["G","ge"],["H","ha"],
+  ["I","i"],["J","jot"],["K","ka"],["L","el"],["M","em"],["N","en"],["O","o"],["P","pe"],
+  ["Q","ku"],["R","er"],["S","es"],["T","te"],["U","u"],["V","vau"],["W","we"],["X","ix"],
+  ["Y","Ypsilon"],["Z","zet"]
+];
+
+const umlauts = [["Ä","ä"],["Ö","ö"],["Ü","ü"],["ß","Eszett"]];
+
+let germanVoice = null;
+function loadGermanVoice(){
+  if(!("speechSynthesis" in window)) return;
+  const voices = speechSynthesis.getVoices();
+  germanVoice =
+    voices.find(v => v.lang?.toLowerCase() === "de-de" && v.name.toLowerCase().includes("google")) ||
+    voices.find(v => v.lang?.toLowerCase() === "de-de") ||
+    voices.find(v => v.lang?.toLowerCase().startsWith("de")) ||
+    null;
+}
+loadGermanVoice();
+if("speechSynthesis" in window) speechSynthesis.addEventListener("voiceschanged", loadGermanVoice);
+
+function speakGerman(text, options = {}){
+  return new Promise(resolve => {
+    if(!text || !("speechSynthesis" in window)){
+      resolve();
+      return;
+    }
+    speechSynthesis.cancel();
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = "de-DE";
+    utterance.rate = options.rate ?? 0.92;
+    utterance.pitch = options.pitch ?? 1;
+    utterance.volume = 1;
+    if(germanVoice) utterance.voice = germanVoice;
+    utterance.onend = resolve;
+    utterance.onerror = () => resolve();
+    speechSynthesis.speak(utterance);
+  });
+}
+
+function createAlphabet(target, letters){
+  target.innerHTML = letters.map(([letter, label]) => {
+    const speech = letter === "ß" ? "Eszett" : letter;
+    return `<button type="button" class="alpha-btn" data-speech="${speech}" aria-label="${letter} ${label}">${letter} – ${label}</button>`;
+  }).join("");
+}
+
+createAlphabet(document.getElementById("alphabetButtons"), alphabet);
+createAlphabet(document.getElementById("umlautButtons"), umlauts);
+
+document.querySelectorAll("[data-speak]").forEach(btn => {
+  btn.addEventListener("click", () => speakGerman(btn.dataset.speak));
+});
+
+document.querySelectorAll("[data-speech]").forEach(btn => {
+  btn.addEventListener("click", async () => {
+    document.querySelectorAll(".alpha-btn").forEach(x => x.classList.remove("active"));
+    btn.classList.add("active");
+    document.getElementById("alphabetFeedback").className = "feedback ok";
+    document.getElementById("alphabetFeedback").textContent = `Gehört: ${btn.dataset.speech}`;
+    await speakGerman(btn.dataset.speech, { rate: 0.82 });
+  });
+});
+
+const pathFeedback = document.getElementById("pathFeedback");
+document.getElementById("showPathBtn").addEventListener("click", () => {
+  pathFeedback.className = "feedback ok";
+  pathFeedback.textContent = "1. Begrüßung → 2. Vorstellung → 3. Alphabet → 4. Mini-Quiz";
+});
+
+const playDialogBtn = document.getElementById("playDialogBtn");
+const dialogFeedback = document.getElementById("dialogFeedback");
+const dialogLines = [
+  "Hallo!",
+  "Wie heißt du?",
+  "Ich heiße Lena.",
+  "Und du?",
+  "Ich heiße Max."
+];
+playDialogBtn.addEventListener("click", async () => {
+  dialogFeedback.className = "feedback ok";
+  dialogFeedback.textContent = "Dialog wird vorgelesen...";
+  for(const line of dialogLines){
+    await speakGerman(line, { rate: 0.9 });
+  }
+  dialogFeedback.textContent = "Dialog fertig. Jetzt selbst nachsprechen.";
+});
+
+document.getElementById("formalBtn").addEventListener("click", () => {
+  dialogFeedback.className = "feedback ok";
+  dialogFeedback.textContent = "Formell: Guten Tag. Wie heißen Sie? — Ich heiße ...";
+  speakGerman("Guten Tag. Wie heißen Sie? Ich heiße Anna.");
+});
+
+document.getElementById("informalBtn").addEventListener("click", () => {
+  dialogFeedback.className = "feedback ok";
+  dialogFeedback.textContent = "Informell: Hallo. Wie heißt du? — Ich heiße ...";
+  speakGerman("Hallo. Wie heißt du? Ich heiße Anna.");
+});
+
+document.querySelectorAll(".choice").forEach(btn => {
+  btn.addEventListener("click", () => {
+    document.querySelectorAll(".choice").forEach(x => x.classList.remove("correct", "wrong"));
+    const fb = document.getElementById("quizFeedback");
+    if(btn.dataset.answer === "correct"){
+      btn.classList.add("correct");
+      fb.className = "feedback ok";
+      fb.textContent = "Richtig! „Ich heiße Maria.“ passt auf „Wie heißen Sie?“";
+      speakGerman("Sehr gut.");
+    }else{
+      btn.classList.add("wrong");
+      fb.className = "feedback no";
+      fb.textContent = "Noch nicht. Versuche es noch einmal.";
+      speakGerman("Noch einmal bitte.");
+    }
+  });
+});
+
+document.getElementById("repeatQuizBtn").addEventListener("click", () => {
+  document.querySelectorAll(".choice").forEach(x => x.classList.remove("correct", "wrong"));
+  const fb = document.getElementById("quizFeedback");
+  fb.className = "feedback";
+  fb.textContent = "Wähle eine Antwort.";
+});
+
+document.getElementById("finalChallengeBtn").addEventListener("click", async () => {
+  const text = "Guten Tag. Ich heiße ... Wie heißen Sie?";
+  await speakGerman(text);
+  document.getElementById("quizFeedback").className = "feedback ok";
+  document.getElementById("quizFeedback").textContent = "Challenge: Sprich den Satz laut nach.";
+});
+
+document.getElementById("speakIntroBtn").addEventListener("click", () => {
+  speakGerman("Guten Tag. Begrüßung und Vorstellung.");
+});
+
+document.getElementById("openSummaryDialogBtn").addEventListener("click", () => {
+  document.getElementById("summaryDialog").showModal();
+});
+
+document.getElementById("openSummaryDialogBtn").addEventListener("click", () => {
+  document.getElementById("summaryDialog").showModal();
+});
+
+document.querySelectorAll("[data-open-dialog]").forEach(btn => {
+  btn.addEventListener("click", () => {
+    const id = btn.getAttribute("data-open-dialog");
+    document.getElementById(id).showModal();
+  });
+});
+
+const introDialog = document.getElementById("introDialog");
+introDialog.addEventListener("click", e => {
+  const rect = introDialog.getBoundingClientRect();
+  const inDialog = (
+    e.clientX >= rect.left && e.clientX <= rect.right &&
+    e.clientY >= rect.top && e.clientY <= rect.bottom
+  );
+  if(!inDialog) introDialog.close();
+});
+
+document.getElementById("playAlphabetSeq").addEventListener("click", async () => {
+  for(const [letter] of alphabet) await speakGerman(letter === "ß" ? "Eszett" : letter, { rate: 0.82 });
+});
+
+document.getElementById("playUmlautSeq").addEventListener("click", async () => {
+  for(const [letter] of umlauts) await speakGerman(letter === "ß" ? "Eszett" : letter, { rate: 0.82 });
+});
+
+document.getElementById("clearAlphabetState").addEventListener("click", () => {
+  document.querySelectorAll(".alpha-btn").forEach(x => x.classList.remove("active"));
+  const fb = document.getElementById("alphabetFeedback");
+  fb.className = "feedback";
+  fb.textContent = "Tipp: Klick auf A, dann auf Ä, Ö, Ü und ß.";
+});
+
+document.getElementById("speakIntroBtn").setAttribute("aria-label", "Überschrift vorlesen");
+</script>
+</body>
+</html>
