@@ -1,1 +1,928 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<title>Ich stelle mich vor</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link
+  href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;700&family=Nunito+Sans:wght@400;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap"
+  rel="stylesheet"
+>
+
+<style>
+:root{
+  --background:#16233a;
+  --paper:#f7efdd;
+  --paper-light:#fffdf7;
+  --line:#e3d6b8;
+  --text:#1c2430;
+  --red:#bd4433;
+  --green:#315f4c;
+
+  --informell:#58755f;
+  --informell-border:#46614e;
+
+  --formell:#a65e4f;
+  --formell-border:#8f4c40;
+
+  --bubble-a:#eee9dc;
+  --bubble-b:#e8c989;
+  --bubble-b-border:#d2a94f;
+}
+
+*{
+  box-sizing:border-box;
+}
+
+body{
+  margin:0;
+  min-height:100vh;
+  padding:25px 18px;
+
+  background:
+    radial-gradient(
+      circle at 15% 10%,
+      rgba(207,159,63,.08),
+      transparent 35%
+    ),
+    radial-gradient(
+      circle at 85% 90%,
+      rgba(79,122,99,.10),
+      transparent 40%
+    ),
+    var(--background);
+
+  color:var(--text);
+  font-family:"Nunito Sans",sans-serif;
+}
+
+/* Główny jasny arkusz – całość jest trochę mniejsza */
+
+.lesson-page{
+  width:min(100%, 860px);
+  margin:0 auto;
+  padding:24px 28px 30px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #fff9ec,
+      #f3e3bf
+    );
+
+  border:1px solid rgba(227,214,184,.8);
+  border-radius:20px;
+
+  box-shadow:
+    0 18px 42px rgba(0,0,0,.28);
+}
+
+/* Nagłówek */
+
+.part-heading{
+  display:flex;
+  align-items:baseline;
+  gap:14px;
+
+  margin:0 0 17px;
+  padding-bottom:9px;
+
+  border-bottom:1px solid rgba(28,36,48,.12);
+}
+
+.part-number{
+  color:var(--red);
+
+  font-family:"JetBrains Mono",monospace;
+  font-size:.72rem;
+  font-weight:600;
+
+  letter-spacing:.18em;
+  text-transform:uppercase;
+}
+
+.part-title{
+  margin:0;
+
+  color:#161616;
+
+  font-family:"Fraunces",serif;
+  font-size:2.15rem;
+  font-weight:700;
+  line-height:1.15;
+}
+
+/* Karta */
+
+.card{
+  padding:21px 22px 20px;
+
+  background:rgba(255,253,247,.88);
+
+  border:1px solid var(--line);
+  border-radius:19px;
+
+  box-shadow:
+    0 10px 24px rgba(0,0,0,.08);
+}
+
+.description{
+  margin:0 0 14px;
+
+  color:var(--text);
+  font-size:1rem;
+  line-height:1.45;
+}
+
+/* Pole imienia */
+
+.name-row{
+  display:flex;
+  align-items:center;
+  gap:12px;
+
+  margin-bottom:17px;
+}
+
+.name-row label{
+  display:inline-flex;
+  align-items:center;
+  gap:7px;
+
+  flex:0 0 auto;
+
+  font-size:.96rem;
+  font-weight:800;
+}
+
+.pen-icon{
+  font-size:1rem;
+  line-height:1;
+}
+
+.name-row input{
+  flex:1;
+  min-width:0;
+
+  padding:10px 14px;
+
+  color:var(--text);
+  background:#fff;
+
+  border:2px solid var(--line);
+  border-radius:11px;
+
+  font-family:"Nunito Sans",sans-serif;
+  font-size:.96rem;
+
+  transition:
+    border-color .18s ease,
+    box-shadow .18s ease;
+}
+
+.name-row input:focus{
+  outline:none;
+  border-color:#cf9f3f;
+
+  box-shadow:
+    0 0 0 4px rgba(207,159,63,.16);
+}
+
+/* Prostokątne przyciski Informell / Formell */
+
+.tab-buttons{
+  display:flex;
+  align-items:center;
+
+  /* około 2 cm odstępu pomiędzy przyciskami */
+  gap:76px;
+
+  margin-bottom:15px;
+}
+
+.tab-button{
+  min-width:122px;
+  padding:9px 20px;
+
+  color:#3b3026;
+  background:#f5efe1;
+
+  border:2px solid var(--line);
+  border-radius:9px;
+
+  font-family:"Nunito Sans",sans-serif;
+  font-size:.92rem;
+  font-weight:800;
+
+  cursor:pointer;
+
+  transition:
+    transform .16s ease,
+    background .16s ease,
+    border-color .16s ease,
+    color .16s ease,
+    box-shadow .16s ease;
+}
+
+.tab-button:hover{
+  transform:translateY(-2px);
+  border-color:#cf9f3f;
+
+  box-shadow:
+    0 5px 12px rgba(0,0,0,.10);
+}
+
+/* Informell – spokojna zieleń dopasowana do całej strony */
+
+#tab-informell.active{
+  color:#fff;
+  background:var(--informell);
+  border-color:var(--informell-border);
+
+  box-shadow:
+    0 5px 12px rgba(70,97,78,.25);
+}
+
+/* Formell – stonowany ceglany kolor */
+
+#tab-formell.active{
+  color:#fff;
+  background:var(--formell);
+  border-color:var(--formell-border);
+
+  box-shadow:
+    0 5px 12px rgba(143,76,64,.25);
+}
+
+/* Dialog */
+
+.dialog-box{
+  display:grid;
+  gap:14px;
+
+  min-height:330px;
+  padding:19px 18px;
+
+  background:rgba(255,255,255,.34);
+
+  border:2px solid var(--line);
+  border-radius:16px;
+}
+
+.dialog-box[hidden]{
+  display:none;
+}
+
+/* Wspólny wygląd wypowiedzi */
+
+.bubble{
+  position:relative;
+
+  padding:11px 16px;
+
+  color:var(--text);
+
+  border-radius:15px;
+
+  font-size:.95rem;
+  line-height:1.4;
+
+  box-shadow:
+    0 4px 10px rgba(0,0,0,.045);
+}
+
+/* Osoba A */
+
+.bubble-a{
+  width:72%;
+  max-width:580px;
+  margin-right:auto;
+
+  background:var(--bubble-a);
+  border:1px solid #e2dccd;
+
+  border-bottom-left-radius:7px;
+}
+
+/* Osoba B */
+
+.bubble-b{
+  width:40%;
+  min-width:220px;
+  max-width:330px;
+  margin-left:auto;
+
+  background:
+    linear-gradient(
+      145deg,
+      #f0d89f,
+      var(--bubble-b)
+    );
+
+  border:1px solid var(--bubble-b-border);
+
+  border-bottom-right-radius:7px;
+
+  box-shadow:
+    0 6px 13px rgba(153,109,25,.15);
+}
+
+.speaker{
+  display:block;
+
+  margin-bottom:3px;
+
+  color:var(--red);
+
+  font-family:"JetBrains Mono",monospace;
+  font-size:.65rem;
+  font-weight:600;
+
+  letter-spacing:.12em;
+  text-transform:uppercase;
+}
+
+/* Przycisk głosu */
+
+.read-button{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:7px;
+
+  margin-top:13px;
+  padding:9px 19px;
+
+  color:#fff;
+
+  background:
+    linear-gradient(
+      180deg,
+      #3e755e,
+      var(--green)
+    );
+
+  border:0;
+  border-radius:999px;
+
+  font-family:"Nunito Sans",sans-serif;
+  font-size:.9rem;
+  font-weight:800;
+
+  cursor:pointer;
+
+  box-shadow:
+    0 6px 13px rgba(49,95,76,.24);
+
+  transition:
+    transform .16s ease,
+    filter .16s ease,
+    box-shadow .16s ease;
+}
+
+.read-button:hover{
+  transform:translateY(-2px);
+  filter:brightness(1.08);
+
+  box-shadow:
+    0 9px 16px rgba(49,95,76,.3);
+}
+
+.read-button:disabled{
+  cursor:not-allowed;
+  opacity:.65;
+  transform:none;
+}
+
+/* Telefon i tablet */
+
+@media (max-width:720px){
+
+  body{
+    padding:16px 9px;
+  }
+
+  .lesson-page{
+    padding:20px 13px 24px;
+    border-radius:15px;
+  }
+
+  .part-heading{
+    gap:9px;
+  }
+
+  .part-title{
+    font-size:1.78rem;
+  }
+
+  .card{
+    padding:18px 13px;
+  }
+
+  .name-row{
+    align-items:stretch;
+    flex-direction:column;
+    gap:7px;
+  }
+
+  .tab-buttons{
+    justify-content:flex-start;
+    gap:35px;
+  }
+
+  .tab-button{
+    min-width:115px;
+    padding:9px 12px;
+  }
+
+  .dialog-box{
+    min-height:0;
+    padding:16px 11px;
+    gap:13px;
+  }
+
+  .bubble-a{
+    width:82%;
+  }
+
+  .bubble-b{
+    width:58%;
+    min-width:0;
+  }
+}
+
+@media (max-width:430px){
+
+  .part-heading{
+    display:block;
+  }
+
+  .part-number{
+    display:block;
+    margin-bottom:5px;
+  }
+
+  .part-title{
+    font-size:1.6rem;
+  }
+
+  .description{
+    font-size:.95rem;
+  }
+
+  .tab-buttons{
+    gap:18px;
+  }
+
+  .tab-button{
+    flex:1;
+    min-width:0;
+    padding:9px 8px;
+  }
+
+  .bubble{
+    padding:10px 13px;
+  }
+
+  .bubble-a{
+    width:90%;
+  }
+
+  .bubble-b{
+    width:72%;
+  }
+
+  .read-button{
+    width:100%;
+  }
+}
+
+@media (prefers-reduced-motion:reduce){
+
+  *,
+  *::before,
+  *::after{
+    scroll-behavior:auto !important;
+    animation-duration:.01ms !important;
+    transition-duration:.01ms !important;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<main class="lesson-page">
+
+  <header class="part-heading">
+    <span class="part-number">Teil 2</span>
+    <h1 class="part-title">Ich stelle mich vor</h1>
+  </header>
+
+  <section class="card">
+
+    <p class="description">
+      Trag deinen Namen ein — die Dialoge passen sich an!
+    </p>
+
+    <div class="name-row">
+
+      <label for="mein-name">
+        <span class="pen-icon" aria-hidden="true">✏️</span>
+        <span>Dein Name:</span>
+      </label>
+
+      <input
+        type="text"
+        id="mein-name"
+        value="Moni"
+        placeholder="z. B. Moni"
+        autocomplete="given-name"
+      >
+
+    </div>
+
+    <div
+      class="tab-buttons"
+      role="tablist"
+      aria-label="Dialogform auswählen"
+    >
+
+      <button
+        type="button"
+        class="tab-button active"
+        id="tab-informell"
+        data-dialog="informell"
+        role="tab"
+        aria-selected="true"
+        aria-controls="dialog-informell"
+      >
+        Informell
+      </button>
+
+      <button
+        type="button"
+        class="tab-button"
+        id="tab-formell"
+        data-dialog="formell"
+        role="tab"
+        aria-selected="false"
+        aria-controls="dialog-formell"
+      >
+        Formell
+      </button>
+
+    </div>
+
+    <!-- Dialog nieformalny -->
+
+    <div
+      class="dialog-box"
+      id="dialog-informell"
+      role="tabpanel"
+      aria-labelledby="tab-informell"
+    >
+
+      <div class="bubble bubble-a">
+        <span class="speaker">A</span>
+        Hallo!
+      </div>
+
+      <div class="bubble bubble-b">
+        <span class="speaker">B</span>
+        Wie heißt du?
+      </div>
+
+      <div class="bubble bubble-a">
+        <span class="speaker">A</span>
+        Ich heiße <span class="dynamic-name">Moni</span>.
+      </div>
+
+      <div class="bubble bubble-b">
+        <span class="speaker">B</span>
+        Und du?
+      </div>
+
+      <div class="bubble bubble-a">
+        <span class="speaker">A</span>
+        Ich heiße Max.
+      </div>
+
+    </div>
+
+    <!-- Dialog formalny -->
+
+    <div
+      class="dialog-box"
+      id="dialog-formell"
+      role="tabpanel"
+      aria-labelledby="tab-formell"
+      hidden
+    >
+
+      <div class="bubble bubble-a">
+        <span class="speaker">A</span>
+        Guten Tag.
+      </div>
+
+      <div class="bubble bubble-b">
+        <span class="speaker">B</span>
+        Wie heißen Sie?
+      </div>
+
+      <div class="bubble bubble-a">
+        <span class="speaker">A</span>
+        Ich heiße <span class="dynamic-name">Moni</span>.
+      </div>
+
+      <div class="bubble bubble-b">
+        <span class="speaker">B</span>
+        Und Sie?
+      </div>
+
+      <div class="bubble bubble-a">
+        <span class="speaker">A</span>
+        Ich heiße Julia.
+      </div>
+
+    </div>
+
+    <button
+      type="button"
+      class="read-button"
+      id="dialog-read-button"
+    >
+      <span aria-hidden="true">🔊</span>
+      <span>Dialog vorlesen</span>
+    </button>
+
+  </section>
+
+</main>
+
+<script>
+"use strict";
+
+/* ==================================================
+   GŁOS NIEMIECKI
+================================================== */
+
+let germanVoice = null;
+
+function loadGermanVoice(){
+
+  if(!("speechSynthesis" in window)){
+    return;
+  }
+
+  const voices =
+    window.speechSynthesis.getVoices();
+
+  germanVoice =
+
+    voices.find(voice =>
+      voice.lang &&
+      voice.lang.toLowerCase() === "de-de" &&
+      voice.name.toLowerCase().includes("google")
+    ) ||
+
+    voices.find(voice =>
+      voice.lang &&
+      voice.lang.toLowerCase() === "de-de"
+    ) ||
+
+    voices.find(voice =>
+      voice.lang &&
+      voice.lang.toLowerCase().startsWith("de")
+    ) ||
+
+    null;
+}
+
+loadGermanVoice();
+
+if("speechSynthesis" in window){
+
+  window.speechSynthesis.addEventListener(
+    "voiceschanged",
+    loadGermanVoice
+  );
+}
+
+function speakGerman(text, options = {}){
+
+  return new Promise(resolve => {
+
+    if(
+      !text ||
+      !("speechSynthesis" in window)
+    ){
+      resolve();
+      return;
+    }
+
+    const utterance =
+      new SpeechSynthesisUtterance(text);
+
+    utterance.lang = "de-DE";
+    utterance.rate = options.rate ?? 0.92;
+    utterance.pitch = options.pitch ?? 1;
+    utterance.volume = 1;
+
+    if(germanVoice){
+      utterance.voice = germanVoice;
+    }
+
+    utterance.onend = resolve;
+
+    utterance.onerror = event => {
+
+      console.error(
+        "Fehler bei der Sprachausgabe:",
+        event.error
+      );
+
+      resolve();
+    };
+
+    window.speechSynthesis.speak(utterance);
+  });
+}
+
+/* ==================================================
+   AUTOMATYCZNE WSTAWIANIE IMIENIA
+================================================== */
+
+const nameInput =
+  document.getElementById("mein-name");
+
+const dynamicNames =
+  document.querySelectorAll(".dynamic-name");
+
+function updateName(){
+
+  const enteredName =
+    nameInput.value.trim();
+
+  const displayedName =
+    enteredName || "Moni";
+
+  dynamicNames.forEach(element => {
+    element.textContent = displayedName;
+  });
+}
+
+nameInput.addEventListener(
+  "input",
+  updateName
+);
+
+updateName();
+
+/* ==================================================
+   PRZEŁĄCZANIE INFORMELL / FORMELL
+================================================== */
+
+const tabButtons =
+  document.querySelectorAll(".tab-button");
+
+const dialogs = {
+
+  informell:
+    document.getElementById("dialog-informell"),
+
+  formell:
+    document.getElementById("dialog-formell")
+};
+
+let activeDialog = "informell";
+
+tabButtons.forEach(button => {
+
+  button.addEventListener("click", () => {
+
+    activeDialog =
+      button.dataset.dialog;
+
+    tabButtons.forEach(tab => {
+
+      const isActive =
+        tab === button;
+
+      tab.classList.toggle(
+        "active",
+        isActive
+      );
+
+      tab.setAttribute(
+        "aria-selected",
+        String(isActive)
+      );
+    });
+
+    Object.entries(dialogs).forEach(
+      ([dialogName, dialogElement]) => {
+
+        dialogElement.hidden =
+          dialogName !== activeDialog;
+      }
+    );
+
+    window.speechSynthesis?.cancel();
+  });
+});
+
+/* ==================================================
+   ODCZYTYWANIE DIALOGU
+================================================== */
+
+const readButton =
+  document.getElementById("dialog-read-button");
+
+function getDialogSentences(dialogElement){
+
+  return Array.from(
+    dialogElement.querySelectorAll(".bubble")
+  ).map(bubble => {
+
+    const bubbleCopy =
+      bubble.cloneNode(true);
+
+    const speakerLabel =
+      bubbleCopy.querySelector(".speaker");
+
+    if(speakerLabel){
+      speakerLabel.remove();
+    }
+
+    return bubbleCopy.textContent
+      .replace(/\s+/g, " ")
+      .trim();
+  });
+}
+
+async function readActiveDialog(){
+
+  if(!("speechSynthesis" in window)){
+
+    alert(
+      "Ihr Browser unterstützt die Sprachausgabe nicht."
+    );
+
+    return;
+  }
+
+  window.speechSynthesis.cancel();
+
+  const currentDialog =
+    dialogs[activeDialog];
+
+  const sentences =
+    getDialogSentences(currentDialog);
+
+  readButton.disabled = true;
+
+  readButton.innerHTML =
+    "<span aria-hidden='true'>🔊</span>" +
+    "<span>Dialog wird vorgelesen …</span>";
+
+  for(const sentence of sentences){
+
+    await speakGerman(
+      sentence,
+      {
+        rate:0.92,
+        pitch:1
+      }
+    );
+  }
+
+  readButton.disabled = false;
+
+  readButton.innerHTML =
+    "<span aria-hidden='true'>🔊</span>" +
+    "<span>Dialog vorlesen</span>";
+}
+
+readButton.addEventListener(
+  "click",
+  readActiveDialog
+);
+
+/* Zatrzymanie głosu po opuszczeniu strony */
+
+window.addEventListener(
+  "beforeunload",
+  () => {
+    window.speechSynthesis?.cancel();
+  }
+);
+</script>
+
+</body>
+</html>
