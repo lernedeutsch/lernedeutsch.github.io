@@ -1,1 +1,654 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Informell oder formell?</title>
 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;700&family=Nunito+Sans:wght@400;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#16233a;
+  --text:#1c2430;
+  --line:#e3d6b8;
+  --gold:#cf9f3f;
+  --green:#16864b;
+  --green-bg:#e8f8ef;
+  --red:#c53d3d;
+  --red-bg:#fff0f0;
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+
+body{
+  min-height:100vh;
+  margin:0;
+  padding:35px 14px 70px;
+  color:var(--text);
+  background:
+    radial-gradient(circle at 10% 10%,rgba(207,159,63,.08),transparent 35%),
+    radial-gradient(circle at 90% 90%,rgba(79,122,99,.1),transparent 40%),
+    var(--bg);
+  font:400 .94rem/1.4 "Nunito Sans",sans-serif;
+}
+
+button{font:inherit;cursor:pointer}
+
+/* Pasek postępu */
+
+.progress-box{
+  position:fixed;
+  z-index:1000;
+  top:0;
+  left:0;
+  width:100%;
+  height:6px;
+  background:rgba(255,255,255,.17);
+}
+
+.progress{
+  width:0;
+  height:100%;
+  background:linear-gradient(90deg,#f4c95d,#ffad42);
+  box-shadow:0 0 10px rgba(244,201,93,.5);
+}
+
+/* Karta */
+
+.wrapper{
+  width:min(900px,100%);
+  margin:auto;
+}
+
+.card{
+  padding:22px;
+  background:linear-gradient(145deg,#fff8e9,#f5e6c7);
+  border:1px solid rgba(255,255,255,.4);
+  border-radius:22px;
+  box-shadow:0 18px 45px rgba(0,0,0,.22);
+}
+
+/* Dialog vorlesen */
+
+.read-btn{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  min-height:42px;
+  margin:0 0 20px;
+  padding:8px 18px;
+  color:#fff;
+  background:linear-gradient(#5e8d72,#3f6c56);
+  border:1px solid #315b47;
+  border-radius:999px;
+  font-weight:800;
+  box-shadow:0 7px 15px rgba(49,91,71,.22);
+  transition:.15s;
+}
+
+.read-btn:hover{
+  transform:translateY(-2px);
+  filter:brightness(1.06);
+}
+
+.read-btn.speaking{background:#315f4c}
+
+h1{
+  margin:0 0 15px;
+  font:700 1.7rem/1.2 "Fraunces",serif;
+}
+
+/* Informell / Formell */
+
+.category-buttons{
+  display:flex;
+  gap:10px;
+  margin:0 0 17px;
+}
+
+.category-btn{
+  min-width:120px;
+  min-height:41px;
+  padding:7px 17px;
+  color:var(--text);
+  background:#fbf5e8;
+  border:2px solid var(--line);
+  border-radius:999px;
+  font-weight:800;
+  transition:.15s;
+}
+
+.category-btn:hover:not(:disabled){
+  border-color:var(--gold);
+  transform:translateY(-2px);
+}
+
+.category-btn.selected{
+  color:#fff;
+  background:#20324a;
+  border-color:#20324a;
+}
+
+.category-btn.correct-choice{
+  color:#fff;
+  background:var(--green);
+  border-color:var(--green);
+}
+
+.category-btn.wrong-choice{
+  color:#fff;
+  background:var(--red);
+  border-color:var(--red);
+}
+
+.category-btn:disabled{
+  cursor:default;
+  opacity:.55;
+}
+
+/* Zdania */
+
+.list{
+  display:grid;
+  gap:9px;
+}
+
+.row{
+  display:grid;
+  grid-template-columns:minmax(0,1fr);
+  gap:5px;
+  min-height:58px;
+  padding:10px 14px;
+  overflow-x:auto;
+  background:rgba(255,255,255,.93);
+  border:2px solid var(--line);
+  border-radius:16px;
+  opacity:.65;
+  transition:border-color .2s,background .2s,box-shadow .2s,transform .2s,opacity .2s;
+}
+
+.row.active{
+  opacity:1;
+  background:#fffdf5;
+  border-color:var(--gold);
+  box-shadow:
+    0 0 0 4px rgba(207,159,63,.2),
+    0 8px 18px rgba(77,60,30,.13);
+  transform:scale(1.01);
+}
+
+.row.solved{
+  opacity:1;
+  background:var(--green-bg);
+  border-color:#78bf95;
+  box-shadow:none;
+  transform:none;
+}
+
+.row.wrong{
+  opacity:1;
+  background:var(--red-bg);
+  border-color:#e79a9a;
+  animation:shake .28s;
+}
+
+.sentence{
+  white-space:nowrap;
+  font-size:1.08rem;
+  font-weight:800;
+}
+
+.feedback{
+  min-height:0;
+  margin:0;
+  font-size:.84rem;
+  font-weight:800;
+}
+
+.feedback.good{color:var(--green)}
+.feedback.bad{color:var(--red)}
+
+@keyframes shake{
+  25%{transform:translateX(-4px)}
+  75%{transform:translateX(4px)}
+}
+
+/* Wynik */
+
+.result{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:14px;
+  margin-top:16px;
+  padding:12px 15px;
+  background:rgba(255,255,255,.7);
+  border:1px solid var(--line);
+  border-radius:14px;
+}
+
+.score{
+  margin:0;
+  font:600 .9rem "JetBrains Mono",monospace;
+}
+
+.score strong{font-size:1.05rem}
+
+.reset{
+  min-height:38px;
+  padding:7px 15px;
+  color:#fff;
+  background:#20324a;
+  border:0;
+  border-radius:999px;
+  font-weight:800;
+  transition:.15s;
+}
+
+.reset:hover{
+  transform:translateY(-2px);
+  filter:brightness(1.1);
+}
+
+.complete{
+  min-height:24px;
+  margin:12px 0 0;
+  color:var(--green);
+  text-align:center;
+  font-weight:800;
+}
+
+button:focus-visible{
+  outline:3px solid #f4c95d;
+  outline-offset:2px;
+}
+
+/* Telefon */
+
+@media(max-width:650px){
+  body{padding:28px 10px 60px}
+
+  .card{
+    padding:17px 12px;
+    border-radius:18px;
+  }
+
+  .read-btn{
+    width:100%;
+    justify-content:center;
+  }
+
+  h1{font-size:1.45rem}
+
+  .category-buttons{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+  }
+
+  .category-btn{min-width:0}
+  .row{padding:10px 12px}
+  .sentence{font-size:1rem}
+
+  .result{
+    align-items:stretch;
+    flex-direction:column;
+  }
+
+  .reset{width:100%}
+}
+
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+
+  *,*::before,*::after{
+    animation-duration:.01ms!important;
+    transition-duration:.01ms!important;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="progress-box" aria-hidden="true">
+  <div class="progress" id="progress"></div>
+</div>
+
+<main class="wrapper">
+<section class="card">
+
+  <button type="button" class="read-btn" id="read">
+    🔊 Dialog vorlesen
+  </button>
+
+  <h1>Informell oder formell?</h1>
+
+  <div class="category-buttons">
+    <button type="button" class="category-btn" data-category="informell">
+      Informell
+    </button>
+
+    <button type="button" class="category-btn" data-category="formell">
+      Formell
+    </button>
+  </div>
+
+  <div class="list">
+
+    <div class="row active" data-answer="informell" data-text="Wie heißt du?">
+      <span class="sentence">Wie heißt du?</span>
+      <p class="feedback" aria-live="polite"></p>
+    </div>
+
+    <div class="row" data-answer="formell" data-text="Wie heißen Sie?">
+      <span class="sentence">Wie heißen Sie?</span>
+      <p class="feedback" aria-live="polite"></p>
+    </div>
+
+    <div class="row" data-answer="formell" data-text="Mein Name ist Anna Müller.">
+      <span class="sentence">Mein Name ist Anna Müller.</span>
+      <p class="feedback" aria-live="polite"></p>
+    </div>
+
+    <div class="row" data-answer="informell" data-text="Hallo! Ich bin Tom.">
+      <span class="sentence">Hallo! Ich bin Tom.</span>
+      <p class="feedback" aria-live="polite"></p>
+    </div>
+
+    <div class="row" data-answer="informell" data-text="Hallo!">
+      <span class="sentence">Hallo!</span>
+      <p class="feedback" aria-live="polite"></p>
+    </div>
+
+    <div class="row" data-answer="informell" data-text="Tschüss!">
+      <span class="sentence">Tschüss!</span>
+      <p class="feedback" aria-live="polite"></p>
+    </div>
+
+    <div class="row" data-answer="formell" data-text="Guten Tag!">
+      <span class="sentence">Guten Tag!</span>
+      <p class="feedback" aria-live="polite"></p>
+    </div>
+
+  </div>
+
+  <div class="result">
+    <p class="score">
+      Richtig zugeordnet:
+      <strong><span id="score">0</span> / 7</strong>
+    </p>
+
+    <button type="button" class="reset" id="reset">
+      Übung wiederholen
+    </button>
+  </div>
+
+  <p class="complete" id="complete" aria-live="polite"></p>
+
+</section>
+</main>
+
+<script>
+"use strict";
+
+const $=s=>document.querySelector(s);
+const $$=s=>[...document.querySelectorAll(s)];
+
+const rows=$$(".row");
+const buttons=$$(".category-btn");
+const read=$("#read");
+const scoreEl=$("#score");
+const complete=$("#complete");
+
+let current=0,score=0,voice=null,session=0,locked=false;
+
+/* Pasek postępu */
+
+function updateProgress(){
+  const max=document.documentElement.scrollHeight-innerHeight;
+
+  $("#progress").style.width=max>0
+    ?`${Math.min(100,scrollY/max*100)}%`
+    :"100%";
+}
+
+addEventListener("scroll",updateProgress,{passive:true});
+addEventListener("resize",updateProgress);
+updateProgress();
+
+/* Głos */
+
+function loadVoice(){
+  if(!("speechSynthesis" in window))return;
+
+  const voices=speechSynthesis.getVoices();
+
+  voice=
+    voices.find(v=>
+      v.lang?.toLowerCase()==="de-de" &&
+      v.name?.toLowerCase().includes("google")
+    )||
+    voices.find(v=>v.lang?.toLowerCase()==="de-de")||
+    voices.find(v=>v.lang?.toLowerCase().startsWith("de"))||
+    null;
+}
+
+loadVoice();
+
+if("speechSynthesis" in window){
+  speechSynthesis.addEventListener("voiceschanged",loadVoice);
+}
+
+function stopSpeech(){
+  session++;
+
+  if("speechSynthesis" in window){
+    speechSynthesis.cancel();
+  }
+
+  read.classList.remove("speaking");
+}
+
+function speak(text,rate=.88){
+  return new Promise(resolve=>{
+    if(!text||!("speechSynthesis" in window)){
+      resolve();
+      return;
+    }
+
+    const utterance=new SpeechSynthesisUtterance(text);
+
+    Object.assign(utterance,{
+      lang:"de-DE",
+      rate,
+      pitch:1,
+      volume:1
+    });
+
+    if(voice)utterance.voice=voice;
+
+    utterance.onend=resolve;
+    utterance.onerror=resolve;
+
+    speechSynthesis.speak(utterance);
+  });
+}
+
+const wait=ms=>new Promise(resolve=>setTimeout(resolve,ms));
+
+/* Aktualne zdanie */
+
+function showCurrent(){
+  rows.forEach((row,index)=>
+    row.classList.toggle("active",index===current)
+  );
+
+  rows[current]?.scrollIntoView({
+    behavior:"smooth",
+    block:"nearest"
+  });
+}
+
+function setButtons(enabled){
+  locked=!enabled;
+
+  buttons.forEach(button=>{
+    button.disabled=!enabled;
+    button.classList.remove(
+      "selected",
+      "correct-choice",
+      "wrong-choice"
+    );
+  });
+}
+
+/* Sprawdzanie odpowiedzi */
+
+buttons.forEach(button=>{
+  button.onclick=async()=>{
+    if(locked||current>=rows.length)return;
+
+    locked=true;
+    stopSpeech();
+
+    const row=rows[current];
+    const feedback=row.querySelector(".feedback");
+    const correct=button.dataset.category===row.dataset.answer;
+
+    buttons.forEach(item=>item.classList.remove(
+      "selected",
+      "correct-choice",
+      "wrong-choice"
+    ));
+
+    feedback.textContent="";
+    feedback.className="feedback";
+    row.classList.remove("wrong");
+
+    if(correct){
+      buttons.forEach(item=>item.disabled=true);
+      button.classList.add("correct-choice");
+
+      row.classList.remove("active");
+      row.classList.add("solved");
+
+      feedback.textContent="Richtig! Sehr gut.";
+      feedback.classList.add("good");
+
+      scoreEl.textContent=++score;
+
+      await speak("Richtig! Sehr gut.",.9);
+      await wait(250);
+
+      current++;
+
+      if(current<rows.length){
+        setButtons(true);
+        showCurrent();
+      }else{
+        setButtons(false);
+
+        complete.textContent=
+          "Sehr gut! Alle Sätze sind richtig zugeordnet.";
+
+        await speak(
+          "Sehr gut! Alle Sätze sind richtig zugeordnet.",
+          .88
+        );
+      }
+    }else{
+      button.classList.add("wrong-choice");
+      row.classList.add("wrong");
+
+      feedback.textContent=
+        "Nicht ganz. Versuchen Sie es noch einmal.";
+
+      feedback.classList.add("bad");
+
+      await speak(
+        "Nicht ganz. Versuchen Sie es noch einmal.",
+        .88
+      );
+
+      await wait(250);
+
+      row.classList.remove("wrong");
+      button.classList.remove("wrong-choice");
+      locked=false;
+    }
+  };
+});
+
+/* Dialog vorlesen — działa zawsze */
+
+read.onclick=async()=>{
+  stopSpeech();
+
+  const activeSession=session;
+  read.classList.add("speaking");
+
+  for(const row of rows){
+    if(activeSession!==session)break;
+
+    const oldBorder=row.style.borderColor;
+    const oldTransform=row.style.transform;
+
+    row.style.borderColor="#cf9f3f";
+    row.style.transform="scale(1.01)";
+
+    await speak(row.dataset.text,.86);
+
+    row.style.borderColor=oldBorder;
+    row.style.transform=oldTransform;
+
+    if(activeSession!==session)break;
+    await wait(180);
+  }
+
+  read.classList.remove("speaking");
+};
+
+/* Reset */
+
+$("#reset").onclick=()=>{
+  stopSpeech();
+
+  current=0;
+  score=0;
+  locked=false;
+
+  scoreEl.textContent="0";
+  complete.textContent="";
+
+  buttons.forEach(button=>{
+    button.disabled=false;
+    button.classList.remove(
+      "selected",
+      "correct-choice",
+      "wrong-choice"
+    );
+  });
+
+  rows.forEach((row,index)=>{
+    row.classList.remove("active","solved","wrong");
+    row.style.cssText="";
+
+    if(index===0)row.classList.add("active");
+
+    const feedback=row.querySelector(".feedback");
+    feedback.textContent="";
+    feedback.className="feedback";
+  });
+
+  showCurrent();
+};
+
+addEventListener("beforeunload",stopSpeech);
+</script>
+
+</body>
+</html>
