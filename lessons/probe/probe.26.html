@@ -1,1 +1,1219 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Deutschkurs A1 — Lektion 1 (Interaktiv)</title>
 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Caveat:wght@500;700&family=Nunito+Sans:opsz,wght@6..12,400,600,700,800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --ink:#16233a;
+  --ink-soft:#223350;
+  --paper:#f7efdd;
+  --paper-line:#e3d6b8;
+  --stamp-red:#bd4433;
+  --gold:#cf9f3f;
+  --sage:#4f7a63;
+  --text-dark:#1c2430;
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+
+body{
+  margin:0;
+  padding:0 0 60px;
+  background:var(--ink);
+  background-image:
+    radial-gradient(circle at 10% 8%,rgba(207,159,63,.07),transparent 35%),
+    radial-gradient(circle at 90% 92%,rgba(79,122,99,.10),transparent 40%);
+  color:var(--text-dark);
+  font:400 1rem/1.6 "Nunito Sans",sans-serif;
+}
+
+/* ---------- Nav ---------- */
+
+.course-nav{
+  max-width:880px;
+  margin:40px auto 50px;
+  padding:0 20px;
+}
+
+.course-nav-title{
+  margin:0 0 24px;
+  color:var(--paper);
+  text-align:center;
+  font:700 2rem "Fraunces",serif;
+}
+
+.course-section{
+  margin-bottom:16px;
+  padding:16px 18px 14px;
+  background:var(--paper);
+  border:1px solid var(--paper-line);
+  border-radius:18px;
+}
+
+.section-title{
+  margin:0 0 12px;
+  color:var(--text-dark);
+  font:1rem "JetBrains Mono",monospace;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+}
+
+.lesson-list{display:grid;gap:8px;margin:0;padding:0;list-style:none}
+
+.lesson-list a{
+  display:block;
+  padding:10px 12px;
+  color:var(--text-dark);
+  text-decoration:none;
+  background:#fff;
+  border:1px solid var(--paper-line);
+  border-radius:12px;
+  transition:background .15s,border-color .15s,transform .15s;
+}
+
+.lesson-list a:hover{
+  background:#fbf6e8;
+  border-color:var(--gold);
+  transform:translateX(4px);
+}
+
+section[id^="lektion"]{scroll-margin-top:40px}
+
+.wrap{max-width:980px;margin:0 auto;padding:32px 20px 0}
+
+#lektion1 .wrap{
+  padding:32px;
+  background:linear-gradient(160deg,#fff8ea,#f3e2bd);
+  border-radius:22px;
+}
+
+/* ---------- Hero ---------- */
+
+header.hero{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  gap:28px;
+  margin-bottom:20px;
+  padding:24px 0 30px;
+  border-bottom:2px dashed rgba(28,36,48,.18);
+}
+
+.hero-text{flex:1 1 340px}
+
+.eyebrow{
+  margin:0 0 10px;
+  color:var(--stamp-red);
+  font:.78rem "JetBrains Mono",monospace;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+}
+
+.lesson-title{
+  margin:0 0 14px;
+  color:var(--text-dark);
+  font:700 2.7rem/1.12 "Fraunces",serif;
+}
+
+.hero-text p{margin:0;max-width:52ch;color:#33455c}
+
+.topics{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+
+.topics span{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:7px 12px;
+  color:var(--text-dark);
+  background:#fff;
+  border:1px solid var(--paper-line);
+  border-radius:999px;
+  font-size:.92rem;
+}
+
+.wheel-box{flex:0 1 300px;display:grid;place-items:center}
+
+.wheel-box svg{
+  width:100%;
+  max-width:300px;
+  height:auto;
+  filter:drop-shadow(0 16px 30px rgba(0,0,0,.18));
+}
+
+.month-label,.center-label,.center-sub{
+  fill:var(--paper);
+  font-family:"JetBrains Mono",monospace;
+  text-anchor:middle;
+}
+
+.center-label{font-size:17px;font-weight:700}
+.center-sub{font-size:12px;opacity:.9}
+
+/* ---------- Sprachpass (signature element) ---------- */
+
+.sprachpass{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  gap:18px;
+  margin:0 0 34px;
+  padding:16px 20px;
+  background:var(--ink-soft);
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:18px;
+  box-shadow:0 10px 24px rgba(0,0,0,.25);
+}
+
+.sprachpass-label{
+  color:var(--paper);
+  font:700 1.05rem "Fraunces",serif;
+  white-space:nowrap;
+}
+
+.sprachpass-sub{
+  margin:2px 0 0;
+  color:rgba(247,239,221,.65);
+  font:.82rem "JetBrains Mono",monospace;
+  letter-spacing:.04em;
+}
+
+.stamps{display:flex;gap:12px;flex-wrap:wrap;margin-left:auto}
+
+.stamp-slot{
+  position:relative;
+  width:68px;
+  height:68px;
+  display:grid;
+  place-items:center;
+  border:2px dashed rgba(247,239,221,.3);
+  border-radius:50%;
+  color:rgba(247,239,221,.4);
+  font:.68rem "JetBrains Mono",monospace;
+  text-align:center;
+  line-height:1.1;
+  transition:transform .3s;
+}
+
+.stamp-slot .slot-icon{font-size:1.3rem;opacity:.5}
+
+.stamp-slot.stamped{
+  border-style:solid;
+  border-color:var(--stamp-red);
+  color:var(--stamp-red);
+  background:rgba(189,68,51,.08);
+  transform:rotate(-8deg) scale(1.06);
+  animation:stampPop .45s ease-out;
+}
+
+.stamp-slot.stamped .slot-icon{opacity:1}
+
+@keyframes stampPop{
+  0%{transform:rotate(-8deg) scale(.4);opacity:0}
+  60%{transform:rotate(-10deg) scale(1.15);opacity:1}
+  100%{transform:rotate(-8deg) scale(1.06);opacity:1}
+}
+
+/* ---------- Parts ---------- */
+
+.part{margin:34px 0 42px}
+
+.part-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:12px;margin-bottom:14px}
+
+.part-num{
+  color:var(--stamp-red);
+  font:.82rem "JetBrains Mono",monospace;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+}
+
+.part-title{margin:0;color:var(--text-dark);font:700 2rem "Fraunces",serif}
+
+.card{
+  margin-top:14px;
+  padding:22px 22px 20px;
+  background:#fffdf6;
+  border:1px solid var(--paper-line);
+  border-radius:22px;
+  box-shadow:0 12px 30px rgba(0,0,0,.06);
+}
+
+.lead{color:var(--text-dark);font-size:1.04rem}
+
+.grammar-box{
+  margin:20px 0;
+  padding:14px 16px;
+  background:#fbf6e8;
+  border-left:4px solid var(--gold);
+  border-radius:16px;
+}
+
+details.grammar-toggle{margin:20px 0}
+
+details.grammar-toggle summary{
+  cursor:pointer;
+  padding:12px 16px;
+  background:#f0ede0;
+  border:1px solid var(--paper-line);
+  border-radius:14px;
+  font-weight:700;
+  list-style:none;
+}
+
+details.grammar-toggle summary::-webkit-details-marker{display:none}
+
+details.grammar-toggle summary::before{content:"📖 ";}
+
+details.grammar-toggle[open] summary{border-radius:14px 14px 0 0}
+
+.gruss-tabelle{
+  width:100%;
+  margin:0;
+  overflow:hidden;
+  background:#fff;
+  border:1px solid var(--paper-line);
+  border-top:none;
+  border-radius:0 0 16px 16px;
+  border-collapse:separate;
+  border-spacing:0;
+}
+
+.gruss-tabelle th{background:#f0ede0;color:var(--text-dark);text-align:left}
+
+.gruss-tabelle th,.gruss-tabelle td{padding:16px;border-bottom:1px solid var(--paper-line)}
+
+.gruss-tabelle tbody tr:last-child td{border-bottom:none}
+
+.gruss{font-size:1.05rem;font-weight:700;color:var(--stamp-red)}
+
+/* ---------- Uhr-Spiel (greeting game) ---------- */
+
+.uhr-spiel{
+  margin-top:20px;
+  padding:20px;
+  background:#fbf6e8;
+  border:1px solid var(--paper-line);
+  border-radius:18px;
+}
+
+.uhr-anzeige{
+  display:flex;
+  align-items:center;
+  gap:16px;
+  margin-bottom:14px;
+}
+
+.uhr-emoji{font-size:2.4rem}
+
+.uhr-zeit{font:700 1.6rem "JetBrains Mono",monospace;color:var(--text-dark)}
+
+input[type="range"].uhr-slider{
+  width:100%;
+  accent-color:var(--stamp-red);
+  margin:10px 0 18px;
+}
+
+.antwort-buttons{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:12px}
+
+.antwort-btn{
+  padding:10px 16px;
+  border:2px solid var(--paper-line);
+  background:#fff;
+  border-radius:999px;
+  font:700 .95rem "Nunito Sans",sans-serif;
+  cursor:pointer;
+  transition:transform .15s,border-color .15s,background .15s;
+}
+
+.antwort-btn:hover{transform:translateY(-2px);border-color:var(--gold)}
+
+.antwort-btn.richtig{background:#e4f3e8;border-color:var(--sage);color:#28502f}
+.antwort-btn.falsch{background:#f9e4e1;border-color:var(--stamp-red);color:var(--stamp-red)}
+
+.feedback-zeile{
+  min-height:26px;
+  font-weight:700;
+  font-size:.95rem;
+}
+
+.fortschritt-mini{
+  margin-top:10px;
+  font:.85rem "JetBrains Mono",monospace;
+  color:#5a5140;
+}
+
+/* ---------- Vorstellung ---------- */
+
+.name-eingabe{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  align-items:center;
+  margin-bottom:18px;
+}
+
+.name-eingabe input{
+  flex:1 1 220px;
+  padding:10px 14px;
+  border:2px solid var(--paper-line);
+  border-radius:12px;
+  font:1rem "Nunito Sans",sans-serif;
+}
+
+.name-eingabe input:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+
+.tab-leiste{display:flex;gap:8px;margin-bottom:14px}
+
+.tab-btn{
+  padding:9px 18px;
+  border:2px solid var(--paper-line);
+  background:#fff;
+  border-radius:999px 999px 0 0;
+  font:700 .9rem "Nunito Sans",sans-serif;
+  cursor:pointer;
+}
+
+.tab-btn.aktiv{background:#fffdf6;border-bottom-color:#fffdf6;color:var(--stamp-red)}
+
+.dialog{display:grid;gap:10px;padding:18px;background:#fffdf6;border:2px solid var(--paper-line);border-top:none;border-radius:0 16px 16px 16px}
+
+.bubble{max-width:86%;padding:12px 14px;color:var(--text-dark);border-radius:18px}
+
+.bubble.a{background:#f0ede0}
+.bubble.b{margin-left:auto;background:#fdf1d6}
+
+.speaker{display:block;margin-bottom:4px;color:var(--stamp-red);font:.72rem "JetBrains Mono",monospace;letter-spacing:.1em;text-transform:uppercase}
+
+.vorlesen-btn{
+  margin-top:12px;
+  padding:9px 18px;
+  border:none;
+  background:var(--sage);
+  color:#fff;
+  border-radius:999px;
+  font:700 .9rem "Nunito Sans",sans-serif;
+  cursor:pointer;
+}
+
+.vorlesen-btn:hover{filter:brightness(1.08)}
+
+.matching-liste{display:grid;gap:10px;margin-top:20px}
+
+.match-zeile{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  gap:12px;
+  padding:12px 14px;
+  background:#fff;
+  border:1px solid var(--paper-line);
+  border-radius:14px;
+}
+
+.match-satz{flex:1 1 220px;font-weight:600}
+
+.match-wahl{display:flex;gap:8px}
+
+.match-wahl button{
+  padding:7px 14px;
+  border:2px solid var(--paper-line);
+  background:#fbf6e8;
+  border-radius:999px;
+  font:700 .82rem "Nunito Sans",sans-serif;
+  cursor:pointer;
+}
+
+.match-wahl button.richtig{background:#e4f3e8;border-color:var(--sage);color:#28502f}
+.match-wahl button.falsch{background:#f9e4e1;border-color:var(--stamp-red);color:var(--stamp-red)}
+
+/* ---------- Alphabet ---------- */
+
+.alphabet{display:flex;flex-wrap:wrap;gap:12px;margin:20px 0}
+
+.alphabet-letter{
+  padding:14px 18px;
+  background:#fbf6e8;
+  border:1px solid var(--paper-line);
+  border-radius:12px;
+  cursor:pointer;
+  font:700 1.15rem sans-serif;
+  transition:background .15s,border-color .15s,transform .15s;
+}
+
+.alphabet-letter:hover{background:#eaf3ff;border-color:#72b8ff;transform:translateY(-2px)}
+
+.alphabet-letter.aktiv{background:var(--stamp-red);border-color:var(--stamp-red);color:#fff}
+
+.section-subtitle{margin:30px 0 14px;color:var(--text-dark);font:700 1.3rem "Fraunces",serif}
+
+.buchstabier-spiel{
+  margin-top:24px;
+  padding:20px;
+  background:#fbf6e8;
+  border:1px solid var(--paper-line);
+  border-radius:18px;
+}
+
+.buchstabier-eingabe{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:16px}
+
+.buchstabier-eingabe input{
+  flex:1 1 200px;
+  padding:10px 14px;
+  border:2px solid var(--paper-line);
+  border-radius:12px;
+  font:1rem "Nunito Sans",sans-serif;
+}
+
+.buchstabier-btn{
+  padding:10px 20px;
+  border:none;
+  background:var(--stamp-red);
+  color:#fff;
+  border-radius:999px;
+  font:700 .95rem "Nunito Sans",sans-serif;
+  cursor:pointer;
+}
+
+.buchstabier-btn:hover{filter:brightness(1.08)}
+
+.buchstabier-ausgabe{display:flex;flex-wrap:wrap;gap:8px;min-height:44px}
+
+.buchstabe-chip{
+  padding:8px 12px;
+  background:#fff;
+  border:2px solid var(--paper-line);
+  border-radius:10px;
+  font:700 1.1rem "JetBrains Mono",monospace;
+  transition:background .2s,border-color .2s,transform .2s;
+}
+
+.buchstabe-chip.spricht{background:var(--gold);border-color:var(--gold);color:#fff;transform:scale(1.1)}
+
+/* ---------- Quiz ---------- */
+
+.quiz-frage{
+  margin-bottom:20px;
+  padding:16px 18px;
+  background:#fff;
+  border:1px solid var(--paper-line);
+  border-radius:16px;
+}
+
+.quiz-frage p{margin:0 0 10px;font-weight:700}
+
+.quiz-optionen{display:grid;gap:8px}
+
+.quiz-optionen label{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:9px 12px;
+  background:#fbf6e8;
+  border:1px solid var(--paper-line);
+  border-radius:10px;
+  cursor:pointer;
+}
+
+.quiz-optionen input{accent-color:var(--stamp-red)}
+
+.quiz-auswerten-btn,.nochmal-btn{
+  padding:11px 22px;
+  border:none;
+  border-radius:999px;
+  font:800 1rem "Nunito Sans",sans-serif;
+  cursor:pointer;
+}
+
+.quiz-auswerten-btn{background:var(--stamp-red);color:#fff}
+.nochmal-btn{background:var(--sage);color:#fff;margin-left:10px}
+
+.quiz-ergebnis{
+  margin-top:16px;
+  padding:14px 18px;
+  border-radius:14px;
+  font-weight:700;
+  display:none;
+}
+
+.quiz-ergebnis.zeigen{display:block}
+.quiz-ergebnis.gut{background:#e4f3e8;color:#28502f}
+.quiz-ergebnis.schlecht{background:#f9e4e1;color:var(--stamp-red)}
+
+/* ---------- Buttons / Nav ---------- */
+
+.training-buttons-wrapper{display:flex;justify-content:center;align-items:stretch;gap:12px;margin:32px auto 12px}
+
+.training-btn{
+  display:inline-flex;flex:1 1 0;align-items:center;justify-content:center;gap:7px;
+  max-width:260px;min-height:58px;padding:12px 16px;color:#fff;text-align:center;
+  text-decoration:none;white-space:nowrap;border-radius:20px;
+  font:800 1.08rem/1.2 "Nunito Sans",sans-serif;
+  box-shadow:0 8px 17px rgba(0,0,0,.22),inset 0 1px 0 rgba(255,255,255,.35);
+  transition:transform .18s,filter .18s,box-shadow .18s;
+}
+
+.training-btn:hover{transform:translateY(-3px);filter:brightness(1.06);box-shadow:0 12px 22px rgba(0,0,0,.27),inset 0 1px 0 rgba(255,255,255,.4)}
+
+.sprich-nach-btn{border:2px solid #d7f1ff;background:linear-gradient(180deg,#68c7ff,#43aef4)}
+.aktiv-trainieren-btn{border:2px solid #e4ffd2;background:linear-gradient(180deg,#84df42,#5fbd28)}
+.übung-training-btn{border:2px solid #e5ddff;background:linear-gradient(180deg,#a88af5,#7958d8)}
+
+.summary-grid{display:grid;gap:12px}
+
+.row{
+  display:grid;grid-template-columns:220px 1fr;align-items:start;gap:14px;
+  padding:16px 18px;background:#fff;border:1px solid var(--paper-line);border-radius:14px;
+  transition:background .3s;
+}
+
+.row.erledigt{background:#eef7ee}
+
+.key{color:var(--stamp-red);font:800 1.05rem "Nunito Sans",sans-serif}
+
+.summary-text{font-size:1.02rem}
+
+.back-to-top{
+  display:flex;justify-content:center;align-items:center;gap:10px;width:max-content;
+  margin:20px auto 0;padding:12px 26px;color:var(--text-dark);background:#fff;
+  border:1px solid var(--paper-line);border-radius:999px;text-decoration:none;
+  font:700 1rem "Nunito Sans",sans-serif;transition:background .15s,border-color .15s;
+}
+
+.back-to-top:hover{background:#f0ede0;border-color:var(--gold)}
+
+.lesson-nav{
+  display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;margin-top:28px;
+  padding-top:24px;border-top:2px dashed rgba(28,36,48,.18);font:.9rem "JetBrains Mono",monospace;
+}
+
+.lesson-nav a{
+  padding:8px 16px;color:var(--text-dark);background:#fff;border:1px solid var(--paper-line);
+  border-radius:999px;text-decoration:none;transition:background .15s,border-color .15s;
+}
+
+.lesson-nav a:hover{background:#f0ede0;border-color:var(--gold)}
+
+a:focus-visible,button:focus-visible,.alphabet-letter:focus-visible{
+  outline:3px solid var(--gold);outline-offset:3px;
+}
+
+/* ---------- Mobile ---------- */
+
+@media (max-width:720px){
+  body{padding-bottom:30px}
+  .course-nav{margin:28px auto 38px}
+  .course-nav-title{font-size:1.7rem}
+  #lektion1 .wrap{padding:20px 14px;border-radius:16px}
+  header.hero{padding-top:12px}
+  .lesson-title{font-size:2.1rem}
+  .part-title{font-size:1.6rem}
+  .row{grid-template-columns:1fr}
+  .bubble{max-width:100%}
+  .card{padding:18px 14px}
+  .gruss-tabelle{display:block;overflow-x:auto}
+  .stamps{margin-left:0;width:100%;justify-content:space-between}
+  .stamp-slot{width:56px;height:56px;font-size:.6rem}
+  .training-buttons-wrapper{gap:7px;margin-top:26px}
+  .training-btn{min-width:0;min-height:52px;padding:10px 7px;border-radius:16px;font-size:.82rem;gap:4px;white-space:normal}
+}
+
+@media (max-width:430px){
+  .training-buttons-wrapper{flex-wrap:wrap}
+  .training-btn{flex:1 1 100%;max-width:100%;font-size:1rem}
+}
+
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important}
+}
+</style>
+</head>
+
+<body id="seitenanfang">
+
+<nav class="course-nav" aria-label="Inhaltsverzeichnis des A1-Kurses">
+  <h2 class="course-nav-title">A1 — 1 · Interaktiv</h2>
+  <div class="course-section">
+    <h3 class="section-title">Erste Schritte</h3>
+    <ul class="lesson-list">
+      <li><a href="#lektion1">Begrüßung, ich heiße …, das Alphabet</a></li>
+    </ul>
+  </div>
+</nav>
+
+<section id="lektion1">
+<div class="wrap">
+
+<header class="hero">
+  <div class="hero-text">
+    <p class="eyebrow">Deutschkurs A1 · 1 von 30 · Zwillingslektion</p>
+    <h1 class="lesson-title">Guten Tag! — Begrüßung und Vorstellung</h1>
+    <p>Heute lernen wir: Wie begrüßen wir uns? Wie stellen wir uns vor?
+    Und das deutsche Alphabet. Diesmal übst du aktiv mit — sammle Stempel für
+    deinen Sprachpass!</p>
+    <div class="topics">
+      <span>1 · Begrüßung</span>
+      <span>2 · Vorstellung</span>
+      <span>3 · Alphabet</span>
+    </div>
+  </div>
+
+  <div class="wheel-box">
+    <svg viewBox="0 0 320 320" role="img" aria-label="Begrüßungssymbol mit Händen und Wörtern">
+      <circle cx="160" cy="160" r="132" fill="rgba(255,255,255,.05)" stroke="rgba(28,36,48,.16)"/>
+      <circle cx="160" cy="160" r="70" fill="#16233a" stroke="rgba(28,36,48,.12)"/>
+      <text class="center-label" x="160" y="152">Hallo!</text>
+      <text class="center-sub" x="160" y="175">Guten Tag</text>
+      <text x="160" y="40" class="month-label" font-size="20">👋</text>
+      <text x="252" y="82" class="month-label" font-size="20">😊</text>
+      <text x="282" y="164" class="month-label" font-size="20">🗣️</text>
+      <text x="250" y="246" class="month-label" font-size="20">👤</text>
+      <text x="160" y="292" class="month-label" font-size="20">📖</text>
+      <text x="70" y="246" class="month-label" font-size="20">🎯</text>
+      <text x="38" y="164" class="month-label" font-size="20">✨</text>
+      <text x="70" y="82" class="month-label" font-size="20">🌟</text>
+    </svg>
+  </div>
+</header>
+
+<!-- SPRACHPASS -->
+<div class="sprachpass">
+  <div>
+    <div class="sprachpass-label">🛂 Dein Sprachpass</div>
+    <p class="sprachpass-sub" id="stempel-zaehler">0 / 4 Stempel gesammelt</p>
+  </div>
+  <div class="stamps" id="stamps">
+    <div class="stamp-slot" data-slot="greetings"><span><span class="slot-icon">👋</span><br>Begrüßung</span></div>
+    <div class="stamp-slot" data-slot="vorstellung"><span><span class="slot-icon">🧑‍🤝‍🧑</span><br>Vorstellung</span></div>
+    <div class="stamp-slot" data-slot="alphabet"><span><span class="slot-icon">🔤</span><br>Alphabet</span></div>
+    <div class="stamp-slot" data-slot="quiz"><span><span class="slot-icon">🏆</span><br>Quiz</span></div>
+  </div>
+</div>
+
+<!-- ============ TEIL 1 — BEGRÜSSUNG ============ -->
+<section class="part" id="lektion1-teil1">
+  <div class="part-head">
+    <span class="part-num">Teil 1</span>
+    <h2 class="part-title">Wir begrüßen uns</h2>
+  </div>
+
+  <div class="card">
+    <p class="lead">Wir sagen verschiedene Grüße je nach Tageszeit. Stell die Uhr ein
+    und finde den richtigen Gruß!</p>
+
+    <details class="grammar-toggle">
+      <summary>Merke! — Grüße nach Tageszeit</summary>
+      <div class="grammar-box" style="margin:0;border-radius:0">
+        morgens: <b>Guten Morgen!</b><br><br>
+        tagsüber: <b>Guten Tag!</b><br><br>
+        abends: <b>Guten Abend!</b><br><br>
+        informell: <b>Hallo!</b><br><br>
+        beim Abschied: <b>Tschüss!</b>
+      </div>
+      <table class="gruss-tabelle">
+        <thead><tr><th>Situation</th><th>Gruß</th><th>Wann?</th></tr></thead>
+        <tbody>
+          <tr><td>morgens</td><td class="gruss">Guten Morgen!</td><td>ca. 5–10 Uhr</td></tr>
+          <tr><td>tagsüber</td><td class="gruss">Guten Tag!</td><td>ca. 10–17 Uhr</td></tr>
+          <tr><td>abends</td><td class="gruss">Guten Abend!</td><td>ca. ab 17 Uhr</td></tr>
+          <tr><td>informell</td><td class="gruss">Hallo!</td><td>zu jeder Zeit</td></tr>
+          <tr><td>Abschied</td><td class="gruss">Tschüss!</td><td>zu jeder Zeit</td></tr>
+        </tbody>
+      </table>
+    </details>
+
+    <div class="uhr-spiel">
+      <div class="uhr-anzeige">
+        <span class="uhr-emoji" id="uhr-emoji">🌅</span>
+        <span class="uhr-zeit" id="uhr-zeit">08:00 Uhr</span>
+      </div>
+      <input type="range" min="0" max="23" value="8" class="uhr-slider" id="uhr-slider"
+        aria-label="Uhrzeit einstellen">
+      <p class="lead" style="margin:0 0 6px">Welcher Gruß passt zu dieser Uhrzeit?</p>
+      <div class="antwort-buttons" id="antwort-buttons">
+        <button class="antwort-btn" data-gruss="morgen">Guten Morgen!</button>
+        <button class="antwort-btn" data-gruss="tag">Guten Tag!</button>
+        <button class="antwort-btn" data-gruss="abend">Guten Abend!</button>
+      </div>
+      <p class="feedback-zeile" id="uhr-feedback"></p>
+      <p class="fortschritt-mini" id="uhr-fortschritt">Richtige Antworten: 0 / 3</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TEIL 2 — VORSTELLUNG ============ -->
+<section class="part" id="lektion1-teil2">
+  <div class="part-head">
+    <span class="part-num">Teil 2</span>
+    <h2 class="part-title">Ich stelle mich vor</h2>
+  </div>
+
+  <div class="card">
+    <p class="lead">Trag deinen Namen ein — die Dialoge passen sich an!</p>
+
+    <div class="name-eingabe">
+      <label for="mein-name" style="font-weight:700">Dein Name:</label>
+      <input type="text" id="mein-name" placeholder="z. B. Alex" value="Alex">
+    </div>
+
+    <div class="tab-leiste">
+      <button class="tab-btn aktiv" data-tab="informell">Informell</button>
+      <button class="tab-btn" data-tab="formell">Formell</button>
+    </div>
+
+    <div class="dialog" id="dialog-informell">
+      <div class="bubble a"><span class="speaker">A</span>Hallo!</div>
+      <div class="bubble b"><span class="speaker">B</span>Wie heißt du?</div>
+      <div class="bubble a"><span class="speaker">A</span>Ich heiße <span class="dyn-name">Alex</span>.</div>
+      <div class="bubble b"><span class="speaker">B</span>Und du?</div>
+      <div class="bubble a"><span class="speaker">A</span>Ich heiße Max.</div>
+    </div>
+
+    <div class="dialog" id="dialog-formell" style="display:none">
+      <div class="bubble a"><span class="speaker">A</span>Guten Tag.</div>
+      <div class="bubble b"><span class="speaker">B</span>Wie heißen Sie?</div>
+      <div class="bubble a"><span class="speaker">A</span>Ich heiße <span class="dyn-name">Alex</span>.</div>
+      <div class="bubble b"><span class="speaker">B</span>Und Sie?</div>
+      <div class="bubble a"><span class="speaker">A</span>Ich heiße Julia.</div>
+    </div>
+
+    <button class="vorlesen-btn" id="dialog-vorlesen">🔊 Dialog vorlesen</button>
+
+    <h3 class="section-subtitle">Informell oder formell?</h3>
+    <p class="lead" style="margin-bottom:10px">Ordne die Sätze richtig zu.</p>
+
+    <div class="matching-liste" id="matching-liste">
+      <div class="match-zeile" data-antwort="informell">
+        <span class="match-satz">Wie heißt du?</span>
+        <div class="match-wahl">
+          <button data-wahl="informell">Informell</button>
+          <button data-wahl="formell">Formell</button>
+        </div>
+      </div>
+      <div class="match-zeile" data-antwort="formell">
+        <span class="match-satz">Wie heißen Sie?</span>
+        <div class="match-wahl">
+          <button data-wahl="informell">Informell</button>
+          <button data-wahl="formell">Formell</button>
+        </div>
+      </div>
+      <div class="match-zeile" data-antwort="formell">
+        <span class="match-satz">Mein Name ist Anna Müller.</span>
+        <div class="match-wahl">
+          <button data-wahl="informell">Informell</button>
+          <button data-wahl="formell">Formell</button>
+        </div>
+      </div>
+      <div class="match-zeile" data-antwort="informell">
+        <span class="match-satz">Hallo! Ich bin Max.</span>
+        <div class="match-wahl">
+          <button data-wahl="informell">Informell</button>
+          <button data-wahl="formell">Formell</button>
+        </div>
+      </div>
+    </div>
+    <p class="fortschritt-mini" id="match-fortschritt">Richtig zugeordnet: 0 / 4</p>
+  </div>
+</section>
+
+<!-- ============ TEIL 3 — ALPHABET ============ -->
+<section class="part" id="lektion1-teil3">
+  <div class="part-head">
+    <span class="part-num">Teil 3</span>
+    <h2 class="part-title">Das deutsche Alphabet</h2>
+  </div>
+
+  <div class="card">
+    <p class="lead">Klicken Sie auf einen Buchstaben und hören Sie die deutsche Aussprache.</p>
+
+    <div class="alphabet" id="alphabet"></div>
+
+    <h3 class="section-subtitle">Die Umlaute</h3>
+    <div class="alphabet" id="umlaute"></div>
+
+    <div class="buchstabier-spiel">
+      <h3 class="section-subtitle" style="margin-top:0">✏️ Buchstabier deinen Namen</h3>
+      <p class="lead" style="margin-bottom:12px">Gib deinen Namen ein und höre ihn Buchstabe für Buchstabe auf Deutsch.</p>
+      <div class="buchstabier-eingabe">
+        <input type="text" id="buchstabier-input" placeholder="z. B. Anna" value="Anna">
+        <button class="buchstabier-btn" id="buchstabier-btn">🔊 Buchstabieren</button>
+      </div>
+      <div class="buchstabier-ausgabe" id="buchstabier-ausgabe"></div>
+    </div>
+  </div>
+
+  <div class="training-buttons-wrapper">
+    <a href="../sprich%20nach/A1/1.html" class="training-btn sprich-nach-btn">🎤 Sprich nach</a>
+    <a href="../aktiv-trainieren/A1/1.html" class="training-btn aktiv-trainieren-btn">🏋️ Aktiv trainieren</a>
+    <a href="Übung-A1.html#übung1" class="training-btn übung-training-btn">✏️ Übung</a>
+  </div>
+</section>
+
+<!-- ============ QUIZ ============ -->
+<section class="part" id="lektion1-quiz">
+  <div class="part-head">
+    <span class="part-num">Abschluss</span>
+    <h2 class="part-title">Teste dich selbst</h2>
+  </div>
+
+  <div class="card">
+    <p class="lead" style="margin-bottom:18px">Vier Fragen, ein Stempel. Du kannst so oft üben, wie du willst.</p>
+
+    <form id="quiz-form">
+      <div class="quiz-frage">
+        <p>1. Es ist 9 Uhr morgens. Was sagst du?</p>
+        <div class="quiz-optionen">
+          <label><input type="radio" name="q1" value="richtig">Guten Morgen!</label>
+          <label><input type="radio" name="q1" value="falsch">Guten Abend!</label>
+          <label><input type="radio" name="q1" value="falsch">Tschüss!</label>
+        </div>
+      </div>
+
+      <div class="quiz-frage">
+        <p>2. „Wie heißen Sie?" ist …</p>
+        <div class="quiz-optionen">
+          <label><input type="radio" name="q2" value="falsch">informell</label>
+          <label><input type="radio" name="q2" value="richtig">formell</label>
+        </div>
+      </div>
+
+      <div class="quiz-frage">
+        <p>3. Welcher Buchstabe kommt nach „S" im Alphabet?</p>
+        <div class="quiz-optionen">
+          <label><input type="radio" name="q3" value="falsch">R</label>
+          <label><input type="radio" name="q3" value="richtig">T</label>
+          <label><input type="radio" name="q3" value="falsch">U</label>
+        </div>
+      </div>
+
+      <div class="quiz-frage">
+        <p>4. Wie sagt man beim Abschied?</p>
+        <div class="quiz-optionen">
+          <label><input type="radio" name="q4" value="richtig">Tschüss!</label>
+          <label><input type="radio" name="q4" value="falsch">Guten Tag!</label>
+        </div>
+      </div>
+
+      <button type="submit" class="quiz-auswerten-btn">Auswerten</button>
+      <button type="button" class="nochmal-btn" id="quiz-reset">Nochmal üben</button>
+    </form>
+
+    <div class="quiz-ergebnis" id="quiz-ergebnis"></div>
+  </div>
+</section>
+
+<!-- ============ ZUSAMMENFASSUNG ============ -->
+<section class="part" id="lektion1-zusammenfassung">
+  <div class="part-head">
+    <span class="part-num">Merken</span>
+    <h2 class="part-title">Was kann ich jetzt?</h2>
+  </div>
+
+  <div class="card">
+    <div class="summary-grid">
+      <div class="row" id="row-greetings">
+        <span class="key">Ich kann grüßen.</span>
+        <span class="summary-text">Guten Morgen! · Guten Tag! · Guten Abend! · Hallo! · Tschüss!</span>
+      </div>
+      <div class="row" id="row-vorstellung">
+        <span class="key">Ich kann mich vorstellen.</span>
+        <span class="summary-text">Ich heiße … · Mein Name ist … · Ich bin …</span>
+      </div>
+      <div class="row" id="row-alphabet">
+        <span class="key">Ich kann das Alphabet sagen.</span>
+        <span class="summary-text">A, B, C, D …</span>
+      </div>
+      <div class="row" id="row-quiz">
+        <span class="key">Ich habe das Quiz bestanden.</span>
+        <span class="summary-text">3 von 4 Fragen richtig oder besser</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<a href="#seitenanfang" class="back-to-top">↑</a>
+
+<nav class="lesson-nav" aria-label="Navigation zwischen den Lektionen">
+  <a href="A1-2.html#lektion2">Lektion 2 →</a>
+</nav>
+
+</div>
+</section>
+
+<script>
+"use strict";
+
+/* ================= SPRACHSYNTHESE ================= */
+
+let germanVoice = null;
+
+function loadGermanVoice(){
+  if(!("speechSynthesis" in window)) return;
+  const voices = speechSynthesis.getVoices();
+  germanVoice =
+    voices.find(v => v.lang?.toLowerCase() === "de-de" && v.name.toLowerCase().includes("google")) ||
+    voices.find(v => v.lang?.toLowerCase() === "de-de") ||
+    voices.find(v => v.lang?.toLowerCase().startsWith("de")) ||
+    null;
+}
+loadGermanVoice();
+if("speechSynthesis" in window){
+  speechSynthesis.addEventListener("voiceschanged", loadGermanVoice);
+}
+
+function speakGerman(text, options = {}){
+  return new Promise(resolve => {
+    if(!text || !("speechSynthesis" in window)){ resolve(); return; }
+    const utterance = new SpeechSynthesisUtterance(text);
+    Object.assign(utterance, {
+      lang: "de-DE",
+      rate: options.rate ?? 0.92,
+      pitch: options.pitch ?? 1,
+      volume: 1
+    });
+    if(germanVoice) utterance.voice = germanVoice;
+    utterance.onend = resolve;
+    utterance.onerror = e => { console.error("Fehler bei der Sprachausgabe:", e.error); resolve(); };
+    speechSynthesis.speak(utterance);
+  });
+}
+
+function speakSequence(items, rate){
+  return items.reduce((chain, item) => chain.then(() => speakGerman(item, { rate })), Promise.resolve());
+}
+
+/* ================= SPRACHPASS / FORTSCHRITT ================= */
+
+const fortschritt = { greetings:false, vorstellung:false, alphabet:false, quiz:false };
+
+function stempelVergeben(schluessel){
+  if(fortschritt[schluessel]) return;
+  fortschritt[schluessel] = true;
+  const slot = document.querySelector(`.stamp-slot[data-slot="${schluessel}"]`);
+  if(slot) slot.classList.add("stamped");
+
+  const zaehler = Object.values(fortschritt).filter(Boolean).length;
+  document.getElementById("stempel-zaehler").textContent = `${zaehler} / 4 Stempel gesammelt`;
+
+  const zeilenKarte = { greetings:"row-greetings", vorstellung:"row-vorstellung", alphabet:"row-alphabet", quiz:"row-quiz" };
+  const zeile = document.getElementById(zeilenKarte[schluessel]);
+  if(zeile){
+    zeile.classList.add("erledigt");
+    zeile.querySelector(".key").textContent = "✅ " + zeile.querySelector(".key").textContent.replace(/^✅ /,"");
+  }
+}
+
+/* ================= TEIL 1 — UHR-SPIEL ================= */
+
+const uhrSlider = document.getElementById("uhr-slider");
+const uhrZeit = document.getElementById("uhr-zeit");
+const uhrEmoji = document.getElementById("uhr-emoji");
+const uhrFeedback = document.getElementById("uhr-feedback");
+const uhrFortschritt = document.getElementById("uhr-fortschritt");
+
+let richtigeAntworten = 0;
+let aktuelleLoesung = null;
+
+function grussFuerStunde(stunde){
+  if(stunde >= 5 && stunde < 11) return { key:"morgen", emoji:"🌅", text:"Guten Morgen!" };
+  if(stunde >= 11 && stunde < 17) return { key:"tag", emoji:"☀️", text:"Guten Tag!" };
+  return { key:"abend", emoji:"🌙", text:"Guten Abend!" };
+}
+
+function uhrAktualisieren(){
+  const stunde = parseInt(uhrSlider.value, 10);
+  uhrZeit.textContent = `${String(stunde).padStart(2,"0")}:00 Uhr`;
+  const loesung = grussFuerStunde(stunde);
+  uhrEmoji.textContent = loesung.emoji;
+  aktuelleLoesung = loesung.key;
+  uhrFeedback.textContent = "";
+  document.querySelectorAll(".antwort-btn").forEach(b => b.classList.remove("richtig","falsch"));
+}
+
+uhrSlider.addEventListener("input", uhrAktualisieren);
+uhrAktualisieren();
+
+document.querySelectorAll(".antwort-btn").forEach(btn => {
+  btn.addEventListener("click", () => {
+    document.querySelectorAll(".antwort-btn").forEach(b => b.classList.remove("richtig","falsch"));
+    if(btn.dataset.gruss === aktuelleLoesung){
+      btn.classList.add("richtig");
+      uhrFeedback.style.color = "#28502f";
+      uhrFeedback.textContent = "Richtig! " + btn.textContent;
+      speakGerman(btn.textContent);
+      richtigeAntworten++;
+      uhrFortschritt.textContent = `Richtige Antworten: ${Math.min(richtigeAntworten,3)} / 3`;
+      if(richtigeAntworten >= 3) stempelVergeben("greetings");
+    } else {
+      btn.classList.add("falsch");
+      uhrFeedback.style.color = "#bd4433";
+      uhrFeedback.textContent = "Versuch's noch mal!";
+    }
+  });
+});
+
+/* ================= TEIL 2 — VORSTELLUNG ================= */
+
+const nameInput = document.getElementById("mein-name");
+const dynNamen = document.querySelectorAll(".dyn-name");
+
+function namenAktualisieren(){
+  const name = nameInput.value.trim() || "Alex";
+  dynNamen.forEach(el => el.textContent = name);
+}
+nameInput.addEventListener("input", namenAktualisieren);
+namenAktualisieren();
+
+document.querySelectorAll(".tab-btn").forEach(tab => {
+  tab.addEventListener("click", () => {
+    document.querySelectorAll(".tab-btn").forEach(t => t.classList.remove("aktiv"));
+    tab.classList.add("aktiv");
+    const zeigen = tab.dataset.tab;
+    document.getElementById("dialog-informell").style.display = zeigen === "informell" ? "grid" : "none";
+    document.getElementById("dialog-formell").style.display = zeigen === "formell" ? "grid" : "none";
+  });
+});
+
+document.getElementById("dialog-vorlesen").addEventListener("click", () => {
+  const aktiverTab = document.querySelector(".tab-btn.aktiv").dataset.tab;
+  const dialogEl = aktiverTab === "formell" ? document.getElementById("dialog-formell") : document.getElementById("dialog-informell");
+  const saetze = Array.from(dialogEl.querySelectorAll(".bubble")).map(b => b.textContent.replace(/^\s*[AB]\s*/,"").trim());
+  speakSequence(saetze, 0.95);
+});
+
+let matchRichtig = 0;
+const matchFortschritt = document.getElementById("match-fortschritt");
+
+document.querySelectorAll(".match-zeile").forEach(zeile => {
+  const antwort = zeile.dataset.antwort;
+  let beantwortet = false;
+  zeile.querySelectorAll(".match-wahl button").forEach(btn => {
+    btn.addEventListener("click", () => {
+      if(beantwortet) return;
+      zeile.querySelectorAll(".match-wahl button").forEach(b => b.classList.remove("richtig","falsch"));
+      if(btn.dataset.wahl === antwort){
+        btn.classList.add("richtig");
+        matchRichtig++;
+        beantwortet = true;
+      } else {
+        btn.classList.add("falsch");
+      }
+      matchFortschritt.textContent = `Richtig zugeordnet: ${matchRichtig} / 4`;
+      if(matchRichtig >= 3) stempelVergeben("vorstellung");
+    });
+  });
+});
+
+/* ================= TEIL 3 — ALPHABET ================= */
+
+const alphabet = [
+  ["A","a"],["B","be"],["C","ce"],["D","de"],["E","e"],["F","ef"],["G","ge"],["H","ha"],
+  ["I","i"],["J","jot"],["K","ka"],["L","el"],["M","em"],["N","en"],["O","o"],["P","pe"],
+  ["Q","ku"],["R","er"],["S","es"],["T","te"],["U","u"],["V","vau"],["W","we"],["X","ix"],
+  ["Y","Ypsilon"],["Z","zet"]
+];
+
+const umlauts = [["Ä","ä"],["Ö","ö"],["Ü","ü"],["ß","Eszett"]];
+
+let angeklickteBuchstaben = new Set();
+
+function createAlphabet(target, letters){
+  target.innerHTML = letters.map(letter => {
+    const speech = letter[0] === "Eszett" ? "Eszett" : letter[0];
+    return `<button type="button" class="alphabet-letter" data-speech="${speech}">${letter[0]} – ${letter[1]}</button>`;
+  }).join("");
+}
+
+createAlphabet(document.getElementById("alphabet"), alphabet);
+createAlphabet(document.getElementById("umlaute"), umlauts);
+
+document.querySelectorAll("[data-speech]").forEach(button => {
+  button.addEventListener("click", () => {
+    button.classList.add("aktiv");
+    speakGerman(button.dataset.speech, { rate: 0.8 }).then(() => button.classList.remove("aktiv"));
+    angeklickteBuchstaben.add(button.dataset.speech);
+    if(angeklickteBuchstaben.size >= 6) stempelVergeben("alphabet");
+  });
+});
+
+const buchstabierInput = document.getElementById("buchstabier-input");
+const buchstabierBtn = document.getElementById("buchstabier-btn");
+const buchstabierAusgabe = document.getElementById("buchstabier-ausgabe");
+
+const buchstabenNamen = { A:"a",B:"be",C:"ce",D:"de",E:"e",F:"ef",G:"ge",H:"ha",I:"i",J:"jot",K:"ka",L:"el",
+  M:"em",N:"en",O:"o",P:"pe",Q:"ku",R:"er",S:"es",T:"te",U:"u",V:"vau",W:"we",X:"ix",Y:"Ypsilon",Z:"zet",
+  Ä:"ä",Ö:"ö",Ü:"ü",ß:"Eszett" };
+
+async function buchstabieren(){
+  const wort = buchstabierInput.value.trim().toUpperCase();
+  if(!wort) return;
+  const buchstaben = Array.from(wort).filter(z => buchstabenNamen[z]);
+  buchstabierAusgabe.innerHTML = buchstaben.map((b,i) => `<span class="buchstabe-chip" id="chip-${i}">${b}</span>`).join("");
+  buchstabierBtn.disabled = true;
+  for(let i = 0; i < buchstaben.length; i++){
+    const chip = document.getElementById(`chip-${i}`);
+    chip.classList.add("spricht");
+    await speakGerman(buchstabenNamen[buchstaben[i]], { rate: 0.85 });
+    chip.classList.remove("spricht");
+  }
+  buchstabierBtn.disabled = false;
+  if(buchstaben.length > 0) stempelVergeben("alphabet");
+}
+
+buchstabierBtn.addEventListener("click", buchstabieren);
+
+/* ================= QUIZ ================= */
+
+const quizForm = document.getElementById("quiz-form");
+const quizErgebnis = document.getElementById("quiz-ergebnis");
+
+quizForm.addEventListener("submit", e => {
+  e.preventDefault();
+  const gesamt = 4;
+  let richtig = 0;
+  for(let i = 1; i <= gesamt; i++){
+    const gewaehlt = quizForm.querySelector(`input[name="q${i}"]:checked`);
+    if(gewaehlt && gewaehlt.value === "richtig") richtig++;
+  }
+  quizErgebnis.classList.add("zeigen");
+  if(richtig >= 3){
+    quizErgebnis.classList.remove("schlecht");
+    quizErgebnis.classList.add("gut");
+    quizErgebnis.textContent = `Super! ${richtig} von ${gesamt} richtig. Stempel verdient! 🎉`;
+    stempelVergeben("quiz");
+  } else {
+    quizErgebnis.classList.remove("gut");
+    quizErgebnis.classList.add("schlecht");
+    quizErgebnis.textContent = `${richtig} von ${gesamt} richtig. Schau dir Teil 1 & 2 noch einmal an und versuch's erneut!`;
+  }
+});
+
+document.getElementById("quiz-reset").addEventListener("click", () => {
+  quizForm.reset();
+  quizErgebnis.classList.remove("zeigen","gut","schlecht");
+  quizErgebnis.textContent = "";
+});
+</script>
+
+<!--
+====================================================
+ENDE DER DATEI: lessons/A1/1-interaktiv.html
+
+Interaktive Zwillingslektion zu:
+Lektion 1 „Guten Tag! — Begrüßung und Vorstellung"
+
+Enthält: Uhr-Begrüßungsspiel, dynamische Vorstellungs-Dialoge mit
+Zuordnungsübung, Buchstabier-Spiel und Abschlussquiz mit Sprachpass-
+Fortschrittsanzeige (4 Stempel).
+====================================================
+-->
+
+</body>
+</html>
