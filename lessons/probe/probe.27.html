@@ -1,1 +1,746 @@
+Poniżej znajduje się kompletny, samodzielny plik HTML zawierający wyłącznie część ze zdjęcia:
+
+
+
+
+„Teil 1 – Wir begrüßen uns”,
+
+
+informację „Merke! – Grüße nach Tageszeit”,
+
+
+suwak ustawiania godziny,
+
+
+trzy przyciski odpowiedzi,
+
+
+automatyczne sprawdzanie odpowiedzi,
+
+
+licznik Richtige Antworten: 0 / 3,
+
+
+niemiecką wymowę poprawnej odpowiedzi.
+
+
+
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Wir begrüßen uns – Interaktive Übung</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link
+  href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Nunito+Sans:opsz,wght@6..12,400,600,700,800&family=JetBrains+Mono:wght@400;600;700&display=swap"
+  rel="stylesheet"
+>
+
+<style>
+:root{
+  --ink:#16233a;
+  --paper:#f7efdd;
+  --paper-line:#e3d6b8;
+  --stamp-red:#bd4433;
+  --gold:#cf9f3f;
+  --sage:#4f7a63;
+  --text-dark:#1c2430;
+}
+
+*{
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  margin:0;
+  min-height:100vh;
+  padding:45px 20px 60px;
+
+  background:
+    radial-gradient(
+      circle at 10% 8%,
+      rgba(207,159,63,.07),
+      transparent 35%
+    ),
+    radial-gradient(
+      circle at 90% 92%,
+      rgba(79,122,99,.10),
+      transparent 40%
+    ),
+    var(--ink);
+
+  color:var(--text-dark);
+  font:400 1rem/1.6 "Nunito Sans",sans-serif;
+}
+
+.wrap{
+  width:100%;
+  max-width:980px;
+  margin:0 auto;
+  padding:34px;
+
+  background:linear-gradient(
+    160deg,
+    #fff8ea,
+    #f3e2bd
+  );
+
+  border-radius:24px;
+  box-shadow:0 24px 55px rgba(0,0,0,.25);
+}
+
+/* ---------- Nagłówek części ---------- */
+
+.part-head{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:baseline;
+  gap:14px;
+  margin-bottom:18px;
+}
+
+.part-num{
+  color:var(--stamp-red);
+
+  font:
+    600 .82rem
+    "JetBrains Mono",
+    monospace;
+
+  letter-spacing:.16em;
+  text-transform:uppercase;
+}
+
+.part-title{
+  margin:0;
+  color:var(--text-dark);
+
+  font:
+    700 2.5rem/1.15
+    "Fraunces",
+    serif;
+}
+
+/* ---------- Główna karta ---------- */
+
+.card{
+  padding:28px;
+
+  background:#fffdf6;
+  border:1px solid var(--paper-line);
+  border-radius:24px;
+
+  box-shadow:0 12px 30px rgba(0,0,0,.07);
+}
+
+.lead{
+  margin:0 0 22px;
+  color:var(--text-dark);
+  font-size:1.08rem;
+}
+
+/* ---------- Merke ---------- */
+
+.grammar-toggle{
+  margin:0 0 26px;
+}
+
+.grammar-toggle summary{
+  cursor:pointer;
+  padding:15px 18px;
+
+  background:#f0ede0;
+  border:1px solid var(--paper-line);
+  border-radius:15px;
+
+  font-size:1rem;
+  font-weight:800;
+
+  list-style:none;
+}
+
+.grammar-toggle summary::-webkit-details-marker{
+  display:none;
+}
+
+.grammar-toggle summary::before{
+  content:"📖 ";
+}
+
+.grammar-toggle[open] summary{
+  border-radius:15px 15px 0 0;
+}
+
+.grammar-box{
+  padding:18px;
+
+  background:#fbf6e8;
+  border-right:1px solid var(--paper-line);
+  border-bottom:1px solid var(--paper-line);
+  border-left:4px solid var(--gold);
+
+  border-radius:0 0 15px 15px;
+}
+
+/* ---------- Gra z godziną ---------- */
+
+.uhr-spiel{
+  padding:26px;
+
+  background:#fbf6e8;
+  border:1px solid var(--paper-line);
+  border-radius:20px;
+}
+
+.uhr-anzeige{
+  display:flex;
+  align-items:center;
+  gap:18px;
+  margin-bottom:22px;
+}
+
+.uhr-emoji{
+  font-size:2.8rem;
+  line-height:1;
+}
+
+.uhr-zeit{
+  color:var(--text-dark);
+
+  font:
+    700 1.8rem
+    "JetBrains Mono",
+    monospace;
+}
+
+.uhr-slider{
+  width:100%;
+  margin:12px 0 22px;
+
+  accent-color:var(--stamp-red);
+  cursor:pointer;
+}
+
+.frage{
+  margin:0 0 10px;
+  color:var(--text-dark);
+  font-size:1.08rem;
+}
+
+.antwort-buttons{
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+  margin-bottom:14px;
+}
+
+.antwort-btn{
+  padding:11px 19px;
+
+  color:var(--text-dark);
+  background:#fff;
+
+  border:2px solid var(--paper-line);
+  border-radius:999px;
+
+  font:
+    800 .98rem
+    "Nunito Sans",
+    sans-serif;
+
+  cursor:pointer;
+
+  transition:
+    transform .15s,
+    border-color .15s,
+    background .15s,
+    box-shadow .15s;
+}
+
+.antwort-btn:hover{
+  transform:translateY(-2px);
+  border-color:var(--gold);
+  box-shadow:0 6px 14px rgba(0,0,0,.08);
+}
+
+.antwort-btn.richtig{
+  color:#28502f;
+  background:#e4f3e8;
+  border-color:var(--sage);
+}
+
+.antwort-btn.falsch{
+  color:var(--stamp-red);
+  background:#f9e4e1;
+  border-color:var(--stamp-red);
+}
+
+.feedback-zeile{
+  min-height:30px;
+  margin:10px 0 0;
+
+  font-size:1rem;
+  font-weight:800;
+}
+
+.fortschritt-mini{
+  margin:12px 0 0;
+
+  color:#5a5140;
+
+  font:
+    .88rem
+    "JetBrains Mono",
+    monospace;
+}
+
+/* ---------- Dostępność ---------- */
+
+button:focus-visible,
+input:focus-visible,
+summary:focus-visible{
+  outline:3px solid var(--gold);
+  outline-offset:3px;
+}
+
+/* ---------- Telefon ---------- */
+
+@media (max-width:700px){
+
+  body{
+    padding:20px 12px 35px;
+  }
+
+  .wrap{
+    padding:20px 14px;
+    border-radius:18px;
+  }
+
+  .part-title{
+    font-size:2rem;
+  }
+
+  .card{
+    padding:18px 14px;
+  }
+
+  .uhr-spiel{
+    padding:20px 14px;
+  }
+
+  .uhr-zeit{
+    font-size:1.5rem;
+  }
+
+  .antwort-buttons{
+    flex-direction:column;
+  }
+
+  .antwort-btn{
+    width:100%;
+  }
+}
+
+@media (prefers-reduced-motion:reduce){
+
+  html{
+    scroll-behavior:auto;
+  }
+
+  *,
+  *::before,
+  *::after{
+    animation-duration:.01ms !important;
+    animation-iteration-count:1 !important;
+    transition-duration:.01ms !important;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<main class="wrap">
+
+  <section aria-labelledby="teil1-title">
+
+    <div class="part-head">
+      <span class="part-num">Teil 1</span>
+
+      <h1 class="part-title" id="teil1-title">
+        Wir begrüßen uns
+      </h1>
+    </div>
+
+    <div class="card">
+
+      <p class="lead">
+        Wir sagen verschiedene Grüße je nach Tageszeit.
+        Stell die Uhr ein und finde den richtigen Gruß!
+      </p>
+
+      <details class="grammar-toggle">
+        <summary>Merke! — Grüße nach Tageszeit</summary>
+
+        <div class="grammar-box">
+          morgens:
+          <strong>Guten Morgen!</strong>
+
+          <br><br>
+
+          tagsüber:
+          <strong>Guten Tag!</strong>
+
+          <br><br>
+
+          abends:
+          <strong>Guten Abend!</strong>
+
+          <br><br>
+
+          informell:
+          <strong>Hallo!</strong>
+
+          <br><br>
+
+          beim Abschied:
+          <strong>Tschüss!</strong>
+        </div>
+      </details>
+
+      <div class="uhr-spiel">
+
+        <div class="uhr-anzeige">
+          <span
+            class="uhr-emoji"
+            id="uhr-emoji"
+            aria-hidden="true"
+          >
+            🌅
+          </span>
+
+          <span
+            class="uhr-zeit"
+            id="uhr-zeit"
+            aria-live="polite"
+          >
+            08:00 Uhr
+          </span>
+        </div>
+
+        <input
+          type="range"
+          min="0"
+          max="23"
+          step="1"
+          value="8"
+          class="uhr-slider"
+          id="uhr-slider"
+          aria-label="Uhrzeit einstellen"
+        >
+
+        <p class="frage">
+          Welcher Gruß passt zu dieser Uhrzeit?
+        </p>
+
+        <div
+          class="antwort-buttons"
+          id="antwort-buttons"
+        >
+          <button
+            type="button"
+            class="antwort-btn"
+            data-gruss="morgen"
+          >
+            Guten Morgen!
+          </button>
+
+          <button
+            type="button"
+            class="antwort-btn"
+            data-gruss="tag"
+          >
+            Guten Tag!
+          </button>
+
+          <button
+            type="button"
+            class="antwort-btn"
+            data-gruss="abend"
+          >
+            Guten Abend!
+          </button>
+        </div>
+
+        <p
+          class="feedback-zeile"
+          id="uhr-feedback"
+          aria-live="polite"
+        ></p>
+
+        <p
+          class="fortschritt-mini"
+          id="uhr-fortschritt"
+        >
+          Richtige Antworten: 0 / 3
+        </p>
+
+      </div>
+
+    </div>
+
+  </section>
+
+</main>
+
+<script>
+"use strict";
+
+/* ========================================
+   NIEMIECKI GŁOS
+======================================== */
+
+let germanVoice = null;
+
+function loadGermanVoice(){
+
+  if(!("speechSynthesis" in window)){
+    return;
+  }
+
+  const voices = window.speechSynthesis.getVoices();
+
+  germanVoice =
+    voices.find(voice =>
+      voice.lang &&
+      voice.lang.toLowerCase() === "de-de" &&
+      voice.name.toLowerCase().includes("google")
+    ) ||
+
+    voices.find(voice =>
+      voice.lang &&
+      voice.lang.toLowerCase() === "de-de"
+    ) ||
+
+    voices.find(voice =>
+      voice.lang &&
+      voice.lang.toLowerCase().startsWith("de")
+    ) ||
+
+    null;
+}
+
+loadGermanVoice();
+
+if("speechSynthesis" in window){
+
+  window.speechSynthesis.addEventListener(
+    "voiceschanged",
+    loadGermanVoice
+  );
+}
+
+function speakGerman(text){
+
+  if(
+    !text ||
+    !("speechSynthesis" in window)
+  ){
+    return;
+  }
+
+  window.speechSynthesis.cancel();
+
+  const utterance =
+    new SpeechSynthesisUtterance(text);
+
+  utterance.lang = "de-DE";
+  utterance.rate = 0.9;
+  utterance.pitch = 1;
+  utterance.volume = 1;
+
+  if(germanVoice){
+    utterance.voice = germanVoice;
+  }
+
+  window.speechSynthesis.speak(utterance);
+}
+
+/* ========================================
+   GRA: POWITANIA I GODZINY
+======================================== */
+
+const uhrSlider =
+  document.getElementById("uhr-slider");
+
+const uhrZeit =
+  document.getElementById("uhr-zeit");
+
+const uhrEmoji =
+  document.getElementById("uhr-emoji");
+
+const uhrFeedback =
+  document.getElementById("uhr-feedback");
+
+const uhrFortschritt =
+  document.getElementById("uhr-fortschritt");
+
+const antwortButtons =
+  document.querySelectorAll(".antwort-btn");
+
+let aktuelleLoesung = "morgen";
+
+const zaliczonePowitania = new Set();
+
+/*
+Godziny:
+
+05:00–10:59 = Guten Morgen
+11:00–16:59 = Guten Tag
+17:00–04:59 = Guten Abend
+*/
+
+function grussFuerStunde(stunde){
+
+  if(stunde >= 5 && stunde < 11){
+
+    return {
+      key:"morgen",
+      emoji:"🌅",
+      text:"Guten Morgen!"
+    };
+  }
+
+  if(stunde >= 11 && stunde < 17){
+
+    return {
+      key:"tag",
+      emoji:"☀️",
+      text:"Guten Tag!"
+    };
+  }
+
+  return {
+    key:"abend",
+    emoji:"🌙",
+    text:"Guten Abend!"
+  };
+}
+
+function buttonsZuruecksetzen(){
+
+  antwortButtons.forEach(button => {
+
+    button.classList.remove(
+      "richtig",
+      "falsch"
+    );
+  });
+}
+
+function uhrAktualisieren(){
+
+  const stunde =
+    Number.parseInt(uhrSlider.value, 10);
+
+  const loesung =
+    grussFuerStunde(stunde);
+
+  aktuelleLoesung =
+    loesung.key;
+
+  uhrZeit.textContent =
+    `${String(stunde).padStart(2, "0")}:00 Uhr`;
+
+  uhrEmoji.textContent =
+    loesung.emoji;
+
+  uhrFeedback.textContent = "";
+
+  buttonsZuruecksetzen();
+}
+
+uhrSlider.addEventListener(
+  "input",
+  uhrAktualisieren
+);
+
+antwortButtons.forEach(button => {
+
+  button.addEventListener("click", () => {
+
+    buttonsZuruecksetzen();
+
+    const wybranaOdpowiedz =
+      button.dataset.gruss;
+
+    if(wybranaOdpowiedz === aktuelleLoesung){
+
+      button.classList.add("richtig");
+
+      uhrFeedback.style.color = "#28502f";
+
+      uhrFeedback.textContent =
+        `Richtig! ${button.textContent.trim()}`;
+
+      speakGerman(
+        button.textContent.trim()
+      );
+
+      zaliczonePowitania.add(
+        aktuelleLoesung
+      );
+
+      const liczbaPoprawnych =
+        zaliczonePowitania.size;
+
+      uhrFortschritt.textContent =
+        `Richtige Antworten: ${liczbaPoprawnych} / 3`;
+
+    } else {
+
+      button.classList.add("falsch");
+
+      uhrFeedback.style.color =
+        "#bd4433";
+
+      uhrFeedback.textContent =
+        "Versuch es noch einmal!";
+    }
+  });
+});
+
+uhrAktualisieren();
+</script>
+
+<!--
+====================================================
+ENDE DER DATEI
+
+Interaktive Übung:
+„Teil 1 — Wir begrüßen uns“
+
+Enthält:
+- Grüße nach Tageszeit
+- einstellbare Uhrzeit
+- automatische Antwortkontrolle
+- deutsche Sprachausgabe
+- Fortschrittsanzeige
+====================================================
+-->
+
+</body>
+</html>
+
+
 
