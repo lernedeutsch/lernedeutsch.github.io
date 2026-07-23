@@ -1,1 +1,3777 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<title>Deutschkurs A1 — Lektion 1</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link
+  href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&family=Nunito+Sans:opsz,wght@6..12,400,600,700,800&family=JetBrains+Mono:wght@400;600&display=swap"
+  rel="stylesheet"
+>
+
+<style>
+:root{
+  --bg:#20324a;
+  --bg-dark:#152337;
+
+  --paper:#fff5e6;
+  --paper-light:#fffaf2;
+
+  --card:#f7f9fc;
+  --white:#ffffff;
+
+  --text:#111820;
+  --muted:#536273;
+
+  --line:#dce3ed;
+  --yellow:#f4c95d;
+  --yellow-dark:#b8860b;
+
+  --blue:#43aef4;
+  --green:#5fbd28;
+  --purple:#7958d8;
+
+  --success:#16864b;
+  --success-light:#e8f8ef;
+
+  --error:#c53d3d;
+  --error-light:#fff0f0;
+
+  --shadow:0 12px 30px rgba(0,0,0,.10);
+}
+
+*{
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  margin:0;
+  padding:0 0 60px;
+  color:var(--text);
+
+  background:
+    radial-gradient(
+      circle at 12% 10%,
+      rgba(255,255,255,.06),
+      transparent 35%
+    ),
+    radial-gradient(
+      circle at 88% 90%,
+      rgba(255,255,255,.05),
+      transparent 40%
+    ),
+    var(--bg);
+
+  font:400 1rem/1.6 "Nunito Sans",sans-serif;
+}
+
+button,
+input{
+  font:inherit;
+}
+
+button{
+  cursor:pointer;
+}
+
+section[id]{
+  scroll-margin-top:24px;
+}
+
+
+/* ==================================================
+   PASEK POSTĘPU
+================================================== */
+
+.progress-bar-container{
+  position:fixed;
+  z-index:1000;
+  top:0;
+  left:0;
+
+  width:100%;
+  height:7px;
+
+  background:rgba(255,255,255,.16);
+}
+
+.progress-bar{
+  width:0;
+  height:100%;
+
+  background:linear-gradient(
+    90deg,
+    #f4c95d,
+    #ffb54a
+  );
+
+  transition:width .2s ease;
+}
+
+
+/* ==================================================
+   MENU LEKCJI
+================================================== */
+
+.course-nav{
+  max-width:900px;
+  margin:46px auto 52px;
+  padding:0 20px;
+}
+
+.course-nav-title{
+  margin:0 0 22px;
+
+  color:#ffffff;
+  text-align:center;
+
+  font:700 2.3rem/1.2 "Kalam",cursive;
+}
+
+.course-section{
+  padding:18px;
+
+  background:#f7f9fc;
+  border:1px solid #dce3ed;
+  border-radius:20px;
+
+  box-shadow:var(--shadow);
+}
+
+.section-title{
+  margin:0 0 13px;
+
+  color:var(--text);
+
+  font:600 .92rem "JetBrains Mono",monospace;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+}
+
+.lesson-list{
+  display:grid;
+  gap:9px;
+
+  margin:0;
+  padding:0;
+
+  list-style:none;
+}
+
+.lesson-list a{
+  display:flex;
+  align-items:center;
+  gap:10px;
+
+  padding:11px 14px;
+
+  color:var(--text);
+  text-decoration:none;
+
+  background:#ffffff;
+  border:1px solid var(--line);
+  border-radius:13px;
+
+  transition:
+    background .16s,
+    border-color .16s,
+    transform .16s;
+}
+
+.lesson-list a:hover{
+  background:#fff8df;
+  border-color:var(--yellow);
+  transform:translateX(4px);
+}
+
+
+/* ==================================================
+   GŁÓWNY OBSZAR LEKCJI
+================================================== */
+
+.wrap{
+  max-width:980px;
+  margin:0 auto;
+  padding:32px;
+
+  background:linear-gradient(
+    135deg,
+    #fff5e6,
+    #ffe0b2
+  );
+
+  border-radius:24px;
+  box-shadow:0 22px 60px rgba(0,0,0,.18);
+}
+
+header.hero{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  gap:28px;
+
+  margin-bottom:36px;
+  padding:24px 0 36px;
+
+  border-bottom:2px dashed rgba(35,51,46,.18);
+}
+
+.hero-text{
+  flex:1 1 350px;
+}
+
+.eyebrow{
+  margin:0 0 10px;
+
+  color:var(--yellow-dark);
+
+  font:.78rem "JetBrains Mono",monospace;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+}
+
+.lesson-title{
+  margin:0 0 14px;
+
+  color:var(--text);
+
+  font:700 2.7rem/1.12 "Kalam",cursive;
+}
+
+.hero-text > p:not(.eyebrow){
+  max-width:55ch;
+  margin:0;
+
+  color:#2a3b50;
+  font-size:1.05rem;
+}
+
+.topics{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+
+  margin-top:20px;
+}
+
+.topics a{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+
+  padding:7px 12px;
+
+  color:var(--text);
+  text-decoration:none;
+
+  background:#f0f4f8;
+  border:1px solid #dce3ed;
+  border-radius:999px;
+
+  font-size:.92rem;
+
+  transition:
+    transform .15s,
+    border-color .15s,
+    background .15s;
+}
+
+.topics a:hover{
+  background:#ffffff;
+  border-color:var(--yellow);
+  transform:translateY(-2px);
+}
+
+
+/* ==================================================
+   ILUSTRACJA
+================================================== */
+
+.wheel-box{
+  flex:0 1 320px;
+
+  display:grid;
+  place-items:center;
+}
+
+.wheel-box svg{
+  width:100%;
+  max-width:320px;
+  height:auto;
+
+  filter:drop-shadow(0 16px 30px rgba(0,0,0,.18));
+}
+
+.month-label,
+.center-label,
+.center-sub{
+  fill:#ffffff;
+  font-family:"JetBrains Mono",monospace;
+  text-anchor:middle;
+}
+
+.center-label{
+  font-size:20px;
+  font-weight:700;
+}
+
+.center-sub{
+  font-size:13px;
+}
+
+
+/* ==================================================
+   CZĘŚCI LEKCJI
+================================================== */
+
+.part{
+  margin:34px 0 44px;
+}
+
+.part-head{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:baseline;
+  gap:12px;
+
+  margin-bottom:14px;
+}
+
+.part-num{
+  color:var(--yellow-dark);
+
+  font:.82rem "JetBrains Mono",monospace;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+}
+
+.part-title{
+  margin:0;
+
+  color:var(--text);
+
+  font:700 2rem/1.2 "Kalam",cursive;
+}
+
+.card{
+  margin-top:14px;
+  padding:22px;
+
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:22px;
+
+  box-shadow:0 12px 30px rgba(0,0,0,.06);
+}
+
+.lead{
+  margin-top:0;
+
+  color:var(--text);
+  font-size:1.06rem;
+}
+
+.instruction{
+  color:var(--muted);
+}
+
+.grammar-box{
+  margin:24px 0;
+  padding:15px 17px;
+
+  background:#f9fbff;
+  border-left:4px solid var(--yellow);
+  border-radius:16px;
+}
+
+.section-subtitle{
+  margin:32px 0 16px;
+
+  color:var(--text);
+  font-size:1.3rem;
+}
+
+
+/* ==================================================
+   PRZYCISKI AUDIO
+================================================== */
+
+.speak-button{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:7px;
+
+  min-height:40px;
+  padding:8px 12px;
+
+  color:#18364c;
+
+  background:#e8f5ff;
+  border:1px solid #a9d9f8;
+  border-radius:999px;
+
+  font-weight:800;
+
+  transition:
+    transform .15s,
+    background .15s,
+    box-shadow .15s;
+}
+
+.speak-button:hover{
+  background:#d7efff;
+  transform:translateY(-2px);
+  box-shadow:0 6px 12px rgba(49,133,185,.17);
+}
+
+.speak-button.is-speaking{
+  color:#ffffff;
+  background:#278fd0;
+  border-color:#278fd0;
+}
+
+
+/* ==================================================
+   POZDROWIENIA
+================================================== */
+
+.greeting-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:12px;
+
+  margin:22px 0;
+}
+
+.greeting-card{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:14px;
+
+  min-height:84px;
+  padding:14px 16px;
+
+  background:#ffffff;
+  border:1px solid var(--line);
+  border-radius:16px;
+
+  transition:
+    transform .16s,
+    border-color .16s,
+    box-shadow .16s;
+}
+
+.greeting-card:hover{
+  border-color:var(--yellow);
+  transform:translateY(-2px);
+  box-shadow:0 8px 18px rgba(0,0,0,.07);
+}
+
+.greeting-text{
+  display:grid;
+  gap:2px;
+}
+
+.greeting{
+  margin:0;
+
+  font-size:1.25rem;
+  font-weight:800;
+}
+
+.greeting-time{
+  color:var(--muted);
+  font-size:.9rem;
+}
+
+.gruss-tabelle{
+  width:100%;
+  margin:30px 0 10px;
+  overflow:hidden;
+
+  background:#ffffff;
+  border:1px solid var(--line);
+  border-radius:16px;
+
+  border-collapse:separate;
+  border-spacing:0;
+}
+
+.gruss-tabelle th{
+  color:var(--text);
+  text-align:left;
+
+  background:#f0f4f8;
+}
+
+.gruss-tabelle th,
+.gruss-tabelle td{
+  padding:17px 15px;
+
+  border-bottom:1px solid var(--line);
+}
+
+.gruss-tabelle tbody tr:last-child td{
+  border-bottom:none;
+}
+
+.gruss{
+  font-size:1.05rem;
+}
+
+
+/* ==================================================
+   PRZEDSTAWIANIE SIĘ
+================================================== */
+
+.intro-card{
+  display:grid;
+  grid-template-columns:auto 1fr;
+  align-items:center;
+  gap:18px;
+
+  margin:20px 0;
+  padding:20px;
+
+  background:#ffffff;
+  border:1px solid var(--line);
+  border-radius:18px;
+}
+
+.intro-icon{
+  font-size:58px;
+}
+
+.intro-title{
+  margin:0 0 8px;
+
+  font-size:1.4rem;
+  font-weight:800;
+}
+
+.intro-sentence{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  gap:9px;
+
+  margin:8px 0;
+}
+
+.intro-text{
+  margin:0;
+
+  color:var(--text);
+  font-size:1.08rem;
+}
+
+
+/* ==================================================
+   DIALOG
+================================================== */
+
+.dialog-controls{
+  display:flex;
+  flex-wrap:wrap;
+  gap:9px;
+
+  margin:18px 0;
+}
+
+.dialog-play-button,
+.dialog-stop-button{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+
+  min-height:43px;
+  padding:9px 15px;
+
+  border-radius:999px;
+
+  font-weight:800;
+}
+
+.dialog-play-button{
+  color:#ffffff;
+  background:#278fd0;
+  border:1px solid #278fd0;
+}
+
+.dialog-stop-button{
+  color:#343d47;
+  background:#ffffff;
+  border:1px solid var(--line);
+}
+
+.dialog{
+  display:grid;
+  gap:11px;
+}
+
+.bubble{
+  max-width:86%;
+  padding:12px 14px;
+
+  color:var(--text);
+
+  border-radius:18px;
+
+  transition:
+    transform .15s,
+    box-shadow .15s,
+    border-color .15s;
+}
+
+.bubble.marta{
+  background:#eaf3fa;
+  border:1px solid #d2e3f0;
+}
+
+.bubble.tom{
+  margin-left:auto;
+
+  background:#fff8dc;
+  border:1px solid #f0dfa0;
+}
+
+.bubble.active-line{
+  transform:scale(1.02);
+  border-color:var(--yellow);
+  box-shadow:0 8px 20px rgba(244,201,93,.28);
+}
+
+.speaker{
+  display:block;
+  margin-bottom:4px;
+
+  color:var(--yellow-dark);
+
+  font:.76rem "JetBrains Mono",monospace;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+}
+
+
+/* ==================================================
+   ALFABET
+================================================== */
+
+.alphabet{
+  display:flex;
+  flex-wrap:wrap;
+  gap:11px;
+
+  margin:22px 0;
+}
+
+.alphabet-letter{
+  min-width:76px;
+  padding:13px 14px;
+
+  color:var(--text);
+
+  background:#ffffff;
+  border:1px solid var(--line);
+  border-radius:12px;
+
+  font:700 1.08rem "Nunito Sans",sans-serif;
+
+  transition:
+    background .15s,
+    border-color .15s,
+    transform .15s,
+    box-shadow .15s;
+}
+
+.alphabet-letter:hover{
+  background:#e8f3ff;
+  border-color:#72b8ff;
+  transform:translateY(-2px);
+  box-shadow:0 7px 13px rgba(47,137,199,.12);
+}
+
+.alphabet-letter.playing{
+  color:#ffffff;
+
+  background:#278fd0;
+  border-color:#278fd0;
+}
+
+.alphabet-controls{
+  display:flex;
+  flex-wrap:wrap;
+  gap:9px;
+
+  margin:18px 0;
+}
+
+.alphabet-action{
+  min-height:43px;
+  padding:9px 15px;
+
+  color:#ffffff;
+
+  background:#278fd0;
+  border:1px solid #278fd0;
+  border-radius:999px;
+
+  font-weight:800;
+}
+
+.alphabet-action.secondary{
+  color:var(--text);
+
+  background:#ffffff;
+  border-color:var(--line);
+}
+
+
+/* ==================================================
+   ĆWICZENIA
+================================================== */
+
+.exercise{
+  margin:22px 0;
+  padding:20px;
+
+  background:#ffffff;
+  border:1px solid var(--line);
+  border-radius:18px;
+}
+
+.exercise-number{
+  display:block;
+  margin-bottom:5px;
+
+  color:var(--yellow-dark);
+
+  font:.76rem "JetBrains Mono",monospace;
+  letter-spacing:.11em;
+  text-transform:uppercase;
+}
+
+.exercise-title{
+  margin:0 0 14px;
+
+  font-size:1.18rem;
+}
+
+.answer-options{
+  display:grid;
+  gap:10px;
+}
+
+.answer-option{
+  width:100%;
+  padding:12px 14px;
+
+  color:var(--text);
+  text-align:left;
+
+  background:#f7f9fc;
+  border:1px solid var(--line);
+  border-radius:13px;
+
+  font-weight:700;
+
+  transition:
+    background .15s,
+    border-color .15s,
+    transform .15s;
+}
+
+.answer-option:hover:not(:disabled){
+  background:#fff9e8;
+  border-color:var(--yellow);
+  transform:translateX(3px);
+}
+
+.answer-option.correct{
+  color:#0d6d3a;
+
+  background:var(--success-light);
+  border-color:#7fc99d;
+}
+
+.answer-option.wrong{
+  color:#9b2929;
+
+  background:var(--error-light);
+  border-color:#eba2a2;
+}
+
+.answer-option:disabled{
+  cursor:default;
+}
+
+.exercise-feedback{
+  min-height:28px;
+  margin:13px 0 0;
+
+  font-weight:800;
+}
+
+.exercise-feedback.success{
+  color:var(--success);
+}
+
+.exercise-feedback.error{
+  color:var(--error);
+}
+
+
+/* ==================================================
+   ĆWICZENIE TEKSTOWE
+================================================== */
+
+.text-exercise-row{
+  display:flex;
+  flex-wrap:wrap;
+  gap:9px;
+}
+
+.text-answer{
+  flex:1 1 240px;
+
+  min-height:46px;
+  padding:10px 13px;
+
+  color:var(--text);
+
+  background:#ffffff;
+  border:2px solid var(--line);
+  border-radius:12px;
+
+  outline:none;
+
+  transition:
+    border-color .15s,
+    box-shadow .15s;
+}
+
+.text-answer:focus{
+  border-color:#72b8ff;
+  box-shadow:0 0 0 4px rgba(114,184,255,.16);
+}
+
+.check-answer-button{
+  min-height:46px;
+  padding:10px 16px;
+
+  color:#ffffff;
+
+  background:#278fd0;
+  border:1px solid #278fd0;
+  border-radius:12px;
+
+  font-weight:800;
+}
+
+
+/* ==================================================
+   WŁASNE PRZEDSTAWIENIE
+================================================== */
+
+.personal-introduction{
+  margin-top:22px;
+  padding:20px;
+
+  background:#fffaf0;
+  border:1px solid #efd693;
+  border-radius:18px;
+}
+
+.name-form{
+  display:flex;
+  flex-wrap:wrap;
+  gap:9px;
+
+  margin-top:12px;
+}
+
+.name-input{
+  flex:1 1 230px;
+
+  min-height:46px;
+  padding:10px 13px;
+
+  border:2px solid var(--line);
+  border-radius:12px;
+
+  outline:none;
+}
+
+.name-input:focus{
+  border-color:#72b8ff;
+}
+
+.introduction-preview{
+  margin:16px 0 0;
+  padding:14px;
+
+  background:#ffffff;
+  border:1px solid var(--line);
+  border-radius:13px;
+
+  font-size:1.08rem;
+  font-weight:800;
+}
+
+
+/* ==================================================
+   WYNIK
+================================================== */
+
+.score-panel{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+
+  margin-top:22px;
+  padding:18px;
+
+  background:#20324a;
+  border-radius:18px;
+
+  color:#ffffff;
+}
+
+.score-number{
+  font:700 1.8rem "Kalam",cursive;
+}
+
+.reset-exercises{
+  padding:9px 15px;
+
+  color:#ffffff;
+
+  background:transparent;
+  border:1px solid rgba(255,255,255,.55);
+  border-radius:999px;
+
+  font-weight:800;
+}
+
+
+/* ==================================================
+   PRZYCISKI TRENINGOWE
+================================================== */
+
+.training-buttons-wrapper{
+  display:flex;
+  justify-content:center;
+  align-items:stretch;
+  gap:12px;
+
+  margin:32px auto 12px;
+}
+
+.training-btn{
+  display:inline-flex;
+  flex:1 1 0;
+  align-items:center;
+  justify-content:center;
+  gap:7px;
+
+  max-width:260px;
+  min-height:56px;
+  padding:11px 15px;
+
+  color:#ffffff;
+  text-align:center;
+  text-decoration:none;
+  white-space:nowrap;
+
+  border-radius:18px;
+
+  font:800 1rem/1.2 "Nunito Sans",sans-serif;
+
+  box-shadow:
+    0 8px 17px rgba(0,0,0,.22),
+    inset 0 1px 0 rgba(255,255,255,.35);
+
+  transition:
+    transform .18s,
+    filter .18s,
+    box-shadow .18s;
+}
+
+.training-btn:hover{
+  transform:translateY(-3px);
+  filter:brightness(1.06);
+
+  box-shadow:
+    0 12px 22px rgba(0,0,0,.27),
+    inset 0 1px 0 rgba(255,255,255,.4);
+}
+
+.sprich-nach-btn{
+  background:linear-gradient(180deg,#68c7ff,#43aef4);
+  border:2px solid #d7f1ff;
+}
+
+.aktiv-trainieren-btn{
+  background:linear-gradient(180deg,#84df42,#5fbd28);
+  border:2px solid #e4ffd2;
+}
+
+.uebung-training-btn{
+  background:linear-gradient(180deg,#a88af5,#7958d8);
+  border:2px solid #e5ddff;
+}
+
+
+/* ==================================================
+   PODSUMOWANIE
+================================================== */
+
+.summary-grid{
+  display:grid;
+  gap:12px;
+}
+
+.row{
+  display:grid;
+  grid-template-columns:210px 1fr;
+  align-items:start;
+  gap:14px;
+
+  padding:16px 18px;
+
+  background:#ffffff;
+  border:1px solid var(--line);
+  border-radius:14px;
+}
+
+.key{
+  color:var(--yellow-dark);
+
+  font:800 1.03rem "Nunito Sans",sans-serif;
+}
+
+.summary-text{
+  font-size:1.03rem;
+}
+
+
+/* ==================================================
+   UKOŃCZENIE LEKCJI
+================================================== */
+
+.complete-panel{
+  margin-top:25px;
+  padding:20px;
+
+  text-align:center;
+
+  background:#ffffff;
+  border:1px solid var(--line);
+  border-radius:18px;
+}
+
+.complete-lesson-button{
+  min-height:49px;
+  padding:11px 21px;
+
+  color:#ffffff;
+
+  background:linear-gradient(180deg,#42c37a,#21965b);
+  border:2px solid #d3f7e2;
+  border-radius:999px;
+
+  font-weight:800;
+
+  box-shadow:0 8px 17px rgba(21,111,65,.2);
+}
+
+.complete-lesson-button.completed{
+  background:#16864b;
+}
+
+.completion-message{
+  min-height:30px;
+  margin:14px 0 0;
+
+  color:var(--success);
+  font-weight:800;
+}
+
+
+/* ==================================================
+   NAWIGACJA
+================================================== */
+
+.back-to-top{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+
+  width:48px;
+  height:48px;
+  margin:22px auto 0;
+
+  color:var(--text);
+  text-decoration:none;
+
+  background:#ffffff;
+  border:1px solid var(--line);
+  border-radius:50%;
+
+  font-size:1.3rem;
+  font-weight:800;
+
+  transition:
+    background .15s,
+    border-color .15s,
+    transform .15s;
+}
+
+.back-to-top:hover{
+  background:#fff8de;
+  border-color:var(--yellow);
+  transform:translateY(-2px);
+}
+
+.lesson-nav{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:flex-end;
+  gap:10px;
+
+  margin-top:28px;
+  padding-top:24px;
+
+  border-top:2px dashed rgba(35,51,46,.18);
+
+  font:.9rem "JetBrains Mono",monospace;
+}
+
+.lesson-nav a{
+  padding:9px 17px;
+
+  color:var(--text);
+  text-decoration:none;
+
+  background:#ffffff;
+  border:1px solid var(--line);
+  border-radius:999px;
+
+  transition:
+    background .15s,
+    border-color .15s,
+    transform .15s;
+}
+
+.lesson-nav a:hover{
+  background:#fff8de;
+  border-color:var(--yellow);
+  transform:translateX(3px);
+}
+
+
+/* ==================================================
+   POWIADOMIENIE
+================================================== */
+
+.toast{
+  position:fixed;
+  z-index:1500;
+  right:20px;
+  bottom:20px;
+
+  max-width:320px;
+  padding:13px 17px;
+
+  color:#ffffff;
+
+  background:#18283c;
+  border:1px solid rgba(255,255,255,.22);
+  border-radius:14px;
+
+  box-shadow:0 12px 30px rgba(0,0,0,.25);
+
+  opacity:0;
+  pointer-events:none;
+  transform:translateY(15px);
+
+  transition:
+    opacity .2s,
+    transform .2s;
+}
+
+.toast.visible{
+  opacity:1;
+  transform:translateY(0);
+}
+
+
+/* ==================================================
+   DOSTĘPNOŚĆ
+================================================== */
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible{
+  outline:3px solid var(--yellow);
+  outline-offset:3px;
+}
+
+
+/* ==================================================
+   WERSJA MOBILNA
+================================================== */
+
+@media (max-width:720px){
+
+  body{
+    padding-bottom:30px;
+  }
+
+  .course-nav{
+    margin:32px auto 36px;
+  }
+
+  .course-nav-title{
+    font-size:1.9rem;
+  }
+
+  .wrap{
+    padding:20px 14px;
+    border-radius:18px;
+  }
+
+  header.hero{
+    padding-top:10px;
+  }
+
+  .lesson-title{
+    font-size:2.15rem;
+  }
+
+  .part-title{
+    font-size:1.7rem;
+  }
+
+  .wheel-box{
+    margin:auto;
+  }
+
+  .greeting-grid{
+    grid-template-columns:1fr;
+  }
+
+  .gruss-tabelle{
+    display:block;
+    overflow-x:auto;
+  }
+
+  .intro-card{
+    grid-template-columns:1fr;
+  }
+
+  .bubble{
+    max-width:100%;
+  }
+
+  .row{
+    grid-template-columns:1fr;
+  }
+
+  .training-buttons-wrapper{
+    gap:7px;
+    margin-top:26px;
+  }
+
+  .training-btn{
+    min-width:0;
+    min-height:52px;
+    padding:10px 7px;
+
+    white-space:normal;
+
+    border-radius:16px;
+    font-size:.82rem;
+  }
+
+}
+
+
+@media (max-width:430px){
+
+  .training-buttons-wrapper{
+    flex-wrap:wrap;
+  }
+
+  .training-btn{
+    flex:1 1 100%;
+    max-width:100%;
+
+    font-size:1rem;
+  }
+
+  .alphabet-letter{
+    flex:1 1 70px;
+  }
+
+  .dialog-controls,
+  .alphabet-controls{
+    display:grid;
+    grid-template-columns:1fr;
+  }
+
+  .dialog-play-button,
+  .dialog-stop-button,
+  .alphabet-action{
+    width:100%;
+  }
+
+}
+
+
+@media (prefers-reduced-motion:reduce){
+
+  html{
+    scroll-behavior:auto;
+  }
+
+  *,
+  *::before,
+  *::after{
+    animation-duration:.01ms !important;
+    animation-iteration-count:1 !important;
+    transition-duration:.01ms !important;
+  }
+
+}
+</style>
+</head>
+
+<body id="seitenanfang">
+
+<div class="progress-bar-container" aria-hidden="true">
+  <div class="progress-bar" id="pageProgress"></div>
+</div>
+
+
+<!-- ==================================================
+     MENU LEKCJI
+================================================== -->
+
+<nav class="course-nav" aria-label="Inhaltsverzeichnis der Lektion">
+
+  <h2 class="course-nav-title">A1 — Lektion 1</h2>
+
+  <div class="course-section">
+
+    <h3 class="section-title">Erste Schritte</h3>
+
+    <ul class="lesson-list">
+
+      <li>
+        <a href="#lektion1-teil1">
+          <span aria-hidden="true">👋</span>
+          Begrüßung
+        </a>
+      </li>
+
+      <li>
+        <a href="#lektion1-teil2">
+          <span aria-hidden="true">👤</span>
+          Ich stelle mich vor
+        </a>
+      </li>
+
+      <li>
+        <a href="#lektion1-teil3">
+          <span aria-hidden="true">🔤</span>
+          Das deutsche Alphabet
+        </a>
+      </li>
+
+      <li>
+        <a href="#lektion1-uebungen">
+          <span aria-hidden="true">✏️</span>
+          Interaktive Übungen
+        </a>
+      </li>
+
+    </ul>
+
+  </div>
+
+</nav>
+
+
+<!-- ==================================================
+     LEKTION 1
+================================================== -->
+
+<main>
+
+<section id="lektion1">
+
+<div class="wrap">
+
+
+<!-- ==================================================
+     HERO
+================================================== -->
+
+<header class="hero">
+
+  <div class="hero-text">
+
+    <p class="eyebrow">
+      Deutschkurs A1 · 1 von 30
+    </p>
+
+    <h1 class="lesson-title">
+      Guten Tag! — Begrüßung und Vorstellung
+    </h1>
+
+    <p>
+      Heute lernen wir, wie wir uns begrüßen,
+      wie wir nach dem Namen fragen und wie
+      wir uns vorstellen. Danach üben wir das
+      deutsche Alphabet.
+    </p>
+
+    <div class="topics">
+
+      <a href="#lektion1-teil1">
+        1 · Begrüßung
+      </a>
+
+      <a href="#lektion1-teil2">
+        2 · Vorstellung
+      </a>
+
+      <a href="#lektion1-teil3">
+        3 · Alphabet
+      </a>
+
+      <a href="#lektion1-uebungen">
+        4 · Übungen
+      </a>
+
+    </div>
+
+  </div>
+
+
+  <div class="wheel-box">
+
+    <svg
+      viewBox="0 0 320 320"
+      role="img"
+      aria-label="Begrüßungssymbol"
+    >
+
+      <circle
+        cx="160"
+        cy="160"
+        r="132"
+        fill="rgba(255,255,255,.17)"
+        stroke="rgba(35,51,46,.16)"
+      />
+
+      <circle
+        cx="160"
+        cy="160"
+        r="70"
+        fill="#20324a"
+        stroke="rgba(35,51,46,.12)"
+      />
+
+      <text
+        class="center-label"
+        x="160"
+        y="152"
+      >
+        Hallo!
+      </text>
+
+      <text
+        class="center-sub"
+        x="160"
+        y="175"
+      >
+        Guten Tag
+      </text>
+
+      <text x="160" y="42" class="month-label" font-size="21">👋</text>
+      <text x="252" y="82" class="month-label" font-size="21">😊</text>
+      <text x="282" y="164" class="month-label" font-size="21">🗣️</text>
+      <text x="250" y="246" class="month-label" font-size="21">👤</text>
+      <text x="160" y="292" class="month-label" font-size="21">📖</text>
+      <text x="70" y="246" class="month-label" font-size="21">🎯</text>
+      <text x="38" y="164" class="month-label" font-size="21">✨</text>
+      <text x="70" y="82" class="month-label" font-size="21">🌟</text>
+
+    </svg>
+
+  </div>
+
+</header>
+
+
+<!-- ==================================================
+     TEIL 1
+================================================== -->
+
+<section class="part" id="lektion1-teil1">
+
+  <div class="part-head">
+    <span class="part-num">Teil 1</span>
+    <h2 class="part-title">Wir begrüßen uns</h2>
+  </div>
+
+  <div class="card">
+
+    <p class="lead">
+      Wir verwenden verschiedene Grüße.
+      Klicken Sie auf das Lautsprechersymbol und sprechen Sie nach.
+    </p>
+
+
+    <div class="greeting-grid">
+
+      <div class="greeting-card">
+
+        <div class="greeting-text">
+          <p class="greeting">Guten Morgen!</p>
+          <span class="greeting-time">am Morgen</span>
+        </div>
+
+        <button
+          type="button"
+          class="speak-button"
+          data-speak="Guten Morgen!"
+          aria-label="Guten Morgen anhören"
+        >
+          🔊 Hören
+        </button>
+
+      </div>
+
+
+      <div class="greeting-card">
+
+        <div class="greeting-text">
+          <p class="greeting">Guten Tag!</p>
+          <span class="greeting-time">tagsüber</span>
+        </div>
+
+        <button
+          type="button"
+          class="speak-button"
+          data-speak="Guten Tag!"
+          aria-label="Guten Tag anhören"
+        >
+          🔊 Hören
+        </button>
+
+      </div>
+
+
+      <div class="greeting-card">
+
+        <div class="greeting-text">
+          <p class="greeting">Guten Abend!</p>
+          <span class="greeting-time">am Abend</span>
+        </div>
+
+        <button
+          type="button"
+          class="speak-button"
+          data-speak="Guten Abend!"
+          aria-label="Guten Abend anhören"
+        >
+          🔊 Hören
+        </button>
+
+      </div>
+
+
+      <div class="greeting-card">
+
+        <div class="greeting-text">
+          <p class="greeting">Hallo!</p>
+          <span class="greeting-time">informell</span>
+        </div>
+
+        <button
+          type="button"
+          class="speak-button"
+          data-speak="Hallo!"
+          aria-label="Hallo anhören"
+        >
+          🔊 Hören
+        </button>
+
+      </div>
+
+
+      <div class="greeting-card">
+
+        <div class="greeting-text">
+          <p class="greeting">Tschüss!</p>
+          <span class="greeting-time">beim Abschied</span>
+        </div>
+
+        <button
+          type="button"
+          class="speak-button"
+          data-speak="Tschüss!"
+          aria-label="Tschüss anhören"
+        >
+          🔊 Hören
+        </button>
+
+      </div>
+
+
+      <div class="greeting-card">
+
+        <div class="greeting-text">
+          <p class="greeting">Auf Wiedersehen!</p>
+          <span class="greeting-time">formeller Abschied</span>
+        </div>
+
+        <button
+          type="button"
+          class="speak-button"
+          data-speak="Auf Wiedersehen!"
+          aria-label="Auf Wiedersehen anhören"
+        >
+          🔊 Hören
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <div class="grammar-box">
+
+      <strong>Merke!</strong>
+
+      <br><br>
+
+      morgens:
+      <strong>Guten Morgen!</strong>
+
+      <br><br>
+
+      tagsüber:
+      <strong>Guten Tag!</strong>
+
+      <br><br>
+
+      abends:
+      <strong>Guten Abend!</strong>
+
+      <br><br>
+
+      informell:
+      <strong>Hallo!</strong>
+
+      <br><br>
+
+      beim Abschied:
+      <strong>Tschüss!</strong> oder
+      <strong>Auf Wiedersehen!</strong>
+
+    </div>
+
+
+    <table class="gruss-tabelle">
+
+      <thead>
+        <tr>
+          <th>Situation</th>
+          <th>Gruß</th>
+          <th>Verwendung</th>
+        </tr>
+      </thead>
+
+      <tbody>
+
+        <tr>
+          <td>morgens</td>
+          <td>
+            <strong class="gruss">Guten Morgen!</strong>
+          </td>
+          <td>
+            ungefähr bis 10:00 oder 11:00 Uhr
+          </td>
+        </tr>
+
+        <tr>
+          <td>tagsüber</td>
+          <td>
+            <strong class="gruss">Guten Tag!</strong>
+          </td>
+          <td>
+            ungefähr bis 17:00 oder 18:00 Uhr
+          </td>
+        </tr>
+
+        <tr>
+          <td>abends</td>
+          <td>
+            <strong class="gruss">Guten Abend!</strong>
+          </td>
+          <td>
+            ungefähr ab 17:00 oder 18:00 Uhr
+          </td>
+        </tr>
+
+        <tr>
+          <td>informell</td>
+          <td>
+            <strong class="gruss">Hallo!</strong>
+          </td>
+          <td>
+            zu jeder Tageszeit
+          </td>
+        </tr>
+
+        <tr>
+          <td>Abschied</td>
+          <td>
+            <strong class="gruss">Tschüss!</strong>
+          </td>
+          <td>
+            informell
+          </td>
+        </tr>
+
+        <tr>
+          <td>Abschied</td>
+          <td>
+            <strong class="gruss">Auf Wiedersehen!</strong>
+          </td>
+          <td>
+            höflich und formell
+          </td>
+        </tr>
+
+      </tbody>
+
+    </table>
+
+  </div>
+
+</section>
+
+
+<!-- ==================================================
+     TEIL 2
+================================================== -->
+
+<section class="part" id="lektion1-teil2">
+
+  <div class="part-head">
+    <span class="part-num">Teil 2</span>
+    <h2 class="part-title">Ich stelle mich vor</h2>
+  </div>
+
+  <div class="card">
+
+    <p class="lead">
+      Wir können uns auf verschiedene Arten vorstellen.
+    </p>
+
+
+    <div class="intro-card">
+
+      <div class="intro-icon" aria-hidden="true">
+        👋
+      </div>
+
+      <div>
+
+        <h3 class="intro-title">Hallo!</h3>
+
+        <div class="intro-sentence">
+
+          <p class="intro-text">
+            Ich heiße Anna.
+          </p>
+
+          <button
+            type="button"
+            class="speak-button"
+            data-speak="Ich heiße Anna."
+          >
+            🔊
+          </button>
+
+        </div>
+
+
+        <div class="intro-sentence">
+
+          <p class="intro-text">
+            Mein Name ist Anna Müller.
+          </p>
+
+          <button
+            type="button"
+            class="speak-button"
+            data-speak="Mein Name ist Anna Müller."
+          >
+            🔊
+          </button>
+
+        </div>
+
+
+        <div class="intro-sentence">
+
+          <p class="intro-text">
+            Ich bin Anna.
+          </p>
+
+          <button
+            type="button"
+            class="speak-button"
+            data-speak="Ich bin Anna."
+          >
+            🔊
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="grammar-box">
+
+      <strong>Informell:</strong>
+
+      <br><br>
+
+      Hallo!
+
+      <br><br>
+
+      Wie heißt du?
+
+      <br><br>
+
+      Ich heiße …
+
+    </div>
+
+
+    <div class="grammar-box">
+
+      <strong>Formell:</strong>
+
+      <br><br>
+
+      Guten Tag.
+
+      <br><br>
+
+      Wie heißen Sie?
+
+      <br><br>
+
+      Ich heiße …
+
+      <br><br>
+
+      Mein Name ist …
+
+    </div>
+
+
+    <div class="personal-introduction">
+
+      <h3 class="section-subtitle">
+        Stellen Sie sich vor
+      </h3>
+
+      <p>
+        Schreiben Sie Ihren Namen.
+        Danach können Sie Ihren eigenen Satz anhören.
+      </p>
+
+      <div class="name-form">
+
+        <label for="studentName" class="visually-hidden">
+          Name
+        </label>
+
+        <input
+          type="text"
+          id="studentName"
+          class="name-input"
+          placeholder="Ihr Name"
+          autocomplete="name"
+        >
+
+        <button
+          type="button"
+          class="check-answer-button"
+          id="createIntroduction"
+        >
+          Satz erstellen
+        </button>
+
+      </div>
+
+      <div
+        class="introduction-preview"
+        id="introductionPreview"
+        aria-live="polite"
+      >
+        Ich heiße …
+      </div>
+
+      <button
+        type="button"
+        class="speak-button"
+        id="speakIntroduction"
+        disabled
+        style="margin-top:12px"
+      >
+        🔊 Meine Vorstellung anhören
+      </button>
+
+    </div>
+
+
+    <h3 class="dialog-title">Informell — Dialog 1</h3>
+
+    <div class="dialog-controls">
+
+      <button
+        type="button"
+        class="dialog-play-button"
+        data-dialog="informalDialog"
+      >
+        ▶ Dialog anhören
+      </button>
+
+      <button
+        type="button"
+        class="dialog-stop-button"
+      >
+        ■ Stop
+      </button>
+
+    </div>
+
+
+    <div class="dialog" id="informalDialog">
+
+      <div
+        class="bubble marta"
+        data-dialog-text="Hallo!"
+      >
+        <span class="speaker">Lena</span>
+        Hallo!
+      </div>
+
+      <div
+        class="bubble tom"
+        data-dialog-text="Hallo! Wie heißt du?"
+      >
+        <span class="speaker">Max</span>
+        Hallo! Wie heißt du?
+      </div>
+
+      <div
+        class="bubble marta"
+        data-dialog-text="Ich heiße Lena. Und du?"
+      >
+        <span class="speaker">Lena</span>
+        Ich heiße Lena. Und du?
+      </div>
+
+      <div
+        class="bubble tom"
+        data-dialog-text="Ich heiße Max."
+      >
+        <span class="speaker">Max</span>
+        Ich heiße Max.
+      </div>
+
+      <div
+        class="bubble marta"
+        data-dialog-text="Freut mich."
+      >
+        <span class="speaker">Lena</span>
+        Freut mich.
+      </div>
+
+      <div
+        class="bubble tom"
+        data-dialog-text="Mich auch."
+      >
+        <span class="speaker">Max</span>
+        Mich auch.
+      </div>
+
+    </div>
+
+
+    <h3 class="dialog-title">Formell — Dialog 2</h3>
+
+    <div class="dialog-controls">
+
+      <button
+        type="button"
+        class="dialog-play-button"
+        data-dialog="formalDialog"
+      >
+        ▶ Dialog anhören
+      </button>
+
+      <button
+        type="button"
+        class="dialog-stop-button"
+      >
+        ■ Stop
+      </button>
+
+    </div>
+
+
+    <div class="dialog" id="formalDialog">
+
+      <div
+        class="bubble marta"
+        data-dialog-text="Guten Tag."
+      >
+        <span class="speaker">Frau Sommer</span>
+        Guten Tag.
+      </div>
+
+      <div
+        class="bubble tom"
+        data-dialog-text="Guten Tag. Wie heißen Sie?"
+      >
+        <span class="speaker">Herr Klein</span>
+        Guten Tag. Wie heißen Sie?
+      </div>
+
+      <div
+        class="bubble marta"
+        data-dialog-text="Mein Name ist Anna Sommer. Und Sie?"
+      >
+        <span class="speaker">Frau Sommer</span>
+        Mein Name ist Anna Sommer. Und Sie?
+      </div>
+
+      <div
+        class="bubble tom"
+        data-dialog-text="Ich heiße Thomas Klein."
+      >
+        <span class="speaker">Herr Klein</span>
+        Ich heiße Thomas Klein.
+      </div>
+
+      <div
+        class="bubble marta"
+        data-dialog-text="Freut mich, Herr Klein."
+      >
+        <span class="speaker">Frau Sommer</span>
+        Freut mich, Herr Klein.
+      </div>
+
+      <div
+        class="bubble tom"
+        data-dialog-text="Freut mich auch, Frau Sommer."
+      >
+        <span class="speaker">Herr Klein</span>
+        Freut mich auch, Frau Sommer.
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ==================================================
+     TEIL 3
+================================================== -->
+
+<section class="part" id="lektion1-teil3">
+
+  <div class="part-head">
+    <span class="part-num">Teil 3</span>
+    <h2 class="part-title">Das deutsche Alphabet</h2>
+  </div>
+
+  <div class="card">
+
+    <p class="lead">
+      Hören Sie zu und sprechen Sie nach.
+    </p>
+
+    <p class="instruction">
+      Klicken Sie auf einen Buchstaben.
+      Dann hören Sie seine deutsche Aussprache.
+    </p>
+
+
+    <div class="alphabet-controls">
+
+      <button
+        type="button"
+        class="alphabet-action"
+        id="playAlphabet"
+      >
+        ▶ Ganzes Alphabet
+      </button>
+
+      <button
+        type="button"
+        class="alphabet-action secondary"
+        id="stopAlphabet"
+      >
+        ■ Stop
+      </button>
+
+    </div>
+
+
+    <div
+      class="alphabet"
+      id="alphabet"
+      aria-label="Deutsches Alphabet"
+    ></div>
+
+
+    <h3 class="section-subtitle">
+      Die Umlaute und das Eszett
+    </h3>
+
+    <div
+      class="alphabet"
+      id="umlaute"
+      aria-label="Deutsche Umlaute"
+    ></div>
+
+  </div>
+
+</section>
+
+
+<!-- ==================================================
+     INTERAKTYWNE ĆWICZENIA
+================================================== -->
+
+<section class="part" id="lektion1-uebungen">
+
+  <div class="part-head">
+    <span class="part-num">Teil 4</span>
+    <h2 class="part-title">Interaktive Übungen</h2>
+  </div>
+
+  <div class="card">
+
+    <p class="lead">
+      Wählen Sie die richtige Antwort.
+    </p>
+
+
+    <!-- ĆWICZENIE 1 -->
+
+    <article
+      class="exercise choice-exercise"
+      data-exercise="1"
+      data-answer="Guten Morgen!"
+    >
+
+      <span class="exercise-number">Übung 1</span>
+
+      <h3 class="exercise-title">
+        Es ist 8:00 Uhr. Was sagen Sie?
+      </h3>
+
+      <div class="answer-options">
+
+        <button
+          type="button"
+          class="answer-option"
+          data-value="Guten Abend!"
+        >
+          Guten Abend!
+        </button>
+
+        <button
+          type="button"
+          class="answer-option"
+          data-value="Guten Morgen!"
+        >
+          Guten Morgen!
+        </button>
+
+        <button
+          type="button"
+          class="answer-option"
+          data-value="Tschüss!"
+        >
+          Tschüss!
+        </button>
+
+      </div>
+
+      <p
+        class="exercise-feedback"
+        aria-live="polite"
+      ></p>
+
+    </article>
+
+
+    <!-- ĆWICZENIE 2 -->
+
+    <article
+      class="exercise choice-exercise"
+      data-exercise="2"
+      data-answer="Wie heißt du?"
+    >
+
+      <span class="exercise-number">Übung 2</span>
+
+      <h3 class="exercise-title">
+        Sie sprechen informell mit Max.
+        Wie fragen Sie nach seinem Namen?
+      </h3>
+
+      <div class="answer-options">
+
+        <button
+          type="button"
+          class="answer-option"
+          data-value="Wie heißen Sie?"
+        >
+          Wie heißen Sie?
+        </button>
+
+        <button
+          type="button"
+          class="answer-option"
+          data-value="Wie heißt du?"
+        >
+          Wie heißt du?
+        </button>
+
+        <button
+          type="button"
+          class="answer-option"
+          data-value="Wo wohnst du?"
+        >
+          Wo wohnst du?
+        </button>
+
+      </div>
+
+      <p
+        class="exercise-feedback"
+        aria-live="polite"
+      ></p>
+
+    </article>
+
+
+    <!-- ĆWICZENIE 3 -->
+
+    <article
+      class="exercise choice-exercise"
+      data-exercise="3"
+      data-answer="Wie heißen Sie?"
+    >
+
+      <span class="exercise-number">Übung 3</span>
+
+      <h3 class="exercise-title">
+        Sie sprechen formell mit Frau Müller.
+        Was ist richtig?
+      </h3>
+
+      <div class="answer-options">
+
+        <button
+          type="button"
+          class="answer-option"
+          data-value="Wie heißt du?"
+        >
+          Wie heißt du?
+        </button>
+
+        <button
+          type="button"
+          class="answer-option"
+          data-value="Wie heißen Sie?"
+        >
+          Wie heißen Sie?
+        </button>
+
+        <button
+          type="button"
+          class="answer-option"
+          data-value="Wie geht du?"
+        >
+          Wie geht du?
+        </button>
+
+      </div>
+
+      <p
+        class="exercise-feedback"
+        aria-live="polite"
+      ></p>
+
+    </article>
+
+
+    <!-- ĆWICZENIE 4 -->
+
+    <article
+      class="exercise choice-exercise"
+      data-exercise="4"
+      data-answer="Tschüss!"
+    >
+
+      <span class="exercise-number">Übung 4</span>
+
+      <h3 class="exercise-title">
+        Sie verabschieden sich informell.
+        Was sagen Sie?
+      </h3>
+
+      <div class="answer-options">
+
+        <button
+          type="button"
+          class="answer-option"
+          data-value="Guten Morgen!"
+        >
+          Guten Morgen!
+        </button>
+
+        <button
+          type="button"
+          class="answer-option"
+          data-value="Tschüss!"
+        >
+          Tschüss!
+        </button>
+
+        <button
+          type="button"
+          class="answer-option"
+          data-value="Ich heiße Max."
+        >
+          Ich heiße Max.
+        </button>
+
+      </div>
+
+      <p
+        class="exercise-feedback"
+        aria-live="polite"
+      ></p>
+
+    </article>
+
+
+    <!-- ĆWICZENIE 5 -->
+
+    <article
+      class="exercise text-exercise"
+      data-exercise="5"
+      data-answers="ich heiße anna|ich heisse anna"
+    >
+
+      <span class="exercise-number">Übung 5</span>
+
+      <h3 class="exercise-title">
+        Schreiben Sie auf Deutsch:
+        „Nazywam się Anna”.
+      </h3>
+
+      <div class="text-exercise-row">
+
+        <input
+          type="text"
+          class="text-answer"
+          placeholder="Ihre Antwort"
+          autocomplete="off"
+        >
+
+        <button
+          type="button"
+          class="check-answer-button check-text-answer"
+        >
+          Prüfen
+        </button>
+
+      </div>
+
+      <p
+        class="exercise-feedback"
+        aria-live="polite"
+      ></p>
+
+    </article>
+
+
+    <!-- ĆWICZENIE 6 -->
+
+    <article
+      class="exercise text-exercise"
+      data-exercise="6"
+      data-answers="guten abend"
+    >
+
+      <span class="exercise-number">Übung 6</span>
+
+      <h3 class="exercise-title">
+        Schreiben Sie den passenden Gruß:
+        Es ist 19:00 Uhr.
+      </h3>
+
+      <div class="text-exercise-row">
+
+        <input
+          type="text"
+          class="text-answer"
+          placeholder="Ihre Antwort"
+          autocomplete="off"
+        >
+
+        <button
+          type="button"
+          class="check-answer-button check-text-answer"
+        >
+          Prüfen
+        </button>
+
+      </div>
+
+      <p
+        class="exercise-feedback"
+        aria-live="polite"
+      ></p>
+
+    </article>
+
+
+    <div class="score-panel">
+
+      <div>
+        <div>Ihr Ergebnis</div>
+
+        <div class="score-number">
+          <span id="score">0</span>
+          /
+          <span id="maximumScore">6</span>
+        </div>
+      </div>
+
+      <button
+        type="button"
+        class="reset-exercises"
+        id="resetExercises"
+      >
+        Übungen wiederholen
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- ==================================================
+       TRZY PRZYCISKI TRENINGOWE
+  ================================================== -->
+
+  <div class="training-buttons-wrapper">
+
+    <a
+      href="../../sprich%20nach/A1/1.html"
+      class="training-btn sprich-nach-btn"
+    >
+      🎤 Sprich nach
+    </a>
+
+    <a
+      href="../../aktiv-trainieren/A1/1.html"
+      class="training-btn aktiv-trainieren-btn"
+    >
+      🏋️ Aktiv trainieren
+    </a>
+
+    <a
+      href="../../Übungen/Übung-A1.html#übung1"
+      class="training-btn uebung-training-btn"
+    >
+      ✏️ Übung
+    </a>
+
+  </div>
+
+</section>
+
+
+<!-- ==================================================
+     PODSUMOWANIE
+================================================== -->
+
+<section class="part" id="lektion1-zusammenfassung">
+
+  <div class="part-head">
+    <span class="part-num">Merken</span>
+    <h2 class="part-title">Was kann ich jetzt?</h2>
+  </div>
+
+  <div class="card">
+
+    <div class="summary-grid">
+
+      <div class="row">
+
+        <span class="key">
+          ✅ Ich kann grüßen.
+        </span>
+
+        <span class="summary-text">
+          Guten Morgen! · Guten Tag! · Guten Abend! · Hallo!
+        </span>
+
+      </div>
+
+
+      <div class="row">
+
+        <span class="key">
+          ✅ Ich kann mich verabschieden.
+        </span>
+
+        <span class="summary-text">
+          Tschüss! · Auf Wiedersehen!
+        </span>
+
+      </div>
+
+
+      <div class="row">
+
+        <span class="key">
+          ✅ Ich kann mich vorstellen.
+        </span>
+
+        <span class="summary-text">
+          Ich heiße … · Mein Name ist … · Ich bin …
+        </span>
+
+      </div>
+
+
+      <div class="row">
+
+        <span class="key">
+          ✅ Ich kann nach dem Namen fragen.
+        </span>
+
+        <span class="summary-text">
+          Wie heißen Sie? · Wie heißt du?
+        </span>
+
+      </div>
+
+
+      <div class="row">
+
+        <span class="key">
+          ✅ Ich kenne das Alphabet.
+        </span>
+
+        <span class="summary-text">
+          A, B, C, D … Ä, Ö, Ü und ß
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <div class="complete-panel">
+
+      <button
+        type="button"
+        class="complete-lesson-button"
+        id="completeLesson"
+      >
+        ✓ Lektion als abgeschlossen markieren
+      </button>
+
+      <p
+        class="completion-message"
+        id="completionMessage"
+        aria-live="polite"
+      ></p>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ==================================================
+     NAWIGACJA
+================================================== -->
+
+<a
+  href="#seitenanfang"
+  class="back-to-top"
+  aria-label="Nach oben"
+>
+  ↑
+</a>
+
+
+<nav
+  class="lesson-nav"
+  aria-label="Navigation zwischen den Lektionen"
+>
+
+  <a href="2.html">
+    Lektion 2 →
+  </a>
+
+</nav>
+
+</div>
+
+</section>
+
+</main>
+
+
+<div
+  class="toast"
+  id="toast"
+  role="status"
+  aria-live="polite"
+></div>
+
+
+<script>
+"use strict";
+
+
+/* ==================================================
+   ELEMENTY
+================================================== */
+
+const pageProgress = document.getElementById("pageProgress");
+const toast = document.getElementById("toast");
+
+const scoreElement = document.getElementById("score");
+const maximumScoreElement = document.getElementById("maximumScore");
+
+const completeLessonButton =
+  document.getElementById("completeLesson");
+
+const completionMessage =
+  document.getElementById("completionMessage");
+
+
+/* ==================================================
+   PASEK POSTĘPU STRONY
+================================================== */
+
+function updatePageProgress(){
+
+  const documentHeight =
+    document.documentElement.scrollHeight -
+    window.innerHeight;
+
+  if(documentHeight <= 0){
+    pageProgress.style.width = "100%";
+    return;
+  }
+
+  const scrollPosition =
+    window.scrollY || document.documentElement.scrollTop;
+
+  const progress =
+    Math.min(
+      100,
+      Math.max(
+        0,
+        scrollPosition / documentHeight * 100
+      )
+    );
+
+  pageProgress.style.width = `${progress}%`;
+
+}
+
+window.addEventListener("scroll",updatePageProgress,{
+  passive:true
+});
+
+window.addEventListener("resize",updatePageProgress);
+
+updatePageProgress();
+
+
+/* ==================================================
+   POWIADOMIENIA
+================================================== */
+
+let toastTimer = null;
+
+function showToast(message){
+
+  if(!toast) return;
+
+  toast.textContent = message;
+  toast.classList.add("visible");
+
+  window.clearTimeout(toastTimer);
+
+  toastTimer = window.setTimeout(()=>{
+    toast.classList.remove("visible");
+  },2500);
+
+}
+
+
+/* ==================================================
+   GŁOS NIEMIECKI
+================================================== */
+
+let germanVoice = null;
+let currentSpeakButton = null;
+let speechSessionId = 0;
+
+
+function loadGermanVoice(){
+
+  if(!("speechSynthesis" in window)){
+    return;
+  }
+
+  const voices = window.speechSynthesis.getVoices();
+
+  germanVoice =
+    voices.find(voice =>
+      voice.lang?.toLowerCase() === "de-de" &&
+      voice.name?.toLowerCase().includes("google")
+    ) ||
+
+    voices.find(voice =>
+      voice.lang?.toLowerCase() === "de-de"
+    ) ||
+
+    voices.find(voice =>
+      voice.lang?.toLowerCase().startsWith("de")
+    ) ||
+
+    null;
+
+}
+
+
+loadGermanVoice();
+
+if("speechSynthesis" in window){
+
+  window.speechSynthesis.addEventListener(
+    "voiceschanged",
+    loadGermanVoice
+  );
+
+}
+
+
+function stopSpeech(){
+
+  speechSessionId += 1;
+
+  if("speechSynthesis" in window){
+    window.speechSynthesis.cancel();
+  }
+
+  document
+    .querySelectorAll(".is-speaking")
+    .forEach(element=>{
+      element.classList.remove("is-speaking");
+    });
+
+  document
+    .querySelectorAll(".playing")
+    .forEach(element=>{
+      element.classList.remove("playing");
+    });
+
+  document
+    .querySelectorAll(".active-line")
+    .forEach(element=>{
+      element.classList.remove("active-line");
+    });
+
+  currentSpeakButton = null;
+
+}
+
+
+function speakGerman(text,options={}){
+
+  return new Promise(resolve=>{
+
+    if(
+      !text ||
+      !("speechSynthesis" in window)
+    ){
+      showToast("Die Sprachausgabe wird nicht unterstützt.");
+      resolve(false);
+      return;
+    }
+
+    window.speechSynthesis.cancel();
+
+    const utterance =
+      new SpeechSynthesisUtterance(text);
+
+    utterance.lang = "de-DE";
+    utterance.rate = options.rate ?? 0.88;
+    utterance.pitch = options.pitch ?? 1;
+    utterance.volume = 1;
+
+    if(germanVoice){
+      utterance.voice = germanVoice;
+    }
+
+    utterance.onend = ()=>{
+      resolve(true);
+    };
+
+    utterance.onerror = event=>{
+
+      if(event.error !== "canceled"){
+        console.error(
+          "Fehler bei der Sprachausgabe:",
+          event.error
+        );
+      }
+
+      resolve(false);
+
+    };
+
+    window.speechSynthesis.speak(utterance);
+
+  });
+
+}
+
+
+/* ==================================================
+   ZWYKŁE PRZYCISKI AUDIO
+================================================== */
+
+document
+  .querySelectorAll("[data-speak]")
+  .forEach(button=>{
+
+    button.addEventListener("click",async()=>{
+
+      const text = button.dataset.speak;
+
+      stopSpeech();
+
+      currentSpeakButton = button;
+      button.classList.add("is-speaking");
+
+      await speakGerman(text);
+
+      button.classList.remove("is-speaking");
+
+      if(currentSpeakButton === button){
+        currentSpeakButton = null;
+      }
+
+    });
+
+  });
+
+
+/* ==================================================
+   WŁASNE PRZEDSTAWIENIE
+================================================== */
+
+const studentNameInput =
+  document.getElementById("studentName");
+
+const createIntroductionButton =
+  document.getElementById("createIntroduction");
+
+const introductionPreview =
+  document.getElementById("introductionPreview");
+
+const speakIntroductionButton =
+  document.getElementById("speakIntroduction");
+
+let personalIntroductionText = "";
+
+
+function createPersonalIntroduction(){
+
+  const name =
+    studentNameInput.value
+      .trim()
+      .replace(/\s+/g," ");
+
+  if(!name){
+
+    introductionPreview.textContent =
+      "Bitte schreiben Sie Ihren Namen.";
+
+    personalIntroductionText = "";
+    speakIntroductionButton.disabled = true;
+
+    studentNameInput.focus();
+
+    return;
+
+  }
+
+  personalIntroductionText =
+    `Hallo! Ich heiße ${name}.`;
+
+  introductionPreview.textContent =
+    personalIntroductionText;
+
+  speakIntroductionButton.disabled = false;
+
+  localStorage.setItem(
+    "neleStudentName",
+    name
+  );
+
+}
+
+
+createIntroductionButton.addEventListener(
+  "click",
+  createPersonalIntroduction
+);
+
+
+studentNameInput.addEventListener("keydown",event=>{
+
+  if(event.key === "Enter"){
+    createPersonalIntroduction();
+  }
+
+});
+
+
+speakIntroductionButton.addEventListener(
+  "click",
+  async()=>{
+
+    if(!personalIntroductionText){
+      return;
+    }
+
+    stopSpeech();
+
+    speakIntroductionButton.classList.add(
+      "is-speaking"
+    );
+
+    await speakGerman(
+      personalIntroductionText,
+      {
+        rate:.84
+      }
+    );
+
+    speakIntroductionButton.classList.remove(
+      "is-speaking"
+    );
+
+  }
+);
+
+
+const savedStudentName =
+  localStorage.getItem("neleStudentName");
+
+if(savedStudentName){
+
+  studentNameInput.value = savedStudentName;
+
+  personalIntroductionText =
+    `Hallo! Ich heiße ${savedStudentName}.`;
+
+  introductionPreview.textContent =
+    personalIntroductionText;
+
+  speakIntroductionButton.disabled = false;
+
+}
+
+
+/* ==================================================
+   DIALOGI
+================================================== */
+
+async function playDialog(dialogId){
+
+  stopSpeech();
+
+  const currentSession = speechSessionId;
+
+  const dialog =
+    document.getElementById(dialogId);
+
+  if(!dialog){
+    return;
+  }
+
+  const lines = [
+    ...dialog.querySelectorAll("[data-dialog-text]")
+  ];
+
+  for(const line of lines){
+
+    if(currentSession !== speechSessionId){
+      break;
+    }
+
+    line.classList.add("active-line");
+
+    await speakGerman(
+      line.dataset.dialogText,
+      {
+        rate:.86
+      }
+    );
+
+    line.classList.remove("active-line");
+
+    if(currentSession !== speechSessionId){
+      break;
+    }
+
+    await wait(240);
+
+  }
+
+}
+
+
+function wait(milliseconds){
+
+  return new Promise(resolve=>{
+    window.setTimeout(resolve,milliseconds);
+  });
+
+}
+
+
+document
+  .querySelectorAll(".dialog-play-button")
+  .forEach(button=>{
+
+    button.addEventListener("click",()=>{
+
+      const dialogId = button.dataset.dialog;
+
+      playDialog(dialogId);
+
+    });
+
+  });
+
+
+document
+  .querySelectorAll(".dialog-stop-button")
+  .forEach(button=>{
+
+    button.addEventListener("click",()=>{
+      stopSpeech();
+    });
+
+  });
+
+
+/* ==================================================
+   ALFABET
+================================================== */
+
+const alphabet = [
+  ["A","a","A"],
+  ["B","be","B"],
+  ["C","tse","C"],
+  ["D","de","D"],
+  ["E","e","E"],
+  ["F","ef","F"],
+  ["G","ge","G"],
+  ["H","ha","H"],
+  ["I","i","I"],
+  ["J","jot","Jot"],
+  ["K","ka","K"],
+  ["L","el","L"],
+  ["M","em","M"],
+  ["N","en","N"],
+  ["O","o","O"],
+  ["P","pe","P"],
+  ["Q","ku","Q"],
+  ["R","er","R"],
+  ["S","es","S"],
+  ["T","te","T"],
+  ["U","u","U"],
+  ["V","fau","V"],
+  ["W","we","W"],
+  ["X","iks","X"],
+  ["Y","Ypsilon","Ypsilon"],
+  ["Z","tset","Z"]
+];
+
+const umlauts = [
+  ["Ä","ä","Ä"],
+  ["Ö","ö","Ö"],
+  ["Ü","ü","Ü"],
+  ["ß","Eszett","Eszett"]
+];
+
+
+function createAlphabet(target,letters){
+
+  if(!target){
+    return;
+  }
+
+  target.innerHTML =
+    letters
+      .map(letter=>{
+
+        const symbol = letter[0];
+        const pronunciation = letter[1];
+        const speech = letter[2];
+
+        return `
+          <button
+            type="button"
+            class="alphabet-letter"
+            data-letter-speech="${escapeHtml(speech)}"
+            aria-label="${escapeHtml(symbol)} anhören"
+          >
+            ${escapeHtml(symbol)}
+            –
+            ${escapeHtml(pronunciation)}
+          </button>
+        `;
+
+      })
+      .join("");
+
+}
+
+
+function escapeHtml(value){
+
+  return String(value)
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
+
+}
+
+
+createAlphabet(
+  document.getElementById("alphabet"),
+  alphabet
+);
+
+createAlphabet(
+  document.getElementById("umlaute"),
+  umlauts
+);
+
+
+document
+  .querySelectorAll("[data-letter-speech]")
+  .forEach(button=>{
+
+    button.addEventListener("click",async()=>{
+
+      stopSpeech();
+
+      button.classList.add("playing");
+
+      await speakGerman(
+        button.dataset.letterSpeech,
+        {
+          rate:.72
+        }
+      );
+
+      button.classList.remove("playing");
+
+    });
+
+  });
+
+
+const playAlphabetButton =
+  document.getElementById("playAlphabet");
+
+const stopAlphabetButton =
+  document.getElementById("stopAlphabet");
+
+
+playAlphabetButton.addEventListener(
+  "click",
+  async()=>{
+
+    stopSpeech();
+
+    const currentSession = speechSessionId;
+
+    const letterButtons = [
+      ...document.querySelectorAll(
+        "#alphabet [data-letter-speech]"
+      )
+    ];
+
+    for(const button of letterButtons){
+
+      if(currentSession !== speechSessionId){
+        break;
+      }
+
+      button.classList.add("playing");
+
+      await speakGerman(
+        button.dataset.letterSpeech,
+        {
+          rate:.7
+        }
+      );
+
+      button.classList.remove("playing");
+
+      if(currentSession !== speechSessionId){
+        break;
+      }
+
+      await wait(100);
+
+    }
+
+  }
+);
+
+
+stopAlphabetButton.addEventListener(
+  "click",
+  stopSpeech
+);
+
+
+/* ==================================================
+   ĆWICZENIA I PUNKTACJA
+================================================== */
+
+const solvedExercises = new Map();
+
+const allExercises = [
+  ...document.querySelectorAll("[data-exercise]")
+];
+
+maximumScoreElement.textContent =
+  String(allExercises.length);
+
+
+function normalizeAnswer(text){
+
+  return String(text)
+    .trim()
+    .toLocaleLowerCase("de-DE")
+    .replace(/[.!?]+$/g,"")
+    .replace(/\s+/g," ");
+
+}
+
+
+function updateScore(){
+
+  let score = 0;
+
+  solvedExercises.forEach(isCorrect=>{
+
+    if(isCorrect){
+      score += 1;
+    }
+
+  });
+
+  scoreElement.textContent = String(score);
+
+  localStorage.setItem(
+    "lessonA1_1Score",
+    String(score)
+  );
+
+}
+
+
+function setExerciseResult(
+  exercise,
+  isCorrect,
+  feedbackText
+){
+
+  const exerciseId =
+    exercise.dataset.exercise;
+
+  const feedback =
+    exercise.querySelector(".exercise-feedback");
+
+  if(!feedback){
+    return;
+  }
+
+  solvedExercises.set(
+    exerciseId,
+    isCorrect
+  );
+
+  feedback.textContent = feedbackText;
+
+  feedback.classList.toggle(
+    "success",
+    isCorrect
+  );
+
+  feedback.classList.toggle(
+    "error",
+    !isCorrect
+  );
+
+  updateScore();
+
+}
+
+
+document
+  .querySelectorAll(".choice-exercise")
+  .forEach(exercise=>{
+
+    const correctAnswer =
+      normalizeAnswer(exercise.dataset.answer);
+
+    const options = [
+      ...exercise.querySelectorAll(".answer-option")
+    ];
+
+    options.forEach(option=>{
+
+      option.addEventListener("click",()=>{
+
+        if(
+          solvedExercises.has(
+            exercise.dataset.exercise
+          )
+        ){
+          return;
+        }
+
+        const selectedAnswer =
+          normalizeAnswer(option.dataset.value);
+
+        const isCorrect =
+          selectedAnswer === correctAnswer;
+
+        options.forEach(button=>{
+          button.disabled = true;
+        });
+
+        if(isCorrect){
+
+          option.classList.add("correct");
+
+          setExerciseResult(
+            exercise,
+            true,
+            "Richtig! Sehr gut."
+          );
+
+          speakGerman("Richtig! Sehr gut.",{
+            rate:.9
+          });
+
+        }else{
+
+          option.classList.add("wrong");
+
+          const correctOption =
+            options.find(button=>
+              normalizeAnswer(button.dataset.value) ===
+              correctAnswer
+            );
+
+          if(correctOption){
+            correctOption.classList.add("correct");
+          }
+
+          setExerciseResult(
+            exercise,
+            false,
+            `Nicht ganz. Richtig ist: ${exercise.dataset.answer}`
+          );
+
+        }
+
+      });
+
+    });
+
+  });
+
+
+document
+  .querySelectorAll(".text-exercise")
+  .forEach(exercise=>{
+
+    const input =
+      exercise.querySelector(".text-answer");
+
+    const checkButton =
+      exercise.querySelector(".check-text-answer");
+
+    const acceptedAnswers =
+      exercise.dataset.answers
+        .split("|")
+        .map(normalizeAnswer);
+
+
+    function checkTextAnswer(){
+
+      if(
+        solvedExercises.has(
+          exercise.dataset.exercise
+        )
+      ){
+        return;
+      }
+
+      const userAnswer =
+        normalizeAnswer(input.value);
+
+      if(!userAnswer){
+
+        const feedback =
+          exercise.querySelector(".exercise-feedback");
+
+        feedback.textContent =
+          "Bitte schreiben Sie eine Antwort.";
+
+        feedback.className =
+          "exercise-feedback error";
+
+        input.focus();
+
+        return;
+
+      }
+
+      const isCorrect =
+        acceptedAnswers.includes(userAnswer);
+
+      input.disabled = true;
+      checkButton.disabled = true;
+
+      if(isCorrect){
+
+        input.style.borderColor = "#7fc99d";
+
+        setExerciseResult(
+          exercise,
+          true,
+          "Richtig! Sehr gut."
+        );
+
+        speakGerman("Richtig! Sehr gut.",{
+          rate:.9
+        });
+
+      }else{
+
+        input.style.borderColor = "#eba2a2";
+
+        const displayedAnswer =
+          acceptedAnswers[0];
+
+        setExerciseResult(
+          exercise,
+          false,
+          `Nicht ganz. Eine richtige Antwort ist: ${capitalize(displayedAnswer)}.`
+        );
+
+      }
+
+    }
+
+
+    checkButton.addEventListener(
+      "click",
+      checkTextAnswer
+    );
+
+
+    input.addEventListener("keydown",event=>{
+
+      if(event.key === "Enter"){
+        checkTextAnswer();
+      }
+
+    });
+
+  });
+
+
+function capitalize(text){
+
+  if(!text){
+    return "";
+  }
+
+  return (
+    text.charAt(0).toUpperCase() +
+    text.slice(1)
+  );
+
+}
+
+
+/* ==================================================
+   RESET ĆWICZEŃ
+================================================== */
+
+document
+  .getElementById("resetExercises")
+  .addEventListener("click",()=>{
+
+    solvedExercises.clear();
+
+    document
+      .querySelectorAll(".answer-option")
+      .forEach(button=>{
+
+        button.disabled = false;
+
+        button.classList.remove(
+          "correct",
+          "wrong"
+        );
+
+      });
+
+    document
+      .querySelectorAll(".text-answer")
+      .forEach(input=>{
+
+        input.disabled = false;
+        input.value = "";
+        input.style.borderColor = "";
+
+      });
+
+    document
+      .querySelectorAll(".check-text-answer")
+      .forEach(button=>{
+        button.disabled = false;
+      });
+
+    document
+      .querySelectorAll(".exercise-feedback")
+      .forEach(feedback=>{
+
+        feedback.textContent = "";
+
+        feedback.classList.remove(
+          "success",
+          "error"
+        );
+
+      });
+
+    updateScore();
+
+    localStorage.removeItem(
+      "lessonA1_1Score"
+    );
+
+    showToast("Die Übungen wurden zurückgesetzt.");
+
+  });
+
+
+/* ==================================================
+   UKOŃCZENIE LEKCJI
+================================================== */
+
+const lessonStorageKey =
+  "lessonA1_1Completed";
+
+
+function showCompletedState(){
+
+  completeLessonButton.classList.add("completed");
+
+  completeLessonButton.textContent =
+    "✓ Lektion abgeschlossen";
+
+  completionMessage.textContent =
+    "Sehr gut! Ihr Fortschritt wurde gespeichert.";
+
+}
+
+
+function showIncompleteState(){
+
+  completeLessonButton.classList.remove("completed");
+
+  completeLessonButton.textContent =
+    "✓ Lektion als abgeschlossen markieren";
+
+  completionMessage.textContent = "";
+
+}
+
+
+const lessonWasCompleted =
+  localStorage.getItem(lessonStorageKey) === "true";
+
+if(lessonWasCompleted){
+  showCompletedState();
+}
+
+
+completeLessonButton.addEventListener(
+  "click",
+  ()=>{
+
+    const isCompleted =
+      localStorage.getItem(lessonStorageKey) === "true";
+
+    if(isCompleted){
+
+      localStorage.removeItem(lessonStorageKey);
+
+      showIncompleteState();
+
+      showToast(
+        "Die Markierung wurde entfernt."
+      );
+
+      return;
+
+    }
+
+    localStorage.setItem(
+      lessonStorageKey,
+      "true"
+    );
+
+    localStorage.setItem(
+      "lessonA1_1CompletedAt",
+      new Date().toISOString()
+    );
+
+    showCompletedState();
+
+    showToast(
+      "Lektion 1 wurde abgeschlossen."
+    );
+
+    speakGerman(
+      "Sehr gut! Sie haben Lektion eins abgeschlossen.",
+      {
+        rate:.88
+      }
+    );
+
+  }
+);
+
+
+/* ==================================================
+   ZATRZYMANIE GŁOSU PRZY OPUSZCZANIU STRONY
+================================================== */
+
+window.addEventListener(
+  "beforeunload",
+  stopSpeech
+);
+
+</script>
+
+
+<!--
+====================================================
+
+ENDE DER DATEI:
+lessons/A1/1.html
+
+DIESE DATEI ENTHÄLT:
+
+Lektion 1
+„Guten Tag! — Begrüßung und Vorstellung“
+
+1. Begrüßung
+2. Vorstellung
+3. Das deutsche Alphabet
+4. Interaktive Übungen
+5. Speicherung des Lernfortschritts
+
+NÄCHSTE DATEI:
+
+lessons/A1/2.html
+Lektion 2
+
+====================================================
+-->
+
+</body>
+  </html>
