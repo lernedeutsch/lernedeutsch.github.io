@@ -11,20 +11,20 @@
 
 <style>
 :root{
-  --bg:#173047;
-  --bg2:#203a57;
-  --surface:#f8fbff;
-  --surface-2:#eef4fb;
+  --bg:#2b3440;
+  --bg2:#33404e;
+  --surface:#f4f1eb;
+  --surface-2:#eef1f4;
   --card:#ffffff;
-  --text:#101820;
-  --muted:#41556b;
-  --line:#d9e4f0;
-  --accent:#f4c95d;
-  --accent-2:#6ac6ff;
-  --accent-3:#84df42;
-  --accent-4:#a88af5;
-  --shadow:0 14px 35px rgba(10,18,32,.12);
-  --shadow-2:0 10px 22px rgba(10,18,32,.10);
+  --text:#1d2430;
+  --muted:#5a6674;
+  --line:#d6dde6;
+  --accent:#b99a5c;
+  --accent-2:#7f9db3;
+  --accent-3:#8ca179;
+  --accent-4:#9a8bc0;
+  --shadow:0 14px 32px rgba(11,18,28,.10);
+  --shadow-2:0 10px 22px rgba(11,18,28,.08);
 }
 
 *{box-sizing:border-box}
@@ -34,8 +34,8 @@ body{
   color:var(--text);
   font:400 1rem/1.65 "Nunito Sans",sans-serif;
   background:
-    radial-gradient(circle at top left, rgba(255,255,255,.08), transparent 30%),
-    radial-gradient(circle at bottom right, rgba(255,255,255,.06), transparent 34%),
+    radial-gradient(circle at top left, rgba(255,255,255,.05), transparent 30%),
+    radial-gradient(circle at bottom right, rgba(255,255,255,.04), transparent 34%),
     linear-gradient(180deg, var(--bg), var(--bg2));
   min-height:100vh;
 }
@@ -77,7 +77,7 @@ img{max-width:100%;display:block}
 
 .section-title{
   margin:0 0 10px;
-  color:#dcecff;
+  color:#dfe7ef;
   font:700 .82rem "JetBrains Mono",monospace;
   letter-spacing:.16em;
   text-transform:uppercase;
@@ -97,7 +97,7 @@ img{max-width:100%;display:block}
   justify-content:space-between;
   gap:12px;
   padding:13px 14px;
-  background:rgba(255,255,255,.94);
+  background:rgba(255,255,255,.95);
   border:1px solid var(--line);
   border-radius:14px;
   text-decoration:none;
@@ -108,20 +108,20 @@ img{max-width:100%;display:block}
 .lesson-list a:hover{
   transform:translateY(-2px);
   background:#fff;
-  border-color:#f2d06f;
+  border-color:#ccb06d;
   box-shadow:0 10px 18px rgba(0,0,0,.08);
 }
 
 .lesson-list a::after{
   content:"→";
-  color:#8d6b00;
+  color:#8e7640;
   font-weight:800;
 }
 
 section[id^="lektion"]{scroll-margin-top:28px}
 
 .lesson{
-  background:linear-gradient(180deg,#fff8eb 0%, #fff 20%, #fff 100%);
+  background:linear-gradient(180deg,#f8f5ef 0%, #fff 20%, #fff 100%);
   border-radius:28px;
   overflow:hidden;
   box-shadow:var(--shadow);
@@ -141,16 +141,16 @@ header.hero{
   padding:28px;
   margin-bottom:28px;
   background:
-    linear-gradient(135deg, rgba(244,201,93,.16), rgba(106,198,255,.12)),
+    linear-gradient(135deg, rgba(185,154,92,.14), rgba(127,157,179,.10)),
     linear-gradient(180deg,#fff,#fff);
-  border:1px solid #e7edf5;
+  border:1px solid #e4e8ee;
   border-radius:28px;
   box-shadow:var(--shadow-2);
 }
 
 .eyebrow{
   margin:0 0 10px;
-  color:#8c6700;
+  color:#8e7640;
   font:700 .78rem "JetBrains Mono",monospace;
   letter-spacing:.16em;
   text-transform:uppercase;
@@ -181,7 +181,7 @@ header.hero{
   align-items:center;
   gap:8px;
   padding:8px 12px;
-  background:#f3f7fc;
+  background:#f3f6f9;
   border:1px solid var(--line);
   border-radius:999px;
   font-size:.94rem;
@@ -194,8 +194,8 @@ header.hero{
   min-height:280px;
   padding:14px;
   background:
-    radial-gradient(circle at center, rgba(132,223,66,.10), transparent 62%),
-    linear-gradient(180deg, #fdfefe, #f4f8fc);
+    radial-gradient(circle at center, rgba(140,161,121,.10), transparent 62%),
+    linear-gradient(180deg, #fcfcfb, #f2f5f7);
   border:1px solid var(--line);
   border-radius:24px;
 }
@@ -203,7 +203,7 @@ header.hero{
 .hero-art svg{
   width:min(100%,340px);
   height:auto;
-  filter:drop-shadow(0 16px 26px rgba(0,0,0,.14));
+  filter:drop-shadow(0 16px 26px rgba(0,0,0,.12));
 }
 
 .month-label,
@@ -232,7 +232,7 @@ header.hero{
 }
 
 .part-num{
-  color:#ffd86c;
+  color:#d7be7b;
   font:700 .78rem "JetBrains Mono",monospace;
   letter-spacing:.14em;
   text-transform:uppercase;
@@ -267,7 +267,7 @@ header.hero{
 .grammar-box,
 .callout{
   padding:16px 16px 14px;
-  background:linear-gradient(180deg,#fbfdff,#f4f8fc);
+  background:linear-gradient(180deg,#fbfcfd,#f4f7f9);
   border:1px solid var(--line);
   border-left:5px solid var(--accent);
   border-radius:18px;
@@ -275,7 +275,7 @@ header.hero{
 
 .callout strong,
 .grammar-box strong{
-  color:#8c6700;
+  color:#8e7640;
 }
 
 .gruessen{
@@ -288,11 +288,32 @@ header.hero{
 .greeting{
   margin:0;
   padding:10px 14px;
-  background:#f7fbff;
+  background:#f7f9fb;
   border:1px solid var(--line);
   border-radius:999px;
   font-size:1.02rem;
   font-weight:700;
+}
+
+.merke-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+  margin-top:12px;
+}
+
+.merke-col{
+  padding:14px 14px 12px;
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:16px;
+}
+
+.merke-title{
+  display:block;
+  margin-bottom:10px;
+  color:#8e7640;
+  font-weight:800;
 }
 
 .gruss-tabelle{
@@ -307,7 +328,7 @@ header.hero{
 }
 
 .gruss-tabelle th{
-  background:#eef4fb;
+  background:#eef3f7;
   color:var(--text);
   text-align:left;
   font:700 .95rem "Nunito Sans",sans-serif;
@@ -323,7 +344,7 @@ header.hero{
 .gruss-tabelle tbody tr:last-child td{border-bottom:none}
 .gruss{
   font-weight:800;
-  color:#8c6700;
+  color:#8e7640;
 }
 
 .dialog-title,
@@ -335,24 +356,26 @@ header.hero{
 
 .dialog{
   display:grid;
-  gap:10px;
+  gap:8px;
 }
 
 .bubble{
   max-width:84%;
-  padding:12px 14px;
-  border-radius:18px;
+  padding:10px 12px;
+  border-radius:16px;
   border:1px solid var(--line);
   box-shadow:0 8px 18px rgba(0,0,0,.05);
+  font-size:.98rem;
+  line-height:1.45;
 }
 
-.marta{background:#f3f7fc}
-.tom{margin-left:auto;background:#fff8e9}
+.marta{background:#f3f7fa}
+.tom{margin-left:auto;background:#f9f5ea}
 .speaker{
   display:block;
-  margin-bottom:5px;
-  color:#b8860b;
-  font:700 .74rem "JetBrains Mono",monospace;
+  margin-bottom:4px;
+  color:#8e7640;
+  font:700 .72rem "JetBrains Mono",monospace;
   letter-spacing:.12em;
   text-transform:uppercase;
 }
@@ -391,7 +414,7 @@ header.hero{
 
 .alphabet-letter{
   padding:12px 15px;
-  background:#f5f8fc;
+  background:#f6f8fa;
   border:1px solid var(--line);
   border-radius:14px;
   cursor:pointer;
@@ -402,8 +425,8 @@ header.hero{
 
 .alphabet-letter:hover{
   transform:translateY(-2px);
-  background:#eef7ff;
-  border-color:#81bfff;
+  background:#eef4f8;
+  border-color:#b8c9d6;
   box-shadow:0 10px 18px rgba(0,0,0,.06);
 }
 
@@ -427,26 +450,26 @@ header.hero{
   text-align:center;
   border-radius:18px;
   font:800 1rem/1.2 "Nunito Sans",sans-serif;
-  box-shadow:0 10px 20px rgba(0,0,0,.18);
+  box-shadow:0 10px 20px rgba(0,0,0,.16);
   transition:transform .18s,filter .18s,box-shadow .18s;
 }
 
 .training-btn:hover{
   transform:translateY(-3px);
-  filter:brightness(1.05);
-  box-shadow:0 14px 24px rgba(0,0,0,.22);
+  filter:brightness(1.04);
+  box-shadow:0 14px 24px rgba(0,0,0,.20);
 }
 
 .sprich-nach-btn{
-  background:linear-gradient(180deg,#6ac6ff,#3da8f0);
+  background:linear-gradient(180deg,#7fb6d0,#5f95b0);
 }
 
 .aktiv-trainieren-btn{
-  background:linear-gradient(180deg,#94e44f,#5fbd28);
+  background:linear-gradient(180deg,#9db27f,#7f9e5d);
 }
 
 .übung-training-btn{
-  background:linear-gradient(180deg,#b08df7,#825fe0);
+  background:linear-gradient(180deg,#b39ad7,#8d76b9);
 }
 
 .summary-grid{
@@ -466,7 +489,7 @@ header.hero{
 }
 
 .key{
-  color:#8c6700;
+  color:#8e7640;
   font:800 1rem/1.4 "Nunito Sans",sans-serif;
 }
 
@@ -492,8 +515,8 @@ header.hero{
 }
 
 .back-to-top:hover{
-  background:#f3f7fc;
-  border-color:#f2d06f;
+  background:#f3f7fa;
+  border-color:#ccb06d;
   transform:translateY(-2px);
 }
 
@@ -504,7 +527,7 @@ header.hero{
   gap:10px;
   margin-top:20px;
   padding-top:20px;
-  border-top:2px dashed rgba(255,255,255,.2);
+  border-top:2px dashed rgba(255,255,255,.18);
 }
 
 .lesson-nav a{
@@ -518,15 +541,15 @@ header.hero{
 }
 
 .lesson-nav a:hover{
-  background:#f3f7fc;
-  border-color:#f2d06f;
+  background:#f3f7fa;
+  border-color:#ccb06d;
   transform:translateY(-2px);
 }
 
 a:focus-visible,
 button:focus-visible,
 .alphabet-letter:focus-visible{
-  outline:3px solid #f4c95d;
+  outline:3px solid #ccb06d;
   outline-offset:3px;
 }
 
@@ -534,6 +557,7 @@ button:focus-visible,
   header.hero{grid-template-columns:1fr}
   .hero-art{min-height:220px}
   .row{grid-template-columns:1fr}
+  .merke-grid{grid-template-columns:1fr}
 }
 
 @media (max-width:720px){
@@ -631,12 +655,21 @@ button:focus-visible,
           </div>
 
           <div class="grammar-box">
-            <strong>Merke!</strong><br><br>
-            morgens: <strong>Guten Morgen!</strong><br><br>
-            tagsüber: <strong>Guten Tag!</strong><br><br>
-            abends: <strong>Guten Abend!</strong><br><br>
-            informell: <strong>Hallo!</strong><br><br>
-            beim Abschied: <strong>Tschüss!</strong>
+            <strong>Merke!</strong>
+            <div class="merke-grid">
+              <div class="merke-col">
+                <span class="merke-title">morgens / tagsüber / abends</span>
+                morgens: <strong>Guten Morgen!</strong><br><br>
+                tagsüber: <strong>Guten Tag!</strong><br><br>
+                abends: <strong>Guten Abend!</strong>
+              </div>
+              <div class="merke-col">
+                <span class="merke-title">informell / Abschied</span>
+                informell: <strong>Hallo!</strong><br><br>
+                beim Abschied: <strong>Tschüss!</strong><br><br>
+                formal: <strong>Auf Wiedersehen!</strong>
+              </div>
+            </div>
           </div>
 
           <table class="gruss-tabelle">
