@@ -1,1 +1,362 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Das deutsche Alphabet</title>
 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;700&family=Nunito+Sans:wght@400;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#16233a;--card:#fffdf7;--box:#fbf6e8;--line:#e3d6b8;
+  --red:#bd4433;--gold:#cf9f3f;--text:#1c2430
+}
+*{box-sizing:border-box}
+body{
+  margin:0;min-height:100vh;padding:28px 14px 55px;color:var(--text);
+  background:
+    radial-gradient(circle at 10% 8%,#cf9f3f14,transparent 35%),
+    radial-gradient(circle at 90% 92%,#4f7a631a,transparent 40%),
+    var(--bg);
+  font:400 .94rem/1.45 "Nunito Sans",sans-serif
+}
+button,input{font:inherit}
+button{cursor:pointer}
+.wrapper{
+  width:min(900px,100%);margin:auto;padding:24px;
+  background:linear-gradient(160deg,#fff8ea,#f3e2bd);
+  border-radius:20px;box-shadow:0 18px 45px #00000038
+}
+.part-head{display:flex;align-items:baseline;gap:12px;margin-bottom:12px}
+.part-num{
+  color:var(--red);font:.76rem "JetBrains Mono",monospace;
+  letter-spacing:.15em;text-transform:uppercase
+}
+.part-title{margin:0;font:700 1.85rem/1.15 "Fraunces",serif}
+.card{
+  padding:20px;background:var(--card);border:1px solid var(--line);
+  border-radius:20px;box-shadow:0 10px 25px #0000000f
+}
+.lead{margin:0 0 16px;font-size:1rem}
+.alphabet{
+  display:grid;grid-template-columns:repeat(8,minmax(0,1fr));
+  gap:9px;margin:0 0 22px
+}
+.alphabet-letter{
+  min-width:0;padding:10px 5px;white-space:nowrap;color:var(--text);
+  background:var(--box);border:1px solid var(--line);border-radius:11px;
+  font-weight:800;transition:.15s
+}
+.alphabet-letter:hover{
+  background:#eaf3ff;border-color:#72b8ff;transform:translateY(-2px)
+}
+.alphabet-letter.active{
+  color:#fff;background:var(--red);border-color:var(--red)
+}
+.subtitle{margin:20px 0 13px;font:700 1.28rem "Fraunces",serif}
+.umlaute{grid-template-columns:repeat(4,minmax(90px,130px));margin-bottom:24px}
+.spelling-box{
+  padding:17px;background:var(--box);border:1px solid var(--line);
+  border-radius:17px
+}
+.spelling-title{margin:0 0 9px;font:700 1.25rem "Fraunces",serif}
+.spelling-text{margin:0 0 13px}
+.spelling-form{display:flex;gap:9px}
+.name-input{
+  flex:1;min-width:0;padding:9px 13px;border:2px solid var(--line);
+  border-radius:11px;outline:none;
+
+  /* Naprawa aktywnego pola wpisywania */
+  position:relative;
+  z-index:2;
+  pointer-events:auto;
+  user-select:text;
+  -webkit-user-select:text;
+  touch-action:manipulation;
+  background:#fff;
+  color:var(--text);
+}
+.name-input:focus{
+  border-color:var(--gold);box-shadow:0 0 0 3px #cf9f3f2e
+}
+.spell-button{
+  padding:9px 17px;color:#fff;white-space:nowrap;background:var(--red);
+  border:0;border-radius:999px;font-weight:800
+}
+.spell-button:hover{filter:brightness(1.08)}
+.spell-button:disabled{cursor:default;opacity:.6}
+.spelling-output{
+  display:flex;flex-wrap:wrap;gap:7px;min-height:38px;margin-top:14px
+}
+.letter-chip{
+  min-width:38px;padding:6px 10px;text-align:center;background:#fff;
+  border:2px solid var(--line);border-radius:9px;
+  font:700 1rem "JetBrains Mono",monospace;transition:.18s
+}
+.letter-chip.speaking{
+  color:#fff;background:var(--gold);border-color:var(--gold);
+  transform:scale(1.08)
+}
+.message{min-height:22px;margin:10px 0 0;color:var(--red);font-weight:700}
+button:focus-visible,input:focus-visible{
+  outline:3px solid var(--gold);outline-offset:2px
+}
+@media(max-width:760px){
+  body{padding:18px 9px 40px}
+  .wrapper{padding:16px 11px}
+  .part-title{font-size:1.55rem}
+  .card{padding:15px 11px}
+  .alphabet{grid-template-columns:repeat(4,minmax(0,1fr));gap:7px}
+  .umlaute{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .alphabet-letter{padding:9px 4px;font-size:.9rem}
+}
+@media(max-width:430px){
+  .spelling-form{flex-direction:column}
+  .spell-button{width:100%}
+}
+@media(prefers-reduced-motion:reduce){
+  *{animation-duration:.01ms!important;transition-duration:.01ms!important}
+}
+</style>
+</head>
+
+<body>
+
+<main class="wrapper">
+
+  <div class="part-head">
+    <span class="part-num">Teil 3</span>
+    <h1 class="part-title">Das deutsche Alphabet</h1>
+  </div>
+
+  <section class="card">
+
+    <p class="lead">
+      Klicken Sie auf einen Buchstaben und hören Sie die deutsche Aussprache.
+    </p>
+
+    <div class="alphabet" id="alphabet"></div>
+
+    <h2 class="subtitle">Die Umlaute</h2>
+
+    <div class="alphabet umlaute" id="umlaute"></div>
+
+    <div class="spelling-box">
+
+      <h2 class="spelling-title">✏️ Buchstabier deinen Namen</h2>
+
+      <p class="spelling-text">
+        Gib deinen Namen ein und höre ihn Buchstabe für Buchstabe auf Deutsch.
+      </p>
+
+      <div class="spelling-form">
+
+        <input
+          id="nameInput"
+          class="name-input"
+          name="name"
+          type="text"
+          placeholder="z. B. Anna"
+          autocomplete="name"
+          autocapitalize="words"
+          spellcheck="false"
+        >
+
+        <button id="spellButton" class="spell-button" type="button">
+          🔊 Buchstabieren
+        </button>
+
+      </div>
+
+      <div
+        id="spellingOutput"
+        class="spelling-output"
+        aria-live="polite"
+      ></div>
+
+      <p id="message" class="message" aria-live="polite"></p>
+
+    </div>
+
+  </section>
+
+</main>
+
+<script>
+"use strict";
+
+const A=[
+  ["A","a"],["B","be"],["C","ce"],["D","de"],["E","e"],["F","ef"],
+  ["G","ge"],["H","ha"],["I","i"],["J","jot"],["K","ka"],["L","el"],
+  ["M","em"],["N","en"],["O","o"],["P","pe"],["Q","ku"],["R","er"],
+  ["S","es"],["T","te"],["U","u"],["V","vau"],["W","we"],["X","ix"],
+  ["Y","Ypsilon"],["Z","zet"]
+];
+
+const U=[
+  ["Ä","ä"],["Ö","ö"],["Ü","ü"],["ß","Eszett"]
+];
+
+const $=id=>document.getElementById(id);
+const synth=window.speechSynthesis;
+const alphabet=$("alphabet");
+const umlaute=$("umlaute");
+const input=$("nameInput");
+const button=$("spellButton");
+const output=$("spellingOutput");
+const message=$("message");
+
+const names=Object.fromEntries(
+  [...A,...U].map(([letter])=>[letter,letter==="ß"?"Eszett":letter])
+);
+
+let voice=null,run=0;
+
+function loadVoice(){
+  if(!synth)return;
+
+  const voices=synth.getVoices();
+
+  voice=
+    voices.find(v=>
+      v.lang?.toLowerCase()==="de-de"&&
+      v.name?.toLowerCase().includes("google")
+    )||
+    voices.find(v=>v.lang?.toLowerCase()==="de-de")||
+    voices.find(v=>v.lang?.toLowerCase().startsWith("de"))||
+    null;
+}
+
+function stop(){
+  run++;
+  synth?.cancel();
+
+  document.querySelectorAll(".active,.speaking")
+    .forEach(el=>el.classList.remove("active","speaking"));
+
+  button.disabled=false;
+}
+
+function speak(text,rate=.82){
+  return new Promise(resolve=>{
+    if(!synth||!text){
+      message.textContent="Die Sprachausgabe wird nicht unterstützt.";
+      return resolve();
+    }
+
+    const speech=new SpeechSynthesisUtterance(text);
+
+    Object.assign(speech,{
+      lang:"de-DE",
+      rate,
+      pitch:1,
+      volume:1,
+      onend:resolve,
+      onerror:resolve
+    });
+
+    if(voice)speech.voice=voice;
+    synth.speak(speech);
+  });
+}
+
+function create(target,data){
+  target.innerHTML=data.map(([letter,label])=>`
+    <button
+      type="button"
+      class="alphabet-letter"
+      data-speech="${letter==="ß"?"Eszett":letter}"
+      aria-label="${letter} anhören"
+    >${letter} – ${label}</button>
+  `).join("");
+}
+
+loadVoice();
+synth?.addEventListener("voiceschanged",loadVoice);
+
+create(alphabet,A);
+create(umlaute,U);
+
+/* Upewnienie się, że pole jest aktywne i można w nim pisać */
+input.disabled=false;
+input.readOnly=false;
+
+input.addEventListener("pointerdown",()=>{
+  input.focus();
+});
+
+input.addEventListener("input",()=>{
+  message.textContent="";
+});
+
+document.querySelectorAll(".alphabet-letter").forEach(el=>{
+  el.onclick=async()=>{
+    stop();
+
+    const current=run;
+    el.classList.add("active");
+
+    await speak(el.dataset.speech);
+
+    if(current===run)el.classList.remove("active");
+  };
+});
+
+async function spellName(){
+  stop();
+  message.textContent="";
+
+  const name=input.value.trim();
+
+  if(!name){
+    message.textContent="Bitte gib deinen Namen ein.";
+    return input.focus();
+  }
+
+  const letters=[
+    ...name.toLocaleUpperCase("de-DE")
+  ].filter(letter=>names[letter]);
+
+  if(!letters.length){
+    message.textContent="Der Name enthält keine unterstützten Buchstaben.";
+    return;
+  }
+
+  output.innerHTML=letters.map(
+    (letter,index)=>
+      `<span class="letter-chip" id="letter-${index}">${letter}</span>`
+  ).join("");
+
+  button.disabled=true;
+  const current=run;
+
+  for(let i=0;i<letters.length&&current===run;i++){
+    const chip=$(`letter-${i}`);
+
+    chip.classList.add("speaking");
+    await speak(names[letters[i]]);
+    chip.classList.remove("speaking");
+
+    await new Promise(resolve=>setTimeout(resolve,120));
+  }
+
+  button.disabled=false;
+}
+
+button.onclick=spellName;
+
+input.onkeydown=e=>{
+  if(e.key==="Enter"){
+    e.preventDefault();
+    spellName();
+  }
+};
+
+addEventListener("beforeunload",stop);
+</script>
+
+</body>
+</html>
