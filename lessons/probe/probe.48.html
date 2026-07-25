@@ -1,1 +1,1782 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Übung-A1 — Lektion 1: Begrüßung und Vorstellung</title>
 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&family=Nunito+Sans:opsz,wght@6..12,400,600,700,800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#20324a;
+  --paper:#f7f9fc;
+  --ink:#1d2b39;
+  --gold:#f4c95d;
+  --green:#2e7d32;
+  --green-soft:#e8f9e8;
+  --blue:#72b8ff;
+  --blue-soft:#e8f3ff;
+  --red:#c62828;
+  --red-soft:#f9e8e8;
+  --line:#dce3ed;
+  --text:#111820;
+  --text-light:#2a3b50;
+}
+
+*{box-sizing:border-box}
+
+html{scroll-behavior:smooth}
+
+body{
+  margin:0;
+  padding:0 0 60px;
+  background:
+    radial-gradient(circle at 12% 10%,rgba(255,255,255,.05),transparent 35%),
+    radial-gradient(circle at 88% 90%,rgba(255,255,255,.05),transparent 40%),
+    var(--bg);
+  color:var(--text);
+  font-family:"Nunito Sans",sans-serif;
+  line-height:1.6;
+}
+
+button,input{font-family:inherit}
+
+.top-bar{
+  max-width:880px;
+  margin:20px auto 0;
+  padding:0 20px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:16px;
+}
+
+.back-btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  padding:20px 40px;
+  background:#fff;
+  color:#1d3557;
+  border:2px solid var(--line);
+  border-radius:999px;
+  box-shadow:0 6px 18px rgba(0,0,0,.25);
+  font-size:1.4rem;
+  font-weight:800;
+  text-decoration:none;
+  cursor:pointer;
+  transition:.15s;
+}
+
+.back-btn:hover{
+  transform:translateY(-3px);
+  filter:brightness(1.05);
+  border-color:var(--gold);
+  box-shadow:0 8px 22px rgba(0,0,0,.3);
+}
+
+.wrap{
+  max-width:980px;
+  margin:auto;
+  padding:32px 20px 0;
+}
+
+.hero{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  gap:28px;
+  padding:24px 0 36px;
+  border-bottom:2px dashed rgba(35,51,46,.18);
+  margin-bottom:36px;
+}
+
+.hero-text{flex:1 1 340px}
+
+.eyebrow{
+  margin:0 0 10px;
+  color:var(--gold);
+  font:700 .78rem "JetBrains Mono",monospace;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+}
+
+.lesson-title{
+  margin:0 0 14px;
+  color:var(--text);
+  font:700 2.7rem/1.12 "Kalam",cursive;
+}
+
+.part{margin:34px 0 42px}
+
+.part-head{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:baseline;
+  gap:12px;
+  margin-bottom:14px;
+}
+
+.part-num{
+  color:var(--gold);
+  font:700 .82rem "JetBrains Mono",monospace;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+}
+
+.part-title{
+  margin:0;
+  color:var(--text);
+  font:700 2rem "Kalam",cursive;
+}
+
+.card{
+  margin-top:14px;
+  padding:22px;
+  background:var(--paper);
+  border:1px solid var(--line);
+  border-radius:22px;
+  box-shadow:0 12px 30px rgba(0,0,0,.06);
+}
+
+.lead{
+  margin-top:0;
+  color:var(--text);
+  font-size:1.04rem;
+}
+
+.exercise-list{
+  padding-left:18px;
+  margin-top:16px;
+}
+
+.exercise-list li{
+  margin:14px 0;
+  color:var(--text);
+  font-size:1.05rem;
+}
+
+input[type="text"]{
+  min-width:150px;
+  padding:9px 12px;
+  vertical-align:middle;
+  background:#f9fbff;
+  color:var(--ink);
+  border:1px solid var(--line);
+  border-radius:12px;
+  font-size:1rem;
+}
+
+.feedback{
+  display:inline-block;
+  min-width:22px;
+  margin-left:8px;
+  font-size:1.2rem;
+  font-weight:800;
+}
+
+.ok{color:var(--green)}
+.no{color:var(--red)}
+
+.action-row{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  gap:10px;
+  margin-top:16px;
+}
+
+.check-btn,
+.control-btn,
+.dictation-open-btn{
+  border:0;
+  border-radius:999px;
+  padding:13px 24px;
+  font-size:1rem;
+  font-weight:800;
+  cursor:pointer;
+  transition:transform .15s,filter .15s,box-shadow .15s;
+}
+
+.check-btn,
+.dictation-open-btn{
+  background:linear-gradient(135deg,var(--gold),#ffd976);
+  color:var(--ink);
+}
+
+.control-btn{
+  background:#fff;
+  color:var(--ink);
+  border:1px solid var(--line);
+}
+
+.control-btn.primary{
+  background:linear-gradient(135deg,#72b8ff,#9ccfff);
+  border:0;
+}
+
+.control-btn.stop{
+  background:linear-gradient(135deg,#ed6d6d,#ff9b9b);
+  border:0;
+}
+
+.control-btn.hint{
+  background:linear-gradient(135deg,#c9a7ff,#e0cbff);
+  border:0;
+}
+
+.check-btn:hover,
+.control-btn:hover,
+.dictation-open-btn:hover{
+  transform:translateY(-2px);
+  filter:brightness(1.03);
+  box-shadow:0 6px 16px rgba(0,0,0,.13);
+}
+
+button:disabled{
+  opacity:.5;
+  cursor:not-allowed;
+  transform:none!important;
+  box-shadow:none!important;
+}
+
+.exercise-result{
+  margin-top:14px;
+  color:var(--text);
+  font-size:1.1rem;
+  font-weight:700;
+}
+
+.quiz-q{
+  margin:16px 0;
+  padding:16px;
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:16px;
+}
+
+.quiz-q p{
+  margin:0 0 12px;
+  color:var(--text);
+  font-size:1.1rem;
+  font-weight:600;
+}
+
+.quiz-options{
+  display:grid;
+  gap:10px;
+}
+
+.quiz-options label{
+  display:block;
+  padding:12px 14px;
+  background:#f9fbff;
+  color:var(--text);
+  border:1px solid var(--line);
+  border-radius:12px;
+  cursor:pointer;
+  transition:.15s;
+}
+
+.quiz-options label:hover{
+  background:#f0f4f8;
+  border-color:var(--blue);
+}
+
+.quiz-options label.correct{
+  background:var(--green-soft);
+  border-color:var(--green);
+}
+
+.quiz-options label.incorrect{
+  background:var(--red-soft);
+  border-color:var(--red);
+}
+
+.quiz-options input{margin-right:8px}
+
+.sentence-grid{
+  display:grid;
+  gap:12px;
+  margin-top:16px;
+}
+
+.sentence-item{
+  padding:14px;
+  background:#fff;
+  color:var(--text);
+  border:1px solid var(--line);
+  border-radius:12px;
+  font-size:1.05rem;
+}
+
+/* SPRECHÜBUNG */
+
+.speaking-panel,
+.dictation-panel{
+  position:relative;
+  overflow:hidden;
+  padding:24px;
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:18px;
+}
+
+.exercise-counter{
+  display:inline-flex;
+  margin-bottom:16px;
+  padding:6px 13px;
+  background:#edf3fa;
+  color:#32475d;
+  border-radius:999px;
+  font:700 .82rem "JetBrains Mono",monospace;
+}
+
+.question-box{
+  padding:20px;
+  background:linear-gradient(135deg,#edf5ff,#f8fbff);
+  border:2px solid #b9d9ff;
+  border-radius:18px;
+  text-align:center;
+}
+
+.question-label{
+  margin:0 0 8px;
+  color:#4d6177;
+  font-size:.85rem;
+  font-weight:800;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+}
+
+.voice-question{
+  margin:0;
+  color:#16233a;
+  font:700 1.7rem/1.35 "Kalam",cursive;
+}
+
+.microphone-area{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  margin-top:24px;
+  text-align:center;
+}
+
+.mic-btn{
+  position:relative;
+  width:104px;
+  height:104px;
+  display:grid;
+  place-items:center;
+  background:linear-gradient(145deg,#f4c95d,#ffdd7b);
+  color:#16233a;
+  border:0;
+  border-radius:50%;
+  box-shadow:0 10px 25px rgba(0,0,0,.2);
+  font-size:2.7rem;
+  cursor:pointer;
+  transition:.2s;
+}
+
+.mic-btn:hover{
+  transform:translateY(-3px) scale(1.03);
+}
+
+.mic-btn.listening{
+  background:linear-gradient(145deg,#ff6868,#ff9999);
+  animation:micPulse 1.2s infinite;
+}
+
+.mic-btn.correct{
+  background:linear-gradient(145deg,#72cc78,#a4e8a8);
+}
+
+@keyframes micPulse{
+  0%,100%{box-shadow:0 0 0 0 rgba(255,85,85,.45),0 10px 25px rgba(0,0,0,.2)}
+  50%{box-shadow:0 0 0 18px rgba(255,85,85,0),0 10px 25px rgba(0,0,0,.2)}
+}
+
+.mic-status{
+  margin:14px 0 0;
+  color:#3d5166;
+  font-weight:700;
+}
+
+.transcript-box{
+  min-height:61px;
+  margin-top:18px;
+  padding:16px;
+  background:#f6f8fb;
+  color:#24364a;
+  border:1px dashed #b9c6d5;
+  border-radius:14px;
+  text-align:center;
+}
+
+.voice-feedback{
+  min-height:30px;
+  margin-top:12px;
+  text-align:center;
+  font-size:1.08rem;
+  font-weight:800;
+}
+
+.progress-track{
+  height:12px;
+  margin-top:22px;
+  overflow:hidden;
+  background:#e7edf4;
+  border-radius:999px;
+}
+
+.progress-fill{
+  width:0;
+  height:100%;
+  background:linear-gradient(90deg,#72b8ff,#8bd17c);
+  border-radius:999px;
+  transition:width .3s;
+}
+
+/* DIKTAT */
+
+.dictation-launch{
+  text-align:center;
+}
+
+.dictation-open-btn{
+  padding:17px 34px;
+  font-size:1.2rem;
+}
+
+.hidden{display:none!important}
+
+.dictation-icon{
+  margin-bottom:8px;
+  font-size:3.4rem;
+  text-align:center;
+}
+
+.dictation-heading{
+  margin:0;
+  color:#17263a;
+  text-align:center;
+  font:700 1.8rem "Kalam",cursive;
+}
+
+.dictation-description{
+  margin:6px 0 18px;
+  color:#536578;
+  text-align:center;
+}
+
+.dictation-input{
+  width:100%;
+  min-width:0!important;
+  padding:15px 17px!important;
+  border:2px solid #cbd7e4!important;
+  border-radius:14px!important;
+  font-size:1.08rem!important;
+}
+
+.dictation-input.correct-input{
+  background:var(--green-soft)!important;
+  border-color:var(--green)!important;
+}
+
+.dictation-input.incorrect-input{
+  background:var(--red-soft)!important;
+  border-color:var(--red)!important;
+}
+
+.dictation-message{
+  min-height:32px;
+  margin-top:13px;
+  text-align:center;
+  font-weight:800;
+}
+
+.dictation-hint{
+  min-height:30px;
+  margin-top:10px;
+  padding:10px;
+  color:#594b77;
+  text-align:center;
+  font-weight:700;
+}
+
+.saved-list{
+  margin:22px 0 0;
+  padding:0;
+  list-style:none;
+}
+
+.saved-list li{
+  display:flex;
+  gap:10px;
+  align-items:flex-start;
+  margin:8px 0;
+  padding:10px 12px;
+  background:var(--green-soft);
+  border:1px solid #b6ddb9;
+  border-radius:11px;
+}
+
+.lesson-nav{
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:10px;
+  padding-top:24px;
+  margin-top:30px;
+  border-top:2px dashed rgba(35,51,46,.18);
+  font:600 .9rem "JetBrains Mono",monospace;
+}
+
+.lesson-nav a{
+  padding:10px 20px;
+  background:#fff;
+  color:var(--text);
+  border:1px solid var(--line);
+  border-radius:999px;
+  text-decoration:none;
+  transition:.15s;
+}
+
+.lesson-nav a:hover{
+  background:#f0f4f8;
+  color:#0a1220;
+  border-color:var(--gold);
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible{
+  outline:3px solid var(--gold);
+  outline-offset:2px;
+}
+
+@media(max-width:720px){
+  .lesson-title{font-size:2.2rem}
+  .part-title{font-size:1.7rem}
+
+  .back-btn{
+    width:100%;
+    padding:16px 20px;
+    font-size:1.1rem;
+  }
+
+  .card{padding:16px}
+
+  .speaking-panel,
+  .dictation-panel{padding:16px}
+
+  .voice-question{font-size:1.4rem}
+
+  .action-row{
+    justify-content:center;
+  }
+
+  .control-btn{
+    flex:1 1 135px;
+  }
+}
+</style>
+</head>
+
+<body id="top">
+
+<div class="top-bar">
+  <a href="A1.html#lektion1" class="back-btn">← Powrót do lekcji</a>
+</div>
+
+<main class="wrap">
+
+<header class="hero">
+  <div class="hero-text">
+    <p class="eyebrow">Deutschkurs A1 · Übung zu Lektion 1</p>
+    <h1 class="lesson-title">
+      Übung — Guten Tag! — Begrüßung und Vorstellung
+    </h1>
+  </div>
+</header>
+
+<!-- ÜBUNG 1 -->
+
+<section class="part" id="übung1">
+  <div class="part-head">
+    <span class="part-num">Übung 1</span>
+    <h2 class="part-title">Welcher Gruß? Ergänzen Sie!</h2>
+  </div>
+
+  <div class="card">
+    <p class="lead">Schreiben Sie den richtigen Gruß in die Lücke.</p>
+
+    <ul class="exercise-list" id="ex1_1">
+      <li>
+        <input type="text" data-answer="guten morgen">!
+        (morgens, 7:00 Uhr)
+        <span class="feedback"></span>
+      </li>
+
+      <li>
+        <input type="text" data-answer="guten tag">!
+        (tagsüber, 14:00 Uhr)
+        <span class="feedback"></span>
+      </li>
+
+      <li>
+        <input type="text" data-answer="guten abend">!
+        (abends, 19:00 Uhr)
+        <span class="feedback"></span>
+      </li>
+
+      <li>
+        <input type="text" data-answer="hallo">!
+        (informell, zu jeder Zeit)
+        <span class="feedback"></span>
+      </li>
+
+      <li>
+        <input type="text" data-answer="tschüss,tschuess">!
+        (beim Abschied)
+        <span class="feedback"></span>
+      </li>
+    </ul>
+
+    <button class="check-btn" onclick="checkExercise('ex1_1')">
+      Antworten prüfen ✓
+    </button>
+
+    <div class="exercise-result" id="ex1_1-result"></div>
+  </div>
+</section>
+
+<!-- ÜBUNG 2 -->
+
+<section class="part" id="übung1_2">
+  <div class="part-head">
+    <span class="part-num">Übung 2</span>
+    <h2 class="part-title">Wie heißen Sie? Ergänzen Sie!</h2>
+  </div>
+
+  <div class="card">
+    <p class="lead">Schreiben Sie das richtige Wort in die Lücke.</p>
+
+    <ul class="exercise-list" id="ex1_2">
+      <li>
+        Hallo! Wie
+        <input type="text" data-answer="heißt,heisst">
+        du?
+        <span class="feedback"></span>
+      </li>
+
+      <li>
+        Ich
+        <input type="text" data-answer="heiße,heisse">
+        Lena.
+        <span class="feedback"></span>
+      </li>
+
+      <li>
+        Guten Tag! Wie heißen
+        <input type="text" data-answer="sie">?
+        <span class="feedback"></span>
+      </li>
+
+      <li>
+        Ich
+        <input type="text" data-answer="heiße,heisse">
+        Thomas.
+        <span class="feedback"></span>
+      </li>
+
+      <li>
+        Mein
+        <input type="text" data-answer="name">
+        ist Anna Müller.
+        <span class="feedback"></span>
+      </li>
+    </ul>
+
+    <button class="check-btn" onclick="checkExercise('ex1_2')">
+      Antworten prüfen ✓
+    </button>
+
+    <div class="exercise-result" id="ex1_2-result"></div>
+  </div>
+</section>
+
+<!-- ÜBUNG 3 -->
+
+<section class="part" id="übung1_3">
+  <div class="part-head">
+    <span class="part-num">Übung 3</span>
+    <h2 class="part-title">Was ist richtig? Wählen Sie!</h2>
+  </div>
+
+  <div class="card">
+    <p class="lead">Klicken Sie auf die richtige Antwort.</p>
+
+    <div class="quiz-q" data-correct="0">
+      <p>1. _____! (morgens, 8:00 Uhr)</p>
+
+      <div class="quiz-options">
+        <label>
+          <input type="radio" name="q1_1" value="0">
+          Guten Morgen!
+        </label>
+
+        <label>
+          <input type="radio" name="q1_1" value="1">
+          Guten Abend!
+        </label>
+
+        <label>
+          <input type="radio" name="q1_1" value="2">
+          Tschüss!
+        </label>
+      </div>
+    </div>
+
+    <div class="quiz-q" data-correct="1">
+      <p>2. _____! (tagsüber, 15:00 Uhr)</p>
+
+      <div class="quiz-options">
+        <label>
+          <input type="radio" name="q1_2" value="0">
+          Guten Morgen!
+        </label>
+
+        <label>
+          <input type="radio" name="q1_2" value="1">
+          Guten Tag!
+        </label>
+
+        <label>
+          <input type="radio" name="q1_2" value="2">
+          Hallo!
+        </label>
+      </div>
+    </div>
+
+    <div class="quiz-q" data-correct="2">
+      <p>3. _____! (beim Abschied)</p>
+
+      <div class="quiz-options">
+        <label>
+          <input type="radio" name="q1_3" value="0">
+          Guten Tag!
+        </label>
+
+        <label>
+          <input type="radio" name="q1_3" value="1">
+          Guten Morgen!
+        </label>
+
+        <label>
+          <input type="radio" name="q1_3" value="2">
+          Tschüss!
+        </label>
+      </div>
+    </div>
+
+    <div class="quiz-q" data-correct="0">
+      <p>4. Hallo! Wie _____ du?</p>
+
+      <div class="quiz-options">
+        <label>
+          <input type="radio" name="q1_4" value="0">
+          heißt
+        </label>
+
+        <label>
+          <input type="radio" name="q1_4" value="1">
+          heißen
+        </label>
+
+        <label>
+          <input type="radio" name="q1_4" value="2">
+          ist
+        </label>
+      </div>
+    </div>
+
+    <div class="quiz-q" data-correct="1">
+      <p>5. Ich _____ Anna.</p>
+
+      <div class="quiz-options">
+        <label>
+          <input type="radio" name="q1_5" value="0">
+          ist
+        </label>
+
+        <label>
+          <input type="radio" name="q1_5" value="1">
+          heiße
+        </label>
+
+        <label>
+          <input type="radio" name="q1_5" value="2">
+          bist
+        </label>
+      </div>
+    </div>
+
+    <button class="check-btn" onclick="checkQuiz1()">
+      Quiz auswerten
+    </button>
+
+    <div class="exercise-result" id="quiz1-result"></div>
+  </div>
+</section>
+
+<!-- ÜBUNG 4 -->
+
+<section class="part" id="übung1_4">
+  <div class="part-head">
+    <span class="part-num">Übung 4</span>
+    <h2 class="part-title">Stellen Sie sich vor!</h2>
+  </div>
+
+  <div class="card">
+    <p class="lead">Schreiben Sie vollständige Sätze.</p>
+
+    <div class="sentence-grid">
+      <div class="sentence-item">
+        1. Hallo! Ich heiße _____ . (twoje imię)
+      </div>
+
+      <div class="sentence-item">
+        2. Mein Name ist _____ . (twoje pełne imię)
+      </div>
+
+      <div class="sentence-item">
+        3. Guten Tag! Wie _____ Sie? (heißen / heißt)
+      </div>
+
+      <div class="sentence-item">
+        4. Ich _____ Thomas. (heiße / ist / bist)
+      </div>
+
+      <div class="sentence-item">
+        5. _____! (beim Abschied)
+        (Tschüss / Guten Tag / Guten Morgen)
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ÜBUNG 5 -->
+
+<section class="part" id="übung1_5">
+  <div class="part-head">
+    <span class="part-num">Übung 5</span>
+    <h2 class="part-title">Alphabet — Buchstabieren</h2>
+  </div>
+
+  <div class="card">
+    <p class="lead">
+      Buchstabieren Sie Ihren Namen. Schreiben Sie die Buchstaben.
+    </p>
+
+    <ul class="exercise-list" id="ex1_5">
+      <li>
+        Anna → A –
+        <input type="text" data-answer="n" style="width:50px;min-width:50px"> –
+        <input type="text" data-answer="n" style="width:50px;min-width:50px"> – A
+        <span class="feedback"></span>
+      </li>
+
+      <li>
+        Thomas → T – H – O –
+        <input type="text" data-answer="m" style="width:50px;min-width:50px"> –
+        <input type="text" data-answer="a" style="width:50px;min-width:50px"> – S
+        <span class="feedback"></span>
+      </li>
+
+      <li>
+        Julia →
+        <input type="text" data-answer="j" style="width:50px;min-width:50px"> –
+        U – L –
+        <input type="text" data-answer="i" style="width:50px;min-width:50px"> – A
+        <span class="feedback"></span>
+      </li>
+
+      <li>
+        Maria →
+        <input type="text" data-answer="m" style="width:50px;min-width:50px"> –
+        A – R –
+        <input type="text" data-answer="i" style="width:50px;min-width:50px"> – A
+        <span class="feedback"></span>
+      </li>
+    </ul>
+
+    <button class="check-btn" onclick="checkExercise('ex1_5')">
+      Antworten prüfen ✓
+    </button>
+
+    <div class="exercise-result" id="ex1_5-result"></div>
+  </div>
+</section>
+
+<!-- ÜBUNG 6 – ODPOWIEDZI GŁOSOWE -->
+
+<section class="part" id="übung1_6">
+  <div class="part-head">
+    <span class="part-num">Übung 6</span>
+    <h2 class="part-title">Antworten Sie laut!</h2>
+  </div>
+
+  <div class="card">
+    <p class="lead">
+      Lesen Sie die Frage und antworten Sie laut. Klicken Sie dazu auf das
+      Mikrofon. Eine richtige Antwort wird gespeichert.
+    </p>
+
+    <div class="speaking-panel">
+      <span class="exercise-counter" id="voiceCounter">
+        Frage 1 von 5
+      </span>
+
+      <div class="question-box">
+        <p class="question-label">Frage</p>
+        <p class="voice-question" id="voiceQuestion"></p>
+      </div>
+
+      <div class="microphone-area">
+        <button
+          class="mic-btn"
+          id="micButton"
+          type="button"
+          aria-label="Mikrofon einschalten"
+          onclick="startVoiceAnswer()"
+        >
+          🎤
+        </button>
+
+        <p class="mic-status" id="micStatus">
+          Klicken Sie auf das Mikrofon und sprechen Sie.
+        </p>
+      </div>
+
+      <div class="transcript-box" id="voiceTranscript">
+        Ihre Antwort erscheint hier.
+      </div>
+
+      <div class="voice-feedback" id="voiceFeedback"></div>
+
+      <div class="action-row">
+        <button
+          class="control-btn"
+          type="button"
+          onclick="repeatVoiceQuestion()"
+        >
+          🔊 Frage wiederholen
+        </button>
+
+        <button
+          class="control-btn stop"
+          type="button"
+          onclick="stopAllSpeech()"
+        >
+          ■ Stopp
+        </button>
+
+        <button
+          class="control-btn primary"
+          id="nextVoiceButton"
+          type="button"
+          onclick="nextVoiceQuestion()"
+          disabled
+        >
+          Weiter →
+        </button>
+      </div>
+
+      <div class="progress-track">
+        <div class="progress-fill" id="voiceProgress"></div>
+      </div>
+
+      <ul class="saved-list" id="voiceSavedList"></ul>
+    </div>
+  </div>
+</section>
+
+<!-- ÜBUNG 7 – DIKTAT -->
+
+<section class="part" id="übung1_7">
+  <div class="part-head">
+    <span class="part-num">Übung 7</span>
+    <h2 class="part-title">Hören und schreiben</h2>
+  </div>
+
+  <div class="card">
+    <div class="dictation-launch" id="dictationLaunch">
+      <p class="lead">
+        Hören Sie einen Satz aus Lektion 1 und schreiben Sie genau das,
+        was Sie hören.
+      </p>
+
+      <button
+        class="dictation-open-btn"
+        type="button"
+        onclick="openDictation()"
+      >
+        🎧 Diktat starten
+      </button>
+    </div>
+
+    <div class="dictation-panel hidden" id="dictationPanel">
+      <span class="exercise-counter" id="dictationCounter">
+        Satz 1 von 8
+      </span>
+
+      <div class="dictation-icon">🎧</div>
+
+      <h3 class="dictation-heading">Hören Sie gut zu!</h3>
+
+      <p class="dictation-description">
+        Schreiben Sie den gehörten Satz vollständig.
+      </p>
+
+      <input
+        type="text"
+        class="dictation-input"
+        id="dictationInput"
+        placeholder="Schreiben Sie hier ..."
+        autocomplete="off"
+        onkeydown="dictationEnter(event)"
+      >
+
+      <div class="dictation-message" id="dictationMessage"></div>
+      <div class="dictation-hint" id="dictationHint"></div>
+
+      <div class="action-row">
+        <button
+          class="control-btn"
+          type="button"
+          onclick="repeatDictation()"
+        >
+          🔊 Wiederholen
+        </button>
+
+        <button
+          class="control-btn stop"
+          type="button"
+          onclick="stopAllSpeech()"
+        >
+          ■ Stopp
+        </button>
+
+        <button
+          class="control-btn hint"
+          type="button"
+          onclick="showDictationHint()"
+        >
+          💡 Hinweis
+        </button>
+
+        <button
+          class="control-btn primary"
+          id="dictationNextButton"
+          type="button"
+          onclick="checkOrContinueDictation()"
+        >
+          Prüfen
+        </button>
+      </div>
+
+      <div class="progress-track">
+        <div class="progress-fill" id="dictationProgress"></div>
+      </div>
+
+      <ul class="saved-list" id="dictationSavedList"></ul>
+    </div>
+  </div>
+</section>
+
+<div class="top-bar">
+  <a href="A1.html#lektion1" class="back-btn">
+    ← Powrót do lekcji
+  </a>
+</div>
+
+<nav class="lesson-nav">
+  <a href="#top">Nach oben ↑</a>
+  <a href="#übung1">Übung 1</a>
+  <a href="#übung1_2">Übung 2</a>
+  <a href="#übung1_3">Übung 3</a>
+  <a href="#übung1_4">Übung 4</a>
+  <a href="#übung1_5">Übung 5</a>
+  <a href="#übung1_6">Sprechen</a>
+  <a href="#übung1_7">Diktat</a>
+</nav>
+
+</main>
+
+<script>
+/* =================================================
+   FUNKCJE PODSTAWOWYCH ĆWICZEŃ
+================================================= */
+
+function normalize(text){
+  return String(text || "")
+    .trim()
+    .toLowerCase()
+    .replace(/ß/g,"ss")
+    .replace(/ä/g,"a")
+    .replace(/ö/g,"o")
+    .replace(/ü/g,"u")
+    .replace(/[.,!?;:„“"']/g,"")
+    .replace(/\s+/g," ");
+}
+
+function checkExercise(exId){
+  const list=document.getElementById(exId);
+  const inputs=list.querySelectorAll('input[type="text"]');
+  let correct=0;
+
+  inputs.forEach(input=>{
+    const item=input.closest("li");
+    const feedback=item.querySelector(".feedback");
+    const accepted=input.dataset.answer.split(",").map(normalize);
+    const value=normalize(input.value);
+
+    if(accepted.includes(value)){
+      feedback.textContent="✓";
+      feedback.className="feedback ok";
+      input.style.borderColor="#2e7d32";
+      correct++;
+    }else{
+      feedback.textContent="✗";
+      feedback.className="feedback no";
+      input.style.borderColor="#c62828";
+    }
+  });
+
+  const result=document.getElementById(exId+"-result");
+
+  result.textContent=
+    `${correct} / ${inputs.length} richtig.`+
+    (
+      correct<inputs.length
+        ?" Versuchen Sie es noch einmal."
+        :" Super! 🎉"
+    );
+}
+
+function checkQuiz1(){
+  const questions=document.querySelectorAll("#übung1_3 .quiz-q");
+  let correct=0;
+  let answered=0;
+
+  questions.forEach(q=>{
+    const correctIndex=q.dataset.correct;
+    const labels=q.querySelectorAll(".quiz-options label");
+    const selected=q.querySelector('input[type="radio"]:checked');
+
+    labels.forEach(label=>{
+      label.classList.remove("correct","incorrect");
+    });
+
+    if(selected){
+      answered++;
+      const chosenLabel=selected.closest("label");
+
+      if(selected.value===correctIndex){
+        chosenLabel.classList.add("correct");
+        correct++;
+      }else{
+        chosenLabel.classList.add("incorrect");
+        labels[Number(correctIndex)].classList.add("correct");
+      }
+    }else{
+      labels[Number(correctIndex)].classList.add("correct");
+    }
+  });
+
+  const result=document.getElementById("quiz1-result");
+
+  result.textContent=
+    answered<questions.length
+      ?`Bitte beantworten Sie alle Fragen. (${answered}/${questions.length} beantwortet)`
+      :`Ergebnis: ${correct} / ${questions.length} richtig.`;
+
+  if(answered===questions.length&&correct===questions.length){
+    result.textContent+=" Ausgezeichnet! 🎉";
+  }
+}
+
+/* =================================================
+   SYNTEZA MOWY
+================================================= */
+
+let germanVoice=null;
+
+function loadGermanVoice(){
+  const voices=speechSynthesis.getVoices();
+
+  germanVoice=
+    voices.find(v=>v.lang==="de-DE")||
+    voices.find(v=>v.lang.startsWith("de"))||
+    null;
+}
+
+if("speechSynthesis" in window){
+  loadGermanVoice();
+  speechSynthesis.onvoiceschanged=loadGermanVoice;
+}
+
+function speakGerman(text,afterSpeaking){
+  if(!("speechSynthesis" in window)){
+    alert("Die Sprachausgabe wird von diesem Browser nicht unterstützt.");
+    return;
+  }
+
+  speechSynthesis.cancel();
+
+  const utterance=new SpeechSynthesisUtterance(text);
+
+  utterance.lang="de-DE";
+  utterance.rate=.84;
+  utterance.pitch=1;
+  utterance.volume=1;
+
+  if(germanVoice) utterance.voice=germanVoice;
+
+  if(typeof afterSpeaking==="function"){
+    utterance.onend=afterSpeaking;
+  }
+
+  speechSynthesis.speak(utterance);
+}
+
+function stopAllSpeech(){
+  if("speechSynthesis" in window){
+    speechSynthesis.cancel();
+  }
+
+  if(activeRecognition){
+    try{
+      activeRecognition.stop();
+    }catch(error){}
+  }
+
+  const micButton=document.getElementById("micButton");
+
+  if(micButton){
+    micButton.classList.remove("listening");
+  }
+
+  const micStatus=document.getElementById("micStatus");
+
+  if(micStatus){
+    micStatus.textContent="Die Wiedergabe wurde gestoppt.";
+  }
+}
+
+/* =================================================
+   ÜBUNG 6 – ODPOWIEDZI GŁOSOWE
+================================================= */
+
+const voiceExercises=[
+  {
+    question:"Was sagt man morgens um sieben Uhr?",
+    spokenQuestion:"Was sagt man morgens um sieben Uhr?",
+    answers:["guten morgen"],
+    example:"Guten Morgen!"
+  },
+  {
+    question:"Was sagt man tagsüber um vierzehn Uhr?",
+    spokenQuestion:"Was sagt man tagsüber um vierzehn Uhr?",
+    answers:["guten tag"],
+    example:"Guten Tag!"
+  },
+  {
+    question:"Was sagt man beim Abschied?",
+    spokenQuestion:"Was sagt man beim Abschied?",
+    answers:["tschuss","tschuess","auf wiedersehen"],
+    example:"Tschüss!"
+  },
+  {
+    question:"Wie fragen Sie eine Person informell nach dem Namen?",
+    spokenQuestion:
+      "Wie fragen Sie eine Person informell nach dem Namen?",
+    answers:["wie heisst du","wie heißt du"],
+    example:"Wie heißt du?"
+  },
+  {
+    question:"Wie fragen Sie eine Person formell nach dem Namen?",
+    spokenQuestion:
+      "Wie fragen Sie eine Person formell nach dem Namen?",
+    answers:["wie heissen sie","wie heißen sie"],
+    example:"Wie heißen Sie?"
+  }
+];
+
+let voiceIndex=0;
+let voiceAnswered=false;
+let activeRecognition=null;
+
+const SpeechRecognition=
+  window.SpeechRecognition||window.webkitSpeechRecognition;
+
+function loadVoiceExercise(){
+  const exercise=voiceExercises[voiceIndex];
+
+  document.getElementById("voiceQuestion").textContent=exercise.question;
+  document.getElementById("voiceCounter").textContent=
+    `Frage ${voiceIndex+1} von ${voiceExercises.length}`;
+
+  document.getElementById("voiceTranscript").textContent=
+    "Ihre Antwort erscheint hier.";
+
+  document.getElementById("voiceFeedback").textContent="";
+
+  document.getElementById("micStatus").textContent=
+    "Klicken Sie auf das Mikrofon und sprechen Sie.";
+
+  document.getElementById("nextVoiceButton").disabled=true;
+
+  const micButton=document.getElementById("micButton");
+  micButton.classList.remove("listening","correct");
+
+  voiceAnswered=false;
+
+  updateVoiceProgress();
+}
+
+function repeatVoiceQuestion(){
+  speakGerman(voiceExercises[voiceIndex].spokenQuestion);
+}
+
+function startVoiceAnswer(){
+  if(!SpeechRecognition){
+    document.getElementById("voiceFeedback").innerHTML=
+      '<span class="no">Die Spracherkennung wird von diesem Browser nicht unterstützt. Verwenden Sie bitte Chrome oder Edge.</span>';
+    return;
+  }
+
+  stopAllSpeech();
+
+  const recognition=new SpeechRecognition();
+
+  activeRecognition=recognition;
+  recognition.lang="de-DE";
+  recognition.interimResults=false;
+  recognition.continuous=false;
+  recognition.maxAlternatives=5;
+
+  const micButton=document.getElementById("micButton");
+  const micStatus=document.getElementById("micStatus");
+  const transcript=document.getElementById("voiceTranscript");
+  const feedback=document.getElementById("voiceFeedback");
+
+  micButton.classList.add("listening");
+  micButton.classList.remove("correct");
+  micStatus.textContent="Ich höre zu …";
+  transcript.textContent="Sprechen Sie jetzt.";
+  feedback.textContent="";
+
+  recognition.onresult=event=>{
+    const alternatives=[];
+
+    for(let i=0;i<event.results[0].length;i++){
+      alternatives.push(event.results[0][i].transcript);
+    }
+
+    const spoken=alternatives[0]||"";
+
+    transcript.textContent=spoken;
+    evaluateVoiceAnswer(alternatives);
+  };
+
+  recognition.onerror=event=>{
+    micButton.classList.remove("listening");
+
+    const messages={
+      "not-allowed":
+        "Der Zugriff auf das Mikrofon wurde nicht erlaubt.",
+      "no-speech":
+        "Ich habe nichts gehört. Bitte sprechen Sie noch einmal.",
+      "audio-capture":
+        "Das Mikrofon wurde nicht gefunden.",
+      "network":
+        "Die Spracherkennung konnte keine Verbindung herstellen."
+    };
+
+    feedback.innerHTML=
+      `<span class="no">${messages[event.error]||"Die Antwort konnte nicht erkannt werden."}</span>`;
+
+    micStatus.textContent="Bitte versuchen Sie es noch einmal.";
+  };
+
+  recognition.onend=()=>{
+    micButton.classList.remove("listening");
+    activeRecognition=null;
+
+    if(!voiceAnswered){
+      micStatus.textContent=
+        "Klicken Sie erneut auf das Mikrofon und wiederholen Sie die Antwort.";
+    }
+  };
+
+  try{
+    recognition.start();
+  }catch(error){
+    feedback.innerHTML=
+      '<span class="no">Das Mikrofon konnte nicht gestartet werden.</span>';
+  }
+}
+
+function evaluateVoiceAnswer(alternatives){
+  const exercise=voiceExercises[voiceIndex];
+  const correct=alternatives.some(alternative=>{
+    const spoken=normalize(alternative);
+
+    return exercise.answers.some(answer=>{
+      const expected=normalize(answer);
+
+      return spoken===expected||
+        spoken.includes(expected)||
+        expected.includes(spoken);
+    });
+  });
+
+  const micButton=document.getElementById("micButton");
+  const micStatus=document.getElementById("micStatus");
+  const feedback=document.getElementById("voiceFeedback");
+  const nextButton=document.getElementById("nextVoiceButton");
+
+  if(correct){
+    voiceAnswered=true;
+
+    micButton.classList.remove("listening");
+    micButton.classList.add("correct");
+
+    feedback.innerHTML=
+      '<span class="ok">Richtig! Die Antwort wurde gespeichert. ✓</span>';
+
+    micStatus.textContent="Sehr gut!";
+    nextButton.disabled=false;
+
+    saveVoiceAnswer(exercise.question,exercise.example);
+    updateVoiceProgress(true);
+
+    speakGerman("Richtig. Sehr gut!");
+  }else{
+    voiceAnswered=false;
+
+    micButton.classList.remove("correct");
+
+    feedback.innerHTML=
+      '<span class="no">Das ist noch nicht richtig. Bitte wiederholen Sie die Antwort.</span>';
+
+    micStatus.textContent=
+      "Klicken Sie erneut auf das Mikrofon und sprechen Sie noch einmal.";
+
+    nextButton.disabled=true;
+
+    speakGerman(
+      "Das ist noch nicht richtig. Bitte versuchen Sie es noch einmal."
+    );
+  }
+}
+
+function nextVoiceQuestion(){
+  if(!voiceAnswered) return;
+
+  if(voiceIndex<voiceExercises.length-1){
+    voiceIndex++;
+    loadVoiceExercise();
+    repeatVoiceQuestion();
+  }else{
+    document.getElementById("voiceQuestion").textContent=
+      "Alle Fragen sind abgeschlossen!";
+
+    document.getElementById("voiceTranscript").textContent=
+      "Sie haben alle Antworten richtig gesprochen.";
+
+    document.getElementById("voiceFeedback").innerHTML=
+      '<span class="ok">Ausgezeichnet! Übung abgeschlossen. 🎉</span>';
+
+    document.getElementById("micStatus").textContent=
+      "Sehr gut gemacht!";
+
+    document.getElementById("micButton").disabled=true;
+    document.getElementById("nextVoiceButton").disabled=true;
+
+    document.getElementById("voiceProgress").style.width="100%";
+
+    speakGerman(
+      "Ausgezeichnet. Sie haben alle Fragen richtig beantwortet."
+    );
+  }
+}
+
+function updateVoiceProgress(currentCorrect=false){
+  const finished=voiceIndex+(currentCorrect?1:0);
+  const percent=finished/voiceExercises.length*100;
+
+  document.getElementById("voiceProgress").style.width=percent+"%";
+}
+
+function saveVoiceAnswer(question,answer){
+  const key=`voiceLesson1_${voiceIndex}`;
+
+  if(localStorage.getItem(key)) return;
+
+  localStorage.setItem(key,answer);
+
+  const list=document.getElementById("voiceSavedList");
+  const li=document.createElement("li");
+
+  li.innerHTML=`<span>✓</span><span><strong>${question}</strong><br>${answer}</span>`;
+  li.dataset.voiceIndex=voiceIndex;
+
+  list.appendChild(li);
+}
+
+function restoreVoiceAnswers(){
+  const list=document.getElementById("voiceSavedList");
+
+  voiceExercises.forEach((exercise,index)=>{
+    const answer=localStorage.getItem(`voiceLesson1_${index}`);
+
+    if(answer){
+      const li=document.createElement("li");
+
+      li.innerHTML=
+        `<span>✓</span><span><strong>${exercise.question}</strong><br>${answer}</span>`;
+
+      list.appendChild(li);
+    }
+  });
+}
+
+/* =================================================
+   ÜBUNG 7 – DIKTAT
+================================================= */
+
+const dictationSentences=[
+  "Guten Morgen!",
+  "Guten Tag!",
+  "Guten Abend!",
+  "Hallo! Wie heißt du?",
+  "Ich heiße Lena.",
+  "Wie heißen Sie?",
+  "Mein Name ist Anna Müller.",
+  "Tschüss! Auf Wiedersehen!"
+];
+
+let dictationIndex=0;
+let dictationCorrect=false;
+let dictationStarted=false;
+
+function openDictation(){
+  document.getElementById("dictationLaunch").classList.add("hidden");
+  document.getElementById("dictationPanel").classList.remove("hidden");
+
+  dictationStarted=true;
+  loadDictationSentence();
+
+  setTimeout(repeatDictation,350);
+}
+
+function loadDictationSentence(){
+  const input=document.getElementById("dictationInput");
+  const nextButton=document.getElementById("dictationNextButton");
+
+  document.getElementById("dictationCounter").textContent=
+    `Satz ${dictationIndex+1} von ${dictationSentences.length}`;
+
+  document.getElementById("dictationMessage").textContent="";
+  document.getElementById("dictationHint").textContent="";
+
+  input.value="";
+  input.disabled=false;
+  input.classList.remove("correct-input","incorrect-input");
+  input.focus();
+
+  nextButton.textContent="Prüfen";
+
+  dictationCorrect=false;
+  updateDictationProgress();
+}
+
+function repeatDictation(){
+  if(!dictationStarted) return;
+
+  speakGerman(dictationSentences[dictationIndex]);
+}
+
+function showDictationHint(){
+  const sentence=dictationSentences[dictationIndex];
+  const words=sentence.split(" ");
+
+  const hint=words
+    .map(word=>{
+      const clean=word.replace(/[.!?]/g,"");
+      return clean.charAt(0)+"_".repeat(Math.max(clean.length-1,1));
+    })
+    .join(" ");
+
+  document.getElementById("dictationHint").textContent=
+    `Hinweis: ${hint}`;
+
+  document.getElementById("dictationInput").focus();
+}
+
+function checkOrContinueDictation(){
+  if(dictationCorrect){
+    nextDictationSentence();
+  }else{
+    checkDictation();
+  }
+}
+
+function checkDictation(){
+  const sentence=dictationSentences[dictationIndex];
+  const input=document.getElementById("dictationInput");
+  const message=document.getElementById("dictationMessage");
+  const nextButton=document.getElementById("dictationNextButton");
+
+  if(!input.value.trim()){
+    message.innerHTML=
+      '<span class="no">Bitte schreiben Sie zuerst den gehörten Satz.</span>';
+
+    input.focus();
+    return;
+  }
+
+  if(normalize(input.value)===normalize(sentence)){
+    dictationCorrect=true;
+
+    input.classList.remove("incorrect-input");
+    input.classList.add("correct-input");
+    input.disabled=true;
+
+    message.innerHTML=
+      '<span class="ok">Richtig! Der Satz wurde gespeichert. ✓</span>';
+
+    nextButton.textContent=
+      dictationIndex===dictationSentences.length-1
+        ?"Übung beenden"
+        :"Weiter →";
+
+    saveDictationSentence(sentence);
+    updateDictationProgress(true);
+
+    speakGerman("Richtig. Sehr gut!");
+  }else{
+    dictationCorrect=false;
+
+    input.classList.remove("correct-input");
+    input.classList.add("incorrect-input");
+
+    message.innerHTML=
+      '<span class="no">Noch nicht richtig. Hören Sie noch einmal und verbessern Sie den Satz.</span>';
+
+    nextButton.textContent="Prüfen";
+
+    speakGerman(
+      "Noch nicht richtig. Hören Sie noch einmal und versuchen Sie es erneut."
+    );
+
+    setTimeout(()=>{
+      input.classList.remove("incorrect-input");
+      input.focus();
+      input.select();
+    },700);
+  }
+}
+
+function nextDictationSentence(){
+  if(!dictationCorrect) return;
+
+  if(dictationIndex<dictationSentences.length-1){
+    dictationIndex++;
+    loadDictationSentence();
+
+    setTimeout(repeatDictation,350);
+  }else{
+    const input=document.getElementById("dictationInput");
+
+    input.value="";
+    input.placeholder="Übung abgeschlossen";
+    input.disabled=true;
+
+    document.getElementById("dictationMessage").innerHTML=
+      '<span class="ok">Ausgezeichnet! Sie haben das ganze Diktat richtig geschrieben. 🎉</span>';
+
+    document.getElementById("dictationHint").textContent="";
+
+    document.getElementById("dictationNextButton").disabled=true;
+    document.getElementById("dictationProgress").style.width="100%";
+
+    speakGerman(
+      "Ausgezeichnet. Sie haben das ganze Diktat richtig geschrieben."
+    );
+  }
+}
+
+function dictationEnter(event){
+  if(event.key==="Enter"){
+    event.preventDefault();
+    checkOrContinueDictation();
+  }
+}
+
+function updateDictationProgress(currentCorrect=false){
+  const finished=dictationIndex+(currentCorrect?1:0);
+  const percent=finished/dictationSentences.length*100;
+
+  document.getElementById("dictationProgress").style.width=
+    percent+"%";
+}
+
+function saveDictationSentence(sentence){
+  const key=`dictationLesson1_${dictationIndex}`;
+
+  if(localStorage.getItem(key)) return;
+
+  localStorage.setItem(key,sentence);
+
+  const list=document.getElementById("dictationSavedList");
+  const li=document.createElement("li");
+
+  li.innerHTML=`<span>✓</span><span>${sentence}</span>`;
+  list.appendChild(li);
+}
+
+function restoreDictationAnswers(){
+  const list=document.getElementById("dictationSavedList");
+
+  dictationSentences.forEach((sentence,index)=>{
+    if(localStorage.getItem(`dictationLesson1_${index}`)){
+      const li=document.createElement("li");
+
+      li.innerHTML=`<span>✓</span><span>${sentence}</span>`;
+      list.appendChild(li);
+    }
+  });
+}
+
+/* =================================================
+   START
+================================================= */
+
+document.addEventListener("DOMContentLoaded",()=>{
+  loadVoiceExercise();
+  restoreVoiceAnswers();
+  restoreDictationAnswers();
+});
+</script>
+
+</body>
+  </html>
