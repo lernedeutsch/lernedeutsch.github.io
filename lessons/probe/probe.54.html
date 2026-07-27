@@ -22,8 +22,6 @@
   --sky-deep:#3da8f0;
   --leaf:#84df42;
   --leaf-deep:#5fbd28;
-  --plum:#a88af5;
-  --plum-deep:#825fe0;
   --rose:#e2685f;
   --shadow:0 16px 38px rgba(8,16,30,.16);
 }
@@ -45,7 +43,6 @@ button{font:inherit}
   margin:0 auto;
   padding:36px 18px 70px;
 }
-
 .hero{
   text-align:center;
   padding:34px 20px 26px;
@@ -69,7 +66,7 @@ button{font:inherit}
 }
 .hero p{
   margin:0 auto;
-  max-width:50ch;
+  max-width:52ch;
   color:#c7d7ea;
   font-size:1.05rem;
 }
@@ -203,7 +200,7 @@ button{font:inherit}
 .dialog{
   display:flex;
   flex-direction:column;
-  gap:14px;
+  gap:12px;
 }
 .bubble-row{
   display:flex;
@@ -340,7 +337,6 @@ button{font:inherit}
   color:var(--muted);
   font:700 .8rem "JetBrains Mono",monospace;
 }
-
 .example-text{
   display:none;
   margin-top:12px;
@@ -368,7 +364,6 @@ button{font:inherit}
 @keyframes fall{
   to{transform:translateY(110vh) rotate(360deg);opacity:0}
 }
-
 .footnote{
   margin-top:22px;
   text-align:center;
@@ -380,45 +375,27 @@ button{font:inherit}
   .stat{min-width:80px;padding:10px 12px}
   .bubble{max-width:100%}
 }
-@media(prefers-reduced-motion:reduce){
-  *,*::before,*::after{
-    animation-duration:.01ms!important;
-    animation-iteration-count:1!important;
-    transition-duration:.01ms!important;
-  }
-}
 </style>
 </head>
 <body>
 <div class="shell">
-
   <header class="hero">
     <span class="hero-badge">A1 · Dialogi</span>
     <h1>Sprich Deutsch! 🎤</h1>
-    <p>Usłyszysz krótkie dialogi. Mikrofon włączy się automatycznie po wypowiedzi partnera i będziesz odpowiadać na głos.</p>
-
+    <p>Usłyszysz krótkie dialogi. Po każdej kwestii partnera mikrofon uruchamia się automatycznie i odpowiadasz głosem.</p>
     <div class="hero-stats">
-      <div class="stat">
-        <span class="stat-value" id="stat-score">0/10</span>
-        <span class="stat-label">Punkty</span>
-      </div>
-      <div class="stat">
-        <span class="stat-value" id="stat-streak">0🔥</span>
-        <span class="stat-label">Seria</span>
-      </div>
-      <div class="stat">
-        <span class="stat-value" id="stat-progress">1/10</span>
-        <span class="stat-label">Runda</span>
-      </div>
+      <div class="stat"><span class="stat-value" id="stat-score">0/8</span><span class="stat-label">Punkty</span></div>
+      <div class="stat"><span class="stat-value" id="stat-streak">0🔥</span><span class="stat-label">Seria</span></div>
+      <div class="stat"><span class="stat-value" id="stat-progress">1/8</span><span class="stat-label">Runda</span></div>
     </div>
   </header>
 
   <div class="gate" id="gate">
     <div class="gate-emoji">🎙️</div>
-    <h2>Gotowy na dialog?</h2>
-    <p>Najpierw aktywuj mikrofon. Później system sam odtworzy rozmowę i zacznie Cię słuchać.</p>
-    <button type="button" class="gate-btn" id="gate-btn">🎤 Aktywuj mikrofon i start</button>
-    <p class="gate-warning" id="gate-warning">Twoja przeglądarka nie obsługuje rozpoznawania mowy. Użyj Chrome lub Edge na desktopie albo Androidzie.</p>
+    <h2>Gotowy na start?</h2>
+    <p>Najpierw kliknij przycisk. To odblokuje dźwięk i mikrofon w przeglądarce.</p>
+    <button type="button" class="gate-btn" id="gate-btn">🎤 Start</button>
+    <p class="gate-warning" id="gate-warning">Brak obsługi rozpoznawania mowy. Użyj Chrome lub Edge na komputerze albo Androidzie.</p>
   </div>
 
   <main class="card" id="card">
@@ -449,7 +426,6 @@ button{font:inherit}
       </div>
 
       <div class="feedback" id="feedback"></div>
-
       <div class="example-text" id="example-text"></div>
 
       <div class="utility-row">
@@ -468,4 +444,15 @@ button{font:inherit}
   </main>
 
   <p class="footnote">Najlepiej działa w Chrome/Edge. Mowa i nasłuch korzystają z Web Speech API.</p>
-</
+</div>
+
+<script>
+const rounds = [
+  {
+    speaker: "Lena",
+    avatar: "👩",
+    role: "informell",
+    partnerText: "Hallo! Wie heißt du?",
+    userPrompt: "Odpowiedz: Hallo! Ich heiße ...",
+    example: "Hallo! Ich heiße Max.",
+    expected: [/hallo/i, /(ich hei
