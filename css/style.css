@@ -1,306 +1,376 @@
-<!DOCTYPE html>
-<html lang="de">
-<head>
-<meta charset="UTF-8">
-<title>A1 – Lekcje</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+/* ===== USTAWIENIA OGÓLNE ===== */
 
-<link rel="stylesheet" href="../../css/style.css">
-
-<style>
-
-body{
-    font-family:system-ui,sans-serif;
-    background:#0f172a;
-    color:#f9fafb;
-    margin:0;
-    padding:40px 20px;
-    text-align:center;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-/* ===== GÓRNE PRZYCISKI ===== */
-
-.top-bar{
-    width:900px;
-    max-width:100%;
-    margin:0 auto 35px;
-
-    display:flex;
-    justify-content:center;
-    gap:20px;
-    flex-wrap:wrap;
+body {
+    font-family: Arial, sans-serif;
 }
 
-.top-btn{
-    display:inline-flex;
-    align-items:center;
-    justify-content:center;
+/* ===== STRONA GŁÓWNA (MAPA ŚWIATA) ===== */
 
-    padding:14px 30px;
-
-    border-radius:999px;
-    text-decoration:none;
-
-    font-size:22px;
-    font-weight:800;
-
-    transition:.25s;
+#mapa {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
 }
 
-/* A-Z */
-
-.aza-btn{
-    background:#1d3557;
-    color:#ffce00;
-    border:3px solid #ffce00;
+.zahlen-container {
+    display: flex;
+    gap: 60px;
+    flex-wrap: wrap;
+    margin-top: 20px;
 }
 
-.aza-btn:hover{
-    background:#274c77;
-    color:white;
-    transform:translateY(-3px) scale(1.05);
+.zahlen-spalte {
+    flex: 1;
+    min-width: 250px;
 }
 
-/* Sprich nach */
-
-.sprich-btn{
-    background:#2563eb;
-    color:white;
-    border:3px solid #60a5fa;
+.zahlen-spalte p {
+    margin: 8px 0;
 }
 
-.sprich-btn:hover{
-    background:#1d4ed8;
-    transform:translateY(-3px) scale(1.05);
+#earth {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
 }
 
-/* Aktiv trainieren */
-
-.train-btn{
-    background:#16a34a;
-    color:white;
-    border:3px solid #4ade80;
+#niemcy {
+    position: absolute;
+    top: 28%;
+    left: 43.5%;
+    width: 120px;
+    cursor: pointer;
+    transition: .3s;
+    filter:
+        drop-shadow(0 0 10px gold)
+        drop-shadow(0 0 25px gold);
 }
 
-.train-btn:hover{
-    background:#15803d;
-    transform:translateY(-3px) scale(1.05);
+#niemcy:hover {
+    transform: scale(1.12);
 }
 
-/* ===== MIEJSCE PO TYTULE ===== */
-/* Zachowuje identyczny odstęp po usunięciu napisu A1 */
-
-.title-space{
-    height:87px;
+#niemcy img {
+    width: 100%;
+    display: block;
 }
 
-/* ===== PRZYCISKI LEKCJI ===== */
+/* ===== MAPA NIEMIEC ===== */
 
-.lesson-list{
-
-    width:900px;
-    max-width:100%;
-    margin:0 auto 45px;
-
-    display:grid;
-    grid-template-columns:repeat(10,1fr);
-
-    gap:12px;
+.germany-page {
+    margin: 0;
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background: #111;
 }
 
-.lesson-link{
-
-    display:flex;
-    justify-content:center;
-    align-items:center;
-
-    width:64px;
-    height:48px;
-
-    margin:auto;
-
-    background:#1f2937;
-    color:#34d399;
-
-    border:2px solid #34d399;
-    border-radius:14px;
-
-    text-decoration:none;
-
-    font-size:19px;
-    font-weight:bold;
-
-    transition:.2s;
+.germany-map {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
 }
 
-.lesson-link:hover{
+.land {
+    position: absolute;
+    z-index: 10;
 
-    background:#022c22;
-    transform:scale(1.08);
+    color: white;
+    text-decoration: none;
+
+    font-size: 18px;
+    font-weight: bold;
+
+    padding: 10px 18px;
+
+    border-radius: 15px;
+
+    background: rgba(0,0,0,0.35);
+
+    backdrop-filter: blur(8px);
+
+    border: 1px solid rgba(255,255,255,0.2);
+
+    box-shadow:
+        0 4px 12px rgba(0,0,0,0.4);
+
+    transition: 0.3s;
+
+    text-align: center;
+
+    min-width: 120px;
+
+    text-shadow:
+        1px 1px 3px black;
 }
 
-/* ===== SPIS TREŚCI ===== */
+.land:hover {
+    transform: scale(1.08);
 
-.info{
+    background: rgba(255,206,0,0.25);
 
-    width:900px;
-    max-width:100%;
+    border: 1px solid rgba(255,206,0,0.6);
 
-    margin:0 auto;
+    box-shadow:
+        0 0 15px rgba(255,206,0,0.5);
 
-    padding:28px;
-
-    background:#111827;
-
-    border-radius:18px;
-
-    line-height:1.9;
-    font-size:18px;
-
-    text-align:left;
+    color: white;
 }
 
-.info h2{
-
-    margin-top:0;
-    margin-bottom:18px;
-
-    color:#60a5fa;
+.land:active {
+    transform: scale(0.97);
 }
 
-/* ===== DOLNE LINKI ===== */
+.land::before {
+    content: "";
 
-.back-links{
+    position: absolute;
 
-    margin-top:45px;
-    margin-bottom:10px;
+    left: 0;
+    top: 0;
 
-    font-size:18px;
+    width: 6px;
+    height: 100%;
+
+    border-radius: 15px 0 0 15px;
+
+    background:
+        linear-gradient(
+            to bottom,
+            black 33%,
+            red 33%,
+            red 66%,
+            gold 66%
+        );
 }
 
-.back-links a{
+/* ===== POZYCJE LANDÓW ===== */
 
-    color:#93c5fd;
-    text-decoration:none;
-    margin:0 10px;
+.schleswig {
+    top: 10%;
+    left: 49%;
 }
 
-.back-links a:hover{
-
-    text-decoration:underline;
+.hamburg {
+    top: 52%;
+    left: 33%;
 }
 
-/* ===== TELEFON ===== */
-
-@media (max-width:950px){
-
-    .lesson-list{
-        grid-template-columns:repeat(5,1fr);
-    }
-
+.a2 {
+    top: 59%;
+    left: 49%;
 }
 
-@media (max-width:600px){
-
-    body{
-        padding:25px 10px;
-    }
-
-    .lesson-list{
-        grid-template-columns:repeat(4,1fr);
-    }
-
-    .lesson-link{
-        width:56px;
-        height:44px;
-    }
-
-    .top-btn{
-        width:100%;
-        max-width:320px;
-    }
-
-    .info{
-        font-size:17px;
-    }
-
-    .title-space{
-        height:70px;
-    }
-
+.nrw {
+    top: 36%;
+    left: 43%;
 }
 
-</style>
+.hessen {
+    top: 22%;
+    left: 25%;
+}
 
-</head>
+.baden {
+    top: 90%;
+    left: 90%;
+}
 
-<body>
+.uebungen {
+    top: 82%;
+    left: 72%;
+}
+.meindeutsch {
+    top: 88%;
+    left: 72%;
+}
 
-<div class="top-bar">
+/* Uwaga: w oryginale był błąd „.b erlin” – poprawiam na .a1 */
+.a1 {
+    top: 78%;
+    left: 55%;
+}
 
-    <a href="A-Z-A1.html" class="top-btn aza-btn">
-        A–Z
-    </a>
+.brandenburg { 
+    top: 54%;
+    left: 90%;
+}
 
-    <a href="../sprich nach/index.html" class="top-btn sprich-btn">
-        🎤 Sprich nach
-    </a>
+.sachsen {
+    top: 68%;
+    left: 90%;
+}
 
-    <a href="../aktiv-trainieren/index.html" class="top-btn train-btn">
-        🏋️ Aktiv trainieren
-    </a>
+.thueringen {
+    top: 60%;
+    left: 90%;
+}
 
-</div>
+/* ===== PODSTRONY OGÓLNE ===== */
 
-<div class="title-space"></div>
+.page {
+    max-width: 1000px;
+    margin: 50px auto;
 
-<div class="lesson-list">
+    background: white;
+    padding: 40px;
 
-<a href="1.html" class="lesson-link">1</a>
-<a href="2.html" class="lesson-link">2</a>
-<a href="3.html" class="lesson-link">3</a>
-<a href="4.html" class="lesson-link">4</a>
-<a href="5.html" class="lesson-link">5</a>
-<a href="6.html" class="lesson-link">6</a>
-<a href="7.html" class="lesson-link">7</a>
-<a href="8.html" class="lesson-link">8</a>
-<a href="9.html" class="lesson-link">9</a>
-<a href="10.html" class="lesson-link">10</a>
+    border-radius: 20px;
 
-<a href="11.html" class="lesson-link">11</a>
-<a href="12.html" class="lesson-link">12</a>
-<a href="13.html" class="lesson-link">13</a>
-<a href="14.html" class="lesson-link">14</a>
-<a href="15.html" class="lesson-link">15</a>
-<a href="16.html" class="lesson-link">16</a>
-<a href="17.html" class="lesson-link">17</a>
-<a href="18.html" class="lesson-link">18</a>
-<a href="19.html" class="lesson-link">19</a>
-<a href="20.html" class="lesson-link">20</a>
+    box-shadow: 0 0 20px rgba(0,0,0,.2);
+}
 
-</div>
+.page h1 {
+    margin-bottom: 20px;
+    color: #222;
+}
 
-<div class="info">
+.page p {
+    color: #444;
+    line-height: 1.6;
+}
 
-<h2>Erste Schritte</h2>
+.page a {
+    display: inline-block;
+    margin-top: 30px;
+    text-decoration: none;
+    color: #0055cc;
+}
 
-1 — Begrüßung, ich heiße ..., das Alphabet<br>
-2 — Woher kommen Sie?<br>
-3 — Wie alt sind Sie?<br>
-4 — Was machen Sie beruflich?<br>
-5 — Du oder Sie?
+.map-container {
+    position: relative;
 
-</div>
+    width: 900px;
+    height: 100vh;
 
-<div class="back-links">
+    margin: 0 auto;
+}
 
-<a href="../index.html">Zurück zu „Niveau“</a>
+.level-menu {
+    display: grid;
 
-•
+    grid-template-columns: repeat(3,1fr);
 
-<a href="../../mapa-niemiec.html">Zurück zur Karte</a>
+    gap: 20px;
 
-</div>
+    margin-top: 30px;
+}
 
-</body>
-</html>
+.level-menu a {
+    background: #0055cc;
+
+    color: white;
+
+    text-decoration: none;
+
+    padding: 20px;
+
+    text-align: center;
+
+    border-radius: 15px;
+
+    font-size: 24px;
+
+    font-weight: bold;
+
+    transition: .3s;
+}
+
+.level-menu a:hover {
+    background: #ffce00;
+
+    color: black;
+
+    transform: scale(1.05);
+}
+
+.word-list {
+    columns: 3;
+    column-gap: 40px;
+
+    margin-top: 30px;
+
+    list-style: none;
+}
+
+.word-list li {
+    padding: 6px 0;
+
+    font-size: 18px;
+
+    color: #222;
+}
+
+.wortschatz-bild {
+    width: 100%;
+    max-width: 1000px;
+
+    display: block;
+
+    margin: 30px auto;
+
+    border-radius: 15px;
+
+    box-shadow: 0 0 20px rgba(0,0,0,.2);
+}
+/* ===== NELE NA STRONIE Z MAPĄ ===== */
+
+.nele-avatar-box {
+  position: fixed;
+  left: 20px;
+  bottom: 20px;
+  width: 300px;
+  height: 420px;
+  z-index: 100;
+  border-radius: 20px;
+  overflow: hidden;
+  background: transparent;
+}
+
+.nele-avatar-frame {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+  background: transparent;
+}
+.nele-button {
+    position: fixed;
+    left: 45px;
+    bottom: 455px;
+    z-index: 1000;
+
+    padding: 15px 25px;
+    font-size: 20px;
+    font-weight: bold;
+
+    border: none;
+    border-radius: 15px;
+
+    background: #2d7df6;
+    color: white;
+
+    cursor: pointer;
+
+    box-shadow: 0 5px 15px rgba(0,0,0,.3);
+}
+
+.nele-button:hover {
+    background: #155ec9;
+}
+/* ===== NELE – ODWRÓCENIE NA PRZÓD ===== */
+
+.nele-avatar-frame {
+    transform: scaleX(-1);
+    transform-origin: center center;
+}
