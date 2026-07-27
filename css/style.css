@@ -2,308 +2,303 @@
 <html lang="de">
 <head>
 <meta charset="UTF-8">
+<title>A1 – Lekcje</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mapa Niemiec</title>
+
+<link rel="stylesheet" href="../../css/style.css">
 
 <style>
-/* ===== RESET ===== */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+
+body{
+    font-family:system-ui,sans-serif;
+    background:#0f172a;
+    color:#f9fafb;
+    margin:0;
+    padding:40px 20px;
+    text-align:center;
 }
 
-body {
-    font-family: Arial, sans-serif;
-    background: #111;
-    overflow: hidden;
+/* ===== GÓRNE PRZYCISKI ===== */
+
+.top-bar{
+    width:900px;
+    max-width:100%;
+    margin:0 auto 35px;
+
+    display:flex;
+    justify-content:center;
+    gap:20px;
+    flex-wrap:wrap;
 }
 
-/* ===== GŁÓWNY UKŁAD ===== */
-.germany-page {
-    position: relative;
-    width: 100vw;
-    height: 100vh;
-    overflow: hidden;
-    background: #111;
+.top-btn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+
+    padding:14px 30px;
+
+    border-radius:999px;
+    text-decoration:none;
+
+    font-size:22px;
+    font-weight:800;
+
+    transition:.25s;
 }
 
-/* ===== MAPA ===== */
-.germany-map {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    display: block;
+/* A-Z */
+
+.aza-btn{
+    background:#1d3557;
+    color:#ffce00;
+    border:3px solid #ffce00;
 }
 
-/* ===== LEWY PANEL Z PRZYCISKAMI ===== */
-.left-menu {
-    position: absolute;
-    left: 20px;
-    top: 50%;
-    transform: translateY(-50%);
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    z-index: 50;
+.aza-btn:hover{
+    background:#274c77;
+    color:white;
+    transform:translateY(-3px) scale(1.05);
 }
 
-.left-menu a {
-    display: inline-block;
-    color: white;
-    text-decoration: none;
-    font-size: 18px;
-    font-weight: bold;
-    padding: 10px 18px;
-    border-radius: 15px;
-    background: rgba(0,0,0,0.35);
-    backdrop-filter: blur(8px);
-    border: 1px solid rgba(255,255,255,0.2);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.4);
-    transition: 0.3s;
-    text-shadow: 1px 1px 3px black;
-    min-width: 180px;
-    text-align: center;
-    position: relative;
+/* Sprich nach */
+
+.sprich-btn{
+    background:#2563eb;
+    color:white;
+    border:3px solid #60a5fa;
 }
 
-.left-menu a:hover {
-    transform: scale(1.08);
-    background: rgba(255,206,0,0.25);
-    border: 1px solid rgba(255,206,0,0.6);
-    box-shadow: 0 0 15px rgba(255,206,0,0.5);
-    color: white;
+.sprich-btn:hover{
+    background:#1d4ed8;
+    transform:translateY(-3px) scale(1.05);
 }
 
-.left-menu a:active {
-    transform: scale(0.97);
+/* Aktiv trainieren */
+
+.train-btn{
+    background:#16a34a;
+    color:white;
+    border:3px solid #4ade80;
 }
 
-.left-menu a::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 6px;
-    height: 100%;
-    border-radius: 15px 0 0 15px;
-    background: linear-gradient(to bottom, black 33%, red 33%, red 66%, gold 66%);
+.train-btn:hover{
+    background:#15803d;
+    transform:translateY(-3px) scale(1.05);
 }
 
-/* ===== ZNACZNIKI LANDÓW ===== */
-.land {
-    position: absolute;
-    z-index: 10;
+/* ===== MIEJSCE PO TYTULE ===== */
+/* Zachowuje identyczny odstęp po usunięciu napisu A1 */
 
-    color: white;
-    text-decoration: none;
-
-    font-size: 18px;
-    font-weight: bold;
-
-    padding: 10px 18px;
-    border-radius: 15px;
-
-    background: rgba(0,0,0,0.35);
-    backdrop-filter: blur(8px);
-    border: 1px solid rgba(255,255,255,0.2);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.4);
-
-    transition: 0.3s;
-    text-align: center;
-    min-width: 120px;
-
-    text-shadow: 1px 1px 3px black;
+.title-space{
+    height:87px;
 }
 
-.land:hover {
-    transform: scale(1.08);
-    background: rgba(255,206,0,0.25);
-    border: 1px solid rgba(255,206,0,0.6);
-    box-shadow: 0 0 15px rgba(255,206,0,0.5);
-    color: white;
+/* ===== PRZYCISKI LEKCJI ===== */
+
+.lesson-list{
+
+    width:900px;
+    max-width:100%;
+    margin:0 auto 45px;
+
+    display:grid;
+    grid-template-columns:repeat(10,1fr);
+
+    gap:12px;
 }
 
-.land:active {
-    transform: scale(0.97);
+.lesson-link{
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    width:64px;
+    height:48px;
+
+    margin:auto;
+
+    background:#1f2937;
+    color:#34d399;
+
+    border:2px solid #34d399;
+    border-radius:14px;
+
+    text-decoration:none;
+
+    font-size:19px;
+    font-weight:bold;
+
+    transition:.2s;
 }
 
-.land::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 6px;
-    height: 100%;
-    border-radius: 15px 0 0 15px;
-    background: linear-gradient(to bottom, black 33%, red 33%, red 66%, gold 66%);
+.lesson-link:hover{
+
+    background:#022c22;
+    transform:scale(1.08);
 }
 
-/* ===== POZYCJE LANDÓW ===== */
-.schleswig { top: 10%; left: 49%; }
-.hamburg { top: 52%; left: 33%; }
-.a2 { top: 59%; left: 49%; }
-.nrw { top: 36%; left: 43%; }
-.hessen { top: 22%; left: 25%; }
-.baden { top: 90%; left: 90%; }
-.a1 { top: 78%; left: 55%; }
-.brandenburg { top: 54%; left: 90%; }
-.sachsen { top: 68%; left: 90%; }
-.thueringen { top: 60%; left: 90%; }
+/* ===== SPIS TREŚCI ===== */
 
-/* ===== PRZYCISK / AVATAR NELE ===== */
-.nele-avatar-box {
-    position: fixed;
-    left: 20px;
-    bottom: 20px;
-    width: 300px;
-    height: 420px;
-    z-index: 100;
-    border-radius: 20px;
-    overflow: hidden;
-    background: transparent;
+.info{
+
+    width:900px;
+    max-width:100%;
+
+    margin:0 auto;
+
+    padding:28px;
+
+    background:#111827;
+
+    border-radius:18px;
+
+    line-height:1.9;
+    font-size:18px;
+
+    text-align:left;
 }
 
-.nele-avatar-frame {
-    width: 100%;
-    height: 100%;
-    border: none;
-    display: block;
-    background: transparent;
-    transform: scaleX(-1);
-    transform-origin: center center;
+.info h2{
+
+    margin-top:0;
+    margin-bottom:18px;
+
+    color:#60a5fa;
 }
 
-.nele-button {
-    position: fixed;
-    left: 45px;
-    bottom: 455px;
-    z-index: 1000;
-    padding: 15px 25px;
-    font-size: 20px;
-    font-weight: bold;
-    border: none;
-    border-radius: 15px;
-    background: #2d7df6;
-    color: white;
-    cursor: pointer;
-    box-shadow: 0 5px 15px rgba(0,0,0,.3);
+/* ===== DOLNE LINKI ===== */
+
+.back-links{
+
+    margin-top:45px;
+    margin-bottom:10px;
+
+    font-size:18px;
 }
 
-.nele-button:hover {
-    background: #155ec9;
+.back-links a{
+
+    color:#93c5fd;
+    text-decoration:none;
+    margin:0 10px;
 }
 
-/* ===== RESPONSYWNOŚĆ ===== */
-@media (max-width: 900px) {
-    .left-menu {
-        left: 10px;
-        gap: 12px;
+.back-links a:hover{
+
+    text-decoration:underline;
+}
+
+/* ===== TELEFON ===== */
+
+@media (max-width:950px){
+
+    .lesson-list{
+        grid-template-columns:repeat(5,1fr);
     }
 
-    .left-menu a {
-        min-width: 150px;
-        font-size: 16px;
-        padding: 9px 14px;
-    }
-
-    .land {
-        font-size: 15px;
-        min-width: 100px;
-        padding: 8px 12px;
-    }
-
-    .nele-avatar-box {
-        width: 220px;
-        height: 300px;
-    }
-
-    .nele-button {
-        left: 25px;
-        bottom: 330px;
-        font-size: 16px;
-        padding: 12px 18px;
-    }
 }
 
-@media (max-width: 600px) {
-    body {
-        overflow: auto;
+@media (max-width:600px){
+
+    body{
+        padding:25px 10px;
     }
 
-    .germany-page {
-        height: 100vh;
-        min-height: 100vh;
+    .lesson-list{
+        grid-template-columns:repeat(4,1fr);
     }
 
-    .germany-map {
-        width: 100%;
-        height: 100%;
-        object-fit: contain;
+    .lesson-link{
+        width:56px;
+        height:44px;
     }
 
-    .left-menu {
-        position: absolute;
-        left: 10px;
-        top: 10px;
-        transform: none;
-        padding: 0;
-        align-items: flex-start;
+    .top-btn{
+        width:100%;
+        max-width:320px;
     }
 
-    .left-menu a {
-        width: auto;
-        max-width: 220px;
-        min-width: 140px;
-        font-size: 14px;
-        padding: 8px 12px;
+    .info{
+        font-size:17px;
     }
 
-    .land {
-        font-size: 12px;
-        min-width: 80px;
-        padding: 7px 10px;
+    .title-space{
+        height:70px;
     }
 
-    .nele-avatar-box,
-    .nele-button {
-        display: none;
-    }
 }
+
 </style>
+
 </head>
 
 <body>
 
-<div class="germany-page">
+<div class="top-bar">
 
-    <img src="mapa-niemiec.png" alt="Mapa Niemiec" class="germany-map">
+    <a href="A-Z-A1.html" class="top-btn aza-btn">
+        A–Z
+    </a>
 
-    <div class="left-menu">
-        <a href="uebungen.html">Übungen</a>
-        <a href="wort.html">Wort</a>
-        <a href="tagesaufgabe.html">Tagesaufgabe</a>
-        <a href="wiederholung.html">Wiederholung</a>
-        <a href="meindeutsch.html">Mein Deutsch</a>
-        <a href="grammatik.html">Grammatik</a>
-    </div>
+    <a href="../sprich nach/index.html" class="top-btn sprich-btn">
+        🎤 Sprich nach
+    </a>
 
-    <a href="schleswig.html" class="land schleswig">Schleswig</a>
-    <a href="hamburg.html" class="land hamburg">Hamburg</a>
-    <a href="a2.html" class="land a2">A2</a>
-    <a href="nrw.html" class="land nrw">NRW</a>
-    <a href="hessen.html" class="land hessen">Hessen</a>
-    <a href="baden.html" class="land baden">Baden</a>
-    <a href="a1.html" class="land a1">A1</a>
-    <a href="brandenburg.html" class="land brandenburg">Brandenburg</a>
-    <a href="sachsen.html" class="land sachsen">Sachsen</a>
-    <a href="thueringen.html" class="land thueringen">Thüringen</a>
+    <a href="../aktiv-trainieren/index.html" class="top-btn train-btn">
+        🏋️ Aktiv trainieren
+    </a>
 
-    <button class="nele-button">Nele</button>
+</div>
 
-    <div class="nele-avatar-box">
-        <iframe src="nele.html" class="nele-avatar-frame"></iframe>
-    </div>
+<div class="title-space"></div>
+
+<div class="lesson-list">
+
+<a href="1.html" class="lesson-link">1</a>
+<a href="2.html" class="lesson-link">2</a>
+<a href="3.html" class="lesson-link">3</a>
+<a href="4.html" class="lesson-link">4</a>
+<a href="5.html" class="lesson-link">5</a>
+<a href="6.html" class="lesson-link">6</a>
+<a href="7.html" class="lesson-link">7</a>
+<a href="8.html" class="lesson-link">8</a>
+<a href="9.html" class="lesson-link">9</a>
+<a href="10.html" class="lesson-link">10</a>
+
+<a href="11.html" class="lesson-link">11</a>
+<a href="12.html" class="lesson-link">12</a>
+<a href="13.html" class="lesson-link">13</a>
+<a href="14.html" class="lesson-link">14</a>
+<a href="15.html" class="lesson-link">15</a>
+<a href="16.html" class="lesson-link">16</a>
+<a href="17.html" class="lesson-link">17</a>
+<a href="18.html" class="lesson-link">18</a>
+<a href="19.html" class="lesson-link">19</a>
+<a href="20.html" class="lesson-link">20</a>
+
+</div>
+
+<div class="info">
+
+<h2>Erste Schritte</h2>
+
+1 — Begrüßung, ich heiße ..., das Alphabet<br>
+2 — Woher kommen Sie?<br>
+3 — Wie alt sind Sie?<br>
+4 — Was machen Sie beruflich?<br>
+5 — Du oder Sie?
+
+</div>
+
+<div class="back-links">
+
+<a href="../index.html">Zurück zu „Niveau“</a>
+
+•
+
+<a href="../../mapa-niemiec.html">Zurück zur Karte</a>
 
 </div>
 
