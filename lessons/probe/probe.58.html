@@ -1,1 +1,1105 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Powtórki A1 · Lekcja 1</title>
 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&family=Nunito+Sans:opsz,wght@6..12,400,600,700,800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#173047;
+  --bg2:#203a57;
+  --card:#ffffff;
+  --text:#101820;
+  --muted:#41556b;
+  --line:#d9e4f0;
+  --accent:#f4c95d;
+  --accent-2:#6ac6ff;
+  --accent-3:#84df42;
+  --accent-4:#a88af5;
+  --bad:#e5654f;
+  --shadow:0 14px 35px rgba(10,18,32,.14);
+  --shadow-2:0 10px 22px rgba(10,18,32,.10);
+}
+
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  color:var(--text);
+  font:400 1rem/1.6 "Nunito Sans",sans-serif;
+  background:
+    radial-gradient(circle at top left,rgba(255,255,255,.08),transparent 30%),
+    radial-gradient(circle at bottom right,rgba(255,255,255,.06),transparent 34%),
+    linear-gradient(180deg,var(--bg),var(--bg2));
+  min-height:100vh;
+}
+
+button{font:inherit;cursor:pointer}
+input{font:inherit}
+
+.shell{
+  max-width:920px;
+  margin:0 auto;
+  padding:26px 16px 60px;
+}
+
+.top{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  margin-bottom:20px;
+}
+
+.top h1{
+  margin:0;
+  color:#fff;
+  font:700 1.7rem "Kalam",cursive;
+  letter-spacing:.01em;
+}
+
+.top .sub{
+  margin:2px 0 0;
+  color:#bcd3ea;
+  font-size:.92rem;
+}
+
+.icon-btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:44px;
+  height:44px;
+  color:#fff;
+  background:rgba(255,255,255,.1);
+  border:1px solid rgba(255,255,255,.18);
+  border-radius:14px;
+  font-size:1.2rem;
+  transition:transform .15s,background .15s;
+}
+.icon-btn:hover{background:rgba(255,255,255,.18);transform:translateY(-2px)}
+
+.panel{
+  background:var(--card);
+  border:1px solid #e3ebf4;
+  border-radius:24px;
+  box-shadow:var(--shadow);
+  padding:22px;
+  margin-bottom:18px;
+}
+
+.stat-row{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+  margin-bottom:20px;
+}
+
+.stat{
+  padding:14px 12px;
+  text-align:center;
+  background:linear-gradient(180deg,#fbfdff,#f4f8fc);
+  border:1px solid var(--line);
+  border-radius:16px;
+}
+
+.stat .num{
+  font:800 1.6rem "JetBrains Mono",monospace;
+  color:var(--text);
+}
+
+.stat .label{
+  margin-top:2px;
+  color:var(--muted);
+  font-size:.8rem;
+  text-transform:uppercase;
+  letter-spacing:.06em;
+}
+
+/* Leitner boxes — signature element: literal drawers a card moves through */
+.boxes-title{
+  margin:0 0 10px;
+  font:700 1.05rem "Kalam",cursive;
+  color:var(--text);
+}
+
+.boxes{
+  display:grid;
+  grid-template-columns:repeat(6,1fr);
+  gap:8px;
+  margin-bottom:6px;
+}
+
+.box{
+  position:relative;
+  padding:14px 6px 10px;
+  text-align:center;
+  background:linear-gradient(180deg,#f3e6c8,#e8d4a3);
+  border:1px solid #cbaf72;
+  border-radius:8px 8px 4px 4px;
+  box-shadow:inset 0 -4px 0 rgba(120,90,30,.18),0 6px 12px rgba(0,0,0,.08);
+}
+.box::before{
+  content:"";
+  position:absolute;
+  top:6px;left:50%;
+  width:22px;height:4px;
+  margin-left:-11px;
+  background:#8c6700;
+  border-radius:3px;
+  opacity:.5;
+}
+.box .n{
+  font:800 1.15rem "JetBrains Mono",monospace;
+  color:#5c4300;
+}
+.box .d{
+  margin-top:2px;
+  font-size:.68rem;
+  color:#6b5222;
+}
+.box.mastered{
+  background:linear-gradient(180deg,#e4f5d5,#cdeab0);
+  border-color:#9bcf6e;
+}
+.box.mastered .n,.box.mastered .d{color:#3c6b1c}
+
+.due-line{
+  margin:12px 0 0;
+  color:var(--muted);
+  font-size:.9rem;
+  text-align:center;
+}
+
+.cat-filters{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin:16px 0 4px;
+}
+
+.cat-chip{
+  padding:8px 13px;
+  border-radius:999px;
+  border:1px solid var(--line);
+  background:#f5f8fc;
+  color:var(--muted);
+  font-size:.88rem;
+  font-weight:700;
+}
+.cat-chip.active{
+  background:#eef7ff;
+  border-color:#81bfff;
+  color:#0d59a3;
+}
+
+.start-btn{
+  display:block;
+  width:100%;
+  margin-top:18px;
+  padding:16px;
+  color:#fff;
+  background:linear-gradient(180deg,#f0bd3a,#b98200);
+  border:2px solid #ffe59a;
+  border-radius:18px;
+  font:800 1.1rem "Nunito Sans",sans-serif;
+  box-shadow:0 10px 20px rgba(0,0,0,.18);
+  transition:transform .18s,filter .18s;
+}
+.start-btn:hover:not(:disabled){transform:translateY(-2px);filter:brightness(1.05)}
+.start-btn:disabled{opacity:.55;cursor:default}
+
+.empty-note{
+  margin-top:14px;
+  padding:14px;
+  text-align:center;
+  background:#f3fbf0;
+  border:1px solid #cdeab0;
+  border-radius:14px;
+  color:#3c6b1c;
+  font-weight:700;
+}
+
+/* Ustawienia */
+.settings-grid{
+  display:grid;
+  gap:16px;
+}
+.field label{
+  display:flex;
+  justify-content:space-between;
+  margin-bottom:6px;
+  font-weight:700;
+  font-size:.92rem;
+}
+.field input[type="range"]{width:100%}
+.field .val{font:700 .95rem "JetBrains Mono",monospace;color:#8c6700}
+
+.checks{display:flex;flex-direction:column;gap:8px}
+.checks label{display:flex;align-items:center;gap:10px;font-weight:600;font-size:.95rem}
+
+.reset-btn{
+  margin-top:6px;
+  padding:11px 16px;
+  color:#a3271b;
+  background:#fdf0ee;
+  border:1px solid #f3c6bd;
+  border-radius:14px;
+  font-weight:800;
+}
+.reset-btn:hover{background:#fbe4e0}
+
+.close-settings{
+  margin-top:4px;
+  padding:11px 16px;
+  background:#eef4fb;
+  border:1px solid var(--line);
+  border-radius:14px;
+  font-weight:800;
+  color:var(--text);
+}
+
+/* Sesja */
+.hidden{display:none !important}
+
+.session-top{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  margin-bottom:12px;
+}
+
+.progress-track{
+  flex:1;
+  height:10px;
+  background:#eef4fb;
+  border:1px solid var(--line);
+  border-radius:999px;
+  overflow:hidden;
+}
+.progress-fill{
+  height:100%;
+  background:linear-gradient(90deg,var(--accent-2),var(--accent-3));
+  transition:width .3s;
+}
+
+.counter{
+  font:700 .85rem "JetBrains Mono",monospace;
+  color:var(--muted);
+  white-space:nowrap;
+}
+
+.exit-btn{
+  padding:8px 12px;
+  background:#fdf0ee;
+  border:1px solid #f3c6bd;
+  color:#a3271b;
+  border-radius:12px;
+  font-weight:700;
+  font-size:.85rem;
+}
+
+.card-face{
+  padding:30px 22px;
+  text-align:center;
+  background:linear-gradient(180deg,#fff8eb,#fff);
+  border:1px solid #e7edf5;
+  border-radius:22px;
+  box-shadow:var(--shadow-2);
+}
+
+.cat-badge{
+  display:inline-block;
+  margin-bottom:14px;
+  padding:5px 12px;
+  border-radius:999px;
+  font:700 .74rem "JetBrains Mono",monospace;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+}
+.cat-badge.greet{background:#eaf6ff;color:#0d6ba3}
+.cat-badge.intro{background:#f4eeff;color:#5b34a3}
+.cat-badge.alpha{background:#effaea;color:#2f7a17}
+
+.front-text{
+  margin:0 0 22px;
+  font:700 clamp(1.3rem,3vw,1.9rem)/1.3 "Kalam",cursive;
+  color:var(--text);
+}
+
+.answer-row{
+  display:flex;
+  gap:10px;
+  max-width:420px;
+  margin:0 auto;
+}
+
+.answer-input{
+  flex:1;
+  padding:13px 16px;
+  border:2px solid var(--line);
+  border-radius:14px;
+  font-size:1.05rem;
+}
+.answer-input:focus{outline:none;border-color:var(--accent-2)}
+.answer-input.wrong{border-color:var(--bad)}
+.answer-input.right{border-color:var(--accent-3)}
+
+.submit-btn{
+  padding:13px 18px;
+  color:#fff;
+  background:linear-gradient(180deg,#6ac6ff,#3da8f0);
+  border:none;
+  border-radius:14px;
+  font-weight:800;
+}
+
+.choice-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  max-width:460px;
+  margin:0 auto;
+}
+.choice-btn{
+  padding:13px 10px;
+  background:#f5f8fc;
+  border:2px solid var(--line);
+  border-radius:14px;
+  font-weight:700;
+}
+.choice-btn:hover{border-color:#81bfff}
+.choice-btn.correct{background:#eaf9e0;border-color:var(--accent-3);color:#2f6b12}
+.choice-btn.incorrect{background:#fdecec;border-color:var(--bad);color:#a3271b}
+.choice-btn:disabled{opacity:.7}
+
+.feedback{
+  margin-top:16px;
+  min-height:26px;
+  font-weight:800;
+}
+.feedback.ok{color:#2f6b12}
+.feedback.bad{color:#a3271b}
+
+.reveal{
+  margin-top:6px;
+  color:var(--muted);
+  font-size:.92rem;
+}
+
+.hint-btn,.speak-btn,.confirm-btn{
+  margin-top:14px;
+  margin-right:8px;
+  padding:9px 14px;
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:12px;
+  font-weight:700;
+  font-size:.88rem;
+}
+.hint-btn:hover,.speak-btn:hover,.confirm-btn:hover{background:#f3f7fc;border-color:#f2d06f}
+
+.next-btn{
+  display:block;
+  margin:18px auto 0;
+  padding:12px 26px;
+  color:#fff;
+  background:linear-gradient(180deg,#94e44f,#5fbd28);
+  border:none;
+  border-radius:14px;
+  font-weight:800;
+}
+
+/* Ekran końcowy */
+.end-emoji{font-size:3rem;text-align:center;margin-bottom:6px}
+.end-title{
+  text-align:center;
+  margin:0 0 18px;
+  font:700 1.5rem "Kalam",cursive;
+}
+.end-stats{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:12px;
+  margin-bottom:18px;
+}
+.back-btn{
+  display:block;
+  width:100%;
+  padding:14px;
+  color:var(--text);
+  background:#eef4fb;
+  border:1px solid var(--line);
+  border-radius:16px;
+  font-weight:800;
+}
+
+.loading{
+  color:#bcd3ea;
+  text-align:center;
+  padding:40px 0;
+}
+
+@media(max-width:640px){
+  .stat-row{grid-template-columns:repeat(3,1fr);gap:8px}
+  .boxes{grid-template-columns:repeat(3,1fr)}
+  .end-stats{grid-template-columns:1fr 1fr}
+  .answer-row{flex-direction:column}
+}
+
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{transition-duration:.01ms!important;animation-duration:.01ms!important}
+}
+</style>
+</head>
+<body>
+
+<div class="shell">
+
+  <div class="top">
+    <div>
+      <h1>Powtórki · Lekcja 1</h1>
+      <p class="sub">Powitania, przedstawianie się, alfabet</p>
+    </div>
+    <button class="icon-btn" id="settings-toggle" aria-label="Ustawienia" title="Ustawienia">⚙️</button>
+  </div>
+
+  <div id="loading" class="loading">Wczytywanie postępów…</div>
+
+  <div id="app" class="hidden">
+
+    <!-- DASHBOARD -->
+    <div id="dashboard">
+
+      <div class="panel">
+
+        <div class="stat-row">
+          <div class="stat"><div class="num" id="stat-streak">0</div><div class="label">dni z rzędu</div></div>
+          <div class="stat"><div class="num" id="stat-due">0</div><div class="label">do powtórki dziś</div></div>
+          <div class="stat"><div class="num" id="stat-acc">–</div><div class="label">skuteczność</div></div>
+        </div>
+
+        <p class="boxes-title">Twoje pudełko Leitnera</p>
+        <div class="boxes" id="boxes"></div>
+        <p class="due-line" id="due-line"></p>
+
+        <div class="cat-filters" id="cat-filters"></div>
+
+        <button class="start-btn" id="start-btn">Rozpocznij sesję</button>
+        <div id="empty-note" class="empty-note hidden">Brak kart na dziś — świetna robota! 🎉 Wróć jutro albo dodaj nowe karty w ustawieniach.</div>
+
+      </div>
+
+    </div>
+
+    <!-- USTAWIENIA -->
+    <div id="settings" class="panel hidden">
+
+      <div class="settings-grid">
+
+        <div class="field">
+          <label>Nowe karty dziennie <span class="val" id="v-new">8</span></label>
+          <input type="range" id="new-per-day" min="1" max="20" value="8">
+        </div>
+
+        <div class="field">
+          <label>Karty w jednej sesji <span class="val" id="v-size">15</span></label>
+          <input type="range" id="session-size" min="5" max="40" value="15">
+        </div>
+
+        <div>
+          <label style="font-weight:700;font-size:.92rem;display:block;margin-bottom:8px">Kategorie do powtarzania</label>
+          <div class="checks" id="cat-checks"></div>
+        </div>
+
+        <div>
+          <label style="display:flex;align-items:center;gap:10px;font-weight:600">
+            <input type="checkbox" id="tts-toggle"> Wymowa głosowa (jeśli dostępna w przeglądarce)
+          </label>
+        </div>
+
+        <button class="close-settings" id="close-settings">Zapisz i wróć</button>
+        <button class="reset-btn" id="reset-btn">Wyzeruj cały postęp</button>
+
+      </div>
+
+    </div>
+
+    <!-- SESJA -->
+    <div id="session" class="panel hidden">
+
+      <div class="session-top">
+        <div class="progress-track"><div class="progress-fill" id="progress-fill" style="width:0%"></div></div>
+        <span class="counter" id="counter">0 / 0</span>
+        <button class="exit-btn" id="exit-btn">Zakończ</button>
+      </div>
+
+      <div class="card-face">
+
+        <span class="cat-badge" id="cat-badge"></span>
+        <p class="front-text" id="front-text"></p>
+
+        <div id="type-area">
+          <div class="answer-row">
+            <input type="text" id="answer-input" class="answer-input" placeholder="Wpisz odpowiedź po niemiecku…" autocomplete="off" autocapitalize="off" spellcheck="false">
+            <button class="submit-btn" id="submit-btn">Sprawdź</button>
+          </div>
+        </div>
+
+        <div id="choice-area" class="choice-grid hidden"></div>
+
+        <div id="feedback" class="feedback"></div>
+        <p id="reveal" class="reveal hidden"></p>
+
+        <div id="post-actions">
+          <button class="hint-btn hidden" id="hint-btn">💡 Pokaż odpowiedź</button>
+          <button class="speak-btn hidden" id="speak-btn">🔊 Wymowa</button>
+          <button class="confirm-btn hidden" id="confirm-btn">Przepisz i potwierdź</button>
+        </div>
+
+        <button class="next-btn hidden" id="next-btn">Dalej →</button>
+
+      </div>
+
+    </div>
+
+    <!-- KONIEC -->
+    <div id="end" class="panel hidden">
+      <div class="end-emoji">🏆</div>
+      <h2 class="end-title" id="end-title">Sesja zakończona!</h2>
+      <div class="end-stats">
+        <div class="stat"><div class="num" id="end-correct">0</div><div class="label">poprawnie za 1. razem</div></div>
+        <div class="stat"><div class="num" id="end-acc">0%</div><div class="label">skuteczność</div></div>
+      </div>
+      <button class="back-btn" id="back-btn">Wróć do panelu</button>
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+/* ---------- DANE LEKCJI 1 ---------- */
+
+const ALPHABET = [
+  ["A","a"],["B","be"],["C","ce"],["D","de"],["E","e"],["F","ef"],["G","ge"],["H","ha"],
+  ["I","i"],["J","jot"],["K","ka"],["L","el"],["M","em"],["N","en"],["O","o"],["P","pe"],
+  ["Q","ku"],["R","er"],["S","es"],["T","te"],["U","u"],["V","vau"],["W","we"],["X","ix"],
+  ["Y","Ypsilon"],["Z","zet"],["Ä","ä"],["Ö","ö"],["Ü","ü"],["ß","Eszett"]
+];
+
+const CARDS = [
+  {id:"g1",cat:"greet",type:"type",front:"Powitanie rano (ok. 5–10/11)",back:"Guten Morgen",accept:[]},
+  {id:"g2",cat:"greet",type:"type",front:"Powitanie w ciągu dnia (ok. 10/11–17/18)",back:"Guten Tag",accept:[]},
+  {id:"g3",cat:"greet",type:"type",front:"Powitanie wieczorem (od ok. 17/18)",back:"Guten Abend",accept:[]},
+  {id:"g4",cat:"greet",type:"type",front:"Nieformalne powitanie o każdej porze dnia",back:"Hallo",accept:[]},
+  {id:"g5",cat:"greet",type:"type",front:"Nieformalne pożegnanie",back:"Tschüss",accept:["tschuss"]},
+  {id:"g6",cat:"greet",type:"type",front:"Formalne pożegnanie",back:"Auf Wiedersehen",accept:[]},
+  {id:"i1",cat:"intro",type:"type",front:"Zapytaj kogoś nieformalnie, jak ma na imię",back:"Wie heißt du?",accept:["wie heisst du","wie heißt du","wie heisst du?"]},
+  {id:"i2",cat:"intro",type:"type",front:"Zapytaj kogoś formalnie (Pan/Pani), jak się nazywa",back:"Wie heißen Sie?",accept:["wie heissen sie"]},
+  {id:"i3",cat:"intro",type:"type",front:"Podaj jedną z formuł, którą przedstawisz swoje imię",back:"Ich heiße",accept:["ich heisse","mein name ist","ich bin"]},
+  {id:"i4",cat:"intro",type:"type",front:"Jak grzecznie przywitasz się, zanim zapytasz formalnie o imię?",back:"Guten Tag",accept:[]},
+  {id:"i5",cat:"intro",type:"type",front:"Odpowiedz nieformalnym pytaniem zwrotnym „A ty?”",back:"Und du",accept:["und du?"]},
+  {id:"i6",cat:"intro",type:"type",front:"Odpowiedz formalnym pytaniem zwrotnym „A Pan/Pani?”",back:"Und Sie",accept:["und sie?"]}
+];
+
+const ALL_PRON = ALPHABET.map(a=>a[1]);
+ALPHABET.forEach(([letter,pron])=>{
+  CARDS.push({id:"alf-"+letter,cat:"alpha",type:"choice",front:letter,back:pron,accept:[]});
+});
+
+const CATS = {
+  greet:{label:"Powitania",color:"greet"},
+  intro:{label:"Przedstawianie się",color:"intro"},
+  alpha:{label:"Alfabet",color:"alpha"}
+};
+
+const INTERVALS = [0,1,2,4,7,15,30]; // dni, indeks = poziom pudełka (0 = nowa)
+const MAX_BOX = INTERVALS.length - 1;
+const STORAGE_KEY = "srs-lekcja1-state";
+
+/* ---------- STAN ---------- */
+
+let state = null;
+let session = null;
+
+function todayStr(){
+  return new Date().toISOString().slice(0,10);
+}
+
+function defaultState(){
+  const cats = {};
+  Object.keys(CATS).forEach(c=>cats[c]=true);
+  return {
+    cards:{},
+    settings:{newPerDay:8, sessionSize:15, cats, tts:true},
+    stats:{streak:0,lastStudyDay:null,totalReviews:0,totalCorrect:0,newToday:0,newTodayDate:null}
+  };
+}
+
+async function loadState(){
+  try{
+    const res = await window.storage.get(STORAGE_KEY, false);
+    if(res && res.value){
+      const parsed = JSON.parse(res.value);
+      const d = defaultState();
+      return {
+        cards: parsed.cards || d.cards,
+        settings: Object.assign(d.settings, parsed.settings || {}),
+        stats: Object.assign(d.stats, parsed.stats || {})
+      };
+    }
+  }catch(e){
+    console.warn("Brak zapisanego stanu lub błąd odczytu:", e);
+  }
+  return defaultState();
+}
+
+async function saveState(){
+  try{
+    await window.storage.set(STORAGE_KEY, JSON.stringify(state), false);
+  }catch(e){
+    console.error("Nie udało się zapisać postępu:", e);
+  }
+}
+
+function getCardState(id){
+  if(!state.cards[id]){
+    state.cards[id] = {box:0, next:null, reps:0, lapses:0};
+  }
+  return state.cards[id];
+}
+
+function addDays(dateStr, days){
+  const d = new Date(dateStr + "T00:00:00");
+  d.setDate(d.getDate() + days);
+  return d.toISOString().slice(0,10);
+}
+
+/* ---------- LOGIKA SESJI ---------- */
+
+function activeCategories(){
+  return Object.keys(state.settings.cats).filter(c=>state.settings.cats[c]);
+}
+
+function buildQueue(){
+  const today = todayStr();
+  if(state.stats.newTodayDate !== today){
+    state.stats.newTodayDate = today;
+    state.stats.newToday = 0;
+  }
+  const cats = activeCategories();
+  const pool = CARDS.filter(c=>cats.includes(c.cat));
+
+  const due = [];
+  const fresh = [];
+
+  pool.forEach(c=>{
+    const cs = getCardState(c.id);
+    if(cs.box === 0 || cs.next === null){
+      fresh.push(c);
+    }else if(cs.next <= today){
+      due.push(c);
+    }
+  });
+
+  const newBudget = Math.max(0, state.settings.newPerDay - state.stats.newToday);
+  const chosenFresh = fresh.slice(0, newBudget);
+
+  let queue = due.concat(chosenFresh);
+  queue = queue.slice(0, state.settings.sessionSize);
+  return queue;
+}
+
+function normalize(s){
+  return s.toLowerCase().trim()
+    .replace(/[.!?]/g,"")
+    .replace(/ß/g,"ss")
+    .replace(/ä/g,"ae").replace(/ö/g,"oe").replace(/ü/g,"ue");
+}
+
+function isCorrect(card, input){
+  const n = normalize(input);
+  if(n === normalize(card.back)) return true;
+  return card.accept.some(a=>normalize(a) === n);
+}
+
+function recordResult(card, correct){
+  const cs = getCardState(card.id);
+  const today = todayStr();
+  state.stats.totalReviews++;
+
+  if(correct){
+    const wasFresh = cs.box === 0;
+    cs.box = Math.min(MAX_BOX, cs.box + 1);
+    cs.next = addDays(today, INTERVALS[cs.box]);
+    cs.reps++;
+    state.stats.totalCorrect++;
+    if(wasFresh) state.stats.newToday++;
+  }else{
+    cs.box = cs.box > 1 ? 1 : cs.box;
+    cs.lapses++;
+  }
+  saveState();
+}
+
+function updateStreakOnFinish(){
+  const today = todayStr();
+  if(state.stats.lastStudyDay === today) return;
+  if(state.stats.lastStudyDay === addDays(today, -1)){
+    state.stats.streak++;
+  }else{
+    state.stats.streak = 1;
+  }
+  state.stats.lastStudyDay = today;
+  saveState();
+}
+
+/* ---------- MOWA ---------- */
+
+let germanVoice = null;
+function loadGermanVoice(){
+  if(!("speechSynthesis" in window)) return;
+  const voices = speechSynthesis.getVoices();
+  germanVoice =
+    voices.find(v=>v.lang && v.lang.toLowerCase()==="de-de" && v.name.toLowerCase().includes("google")) ||
+    voices.find(v=>v.lang && v.lang.toLowerCase()==="de-de") ||
+    voices.find(v=>v.lang && v.lang.toLowerCase().startsWith("de")) ||
+    null;
+}
+loadGermanVoice();
+if("speechSynthesis" in window){
+  speechSynthesis.addEventListener("voiceschanged", loadGermanVoice);
+}
+function speakGerman(text){
+  if(!state.settings.tts || !text || !("speechSynthesis" in window)) return;
+  speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(text);
+  u.lang = "de-DE";
+  u.rate = 0.9;
+  if(germanVoice) u.voice = germanVoice;
+  speechSynthesis.speak(u);
+}
+
+/* ---------- RENDER: DASHBOARD ---------- */
+
+const el = id => document.getElementById(id);
+
+function renderDashboard(){
+  el("stat-streak").textContent = state.stats.streak;
+
+  const today = todayStr();
+  const cats = activeCategories();
+  const pool = CARDS.filter(c=>cats.includes(c.cat));
+  let dueCount = 0;
+  const boxCounts = [0,0,0,0,0,0,0];
+  pool.forEach(c=>{
+    const cs = getCardState(c.id);
+    boxCounts[cs.box]++;
+    if(cs.box>0 && cs.next<=today) dueCount++;
+  });
+  const freshBudget = Math.max(0, state.settings.newPerDay - (state.stats.newTodayDate===today ? state.stats.newToday : 0));
+  const freshDue = Math.min(boxCounts[0], freshBudget);
+  el("stat-due").textContent = dueCount + freshDue;
+
+  const acc = state.stats.totalReviews > 0
+    ? Math.round(100 * state.stats.totalCorrect / state.stats.totalReviews) + "%"
+    : "–";
+  el("stat-acc").textContent = acc;
+
+  const boxLabels = ["Nowe","1 dzień","2 dni","4 dni","7 dni","15 dni","Opanowane"];
+  el("boxes").innerHTML = boxCounts.map((n,i)=>
+    '<div class="box ' + (i===MAX_BOX?'mastered':'') + '">' +
+      '<div class="n">' + n + '</div>' +
+      '<div class="d">' + boxLabels[i] + '</div>' +
+    '</div>'
+  ).join("");
+
+  el("due-line").textContent = "Nowe karty dziś: " + (state.stats.newTodayDate===today?state.stats.newToday:0) + " / " + state.settings.newPerDay;
+
+  el("cat-filters").innerHTML = Object.keys(CATS).map(c=>
+    '<span class="cat-chip ' + (state.settings.cats[c]?'active':'') + '">' + CATS[c].label + '</span>'
+  ).join("");
+
+  const queue = buildQueue();
+  const startBtn = el("start-btn");
+  const emptyNote = el("empty-note");
+  if(queue.length === 0){
+    startBtn.classList.add("hidden");
+    emptyNote.classList.remove("hidden");
+  }else{
+    startBtn.classList.remove("hidden");
+    startBtn.disabled = false;
+    startBtn.textContent = "Rozpocznij sesję (" + queue.length + " kart)";
+    emptyNote.classList.add("hidden");
+  }
+}
+
+/* ---------- RENDER: USTAWIENIA ---------- */
+
+function renderSettings(){
+  el("new-per-day").value = state.settings.newPerDay;
+  el("v-new").textContent = state.settings.newPerDay;
+  el("session-size").value = state.settings.sessionSize;
+  el("v-size").textContent = state.settings.sessionSize;
+  el("tts-toggle").checked = state.settings.tts;
+
+  el("cat-checks").innerHTML = Object.keys(CATS).map(c=>
+    '<label><input type="checkbox" data-cat="' + c + '" ' + (state.settings.cats[c]?'checked':'') + '> ' + CATS[c].label + '</label>'
+  ).join("");
+
+  document.querySelectorAll("#cat-checks input").forEach(cb=>{
+    cb.addEventListener("change", ()=>{
+      state.settings.cats[cb.dataset.cat] = cb.checked;
+      saveState();
+    });
+  });
+}
+
+/* ---------- SESJA ---------- */
+
+function startSession(){
+  const queue = buildQueue();
+  if(queue.length === 0) return;
+  session = { queue: queue.slice(), total: queue.length, correctFirstTry: 0, attempts: 0, seenOnce: new Set() };
+  showScreen("session");
+  renderCard();
+}
+
+function showScreen(name){
+  ["dashboard","settings","session","end"].forEach(s=>{
+    el(s).classList.toggle("hidden", s !== name);
+  });
+}
+
+function renderCard(){
+  el("feedback").textContent = "";
+  el("feedback").className = "feedback";
+  el("reveal").classList.add("hidden");
+  el("hint-btn").classList.add("hidden");
+  el("confirm-btn").classList.add("hidden");
+  el("next-btn").classList.add("hidden");
+  el("answer-input").value = "";
+  el("answer-input").className = "answer-input";
+  el("answer-input").disabled = false;
+
+  if(session.queue.length === 0){
+    finishSession();
+    return;
+  }
+
+  const card = session.queue[0];
+
+  el("counter").textContent = session.seenOnce.size + " / " + session.total;
+  const pct = session.total ? Math.round(100 * session.seenOnce.size / session.total) : 0;
+  el("progress-fill").style.width = pct + "%";
+
+  el("cat-badge").textContent = CATS[card.cat].label;
+  el("cat-badge").className = "cat-badge " + card.cat;
+  el("front-text").textContent = card.type === "choice" ? ("Jak wymawia się litera „" + card.front + "”?") : card.front;
+
+  el("speak-btn").classList.remove("hidden");
+  el("speak-btn").onclick = () => speakGerman(card.back);
+
+  if(card.type === "type"){
+    el("type-area").classList.remove("hidden");
+    el("choice-area").classList.add("hidden");
+    el("hint-btn").classList.remove("hidden");
+    setTimeout(()=>el("answer-input").focus(), 30);
+  }else{
+    el("type-area").classList.add("hidden");
+    const area = el("choice-area");
+    area.classList.remove("hidden");
+    const distractors = shuffle(ALL_PRON.filter(p=>p!==card.back)).slice(0,3);
+    const options = shuffle([card.back].concat(distractors));
+    area.innerHTML = options.map(o=>'<button type="button" class="choice-btn" data-val="' + o + '">' + o + '</button>').join("");
+    area.querySelectorAll(".choice-btn").forEach(btn=>{
+      btn.addEventListener("click", ()=>handleChoiceAnswer(card, btn));
+    });
+  }
+}
+
+function shuffle(arr){
+  const a = arr.slice();
+  for(let i=a.length-1;i>0;i--){
+    const j = Math.floor(Math.random()*(i+1));
+    const tmp = a[i]; a[i] = a[j]; a[j] = tmp;
+  }
+  return a;
+}
+
+function requeueWrong(card){
+  session.queue.shift();
+  const insertAt = Math.min(session.queue.length, 3);
+  session.queue.splice(insertAt, 0, card);
+}
+
+function handleTypeAnswer(){
+  const card = session.queue[0];
+  const input = el("answer-input");
+  if(input.disabled) return;
+  const val = input.value.trim();
+  if(!val) return;
+  const correct = isCorrect(card, val);
+  session.attempts++;
+
+  if(correct){
+    input.className = "answer-input right";
+    input.disabled = true;
+    el("feedback").textContent = "✅ Świetnie! Poprawnie.";
+    el("feedback").className = "feedback ok";
+    if(!session.seenOnce.has(card.id)){ session.seenOnce.add(card.id); session.correctFirstTry++; }
+    recordResult(card, true);
+    session.queue.shift();
+    el("next-btn").classList.remove("hidden");
+    el("hint-btn").classList.add("hidden");
+    el("counter").textContent = session.seenOnce.size + " / " + session.total;
+    el("progress-fill").style.width = (Math.round(100*session.seenOnce.size/session.total)) + "%";
+  }else{
+    input.className = "answer-input wrong";
+    session.seenOnce.add(card.id);
+    el("feedback").textContent = "❌ Jeszcze nie tak. Spróbuj ponownie albo zobacz podpowiedź.";
+    el("feedback").className = "feedback bad";
+    recordResult(card, false);
+    input.value = "";
+    input.focus();
+  }
+}
+
+function handleChoiceAnswer(card, btn){
+  document.querySelectorAll(".choice-btn").forEach(b=>b.disabled = true);
+  const chosen = btn.dataset.val;
+  const correct = chosen === card.back;
+  session.attempts++;
+
+  document.querySelectorAll(".choice-btn").forEach(b=>{
+    if(b.dataset.val === card.back) b.classList.add("correct");
+    if(b === btn && !correct) b.classList.add("incorrect");
+  });
+
+  if(correct){
+    el("feedback").textContent = "✅ Świetnie! Poprawnie.";
+    el("feedback").className = "feedback ok";
+    if(!session.seenOnce.has(card.id)){ session.seenOnce.add(card.id); session.correctFirstTry++; }
+    recordResult(card, true);
+    session.queue.shift();
+  }else{
+    el("feedback").textContent = "❌ Nie tym razem — poprawna wymowa jest podświetlona na zielono.";
+    el("feedback").className = "feedback bad";
+    session.seenOnce.add(card.id);
+    recordResult(card, false);
+    requeueWrong(card);
+  }
+  el("counter").textContent = session.seenOnce.size + " / " + session.total;
+  el("progress-fill").style.width = (Math.round(100*session.seenOnce.size/session.total)) + "%";
+  el("next-btn").classList.remove("hidden");
+}
+
+function showHint(){
+  const card = session.queue[0];
+  el("reveal").textContent = "Odpowiedź: " + card.back;
+  el("reveal").classList.remove("hidden");
+  el("hint-btn").classList.add("hidden");
+  el("confirm-btn").classList.remove("hidden");
+}
+
+function confirmAfterHint(){
+  const card = session.queue[0];
+  el("answer-input").value = card.back;
+  el("confirm-btn").classList.add("hidden");
+}
+
+function finishSession(){
+  updateStreakOnFinish();
+  const acc = session.total ? Math.round(100 * session.correctFirstTry / session.total) : 0;
+  el("end-correct").textContent = session.correctFirstTry + " / " + session.total;
+  el("end-acc").textContent = acc + "%";
+  el("end-title").textContent = acc >= 80 ? "Świetna sesja! 🏆" : (acc >= 50 ? "Dobra robota! 💪" : "Ćwicz dalej, idzie ci coraz lepiej 🌱");
+  showScreen("end");
+}
+
+/* ---------- ZDARZENIA ---------- */
+
+function wireEvents(){
+  el("settings-toggle").addEventListener("click", ()=>{
+    renderSettings();
+    showScreen("settings");
+  });
+
+  el("close-settings").addEventListener("click", ()=>{
+    renderDashboard();
+    showScreen("dashboard");
+  });
+
+  el("new-per-day").addEventListener("input", e=>{
+    state.settings.newPerDay = parseInt(e.target.value,10);
+    el("v-new").textContent = state.settings.newPerDay;
+    saveState();
+  });
+
+  el("session-size").addEventListener("input", e=>{
+    state.settings.sessionSize = parseInt(e.target.value,10);
+    el("v-size").textContent = state.settings.sessionSize;
+    saveState();
+  });
+
+  el("tts-toggle").addEventListener("change", e=>{
+    state.settings.tts = e.target.checked;
+    saveState();
+  });
+
+  el("reset-btn").addEventListener("click", ()=>{
+    if(confirm("Na pewno wyzerować cały postęp powtórek? Tej operacji nie można cofnąć.")){
+      state.cards = {};
+      state.stats = defaultState().stats;
+      saveState();
+      renderSettings();
+      renderDashboard();
+    }
+  });
+
+  el("start-btn").addEventListener("click", startSession);
+
+  el("exit-btn").addEventListener("click", ()=>{
+    if(confirm("Zakończyć sesję teraz? Twój postęp do tej pory zostanie zapisany.")){
+      renderDashboard();
+      showScreen("dashboard");
+    }
+  });
+
+  el("submit-btn").addEventListener("click", handleTypeAnswer);
+  el("answer-input").addEventListener("keydown", e=>{
+    if(e.key === "Enter") handleTypeAnswer();
+  });
+
+  el("hint-btn").addEventListener("click", showHint);
+  el("confirm-btn").addEventListener("click", confirmAfterHint);
+
+  el("next-btn").addEventListener("click", renderCard);
+
+  el("back-btn").addEventListener("click", ()=>{
+    renderDashboard();
+    showScreen("dashboard");
+  });
+}
+
+/* ---------- START ---------- */
+
+(async function init(){
+  state = await loadState();
+  wireEvents();
+  renderDashboard();
+  el("loading").classList.add("hidden");
+  el("app").classList.remove("hidden");
+  showScreen("dashboard");
+})();
+</script>
+
+</body>
+</html>
