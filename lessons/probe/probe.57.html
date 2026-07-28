@@ -289,11 +289,19 @@ button{font:inherit}
 
 /* ---------- MIKROFON ---------- */
 
+.mic-column{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:6px;
+  flex-shrink:0;
+  margin-top:-24px;
+}
+
 .mic-btn-wrap{
   position:relative;
-  width:104px;
-  height:104px;
-  margin-top:-16px;
+  width:122px;
+  height:122px;
   display:grid;
   place-items:center;
   flex-shrink:0;
@@ -328,13 +336,13 @@ button{font:inherit}
 .mic-btn{
   position:relative;
   z-index:1;
-  width:84px;
-  height:84px;
+  width:100px;
+  height:100px;
   border-radius:50%;
   border:none;
   cursor:pointer;
   color:#fff;
-  font-size:1.9rem;
+  font-size:2.3rem;
   background:linear-gradient(180deg,var(--sky),var(--sky-deep));
   box-shadow:0 12px 22px rgba(61,168,240,.36);
   transition:transform .18s,filter .18s,background .2s;
@@ -367,10 +375,12 @@ button{font:inherit}
 }
 
 .mic-status{
-  min-height:1.3rem;
+  max-width:120px;
+  min-height:1.1rem;
   color:var(--muted);
-  font:700 .86rem "JetBrains Mono",monospace;
-  letter-spacing:.03em;
+  font:700 .68rem "JetBrains Mono",monospace;
+  letter-spacing:.02em;
+  line-height:1.25;
   text-align:center;
 }
 
@@ -408,13 +418,9 @@ button{font:inherit}
 .utility-row{
   display:flex;
   justify-content:center;
-  align-items:center;
-  gap:10px;
+  align-items:stretch;
+  gap:6px;
   flex-wrap:nowrap;
-  margin-top:12px;
-}
-
-.utility-row:first-of-type{
   margin-top:18px;
 }
 
@@ -424,11 +430,14 @@ button{font:inherit}
   background:none;
   border:1px dashed var(--line);
   border-radius:999px;
-  padding:12px 12px;
+  padding:11px 4px;
   cursor:pointer;
   color:var(--muted);
-  font:700 .82rem "JetBrains Mono",monospace;
+  font:700 .68rem "JetBrains Mono",monospace;
+  letter-spacing:-.02em;
   white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
   transition:border-color .16s,color .16s,transform .16s,background .16s;
 }
 
@@ -638,12 +647,12 @@ button{font:inherit}
 
 @media(max-width:620px){
   .utility-row{
-    gap:6px;
+    gap:4px;
   }
 
   .utility-btn{
-    padding:10px 6px;
-    font-size:.68rem;
+    padding:9px 3px;
+    font-size:.62rem;
     letter-spacing:-.03em;
   }
 }
@@ -656,23 +665,31 @@ button{font:inherit}
     padding:10px 12px;
   }
 
+  .mic-column{
+    margin-top:-20px;
+  }
+
   .mic-btn-wrap{
-    width:94px;
-    height:94px;
-    margin-top:-10px;
+    width:108px;
+    height:108px;
   }
 
   .mic-btn{
-    width:76px;
-    height:76px;
-    font-size:1.7rem;
+    width:88px;
+    height:88px;
+    font-size:2rem;
   }
 }
 
 @media(max-width:390px){
+  .utility-row{
+    gap:3px;
+  }
+
   .utility-btn{
-    font-size:.61rem;
-    padding:9px 4px;
+    font-size:.54rem;
+    padding:8px 2px;
+    letter-spacing:-.04em;
   }
 }
 
@@ -780,25 +797,29 @@ button{font:inherit}
 
           </div>
 
-          <div class="mic-btn-wrap" id="mic-btn-wrap">
+          <div class="mic-column">
 
-            <span class="mic-ring"></span>
-            <span class="mic-ring"></span>
-            <span class="mic-ring"></span>
+            <div class="mic-btn-wrap" id="mic-btn-wrap">
 
-            <button type="button" class="mic-btn" id="mic-btn">
-              🎤
-            </button>
+              <span class="mic-ring"></span>
+              <span class="mic-ring"></span>
+              <span class="mic-ring"></span>
+
+              <button type="button" class="mic-btn" id="mic-btn">
+                🎤
+              </button>
+
+            </div>
+
+            <p class="mic-status" id="mic-status">
+              Hör zu …
+            </p>
 
           </div>
 
         </div>
 
         <div class="mic-status-row">
-
-          <p class="mic-status" id="mic-status">
-            Hör zu …
-          </p>
 
           <p class="live-transcript" id="live-transcript"></p>
 
@@ -819,10 +840,6 @@ button{font:inherit}
           <button type="button" class="utility-btn answer-btn" id="answer-btn">
             ✓ Antwort anzeigen
           </button>
-
-        </div>
-
-        <div class="utility-row">
 
           <button type="button" class="utility-btn stop-btn" id="stop-btn">
             ⏹ Stop
@@ -1165,12 +1182,18 @@ function speakGerman(text,options={}){
     }
 
     const token=++speechToken;
+
+    /* Alte, evtl. hängende Sprachausgabe zuerst vollständig leeren —
+       verhindert, dass der Anfang des neuen Satzes verschluckt wird. */
+    speechSynthesis.cancel();
+
     const utterance=new SpeechSynthesisUtterance(text);
     let finished=false;
+    let keepAliveTimer=null;
 
     Object.assign(utterance,{
       lang:"de-DE",
-      rate:options.rate??.98,
+      rate:options.rate??.96,
       pitch:1,
       volume:1
     });
@@ -1179,21 +1202,49 @@ function speakGerman(text,options={}){
       utterance.voice=germanVoice;
     }
 
+    const stopKeepAlive=()=>{
+      if(keepAliveTimer){
+        window.clearInterval(keepAliveTimer);
+        keepAliveTimer=null;
+      }
+    };
+
     const finish=()=>{
       if(finished||token!==speechToken)return;
 
       finished=true;
       speaking=false;
+      stopKeepAlive();
 
       window.setTimeout(resolve,250);
     };
 
     speaking=true;
 
+    utterance.onstart=()=>{
+      stopKeepAlive();
+
+      /* Bekannter Chrome-Bug: die Sprachausgabe kann mittendrin
+         abbrechen oder Silben verschlucken. Ein periodisches
+         pause()/resume() hält die Synthese zuverlässig am Laufen. */
+      keepAliveTimer=window.setInterval(()=>{
+        if(token!==speechToken){
+          stopKeepAlive();
+          return;
+        }
+
+        if(speechSynthesis.speaking&&!speechSynthesis.paused){
+          speechSynthesis.pause();
+          speechSynthesis.resume();
+        }
+      },240);
+    };
+
     utterance.onend=finish;
 
     utterance.onerror=event=>{
       console.warn("Sprachausgabe:",event.error);
+      stopKeepAlive();
 
       if(
         event.error==="canceled"||
@@ -1209,7 +1260,7 @@ function speakGerman(text,options={}){
       if(token!==speechToken)return;
 
       speechSynthesis.speak(utterance);
-    },60);
+    },90);
   });
 }
 
