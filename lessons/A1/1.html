@@ -510,6 +510,53 @@ header.hero{
   background:linear-gradient(180deg,#b08df7,#825fe0);
 }
 
+.dialoge-btn{
+  background:linear-gradient(180deg,#ff9d76,#e8623a);
+}
+
+.diktat-btn{
+  background:linear-gradient(180deg,#5ad1c9,#1f9c93);
+}
+
+/* Kolumna z przyciskami po lewej stronie strony */
+
+.side-buttons{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:12px;
+  max-width:1180px;
+  margin:0 auto 26px;
+  padding:0 18px;
+}
+
+.side-buttons .training-btn{
+  flex:1 1 200px;
+}
+
+@media(min-width:1400px){
+  .side-buttons{
+    position:fixed;
+    top:50%;
+    left:18px;
+    transform:translateY(-50%);
+    flex-direction:column;
+    flex-wrap:nowrap;
+    max-width:none;
+    margin:0;
+    padding:0;
+    gap:12px;
+    z-index:30;
+  }
+
+  .side-buttons .training-btn{
+    flex:none;
+    min-height:48px;
+    padding:12px 18px;
+    white-space:nowrap;
+  }
+}
+
 /* Przycisk Ich kann i rozwijany papierek */
 
 .ich-kann-button{
@@ -710,6 +757,30 @@ button:focus-visible,
 <body id="seitenanfang">
 
 <div class="course-shell">
+
+  <div class="side-buttons">
+
+    <a href="../aktiv-trainieren/A1/1.html" class="training-btn aktiv-trainieren-btn">
+      🏋️ Aktiv trainieren
+    </a>
+
+    <a href="../sprich%20nach/A1/1.html" class="training-btn sprich-nach-btn">
+      🎤 Sprich nach
+    </a>
+
+    <a href="../ubungen/A1/1.html" class="training-btn übung-training-btn">
+      ✏️ Übungen
+    </a>
+
+    <a href="../dialoge/A1/1.html" class="training-btn dialoge-btn">
+      💬 Dialoge
+    </a>
+
+    <a href="../diktat/A1/1.html" class="training-btn diktat-btn">
+      ✍️ Ich schreibe ein Diktat
+    </a>
+
+  </div>
 
   <nav class="course-nav" aria-label="Inhaltsverzeichnis des A1-Kurses">
 
@@ -1037,31 +1108,6 @@ button:focus-visible,
           <h3 class="section-subtitle">Die Umlaute</h3>
 
           <div class="alphabet" id="umlaute"></div>
-
-          <div class="training-buttons-wrapper">
-
-            <a
-              href="../aktiv-trainieren/A1/1.html"
-              class="training-btn aktiv-trainieren-btn"
-            >
-              🏋️ Aktiv trainieren
-            </a>
-
-            <a
-              href="../sprich%20nach/A1/1.html"
-              class="training-btn sprich-nach-btn"
-            >
-              🎤 Sprich nach
-            </a>
-
-            <a
-             href="../ubungen/A1/1.html"
-             class="training-btn übung-training-btn"
-            >
-              ✏️ Übungen
-            </a>
-
-          </div>
 
         </div>
 
