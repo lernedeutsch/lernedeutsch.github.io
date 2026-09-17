@@ -1,14 +1,15 @@
 /**
- * app-config.js - Konfiguracja główna aplikacji (tylko niemiecki)
+ * app-config.js
+ * Główna konfiguracja aplikacji Nele
  */
 
 const appConfig = {
   nazwa: "Lerne Deutsch",
-  wersja: "0.1.0",
-  domyślnyJęzyk: "de",  // ← Tylko niemiecki
+  wersja: "3.0.0",
+  domyślnyJęzyk: "de",
   debug: true,
 
-  // Ustawienia ogólnie
+  // Ustawienia aplikacji
   ustawienia: {
     animacje: true,
     wymowa: true,
@@ -16,14 +17,20 @@ const appConfig = {
     chatbot: true
   },
 
-  // API (jeśli używasz)
+  // Backend Nele 3.0 na Render
   api: {
-    baseUrl: "",
-    timeout: 5000
+    baseUrl: "https://nele-backend-3.onrender.com",
+    timeout: 70000
   }
 };
 
-// Eksport (jeśli używasz modulów Node.js)
-if (typeof module !== 'undefined' && module.exports) {
+// Udostępnienie konfiguracji innym plikom JavaScript
+if (typeof window !== "undefined") {
+  window.appConfig = appConfig;
+  window.NELE_API_BASE = appConfig.api.baseUrl;
+}
+
+// Eksport dla Node.js
+if (typeof module !== "undefined" && module.exports) {
   module.exports = appConfig;
 }
