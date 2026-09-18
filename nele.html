@@ -1429,24 +1429,32 @@ Worüber möchtest du heute sprechen?</span>
           isListeningExercise
         ) {
 
-          await speak(
-            speechText,
-            0.82
-          );
-
-
-          await new Promise(
-            resolve =>
-              setTimeout(
-                resolve,
-                250
+          const questionOnly =
+            answer
+              .replace(
+                /^Hör gut zu\.?\s*/i,
+                ""
               )
-          );
+              .trim();
+
+
+          const listeningSpeech =
+            [
+              "Hör gut zu.",
+              speechText,
+              questionOnly
+            ]
+              .filter(Boolean)
+              .join(" ");
+
+
+          lastNeleAnswer =
+            listeningSpeech;
 
 
           await speak(
-            answer,
-            0.85
+            listeningSpeech,
+            0.82
           );
 
         } else {
