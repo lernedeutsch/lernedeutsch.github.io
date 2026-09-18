@@ -1377,17 +1377,42 @@ Worüber möchtest du heute sprechen?</span>
         }
 
 
+        const metaSpeakText =
+          (
+            data.meta &&
+            typeof data.meta.speak_text === "string"
+          )
+            ? data.meta.speak_text.trim()
+            : "";
+
+
         const speechText =
           (
             typeof data.speak_text === "string" &&
             data.speak_text.trim()
           )
             ? data.speak_text.trim()
-            : answer;
+            : (
+                metaSpeakText ||
+                answer
+              );
+
+
+        const isListeningExercise =
+          Boolean(
+            speechText &&
+            speechText !== answer &&
+            (
+              data.meta?.activity === "listening" ||
+              data.meta?.activity_type === "listening"
+            )
+          );
 
 
         lastNeleAnswer =
-          speechText;
+          isListeningExercise
+            ? speechText + " " + answer
+            : speechText;
 
 
         addMessage(
@@ -1400,9 +1425,36 @@ Worüber möchtest du heute sprechen?</span>
           "Nele 3.0 online";
 
 
-        await speak(
-          speechText
-        );
+        if (
+          isListeningExercise
+        ) {
+
+          await speak(
+            speechText,
+            0.82
+          );
+
+
+          await new Promise(
+            resolve =>
+              setTimeout(
+                resolve,
+                250
+              )
+          );
+
+
+          await speak(
+            answer,
+            0.85
+          );
+
+        } else {
+
+          await speak(
+            speechText
+          );
+        }
 
       } catch (error) {
 
