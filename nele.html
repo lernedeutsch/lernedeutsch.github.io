@@ -745,7 +745,7 @@ Worüber möchtest du heute sprechen?</span>
     const API_BASE =
       window.NELE_API_BASE ||
       window.appConfig?.api?.baseUrl ||
-      "https://nele-backend-3.onrender.com";
+      "https://nele-backend.onrender.com";
 
 
     const CHAT_URL =
@@ -1377,8 +1377,17 @@ Worüber möchtest du heute sprechen?</span>
         }
 
 
+        const speechText =
+          (
+            typeof data.speak_text === "string" &&
+            data.speak_text.trim()
+          )
+            ? data.speak_text.trim()
+            : answer;
+
+
         lastNeleAnswer =
-          answer;
+          speechText;
 
 
         addMessage(
@@ -1392,7 +1401,7 @@ Worüber möchtest du heute sprechen?</span>
 
 
         await speak(
-          answer
+          speechText
         );
 
       } catch (error) {
