@@ -17,9 +17,9 @@ const appConfig = {
     chatbot: true
   },
 
-  // Backend Nele 3.0 na Render
+  // Backend Nele 1 + funkcje Nele 3.0 na Render
   api: {
-    baseUrl: "https://nele-backend-3.onrender.com",
+    baseUrl: "https://nele-backend.onrender.com",
     timeout: 70000
   }
 };
