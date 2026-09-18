@@ -742,7 +742,7 @@ const API_BASE =
   (
     window.NELE_API_BASE ||
     window.appConfig?.api?.baseUrl ||
-    "https://nele-backend-3.onrender.com"
+    "https://nele-backend.onrender.com"
   ).replace(/\/+$/, "");
 
 
@@ -1464,8 +1464,42 @@ async function askNele(
     }
 
 
+    const metaSpeakText =
+      (
+        data.meta &&
+        typeof data.meta.speak_text === "string"
+      )
+        ? data.meta.speak_text.trim()
+        : "";
+
+
+    const speechText =
+      (
+        typeof data.speak_text === "string" &&
+        data.speak_text.trim()
+      )
+        ? data.speak_text.trim()
+        : (
+            metaSpeakText ||
+            answer
+          );
+
+
+    const isListeningExercise =
+      Boolean(
+        speechText &&
+        speechText !== answer &&
+        (
+          data.meta?.activity === "listening" ||
+          data.meta?.activity_type === "listening"
+        )
+      );
+
+
     lastNeleAnswer =
-      answer;
+      isListeningExercise
+        ? speechText + " " + answer
+        : speechText;
 
 
     addMessage(
@@ -1478,9 +1512,36 @@ async function askNele(
       "Nele 3.0 online";
 
 
-    await speak(
-      answer
-    );
+    if(
+      isListeningExercise
+    ){
+
+      await speak(
+        speechText,
+        .82
+      );
+
+
+      await new Promise(
+        resolve =>
+          setTimeout(
+            resolve,
+            250
+          )
+      );
+
+
+      await speak(
+        answer,
+        .85
+      );
+
+    }else{
+
+      await speak(
+        speechText
+      );
+    }
 
 
     /*
