@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nele – Deine Deutschtrainerin</title>
+
+<style>
+:root{
+  --bg:#07182c;
+  --bg2:#0c2744;
+  --panel:#102d4d;
+  --panel2:#163858;
+  --text:#f5f8fc;
+  --muted:#aebdce;
+  --gold:#f4c95d;
+  --blue:#62bdf5;
+  --green:#82df48;
+  --line:rgba(255,255,255,.10);
+}
+
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  min-height:100vh;
+  font-family:Arial,sans-serif;
+  color:var(--text);
+  background:
+    radial-gradient(circle at top,rgba(70,140,220,.16),transparent 35%),
+    linear-gradient(180deg,var(--bg),var(--bg2));
+}
+
+button,input{font:inherit}
+
+.page{
+  width:min(900px,94%);
+  margin:auto;
+  padding:24px 0 30px;
+}
+
+.topbar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+  margin-bottom:18px;
+}
+
+.back{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:46px;
+  padding:10px 15px;
+  border-radius:14px;
+  border:1px solid var(--line);
+  background:rgba(255,255,255,.07);
+  color:white;
+  text-decoration:none;
+  font-weight:700;
+}
+
+.topbar-right{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  flex-wrap:wrap;
+  justify-content:flex-end;
+}
+
+.status{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  color:var(--muted);
+  font-size:.95rem;
+}
+
+.status-dot{
+  width:10px;
+  height:10px;
+  border-radius:50%;
+  background:var(--green);
+}
+
+.reset-btn,
+.new-user-btn{
+  min-height:42px;
+  padding:9px 13px;
+  border-radius:13px;
+  border:1px solid rgba(255,255,255,.14);
+  background:rgba(255,255,255,.07);
+  color:#f5f8fc;
+  font-weight:700;
+  cursor:pointer;
+}
+
+.reset-btn:hover,
+.new-user-btn:hover{
+  background:rgba(255,255,255,.12);
+}
+
+.new-user-btn{
+  border-color:rgba(98,189,245,.28);
+}
+
+.nele-header{
+  display:flex;
+  align-items:center;
+  gap:18px;
+  padding:20px;
+  margin-bottom:18px;
+  border-radius:24px;
+  border:1px solid var(--line);
+  background:linear-gradient(135deg,#173e63,#102c49);
+  box-shadow:0 16px 35px rgba(0,0,0,.22);
+}
+
+.avatar{
+  width:76px;
+  height:76px;
+  flex:none;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:50%;
+  background:var(--gold);
+  font-size:40px;
+}
+
+.nele-title h1{
+  margin:0 0 4px;
+  font-size:2rem;
+}
+
+.nele-title p{
+  margin:0;
+  color:var(--muted);
+}
+
+.chat{
+  display:flex;
+  flex-direction:column;
+  height:min(62vh,650px);
+  min-height:430px;
+  border-radius:24px;
+  overflow:hidden;
+  border:1px solid var(--line);
+  background:rgba(5,20,38,.78);
+  box-shadow:0 18px 40px rgba(0,0,0,.25);
+}
+
+.messages{
+  flex:1;
+  overflow-y:auto;
+  padding:20px;
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+
+.message{
+  max-width:82%;
+  padding:12px 15px;
+  border-radius:18px;
+  line-height:1.5;
+  font-size:1rem;
+  white-space:pre-wrap;
+  overflow-wrap:anywhere;
+}
+
+.message-nele{
+  align-self:flex-start;
+  background:linear-gradient(135deg,#173e63,#102d4d);
+  border:1px solid rgba(98,189,245,.28);
+}
+
+.message-user{
+  align-self:flex-end;
+  background:linear-gradient(135deg,#f4c95d,#dca933);
+  color:#172235;
+}
+
+.speaker{
+  display:block;
+  margin-bottom:4px;
+  font-weight:800;
+  font-size:.82rem;
+}
+
+.message-nele .speaker{color:var(--blue)}
+.message-user .speaker{color:#5f4600}
+
+.chat-input-area{
+  padding:14px;
+  border-top:1px solid var(--line);
+  background:rgba(255,255,255,.04);
+}
+
+.input-row{
+  display:grid;
+  grid-template-columns:auto 1fr auto;
+  gap:10px;
+}
+
+.mic-btn,
+.send-btn{
+  min-width:52px;
+  min-height:52px;
+  border:none;
+  border-radius:16px;
+  cursor:pointer;
+  font-size:1.25rem;
+  font-weight:800;
+}
+
+.mic-btn{
+  background:#173e63;
+  color:white;
+  border:1px solid rgba(255,255,255,.12);
+}
+
+.mic-btn.listening{
+  background:#2f7d3a;
+}
+
+.send-btn{
+  padding:0 18px;
+  background:linear-gradient(180deg,#72d8ff,#359bd8);
+  color:#07182c;
+}
+
+.mic-btn:disabled,
+.send-btn:disabled,
+.reset-btn:disabled,
+.new-user-btn:disabled{
+  opacity:.55;
+  cursor:wait;
+}
+
+#message-input{
+  width:100%;
+  min-height:52px;
+  padding:13px 15px;
+  border-radius:16px;
+  border:1px solid rgba(255,255,255,.14);
+  outline:none;
+  background:rgba(255,255,255,.08);
+  color:white;
+}
+
+#message-input::placeholder{color:#8da0b5}
+#message-input:focus{border-color:var(--blue)}
+
+.quick-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-top:12px;
+}
+
+.quick-action{
+  padding:8px 11px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,.12);
+  background:rgba(255,255,255,.06);
+  color:#dbe8f5;
+  cursor:pointer;
+  font-size:.9rem;
+}
+
+.quick-action:hover{
+  background:rgba(255,255,255,.11);
+}
+
+.pronunciation-action{
+  border-color:rgba(98,189,245,.30);
+  background:rgba(98,189,245,.10);
+  color:#e7f6ff;
+}
+
+.pronunciation-action:hover{
+  background:rgba(98,189,245,.18);
+}
+
+@media(max-width:650px){
+  .page{
+    width:94%;
+    padding-top:14px;
+  }
+
+  .topbar{
+    align-items:flex-start;
+  }
+
+  .topbar-right{
+    flex-direction:column;
+    align-items:flex-end;
+    gap:7px;
+  }
+
+  .reset-btn,
+  .new-user-btn{
+    min-height:38px;
+    padding:7px 10px;
+    font-size:.85rem;
+  }
+
+  .nele-header{padding:16px}
+
+  .avatar{
+    width:64px;
+    height:64px;
+    font-size:34px;
+  }
+
+  .nele-title h1{font-size:1.7rem}
+
+  .chat{
+    height:68vh;
+    min-height:420px;
+  }
+
+  .input-row{
+    grid-template-columns:48px 1fr 58px;
+  }
+
+  .message{max-width:90%}
+}
+</style>
+</head>
+
+<body>
+<div class="page">
+
+  <div class="topbar">
+    <a href="index.html" class="back">← Startseite</a>
+
+    <div class="topbar-right">
+      <div class="status">
+        <span class="status-dot"></span>
+        <span id="status-text">Nele ist bereit</span>
+      </div>
+
+      <button type="button" class="reset-btn" id="reset-btn">
+        Neu anfangen
+      </button>
+
+      <button type="button" class="new-user-btn" id="new-user-btn">
+        Als neuer Benutzer starten
+      </button>
+    </div>
+  </div>
+
+  <section class="nele-header">
+    <div class="avatar">👩‍🏫</div>
+
+    <div class="nele-title">
+      <h1>Nele</h1>
+      <p>Deine persönliche Deutschtrainerin</p>
+    </div>
+  </section>
+
+  <section class="chat">
+    <div class="messages" id="messages"></div>
+
+    <div class="chat-input-area">
+      <div class="input-row">
+        <button
+          type="button"
+          class="mic-btn"
+          id="mic-btn"
+          aria-label="Mikrofon"
+        >
+          🎤
+        </button>
+
+        <input
+          id="message-input"
+          type="text"
+          autocomplete="off"
+          placeholder="Schreib eine Nachricht..."
+        >
+
+        <button
+          type="button"
+          class="send-btn"
+          id="send-btn"
+        >
+          Senden
+        </button>
+      </div>
+
+      <div class="quick-actions">
+        <button type="button" class="quick-action" data-text="Hilf mir mit Deutsch.">
+          Deutsch üben
+        </button>
+
+        <button type="button" class="quick-action" data-text="Erklär mir die Grammatik.">
+          Grammatik
+        </button>
+
+        <button type="button" class="quick-action" data-text="Üben wir ein Gespräch.">
+          Dialog
+        </button>
+
+        <button type="button" class="quick-action" data-text="Korrigiere meinen Satz.">
+          Satz korrigieren
+        </button>
+
+        <button
+          type="button"
+          class="quick-action pronunciation-action"
+          id="pronunciation-btn"
+          aria-label="Aussprache üben"
+          title="Aussprache üben"
+        >
+          🗣️ Aussprache üben
+        </button>
+      </div>
+    </div>
+  </section>
+</div>
+
+<script src="/config/app-config.js"></script>
+
+<script>
+"use strict";
+
+const API_BASE = (
+  window.NELE_API_BASE ||
+  window.appConfig?.api?.baseUrl ||
+  "https://nele-backend.onrender.com"
+).replace(/\/+$/, "");
+
+const CHAT_URL = API_BASE + "/chat";
+const START_SESSION_URL = API_BASE + "/api/session/start";
+const API_TIMEOUT = window.appConfig?.api?.timeout || 70000;
+
+const messages = document.getElementById("messages");
+const messageInput = document.getElementById("message-input");
+const sendButton = document.getElementById("send-btn");
+const microphoneButton = document.getElementById("mic-btn");
+const resetButton = document.getElementById("reset-btn");
+const newUserButton = document.getElementById("new-user-btn");
+const pronunciationButton = document.getElementById("pronunciation-btn");
+const statusText = document.getElementById("status-text");
+
+let recognition = null;
+let isListening = false;
+let requestRunning = false;
+let sessionStarting = false;
+let germanVoice = null;
+let sessionId = null;
+let studentId = getStudentId();
+let lastNeleAnswer = "";
+
+function createUUID(){
+  if(window.crypto && typeof window.crypto.randomUUID === "function"){
+    return window.crypto.randomUUID();
+  }
+
+  return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(
+    /[xy]/g,
+    function(character){
+      const random = Math.random() * 16 | 0;
+      const value = character === "x"
+        ? random
+        : (random & 0x3) | 0x8;
+
+      return value.toString(16);
+    }
+  );
+}
+
+function getStudentId(){
+  let value = localStorage.getItem("nele_student_id");
+
+  if(!value){
+    value = createUUID();
+    localStorage.setItem("nele_student_id", value);
+  }
+
+  return value;
+}
+
+function setBusy(busy){
+  sendButton.disabled = busy;
+  messageInput.disabled = busy;
+  resetButton.disabled = busy;
+  newUserButton.disabled = busy;
+}
+
+function setStatus(text){
+  statusText.textContent = text;
+}
+
+function clearMessages(){
+  messages.innerHTML = "";
+}
+
+function addMessage(author,text){
+  const item = document.createElement("div");
+  item.className = "message " + (
+    author === "Nele"
+      ? "message-nele"
+      : "message-user"
+  );
+
+  const speaker = document.createElement("span");
+  speaker.className = "speaker";
+  speaker.textContent = author;
+
+  const body = document.createElement("span");
+  body.textContent = text;
+
+  item.append(speaker,body);
+  messages.appendChild(item);
+  messages.scrollTop = messages.scrollHeight;
+}
+
+async function fetchWithTimeout(url,options,timeout){
+  const controller = new AbortController();
+  const timer = setTimeout(
+    function(){ controller.abort(); },
+    timeout || API_TIMEOUT
+  );
+
+  try{
+    return await fetch(
+      url,
+      Object.assign(
+        {},
+        options || {},
+        {signal:controller.signal}
+      )
+    );
+  }finally{
+    clearTimeout(timer);
+  }
+}
+
+function loadGermanVoice(){
+  if(!("speechSynthesis" in window)){
+    return;
+  }
+
+  const voices = speechSynthesis.getVoices();
+  const femaleHints = [
+    "female",
+    "frau",
+    "anna",
+    "petra",
+    "helena",
+    "vicki",
+    "marlene",
+    "google"
+  ];
+
+  germanVoice =
+    voices.find(function(voice){
+      return (
+        voice.lang?.toLowerCase() === "de-de" &&
+        femaleHints.some(function(hint){
+          return voice.name.toLowerCase().includes(hint);
+        })
+      );
+    }) ||
+    voices.find(function(voice){
+      return voice.lang?.toLowerCase() === "de-de";
+    }) ||
+    voices.find(function(voice){
+      return voice.lang?.toLowerCase().startsWith("de");
+    }) ||
+    null;
+}
+
+function speak(text,rate){
+  return new Promise(function(resolve){
+    if(!text || !("speechSynthesis" in window)){
+      resolve();
+      return;
+    }
+
+    speechSynthesis.cancel();
+
+    const utter = new SpeechSynthesisUtterance(text);
+    utter.lang = "de-DE";
+    utter.rate = rate || .85;
+    utter.pitch = 1.05;
+    utter.volume = 1;
+
+    if(germanVoice){
+      utter.voice = germanVoice;
+    }
+
+    utter.onend = resolve;
+    utter.onerror = resolve;
+    speechSynthesis.speak(utter);
+  });
+}
+
+async function startNewSession(options){
+  const settings = options || {};
+
+  if(sessionStarting || requestRunning){
+    return;
+  }
+
+  sessionStarting = true;
+  setBusy(true);
+  setStatus("Nele startet …");
+
+  if(settings.clearChat){
+    clearMessages();
+  }
+
+  sessionId = null;
+
+  try{
+    const response = await fetchWithTimeout(
+      START_SESSION_URL,
+      {
+        method:"POST",
+        headers:{
+          "Content-Type":"application/json"
+        },
+        body:JSON.stringify({
+          student_id:studentId,
+          name:"Lernende",
+          force_new:true
+        })
+      }
+    );
+
+    if(!response.ok){
+      throw new Error("HTTP " + response.status);
+    }
+
+    const data = await response.json();
+
+    if(data.student_id){
+      studentId = data.student_id;
+      localStorage.setItem("nele_student_id", studentId);
+    }
+
+    if(data.session_id){
+      sessionId = data.session_id;
+    }
+
+    const reply =
+      data.reply ||
+      data.response ||
+      data.message ||
+      "";
+
+    if(reply){
+      lastNeleAnswer = reply;
+      addMessage("Nele",reply);
+    }
+
+    setStatus("Nele ist bereit");
+
+  }catch(error){
+    console.error("Start session error:",error);
+    setStatus("Nele ist bereit");
+
+    if(messages.children.length === 0){
+      addMessage(
+        "Nele",
+        "Entschuldigung, ich kann den Server gerade nicht erreichen. Bitte versuche es gleich noch einmal."
+      );
+    }
+
+  }finally{
+    sessionStarting = false;
+    setBusy(false);
+    messageInput.focus();
+  }
+}
+
+async function askNele(text,inputMode = "keyboard"){
+  if(requestRunning || sessionStarting){
+    return;
+  }
+
+  const cleanText = String(text || "").trim();
+
+  if(!cleanText){
+    return;
+  }
+
+  requestRunning = true;
+  setBusy(true);
+  setStatus("Nele denkt nach …");
+
+  addMessage("Du",cleanText);
+
+  try{
+    const payload = {
+      message:cleanText,
+      text:cleanText,
+      user_message:cleanText,
+      student_id:studentId,
+      name:"Lernende",
+      input_mode:inputMode
+    };
+
+    if(sessionId){
+      payload.session_id = sessionId;
+    }
+
+    const response = await fetchWithTimeout(
+      CHAT_URL,
+      {
+        method:"POST",
+        headers:{
+          "Content-Type":"application/json"
+        },
+        body:JSON.stringify(payload)
+      }
+    );
+
+    if(!response.ok){
+      throw new Error("HTTP " + response.status);
+    }
+
+    const data = await response.json();
+
+    if(data.student_id){
+      studentId = data.student_id;
+      localStorage.setItem("nele_student_id", studentId);
+    }
+
+    if(data.session_id){
+      sessionId = data.session_id;
+    }
+
+    const answer =
+      data.reply ||
+      data.response ||
+      data.answer ||
+      data.message ||
+      data.text;
+
+    if(!answer || typeof answer !== "string"){
+      throw new Error("Keine Antwort im erwarteten Format");
+    }
+
+    const metaSpeakText =
+      data.meta &&
+      typeof data.meta.speak_text === "string"
+        ? data.meta.speak_text.trim()
+        : "";
+
+    const speechText =
+      typeof data.speak_text === "string" &&
+      data.speak_text.trim()
+        ? data.speak_text.trim()
+        : (metaSpeakText || answer);
+
+    const isListeningExercise = Boolean(
+      speechText &&
+      speechText !== answer &&
+      (
+        data.meta?.activity === "listening" ||
+        data.meta?.activity_type === "listening"
+      )
+    );
+
+    lastNeleAnswer = isListeningExercise
+      ? speechText + " " + answer
+      : speechText;
+
+    addMessage("Nele",answer);
+
+    if(isListeningExercise){
+      const questionOnly = answer
+        .replace(/^Hör gut zu\.?\s*/i,"")
+        .trim();
+
+      const listeningSpeech = [
+        "Hör gut zu.",
+        speechText,
+        questionOnly
+      ].filter(Boolean).join(" ");
+
+      lastNeleAnswer = listeningSpeech;
+      await speak(listeningSpeech,.82);
+    }else{
+      await speak(speechText,.85);
+    }
+
+    if(data.finished === true){
+      sessionId = null;
+    }
+
+    setStatus("Nele ist bereit");
+
+  }catch(error){
+    console.error("Nele API Fehler:",error);
+
+    const answer = error.name === "AbortError"
+      ? "Der Server braucht gerade etwas länger. Bitte versuche es noch einmal."
+      : "Entschuldigung, ich kann den Server gerade nicht erreichen. Bitte versuche es gleich noch einmal.";
+
+    lastNeleAnswer = answer;
+    addMessage("Nele",answer);
+    setStatus("Verbindungsfehler");
+    await speak(answer,.85);
+
+  }finally{
+    requestRunning = false;
+    setBusy(false);
+    messageInput.focus();
+    messages.scrollTop = messages.scrollHeight;
+  }
+}
+
+function sendTypedMessage(){
+  const text = messageInput.value.trim();
+
+  if(!text){
+    return;
+  }
+
+  messageInput.value = "";
+  askNele(text,"keyboard");
+}
+
+sendButton.addEventListener("click",sendTypedMessage);
+
+messageInput.addEventListener("keydown",function(event){
+  if(event.key === "Enter"){
+    event.preventDefault();
+    sendTypedMessage();
+  }
+});
+
+document.querySelectorAll(".quick-action[data-text]").forEach(function(button){
+  button.addEventListener("click",function(){
+    askNele(button.dataset.text || "","keyboard");
+  });
+});
+
+pronunciationButton.addEventListener("click",function(){
+  askNele("Aussprache üben","keyboard");
+});
+
+resetButton.addEventListener("click",function(){
+  startNewSession({clearChat:true});
+});
+
+newUserButton.addEventListener("click",async function(){
+  const confirmed = window.confirm(
+    "Als neuer Benutzer starten?\n\n" +
+    "Das Training auf diesem Gerät beginnt von vorne."
+  );
+
+  if(!confirmed){
+    return;
+  }
+
+  if("speechSynthesis" in window){
+    speechSynthesis.cancel();
+  }
+
+  if(recognition && isListening){
+    try{
+      recognition.stop();
+    }catch(error){
+      console.error(error);
+    }
+  }
+
+  localStorage.removeItem("nele_student_id");
+  localStorage.removeItem("nele_session_id");
+
+  studentId = createUUID();
+  localStorage.setItem("nele_student_id",studentId);
+  sessionId = null;
+
+  await startNewSession({clearChat:true});
+});
+
+const SpeechRecognition =
+  window.SpeechRecognition ||
+  window.webkitSpeechRecognition;
+
+if(SpeechRecognition){
+  recognition = new SpeechRecognition();
+  recognition.lang = "de-DE";
+  recognition.interimResults = true;
+  recognition.continuous = false;
+  recognition.maxAlternatives = 1;
+
+  recognition.onstart = function(){
+    isListening = true;
+    microphoneButton.classList.add("listening");
+  };
+
+  recognition.onresult = function(event){
+    let text = "";
+
+    for(
+      let i = event.resultIndex;
+      i < event.results.length;
+      i++
+    ){
+      text += event.results[i][0].transcript;
+    }
+
+    messageInput.value = text;
+
+    const lastResult = event.results[event.results.length - 1];
+
+    if(lastResult.isFinal){
+      recognition.stop();
+
+      const finalText = text.trim();
+      messageInput.value = "";
+
+      if(finalText){
+        askNele(finalText,"voice");
+      }
+    }
+  };
+
+  recognition.onerror = function(event){
+    console.error("SpeechRecognition:",event.error);
+  };
+
+  recognition.onend = function(){
+    isListening = false;
+    microphoneButton.classList.remove("listening");
+  };
+
+  microphoneButton.addEventListener("click",function(){
+    if(isListening){
+      recognition.stop();
+      return;
+    }
+
+    if("speechSynthesis" in window){
+      speechSynthesis.cancel();
+    }
+
+    try{
+      recognition.start();
+    }catch(error){
+      console.error(error);
+    }
+  });
+
+}else{
+  microphoneButton.disabled = true;
+}
+
+loadGermanVoice();
+
+if("speechSynthesis" in window){
+  speechSynthesis.addEventListener("voiceschanged",loadGermanVoice);
+}
+
+window.addEventListener("load",async function(){
+  await startNewSession({clearChat:true});
+});
+</script>
+
+</body>
+</html>
