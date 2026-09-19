@@ -1334,7 +1334,8 @@ function speak(
    ========================================================= */
 
 async function askNele(
-  text
+  text,
+  inputMode = "keyboard"
 ){
 
   if(requestRunning){
@@ -1385,7 +1386,8 @@ async function askNele(
       text:cleanText,
       user_message:cleanText,
       student_id:STUDENT_ID,
-      name:"Lernende"
+      name:"Lernende",
+      input_mode:inputMode
     };
 
 
@@ -1683,7 +1685,8 @@ messageForm.addEventListener(
 
 
     askNele(
-      text
+      text,
+      "keyboard"
     );
   }
 );
@@ -1865,7 +1868,8 @@ if(SpeechRecognition){
         if(finalText){
 
           askNele(
-            finalText
+            finalText,
+            "voice"
           );
         }
       }
