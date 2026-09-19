@@ -75,4 +75,33 @@ check(
   "frontend has the Nele backend as its fallback/configured API"
 );
 
+
+check(
+  nele.includes('id="reset-btn"') &&
+  nele.includes("startNewSession({clearChat:true})"),
+  "Neu anfangen starts a new session without replacing student_id"
+);
+
+check(
+  nele.includes('id="new-user-btn"') &&
+  nele.includes('localStorage.removeItem("nele_student_id")') &&
+  nele.includes("studentId = createUUID()") &&
+  nele.includes('localStorage.setItem("nele_student_id",studentId)'),
+  "new-user button replaces the local student_id and starts from zero"
+);
+
+check(
+  nele.includes("Aussprache üben") &&
+  nele.includes('askNele("Aussprache üben","keyboard")'),
+  "pronunciation button routes to the backend pronunciation activity"
+);
+
+check(
+  nele.includes("← Startseite") &&
+  nele.includes("Deine persönliche Deutschtrainerin") &&
+  nele.includes("Deutsch üben") &&
+  nele.includes("Satz korrigieren"),
+  "official Deutschsprechen Nele keeps the intended interface"
+);
+
 console.log("\nAll frontend smoke tests passed.");
