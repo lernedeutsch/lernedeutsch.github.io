@@ -2,1185 +2,551 @@
 <html lang="de">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Mit Nele sprechen</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nele – Deine Deutschtrainerin</title>
 
 <style>
 :root{
-  --bg:#061120;
-  --panel:#0a192d;
-  --line:rgba(100,148,212,.18);
-  --text:#edf4ff;
-  --muted:#9cadc6;
-  --blue:#1e8bff;
-  --blue2:#0f63e5;
-  --shadow:0 18px 50px rgba(0,0,0,.35);
+  --bg:#07182c;
+  --bg2:#0c2744;
+  --panel:#102d4d;
+  --panel2:#163858;
+  --text:#f5f8fc;
+  --muted:#aebdce;
+  --gold:#f4c95d;
+  --blue:#62bdf5;
+  --green:#82df48;
+  --line:rgba(255,255,255,.10);
 }
 
-*{
-  box-sizing:border-box;
-}
+*{box-sizing:border-box}
 
-html,
 body{
-  width:100%;
-  height:100%;
   margin:0;
-}
-
-body{
-  font-family:Arial,Helvetica,sans-serif;
+  min-height:100vh;
+  font-family:Arial,sans-serif;
   color:var(--text);
   background:
-    radial-gradient(
-      circle at 18% 18%,
-      rgba(41,122,255,.2),
-      transparent 28%
-    ),
-    linear-gradient(
-      135deg,
-      #04101f,
-      #08192d 48%,
-      #061120
-    );
-  overflow:hidden;
+    radial-gradient(circle at top,rgba(70,140,220,.16),transparent 35%),
+    linear-gradient(180deg,var(--bg),var(--bg2));
 }
 
-button,
-input{
-  font:inherit;
-}
+button,input{font:inherit}
 
 .page{
-  width:min(1550px,100%);
-  height:100dvh;
+  width:min(900px,94%);
   margin:auto;
-  padding:12px clamp(14px,2vw,30px) 10px;
-  display:flex;
-  flex-direction:column;
-  gap:12px;
-  overflow:hidden;
+  padding:24px 0 30px;
 }
-
-/* =========================================================
-   GÓRA
-   ========================================================= */
 
 .topbar{
-  flex:none;
-  display:grid;
-  grid-template-columns:1fr auto 1fr;
+  display:flex;
+  justify-content:space-between;
   align-items:center;
-  gap:16px;
+  gap:12px;
+  margin-bottom:18px;
 }
 
-.back-link,
-.settings-button,
-.secondary-control{
+.back{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
   min-height:46px;
-  padding:0 18px;
-  border:1px solid var(--line);
+  padding:10px 15px;
   border-radius:14px;
-  color:var(--text);
-  background:rgba(12,24,43,.82);
+  border:1px solid var(--line);
+  background:rgba(255,255,255,.07);
+  color:white;
   text-decoration:none;
+  font-weight:700;
+}
+
+.topbar-right{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  flex-wrap:wrap;
+  justify-content:flex-end;
+}
+
+.status{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  color:var(--muted);
+  font-size:.95rem;
+}
+
+.status-dot{
+  width:10px;
+  height:10px;
+  border-radius:50%;
+  background:var(--green);
+}
+
+.reset-btn,
+.new-user-btn{
+  min-height:42px;
+  padding:9px 13px;
+  border-radius:13px;
+  border:1px solid rgba(255,255,255,.14);
+  background:rgba(255,255,255,.07);
+  color:#f5f8fc;
+  font-weight:700;
   cursor:pointer;
 }
 
-.back-link{
-  justify-self:start;
+.reset-btn:hover,
+.new-user-btn:hover{
+  background:rgba(255,255,255,.12);
+}
+
+.new-user-btn{
+  border-color:rgba(98,189,245,.28);
+}
+
+.nele-header{
   display:flex;
   align-items:center;
-}
-
-.settings-button{
-  justify-self:end;
-}
-
-.page-title{
-  text-align:center;
-}
-
-.page-title h1{
-  margin:0;
-  font-size:clamp(27px,3.2vw,48px);
-  line-height:1.05;
-}
-
-.page-title p{
-  margin:5px 0 0;
-  color:var(--muted);
-}
-
-/* =========================================================
-   UKŁAD
-   ========================================================= */
-
-.main-layout{
-  flex:1;
-  min-height:0;
-  display:grid;
-  grid-template-columns:
-    clamp(210px,20vw,290px)
-    minmax(480px,1fr);
-  align-items:start;
-  gap:16px;
-  overflow:hidden;
-}
-
-.avatar-panel,
-.chat-panel,
-.controls-panel{
+  gap:18px;
+  padding:20px;
+  margin-bottom:18px;
+  border-radius:24px;
   border:1px solid var(--line);
-  border-radius:22px;
-  background:
-    linear-gradient(
-      180deg,
-      rgba(10,25,45,.96),
-      rgba(4,14,26,.98)
-    );
-  box-shadow:var(--shadow);
-  overflow:hidden;
+  background:linear-gradient(135deg,#173e63,#102c49);
+  box-shadow:0 16px 35px rgba(0,0,0,.22);
 }
 
-/* =========================================================
-   AVATAR
-   ========================================================= */
-
-.avatar-panel{
-  position:relative;
-  width:100%;
-  aspect-ratio:1/1;
-  align-self:start;
-  background:
-    radial-gradient(
-      circle at 50% 34%,
-      rgba(48,118,226,.2),
-      transparent 45%
-    ),
-    linear-gradient(
-      180deg,
-      rgba(8,23,40,.96),
-      rgba(4,14,26,.98)
-    );
-}
-
-.avatar-frame{
-  width:100%;
-  height:100%;
-  border:0;
-  display:block;
-}
-
-.avatar-glow{
-  position:absolute;
-  inset:0;
-  pointer-events:none;
-  background:
-    radial-gradient(
-      circle at 50% 48%,
-      transparent 34%,
-      rgba(3,12,23,.32) 84%
-    );
-}
-
-.avatar-card{
-  position:absolute;
-  left:10px;
-  right:10px;
-  bottom:10px;
-  padding:9px 11px;
-  border:1px solid var(--line);
-  border-radius:13px;
-  background:rgba(9,24,42,.88);
-  backdrop-filter:blur(10px);
-}
-
-.avatar-card strong{
-  display:block;
-  margin-bottom:3px;
-  font-size:15px;
-}
-
-.avatar-card p{
-  margin:0;
-  color:var(--muted);
-  font-size:12px;
-}
-
-.online-dot{
-  display:inline-block;
-  width:9px;
-  height:9px;
-  margin-right:7px;
+.avatar{
+  width:76px;
+  height:76px;
+  flex:none;
+  display:flex;
+  align-items:center;
+  justify-content:center;
   border-radius:50%;
-  background:#3ca0ff;
-  box-shadow:0 0 12px #3ca0ff;
+  background:var(--gold);
+  font-size:40px;
 }
 
-/* =========================================================
-   CHAT
-   ========================================================= */
+.nele-title h1{
+  margin:0 0 4px;
+  font-size:2rem;
+}
 
-.chat-panel{
-  height:100%;
-  min-height:0;
+.nele-title p{
+  margin:0;
+  color:var(--muted);
+}
+
+.chat{
   display:flex;
   flex-direction:column;
+  height:min(62vh,650px);
+  min-height:430px;
+  border-radius:24px;
+  overflow:hidden;
+  border:1px solid var(--line);
+  background:rgba(5,20,38,.78);
+  box-shadow:0 18px 40px rgba(0,0,0,.25);
 }
 
 .messages{
   flex:1;
-  min-height:0;
-  padding:20px;
   overflow-y:auto;
+  padding:20px;
   display:flex;
   flex-direction:column;
-  gap:16px;
-  scroll-behavior:smooth;
+  gap:12px;
 }
 
 .message{
-  position:relative;
-  max-width:78%;
-  padding:14px 18px 25px;
+  max-width:82%;
+  padding:12px 15px;
   border-radius:18px;
   line-height:1.5;
+  font-size:1rem;
   white-space:pre-wrap;
   overflow-wrap:anywhere;
 }
 
-.message.nele{
+.message-nele{
   align-self:flex-start;
-  background:#122039;
-  border-top-left-radius:6px;
+  background:linear-gradient(135deg,#173e63,#102d4d);
+  border:1px solid rgba(98,189,245,.28);
 }
 
-.message.user{
+.message-user{
   align-self:flex-end;
-  background:
-    linear-gradient(
-      135deg,
-      var(--blue),
-      var(--blue2)
-    );
-  border-top-right-radius:6px;
+  background:linear-gradient(135deg,#f4c95d,#dca933);
+  color:#172235;
 }
 
-.message-author{
+.speaker{
   display:block;
-  margin-bottom:6px;
-  color:#69aefb;
-  font-weight:bold;
-  font-size:14px;
+  margin-bottom:4px;
+  font-weight:800;
+  font-size:.82rem;
 }
 
-.message.user .message-author{
-  color:#fff;
-}
+.message-nele .speaker{color:var(--blue)}
+.message-user .speaker{color:#5f4600}
 
-.message-time{
-  position:absolute;
-  right:12px;
-  bottom:7px;
-  font-size:11px;
-  opacity:.7;
-}
-
-.typing{
-  align-self:flex-start;
-  padding:12px 16px;
-  border-radius:14px;
-  color:var(--muted);
-  background:#11233a;
-}
-
-.typing[hidden]{
-  display:none;
-}
-
-/* =========================================================
-   FORMULARZ
-   ========================================================= */
-
-.message-form{
-  flex:none;
-  padding:14px 16px;
-  display:grid;
-  grid-template-columns:1fr auto;
-  gap:12px;
+.chat-input-area{
+  padding:14px;
   border-top:1px solid var(--line);
+  background:rgba(255,255,255,.04);
 }
 
-.message-input{
+.input-row{
+  display:grid;
+  grid-template-columns:auto 1fr auto;
+  gap:10px;
+}
+
+.mic-btn,
+.send-btn{
+  min-width:52px;
   min-height:52px;
-  padding:0 16px;
-  border:1px solid rgba(118,177,255,.22);
-  border-radius:12px;
-  outline:none;
-  color:#fff;
-  background:#0e1e33;
-}
-
-.message-input:focus{
-  border-color:#2a8cff;
-  box-shadow:0 0 0 3px rgba(42,140,255,.12);
-}
-
-.send-button{
-  min-width:120px;
-  border:0;
-  border-radius:12px;
-  color:#fff;
-  font-weight:bold;
+  border:none;
+  border-radius:16px;
   cursor:pointer;
-  background:
-    linear-gradient(
-      135deg,
-      var(--blue),
-      var(--blue2)
-    );
+  font-size:1.25rem;
+  font-weight:800;
 }
 
-.send-button:disabled{
+.mic-btn{
+  background:#173e63;
+  color:white;
+  border:1px solid rgba(255,255,255,.12);
+}
+
+.mic-btn.listening{
+  background:#2f7d3a;
+}
+
+.send-btn{
+  padding:0 18px;
+  background:linear-gradient(180deg,#72d8ff,#359bd8);
+  color:#07182c;
+}
+
+.mic-btn:disabled,
+.send-btn:disabled,
+.reset-btn:disabled,
+.new-user-btn:disabled{
   opacity:.55;
   cursor:wait;
 }
 
-/* =========================================================
-   DOLNE STEROWANIE
-   ========================================================= */
-
-.controls-panel{
-  flex:none;
-  padding:9px 18px;
-  display:grid;
-  grid-template-columns:1fr auto 1fr;
-  align-items:center;
-  gap:16px;
+#message-input{
+  width:100%;
+  min-height:52px;
+  padding:13px 15px;
+  border-radius:16px;
+  border:1px solid rgba(255,255,255,.14);
+  outline:none;
+  background:rgba(255,255,255,.08);
+  color:white;
 }
 
-.secondary-control{
-  justify-self:center;
-}
+#message-input::placeholder{color:#8da0b5}
+#message-input:focus{border-color:var(--blue)}
 
-.microphone-area{
-  text-align:center;
-}
-
-.microphone-button{
-  width:72px;
-  height:72px;
-  border:6px solid rgba(28,113,255,.24);
-  border-radius:50%;
-  color:#fff;
-  font-size:32px;
-  cursor:pointer;
-  background:
-    linear-gradient(
-      135deg,
-      #209dff,
-      #1262ec
-    );
-  box-shadow:
-    0 0 0 8px rgba(27,115,255,.1),
-    0 0 35px rgba(21,111,255,.4);
-}
-
-.microphone-button.listening{
-  background:
-    linear-gradient(
-      135deg,
-      #7cdd43,
-      #3f941b
-    );
-  animation:pulse 1s infinite;
-}
-
-.microphone-button:disabled{
-  opacity:.45;
-  cursor:not-allowed;
-}
-
-.microphone-label{
-  margin:5px 0 0;
-  color:#91b8eb;
-  font-size:13px;
-}
-
-.tip-bar{
-  grid-column:1/-1;
-  padding:10px 14px;
-  border-radius:14px;
-  color:var(--muted);
-  background:rgba(12,24,43,.88);
+.quick-actions{
   display:flex;
-  justify-content:space-between;
-  gap:16px;
-  font-size:13px;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-top:12px;
 }
 
-.status{
-  color:#8fc6ff;
+.quick-action{
+  padding:8px 11px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,.12);
+  background:rgba(255,255,255,.06);
+  color:#dbe8f5;
+  cursor:pointer;
+  font-size:.9rem;
 }
 
-.error{
-  color:#ffaaa2;
+.quick-action:hover{
+  background:rgba(255,255,255,.11);
 }
 
-@keyframes pulse{
-  50%{
-    transform:scale(1.08);
-  }
+.pronunciation-action{
+  border-color:rgba(98,189,245,.30);
+  background:rgba(98,189,245,.10);
+  color:#e7f6ff;
 }
 
-/* =========================================================
-   TABLET
-   ========================================================= */
+.pronunciation-action:hover{
+  background:rgba(98,189,245,.18);
+}
 
-@media(max-width:850px){
-
-  body{
-    overflow-y:auto;
-  }
-
+@media(max-width:650px){
   .page{
-    height:auto;
-    min-height:100dvh;
-    overflow:visible;
+    width:94%;
+    padding-top:14px;
   }
 
   .topbar{
-    grid-template-columns:1fr;
+    align-items:flex-start;
   }
 
-  .back-link,
-  .settings-button{
-    justify-self:stretch;
-  }
-
-  .main-layout{
-    display:grid;
-    grid-template-columns:
-      clamp(150px,38vw,210px)
-      minmax(0,1fr);
-    align-items:start;
-    overflow:visible;
-  }
-
-  .avatar-panel{
-    width:100%;
-    aspect-ratio:1/1;
-  }
-
-  .chat-panel{
-    min-height:500px;
-  }
-
-  .controls-panel{
-    grid-template-columns:1fr;
-  }
-
-  .tip-bar{
-    grid-column:1;
+  .topbar-right{
     flex-direction:column;
+    align-items:flex-end;
+    gap:7px;
   }
 
-  .message-form{
-    grid-template-columns:1fr;
+  .reset-btn,
+  .new-user-btn{
+    min-height:38px;
+    padding:7px 10px;
+    font-size:.85rem;
   }
 
-  .send-button{
-    min-height:48px;
-  }
-}
+  .nele-header{padding:16px}
 
-/* =========================================================
-   TELEFON
-   ========================================================= */
-
-@media(max-width:620px){
-
-  .page-title h1{
-    font-size:28px;
+  .avatar{
+    width:64px;
+    height:64px;
+    font-size:34px;
   }
 
-  .main-layout{
-    grid-template-columns:1fr;
+  .nele-title h1{font-size:1.7rem}
+
+  .chat{
+    height:68vh;
+    min-height:420px;
   }
 
-  .avatar-panel{
-    width:160px;
-    height:160px;
-    justify-self:start;
+  .input-row{
+    grid-template-columns:48px 1fr 58px;
   }
 
-  .chat-panel{
-    min-height:500px;
-  }
-
-  .avatar-card p{
-    display:none;
-  }
-
-  .message{
-    max-width:90%;
-  }
+  .message{max-width:90%}
 }
 </style>
 </head>
 
 <body>
-
 <div class="page">
 
-  <header class="topbar">
+  <div class="topbar">
+    <a href="index.html" class="back">← Startseite</a>
 
-    <a
-      href="/mapa-niemiec.html"
-      class="back-link"
-    >
-      ← Zurück zur Karte
-    </a>
+    <div class="topbar-right">
+      <div class="status">
+        <span class="status-dot"></span>
+        <span id="status-text">Nele ist bereit</span>
+      </div>
 
-    <div class="page-title">
-      <h1>Mit Nele sprechen 💬</h1>
-      <p>Deutsch sprechen üben – ganz einfach mit Nele</p>
+      <button type="button" class="reset-btn" id="reset-btn">
+        Neu anfangen
+      </button>
+
+      <button type="button" class="new-user-btn" id="new-user-btn">
+        Als neuer Benutzer starten
+      </button>
     </div>
+  </div>
 
-    <button
-      type="button"
-      class="settings-button"
-      id="settingsButton"
-    >
-      ⚙ Einstellungen
-    </button>
+  <section class="nele-header">
+    <div class="avatar">👩‍🏫</div>
 
-  </header>
+    <div class="nele-title">
+      <h1>Nele</h1>
+      <p>Deine persönliche Deutschtrainerin</p>
+    </div>
+  </section>
 
+  <section class="chat">
+    <div class="messages" id="messages"></div>
 
-  <main class="main-layout">
-
-    <section
-      class="avatar-panel"
-      aria-label="Nele"
-    >
-
-      <iframe
-        src="/avatar/avatar.html"
-        title="Nele – Deutschtrainerin"
-        class="avatar-frame"
-      ></iframe>
-
-      <div class="avatar-glow"></div>
-
-      <div class="avatar-card">
-
-        <strong>
-          <span class="online-dot"></span>
-          Nele
-        </strong>
-
-        <p>Deine Deutschtrainerin</p>
-
-      </div>
-
-    </section>
-
-
-    <section
-      class="chat-panel"
-      aria-label="Gespräch mit Nele"
-    >
-
-      <div
-        class="messages"
-        id="chatMessages"
-      >
-
-        <article
-          class="message nele"
-          id="welcomeMessage"
+    <div class="chat-input-area">
+      <div class="input-row">
+        <button
+          type="button"
+          class="mic-btn"
+          id="mic-btn"
+          aria-label="Mikrofon"
         >
-
-          <span class="message-author">
-            Nele
-          </span>
-
-          <span class="message-text">
-Guten Tag!
-Schön, dass du da bist.
-Ich bereite dein Training vor …
-          </span>
-
-          <span class="message-time"></span>
-
-        </article>
-
-
-        <div
-          class="typing"
-          id="typing"
-          hidden
-        >
-          ● ● ● &nbsp; Nele schreibt...
-        </div>
-
-      </div>
-
-
-      <form
-        class="message-form"
-        id="messageForm"
-      >
+          🎤
+        </button>
 
         <input
+          id="message-input"
           type="text"
-          id="messageInput"
-          class="message-input"
-          placeholder="Schreibe deine Nachricht..."
           autocomplete="off"
+          placeholder="Schreib eine Nachricht..."
         >
 
         <button
-          type="submit"
-          class="send-button"
-          id="sendButton"
+          type="button"
+          class="send-btn"
+          id="send-btn"
         >
-          Senden ✈
+          Senden
+        </button>
+      </div>
+
+      <div class="quick-actions">
+        <button type="button" class="quick-action" data-text="Hilf mir mit Deutsch.">
+          Deutsch üben
         </button>
 
-      </form>
+        <button type="button" class="quick-action" data-text="Erklär mir die Grammatik.">
+          Grammatik
+        </button>
 
-    </section>
+        <button type="button" class="quick-action" data-text="Üben wir ein Gespräch.">
+          Dialog
+        </button>
 
-  </main>
+        <button type="button" class="quick-action" data-text="Korrigiere meinen Satz.">
+          Satz korrigieren
+        </button>
 
-
-  <section class="controls-panel">
-
-    <button
-      type="button"
-      class="secondary-control"
-      id="keyboardButton"
-    >
-      ⌨ Tastatur verwenden
-    </button>
-
-
-    <div class="microphone-area">
-
-      <button
-        type="button"
-        id="microphoneButton"
-        class="microphone-button"
-        aria-label="Mit Nele sprechen"
-      >
-        🎤
-      </button>
-
-      <p
-        class="microphone-label"
-        id="microphoneLabel"
-      >
-        Zum Sprechen klicken
-      </p>
-
-    </div>
-
-
-    <button
-      type="button"
-      class="secondary-control"
-      id="repeatButton"
-    >
-      🔊 Letzte Antwort wiederholen
-    </button>
-
-
-    <div class="tip-bar">
-
-      <div>
-        ℹ <strong>Tipp:</strong>
-        Sprich langsam und deutlich.
+        <button
+          type="button"
+          class="quick-action pronunciation-action"
+          id="pronunciation-btn"
+          aria-label="Aussprache üben"
+          title="Aussprache üben"
+        >
+          🗣️ Aussprache üben
+        </button>
       </div>
-
-      <div
-        id="voiceInfo"
-        class="status"
-      >
-        Nele 3.0 wird geladen …
-      </div>
-
     </div>
-
   </section>
-
 </div>
 
-
-<!--
-  WAŻNE:
-  Ten plik znajduje się w:
-  /deutschsprechen/nele.html
-
-  Dlatego ścieżka zaczyna się od /
--->
 <script src="/config/app-config.js"></script>
-
 
 <script>
 "use strict";
 
+const API_BASE = (
+  window.NELE_API_BASE ||
+  window.appConfig?.api?.baseUrl ||
+  "https://nele-backend.onrender.com"
+).replace(/\/+$/, "");
 
-/* =========================================================
-   NELE 3.0
-   BACKEND
-   ========================================================= */
+const CHAT_URL = API_BASE + "/chat";
+const START_SESSION_URL = API_BASE + "/api/session/start";
+const API_TIMEOUT = window.appConfig?.api?.timeout || 70000;
 
-const API_BASE =
-  (
-    window.NELE_API_BASE ||
-    window.appConfig?.api?.baseUrl ||
-    "https://nele-backend.onrender.com"
-  ).replace(/\/+$/, "");
+const messages = document.getElementById("messages");
+const messageInput = document.getElementById("message-input");
+const sendButton = document.getElementById("send-btn");
+const microphoneButton = document.getElementById("mic-btn");
+const resetButton = document.getElementById("reset-btn");
+const newUserButton = document.getElementById("new-user-btn");
+const pronunciationButton = document.getElementById("pronunciation-btn");
+const statusText = document.getElementById("status-text");
 
-
-const CHAT_URL =
-  API_BASE + "/chat";
-
-
-const START_SESSION_URL =
-  API_BASE + "/api/session/start";
-
-
-const API_TIMEOUT =
-  window.appConfig?.api?.timeout ||
-  70000;
-
-
-/* =========================================================
-   ELEMENTY STRONY
-   ========================================================= */
-
-const chatMessages =
-  document.getElementById(
-    "chatMessages"
-  );
-
-const messageForm =
-  document.getElementById(
-    "messageForm"
-  );
-
-const messageInput =
-  document.getElementById(
-    "messageInput"
-  );
-
-const sendButton =
-  document.getElementById(
-    "sendButton"
-  );
-
-const typing =
-  document.getElementById(
-    "typing"
-  );
-
-const microphoneButton =
-  document.getElementById(
-    "microphoneButton"
-  );
-
-const microphoneLabel =
-  document.getElementById(
-    "microphoneLabel"
-  );
-
-const voiceInfo =
-  document.getElementById(
-    "voiceInfo"
-  );
-
-const welcomeMessage =
-  document.getElementById(
-    "welcomeMessage"
-  );
-
-
-/* =========================================================
-   STUDENT ID
-   STAŁA PAMIĘĆ UCZNIA
-   ========================================================= */
+let recognition = null;
+let isListening = false;
+let requestRunning = false;
+let sessionStarting = false;
+let germanVoice = null;
+let sessionId = null;
+let studentId = getStudentId();
+let lastNeleAnswer = "";
 
 function createUUID(){
-
-  if(
-    window.crypto &&
-    typeof window.crypto.randomUUID ===
-      "function"
-  ){
+  if(window.crypto && typeof window.crypto.randomUUID === "function"){
     return window.crypto.randomUUID();
   }
 
-  return (
-    "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx"
-  ).replace(
+  return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(
     /[xy]/g,
-    character => {
-
-      const random =
-        Math.random() * 16 | 0;
-
-      const value =
-        character === "x"
-          ? random
-          : (random & 0x3) | 0x8;
+    function(character){
+      const random = Math.random() * 16 | 0;
+      const value = character === "x"
+        ? random
+        : (random & 0x3) | 0x8;
 
       return value.toString(16);
     }
   );
 }
 
-
 function getStudentId(){
+  let value = localStorage.getItem("nele_student_id");
 
-  let studentId =
-    localStorage.getItem(
-      "nele_student_id"
-    );
-
-  if(!studentId){
-
-    studentId =
-      createUUID();
-
-    localStorage.setItem(
-      "nele_student_id",
-      studentId
-    );
+  if(!value){
+    value = createUUID();
+    localStorage.setItem("nele_student_id", value);
   }
 
-  return studentId;
+  return value;
 }
 
-
-const STUDENT_ID =
-  getStudentId();
-
-
-/*
-  Session ID nie jest używany z poprzedniej
-  sesji po ponownym otwarciu Nele.
-
-  Student ID zostaje ten sam,
-  więc pamięć ucznia nie znika.
-*/
-let sessionId = null;
-
-
-/* =========================================================
-   STAN
-   ========================================================= */
-
-let germanVoice = null;
-
-let recognition = null;
-
-let isListening = false;
-
-let requestRunning = false;
-
-let sessionStarting = false;
-
-let lastNeleAnswer =
-  "Guten Tag! Schön, dass du da bist.";
-
-
-/* =========================================================
-   CZAS
-   ========================================================= */
-
-function timeNow(){
-
-  return new Intl.DateTimeFormat(
-    "de-DE",
-    {
-      hour:"2-digit",
-      minute:"2-digit"
-    }
-  ).format(
-    new Date()
-  );
+function setBusy(busy){
+  sendButton.disabled = busy;
+  messageInput.disabled = busy;
+  resetButton.disabled = busy;
+  newUserButton.disabled = busy;
 }
 
-
-const firstMessageTime =
-  document.querySelector(
-    ".message-time"
-  );
-
-if(firstMessageTime){
-  firstMessageTime.textContent =
-    timeNow();
+function setStatus(text){
+  statusText.textContent = text;
 }
 
-
-/* =========================================================
-   WIADOMOŚCI
-   ========================================================= */
-
-function addMessage(
-  author,
-  text
-){
-
-  const article =
-    document.createElement(
-      "article"
-    );
-
-  article.className =
-    "message " +
-    (
-      author === "Nele"
-        ? "nele"
-        : "user"
-    );
-
-
-  const who =
-    document.createElement(
-      "span"
-    );
-
-  who.className =
-    "message-author";
-
-  who.textContent =
-    author;
-
-
-  const body =
-    document.createElement(
-      "span"
-    );
-
-  body.className =
-    "message-text";
-
-  body.textContent =
-    text;
-
-
-  const stamp =
-    document.createElement(
-      "span"
-    );
-
-  stamp.className =
-    "message-time";
-
-  stamp.textContent =
-    timeNow();
-
-
-  article.append(
-    who,
-    body,
-    stamp
-  );
-
-
-  chatMessages.insertBefore(
-    article,
-    typing
-  );
-
-
-  chatMessages.scrollTop =
-    chatMessages.scrollHeight;
+function clearMessages(){
+  messages.innerHTML = "";
 }
 
+function addMessage(author,text){
+  const item = document.createElement("div");
+  item.className = "message " + (
+    author === "Nele"
+      ? "message-nele"
+      : "message-user"
+  );
 
-/* =========================================================
-   FETCH Z TIMEOUTEM
-   ========================================================= */
+  const speaker = document.createElement("span");
+  speaker.className = "speaker";
+  speaker.textContent = author;
 
-async function fetchWithTimeout(
-  url,
-  options = {},
-  timeout = API_TIMEOUT
-){
+  const body = document.createElement("span");
+  body.textContent = text;
 
-  const controller =
-    new AbortController();
+  item.append(speaker,body);
+  messages.appendChild(item);
+  messages.scrollTop = messages.scrollHeight;
+}
 
-  const timer =
-    setTimeout(
-      () => controller.abort(),
-      timeout
-    );
+async function fetchWithTimeout(url,options,timeout){
+  const controller = new AbortController();
+  const timer = setTimeout(
+    function(){ controller.abort(); },
+    timeout || API_TIMEOUT
+  );
 
   try{
-
     return await fetch(
       url,
-      {
-        ...options,
-        signal:controller.signal
-      }
+      Object.assign(
+        {},
+        options || {},
+        {signal:controller.signal}
+      )
     );
-
   }finally{
-
-    clearTimeout(
-      timer
-    );
+    clearTimeout(timer);
   }
 }
-
-
-/* =========================================================
-   NOWA SESJA
-   ========================================================= */
-
-async function startNewSession(){
-
-  if(sessionStarting){
-    return;
-  }
-
-  sessionStarting = true;
-
-  voiceInfo.textContent =
-    "Nele 3.0 startet …";
-
-  try{
-
-    const response =
-      await fetchWithTimeout(
-        START_SESSION_URL,
-        {
-          method:"POST",
-
-          headers:{
-            "Content-Type":
-              "application/json"
-          },
-
-          body:JSON.stringify({
-            student_id:STUDENT_ID,
-            name:"Lernende",
-            force_new:true
-          })
-        }
-      );
-
-
-    if(!response.ok){
-
-      throw new Error(
-        "HTTP " +
-        response.status
-      );
-    }
-
-
-    const data =
-      await response.json();
-
-
-    if(data.student_id){
-
-      localStorage.setItem(
-        "nele_student_id",
-        data.student_id
-      );
-    }
-
-
-    if(data.session_id){
-
-      sessionId =
-        data.session_id;
-    }
-
-
-    const reply =
-      data.reply ||
-      data.response ||
-      data.message ||
-      "";
-
-
-    if(reply){
-
-      lastNeleAnswer =
-        reply;
-
-      addMessage(
-        "Nele",
-        reply
-      );
-    }
-
-
-    voiceInfo.textContent =
-      "Nele 3.0 online";
-
-
-  }catch(error){
-
-    console.error(
-      "Start session error:",
-      error
-    );
-
-    /*
-      Gdy Render dopiero się budzi,
-      użytkownik nadal może pisać.
-      /chat może utworzyć sesję.
-    */
-
-    voiceInfo.textContent =
-      "Nele 3.0 online";
-
-  }finally{
-
-    sessionStarting = false;
-  }
-}
-
-
-/* =========================================================
-   GŁOS
-   ========================================================= */
 
 function loadGermanVoice(){
-
-  if(
-    !(
-      "speechSynthesis"
-      in window
-    )
-  ){
-
-    voiceInfo.textContent =
-      "Sprachausgabe wird nicht unterstützt.";
-
-    voiceInfo.className =
-      "error";
-
+  if(!("speechSynthesis" in window)){
     return;
   }
 
-
-  const voices =
-    speechSynthesis.getVoices();
-
-
+  const voices = speechSynthesis.getVoices();
   const femaleHints = [
     "female",
     "frau",
@@ -1192,259 +558,184 @@ function loadGermanVoice(){
     "google"
   ];
 
-
   germanVoice =
-    voices.find(
-      voice =>
-        voice.lang
-          ?.toLowerCase() ===
-          "de-de"
-        &&
-        femaleHints.some(
-          hint =>
-            voice.name
-              .toLowerCase()
-              .includes(hint)
-        )
-    )
-
-    ||
-
-    voices.find(
-      voice =>
-        voice.lang
-          ?.toLowerCase() ===
-          "de-de"
-    )
-
-    ||
-
-    voices.find(
-      voice =>
-        voice.lang
-          ?.toLowerCase()
-          .startsWith("de")
-    )
-
-    ||
-
-    null;
-
-
-  if(germanVoice){
-
-    voiceInfo.textContent =
-      "Nele 3.0 online · Stimme: " +
-      germanVoice.name;
-
-  }else{
-
-    voiceInfo.textContent =
-      "Nele 3.0 online · Deutsche Standardstimme";
-  }
-}
-
-
-loadGermanVoice();
-
-
-if(
-  "speechSynthesis"
-  in window
-){
-
-  speechSynthesis.addEventListener(
-    "voiceschanged",
-    loadGermanVoice
-  );
-}
-
-
-/* =========================================================
-   MÓWIENIE NELE
-   ========================================================= */
-
-function speak(
-  text,
-  rate = .85
-){
-
-  return new Promise(
-    resolve => {
-
-      if(
-        !text ||
-        !(
-          "speechSynthesis"
-          in window
-        )
-      ){
-
-        resolve();
-        return;
-      }
-
-
-      speechSynthesis.cancel();
-
-
-      const utter =
-        new SpeechSynthesisUtterance(
-          text
-        );
-
-
-      utter.lang =
-        "de-DE";
-
-      utter.rate =
-        rate;
-
-      utter.pitch =
-        1.05;
-
-      utter.volume =
-        1;
-
-
-      if(germanVoice){
-
-        utter.voice =
-          germanVoice;
-      }
-
-
-      utter.onend =
-        resolve;
-
-      utter.onerror =
-        resolve;
-
-
-      speechSynthesis.speak(
-        utter
+    voices.find(function(voice){
+      return (
+        voice.lang?.toLowerCase() === "de-de" &&
+        femaleHints.some(function(hint){
+          return voice.name.toLowerCase().includes(hint);
+        })
       );
-    }
-  );
+    }) ||
+    voices.find(function(voice){
+      return voice.lang?.toLowerCase() === "de-de";
+    }) ||
+    voices.find(function(voice){
+      return voice.lang?.toLowerCase().startsWith("de");
+    }) ||
+    null;
 }
 
+function speak(text,rate){
+  return new Promise(function(resolve){
+    if(!text || !("speechSynthesis" in window)){
+      resolve();
+      return;
+    }
 
-/* =========================================================
-   ROZMOWA Z NELE
-   ========================================================= */
+    speechSynthesis.cancel();
 
-async function askNele(
-  text,
-  inputMode = "keyboard"
-){
+    const utter = new SpeechSynthesisUtterance(text);
+    utter.lang = "de-DE";
+    utter.rate = rate || .85;
+    utter.pitch = 1.05;
+    utter.volume = 1;
 
-  if(requestRunning){
+    if(germanVoice){
+      utter.voice = germanVoice;
+    }
+
+    utter.onend = resolve;
+    utter.onerror = resolve;
+    speechSynthesis.speak(utter);
+  });
+}
+
+async function startNewSession(options){
+  const settings = options || {};
+
+  if(sessionStarting || requestRunning){
     return;
   }
 
+  sessionStarting = true;
+  setBusy(true);
+  setStatus("Nele startet …");
 
-  const cleanText =
-    String(
-      text || ""
-    ).trim();
+  if(settings.clearChat){
+    clearMessages();
+  }
 
+  sessionId = null;
+
+  try{
+    const response = await fetchWithTimeout(
+      START_SESSION_URL,
+      {
+        method:"POST",
+        headers:{
+          "Content-Type":"application/json"
+        },
+        body:JSON.stringify({
+          student_id:studentId,
+          name:"Lernende",
+          force_new:true
+        })
+      }
+    );
+
+    if(!response.ok){
+      throw new Error("HTTP " + response.status);
+    }
+
+    const data = await response.json();
+
+    if(data.student_id){
+      studentId = data.student_id;
+      localStorage.setItem("nele_student_id", studentId);
+    }
+
+    if(data.session_id){
+      sessionId = data.session_id;
+    }
+
+    const reply =
+      data.reply ||
+      data.response ||
+      data.message ||
+      "";
+
+    if(reply){
+      lastNeleAnswer = reply;
+      addMessage("Nele",reply);
+    }
+
+    setStatus("Nele ist bereit");
+
+  }catch(error){
+    console.error("Start session error:",error);
+    setStatus("Nele ist bereit");
+
+    if(messages.children.length === 0){
+      addMessage(
+        "Nele",
+        "Entschuldigung, ich kann den Server gerade nicht erreichen. Bitte versuche es gleich noch einmal."
+      );
+    }
+
+  }finally{
+    sessionStarting = false;
+    setBusy(false);
+    messageInput.focus();
+  }
+}
+
+async function askNele(text,inputMode){
+  if(requestRunning || sessionStarting){
+    return;
+  }
+
+  const cleanText = String(text || "").trim();
 
   if(!cleanText){
     return;
   }
 
-
   requestRunning = true;
+  setBusy(true);
+  setStatus("Nele denkt nach …");
 
-  sendButton.disabled = true;
-
-  messageInput.disabled = true;
-
-
-  addMessage(
-    "Du",
-    cleanText
-  );
-
-
-  typing.hidden =
-    false;
-
-
-  chatMessages.scrollTop =
-    chatMessages.scrollHeight;
-
-
-  voiceInfo.textContent =
-    "Nele denkt nach …";
-
+  addMessage("Du",cleanText);
 
   try{
-
     const payload = {
       message:cleanText,
       text:cleanText,
       user_message:cleanText,
-      student_id:STUDENT_ID,
+      student_id:studentId,
       name:"Lernende",
-      input_mode:inputMode
+      input_mode:inputMode || "keyboard"
     };
 
-
     if(sessionId){
-
-      payload.session_id =
-        sessionId;
+      payload.session_id = sessionId;
     }
 
-
-    const response =
-      await fetchWithTimeout(
-        CHAT_URL,
-        {
-          method:"POST",
-
-          headers:{
-            "Content-Type":
-              "application/json"
-          },
-
-          body:
-            JSON.stringify(
-              payload
-            )
-        }
-      );
-
+    const response = await fetchWithTimeout(
+      CHAT_URL,
+      {
+        method:"POST",
+        headers:{
+          "Content-Type":"application/json"
+        },
+        body:JSON.stringify(payload)
+      }
+    );
 
     if(!response.ok){
-
-      throw new Error(
-        "HTTP " +
-        response.status
-      );
+      throw new Error("HTTP " + response.status);
     }
 
-
-    const data =
-      await response.json();
-
+    const data = await response.json();
 
     if(data.student_id){
-
-      localStorage.setItem(
-        "nele_student_id",
-        data.student_id
-      );
+      studentId = data.student_id;
+      localStorage.setItem("nele_student_id", studentId);
     }
-
 
     if(data.session_id){
-
-      sessionId =
-        data.session_id;
+      sessionId = data.session_id;
     }
-
 
     const answer =
       data.reply ||
@@ -1453,574 +744,229 @@ async function askNele(
       data.message ||
       data.text;
 
-
-    if(
-      !answer ||
-      typeof answer !==
-        "string"
-    ){
-
-      throw new Error(
-        "Keine Antwort im erwarteten Format"
-      );
+    if(!answer || typeof answer !== "string"){
+      throw new Error("Keine Antwort im erwarteten Format");
     }
 
-
     const metaSpeakText =
-      (
-        data.meta &&
-        typeof data.meta.speak_text === "string"
-      )
+      data.meta &&
+      typeof data.meta.speak_text === "string"
         ? data.meta.speak_text.trim()
         : "";
 
-
     const speechText =
-      (
-        typeof data.speak_text === "string" &&
-        data.speak_text.trim()
-      )
+      typeof data.speak_text === "string" &&
+      data.speak_text.trim()
         ? data.speak_text.trim()
-        : (
-            metaSpeakText ||
-            answer
-          );
+        : (metaSpeakText || answer);
 
-
-    const isListeningExercise =
-      Boolean(
-        speechText &&
-        speechText !== answer &&
-        (
-          data.meta?.activity === "listening" ||
-          data.meta?.activity_type === "listening"
-        )
-      );
-
-
-    lastNeleAnswer =
-      isListeningExercise
-        ? speechText + " " + answer
-        : speechText;
-
-
-    addMessage(
-      "Nele",
-      answer
+    const isListeningExercise = Boolean(
+      speechText &&
+      speechText !== answer &&
+      (
+        data.meta?.activity === "listening" ||
+        data.meta?.activity_type === "listening"
+      )
     );
 
+    lastNeleAnswer = isListeningExercise
+      ? speechText + " " + answer
+      : speechText;
 
-    voiceInfo.textContent =
-      "Nele 3.0 online";
+    addMessage("Nele",answer);
 
+    if(isListeningExercise){
+      const questionOnly = answer
+        .replace(/^Hör gut zu\.?\s*/i,"")
+        .trim();
 
-    if(
-      isListeningExercise
-    ){
+      const listeningSpeech = [
+        "Hör gut zu.",
+        speechText,
+        questionOnly
+      ].filter(Boolean).join(" ");
 
-      const questionOnly =
-        answer
-          .replace(
-            /^Hör gut zu\.?\s*/i,
-            ""
-          )
-          .trim();
-
-
-      const listeningSpeech =
-        [
-          "Hör gut zu.",
-          speechText,
-          questionOnly
-        ]
-          .filter(Boolean)
-          .join(" ");
-
-
-      lastNeleAnswer =
-        listeningSpeech;
-
-
-      await speak(
-        listeningSpeech,
-        .82
-      );
-
+      lastNeleAnswer = listeningSpeech;
+      await speak(listeningSpeech,.82);
     }else{
-
-      await speak(
-        speechText
-      );
+      await speak(speechText,.85);
     }
 
-
-    /*
-      Jeśli backend zakończy sesję,
-      kolejna odpowiedź może rozpocząć
-      następną sesję.
-    */
     if(data.finished === true){
-
       sessionId = null;
     }
 
+    setStatus("Nele ist bereit");
 
   }catch(error){
+    console.error("Nele API Fehler:",error);
 
-    console.error(
-      "Nele API Fehler:",
-      error
-    );
+    const answer = error.name === "AbortError"
+      ? "Der Server braucht gerade etwas länger. Bitte versuche es noch einmal."
+      : "Entschuldigung, ich kann den Server gerade nicht erreichen. Bitte versuche es gleich noch einmal.";
 
-
-    let answer;
-
-
-    if(
-      error.name ===
-      "AbortError"
-    ){
-
-      answer =
-        "Der Server braucht gerade etwas länger. Bitte versuche es noch einmal.";
-
-    }else{
-
-      answer =
-        "Entschuldigung, ich kann den Server gerade nicht erreichen. Bitte versuche es gleich noch einmal.";
-    }
-
-
-    lastNeleAnswer =
-      answer;
-
-
-    addMessage(
-      "Nele",
-      answer
-    );
-
-
-    voiceInfo.textContent =
-      "Verbindungsfehler";
-
-    voiceInfo.className =
-      "error";
-
-
-    await speak(
-      answer
-    );
-
+    lastNeleAnswer = answer;
+    addMessage("Nele",answer);
+    setStatus("Verbindungsfehler");
+    await speak(answer,.85);
 
   }finally{
-
-    typing.hidden =
-      true;
-
-    requestRunning =
-      false;
-
-    sendButton.disabled =
-      false;
-
-    messageInput.disabled =
-      false;
-
+    requestRunning = false;
+    setBusy(false);
     messageInput.focus();
-
-
-    chatMessages.scrollTop =
-      chatMessages.scrollHeight;
-
-
-    setTimeout(
-      () => {
-
-        voiceInfo.className =
-          "status";
-
-        if(germanVoice){
-
-          voiceInfo.textContent =
-            "Nele 3.0 online · Stimme: " +
-            germanVoice.name;
-
-        }else{
-
-          voiceInfo.textContent =
-            "Nele 3.0 online";
-        }
-
-      },
-      2500
-    );
+    messages.scrollTop = messages.scrollHeight;
   }
 }
 
+function sendTypedMessage(){
+  const text = messageInput.value.trim();
 
-/* =========================================================
-   FORMULARZ
-   ========================================================= */
-
-messageForm.addEventListener(
-  "submit",
-  event => {
-
-    event.preventDefault();
-
-
-    const text =
-      messageInput.value
-        .trim();
-
-
-    if(!text){
-      return;
-    }
-
-
-    messageInput.value =
-      "";
-
-
-    askNele(
-      text,
-      "keyboard"
-    );
+  if(!text){
+    return;
   }
-);
 
+  messageInput.value = "";
+  askNele(text,"keyboard");
+}
 
-/* =========================================================
-   KLAWIATURA
-   ========================================================= */
+sendButton.addEventListener("click",sendTypedMessage);
 
-document
-  .getElementById(
-    "keyboardButton"
-  )
-  .addEventListener(
-    "click",
-    () => {
+messageInput.addEventListener("keydown",function(event){
+  if(event.key === "Enter"){
+    event.preventDefault();
+    sendTypedMessage();
+  }
+});
 
-      messageInput.focus();
-    }
+document.querySelectorAll(".quick-action[data-text]").forEach(function(button){
+  button.addEventListener("click",function(){
+    askNele(button.dataset.text || "","keyboard");
+  });
+});
+
+pronunciationButton.addEventListener("click",function(){
+  askNele("Aussprache üben","keyboard");
+});
+
+resetButton.addEventListener("click",function(){
+  startNewSession({clearChat:true});
+});
+
+newUserButton.addEventListener("click",async function(){
+  const confirmed = window.confirm(
+    "Als neuer Benutzer starten?\n\n" +
+    "Das Training auf diesem Gerät beginnt von vorne."
   );
 
+  if(!confirmed){
+    return;
+  }
 
-/* =========================================================
-   POWTÓRZ ODPOWIEDŹ
-   ========================================================= */
+  if("speechSynthesis" in window){
+    speechSynthesis.cancel();
+  }
 
-document
-  .getElementById(
-    "repeatButton"
-  )
-  .addEventListener(
-    "click",
-    () => {
-
-      speak(
-        lastNeleAnswer
-      );
+  if(recognition && isListening){
+    try{
+      recognition.stop();
+    }catch(error){
+      console.error(error);
     }
-  );
+  }
 
+  localStorage.removeItem("nele_student_id");
+  localStorage.removeItem("nele_session_id");
 
-/* =========================================================
-   USTAWIENIA
-   ========================================================= */
+  studentId = createUUID();
+  localStorage.setItem("nele_student_id",studentId);
+  sessionId = null;
 
-document
-  .getElementById(
-    "settingsButton"
-  )
-  .addEventListener(
-    "click",
-    () => {
-
-      alert(
-        "Nele 3.0\n\n" +
-
-        "Backend:\n" +
-        API_BASE +
-
-        "\n\nStudent ID:\n" +
-        STUDENT_ID +
-
-        "\n\nSession ID:\n" +
-        (
-          sessionId ||
-          "Neue Sitzung"
-        ) +
-
-        "\n\nStimme:\n" +
-        (
-          germanVoice?.name ||
-          "deutsche Standardstimme"
-        ) +
-
-        "\n\nGeschwindigkeit: 0.85" +
-
-        "\nTonhöhe: 1.05"
-      );
-    }
-  );
-
-
-/* =========================================================
-   MIKROFON
-   ========================================================= */
+  await startNewSession({clearChat:true});
+});
 
 const SpeechRecognition =
   window.SpeechRecognition ||
   window.webkitSpeechRecognition;
 
-
 if(SpeechRecognition){
+  recognition = new SpeechRecognition();
+  recognition.lang = "de-DE";
+  recognition.interimResults = true;
+  recognition.continuous = false;
+  recognition.maxAlternatives = 1;
 
-  recognition =
-    new SpeechRecognition();
+  recognition.onstart = function(){
+    isListening = true;
+    microphoneButton.classList.add("listening");
+  };
 
+  recognition.onresult = function(event){
+    let text = "";
 
-  recognition.lang =
-    "de-DE";
+    for(
+      let i = event.resultIndex;
+      i < event.results.length;
+      i++
+    ){
+      text += event.results[i][0].transcript;
+    }
 
+    messageInput.value = text;
 
-  recognition.interimResults =
-    true;
+    const lastResult = event.results[event.results.length - 1];
 
+    if(lastResult.isFinal){
+      recognition.stop();
 
-  recognition.continuous =
-    false;
+      const finalText = text.trim();
+      messageInput.value = "";
 
-
-  recognition.maxAlternatives =
-    1;
-
-
-  recognition.onstart =
-    () => {
-
-      isListening =
-        true;
-
-
-      microphoneButton
-        .classList
-        .add(
-          "listening"
-        );
-
-
-      microphoneLabel.textContent =
-        "Nele hört zu …";
-    };
-
-
-  recognition.onresult =
-    event => {
-
-      let text =
-        "";
-
-
-      for(
-        let i =
-          event.resultIndex;
-
-        i <
-          event.results.length;
-
-        i++
-      ){
-
-        text +=
-          event.results[i][0]
-            .transcript;
+      if(finalText){
+        askNele(finalText,"voice");
       }
+    }
+  };
 
+  recognition.onerror = function(event){
+    console.error("SpeechRecognition:",event.error);
+  };
 
-      messageInput.value =
-        text;
+  recognition.onend = function(){
+    isListening = false;
+    microphoneButton.classList.remove("listening");
+  };
 
+  microphoneButton.addEventListener("click",function(){
+    if(isListening){
+      recognition.stop();
+      return;
+    }
 
-      const lastResult =
-        event.results[
-          event.results.length - 1
-        ];
+    if("speechSynthesis" in window){
+      speechSynthesis.cancel();
+    }
 
-
-      if(lastResult.isFinal){
-
-        recognition.stop();
-
-
-        const finalText =
-          text.trim();
-
-
-        messageInput.value =
-          "";
-
-
-        if(finalText){
-
-          askNele(
-            finalText,
-            "voice"
-          );
-        }
-      }
-    };
-
-
-  recognition.onerror =
-    event => {
-
-      console.error(
-        "SpeechRecognition:",
-        event.error
-      );
-
-
-      if(
-        event.error ===
-        "not-allowed"
-      ){
-
-        microphoneLabel.textContent =
-          "Mikrofonzugriff nicht erlaubt";
-
-      }else if(
-        event.error ===
-        "no-speech"
-      ){
-
-        microphoneLabel.textContent =
-          "Ich habe nichts gehört.";
-
-      }else{
-
-        microphoneLabel.textContent =
-          "Ich habe dich nicht verstanden.";
-      }
-    };
-
-
-  recognition.onend =
-    () => {
-
-      isListening =
-        false;
-
-
-      microphoneButton
-        .classList
-        .remove(
-          "listening"
-        );
-
-
-      if(
-        !microphoneLabel
-          .textContent
-          .includes(
-            "nicht erlaubt"
-          )
-      ){
-
-        microphoneLabel.textContent =
-          "Zum Sprechen klicken";
-      }
-    };
-
-
-  microphoneButton
-    .addEventListener(
-      "click",
-      () => {
-
-        if(isListening){
-
-          recognition.stop();
-
-          return;
-        }
-
-
-        if(
-          "speechSynthesis"
-          in window
-        ){
-
-          speechSynthesis.cancel();
-        }
-
-
-        try{
-
-          recognition.start();
-
-        }catch(error){
-
-          console.error(
-            error
-          );
-        }
-      }
-    );
-
+    try{
+      recognition.start();
+    }catch(error){
+      console.error(error);
+    }
+  });
 
 }else{
-
-  microphoneButton.disabled =
-    true;
-
-
-  microphoneLabel.textContent =
-    "Spracherkennung nicht unterstützt";
+  microphoneButton.disabled = true;
 }
 
+loadGermanVoice();
 
-/* =========================================================
-   START STRONY
-   ========================================================= */
+if("speechSynthesis" in window){
+  speechSynthesis.addEventListener("voiceschanged",loadGermanVoice);
+}
 
-window.addEventListener(
-  "load",
-  async () => {
-
-    /*
-      Po wejściu na stronę rozpoczynamy
-      NOWĄ sesję treningową.
-
-      STUDENT_ID pozostaje ten sam,
-      więc pamięć ucznia jest zachowana.
-    */
-    await startNewSession();
-
-
-    console.log(
-      "Nele 3.0 API:",
-      API_BASE
-    );
-
-
-    console.log(
-      "Nele Student ID:",
-      STUDENT_ID
-    );
-
-
-    console.log(
-      "Nele Session ID:",
-      sessionId
-    );
-  }
-);
+window.addEventListener("load",async function(){
+  await startNewSession({clearChat:true});
+});
 </script>
 
 </body>
-  </html>
+</html>
