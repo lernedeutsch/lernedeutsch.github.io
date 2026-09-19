@@ -680,7 +680,7 @@ async function startNewSession(options){
   }
 }
 
-async function askNele(text,inputMode){
+async function askNele(text,inputMode = "keyboard"){
   if(requestRunning || sessionStarting){
     return;
   }
@@ -704,7 +704,7 @@ async function askNele(text,inputMode){
       user_message:cleanText,
       student_id:studentId,
       name:"Lernende",
-      input_mode:inputMode || "keyboard"
+      input_mode:inputMode
     };
 
     if(sessionId){
