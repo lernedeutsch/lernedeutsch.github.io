@@ -17,6 +17,8 @@ function check(condition, message) {
 const rootNele = read("nele.html");
 const duplicateNele = read("deutschsprechen/nele.html");
 const testNele = read("deutschsprechen/nele-test-20260919.html");
+const oldCopyA = read("nele.html.KOPIA.2");
+const oldCopyB = read("nele.html.kopia.1");
 const map = read("mapa-niemiec.html");
 const config = read("config/app-config.js");
 
@@ -27,6 +29,8 @@ for (const [name, content] of [
   ["root Nele", rootNele],
   ["old deutschsprechen copy", duplicateNele],
   ["temporary Nele test page", testNele],
+  ["old Nele copy A", oldCopyA],
+  ["old Nele copy B", oldCopyB],
 ]) {
   check(
     content.includes(canonical),
