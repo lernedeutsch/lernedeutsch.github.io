@@ -412,7 +412,7 @@ WYSŁANIE WYPOWIEDZI UCZNIA DO /chat
 ========================================================
 */
 
-async function askNele(message) {
+async function askNele(message, inputMode = "keyboard") {
     const cleanMessage = String(message || "").trim();
 
     if (!cleanMessage) {
@@ -434,7 +434,8 @@ async function askNele(message) {
                 },
 
                 body: JSON.stringify({
-                    message: cleanMessage
+                    message: cleanMessage,
+                    input_mode: inputMode
                 })
             }
         );
@@ -619,7 +620,7 @@ function startNeleListening() {
             `Sie haben gesagt: ${recognizedText}`
         );
 
-        askNele(recognizedText);
+        askNele(recognizedText, "voice");
     };
 
     recognition.onerror = function (event) {
