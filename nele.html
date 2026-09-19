@@ -1230,7 +1230,8 @@ Worüber möchtest du heute sprechen?</span>
 
 
     async function askNele(
-      text
+      text,
+      inputMode = "keyboard"
     ) {
 
       if (
@@ -1285,7 +1286,8 @@ Worüber möchtest du heute sprechen?</span>
           text: cleanText,
           user_message: cleanText,
           student_id: STUDENT_ID,
-          name: "Lernende"
+          name: "Lernende",
+          input_mode: inputMode
         };
 
 
@@ -1768,7 +1770,8 @@ Worüber möchtest du heute sprechen?</span>
             ) {
 
               askNele(
-                finalText
+                finalText,
+                "voice"
               );
             }
           }
