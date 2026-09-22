@@ -24,8 +24,8 @@ jobs:
           test -f nele.html
           test -f config/app-config.js
           grep -q 'https://lernedeutsch.github.io/nele.html' mapa-niemiec.html
-          grep -q 'https://nele2-backend.onrender.com' nele.html
-          grep -q 'https://nele2-backend.onrender.com' config/app-config.js
+          ! grep -q 'nele2-backend.onrender.com' nele.html
+          ! grep -q 'nele2-backend.onrender.com' config/app-config.js
           ! grep -q 'nele-backend-3.onrender.com' nele.html
           ! grep -q 'nele-backend-3.onrender.com' config/app-config.js
 
@@ -37,66 +37,4 @@ jobs:
           curl --fail --silent --show-error --location --retry 4 --retry-delay 10 https://lernedeutsch.github.io/mapa-niemiec.html -o /tmp/map.html
           curl --fail --silent --show-error --location --retry 4 --retry-delay 10 https://lernedeutsch.github.io/nele.html -o /tmp/nele.html
           grep -q '<title>Nele</title>' /tmp/nele.html
-          grep -q 'https://nele2-backend.onrender.com' /tmp/nele.html
-
-      - name: Check Nele2 backend live
-        shell: bash
-        run: |
-          set -euo pipefail
-          BASE='https://nele2-backend.onrender.com'
-
-          curl --fail --silent --show-error --location --retry 6 --retry-delay 10 \
-            "$BASE/health" -o /tmp/health.json
-
-          python -c "import json; d=json.load(open('/tmp/health.json')); assert d['ok'] is True; assert d['service']=='Nele2'"
-
-          curl --fail --silent --show-error --location --retry 6 --retry-delay 10 \
-            -H 'Content-Type: application/json' \
-            -H 'Origin: https://lernedeutsch.github.io' \
-            -d '{"student_id":"gha-site-smoke"}' \
-            "$BASE/api/session/start" \
-            -D /tmp/headers.txt \
-            -o /tmp/welcome.json
-
-          python - <<'PY'
-          import json
-          d=json.load(open('/tmp/welcome.json'))
-          assert d.get('student_id') == 'gha-site-smoke'
-          assert d.get('session_id')
-          assert d.get('reply')
-          open('/tmp/session.txt','w').write(d['session_id'])
-          PY
-
-          python - <<'PY'
-          from pathlib import Path
-          headers = Path('/tmp/headers.txt').read_text().lower()
-          if 'access-control-allow-origin: https://lernedeutsch.github.io' not in headers:
-              print('WARN: CORS header not visible in this curl response; continuing to functional chat test.')
-          PY
-
-          python - <<'PY' > /tmp/chat-payload.json
-          import json
-          session = open('/tmp/session.txt').read()
-          print(json.dumps({
-              "student_id": "gha-site-smoke",
-              "session_id": session,
-              "message": "Gut"
-          }))
-          PY
-
-          curl --fail --silent --show-error --location --retry 6 --retry-delay 10 \
-            -H 'Content-Type: application/json' \
-            -H 'Origin: https://lernedeutsch.github.io' \
-            --data-binary @/tmp/chat-payload.json \
-            "$BASE/chat" \
-            -o /tmp/chat.json
-
-          cat /tmp/chat.json
-
-          python - <<'PY'
-          import json
-          d=json.load(open('/tmp/chat.json'))
-          assert d.get('student_id') == 'gha-site-smoke'
-          assert d.get('session_id')
-          assert d.get('reply')
-          PY
+          ! grep -q 'nele2-backend.onrender.com' /tmp/nele.html
