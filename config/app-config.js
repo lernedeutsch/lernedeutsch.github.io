@@ -9,7 +9,9 @@ const appConfig = {
   domyślnyJęzyk: "de",
   debug: true,
 
-  // Ustawienia aplikacji
+  // Ta instalacja portalu jest przeznaczona dla jednego użytkownika.
+  singleUser: true,
+
   ustawienia: {
     animacje: true,
     wymowa: true,
@@ -17,20 +19,20 @@ const appConfig = {
     chatbot: true
   },
 
-  // Backend Nele 1 + funkcje Nele 3.0 na Render
+  // Nele 3.0
   api: {
-    baseUrl: "https://nele-backend.onrender.com",
+    baseUrl: "https://nele-backend-3.onrender.com",
     timeout: 70000
   }
 };
 
-// Udostępnienie konfiguracji innym plikom JavaScript
 if (typeof window !== "undefined") {
   window.appConfig = appConfig;
   window.NELE_API_BASE = appConfig.api.baseUrl;
+  window.NELE_BACKEND_URL = appConfig.api.baseUrl;
+  window.NELE_SINGLE_USER = appConfig.singleUser;
 }
 
-// Eksport dla Node.js
 if (typeof module !== "undefined" && module.exports) {
   module.exports = appConfig;
 }
