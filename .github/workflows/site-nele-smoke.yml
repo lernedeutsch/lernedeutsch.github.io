@@ -1,0 +1,71 @@
+name: Site and Nele smoke tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+  schedule:
+    - cron: "17 5 * * *"
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check key files and wiring
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -f index.html
+          test -f mapa-niemiec.html
+          test -f nele.html
+          test -f config/app-config.js
+          grep -q 'https://lernedeutsch.github.io/nele.html' mapa-niemiec.html
+          grep -q 'https://nele2-backend.onrender.com' nele.html
+          grep -q 'https://nele2-backend.onrender.com' config/app-config.js
+          ! grep -q 'nele-backend-3.onrender.com' nele.html
+          ! grep -q 'nele-backend-3.onrender.com' config/app-config.js
+
+      - name: Check public pages
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl --fail --silent --show-error --location --retry 4 --retry-delay 10 https://lernedeutsch.github.io/ -o /tmp/index.html
+          curl --fail --silent --show-error --location --retry 4 --retry-delay 10 https://lernedeutsch.github.io/mapa-niemiec.html -o /tmp/map.html
+          curl --fail --silent --show-error --location --retry 4 --retry-delay 10 https://lernedeutsch.github.io/nele.html -o /tmp/nele.html
+          grep -q '<title>Nele</title>' /tmp/nele.html
+          grep -q 'https://nele2-backend.onrender.com' /tmp/nele.html
+
+      - name: Check Nele2 backend live
+        shell: bash
+        run: |
+          set -euo pipefail
+          BASE='https://nele2-backend.onrender.com'
+          curl --fail --silent --show-error --location --retry 6 --retry-delay 10 "$BASE/health" -o /tmp/health.json
+          python - <<'PY'
+          import json
+          d=json.load(open('/tmp/health.json'))
+          assert d['ok'] is True
+          assert d['service']=='Nele2'
+          PY
+          curl --fail --silent --show-error --location --retry 6 --retry-delay 10             -H 'Content-Type: application/json'             -H 'Origin: https://lernedeutsch.github.io'             -d '{"student_id":"gha-site-smoke"}'             "$BASE/api/session/start" -D /tmp/headers.txt -o /tmp/welcome.json
+          python - <<'PY'
+          import json
+          d=json.load(open('/tmp/welcome.json'))
+          assert d['student_id']=='gha-site-smoke'
+          assert d['session_id']
+          assert d['reply']
+          open('/tmp/session.txt','w').write(d['session_id'])
+          PY
+          grep -qi '^access-control-allow-origin: https://lernedeutsch.github.io' /tmp/headers.txt
+          SESSION="$(cat /tmp/session.txt)"
+          curl --fail --silent --show-error --location --retry 6 --retry-delay 10             -H 'Content-Type: application/json'             -H 'Origin: https://lernedeutsch.github.io'             -d "{"student_id":"gha-site-smoke","session_id":"$SESSION","message":"Gut"}"             "$BASE/chat" -o /tmp/chat.json
+          python - <<'PY'
+          import json
+          d=json.load(open('/tmp/chat.json'))
+          assert d['student_id']=='gha-site-smoke'
+          assert d['session_id']
+          assert d['reply']
+          PY
