@@ -19,9 +19,9 @@ const appConfig = {
     chatbot: true
   },
 
-  // Nele 3.0
+  // Nele2
   api: {
-    baseUrl: "https://nele-backend-3.onrender.com",
+    baseUrl: "https://nele2-backend.onrender.com",
     timeout: 70000
   }
 };
