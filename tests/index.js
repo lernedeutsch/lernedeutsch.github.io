@@ -16,42 +16,37 @@ const map = read("mapa-niemiec.html");
 const config = read("config/app-config.js");
 
 const portalNele = "https://lernedeutsch.github.io/nele.html";
-const canonical = "https://lernedeutsch.github.io/deutschsprechen/nele.html";
+const nele2 = "https://nele2-backend.onrender.com";
 const backend3 = "https://nele-backend-3.onrender.com";
 
 check(
-  rootNele.includes(canonical),
-  "root Nele redirects to canonical Nele"
-);
-
-check(
-  rootNele.includes(backend3),
-  "root Nele declares backend 3.0"
-);
-
-check(
-  rootNele.includes("NELE_SINGLE_USER"),
-  "root Nele is marked as single-user"
-);
-
-check(
   map.includes(portalNele),
-  "portal Nele button opens the root Nele entry point"
+  "portal Nele button opens the separate root Nele page"
 );
 
 check(
-  config.includes(backend3),
-  "portal config uses backend 3.0"
+  rootNele.includes(nele2),
+  "root Nele uses the Nele2 backend"
 );
 
 check(
-  config.includes("singleUser: true"),
-  "portal config is single-user"
+  config.includes(nele2),
+  "portal config uses the Nele2 backend"
 );
 
 check(
-  !config.includes("https://nele-backend.onrender.com"),
-  "portal config does not use the old backend"
+  !rootNele.includes(backend3),
+  "root Nele does not use backend 3.0"
 );
 
-console.log("\nAll portal Nele 3.0 tests passed.");
+check(
+  !config.includes(backend3),
+  "portal config does not use backend 3.0"
+);
+
+check(
+  rootNele.includes("nele2_student_id"),
+  "root Nele uses the Nele2 local-storage key"
+);
+
+console.log("\nAll portal Nele2 wiring tests passed.");
