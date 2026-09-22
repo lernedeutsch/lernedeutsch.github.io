@@ -19,9 +19,9 @@ const appConfig = {
     chatbot: true
   },
 
-  // Nele2
+  // Backend dla tej strony jest celowo odłączony.
   api: {
-    baseUrl: "https://nele2-backend.onrender.com",
+    baseUrl: "",
     timeout: 70000
   }
 };
