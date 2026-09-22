@@ -25,13 +25,13 @@ check(
 );
 
 check(
-  rootNele.includes(nele2),
-  "root Nele uses the Nele2 backend"
+  !rootNele.includes(nele2),
+  "root Nele is disconnected from the Nele2 backend"
 );
 
 check(
-  config.includes(nele2),
-  "portal config uses the Nele2 backend"
+  !config.includes(nele2),
+  "portal config is disconnected from the Nele2 backend"
 );
 
 check(
@@ -44,9 +44,4 @@ check(
   "portal config does not use backend 3.0"
 );
 
-check(
-  rootNele.includes("nele2_student_id"),
-  "root Nele uses the Nele2 local-storage key"
-);
-
-console.log("\nAll portal Nele2 wiring tests passed.");
+console.log("\nPortal Nele is disconnected from external Nele backends.");
