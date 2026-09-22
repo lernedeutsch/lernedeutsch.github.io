@@ -3,10 +3,7 @@ const path = require("path");
 const assert = require("assert");
 
 function read(relativePath) {
-  return fs.readFileSync(
-    path.join(__dirname, "..", relativePath),
-    "utf8"
-  );
+  return fs.readFileSync(path.join(__dirname, "..", relativePath), "utf8");
 }
 
 function check(condition, message) {
@@ -15,51 +12,46 @@ function check(condition, message) {
 }
 
 const rootNele = read("nele.html");
-const duplicateNele = read("deutschsprechen/nele.html");
-const testNele = read("deutschsprechen/nele-test-20260919.html");
-const oldCopyA = read("nele.html.KOPIA.2");
-const oldCopyB = read("nele.html.kopia.1");
 const map = read("mapa-niemiec.html");
 const config = read("config/app-config.js");
 
-const canonical =
-  "https://lernedeutsch.github.io/deutschsprechen/nele.html";
-
-for (const [name, content] of [
-  ["root Nele", rootNele],
-  ["old deutschsprechen copy", duplicateNele],
-  ["temporary Nele test page", testNele],
-  ["old Nele copy A", oldCopyA],
-  ["old Nele copy B", oldCopyB],
-]) {
-  check(
-    content.includes(canonical),
-    name + " points to canonical Nele"
-  );
-
-  check(
-    !content.includes("localStorage.") &&
-    !content.includes("nele_session_id") &&
-    !content.includes("nele_student_id") &&
-    !content.includes("nele3_student_id"),
-    name + " cannot change learner identity"
-  );
-
-  check(
-    !content.includes("nele-backend-3.onrender.com"),
-    name + " cannot connect to backend-3"
-  );
-}
+const portalNele = "https://lernedeutsch.github.io/nele.html";
+const canonical = "https://lernedeutsch.github.io/deutschsprechen/nele.html";
+const backend3 = "https://nele-backend-3.onrender.com";
 
 check(
-  map.includes(canonical),
-  "portal Nele button opens canonical Deutschsprechen Nele"
+  rootNele.includes(canonical),
+  "root Nele redirects to canonical Nele"
 );
 
 check(
-  config.includes("https://nele-backend.onrender.com") &&
-  !config.includes("nele-backend-3.onrender.com"),
-  "portal config names only the production backend"
+  rootNele.includes(backend3),
+  "root Nele declares backend 3.0"
 );
 
-console.log("\nAll portal Nele isolation tests passed.");
+check(
+  rootNele.includes("NELE_SINGLE_USER"),
+  "root Nele is marked as single-user"
+);
+
+check(
+  map.includes(portalNele),
+  "portal Nele button opens the root Nele entry point"
+);
+
+check(
+  config.includes(backend3),
+  "portal config uses backend 3.0"
+);
+
+check(
+  config.includes("singleUser: true"),
+  "portal config is single-user"
+);
+
+check(
+  !config.includes("https://nele-backend.onrender.com"),
+  "portal config does not use the old backend"
+);
+
+console.log("\nAll portal Nele 3.0 tests passed.");
